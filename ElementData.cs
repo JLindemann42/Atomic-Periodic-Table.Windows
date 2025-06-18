@@ -12,6 +12,7 @@ namespace Atomic_WinUI
             // Example elements
             new Element { OriginalName = "Hydrogen", Symbol = "H", AtomicNumber = 1 },
             new Element { OriginalName = "Helium", Symbol = "He", AtomicNumber = 2 },
+            new Element { OriginalName = "Lithium", Symbol = "Li", AtomicNumber = 3 },
             new Element { OriginalName = "Beryllium", Symbol = "Be", AtomicNumber = 4 },
             new Element { OriginalName = "Boron", Symbol = "B", AtomicNumber = 5 },
             new Element { OriginalName = "Carbon", Symbol = "C", AtomicNumber = 6 },

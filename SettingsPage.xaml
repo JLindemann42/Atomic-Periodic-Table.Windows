@@ -49,6 +49,19 @@
                </StackPanel>
                 <HyperlinkButton HorizontalAlignment="Right" FontSize="14" Content="Download Atomic for Android" NavigateUri="https://play.google.com/store/apps/details?id=com.jlindemann.science" />
             </Grid>
+
+            <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Padding="12" CornerRadius="8" Margin="36,-12,36,0" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="GitHub" FontSize="14" FontWeight="SemiBold" />
+                    <TextBlock Text="'Atomic - Periodic Table' open-source repo for Windows" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+                <HyperlinkButton HorizontalAlignment="Right" FontSize="14" Content="GitHub Repo" NavigateUri="https://github.com/JLindemann42/Atomic-Periodic-Table.Windows" />
+            </Grid>
+
             <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Padding="12" CornerRadius="8" Margin="36,-12,36,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
