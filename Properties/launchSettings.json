@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Atomic-WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Atomic-WinUI (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Atomic_WinUI.phPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic_WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel>
+                
+                <!-- Bromothymol Blue Card-->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="12" CornerRadius="8" Margin="56,12,56,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="600" MaxWidth="1200" >
+                    <StackPanel>
+
+                        <TextBlock Text="Bromothymol Blue" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+
+                        <Grid Margin="0,24,0,0" HorizontalAlignment="Center">
+                            <!-- Gradient Bar at the top -->
+                            <Rectangle Height="32" Width="600" RadiusX="8" RadiusY="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="#ffe600" Offset="0.0"/>
+                                        <GradientStop Color="#9eb22c" Offset="0.43"/>
+                                        <GradientStop Color="#88bd44" Offset="0.5"/>
+                                        <GradientStop Color="#0177a0" Offset="0.75"/>
+                                        <GradientStop Color="#0032e7" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <!-- pH scale numbers below the bar -->
+                            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0" Width="600">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.14" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.0*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="0" HorizontalAlignment="Left" FontSize="12"/>
+                                <TextBlock Grid.Column="1" Text="2" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="2" Text="4" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="3" Text="6" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="4" Text="8" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="5" Text="10" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="6" Text="12" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="7" Text="14" HorizontalAlignment="Right" FontSize="12"/>
+                            </Grid>
+
+                            <!-- Lines and Labels below the numbers -->
+                            <Canvas Width="600" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsHitTestVisible="False">
+                                <!-- Acid line and label -->
+                                <Line X1="100" Y1="0" X2="100" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="50" Canvas.Top="35" Text="Acid (pH 0–6)" FontWeight="SemiBold" Foreground="Black"/>
+                                <!-- Neutral line and label -->
+                                <Line X1="300" Y1="0" X2="300" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="240" Canvas.Top="35" TextAlignment="Center" Text="Neutral (pH 6.0-7.6)" FontWeight="SemiBold" Foreground="Black"/>
+                                <!-- Alkaline line and label -->
+                                <Line X1="500" Y1="0" X2="500" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="450" Canvas.Top="35" Text="Alkaline (pH 8–14)" FontWeight="SemiBold" Foreground="Black"/>
+                            </Canvas>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Methyl-Orange Card-->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="12" CornerRadius="8" Margin="56,12,56,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="600" MaxWidth="1200" >
+                    <StackPanel>
+
+                        <TextBlock Text="Methyl-Orange" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+
+                        <Grid Margin="0,24,0,0" HorizontalAlignment="Center">
+                            <!-- Gradient Bar at the top -->
+                            <Rectangle Height="32" Width="600" RadiusX="8" RadiusY="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="#f63136" Offset="0.0"/>
+                                        <GradientStop Color="#ffff31" Offset="0.35"/>
+                                        <GradientStop Color="#ffff31" Offset="0.5"/>
+                                        <GradientStop Color="#ffff31" Offset="0.75"/>
+                                        <GradientStop Color="#ffff31" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <!-- pH scale numbers below the bar -->
+                            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0" Width="600">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.14" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.0*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="0" HorizontalAlignment="Left" FontSize="12"/>
+                                <TextBlock Grid.Column="1" Text="2" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="2" Text="4" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="3" Text="6" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="4" Text="8" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="5" Text="10" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="6" Text="12" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="7" Text="14" HorizontalAlignment="Right" FontSize="12"/>
+                            </Grid>
+
+                            <!-- Lines and Labels below the numbers -->
+                            <Canvas Width="600" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsHitTestVisible="False">
+                                <!-- Acid line and label -->
+                                <Line X1="40" Y1="0" X2="40" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="0" Canvas.Top="35" Text="Acid (pH 0–3.1)" FontWeight="SemiBold" Foreground="Black"/>
+                                <!-- Neutral line and label -->
+                                <Line X1="140" Y1="0" X2="150" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="110" Canvas.Top="35" TextAlignment="Center" Text="Neutral (pH 3.1-4.4)" FontWeight="SemiBold" Foreground="Black"/>
+                                <!-- Alkaline line and label -->
+                                <Line X1="400" Y1="0" X2="400" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="335" Canvas.Top="35" Text="Alkaline (pH 4.4–14)" FontWeight="SemiBold" Foreground="Black"/>
+                            </Canvas>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Congo Red Card-->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="12" CornerRadius="8" Margin="56,12,56,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="600" MaxWidth="1200" >
+                    <StackPanel>
+
+                        <TextBlock Text="Congo Red" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+
+                        <Grid Margin="0,24,0,0" HorizontalAlignment="Center">
+                            <!-- Gradient Bar at the top -->
+                            <Rectangle Height="32" Width="600" RadiusX="8" RadiusY="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="#002ac1" Offset="0.0"/>
+                                        <GradientStop Color="#672fda" Offset="0.2"/>
+                                        <GradientStop Color="#ff0000" Offset="0.4"/>
+                                        <GradientStop Color="#ff0000" Offset="0.75"/>
+                                        <GradientStop Color="#ff0000" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <!-- pH scale numbers below the bar -->
+                            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0" Width="600">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.14" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.14*" />
+                                    <ColumnDefinition Width="0.0*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="0" HorizontalAlignment="Left" FontSize="12"/>
+                                <TextBlock Grid.Column="1" Text="2" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="2" Text="4" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="3" Text="6" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="4" Text="8" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="5" Text="10" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="6" Text="12" HorizontalAlignment="Center" FontSize="12"/>
+                                <TextBlock Grid.Column="7" Text="14" HorizontalAlignment="Right" FontSize="12"/>
+                            </Grid>
+
+                            <!-- Lines and Labels below the numbers -->
+                            <Canvas Width="600" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsHitTestVisible="False">
+                                <!-- Acid line and label -->
+                                <Line X1="40" Y1="0" X2="40" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="0" Canvas.Top="35" Text="Acid (pH 0–3.0)" FontWeight="SemiBold" Foreground="Black"/>
+                                <!-- Neutral line and label -->
+                                <Line X1="150" Y1="0" X2="150" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="110" Canvas.Top="35" TextAlignment="Center" Text="Neutral (pH 3.0-5.0)" FontWeight="SemiBold" Foreground="Black"/>
+                                <!-- Alkaline line and label -->
+                                <Line X1="425" Y1="0" X2="425" Y2="30" Stroke="Black" StrokeThickness="1.5"/>
+                                <TextBlock Canvas.Left="350" Canvas.Top="35" Text="Alkaline (pH 5.0–14)" FontWeight="SemiBold" Foreground="Black"/>
+                            </Canvas>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+
+
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,114 @@
+<Window
+    x:Class="Atomic_WinUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic_WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    SizeChanged="Window_SizeChanged"
+    Title="Atomic - Periodic Table">
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="Base"/>
+    </Window.SystemBackdrop>
+
+    <Grid>
+        <!-- Define rows for the title bar and the main content -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Title bar -->
+            <RowDefinition Height="*" />
+            <!-- Main content -->
+        </Grid.RowDefinitions>
+
+        <!-- Title Bar -->
+        <Grid x:Name="AppTitleBar"  
+              Grid.Row="0"
+              Height="32" >
+            <!-- Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}" -->
+              
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="TitleBarIcon" Source="ms-appx:///Assets/StoreLogo.png"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left"
+                   Width="16" Height="16"
+                   Margin="8,0,0,0"/>
+            <TextBlock x:Name="TitleBarTextBlock" 
+                       Text="Atomic - Periodic Table" 
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Margin="28,0,0,0"/>
+        </Grid>
+
+        <!-- Main Content -->
+        <NavigationView x:Name="nvSample"
+                        Grid.Row="1"
+                        IsSettingsVisible="True"
+                        IsBackButtonVisible="Auto"
+                        IsBackEnabled="False"
+                        Header="{x:Bind BreadcrumbHeader, Mode=OneWay}"
+                        AlwaysShowHeader="True"
+                        PaneTitle="Atomic - Periodic Table"
+                        PaneDisplayMode="Left"
+                        ExpandedModeThresholdWidth="500"
+                        SelectionFollowsFocus="Disabled"
+                        IsTabStop="False"
+                        SelectionChanged="NvSample_SelectionChanged"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        BackRequested="NvSample_BackRequested">
+
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Periodic Table" Tag="PeriodicTablePage" x:Name="PeriodicTablePageItem" ToolTipService.ToolTip="Periodic Table">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Home" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Tables" Icon="GlobalNavigationButton" ToolTipService.ToolTip="Tables" Tag="SamplePage2">
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Isotopes" ToolTipService.ToolTip="Isotopes" Tag="IsotopePage"/>
+                        <NavigationViewItem Content="Solubility" ToolTipService.ToolTip="Solubility" Tag="SolubilityPage"/>
+                        <NavigationViewItem Content="pH-Indicators" ToolTipService.ToolTip="pH-Indicators" Tag="phPage"/>
+
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
+                <NavigationViewItemHeader Content="Tools"/>
+                <NavigationViewItem Content="Dictionary" Tag="DictionaryPage" x:Name="DictionaryPageItem" SelectsOnInvoked="True" ToolTipService.ToolTip="Dictionary">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Document" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Calculator" Tag="CalculatorPage" x:Name="CalculatorPageItem" ToolTipService.ToolTip="Calculator" Visibility="Visible">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Calculator" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Blog" Tag="BlogPage" x:Name="BlogPageItem" ToolTipService.ToolTip="Blog" Visibility="Collapsed">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Globe" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <NavigationView.PaneCustomContent>
+                <HyperlinkButton x:Name="PaneHyperlink" Content="More info" Margin="12,0" Visibility="Collapsed" />
+            </NavigationView.PaneCustomContent>
+
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox 
+                    QueryIcon="Find" 
+                    AutomationProperties.Name="Search" 
+                    PlaceholderText="Search elements..."
+                    TextChanged="AutoSuggestBox_TextChanged" 
+                    QuerySubmitted="AutoSuggestBox_QuerySubmitted" />
+            </NavigationView.AutoSuggestBox>
+
+            <Frame x:Name="contentFrame" />
+        </NavigationView>
+    </Grid>
+</Window>

@@ -1,0 +1,363 @@
+<Page  
+   x:Class="Atomic_WinUI.ElementDetailsPage"  
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+   xmlns:local="using:Atomic_WinUI"  
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+   mc:Ignorable="d">
+
+    <Grid>
+        <!-- Page Content -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Padding="56,36,56,36" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding OriginalName}" FontSize="24" FontWeight="Bold" />
+
+                <!-- Buttons Section -->
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,12,0,0">
+                    <Button Content="Isotopes" Click="IsotopeClick" />
+                    <Button Content="Wikipedia" Click="WikipediaClick" />
+                </StackPanel>
+
+
+                <!-- Overview Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Overview" FontSize="20" FontWeight="SemiBold" />
+                        </StackPanel>
+                        <Grid ColumnSpacing="12" RowSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Image Section -->
+                            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Width="120" Height="120" MinHeight="120" CornerRadius="12" BorderThickness="1" Margin="0,12,0,0"  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" VerticalAlignment="Top">
+                                <Image x:Name="ElementImage" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+
+                            <!-- Description Section -->
+                            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Spacing="0">
+                                <TextBlock Text="Description:" FontSize="14" FontWeight="SemiBold" Margin="0,24,0,4" IsTextSelectionEnabled="True" />
+                                <TextBlock x:Name="Description" Text="{Binding Description}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Spacing="0">
+                            <TextBlock Text="Year Discovered:" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,4" IsTextSelectionEnabled="True" />
+                            <TextBlock x:Name="YearDiscovered" Text="{Binding YearDiscovered}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                            <TextBlock Text="Discovered By:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                            <TextBlock x:Name="DiscoveredBy" Text="{Binding DiscoveredBy}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                            <TextBlock Text="Group:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                            <TextBlock x:Name="ElementGroup" Text="{Binding ElementGroup}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                            <TextBlock Text="Appearance:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                            <TextBlock x:Name="ElementAppearance" Text="{Binding ElementAppearance}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                            <TextBlock Text="Electrons:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                            <TextBlock x:Name="ElementElectrons" Text="{Binding ElementElectrons}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>  
+
+               <!-- Properties Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">  
+                   <StackPanel>  
+                       <TextBlock Text="Properties" FontSize="20" FontWeight="SemiBold" />  
+
+                       <TextBlock Text="Atomic Number:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />  
+                       <TextBlock x:Name="AtomicNumber" Text="{Binding AtomicNumber}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>  
+
+                       <TextBlock Text="Atomic Weight (Relative Atomic Mass):" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>  
+                       <TextBlock x:Name="ElementAtomicWeight" Text="{Binding ElementAtomicWeight}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>  
+
+                       <TextBlock Text="Density:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>  
+                       <TextBlock x:Name="ElementDensity" Text="{Binding ElementDensity}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>  
+
+                       <TextBlock Text="Electronegativity:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>  
+                       <TextBlock x:Name="ElementElectronegativity" Text="{Binding ElementElectronegativity}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>  
+
+                       <TextBlock Text="Block:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>  
+                       <TextBlock x:Name="ElementBlock" Text="{Binding ElementBlock}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>  
+
+                       <TextBlock Text="Emission Spectrum:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />  
+                       <Border CornerRadius="12" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Left">  
+                           <Image x:Name="EmissionSpectrumImage" Height="64" Stretch="Uniform" HorizontalAlignment="Left" />  
+                       </Border>  
+                   </StackPanel>  
+               </Border>
+
+                <!-- Temperatures Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Temperatures" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Boiling Point:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="BoilingPointKelvin" Text="{Binding BoilingPointKelvin}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text=", " FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="BoilingPointCelsius" Text="{Binding BoilingPointCelsius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text=", " FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="BoilingPointFahrenheit" Text="{Binding BoilingPointFahrenheit}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Melting Point:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="MeltingPointKelvin" Text="{Binding BoilingPointKelvin}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text=", " FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="MeltingPointCelsius" Text="{Binding BoilingPointCelsius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text=", " FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="MeltingPointFahrenheit" Text="{Binding BoilingPointFahrenheit}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Atomic Properties Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Atomic Properties" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Oxidation States:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        
+                        <StackPanel Orientation="Vertical" Spacing="12" HorizontalAlignment="Left" Margin="0,12,0,4">
+                            <!-- First Row -->
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up1b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up1"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up2b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up2" />
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up3b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up3"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up4b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up4" />
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up5b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up5"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up6b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up6"/>
+                                </Border>
+                            </StackPanel>
+
+                            <!-- Second Row -->
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d1b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d1"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d2b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d2" />
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d3b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d3"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d4b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d4" />
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d5b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d5"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d6b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d6"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d7b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d7"/>
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d8b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d8" />
+                                </Border>
+                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d9b">
+                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d9"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Text="Electron Configuration:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="ElectronConfiguration" Text="{Binding ElectronConfiguration}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Ion Charge:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="IonCharge" Text="{Binding IonCharge}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Ionization Energies:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="IonizationEnergies" Text="{Binding IonizationEnergies}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Atomic Radius (Empirical):" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="AtomicRadiusEmpirical" Text="{Binding AtomicRadiusEmpirical}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Atomic Radius (Calculated):" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="AtomicRadiusCalculated" Text="{Binding AtomicRadiusCalculated}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Covalent Radius:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="CovalentRadius" Text="{Binding CovalentRadius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Van Der Waals Radius:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="VanDerWallsRadius" Text="{Binding VanDerWallsRadius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
+                </Border>
+
+
+                <!-- Electromagnetic Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Electromagnetic Properties" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Electrical Type:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="ElectricalType" Text="{Binding ElectricalType}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Electrical Resistivity:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="ElectricalResistivity" Text="{Binding ElectricalResistivity}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Magnetic Type:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="MagneticType" Text="{Binding MagneticType}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Superconducting Point:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="SuperconductingPoint" Text="{Binding SuperconductingPoint}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                    </StackPanel>
+                </Border>
+
+                <!-- Thermodynamic Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Thermodynamic Properties" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Phase (STP):" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="Phase" Text="{Binding Phase}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Fusion Heat:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="FusionHeat" Text="{Binding FusionHeat}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Specific Heat Capacity:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="SpecificHeatCapacity" Text="{Binding SpecificHeatCapacity}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Vaporization Heat:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="VaporizationHeat" Text="{Binding VaporizationHeat}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                    </StackPanel>
+                </Border>
+
+
+                <!-- Nuclear Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Nuclear Properties" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Radioactive:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="Radioactive" Text="{Binding Radioactive}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Isotopes:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="ViewAllIsotopes" Text="View all Isotopes" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Neutron Cross Sectional:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="NeutronCrossSectional" Text="{Binding NeutronCrossSectional}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Hardness Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Hardness Properties" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Mohs Hardness:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="MohsHardness" Text="{Binding MohsHardness}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Vickers Hardness:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="VickersHardness" Text="{Binding VickersHardness}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Brinell Hardness:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="BrinellHardness" Text="{Binding BrinellHardness}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Additional Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Additional Properties" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Sound of Speed:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="SoundOfSpeed"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Poisson's Constant:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="PoissonConstant"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Young's Modulus:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="YoungModulus"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Bulk Modulus:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="BulkModulus"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Shear Modulus:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="ShearModulus" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Abundance Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Abundance" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="In earth's crust:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="EarthCrustAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="In earth's soil:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="EarthSoilAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="In urban soil:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="UrbanSoilAbundance" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="In crustal rocks:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="CrustalRocksAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="In sea water:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="SeaWaterAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="In sun atoms:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="SunAtomsAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="In solar system atoms:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="SolarSystemAtomsAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Hazard Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Hazard of Materials" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Fire hazard:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="FireHazard"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Health hazard:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="HealthHazard"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Reactivity:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="Reactivity"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="Specific hazard:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="SpecificHazard"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Others Card -->
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1200">
+                    <StackPanel>
+                        <TextBlock Text="Others" FontSize="20" FontWeight="SemiBold" />
+
+                        <TextBlock Text="CAS Number:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock x:Name="CASNumber"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                        <TextBlock Text="EG Number:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock x:Name="EGNumber"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>  
+       </ScrollViewer>  
+   </Grid>  
+</Page>
