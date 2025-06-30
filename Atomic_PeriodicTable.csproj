@@ -65,8 +65,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Tables\FormulasPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Tables\NuclidePage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Tables\EmissionDetailsPage.xaml">
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -78,7 +78,7 @@
                         <NavigationViewItem Content="Isotopes" ToolTipService.ToolTip="Isotopes" Tag="IsotopePage"/>    
                         <NavigationViewItem Content="pH-Indicators" ToolTipService.ToolTip="pH-Indicators" Tag="phPage"/>
                         <NavigationViewItem Content="Electrochemical Series" ToolTipService.ToolTip="Electrochemical Series" Tag="ElectrochemicalPage"/>
-                        <NavigationViewItem Content="Equations" ToolTipService.ToolTip="Equations" Tag="EquationsPage" Visibility="Collapsed"/>
+                        <NavigationViewItem Content="Equations" ToolTipService.ToolTip="Equations" Tag="EquationsPage" Visibility="Visible"/>
                         <NavigationViewItem Content="Ionization Energies" ToolTipService.ToolTip="Ionization Energies" Tag="IonizationPage"/>
                         <NavigationViewItem Content="Solubility" ToolTipService.ToolTip="Solubility" Tag="SolubilityPage"/>
                         <NavigationViewItem Content="Poisson's Ratio" ToolTipService.ToolTip="Poisson's Ratio" Tag="PoissonPage"/>

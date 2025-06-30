@@ -10,7 +10,7 @@ using Windows.Storage;
 
 namespace Atomic_WinUI
 {
-    public sealed partial class PoissonPage : Page
+    public sealed partial class FormulasPage : Page
     {
         private ObservableCollection<Poisson> PoissonList { get; set; }
         public ObservableCollection<Poisson> FilteredPoissonList { get; set; }
@@ -23,7 +23,7 @@ namespace Atomic_WinUI
             }
         }
 
-        public PoissonPage()
+        public FormulasPage()
         {
             this.InitializeComponent();
             //Check PRO or Not:

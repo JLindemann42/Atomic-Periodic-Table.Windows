@@ -35,7 +35,7 @@
         </Grid.RowDefinitions>
 
         <!-- Search Box -->
-        <Border MaxWidth="1800">
+        <Border MaxWidth="1800" x:Name="EmissionToolBar">
             <TextBox x:Name="SearchBox"
                      PlaceholderText="Search Emission Spectrums..."
                      Margin="0,0,0,12"
@@ -106,11 +106,16 @@
                                             Margin="12,0"
                                             VerticalAlignment="Center">
                                     <TextBlock Text="{x:Bind Name}" FontWeight="SemiBold"/>
-                                    <Image Source="{x:Bind EmissionImageUrl}"
-                                           Height="34"
-                                           Width="180"
+
+                                    <Border CornerRadius="12"       
+                                        HorizontalAlignment="Left"
+                                        Margin="0,6,0,0"
+                                        Width="180">
+                                        <Image Source="{x:Bind EmissionImageUrl}"
                                            Stretch="Uniform"
-                                           Margin="0,6,0,0"/>
+                                           Loaded="Image_Loaded"
+                                           />
+                                    </Border>
                                 </StackPanel>
 
                                 <!-- Category and Chevron -->
@@ -135,5 +140,15 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <!-- Message and Button if user does NOT have PRO -->
+        <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="This feature requires PRO version."
+                       FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
+            <Button Content="Get PRO Version"
+                    Click="OpenProPage_Click"
+                    Width="200"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Page>

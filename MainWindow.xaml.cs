@@ -264,6 +264,11 @@ namespace Atomic_WinUI
                         nvSample.Header = CreateBreadcrumb("Dictionary");
                         break;
 
+                    case "EquationsPage":
+                        contentFrame.Navigate(typeof(FormulasPage));
+                        nvSample.Header = CreateBreadcrumb("Equations");
+                        break;
+
                     case "IonizationPage":
                         contentFrame.Navigate(typeof(IonizationPage));
                         nvSample.Header = CreateBreadcrumb("Ionization Table");

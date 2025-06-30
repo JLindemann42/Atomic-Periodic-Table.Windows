@@ -4,8 +4,11 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Windows.Storage;
 
 namespace Atomic_WinUI
 {
@@ -18,6 +21,20 @@ namespace Atomic_WinUI
         {
             this.InitializeComponent();
 
+            //Check PRO or Not:
+            if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
+            {
+                EmissionToolBar.Visibility = Visibility.Visible;
+                EmissionListView.Visibility = Visibility.Visible;
+                NoProContent.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                EmissionToolBar.Visibility = Visibility.Collapsed;
+                EmissionListView.Visibility = Visibility.Collapsed;
+                NoProContent.Visibility = Visibility.Visible;
+            }
+
             string[] elementSymbols = new string[]
             {
                 "H", "He", "Li", "Be", "B",  "C",  "N",  "O",  "F",  "Ne",
@@ -29,21 +46,31 @@ namespace Atomic_WinUI
                 "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb",
                 "Lu", "Hf", "Ta", "W",  "Re", "Os", "Ir", "Pt", "Au", "Hg",
                 "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th",
-                "Pa", "U",  "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm",
-                "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds",
-                "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
+                "Pa", "U",  "Np", "Pu", "Am", "Cm", "Bk", "Cf",
             };
 
+            string[] elementNames = new string[]
+            {
+                "Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon",
+                "Sodium", "Magnesium", "Aluminum", "Silicon", "Phosphorus", "Sulfur", "Chlorine", "Argon", "Potassium", "Calcium",
+                "Scandium", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc",
+                "Gallium", "Germanium", "Arsenic", "Selenium", "Bromine", "Krypton", "Rubidium", "Strontium", "Yttrium", "Zirconium",
+                "Niobium", "Molybdenum", "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silver", "Cadmium", "Indium", "Tin",
+                "Antimony", "Tellurium", "Iodine", "Xenon", "Cesium", "Barium", "Lanthanum", "Cerium", "Praseodymium", "Neodymium",
+                "Promethium", "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", "Erbium", "Thulium", "Ytterbium",
+                "Lutetium", "Hafnium", "Tantalum", "Tungsten", "Rhenium", "Osmium", "Iridium", "Platinum", "Gold", "Mercury",
+                "Thallium", "Lead", "Bismuth", "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Thorium",
+                "Protactinium", "Uranium", "Neptunium", "Plutonium", "Americium", "Curium", "Berkelium", "Californium"
+            };
 
             EmissionList = new ObservableCollection<Emission>(
-                elementSymbols.Select(symbol => new Emission
+                elementSymbols.Select((symbol, index) => new Emission
                 {
                     Symbol = symbol,
-                    Name = symbol,
+                    Name = elementNames[index],
                     EmissionImageUrl = $"https://www.jlindemann.se/atomic/emission_lines/{symbol}.gif"
                 })
             );
-
 
             FilteredEmissionList = new ObservableCollection<Emission>(EmissionList);
         }
@@ -63,12 +90,26 @@ namespace Atomic_WinUI
             }
         }
 
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is Image image && image.DataContext is Emission emission)
+            {
+                image.Source = new BitmapImage(new Uri(emission.EmissionImageUrl));
+            }
+        }
+
+        private void OpenProPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ProPage));
+        }
+
+
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is Emission selectedEmission)
             {
                 // Navigation stub
-                // Frame.Navigate(typeof(EmissionDetailsPage), selectedEmission);
+                Frame.Navigate(typeof(EmissionDetailsPage), selectedEmission);
             }
         }
 
