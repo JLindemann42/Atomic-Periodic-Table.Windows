@@ -16,6 +16,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using Windows.Storage;
+using Microsoft.UI.Windowing;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,7 +28,7 @@ namespace Atomic_WinUI
     /// </summary>
     public partial class App : Application
     {
-        public Window MainWindow { get; private set; }
+        public static Window MainWindow { get; private set; }
         public App()
         {
             this.InitializeComponent();
@@ -67,6 +68,7 @@ namespace Atomic_WinUI
 
             MainWindow.Activate();
         }
+
         public void ApplyAppTheme(string? theme)
         {
             if (MainWindow?.Content is FrameworkElement root)

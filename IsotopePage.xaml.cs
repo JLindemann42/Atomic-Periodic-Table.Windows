@@ -1,11 +1,17 @@
 using Atomic_PeriodicTable;
+using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
 
 namespace Atomic_WinUI
 {
     public sealed partial class IsotopePage : Page
     {
+        private ObservableCollection<Isotope> IsotopeList { get; set; }
+        public ObservableCollection<Isotope> FilteredIsotopeList { get; set; }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -15,8 +21,13 @@ namespace Atomic_WinUI
                 Frame.Navigate(typeof(IsotopeDetailsPage), selectedIsotope);
             }
         }
-        public ObservableCollection<Isotope> IsotopeList { get; } = new()
+
+
+        public IsotopePage()
         {
+            this.InitializeComponent();
+            IsotopeList = new ObservableCollection<Isotope>
+            {
             new Isotope { Symbol = "H", Name = "Hydrogen", Number = 1 },
             new Isotope { Symbol = "He", Name = "Helium", Number = 2 },
             new Isotope { Symbol = "Li", Name = "Lithium", Number = 3 },
@@ -135,15 +146,69 @@ namespace Atomic_WinUI
             new Isotope { Symbol = "Lv", Name = "Livermorium", Number = 116 },
             new Isotope { Symbol = "Ts", Name = "Tennessine", Number = 117 },
             new Isotope { Symbol = "Og", Name = "Oganesson", Number = 118 }
+            };
+            FilteredIsotopeList = new ObservableCollection<Isotope>(IsotopeList);
 
-            // Add more isotopes as needed
-        };
-
-        public IsotopePage()
-        {
-            this.InitializeComponent();
         }
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var query = SearchBox.Text?.Trim().ToLower() ?? "";
+            FilteredIsotopeList.Clear();
+
+            foreach (var item in IsotopeList)
+            {
+                if (item.Name.ToLower().Contains(query) ||
+                    item.Symbol.ToLower().Contains(query) ||
+                    item.Number.ToString().Contains(query))
+                {
+                    FilteredIsotopeList.Add(item);
+                }
+            }
+        }
+        private void RootGrid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = GetThemeBrush("SubtleFillColorSecondaryBrush");
+            }
+        }
+
+        private void RootGrid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            }
+        }
+
+        private void RootGrid_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = GetThemeBrush("SubtleFillColorSecondaryBrush");
+            }
+        }
+
+        private void RootGrid_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            }
+        }
+
+        Brush GetThemeBrush(string key)
+        {
+            return (Brush)Application.Current.Resources[key];
+        }
+
     }
+
+
 
     public class Isotope
     {

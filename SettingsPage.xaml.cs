@@ -18,6 +18,14 @@ namespace Atomic_WinUI
         private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
         {
             _isInitializing = true;
+            updateThemeComboBox();
+            updateUnitComboBox();
+            _isInitializing = false;
+        }
+
+        private void updateThemeComboBox()
+        {
+            //Theme Combo Box Initialization
             ThemeComboBox.SelectionChanged -= ThemeComboBox_SelectionChanged;
 
             var savedTheme = ApplicationData.Current.LocalSettings.Values["AppTheme"] as string ?? "Default";
@@ -39,7 +47,32 @@ namespace Atomic_WinUI
             }
 
             ThemeComboBox.SelectionChanged += ThemeComboBox_SelectionChanged;
-            _isInitializing = false;
+        }
+
+        private void updateUnitComboBox()
+        {
+            //Init Unit Combo Box
+            UnitComboBox.SelectionChanged -= UnitComboBox_SelectionChanged;
+
+            var savedUnit = ApplicationData.Current.LocalSettings.Values["DefaultUnit"] as string ?? "Celsius";
+            bool unitFound = false;
+            int unitIndex = 0;
+            foreach (ComboBoxItem item in UnitComboBox.Items)
+            {
+                if ((item.Tag as string)?.Equals(savedUnit, StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    UnitComboBox.SelectedIndex = unitIndex;
+                    unitFound = true;
+                    break;
+                }
+                unitIndex++;
+                        }
+            if (!unitFound)
+            {
+                UnitComboBox.SelectedIndex = 0;
+            }
+
+            UnitComboBox.SelectionChanged += UnitComboBox_SelectionChanged;
         }
 
         private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,6 +85,17 @@ namespace Atomic_WinUI
                 string? selectedTheme = selectedItem.Tag as string ?? "Default";
                 ApplicationData.Current.LocalSettings.Values["AppTheme"] = selectedTheme;
                 (Application.Current as App)?.ApplyAppTheme(selectedTheme);
+            }
+        }
+        private void UnitComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isInitializing)
+                return;
+
+            if (UnitComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string? selectedUnit = selectedItem.Tag as string ?? "Celsius";
+                ApplicationData.Current.LocalSettings.Values["DefaultUnit"] = selectedUnit;
             }
         }
     }

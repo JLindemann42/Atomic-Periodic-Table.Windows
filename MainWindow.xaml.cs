@@ -15,6 +15,9 @@ using Atomic_PeriodicTable;
 using Microsoft.UI.Windowing;
 using Windows.Graphics;
 using Windows.Storage;
+using Microsoft.UI;
+using Windows.UI;
+using Atomic_PeriodicTable.Tables;
 
 namespace Atomic_WinUI
 {
@@ -36,9 +39,15 @@ namespace Atomic_WinUI
 
 
             this.InitializeComponent();
-            this.SizeChanged += MainWindow_SizeChanged;
             this.Closed += MainWindow_Closed; // Add this line
             ExtendsContentIntoTitleBar = true;
+
+            //Update colors of buttons in AppWindowBar depending on theme:
+            RootGrid.Loaded += (s, e) =>
+            {
+                RootGrid.ActualThemeChanged += RootGrid_ActualThemeChanged;
+                UpdateTitleBarButtonColors(RootGrid.ActualTheme);
+            };
 
             // Set the window icon
             IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
@@ -61,7 +70,7 @@ namespace Atomic_WinUI
             else
             {
                 // Optionally set a default size
-                appWindow.Resize(new Windows.Graphics.SizeInt32(1000, 700));
+                appWindow.Resize(new Windows.Graphics.SizeInt32(1200, 900));
             }
 
             contentFrame.Navigated += ContentFrame_Navigated;
@@ -72,34 +81,17 @@ namespace Atomic_WinUI
             // Set the PeriodicTablePage as the active item in the NavigationView
             nvSample.SelectedItem = PeriodicTablePageItem;
 
-        }
 
-        //Handle minimum size of the app window
-        private void MainWindow_SizeChanged(object sender, WindowSizeChangedEventArgs e)
-        {
-            const int minWidth = 600;
-            const int minHeight = 500;
-
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-            var appWindow = AppWindow.GetFromWindowId(windowId);
-
-            int width = (int)e.Size.Width;
-            int height = (int)e.Size.Height;
-
-            bool needsResize = false;
-            if (width < minWidth || height < minHeight)
+            //Update NavBar items if PRO Version is purschased
+            if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
             {
-                width = Math.Max(width, minWidth);
-                height = Math.Max(height, minHeight);
-                needsResize = true;
+                ProPageItem.Content = "PRO Member";
             }
 
-            if (needsResize)
-            {
-                appWindow.Resize(new SizeInt32(width, height));
-            }
+
+
         }
+
 
         //Store the window size when the window is closed
         private void MainWindow_Closed(object sender, WindowEventArgs args)
@@ -134,6 +126,7 @@ namespace Atomic_WinUI
             }
         }
 
+
         private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
         {
             if (e.SourcePageType == typeof(PeriodicTablePage))
@@ -141,15 +134,40 @@ namespace Atomic_WinUI
                 BreadcrumbHeader = "Periodic Table";
                 nvSample.Header = CreateBreadcrumb("Periodic Table");
             }
+            else if (e.SourcePageType == typeof(ProPage))
+            {
+                BreadcrumbHeader = "PRO Version";
+                nvSample.Header = CreateBreadcrumb("PRO Version");
+            }
             else if (e.SourcePageType == typeof(ElementDetailsPage))
             {
                 BreadcrumbHeader = "Periodic Table > Element Details";
                 nvSample.Header = CreateBreadcrumb("Periodic Table", "Element Details");
             }
+            else if (e.SourcePageType == typeof(PoissonDetailsPage))
+            {
+                BreadcrumbHeader = "Poisson's Ratio Table > Poisson's Ratio Details";
+                nvSample.Header = CreateBreadcrumb("Poisson's Ratio Table", "Poisson's Ratio Details");
+            }
             else if (e.SourcePageType == typeof(IsotopePage))
             {
                 BreadcrumbHeader = "Isotopes";
                 nvSample.Header = CreateBreadcrumb("Isotopes");
+            }
+            else if (e.SourcePageType == typeof(PoissonPage))
+            {
+                BreadcrumbHeader = "Poisson's Ratio Table";
+                nvSample.Header = CreateBreadcrumb("Poisson's Ratio Table");
+            }
+            else if (e.SourcePageType == typeof(EmissionPage))
+            {
+                BreadcrumbHeader = "Emission Spectrum Table";
+                nvSample.Header = CreateBreadcrumb("Emission Spectrum Table");
+            }
+            else if (e.SourcePageType == typeof(NuclidePage))
+            {
+                BreadcrumbHeader = "Nuclide Table";
+                nvSample.Header = CreateBreadcrumb("Nuclide Table");
             }
             else if (e.SourcePageType == typeof(IsotopeDetailsPage))
             {
@@ -161,8 +179,14 @@ namespace Atomic_WinUI
                 if (backStack.Count > 0 && backStack.Last().SourcePageType == typeof(ElementDetailsPage))
                 {
                     // Navigated from ElementDetailsPage
-                    breadcrumbHeader = "... > Element Details > Isotopes";
-                    breadcrumb = CreateBreadcrumb("...", "Element Details", "Isotopes");
+                    breadcrumbHeader = "... > Element Details > Isotope Details";
+                    breadcrumb = CreateBreadcrumb("...", "Element Details", "Isotope Details");
+                }
+                if (backStack.Count > 0 && backStack.Last().SourcePageType == typeof(NuclidePage))
+                {
+                    // Navigated from NuclidePage
+                    breadcrumbHeader = "Nuclide Table > Isotope Details";
+                    breadcrumb = CreateBreadcrumb("Nuclide Table", "Isotope Details");
                 }
                 else
                 {
@@ -174,12 +198,37 @@ namespace Atomic_WinUI
                 BreadcrumbHeader = breadcrumbHeader;
                 nvSample.Header = breadcrumb;
             }
+            else if (e.SourcePageType == typeof(IonizationDetailsPage))
+            {
+                // Check previous page in the back stack
+                var backStack = contentFrame.BackStack;
+                string breadcrumbHeader;
+                StackPanel breadcrumb;
+
+                if (backStack.Count > 0 && backStack.Last().SourcePageType == typeof(ElementDetailsPage))
+                {
+                    // Navigated from ElementDetailsPage
+                    breadcrumbHeader = "... > Element Details > Ionization Energies Details";
+                    breadcrumb = CreateBreadcrumb("...", "Element Details", "Ionization Energies Details");
+                }
+                else
+                {
+                    // Navigated from IsotopePage or elsewhere
+                    breadcrumbHeader = "Ionization Energies > Ionization Energies Details";
+                    breadcrumb = CreateBreadcrumb("Ionization Energies", "Ionization Energies Details");
+                }
+
+                BreadcrumbHeader = breadcrumbHeader;
+                nvSample.Header = breadcrumb;
+            }
+
             // Enable or disable the back button based on the navigation stack
             nvSample.IsBackEnabled = contentFrame.CanGoBack;
         }
 
         private void NvSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+
             if (args.IsSettingsSelected)
             {
                 // Navigate to SettingsPage when the settings button is clicked
@@ -193,6 +242,11 @@ namespace Atomic_WinUI
                     case "PeriodicTablePage":
                         contentFrame.Navigate(typeof(PeriodicTablePage));
                         nvSample.Header = CreateBreadcrumb("Periodic Table");
+                        break;
+
+                    case "ProPage":
+                        contentFrame.Navigate(typeof(ProPage));
+                        nvSample.Header = CreateBreadcrumb("PRO Version");
                         break;
 
                     case "IsotopePage":
@@ -210,6 +264,11 @@ namespace Atomic_WinUI
                         nvSample.Header = CreateBreadcrumb("Dictionary");
                         break;
 
+                    case "IonizationPage":
+                        contentFrame.Navigate(typeof(IonizationPage));
+                        nvSample.Header = CreateBreadcrumb("Ionization Table");
+                        break;
+
                     case "CalculatorPage":
                         contentFrame.Navigate(typeof(CalculatorPage));
                         nvSample.Header = CreateBreadcrumb("Calculator");
@@ -224,9 +283,36 @@ namespace Atomic_WinUI
                         contentFrame.Navigate(typeof(phPage));
                         nvSample.Header = CreateBreadcrumb("pH-Indicators");
                         break;
+
+                    case "ElectrochemicalPage":
+                        contentFrame.Navigate(typeof(ElectrochemicalPage));
+                        nvSample.Header = CreateBreadcrumb("Electrochemical Series");
+                        break;
+
+                    case "ConstantsPage":
+                        contentFrame.Navigate(typeof(ConstantsPage));
+                        nvSample.Header = CreateBreadcrumb("Constants Table");
+                        break;
+
+                    case "PoissonPage":
+                        contentFrame.Navigate(typeof(PoissonPage));
+                        nvSample.Header = CreateBreadcrumb("Poisson's Ratio Table");
+                        break;
+
+                    case "EmissionPage":
+                        contentFrame.Navigate(typeof(EmissionPage));
+                        nvSample.Header = CreateBreadcrumb("Emission Spectrum Table");
+                        break;
+
+                    case "NuclidePage":
+                        contentFrame.Navigate(typeof(NuclidePage));
+                        nvSample.Header = CreateBreadcrumb("Nuclide Table");
+                        break;
                 }
             }
         }
+
+
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
@@ -275,13 +361,31 @@ namespace Atomic_WinUI
 
         private StackPanel CreateBreadcrumb(params string[] items)
         {
-            var breadcrumb = new StackPanel { Orientation = Orientation.Horizontal };
+            bool isWideContent = items.Contains("Dictionary") || 
+                (items.Contains("Periodic Table") && !items.Contains("Element Details")) || 
+                items.Contains("Nuclide Table") || 
+                items.Contains("Isotopes Details");
+
+            var breadcrumb = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 0)
+            };
+            // Only apply MaxWidth if NOT "Dictionary"
+            if (!isWideContent)
+            {
+                breadcrumb.MaxWidth = 1800;
+            }
+
             for (int i = 0; i < items.Length; i++)
             {
                 var textBlock = new TextBlock
                 {
                     Text = items[i],
                     Margin = new Thickness(0, 0, 8, 0),
+                    MaxWidth = 1800,
+                    VerticalAlignment = VerticalAlignment.Stretch,
                     FontWeight = i == items.Length - 1 ? FontWeights.Bold : FontWeights.Normal
                 };
 
@@ -321,7 +425,41 @@ namespace Atomic_WinUI
             }
         }
 
+        private void RootGrid_ActualThemeChanged(FrameworkElement sender, object args)
+        {
+            UpdateTitleBarButtonColors(sender.ActualTheme);
+        }
 
+        private void UpdateTitleBarButtonColors(ElementTheme theme)
+        {
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+            var appWindow = AppWindow.GetFromWindowId(windowId);
+            var titleBar = appWindow.TitleBar;
+
+            if (theme == ElementTheme.Dark)
+            {
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonForegroundColor = Colors.White;
+                titleBar.ButtonHoverBackgroundColor = Color.FromArgb(30, 255, 255, 255);
+                titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonPressedBackgroundColor = Color.FromArgb(60, 255, 255, 255);
+                titleBar.ButtonPressedForegroundColor = Colors.White;
+                titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+                titleBar.ButtonInactiveForegroundColor = Colors.Gray;
+            }
+            else // Light or Default
+            {
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonForegroundColor = Colors.Black;
+                titleBar.ButtonHoverBackgroundColor = Color.FromArgb(30, 0, 0, 0);
+                titleBar.ButtonHoverForegroundColor = Colors.Black;
+                titleBar.ButtonPressedBackgroundColor = Color.FromArgb(60, 0, 0, 0);
+                titleBar.ButtonPressedForegroundColor = Colors.Black;
+                titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+                titleBar.ButtonInactiveForegroundColor = Colors.Gray;
+            }
+        }
 
     }
 

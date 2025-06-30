@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Remove="IsotopeDetailsPage.xaml" />
     <None Remove="IsotopePage.xaml" />
+    <None Remove="Tables\NuclidePage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,7 +65,23 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Tables\NuclidePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Tables\PoissonDetailsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tables\IonizationDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="BlogPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ElectrochemicalPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="phPage.xaml">
@@ -100,6 +117,17 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="PeriodicTablePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Tables\EmissionPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tables\PoissonPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ToolsPages\ProPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

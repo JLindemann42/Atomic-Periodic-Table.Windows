@@ -1,5 +1,5 @@
 <Page
-    x:Class="Atomic_WinUI.IsotopePage"
+    x:Class="Atomic_WinUI.EmissionPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Atomic_WinUI"
@@ -28,7 +28,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="Transparent" Margin="56,12,0,0">
+    <Grid Background="Transparent" Margin="54,12,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -37,33 +37,35 @@
         <!-- Search Box -->
         <Border MaxWidth="1800">
             <TextBox x:Name="SearchBox"
-                PlaceholderText="Search Isotopes..."
-                Margin="2,0,0,12"
-                TextChanged="SearchBox_TextChanged"
-                Width="300"
-                HorizontalAlignment="Left"/>
+                     PlaceholderText="Search Emission Spectrums..."
+                     Margin="0,0,0,12"
+                     TextChanged="SearchBox_TextChanged"
+                     Width="300"
+                     HorizontalAlignment="Left"/>
         </Border>
 
-        <!-- Scrollable List -->
+        <!-- ListView -->
         <ListView  
             Grid.Row="1"
-            x:Name="IsotopeListView"
-            ItemsSource="{x:Bind FilteredIsotopeList, Mode=OneWay}"          
+            x:Name="EmissionListView"
+            ItemsSource="{x:Bind FilteredEmissionList, Mode=OneWay}"          
             IsItemClickEnabled="True"
             ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"
             Background="Transparent"
             Padding="0,0,12,54"
             ItemClick="ListView_ItemClick">
+
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:Isotope">
-                    <Grid MinWidth="300" MaxWidth="1800" Margin="4,2,0,2">
+                <DataTemplate x:DataType="local:Emission">
+                    <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
                         <Border CornerRadius="8" Background="Transparent">
                             <Border.Shadow>
                                 <ThemeShadow />
                             </Border.Shadow>
                         </Border>
+
                         <Grid x:Name="RootGrid"
-                              Background="{ThemeResource ControlFillColorDefaultBrush}"
+                              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                               MinWidth="300" MaxWidth="1790"
                               Margin="0,2,0,2"
                               CornerRadius="8"
@@ -84,7 +86,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <!-- Icon -->
+                                <!-- Symbol Bubble -->
                                 <Border Grid.Column="0"
                                         Width="40"
                                         Height="40"
@@ -99,23 +101,34 @@
                                                HorizontalAlignment="Center"/>
                                 </Border>
 
-                                <!-- Details -->
+                                <!-- Element Name + Emission Spectrum -->
                                 <StackPanel Grid.Column="1"
                                             Margin="12,0"
                                             VerticalAlignment="Center">
                                     <TextBlock Text="{x:Bind Name}" FontWeight="SemiBold"/>
-                                    <TextBlock Text="{x:Bind Number}"
-                                               FontSize="12"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    <Image Source="{x:Bind EmissionImageUrl}"
+                                           Height="34"
+                                           Width="180"
+                                           Stretch="Uniform"
+                                           Margin="0,6,0,0"/>
                                 </StackPanel>
 
-                                <!-- Arrow -->
-                                <TextBlock Grid.Column="2"
-                                           Text=">"
-                                           FontWeight="SemiBold"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           Margin="0,0,12,0"/>
+                                <!-- Category and Chevron -->
+                                <StackPanel Grid.Column="2"
+                                            Margin="0,0,12,0"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right">
+                                    <TextBlock Text="Spectrum"
+                                               FontSize="12"
+                                               Margin="0,0,12,0.5"
+                                               VerticalAlignment="Center"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    <TextBlock Text=">"
+                                               FontWeight="SemiBold"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"/>
+                                </StackPanel>
                             </Grid>
                         </Grid>
                     </Grid>

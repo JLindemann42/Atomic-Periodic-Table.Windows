@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Atomic_PeriodicTable.Tables.PoissonDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic_PeriodicTable.Tables"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+
+            <ScrollViewer x:Name="MainContent" VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Padding="56,36,18,36" HorizontalAlignment="Stretch">
+
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="18" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" MinWidth="600" MaxWidth="1780">
+                    <StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="PoissonTitle" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="Poisson's Ratio:" FontSize="20" FontWeight="SemiBold" Margin="12,0,0,12"/>
+                            <TextBlock x:Name="PoissonRangeInfo" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="Value Range: xx% - yy%" FontSize="16" Margin="12,0,0,12"/>
+                            <StackPanel Margin="12,4,12,0">
+                                <!-- Progress bar container -->
+                                <Grid x:Name="ProgressContainer" Height="18" Background="{ThemeResource ControlAltFillColorQuarternaryBrush}" CornerRadius="4" >
+                                    <Rectangle x:Name="ProgressBar" Fill="{ThemeResource AccentFillColorDefaultBrush}" RadiusX="4" RadiusY="4" MinWidth="20" HorizontalAlignment="Left"/>
+                                </Grid>
+                                <!-- Markers below the progress bar -->
+                                <Grid Margin="0,4,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <!-- Assuming range 0.1 to 0.35 (spread across 5 intervals of 0.05) -->
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Major markers -->
+                                    <Rectangle Grid.Column="0" Width="1" Height="14" Fill="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,18"/>
+                                    <Rectangle Grid.Column="1" Width="1" Height="14" Fill="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,18"/>
+                                    <Rectangle Grid.Column="2" Width="1" Height="14" Fill="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,18"/>
+                                    <Rectangle Grid.Column="3" Width="1" Height="14" Fill="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,18"/>
+                                    <Rectangle Grid.Column="4" Width="1" Height="14" Fill="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,18"/>
+
+                                    <!-- Labels -->
+                                    <TextBlock Grid.Column="0" Text="0.05" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,24,0,0"/>
+                                    <TextBlock Grid.Column="1" Text="0.15" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,24,0,0"/>
+                                    <TextBlock Grid.Column="2" Text="0.25" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,24,0,0"/>
+                                    <TextBlock Grid.Column="3" Text="0.35" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,24,0,0"/>
+                                    <TextBlock Grid.Column="4" Text="0.45" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,24,0,0"/>
+                                </Grid>
+                            </StackPanel>
+
+
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Message and Button if user does NOT have PRO -->
+        <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="This feature requires PRO version."
+                       FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
+            <Button Content="Get PRO Version"
+                    Click="OpenProPage_Click"
+                    Width="200"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>

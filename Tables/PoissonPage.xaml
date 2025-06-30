@@ -1,5 +1,5 @@
 <Page
-    x:Class="Atomic_WinUI.IsotopePage"
+    x:Class="Atomic_WinUI.PoissonPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Atomic_WinUI"
@@ -28,42 +28,42 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="Transparent" Margin="56,12,0,0">
+    <Grid Background="Transparent" Margin="54,12,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Search Box -->
         <Border MaxWidth="1800">
             <TextBox x:Name="SearchBox"
-                PlaceholderText="Search Isotopes..."
-                Margin="2,0,0,12"
-                TextChanged="SearchBox_TextChanged"
-                Width="300"
-                HorizontalAlignment="Left"/>
+                 PlaceholderText="Search Poisson's Ratios..."
+                 Margin="0,0,0,12"
+                 TextChanged="SearchBox_TextChanged"
+                 Width="300"
+                 HorizontalAlignment="Left"/>
         </Border>
 
-        <!-- Scrollable List -->
+
+        <!-- ListView with scrolling enabled -->
         <ListView  
             Grid.Row="1"
-            x:Name="IsotopeListView"
-            ItemsSource="{x:Bind FilteredIsotopeList, Mode=OneWay}"          
+            x:Name="PoissonListView"
+            ItemsSource="{x:Bind FilteredPoissonList, Mode=OneWay}"          
             IsItemClickEnabled="True"
             ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"
             Background="Transparent"
             Padding="0,0,12,54"
             ItemClick="ListView_ItemClick">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:Isotope">
-                    <Grid MinWidth="300" MaxWidth="1800" Margin="4,2,0,2">
+                <DataTemplate x:DataType="local:Poisson">
+                    <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
                         <Border CornerRadius="8" Background="Transparent">
                             <Border.Shadow>
                                 <ThemeShadow />
                             </Border.Shadow>
                         </Border>
                         <Grid x:Name="RootGrid"
-                              Background="{ThemeResource ControlFillColorDefaultBrush}"
+                              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                               MinWidth="300" MaxWidth="1790"
                               Margin="0,2,0,2"
                               CornerRadius="8"
@@ -104,18 +104,38 @@
                                             Margin="12,0"
                                             VerticalAlignment="Center">
                                     <TextBlock Text="{x:Bind Name}" FontWeight="SemiBold"/>
-                                    <TextBlock Text="{x:Bind Number}"
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Bind StartNumber}"
                                                FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        <TextBlock Text="-"
+                                                   Margin="4,0,4,0"
+                                               FontSize="12"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        <TextBlock Text="{x:Bind EndNumber}"
+                                               FontSize="12"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </StackPanel>
+
                                 </StackPanel>
 
                                 <!-- Arrow -->
-                                <TextBlock Grid.Column="2"
+                                <StackPanel Grid.Column="2"
+                                            Margin="0,0,12,0"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right">
+                                    <TextBlock Text="{x:Bind Category}"
+                                               FontSize="12"
+                                               Margin="0,0,12,0.5"
+                                               VerticalAlignment="Center"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    <TextBlock
                                            Text=">"
                                            FontWeight="SemiBold"
                                            VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           Margin="0,0,12,0"/>
+                                           HorizontalAlignment="Right"/>
+                                </StackPanel>
                             </Grid>
                         </Grid>
                     </Grid>

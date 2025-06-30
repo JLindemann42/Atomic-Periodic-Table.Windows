@@ -1,5 +1,5 @@
 <Page
-    x:Class="Atomic_WinUI.IsotopePage"
+    x:Class="Atomic_WinUI.IonizationPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Atomic_WinUI"
@@ -28,7 +28,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="Transparent" Margin="56,12,0,0">
+    <Grid Background="Transparent" Margin="54,12,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -37,33 +37,33 @@
         <!-- Search Box -->
         <Border MaxWidth="1800">
             <TextBox x:Name="SearchBox"
-                PlaceholderText="Search Isotopes..."
-                Margin="2,0,0,12"
-                TextChanged="SearchBox_TextChanged"
-                Width="300"
-                HorizontalAlignment="Left"/>
+                 PlaceholderText="Search Ionization Energies..."
+                 Margin="0,0,0,12"
+                 TextChanged="SearchBox_TextChanged"
+                 Width="300"
+                 HorizontalAlignment="Left"/>
         </Border>
 
-        <!-- Scrollable List -->
+        <!-- ListView with scrolling enabled -->
         <ListView  
             Grid.Row="1"
-            x:Name="IsotopeListView"
-            ItemsSource="{x:Bind FilteredIsotopeList, Mode=OneWay}"          
+            x:Name="IonizationListView"
+            ItemsSource="{x:Bind FilteredIonizationList, Mode=OneWay}"          
             IsItemClickEnabled="True"
             ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"
             Background="Transparent"
             Padding="0,0,12,54"
             ItemClick="ListView_ItemClick">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:Isotope">
-                    <Grid MinWidth="300" MaxWidth="1800" Margin="4,2,0,2">
+                <DataTemplate x:DataType="local:Ionization">
+                    <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
                         <Border CornerRadius="8" Background="Transparent">
                             <Border.Shadow>
                                 <ThemeShadow />
                             </Border.Shadow>
                         </Border>
                         <Grid x:Name="RootGrid"
-                              Background="{ThemeResource ControlFillColorDefaultBrush}"
+                              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                               MinWidth="300" MaxWidth="1790"
                               Margin="0,2,0,2"
                               CornerRadius="8"

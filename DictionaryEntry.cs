@@ -1,4 +1,3 @@
-
 namespace Atomic_WinUI
 { 
     public class DictionaryEntry

@@ -6,6 +6,8 @@ using System;
 using System.IO;
 using System.Linq;
 using Atomic_PeriodicTable;
+using Windows.Storage;
+using Atomic_PeriodicTable.Tables;
 
 namespace Atomic_WinUI
 {
@@ -80,6 +82,11 @@ namespace Atomic_WinUI
                         ElementAppearance.Text = elementData.ElementAppearance;
                         ElementElectrons.Text = elementData.ElementElectrons;
 
+                        //Most common isotope card
+                        Protons.Text = elementData.ElementProtons;
+                        Electrons.Text = elementData.ElementElectrons;
+                        Neutrons.Text = elementData.ElementNeutrons;
+
                         //Properties
                         ElementAtomicWeight.Text = elementData.ElementAtomicWeight;
                         ElementDensity.Text = elementData.ElementDensity;
@@ -122,29 +129,52 @@ namespace Atomic_WinUI
                         NeutronCrossSectional.Text = elementData.NeutronCrossSectional;
 
                         //Hardness Properties
-                        MohsHardness.Text = elementData.MohsHardness;
-                        VickersHardness.Text = elementData.VickersHardness;
-                        BrinellHardness.Text = elementData.BrinellHardness;
+                        if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
+                        {
+                            MohsHardness.Text = elementData.MohsHardness;
+                            VickersHardness.Text = elementData.VickersHardness;
+                            BrinellHardness.Text = elementData.BrinellHardness;
+                        }
+                        else
+                        {
+                            MohsHardness.Text = "Requires PRO-Version";
+                            VickersHardness.Text = "Requires PRO-Version";
+                            BrinellHardness.Text = "Requires PRO-Version";
+                        }
+
 
                         //Additional Properties
-                        if (elementData.SoundOfSpeedSolid is not "---") {
-                            SoundOfSpeed.Text = elementData.SoundOfSpeedSolid;
-                        }
-                        if (elementData.SoundOfSpeedLiquid is not "---")
+                        if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
                         {
-                            SoundOfSpeed.Text = elementData.SoundOfSpeedLiquid;
+                            if (elementData.SoundOfSpeedSolid is not "---")
+                            {
+                                SoundOfSpeed.Text = elementData.SoundOfSpeedSolid;
+                            }
+                            if (elementData.SoundOfSpeedLiquid is not "---")
+                            {
+                                SoundOfSpeed.Text = elementData.SoundOfSpeedLiquid;
+                            }
+                            if (elementData.SoundOfSpeedGas is not "---")
+                            {
+                                SoundOfSpeed.Text = elementData.SoundOfSpeedGas;
+                            }
+                            PoissonConstant.Text = elementData.PoissonRatio;
+                            BulkModulus.Text = elementData.BulkModulus;
+                            YoungModulus.Text = elementData.BulkModulus;
+                            ShearModulus.Text = elementData.ShearModulus;
                         }
-                        if (elementData.SoundOfSpeedGas is not "---")
+                        else
                         {
-                            SoundOfSpeed.Text = elementData.SoundOfSpeedGas;
+                            SoundOfSpeed.Text = "Requires PRO-Version";
+                            PoissonConstant.Text = "Requires PRO-Version";
+                            BulkModulus.Text = "Requires PRO-Version";
+                            YoungModulus.Text = "Requires PRO-Version";
+                            ShearModulus.Text = "Requires PRO-Version";
                         }
-                        PoissonConstant.Text = elementData.PoissonRatio;
-                        BulkModulus.Text = elementData.BulkModulus;
-                        YoungModulus.Text = elementData.BulkModulus;
-                        ShearModulus.Text = elementData.ShearModulus;
 
-                        //Abundance
-                        EarthCrustAbundance.Text = elementData.EarthCrust + " mg/kg (ppm)";
+
+                            //Abundance
+                            EarthCrustAbundance.Text = elementData.EarthCrust + " mg/kg (ppm)";
                         EarthSoilAbundance.Text = elementData.EarthSoils + " mg/kg (ppm)";
                         UrbanSoilAbundance.Text = elementData.UrbanSoils + " mg/kg (ppm)";
                         SeaWaterAbundance.Text = elementData.SeaWater + " mg/kg (ppm)";
@@ -153,10 +183,28 @@ namespace Atomic_WinUI
                         SolarSystemAtomsAbundance.Text = elementData.SolarSystem + " (atoms per 10^6 atoms of silicon)";
 
                         //Hazard Properties
-                        HealthHazard.Text = elementData.Health.ToString();
-                        FireHazard.Text = elementData.Flammability.ToString();
-                        Reactivity.Text = elementData.Instability.ToString();
-                        SpecificHazard.Text = elementData.Special.ToString();
+                        if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
+                        {
+                            HealthHazard.Text = string.IsNullOrWhiteSpace(elementData.Health?.ToString()) ? "-" : elementData.Health.ToString();
+                            hHealth.Content = string.IsNullOrWhiteSpace(elementData.Health?.ToString()) ? "-" : elementData.Health.ToString();
+
+                            FireHazard.Text = string.IsNullOrWhiteSpace(elementData.Flammability?.ToString()) ? "-" : elementData.Flammability.ToString();
+                            hPhase.Content = string.IsNullOrWhiteSpace(elementData.Flammability?.ToString()) ? "-" : elementData.Flammability.ToString();
+
+                            Reactivity.Text = string.IsNullOrWhiteSpace(elementData.Instability?.ToString()) ? "-" : elementData.Instability.ToString();
+                            hReactivity.Content = string.IsNullOrWhiteSpace(elementData.Instability?.ToString()) ? "-" : elementData.Instability.ToString();
+
+                            SpecificHazard.Text = string.IsNullOrWhiteSpace(elementData.Special?.ToString()) ? "-" : elementData.Special.ToString();
+                            hSpecific.Content = string.IsNullOrWhiteSpace(elementData.Special?.ToString()) ? "-" : elementData.Special.ToString();
+                        }
+                        else
+                        {
+                            HealthHazard.Text = "Requires PRO-Version";
+                            FireHazard.Text = "Requires PRO-Version";
+                            Reactivity.Text = "Requires PRO-Version";
+                            SpecificHazard.Text = "Requires PRO-Version";
+                        }
+ 
 
 
                         //Other Properties
@@ -183,6 +231,11 @@ namespace Atomic_WinUI
         {
             Frame.Navigate(typeof(IsotopeDetailsPage), Element);
         }
+        private void IonizationClick(object sender, global::Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(IonizationDetailsPage), Element);
+        }
+
         private void WikipediaClick(object sender, global::Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(Element?.WikipediaLink))

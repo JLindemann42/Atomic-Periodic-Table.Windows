@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Background="Transparent" Margin="56,24,0,0">
+        <Grid Background="Transparent" Margin="56,24,0,0" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="48"/>
                 <RowDefinition Height="*"/>
@@ -38,6 +38,10 @@
                     <ColumnDefinition Width="64"/>
                     <ColumnDefinition Width="64"/>
                     <ColumnDefinition Width="64"/>
+                    <ColumnDefinition Width="64"/>
+                    <ColumnDefinition Width="220"/>
+
+
                 </Grid.ColumnDefinitions>
                 <Border Grid.Row="0" Grid.Column="0" />
                 <Border Grid.Row="0" Grid.Column="1" Background="{ThemeResource SolidBackgroundFillColorBaseAltBrush}" CornerRadius="8,0,0,8">
@@ -79,6 +83,10 @@
                 <Border Grid.Row="0" Grid.Column="13" Background="{ThemeResource SolidBackgroundFillColorBaseAltBrush}" CornerRadius="0,8,8,0">
                     <TextBlock Text="Pb²⁺" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
+
+                <Border Grid.Row="0" Grid.Column="14" Background="{ThemeResource SolidBackgroundFillColorBaseAltBrush}" CornerRadius="8,8,0,0" Margin="12,0,0,0">
+                    <TextBlock Text="Details:" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
             </Grid>
 
             <!-- Left axis headers -->
@@ -96,6 +104,8 @@
                     <RowDefinition Height="48"/>
                     <RowDefinition Height="48"/>
                     <RowDefinition Height="48"/>
+                    <RowDefinition Height="48"/>
+
                 </Grid.RowDefinitions>
                 <Border Grid.Row="1" Grid.Column="0" Background="{ThemeResource SolidBackgroundFillColorBaseAltBrush}" CornerRadius="8,8,0,0">
                     <TextBlock Text="OH⁻" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -151,6 +161,8 @@
                         <RowDefinition Height="48"/>
                         <RowDefinition Height="48"/>
                         <RowDefinition Height="48"/>
+                        <RowDefinition Height="48"/>
+
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"/>
@@ -166,7 +178,25 @@
                         <ColumnDefinition Width="64"/>
                         <ColumnDefinition Width="64"/>
                         <ColumnDefinition Width="64"/>
+                        <ColumnDefinition Width="64"/>
+                        <ColumnDefinition Width="220"/>
+
                     </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="1" Grid.Column="14" Background="{ThemeResource SystemFillColorSuccessBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="0" Margin="12,0,0,0">
+                        <TextBlock Text="S: Soluble" Foreground="{ThemeResource SystemFillColorSuccessBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="14" Background="{ThemeResource SystemFillColorCautionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="0" Margin="12,0,0,0">
+                        <TextBlock Text="Ss: Slightly Soluble" Foreground="{ThemeResource SystemFillColorCautionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="14" Background="{ThemeResource SystemFillColorCriticalBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="0" Margin="12,0,0,0">
+                        <TextBlock Text="I: Insoluble" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="14" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="0,0,8,8" Margin="12,0,0,0">
+                        <TextBlock Text="-: Decomposed by water" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    </Border>
+                    
+                    
                     <Border Grid.Row="1" Grid.Column="1" Background="{ThemeResource SystemFillColorSuccessBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
                         <TextBlock Text="S" Foreground="{ThemeResource SystemFillColorSuccessBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
@@ -315,10 +345,10 @@
                         <TextBlock Text="S" Foreground="{ThemeResource SystemFillColorSuccessBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="4" Grid.Column="9" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="4" Grid.Column="10" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="4" Grid.Column="11" Background="{ThemeResource SystemFillColorCriticalBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
@@ -362,7 +392,7 @@
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="5" Grid.Column="11" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="5" Grid.Column="12" Background="{ThemeResource SystemFillColorCriticalBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
@@ -385,16 +415,16 @@
                         <TextBlock Text="S" Foreground="{ThemeResource SystemFillColorSuccessBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="6" Grid.Column="5" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="6" Grid.Column="6" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="6" Grid.Column="7" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="6" Grid.Column="8" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="6" Grid.Column="9" Background="{ThemeResource SystemFillColorCriticalBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
@@ -476,13 +506,13 @@
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="8" Grid.Column="8" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="8" Grid.Column="9" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="8" Grid.Column="10" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="8" Grid.Column="11" Background="{ThemeResource SystemFillColorCriticalBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
@@ -599,7 +629,7 @@
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="11" Grid.Column="8" Background="{ThemeResource SystemFillColorAttentionBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
-                        <TextBlock Text="-" Foreground="{ThemeResource SystemFillColorAttentionBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="-" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                     </Border>
                     <Border Grid.Row="11" Grid.Column="9" Background="{ThemeResource SystemFillColorCriticalBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Margin="1">
                         <TextBlock Text="I" Foreground="{ThemeResource SystemFillColorCriticalBackgroundBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>

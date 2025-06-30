@@ -82,6 +82,12 @@ public class Element : INotifyPropertyChanged
     [JsonPropertyName("element_electrons")]
     public string ElementElectrons { get; set; }
 
+    [JsonPropertyName("element_protons")]
+    public string ElementProtons { get; set; }
+
+    [JsonPropertyName("element_neutron_common")]
+    public string ElementNeutrons { get; set; }
+
     [JsonPropertyName("wikilink")]
     public string WikipediaLink { get; set; }
 

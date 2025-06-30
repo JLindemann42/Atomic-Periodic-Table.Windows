@@ -1,4 +1,5 @@
 <Window
+    
     x:Class="Atomic_WinUI.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,7 +13,7 @@
         <MicaBackdrop Kind="Base"/>
     </Window.SystemBackdrop>
 
-    <Grid>
+    <Grid x:Name="RootGrid">
         <!-- Define rows for the title bar and the main content -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -69,21 +70,30 @@
                         <SymbolIcon Symbol="Home" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Tables" Icon="GlobalNavigationButton" ToolTipService.ToolTip="Tables" Tag="SamplePage2">
+                <NavigationViewItem Content="Tables" ToolTipService.ToolTip="Tables" Tag="SamplePage2">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xF0E2;"/>
+                    </NavigationViewItem.Icon>
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Content="Isotopes" ToolTipService.ToolTip="Isotopes" Tag="IsotopePage"/>
-                        <NavigationViewItem Content="Solubility" ToolTipService.ToolTip="Solubility" Tag="SolubilityPage"/>
+                        <NavigationViewItem Content="Isotopes" ToolTipService.ToolTip="Isotopes" Tag="IsotopePage"/>    
                         <NavigationViewItem Content="pH-Indicators" ToolTipService.ToolTip="pH-Indicators" Tag="phPage"/>
-
+                        <NavigationViewItem Content="Electrochemical Series" ToolTipService.ToolTip="Electrochemical Series" Tag="ElectrochemicalPage"/>
+                        <NavigationViewItem Content="Equations" ToolTipService.ToolTip="Equations" Tag="EquationsPage" Visibility="Collapsed"/>
+                        <NavigationViewItem Content="Ionization Energies" ToolTipService.ToolTip="Ionization Energies" Tag="IonizationPage"/>
+                        <NavigationViewItem Content="Solubility" ToolTipService.ToolTip="Solubility" Tag="SolubilityPage"/>
+                        <NavigationViewItem Content="Poisson's Ratio" ToolTipService.ToolTip="Poisson's Ratio" Tag="PoissonPage"/>
+                        <NavigationViewItem Content="Nuclide Table" ToolTipService.ToolTip="Nuclide Table" Tag="NuclidePage"/>
+                        <NavigationViewItem Content="Constants" ToolTipService.ToolTip="Constants" Tag="ConstantsPage"/>
+                        <NavigationViewItem Content="Emission Spectrums" ToolTipService.ToolTip="Emission Spectrums" Tag="EmissionPage"/>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
                 <NavigationViewItemHeader Content="Tools"/>
                 <NavigationViewItem Content="Dictionary" Tag="DictionaryPage" x:Name="DictionaryPageItem" SelectsOnInvoked="True" ToolTipService.ToolTip="Dictionary">
                     <NavigationViewItem.Icon>
-                        <SymbolIcon Symbol="Document" />
+                        <FontIcon Glyph="&#xE82D;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Calculator" Tag="CalculatorPage" x:Name="CalculatorPageItem" ToolTipService.ToolTip="Calculator" Visibility="Visible">
+                <NavigationViewItem Content="Calculator" Tag="CalculatorPage" x:Name="CalculatorPageItem" ToolTipService.ToolTip="Calculator" Visibility="Collapsed">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Calculator" />
                     </NavigationViewItem.Icon>
@@ -91,6 +101,11 @@
                 <NavigationViewItem Content="Blog" Tag="BlogPage" x:Name="BlogPageItem" ToolTipService.ToolTip="Blog" Visibility="Collapsed">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Globe" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Get PRO Version" Tag="ProPage" x:Name="ProPageItem" SelectsOnInvoked="True" ToolTipService.ToolTip="Get PRO Version">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Add" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>

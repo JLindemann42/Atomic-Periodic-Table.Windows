@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using Windows.Storage;
 
 namespace Atomic_WinUI
 {
@@ -298,6 +299,7 @@ namespace Atomic_WinUI
             {
                 string mode = menuItem.Text;
                 System.Diagnostics.Debug.WriteLine($"Selected mode: {mode}");
+                string unit = ApplicationData.Current.LocalSettings.Values["DefaultUnit"] as string ?? "Celsius";
 
                 foreach (var child in PeriodicTableGrid.Children)
                 {
@@ -344,11 +346,37 @@ namespace Atomic_WinUI
                                             element.Name = atomicMass.GetString();
                                         }
                                         break;
+                                    case "Boiling Point":
+                                        if (elementData.TryGetProperty($"element_boiling_{unit.ToLower()}", out var boilingPoint)) //{unit} from settings
+                                        {
+                                            element.Name = boilingPoint.GetString();
+                                        }
+                                        break;
+                                    case "Melting Point":
+                                        if (elementData.TryGetProperty($"element_boiling_{unit.ToLower()}", out var meltingPoint)) //{unit} from settings
+                                        {
+                                            element.Name = meltingPoint.GetString();
+                                        }
+                                        break;
 
                                     case "Element Groups":
                                         if (elementData.TryGetProperty("element_group", out var elementGroup))
                                         {
                                             element.Name = elementGroup.GetString();
+                                        }
+                                        break;
+
+                                    case "Phase (STP)":
+                                        if (elementData.TryGetProperty("element_phase", out var elementPhase))
+                                        {
+                                            element.Name = elementPhase.GetString();
+                                        }
+                                        break;
+
+                                    case "Year Discovered":
+                                        if (elementData.TryGetProperty("element_year", out var elementYear))
+                                        {
+                                            element.Name = elementYear.GetString();
                                         }
                                         break;
 
@@ -365,6 +393,31 @@ namespace Atomic_WinUI
                     }
                 }
             }
+        }
+        private void OnRandomElementButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Use reflection to get all Element properties named "Element1" to "Element118"
+            var elementList = new List<Element>();
+
+            for (int i = 1; i <= 118; i++)
+            {
+                var prop = typeof(PeriodicTablePage).GetProperty($"Element{i}");
+                if (prop != null)
+                {
+                    var element = prop.GetValue(this) as Element;
+                    if (element != null)
+                    {
+                        elementList.Add(element);
+                    }
+                }
+            }
+
+            // Pick a random element
+            var random = new Random();
+            var selected = elementList[random.Next(elementList.Count)];
+
+            // Navigate to the details page
+            Frame.Navigate(typeof(ElementDetailsPage), selected);
         }
     }
 

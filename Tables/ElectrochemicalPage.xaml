@@ -1,0 +1,51 @@
+<Page
+    x:Class="Atomic_WinUI.ElectrochemicalPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic_WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="Transparent"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="56,0,0,0" >
+        <!-- Top Section for DropDownButton --> 
+        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,12,0,0" Grid.Row="0" >
+
+        </StackPanel>
+        <Border MaxWidth="1800">
+            <TextBox x:Name="SearchBox"
+                     Margin="0,12,0,0"
+                     PlaceholderText="Search table..."
+                     Width="300"        
+                         HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     TextChanged="OnSearchBoxTextChanged"/>
+        </Border>
+        <ListView ItemsSource="{x:Bind FilteredEntries}" SelectionMode="None" Padding="0,0,8,36" Margin="0,56,0,0" >
+ 
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:ElectrochemicalEntry" >
+                    <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Padding="12" CornerRadius="8" Margin="0,2,0,2"  MinWidth="300" MaxWidth="1796">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Width="40" Height="40" HorizontalAlignment="Left" Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="20">
+                            <TextBlock Text="{x:Bind Short}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="{ThemeResource TextOnAccentFillColorDefault}"/>
+
+                        </Grid>
+
+                        <StackPanel Margin="52,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{x:Bind Name}" FontSize="14" FontWeight="SemiBold" />
+                            <TextBlock Text="{x:Bind Voltage}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+
+                        <TextBlock Text="{x:Bind Charge}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

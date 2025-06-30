@@ -9,11 +9,15 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
-                
+
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
             <SolidColorBrush x:Key="MicaBackgroundFillColorDefaultBrush" Color="#F3F3F3" />
 
         </ResourceDictionary>
+
+
     </Application.Resources>
+
 </Application>
+

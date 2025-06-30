@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System.Text.Json.Nodes;
 using Atomic_WinUI;
 using Microsoft.UI.Xaml;
+using Atomic_PeriodicTable.Tables;
 
 namespace Atomic_PeriodicTable
 {
@@ -39,6 +40,10 @@ namespace Atomic_PeriodicTable
             if (e.Parameter is Atomic_WinUI.Isotope isotope)
             {
                 elementName = isotope.Name;
+            }
+            if (e.Parameter is IsotopeInfo isoInfo)
+            {
+                elementName = isoInfo.ElementFullName;
             }
             else if (e.Parameter is Element element)
             {

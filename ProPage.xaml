@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Atomic_PeriodicTable.ProPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic_PeriodicTable"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="ProGradientStoryboard" RepeatBehavior="Forever" AutoReverse="True">
+            <DoubleAnimation Storyboard.TargetName="GradientStart"
+                         Storyboard.TargetProperty="Offset"
+                         From="0.0" To="0.3"
+                         Duration="0:0:5" />
+            <DoubleAnimation Storyboard.TargetName="GradientEnd"
+                         Storyboard.TargetProperty="Offset"
+                         From="0.3" To="0.7"
+                         Duration="0:0:5" />
+        </Storyboard>
+    </Page.Resources>
+
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="56,12,56,0">
+            <Grid MinWidth="600" MaxWidth="1748" Margin="0,12">  
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Free Version -->
+                <Grid Grid.Column="0" Margin="0,0,10,0">
+                    <Border x:Name="FreeCard"
+                CornerRadius="20"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                Padding="20"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                Translation="0,0,24">
+                        <Border.Shadow>
+                            <ThemeShadow />
+                        </Border.Shadow>
+
+                        <StackPanel>
+                            <TextBlock Text="Free Version" FontSize="20" FontWeight="Bold" Margin="0,12,0,10"/>
+                            <TextBlock Text="Perfect for basic access." FontSize="14" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="FreePrice" Text="Free" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <Button x:Name="FreeButton" Content="Current Version" Style="{StaticResource AccentButtonStyle}" Margin="0,15,0,10" HorizontalAlignment="Stretch" IsEnabled="False"/>
+                            <TextBlock Text="• Element Overview" />
+                            <TextBlock Text="• Isotopes" />
+                            <TextBlock Text="• Dictionary" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Pro Version with gradient and working shadow -->
+                <Grid Grid.Column="1" Margin="10,0,10,0">
+                    <Grid x:Name="ProCardShadowHost" Translation="0,0,42" CornerRadius="20">
+                        <!-- Apply shadow here -->
+                        <Grid.Shadow>
+                            <ThemeShadow />
+                        </Grid.Shadow>
+
+                        <!-- Gradient border with inner card -->
+                        <Border CornerRadius="20" Padding="2">
+                            <Border.Background>
+                                <LinearGradientBrush x:Name="ProGradient" StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop x:Name="GradientStart" Color="#FF6EE7B7" Offset="0.0" />
+                                    <GradientStop x:Name="GradientEnd" Color="#FF3B82F6" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+
+                            <Border Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                    CornerRadius="18"
+                    Padding="20">
+                                <StackPanel>
+                                    <TextBlock x:Name="Pro" Text="PRO Version" FontSize="20" FontWeight="Bold" Margin="0,12,0,10"/>
+                                    <TextBlock Text="Unlock advanced data." FontSize="14" Margin="0,0,0,10"/>
+                                    <TextBlock x:Name="ProPrice" Text="---" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
+                                    <Button x:Name="BuyProButton" Content="Purchase" Margin="0,15,0,10" Style="{StaticResource AccentButtonStyle}" Click="BuyProVersion_Click" HorizontalAlignment="Stretch"/>
+                                    <TextBlock Text="• All Free features" />
+                                    <TextBlock Text="• Additional Tables" />
+                                    <TextBlock Text="• Additional Features" />
+                                </StackPanel>
+                            </Border>
+                        </Border>
+
+                        <!-- Most Popular badge -->
+                        <Border Background="{ThemeResource SystemAccentColor}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="12"
+                Padding="8,4"
+                CornerRadius="10">
+                            <TextBlock Text="Most popular"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Bold"
+                       TextAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+
+                <!-- Pro+ Version -->
+                <Grid Grid.Column="2" Margin="10,0,0,0">
+                    <Grid>
+                        <!-- Card -->
+                        <Border x:Name="ProPlusCard"
+                    CornerRadius="20"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    Padding="20"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    Translation="0,0,24">
+                            <Border.Shadow>
+                                <ThemeShadow />
+                            </Border.Shadow>
+
+                            <StackPanel>
+                                <TextBlock x:Name="ProPlus" Text="PRO+ Version" FontSize="20" FontWeight="Bold" Margin="0,12,0,10"/>
+                                <TextBlock Text="Unlock advanced data and access to all platforms." FontSize="14" Margin="0,0,0,10"/>
+                                <TextBlock x:Name="ProPlusPrice" Text="---" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <Button x:Name="BuyProPlusButton" Content="Purchase" Margin="0,15,0,10" Style="{StaticResource AccentButtonStyle}" Click="BuyProPlusVersion_Click" HorizontalAlignment="Stretch"/>
+                                <TextBlock Text="• All PRO features" />
+                                <TextBlock Text="• Early access to DEV features" />
+                                <TextBlock Text="• Access to PRO Version on mobile" />
+   
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Most Advanced badge -->
+                        <Border Background="{ThemeResource SystemAccentColorDark2}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="12,12,24,0"
+                    Padding="8,4"
+                    CornerRadius="10">
+                            <TextBlock Text="Most advanced"
+                           Foreground="White"
+                           FontSize="12"
+                           FontWeight="Bold"
+                           TextAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+            </Grid>
+
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="0,0,0,56" Padding="16" CornerRadius="20" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinWidth="600" MaxWidth="1748" Height="680">
+                <StackPanel>
+
+                    <!-- Title -->
+                    <TextBlock Text="Compare features by versions"
+               FontSize="20"
+               FontWeight="Bold"
+               Margin="20,20,0,0"
+               HorizontalAlignment="Left"
+               Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                    <TextBlock Text="Easily compare the different features of different versions" FontWeight="Normal" FontSize="14" HorizontalAlignment="Left" Margin="20,10,0,10"/>
+
+                    <!-- Header Row -->
+                    <Grid Grid.ColumnSpan="3" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Feature" Grid.Column="0" FontWeight="SemiBold" Margin="20,0,0,0"/>
+                        <TextBlock Text="Free" Grid.Column="1" TextAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="PRO" Grid.Column="2" TextAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="PRO+" Grid.Column="3" TextAlignment="Center" FontWeight="SemiBold"/>
+                    </Grid>
+
+                    <!-- Features List -->
+                    <ItemsControl Grid.ColumnSpan="3" ItemsSource="{x:Bind FeatureList}" Margin="0,32,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:FeatureComparison">
+                                <Grid Margin="0,5,0,5" Padding="0,0,0,10" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{x:Bind Title}" Grid.Column="0" FontWeight="SemiBold" Margin="20,0,0,0"/>
+                                    <TextBlock Text="{x:Bind FreeCheckmark}" Grid.Column="1" TextAlignment="Center"/>
+                                    <TextBlock Text="{x:Bind ProCheckmark}" Grid.Column="2" TextAlignment="Center"/>
+                                    <TextBlock Text="{x:Bind ProPlusCheckmark}" Grid.Column="3" TextAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

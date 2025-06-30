@@ -68,8 +68,7 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Page.Resources>
-
-    <Grid>
+        <Grid>
         <!-- Define rows for DropDownButton and Periodic Table -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -86,10 +85,16 @@
                         <MenuFlyoutItem Text="Element Name (Default)" Click="OnDisplayModeSelected" />
                         <MenuFlyoutItem Text="Element Groups" Click="OnDisplayModeSelected" />
                         <MenuFlyoutItem Text="Atomic Weight" Click="OnDisplayModeSelected" />
+                        <MenuFlyoutItem Text="Boiling Point" Click="OnDisplayModeSelected" />
+                        <MenuFlyoutItem Text="Melting Point" Click="OnDisplayModeSelected" />
                         <MenuFlyoutItem Text="Electronegativity" Click="OnDisplayModeSelected" />
+                        <MenuFlyoutItem Text="Phase (STP)" Click="OnDisplayModeSelected" />
+                        <MenuFlyoutItem Text="Year Discovered" Click="OnDisplayModeSelected" />
                     </MenuFlyout>
                 </DropDownButton.Flyout>
             </DropDownButton>
+
+            <Button x:Name="RandomElementButton" Click="OnRandomElementButtonClick" Content="Random Element" Margin="8,0,0,0"/>
         </StackPanel>
 
         <ScrollViewer HorizontalScrollBarVisibility="Auto" 
@@ -98,8 +103,9 @@
               MinZoomFactor="0.5" 
               Grid.Row="1"
               MaxZoomFactor="3">
+            <Viewbox x:Name="PeriodicTableContainer" Stretch="Uniform">
 
-            <Grid Margin="54,24,0,0" x:Name="PeriodicTableGrid">
+                <Grid Margin="54,24,54,54" x:Name="PeriodicTableGrid">
                 <!-- Define rows and columns for the periodic table -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -256,6 +262,8 @@
                 <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="17" DataContext="{Binding Element118}" Click="OnElementButtonClick" />
 
             </Grid>
-        </ScrollViewer>
+    </Viewbox>
+
+    </ScrollViewer>
     </Grid>
 </Page>
