@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Remove="IsotopeDetailsPage.xaml" />
     <None Remove="IsotopePage.xaml" />
+    <None Remove="Tables\FormulasDetailsPage.xaml" />
     <None Remove="Tables\NuclidePage.xaml" />
   </ItemGroup>
 
@@ -31,6 +32,84 @@
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
+	  <Content Include="Equations\e_density.png" />
+	  <Content Include="Equations\e_density.png" />
+	  <Content Include="Equations\e_powereffect.png" />
+	  <Content Include="Equations\e_intensity.png" />
+	  <Content Include="Equations\e_efficiency.png" />
+	  <Content Include="Equations\e_frequency.png" />
+	  <Content Include="Equations\e_angularvelocity.png" />
+	  <Content Include="Equations\e_averagevelocity.png" />
+	  <Content Include="Equations\e_linearmotion.png" />
+	  <Content Include="Equations\e_averageacceleration.png" />
+	  <Content Include="Equations\e_instantvelocity_1.png" />
+	  <Content Include="Equations\e_instantvelocity_2.png" />
+	  <Content Include="Equations\e_instantvelocity_3.png" />
+	  <Content Include="Equations\e_instantvelocity_4.png" />
+	  <Content Include="Equations\e_forcelaw.png" />
+	  <Content Include="Equations\e_friction.png" />
+	  <Content Include="Equations\e_hookeslaw.png" />
+	  <Content Include="Equations\e_lawofgravity.png" />
+	  <Content Include="Equations\e_moment.png" />
+	  <Content Include="Equations\e_impulse.png" />
+	  <Content Include="Equations\e_lawofimpulse.png" />
+	  <Content Include="Equations\e_momentum.png" />
+	  <Content Include="Equations\e_lawofmomentum.png" />
+	  <Content Include="Equations\e_work.png" />
+	  <Content Include="Equations\e_potentialenergy.png" />
+	  <Content Include="Equations\e_kineticenergy.png" />
+	  <Content Include="Equations\e_elasticeergy.png" />
+	  <Content Include="Equations\e_centripetalforce.png" />
+	  <Content Include="Equations\e_centripetalacceleration.png" />
+	  <Content Include="Equations\e_harmonicoscillator1.png" />
+	  <Content Include="Equations\e_harmonicoscillator2.png" />
+	  <Content Include="Equations\e_harmonicoscillator_3.png" />
+	  <Content Include="Equations\e_harmonicoscillator_4.png" />
+	  <Content Include="Equations\e_simplependulum.png" />
+	  <Content Include="Equations\e_massenergy.png" />
+	  <Content Include="Equations\e_thermalenergy.png" />
+	  <Content Include="Equations\e_latentenergyfus.png" />
+	  <Content Include="Equations\e_latentenergyvap.png" />
+	  <Content Include="Equations\e_idealenergy.png" />
+	  <Content Include="Equations\e_pressure.png" />
+	  <Content Include="Equations\e_liquidpressure.png" />
+	  <Content Include="Equations\e_liftforce.png" />
+	  <Content Include="Equations\e_velocityfactor.png" />
+	  <Content Include="Equations\e_lightinterference.png" />
+	  <Content Include="Equations\e_lawofrefraction.png" />
+	  <Content Include="Equations\e_emittance.png" />
+	  <Content Include="Equations\e_stefanboltzmann.png" />
+	  <Content Include="Equations\e_wiens.png" />
+	  <Content Include="Equations\e_coulombs.png" />
+	  <Content Include="Equations\e_current.png" />
+	  <Content Include="Equations\e_electricalvoltage.png" />
+	  <Content Include="Equations\e_ohmslaw.png" />
+	  <Content Include="Equations\e_electricaleffect.png" />
+	  <Content Include="Equations\e_electricalfieldstrenght.png" />
+	  <Content Include="Equations\e_chargeparticle.png" />
+	  <Content Include="Equations\e_seriesresistance.png" />
+	  <Content Include="Equations\e_parallelresistance.png" />
+	  <Content Include="Equations\e_magneticfieldelectricalconduct.png" />
+	  <Content Include="Equations\e_magneticfieldflat.png" />
+	  <Content Include="Equations\e_magneticfieldsolenoid.png" />
+	  <Content Include="Equations\e_powereffectconductor.png" />
+	  <Content Include="Equations\e_powereffectcharged.png" />
+	  <Content Include="Equations\e_powereffectcharged.png" />
+	  <Content Include="Equations\e_inducedvoltagemoving.png" />
+	  <Content Include="Equations\e_inducedvoltagevariable.png" />
+	  <Content Include="Equations\e_transformer.png" />
+	  <Content Include="Equations\e_photonenergy.png" />
+	  <Content Include="Equations\e_photoelectriceffect.png" />
+	  <Content Include="Equations\e_photonmomentum.png" />
+	  <Content Include="Equations\e_matterwave.png" />
+	  <Content Include="Equations\e_hydrogenenergylevels.png" />
+	  <Content Include="Equations\e_lawofdecay.png" />
+	  <Content Include="Equations\e_halflife.png" />
+	  <Content Include="Equations\e_activity1.png" />
+	  <Content Include="Equations\e_activity2.png" />
+	  <Content Include="Equations\e_absorbeddose.png" />
+	  <Content Include="Equations\e_equivalentdose.png" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +142,11 @@
     <Content Update="Assets\atomic_icon_transparent.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Tables\FormulasDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Tables\FormulasPage.xaml">

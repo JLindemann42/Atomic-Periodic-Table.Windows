@@ -34,9 +34,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border MaxWidth="1800" x:Name="PoissonToolBar">
+        <Border MaxWidth="1800" x:Name="EquationToolBar">
             <TextBox x:Name="SearchBox"
-                 PlaceholderText="Search Poisson's Ratios..."
+                 PlaceholderText="Search Equations..."
                  Margin="0,0,0,12"
                  TextChanged="SearchBox_TextChanged"
                  Width="300"
@@ -47,15 +47,15 @@
         <!-- ListView with scrolling enabled -->
         <ListView  
             Grid.Row="1"
-            x:Name="PoissonListView"
-            ItemsSource="{x:Bind FilteredPoissonList, Mode=OneWay}"          
+            x:Name="EquationListView"
+            ItemsSource="{x:Bind FilteredEquationList, Mode=OneWay}"          
             IsItemClickEnabled="True"
             ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"
             Background="Transparent"
             Padding="0,0,12,54"
             ItemClick="ListView_ItemClick">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:Poisson">
+                <DataTemplate x:DataType="local:Equation">
                     <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
                         <Border CornerRadius="8" Background="Transparent">
                             <Border.Shadow>
@@ -88,10 +88,11 @@
                                 <Border Grid.Column="0"
                                         Width="40"
                                         Height="40"
+                                        Visibility="Collapsed"
                                         CornerRadius="20"
                                         Background="{ThemeResource AccentFillColorSecondaryBrush}"
                                         VerticalAlignment="Center">
-                                    <TextBlock Text="{x:Bind Symbol}"
+                                    <TextBlock Text="{x:Bind Name}"
                                                Foreground="White"
                                                FontWeight="Bold"
                                                FontSize="18"
@@ -100,24 +101,26 @@
                                 </Border>
 
                                 <!-- Details -->
-                                <StackPanel Grid.Column="1"
+                                <StackPanel Grid.Column="0"
                                             Margin="12,0"
                                             VerticalAlignment="Center">
                                     <TextBlock Text="{x:Bind Name}" FontWeight="SemiBold"/>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Bind StartNumber}"
+                                        <TextBlock Text="{x:Bind Category}"
                                                FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                        <TextBlock Text="-"
-                                                   Margin="4,0,4,0"
-                                               FontSize="12"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                        <TextBlock Text="{x:Bind EndNumber}"
-                                               FontSize="12"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+
                                     </StackPanel>
 
                                 </StackPanel>
+
+                                <Image x:Name="EquationImage"
+                                       Source="{x:Bind ImagePath}"
+                                       Stretch="Uniform" Height="36" 
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       Width="140"
+                                       Margin="24,0,24,0"/>
 
                                 <!-- Arrow -->
                                 <StackPanel Grid.Column="2"
@@ -125,7 +128,7 @@
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
-                                    <TextBlock Text="{x:Bind Category}"
+                                    <TextBlock Text="Details"
                                                FontSize="12"
                                                Margin="0,0,12,0.5"
                                                VerticalAlignment="Center"

@@ -66,7 +66,7 @@ namespace Atomic_PeriodicTable.Tables
             //Wait until layout is measured before setting progress
             ProgressContainer.SizeChanged += (s, e) =>
             {
-                SetProgress(poissonStart, poissonEnd); // Setting the start value and end value (error -> 0.0)
+                SetProgress1(poissonStart, poissonEnd); // Setting the start value and end value (error -> 0.0)
             };
 
             //Setup text depending on selected ratio:
@@ -75,7 +75,7 @@ namespace Atomic_PeriodicTable.Tables
 
         }
 
-        private void SetProgress(double startPercent, double endPercent)
+        private void SetProgress1(double startPercent, double endPercent)
         {
             double maxRange = 0.5; // Setting 0.5 as the full width
             double totalWidth = ProgressContainer.ActualWidth;
