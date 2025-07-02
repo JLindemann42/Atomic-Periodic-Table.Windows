@@ -9,58 +9,69 @@
 
     <Grid Background="Transparent">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="MainLayout"
-                        Orientation="Vertical"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Spacing="24"
-                        Margin="0,32,0,12">
-                <!-- Calculator Card -->
+            <Grid VerticalAlignment="Top"
+                  Margin="0,32,0,12"
+                  MaxWidth="1800"
+                  Padding="54,0,24,0"
+                  HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="24" />
+                    <!-- Spacer -->
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Calculator Card (Left) -->
                 <Border x:Name="CalculatorCard"
+                        Grid.Column="0"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         BorderThickness="1"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         CornerRadius="24"
                         Padding="24"
-                        Width="400">
+                        Margin="0,0" 
+                        MinWidth="320"
+                        MaxWidth="600"
+                        HorizontalAlignment="Stretch">
                     <StackPanel Spacing="16">
                         <TextBlock Text="Calculator:" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
-                        <!-- Input Row: Overlayed TextBox and TextBlock for formatting -->
                         <Grid Background="White" CornerRadius="16" Height="48" VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="48" />
                             </Grid.ColumnDefinitions>
-                            <!-- Transparent TextBox for input -->
-                            <TextBox x:Name="CompoundInput"
-                                     PlaceholderText="Enter compound (e.g. CH3)"
-                                     FontSize="20"
-                                     BorderThickness="0"
-                                     Background="Transparent"
-                                     Margin="16,0,8,0"
-                                     VerticalAlignment="Center"
-                                     Padding="0" 
-                                     Foreground="Transparent"
-                                     SelectionHighlightColor="Transparent"
-                                     />
-                            <!-- Overlayed formatted TextBlock -->
-                            <TextBlock x:Name="CompoundFormatted"
-                                       FontSize="20"
-                                       VerticalAlignment="Center"
-                                       Margin="16,0,8,0"
-                                       IsHitTestVisible="False"
-                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}">
-                                <!-- Inlines set in code-behind -->
-                            </TextBlock>
+                            <Grid>
+                                <TextBlock x:Name="CompoundFormatted"
+                                           FontSize="20"
+                                           VerticalAlignment="Center"
+                                           Margin="16,0,8,0"
+                                           Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                           IsHitTestVisible="True"
+                                           Tapped="CompoundFormatted_Tapped"
+                                           Visibility="Visible"/>
+                                <TextBox x:Name="CompoundInput"
+                                         PlaceholderText="Enter compound..."
+                                         FontSize="20"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         Margin="16,0,8,0"
+                                         VerticalAlignment="Center"
+                                         Padding="0"
+                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                         SelectionHighlightColor="{ThemeResource TextFillColorPrimaryBrush}"
+                                         LostFocus="CompoundInput_LostFocus"
+                                         KeyDown="CompoundInput_KeyDown"
+                                         Visibility="Collapsed"/>
+                            </Grid>
                             <Button Grid.Column="1"
                                     Width="40"
                                     Height="40"
                                     Background="Transparent"
                                     BorderThickness="0"
+                                    Padding="0,0,4,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
                                 <FontIcon Glyph="&#xE734;" FontSize="20" />
-                                <!-- Star icon -->
                             </Button>
                         </Grid>
                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
@@ -71,20 +82,24 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Favorites Card (placeholder, ready for extension) -->
+                <!-- Favorites Card (Right) -->
                 <Border x:Name="FavoritesCard"
+                        Grid.Column="2"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         BorderThickness="1"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         CornerRadius="24"
+                        Margin="0,0,0,0"
                         Padding="24"
-                        Width="400">
+                        MinWidth="320"
+                        MaxWidth="600"
+                        HorizontalAlignment="Stretch">
                     <StackPanel Spacing="16">
                         <TextBlock Text="Favorites:" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
                         <!-- Add your favorites logic here -->
                     </StackPanel>
                 </Border>
-            </StackPanel>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </Page>

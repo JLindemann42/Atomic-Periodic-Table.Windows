@@ -184,6 +184,11 @@ namespace Atomic_WinUI
                 BreadcrumbHeader = "Emission Spectrum Table";
                 nvSample.Header = CreateBreadcrumb("Emission Spectrum Table");
             }
+            else if (e.SourcePageType == typeof(EmissionDetailsPage))
+            {
+                BreadcrumbHeader = "Emission Spectrum Table > Emission Spectrum Table Details";
+                nvSample.Header = CreateBreadcrumb("Emission Spectrum Table", "Emission Spectrum Table Details");
+            }
             else if (e.SourcePageType == typeof(NuclidePage))
             {
                 BreadcrumbHeader = "Nuclide Table";

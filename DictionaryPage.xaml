@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="Transparent"  VerticalAlignment="Top">
+    <Grid Background="Transparent" VerticalAlignment="Top">
         <!-- Top Section for DropDownButton -->
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="54,12,0,0" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="54,12,0,0" Grid.Row="0" MaxWidth="1742">
             <DropDownButton Content="Categories">
                 <DropDownButton.Flyout>
                     <MenuFlyout Placement="Bottom">
@@ -22,61 +22,70 @@
                 </DropDownButton.Flyout>
             </DropDownButton>
             <TextBox x:Name="SearchBox"
-         Margin="12,0,0,0"
-         PlaceholderText="Search dictionary..."
-         Width="240"            
-         TextChanged="OnSearchBoxTextChanged"/>
+                     Margin="12,0,0,0"
+                     PlaceholderText="Search dictionary..."
+                     Width="240"            
+                     TextChanged="OnSearchBoxTextChanged"/>
         </StackPanel>
 
-        <GridView ItemsSource="{x:Bind FilteredEntries}" SelectionMode="None" Padding="50,0,8,36" Margin="0,56,0,0">
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-            <GridView.ItemContainerStyle>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="IsHitTestVisible" Value="True"/>
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="VerticalAlignment" Value="Top"/>
-                </Style>
-            </GridView.ItemContainerStyle>
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="local:DictionaryEntry">
-                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
+        <!-- Main content area with max width for GridView -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="0,56,0,0">
+            <Grid>
+                <GridView x:Name="DictionaryGridView"
+                          ItemsSource="{x:Bind FilteredEntries}"
+                          SelectionMode="None"
+                          Padding="50,0,24,36"
+                          MaxWidth="1800"
+                          HorizontalAlignment="Stretch">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid x:Name="WrapGridPanel" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="IsHitTestVisible" Value="True"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="local:DictionaryEntry">
+                            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
             Padding="0" CornerRadius="8" Margin="6,6,6,6"  
             BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-            Width="340" Height="220" >
-                        <Grid>
-                            <!-- Text content -->
-                            <StackPanel>
-                                <TextBlock Text="{x:Bind Term}" FontWeight="Bold" FontSize="18" Padding="16,16,16,0"/>
-                                <TextBlock Text="{x:Bind Category}" FontStyle="Italic" FontSize="12" Margin="0,2,0,0" Padding="16,0,16,0"/>
-                                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="126" Margin="0,6,0,0" Padding="0">
-                                    <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap" Padding="16,0,16,0"/>
-                                </ScrollViewer>
-                            </StackPanel>
-                            <!-- Solid color area at the bottom -->
-                            <Border Background="{ThemeResource SurfaceStrokeColorDefault}"
-                          Height="49"
-                          VerticalAlignment="Bottom"
-                          HorizontalAlignment="Stretch"/>
-                            <Border Background="{ThemeResource SolidBackgroundFillColorSecondary}"
-                            Height="48"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"/>
-                            <!-- HyperlinkButton on top of the colored area -->
-                            <HyperlinkButton Content="Learn more"
+            Height="220">
+                                <Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="{x:Bind Term}" FontWeight="Bold" FontSize="18" Padding="16,16,16,0"/>
+                                        <TextBlock Text="{x:Bind Category}" FontStyle="Italic" FontSize="12" Margin="0,2,0,0" Padding="16,0,16,0"/>
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="106" Margin="0,6,0,30" Padding="0,0,0,0">
+                                            <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap" Padding="16,0,16,16"/>
+                                        </ScrollViewer>
+                                    </StackPanel>
+                                    <Border Background="{ThemeResource SurfaceStrokeColorDefault}"
+                    Height="49"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"/>
+                                    <Border Background="{ThemeResource SolidBackgroundFillColorSecondary}"
+                    Height="48"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"/>
+                                    <HyperlinkButton Content="Learn more"
                              NavigateUri="{x:Bind Url}"
                              HorizontalAlignment="Right"
                              VerticalAlignment="Bottom"
                              Margin="0,0,12,8"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

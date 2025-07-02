@@ -1,72 +1,152 @@
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using Microsoft.UI.Xaml;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System;
+using Microsoft.UI.Text;
+using Atomic_PeriodicTable;
 using System.IO;
 using System.Text.Json;
-using Microsoft.UI.Text;
-using Atomic_PeriodicTable; // Assuming ElementData is in this namespace
+
+// Type aliases to avoid Dictionary name conflicts
+using StringDoubleMap = System.Collections.Generic.Dictionary<string, double>;
+using StringStringMap = System.Collections.Generic.Dictionary<string, string>;
+using StringElementMap = System.Collections.Generic.Dictionary<string, (double count, double weight, string name)>;
+using System.Collections.Generic;
+using Microsoft.UI.Xaml.Input;
 
 namespace Atomic_WinUI
 {
-
     public sealed partial class CalculatorPage : Page
     {
+        private readonly StringDoubleMap elementWeights = new(StringComparer.OrdinalIgnoreCase);
+        private readonly StringStringMap elementNames = new(StringComparer.OrdinalIgnoreCase);
+
         public CalculatorPage()
         {
             this.InitializeComponent();
+            LoadElementData();
             CompoundInput.TextChanged += CompoundInput_TextChanged;
+            CompoundInput.Visibility = Visibility.Visible;
+            CompoundFormatted.Visibility = Visibility.Collapsed;
         }
 
-        private async void CompoundInput_TextChanged(object sender, TextChangedEventArgs e)
+        // When user taps the formatted text, switch to edit mode
+        private void CompoundFormatted_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            CompoundFormatted.Visibility = Visibility.Collapsed;
+            CompoundInput.Visibility = Visibility.Visible;
+            CompoundInput.Focus(FocusState.Programmatic);
+            CompoundInput.Select(CompoundInput.Text?.Length ?? 0, 0);
+        }
 
+        // When user leaves the TextBox, switch back to formatted view
+        private void CompoundInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CompoundInput.Visibility = Visibility.Collapsed;
+            CompoundFormatted.Visibility = Visibility.Visible;
+        }
+
+        // Optional: When user presses Enter, exit edit mode
+        private void CompoundInput_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                CompoundFormatted.Visibility = Visibility.Visible;
+                CompoundInput.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LoadElementData()
+        {
+            elementWeights.Clear();
+            elementNames.Clear();
+
+            string elementsDir = System.IO.Path.Combine(AppContext.BaseDirectory, "Elements");
+            if (!Directory.Exists(elementsDir))
+            {
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Elements directory not found: {elementsDir}");
+                return;
+            }
+
+            foreach (var file in Directory.GetFiles(elementsDir, "*.json"))
+            {
+                try
+                {
+                    string json = File.ReadAllText(file);
+                    using var doc = JsonDocument.Parse(json);
+                    var root = doc.RootElement;
+
+                    // If your JSON is an array, get the first object
+                    var elementObj = root.ValueKind == JsonValueKind.Array ? root[0] : root;
+
+                    string symbol = elementObj.TryGetProperty("short", out var shortProp) ? shortProp.GetString() : null;
+                    string name = elementObj.TryGetProperty("element", out var nameProp) ? nameProp.GetString() : symbol;
+                    string massRaw = elementObj.TryGetProperty("element_atomicmass", out var massProp) ? massProp.GetString() : null;
+
+                    // Remove " (u)" and any non-numeric characters
+                    string massClean = massRaw?.Split(' ').FirstOrDefault();
+                    double mass = 0;
+                    double.TryParse(massClean, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out mass);
+
+                    System.Diagnostics.Debug.WriteLine($"[DEBUG] {symbol}: \"{massRaw}\" -> {mass}");
+
+                    if (!string.IsNullOrWhiteSpace(symbol))
+                    {
+                        elementWeights[symbol] = mass;
+                        elementNames[symbol] = name;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[DEBUG] Error reading {file}: {ex.Message}");
+                }
+            }
+        }
+
+        private void CompoundInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
             // Format input visually
             CompoundFormatted.Inlines.Clear();
             FormatFormulaWithSubscripts(CompoundInput.Text, CompoundFormatted.Inlines);
 
-            // Parse and calculate
-            string input = CompoundInput.Text;
-            var compounds = ParseCompounds(input);
-
-            double totalMass = 0;
-            var elementTotals = new Dictionary<string, double>();
-            var elementNames = new Dictionary<string, string>();
-            var elementWeights = new Dictionary<string, double>();
-
-            foreach (var compound in compounds)
+            string input = CompoundInput.Text?.Trim();
+            if (string.IsNullOrEmpty(input))
             {
-                var elements = await ParseFormula(compound.Formula, compound.Multiplier, elementNames, elementWeights);
-                foreach (var kvp in elements)
+                MolarMassText.Text = "0.0 (g/mol)";
+                ElementsPanel.Children.Clear();
+                return;
+            }
+
+            // Parse and calculate
+            var includedElements = new StringElementMap(StringComparer.OrdinalIgnoreCase);
+            double totalMass = 0;
+
+            foreach (var (formula, multiplier) in ParseCompounds(input))
+            {
+                var elements = ParseFormulaWithGroups(formula, multiplier);
+                foreach (var (symbol, count) in elements)
                 {
-                    if (!elementTotals.ContainsKey(kvp.Key))
-                        elementTotals[kvp.Key] = 0;
-                    elementTotals[kvp.Key] += kvp.Value;
+                    if (!includedElements.ContainsKey(symbol))
+                        includedElements[symbol] = (0, elementWeights.GetValueOrDefault(symbol, 0), elementNames.GetValueOrDefault(symbol, symbol));
+                    includedElements[symbol] = (includedElements[symbol].count + count, includedElements[symbol].weight, includedElements[symbol].name);
                 }
             }
 
             // Calculate total mass
-            foreach (var kvp in elementTotals)
-            {
-                if (elementWeights.TryGetValue(kvp.Key, out double w))
-                    totalMass += kvp.Value * w;
-            }
+            foreach (var (symbol, (count, weight, _)) in includedElements)
+                totalMass += count * weight;
 
             // Update UI
             MolarMassText.Text = $"{totalMass:0.#####} (g/mol)";
             ElementsPanel.Children.Clear();
 
-            foreach (var kvp in elementTotals.OrderByDescending(k => k.Value * elementWeights.GetValueOrDefault(k.Key, 0)))
+            foreach (var (symbol, (count, weight, name)) in includedElements.OrderByDescending(x => x.Value.count * x.Value.weight))
             {
-                var symbol = kvp.Key;
-                var name = elementNames.ContainsKey(symbol) ? elementNames[symbol] : symbol;
-                var weight = elementWeights.ContainsKey(symbol) ? elementWeights[symbol] : 0;
-                double mass = kvp.Value * weight;
+                double mass = count * weight;
                 double percent = totalMass > 0 ? (mass / totalMass) * 100 : 0;
 
                 var border = new Border
@@ -126,8 +206,6 @@ namespace Atomic_WinUI
             }
         }
 
-        // --- Parsing logic ---
-
         // Handles + and leading numbers (e.g., 2H2O + NaCl)
         private List<(string Formula, int Multiplier)> ParseCompounds(string input)
         {
@@ -150,21 +228,43 @@ namespace Atomic_WinUI
             return result;
         }
 
-        // Recursively parses a chemical formula and returns a dictionary of element counts
-        private async System.Threading.Tasks.Task<Dictionary<string, double>> ParseFormula(
-            string formula,
-            int multiplier,
-            Dictionary<string, string> elementNames,
-            Dictionary<string, double> elementWeights)
+        // Recursively parses a chemical formula with groups and returns a dictionary of element counts
+        private StringDoubleMap ParseFormulaWithGroups(string formula, int multiplier)
         {
-            var result = new Dictionary<string, double>();
+            var result = new StringDoubleMap(StringComparer.OrdinalIgnoreCase);
+
+            void AddElement(string symbol, double count)
+            {
+                if (!result.ContainsKey(symbol))
+                    result[symbol] = 0;
+                result[symbol] += count;
+            }
+
             int i = 0;
             while (i < formula.Length)
             {
                 if (formula[i] == '(' || formula[i] == '[')
                 {
-                    // ... group parsing unchanged ...
-                    i++; // You should implement group parsing if needed
+                    char open = formula[i];
+                    char close = open == '(' ? ')' : ']';
+                    int start = ++i, depth = 1;
+                    while (i < formula.Length && depth > 0)
+                    {
+                        if (formula[i] == open) depth++;
+                        else if (formula[i] == close) depth--;
+                        i++;
+                    }
+                    int end = i - 1;
+                    string group = formula.Substring(start, end - start);
+                    int groupMultiplier = 1;
+                    int j = i;
+                    while (j < formula.Length && char.IsDigit(formula[j])) j++;
+                    if (j > i)
+                        groupMultiplier = int.Parse(formula.Substring(i, j - i));
+                    i = j;
+                    var groupElements = ParseFormulaWithGroups(group, multiplier * groupMultiplier);
+                    foreach (var kvp in groupElements)
+                        AddElement(kvp.Key, kvp.Value);
                 }
                 else if (char.IsUpper(formula[i]))
                 {
@@ -178,31 +278,7 @@ namespace Atomic_WinUI
                     if (j > i)
                         count = int.Parse(formula.Substring(i, j - i));
                     i = j;
-
-                    if (!elementWeights.ContainsKey(symbol))
-                    {
-                        var element = ElementData.Elements.FirstOrDefault(e =>
-                            string.Equals(e.Symbol, symbol, StringComparison.OrdinalIgnoreCase));
-                        string atomicMass = null;
-                        string elementName = symbol;
-
-                        if (element != null)
-                        {
-                            elementName = element.OriginalName ?? symbol;
-                            //atomicMass = element.GetType().GetProperty("element_atomicmass")?.GetValue(element) as string;
-                        }
-
-                        if (string.IsNullOrEmpty(atomicMass))
-                        {
-                            atomicMass = await GetElementAtomicMassFromJsonAsync(symbol);
-                        }
-
-                        elementNames[symbol] = elementName;
-                        elementWeights[symbol] = ParseAtomicMass(atomicMass);
-                    }
-
-                    if (!result.ContainsKey(symbol)) result[symbol] = 0;
-                    result[symbol] += count * multiplier;
+                    AddElement(symbol, count * multiplier);
                 }
                 else
                 {
@@ -211,12 +287,18 @@ namespace Atomic_WinUI
             }
             return result;
         }
-        // Fix for CS1061: 'Run' does not contain a definition for 'Margin'
-        // The 'Run' class does not have a 'Margin' property. To achieve the desired effect, you can use an InlineUIContainer with a TextBlock inside it, as TextBlock supports the Margin property.
 
         private void FormatFormulaWithSubscripts(string formula, InlineCollection inlines)
         {
             int i = 0;
+            // Handle leading number (multiplier)
+            if (i < formula.Length && char.IsDigit(formula[i]))
+            {
+                int start = i;
+                while (i < formula.Length && char.IsDigit(formula[i])) i++;
+                inlines.Add(new Run { Text = formula.Substring(start, i - start) });
+            }
+
             while (i < formula.Length)
             {
                 if (char.IsLetter(formula[i]))
@@ -228,15 +310,22 @@ namespace Atomic_WinUI
                 }
                 else if (char.IsDigit(formula[i]))
                 {
-                    int start = i;
-                    while (i < formula.Length && char.IsDigit(formula[i])) i++;
-                    var textBlock = new TextBlock
+                    // Only subscript if previous char is a letter or ')' or ']'
+                    if (i > 0 && (char.IsLetter(formula[i - 1]) || formula[i - 1] == ')' || formula[i - 1] == ']'))
                     {
-                        Text = formula.Substring(start, i - start),
-                        FontSize = 12, // Adjust font size for subscripts
-                        Margin = new Thickness(0, 6, 0, 0) // Apply margin for visual adjustment
-                    };
-                    inlines.Add(new InlineUIContainer { Child = textBlock });
+                        int start = i;
+                        while (i < formula.Length && char.IsDigit(formula[i])) i++;
+                        string digits = formula.Substring(start, i - start);
+                        string subscript = string.Concat(digits.Select(SubscriptChar));
+                        inlines.Add(new Run { Text = subscript });
+                    }
+                    else
+                    {
+                        // Not a subscript (shouldn't happen except for leading number, already handled)
+                        int start = i;
+                        while (i < formula.Length && char.IsDigit(formula[i])) i++;
+                        inlines.Add(new Run { Text = formula.Substring(start, i - start) });
+                    }
                 }
                 else
                 {
@@ -246,37 +335,23 @@ namespace Atomic_WinUI
             }
         }
 
-        private double ParseAtomicMass(string massStr)
+        // Helper to convert digit to subscript unicode
+        private static char SubscriptChar(char c)
         {
-            if (string.IsNullOrEmpty(massStr)) return 0;
-            var match = Regex.Match(massStr, @"\d+([.,]\d+)?");
-            if (match.Success)
+            return c switch
             {
-                if (double.TryParse(match.Value.Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double mass))
-                    return mass;
-            }
-            return 0;
-        }
-        private async System.Threading.Tasks.Task<string> GetElementAtomicMassFromJsonAsync(string symbol)
-        {
-            try
-            {
-                string filePath = System.IO.Path.Combine("Elements", symbol.ToLower() + ".json");
-                if (File.Exists(filePath))
-                {
-                    using var stream = File.OpenRead(filePath);
-                    using var doc = await JsonDocument.ParseAsync(stream);
-                    //if (doc.RootElement.TryGetProperty("element_atomicmass", out var massProp))
-                    //{
-                      //  return massProp.GetString();
-                    //}
-                }
-            }
-            catch
-            {
-                // Handle or log error as needed
-            }
-            return null;
+                '0' => '₀',
+                '1' => '₁',
+                '2' => '₂',
+                '3' => '₃',
+                '4' => '₄',
+                '5' => '₅',
+                '6' => '₆',
+                '7' => '₇',
+                '8' => '₈',
+                '9' => '₉',
+                _ => c
+            };
         }
     }
 }

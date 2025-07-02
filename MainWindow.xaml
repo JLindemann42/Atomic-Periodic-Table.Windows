@@ -94,7 +94,7 @@
                         <FontIcon Glyph="&#xE82D;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Calculator" Tag="CalculatorPage" x:Name="CalculatorPageItem" ToolTipService.ToolTip="Calculator" Visibility="Collapsed">
+                <NavigationViewItem Content="Calculator" Tag="CalculatorPage" x:Name="CalculatorPageItem" ToolTipService.ToolTip="Calculator" Visibility="Visible">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Calculator" />
                     </NavigationViewItem.Icon>
