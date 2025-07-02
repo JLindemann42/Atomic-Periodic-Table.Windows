@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml;
 
 
 namespace Atomic_WinUI
@@ -83,6 +86,47 @@ namespace Atomic_WinUI
                 FilteredEntries.Add(entry);
 
             this.DataContext = this;
+        }
+
+        private void RootGrid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = GetThemeBrush("SubtleFillColorSecondaryBrush");
+            }
+        }
+
+        private void RootGrid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            }
+        }
+
+        private void RootGrid_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = GetThemeBrush("SubtleFillColorSecondaryBrush");
+            }
+        }
+
+        private void RootGrid_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid rootGrid &&
+                rootGrid.FindName("ContentGrid") is Grid contentGrid)
+            {
+                contentGrid.Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            }
+        }
+
+        Brush GetThemeBrush(string key)
+        {
+            return (Brush)Application.Current.Resources[key];
         }
 
 

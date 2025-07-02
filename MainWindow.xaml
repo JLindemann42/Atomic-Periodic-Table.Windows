@@ -84,6 +84,7 @@
                         <NavigationViewItem Content="Poisson's Ratio" ToolTipService.ToolTip="Poisson's Ratio" Tag="PoissonPage"/>
                         <NavigationViewItem Content="Nuclide Table" ToolTipService.ToolTip="Nuclide Table" Tag="NuclidePage"/>
                         <NavigationViewItem Content="Constants" ToolTipService.ToolTip="Constants" Tag="ConstantsPage"/>
+                        <NavigationViewItem Content="Geology Table" ToolTipService.ToolTip="Geology Table" Tag="GeologyPage"/>
                         <NavigationViewItem Content="Emission Spectrums" ToolTipService.ToolTip="Emission Spectrums" Tag="EmissionPage"/>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>

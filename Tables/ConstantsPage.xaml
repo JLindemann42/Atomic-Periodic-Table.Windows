@@ -29,35 +29,36 @@
     </Page.Resources>
 
     <Grid Background="Transparent" Margin="54,12,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Border MaxWidth="1800">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border MaxWidth="1800">
 
-            <StackPanel x:Name="MainToolBar" Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,12" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <DropDownButton Content="Categories">
-                    <DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
-                            <MenuFlyoutItem Text="Physics" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Mathematics" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Water" Click="OnDisplayModeSelected" />
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
+                <StackPanel x:Name="MainToolBar" Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,12" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <DropDownButton Content="Categories">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
+                                <MenuFlyoutItem Text="Physics" Click="OnDisplayModeSelected" />
+                                <MenuFlyoutItem Text="Mathematics" Click="OnDisplayModeSelected" />
+                                <MenuFlyoutItem Text="Water" Click="OnDisplayModeSelected" />
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
 
 
-                <TextBox x:Name="SearchBox"
+                    <TextBox x:Name="SearchBox"
                      Margin="12,0,0,0"
                      PlaceholderText="Search Constants..."
                      Width="240"
                      TextChanged="OnSearchBoxTextChanged"/>
-            </StackPanel>
-        </Border>
+                </StackPanel>
+            </Border>
 
-        <!-- ListView with Constants entries -->
-        <ListView
+            <!-- ListView with Constants entries -->
+            <ListView
             Grid.Row="1"
             x:Name="ConstantsListView"
             ItemsSource="{x:Bind FilteredEntries, Mode=OneWay}"
@@ -66,16 +67,16 @@
             Background="Transparent"
             Padding="0,0,12,54">
 
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:ConstantsEntry">
-                    <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
-                        <Border CornerRadius="8" Background="Transparent">
-                            <Border.Shadow>
-                                <ThemeShadow />
-                            </Border.Shadow>
-                        </Border>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ConstantsEntry">
+                        <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
+                            <Border CornerRadius="8" Background="Transparent">
+                                <Border.Shadow>
+                                    <ThemeShadow />
+                                </Border.Shadow>
+                            </Border>
 
-                        <Grid x:Name="RootGrid"
+                            <Grid x:Name="RootGrid"
                               Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                               MinWidth="300" MaxWidth="1790"
                               Margin="0,2,0,2"
@@ -85,58 +86,59 @@
                               PointerPressed="RootGrid_PointerPressed"
                               PointerReleased="RootGrid_PointerReleased">
 
-                            <Grid x:Name="ContentGrid"
+                                <Grid x:Name="ContentGrid"
                                   Background="Transparent"
                                   BorderThickness="1"
                                   BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                   Padding="12"
                                   CornerRadius="8">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <!-- Icon placeholder, hidden by default -->
-                                <Border Grid.Column="0"
+                                    <!-- Icon placeholder, hidden by default -->
+                                    <Border Grid.Column="0"
                                         Width="40"
                                         Height="40"
                                         CornerRadius="20"
                                         Background="{ThemeResource AccentFillColorSecondaryBrush}"
                                         VerticalAlignment="Center"
                                         Visibility="Collapsed">
-                                    <TextBlock FontSize="18"
+                                        <TextBlock FontSize="18"
                                                FontWeight="SemiBold"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
                                                TextAlignment="Center"
                                                Foreground="{ThemeResource TextOnAccentFillColorDefault}"/>
-                                </Border>
+                                    </Border>
 
-                                <!-- Details -->
-                                <StackPanel Grid.Column="1"
+                                    <!-- Details -->
+                                    <StackPanel Grid.Column="1"
                                             Margin="12,0"
                                             VerticalAlignment="Center">
-                                    <TextBlock Text="{x:Bind Name}" FontSize="14" FontWeight="SemiBold"/>
-                                    <TextBlock Text="{x:Bind Info}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                </StackPanel>
+                                        <TextBlock Text="{x:Bind Name}" FontSize="14" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{x:Bind Info}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </StackPanel>
 
-                                <!-- Value and Unit -->
-                                <StackPanel Grid.Column="2"
+                                    <!-- Value and Unit -->
+                                    <StackPanel Grid.Column="2"
                                             Margin="0,0,12,0"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
-                                    <TextBlock Text="{x:Bind Value}" FontSize="14" FontWeight="SemiBold" TextAlignment="Right"/>
-                                    <TextBlock Text="{x:Bind Unit}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextAlignment="Right"/>
-                                </StackPanel>
+                                        <TextBlock Text="{x:Bind Value}" FontSize="14" FontWeight="SemiBold" TextAlignment="Right"/>
+                                        <TextBlock Text="{x:Bind Unit}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
         <!-- Message and Button if user does NOT have PRO -->
-        <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+        <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="This feature requires PRO version."
                        FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
             <Button Content="Get PRO Version"

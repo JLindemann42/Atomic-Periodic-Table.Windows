@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Atomic_PeriodicTable.Tables.GeologyDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic_PeriodicTable.Tables"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <ScrollViewer x:Name="MainContent" VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Padding="56,36,18,36" HorizontalAlignment="Stretch">
+
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="18" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" MinWidth="600" MaxWidth="1780">
+                    <StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="GeologyTitle" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="Geology Title" FontSize="20" FontWeight="SemiBold" Margin="12,0,0,12"/>
+                            <StackPanel Margin="12,4,12,0">
+
+
+                                <TextBlock x:Name="Type" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Type:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="Group" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Group:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="Color" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Color:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="Streak" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Streak:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="CristalStructure" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Cristal Strucute:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="Hardness" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Hardness:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="Density" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Density:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="Magnetism" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Magnetism:" FontSize="16" Margin="2,2,0,12"/>
+                                <TextBlock x:Name="Hydrochloride" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="- Hydrochloride:" FontSize="16" Margin="2,2,0,12"/>
+
+                            </StackPanel>
+
+
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+
+    </Grid>
+</Page>

@@ -29,23 +29,24 @@
     </Page.Resources>
 
     <Grid Background="Transparent" Margin="54,12,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- Search Box -->
-        <Border MaxWidth="1800" x:Name="EmissionToolBar">
-            <TextBox x:Name="SearchBox"
+            <!-- Search Box -->
+            <Border MaxWidth="1800" x:Name="EmissionToolBar">
+                <TextBox x:Name="SearchBox"
                      PlaceholderText="Search Emission Spectrums..."
                      Margin="0,0,0,12"
                      TextChanged="SearchBox_TextChanged"
                      Width="300"
                      HorizontalAlignment="Left"/>
-        </Border>
+            </Border>
 
-        <!-- ListView -->
-        <ListView  
+            <!-- ListView -->
+            <ListView  
             Grid.Row="1"
             x:Name="EmissionListView"
             ItemsSource="{x:Bind FilteredEmissionList, Mode=OneWay}"          
@@ -55,16 +56,16 @@
             Padding="0,0,12,54"
             ItemClick="ListView_ItemClick">
 
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:Emission">
-                    <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
-                        <Border CornerRadius="8" Background="Transparent">
-                            <Border.Shadow>
-                                <ThemeShadow />
-                            </Border.Shadow>
-                        </Border>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Emission">
+                        <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
+                            <Border CornerRadius="8" Background="Transparent">
+                                <Border.Shadow>
+                                    <ThemeShadow />
+                                </Border.Shadow>
+                            </Border>
 
-                        <Grid x:Name="RootGrid"
+                            <Grid x:Name="RootGrid"
                               Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                               MinWidth="300" MaxWidth="1790"
                               Margin="0,2,0,2"
@@ -74,73 +75,73 @@
                               PointerPressed="RootGrid_PointerPressed"
                               PointerReleased="RootGrid_PointerReleased">
 
-                            <Grid x:Name="ContentGrid"
+                                <Grid x:Name="ContentGrid"
                                   Background="Transparent"
                                   BorderThickness="1"
                                   BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                   Padding="12"
                                   CornerRadius="8">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <!-- Symbol Bubble -->
-                                <Border Grid.Column="0"
+                                    <!-- Symbol Bubble -->
+                                    <Border Grid.Column="0"
                                         Width="40"
                                         Height="40"
                                         CornerRadius="20"
                                         Background="{ThemeResource AccentFillColorSecondaryBrush}"
                                         VerticalAlignment="Center">
-                                    <TextBlock Text="{x:Bind Symbol}"
+                                        <TextBlock Text="{x:Bind Symbol}"
                                                Foreground="White"
                                                FontWeight="Bold"
                                                FontSize="18"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"/>
-                                </Border>
+                                    </Border>
 
-                                <!-- Element Name + Emission Spectrum -->
-                                <StackPanel Grid.Column="1"
+                                    <!-- Element Name + Emission Spectrum -->
+                                    <StackPanel Grid.Column="1"
                                             Margin="12,0"
                                             VerticalAlignment="Center">
-                                    <TextBlock Text="{x:Bind Name}" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{x:Bind Name}" FontWeight="SemiBold"/>
 
-                                    <Border CornerRadius="12"       
+                                        <Border CornerRadius="12"       
                                         HorizontalAlignment="Left"
                                         Margin="0,6,0,0"
                                         Width="180">
-                                        <Image Source="{x:Bind EmissionImageUrl}"
+                                            <Image Source="{x:Bind EmissionImageUrl}"
                                            Stretch="Uniform"
                                            Loaded="Image_Loaded"
                                            />
-                                    </Border>
-                                </StackPanel>
+                                        </Border>
+                                    </StackPanel>
 
-                                <!-- Category and Chevron -->
-                                <StackPanel Grid.Column="2"
+                                    <!-- Category and Chevron -->
+                                    <StackPanel Grid.Column="2"
                                             Margin="0,0,12,0"
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
-                                    <TextBlock Text="Spectrum"
+                                        <TextBlock Text="Spectrum"
                                                FontSize="12"
                                                Margin="0,0,12,0.5"
                                                VerticalAlignment="Center"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                    <TextBlock Text=">"
+                                        <TextBlock Text=">"
                                                FontWeight="SemiBold"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Right"/>
-                                </StackPanel>
+                                    </StackPanel>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
         <!-- Message and Button if user does NOT have PRO -->
         <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="This feature requires PRO version."

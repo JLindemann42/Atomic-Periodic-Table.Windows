@@ -23,10 +23,10 @@ using Microsoft.UI.Xaml.Media.Imaging;
 namespace Atomic_PeriodicTable.Tables
 {
 
-    public sealed partial class FormulasDetailsPage : Page
+    public sealed partial class GeologyDetailsPage : Page
     {
 
-        public FormulasDetailsPage()
+        public GeologyDetailsPage()
         {
             this.InitializeComponent();
 
@@ -43,11 +43,21 @@ namespace Atomic_PeriodicTable.Tables
             base.OnNavigatedTo(e);
 
 
-            if (e.Parameter is Atomic_WinUI.Equation selectedEquation)
+            if (e.Parameter is Atomic_WinUI.Geology selectedGeology)
             {
-                FormulasTitle.Text = $"Info about {selectedEquation.Name}:";
-                EquationImage.Source = new BitmapImage(new Uri($"ms-appx:///Equations/{selectedEquation.Image}.png"));
-                FormulasDetails.Text = selectedEquation.Description;
+                GeologyTitle.Text = selectedGeology.Name;
+
+                //Description
+                Group.Text = $"- Group: {selectedGeology.Group}";
+                Color.Text = $"- Color: {selectedGeology.Color}";
+                Streak.Text = $"- Streak: {selectedGeology.Streak}";
+                CristalStructure.Text = $"- Crystal Structure: {selectedGeology.Cristal}";
+                Hardness.Text = $"- Hardness: {selectedGeology.Hardness}";
+                Density.Text = $"- Density: {selectedGeology.Density}";
+                Magnetism.Text = $"- Magnetism: {selectedGeology.Magnetism}";
+                Hydrochloride.Text = $"- Hydrochloride: {selectedGeology.Hydrochloride}";
+
+
             }
 
 

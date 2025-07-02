@@ -150,7 +150,7 @@
             </Grid>
 
 
-            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="0,0,0,56" Padding="16" CornerRadius="20" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinWidth="600" MaxWidth="1748" Height="680">
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="0,0,0,56" Padding="16" CornerRadius="20" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinWidth="600" MaxWidth="1748" Height="756">
                 <StackPanel>
 
                     <!-- Title -->

@@ -70,7 +70,7 @@ namespace Atomic_WinUI
             else
             {
                 // Optionally set a default size
-                appWindow.Resize(new Windows.Graphics.SizeInt32(1200, 900));
+                appWindow.Resize(new Windows.Graphics.SizeInt32(1400, 900));
             }
 
             contentFrame.Navigated += ContentFrame_Navigated;
@@ -149,6 +149,16 @@ namespace Atomic_WinUI
                 BreadcrumbHeader = "Poisson's Ratio Table > Poisson's Ratio Details";
                 nvSample.Header = CreateBreadcrumb("Poisson's Ratio Table", "Poisson's Ratio Details");
             }
+            else if (e.SourcePageType == typeof(GeologyDetailsPage))
+            {
+                BreadcrumbHeader = "Geology Table > Geology Table Details";
+                nvSample.Header = CreateBreadcrumb("Geology Table", "Geology Table Details");
+            }
+            else if (e.SourcePageType == typeof(FormulasDetailsPage))
+            {
+                BreadcrumbHeader = "Equations > Equations Details";
+                nvSample.Header = CreateBreadcrumb("Equations", "Equations Details");
+            }
             else if (e.SourcePageType == typeof(IsotopePage))
             {
                 BreadcrumbHeader = "Isotopes";
@@ -158,6 +168,16 @@ namespace Atomic_WinUI
             {
                 BreadcrumbHeader = "Poisson's Ratio Table";
                 nvSample.Header = CreateBreadcrumb("Poisson's Ratio Table");
+            }
+            else if (e.SourcePageType == typeof(GeologyPage))
+            {
+                BreadcrumbHeader = "Geology Table";
+                nvSample.Header = CreateBreadcrumb("Geology Table");
+            }
+            else if (e.SourcePageType == typeof(FormulasPage))
+            {
+                BreadcrumbHeader = "Equations";
+                nvSample.Header = CreateBreadcrumb("Equations");
             }
             else if (e.SourcePageType == typeof(EmissionPage))
             {
@@ -303,7 +323,10 @@ namespace Atomic_WinUI
                         contentFrame.Navigate(typeof(PoissonPage));
                         nvSample.Header = CreateBreadcrumb("Poisson's Ratio Table");
                         break;
-
+                    case "GeologyPage":
+                        contentFrame.Navigate(typeof(GeologyPage));
+                        nvSample.Header = CreateBreadcrumb("Geology Table");
+                        break;
                     case "EmissionPage":
                         contentFrame.Navigate(typeof(EmissionPage));
                         nvSample.Header = CreateBreadcrumb("Emission Spectrum Table");

@@ -7,42 +7,124 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="Transparent"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="56,0,0,0" >
-        <!-- Top Section for DropDownButton --> 
-        
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,12,0,0" Grid.Row="0" >
+    <Page.Resources>
+        <ThemeResource x:Key="CardBackgroundNormal" ResourceKey="ControlFillColorDefaultBrush"/>
+        <ThemeResource x:Key="CardBackgroundHover" ResourceKey="ControlFillColorSecondaryBrush"/>
+        <ThemeResource x:Key="CardBackgroundPressed" ResourceKey="ControlFillColorTertiaryBrush"/>
 
-        </StackPanel>
+        <Style x:Key="TransparentListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Shadow" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="Transparent" Margin="56,12,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
         <Border MaxWidth="1800">
-            <TextBox x:Name="SearchBox"
-                     Margin="0,12,0,0"
-                     PlaceholderText="Search table..."
-                     Width="300"        
-                         HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     TextChanged="OnSearchBoxTextChanged"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,12" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBox x:Name="SearchBox"
+                         Margin="0"
+                         PlaceholderText="Search table..."
+                         Width="300"
+                         TextChanged="OnSearchBoxTextChanged"/>
+            </StackPanel>
         </Border>
-        <ListView ItemsSource="{x:Bind FilteredEntries}" SelectionMode="None" Padding="0,0,8,36" Margin="0,56,0,0" >
- 
+
+        <ListView
+            Grid.Row="1"
+            x:Name="ElectrochemicalListView"
+            ItemsSource="{x:Bind FilteredEntries, Mode=OneWay}"
+            IsItemClickEnabled="True"
+            ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"
+            Background="Transparent"
+            Padding="0,0,12,54">
+
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:ElectrochemicalEntry" >
-                    <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Padding="12" CornerRadius="8" Margin="0,2,0,2"  MinWidth="300" MaxWidth="1796">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid Width="40" Height="40" HorizontalAlignment="Left" Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="20">
-                            <TextBlock Text="{x:Bind Short}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="{ThemeResource TextOnAccentFillColorDefault}"/>
+                <DataTemplate x:DataType="local:ElectrochemicalEntry">
+                    <Grid MinWidth="300" MaxWidth="1800" Margin="0,2,0,2">
+                        <Border CornerRadius="8" Background="Transparent">
+                            <Border.Shadow>
+                                <ThemeShadow />
+                            </Border.Shadow>
+                        </Border>
+                        <Grid x:Name="RootGrid"
+                              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                              Margin="0,2,0,2"
+                              CornerRadius="8"
+                              PointerEntered="RootGrid_PointerEntered"
+                              PointerExited="RootGrid_PointerExited"
+                              PointerPressed="RootGrid_PointerPressed"
+                              PointerReleased="RootGrid_PointerReleased">
 
+                            <Grid x:Name="ContentGrid"
+                                  Background="Transparent"
+                                  BorderThickness="1"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                  Padding="12"
+                                  CornerRadius="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Icon -->
+                                <Border Grid.Column="0"
+                                        Width="40"
+                                        Height="40"
+                                        CornerRadius="20"
+                                        Background="{ThemeResource AccentFillColorSecondaryBrush}"
+                                        VerticalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Short}"
+                                               Foreground="White"
+                                               FontWeight="Bold"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                </Border>
+
+                                <!-- Details -->
+                                <StackPanel Grid.Column="1"
+                                            Margin="12,0"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Name}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{x:Bind Voltage}" 
+                                               FontSize="12" 
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                </StackPanel>
+
+                                <!-- Right Aligned Info -->
+                                <StackPanel Grid.Column="2"
+                                            Margin="0,0,12,0"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right">
+                                    <TextBlock Text="{x:Bind Charge}"
+                                               FontSize="18"
+                                               FontWeight="SemiBold"
+                                               Margin="0,0,8,0"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text=">" 
+                                               FontWeight="SemiBold"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
-
-                        <StackPanel Margin="52,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="{x:Bind Name}" FontSize="14" FontWeight="SemiBold" />
-                            <TextBlock Text="{x:Bind Voltage}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                        </StackPanel>
-
-                        <TextBlock Text="{x:Bind Charge}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

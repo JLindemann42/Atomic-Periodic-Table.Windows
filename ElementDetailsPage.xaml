@@ -466,7 +466,7 @@
                         <Grid Grid.Column="1"
                           Width="200" Height="200"
                           VerticalAlignment="Center">
-                            <Button Content="4"
+                            <Button Content="-"
                                 Width="70" Height="70" x:Name="hPhase"
                                 HorizontalAlignment="Center" VerticalAlignment="Top"
                                 Background="IndianRed"
@@ -475,7 +475,7 @@
                                 FontSize="20"
                                 Style="{StaticResource DiamondButtonStyle}" />
 
-                            <Button Content="3" x:Name="hHealth"
+                            <Button Content="-" x:Name="hHealth"
                                 Width="70" Height="70"
                                 HorizontalAlignment="Left" VerticalAlignment="Center"
                                 Background="RoyalBlue"
@@ -484,7 +484,7 @@
                                 FontSize="20"
                                 Style="{StaticResource DiamondButtonStyle}" />
 
-                            <Button Content="0" x:Name="hReactivity"
+                            <Button Content="-" x:Name="hReactivity"
                                 Width="70" Height="70"
                                 HorizontalAlignment="Right" VerticalAlignment="Center"
                                 Background="Orange"

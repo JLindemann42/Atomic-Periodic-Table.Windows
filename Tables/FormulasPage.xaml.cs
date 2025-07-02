@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Windows.Storage;
 
 namespace Atomic_WinUI
@@ -26,19 +27,6 @@ namespace Atomic_WinUI
         public FormulasPage()
         {
             this.InitializeComponent();
-            //Check PRO or Not:
-            if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
-            {
-                EquationToolBar.Visibility = Visibility.Visible;
-                EquationListView.Visibility = Visibility.Visible;
-                NoProContent.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                EquationToolBar.Visibility = Visibility.Collapsed;
-                EquationListView.Visibility = Visibility.Collapsed;
-                NoProContent.Visibility = Visibility.Visible;
-            }
             EquationList = new ObservableCollection<Equation>
             {
 
@@ -143,6 +131,24 @@ namespace Atomic_WinUI
         private void OpenProPage_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(ProPage));
+        }
+
+        private void OnClearFilterSelected(object sender, RoutedEventArgs e)
+        {
+            FilteredEquationList.Clear();
+            foreach (var equation in EquationList)
+                FilteredEquationList.Add(equation);
+        }
+
+        private void OnDisplayModeSelected(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuFlyoutItem menuItem && menuItem.Text is string category)
+            {
+                var filtered = EquationList.Where(eq => eq.Category == category);
+                FilteredEquationList.Clear();
+                foreach (var equation in filtered)
+                    FilteredEquationList.Add(equation);
+            }
         }
 
 

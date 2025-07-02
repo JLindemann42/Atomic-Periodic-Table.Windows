@@ -32,6 +32,8 @@ namespace Atomic_PeriodicTable
             new() { Title = "Table of Nuclides", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Poisson's Ratio Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Constants Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Geology Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Emission Spectrum Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "PRO Access on all platforms", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
             new() { Title = "Early Access to DEV Features", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
         };

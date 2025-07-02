@@ -147,6 +147,9 @@
     <Page Update="Tables\FormulasDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Update="Tables\GeologyPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Tables\FormulasPage.xaml">
