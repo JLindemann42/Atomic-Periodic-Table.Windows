@@ -3,17 +3,14 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Windows.Storage;
 
 namespace Atomic_WinUI
 {
-    public sealed partial class PeriodicTablePage : Page 
+    public sealed partial class PeriodicTablePage : Page
     {
 
 
@@ -140,12 +137,12 @@ namespace Atomic_WinUI
 
 
 
-        public PeriodicTablePage() 
+        public PeriodicTablePage()
         {
             this.InitializeComponent();
 
             // Populate the elements
-            Lanthanoids = new Element { AtomicNumber = 1, Symbol = "57-71", Name = "Lanthanoids", OriginalName= "Lanthanoids" };
+            Lanthanoids = new Element { AtomicNumber = 1, Symbol = "57-71", Name = "Lanthanoids", OriginalName = "Lanthanoids" };
             Actinoids = new Element { AtomicNumber = 1, Symbol = "89-103", Name = "Actinoids", OriginalName = "Actinoids" };
 
             Element1 = new Element { AtomicNumber = 1, Symbol = "H", Name = "Hydrogen", OriginalName = "Hydrogen" };
@@ -421,5 +418,5 @@ namespace Atomic_WinUI
         }
     }
 
- }
+}
 

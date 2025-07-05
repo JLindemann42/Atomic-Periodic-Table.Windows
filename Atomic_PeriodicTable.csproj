@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Remove="IsotopeDetailsPage.xaml" />
     <None Remove="IsotopePage.xaml" />
+    <None Remove="Tables\FlashCardsPage.xaml" />
     <None Remove="Tables\FormulasDetailsPage.xaml" />
     <None Remove="Tables\NuclidePage.xaml" />
   </ItemGroup>
@@ -144,6 +145,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Tables\FlashCardsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Tables\FormulasDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +229,9 @@
     <Page Update="ToolsPages\ProPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tools\" />
   </ItemGroup>
 
   <!--

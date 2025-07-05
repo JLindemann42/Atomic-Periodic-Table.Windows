@@ -1,11 +1,11 @@
 ﻿using Atomic_PeriodicTable;
 using Atomic_PeriodicTable.Tables;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Windows.Storage;
 
 namespace Atomic_WinUI
@@ -122,6 +122,24 @@ namespace Atomic_WinUI
         private void OpenProPage_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(ProPage));
+        }
+
+        private void OnClearFilterSelected(object sender, RoutedEventArgs e)
+        {
+            FilteredPoissonList.Clear();
+            foreach (var poisson in PoissonList)
+                FilteredPoissonList.Add(poisson);
+        }
+
+        private void OnDisplayModeSelected(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuFlyoutItem menuItem && menuItem.Text is string category)
+            {
+                var filtered = PoissonList.Where(eq => eq.Category == category);
+                FilteredPoissonList.Clear();
+                foreach (var poisson in filtered)
+                    FilteredPoissonList.Add(poisson);
+            }
         }
 
 

@@ -1,26 +1,25 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Atomic_PeriodicTable;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
-using Microsoft.UI.Xaml;
-using System.Text.RegularExpressions;
-using System.Linq;
 using System;
-using Microsoft.UI.Text;
-using Atomic_PeriodicTable;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
-
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
 // Type aliases to avoid Dictionary name conflicts
 using StringDoubleMap = System.Collections.Generic.Dictionary<string, double>;
-using StringStringMap = System.Collections.Generic.Dictionary<string, string>;
 using StringElementMap = System.Collections.Generic.Dictionary<string, (double count, double weight, string name)>;
-using System.Collections.Generic;
-using Microsoft.UI.Xaml.Input;
-using Windows.ApplicationModel.DataTransfer;
-using System.Collections.ObjectModel;
-using Windows.Storage;
-using System.Threading.Tasks;
+using StringStringMap = System.Collections.Generic.Dictionary<string, string>;
 
 namespace Atomic_WinUI
 {
@@ -30,11 +29,22 @@ namespace Atomic_WinUI
         private readonly StringStringMap elementNames = new(StringComparer.OrdinalIgnoreCase);
         public ObservableCollection<FavoriteCompound> Favorites { get; } = new();
         private const string FavoritesFileName = "favorites.json";
-
+        private static readonly Regex CompoundRegex = new(@"^(\d+)?(.*)$", RegexOptions.Compiled);
 
         public CalculatorPage()
         {
             this.InitializeComponent();
+
+            // Check PRO or Not:
+            if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
+            {
+                FavoritesAcrylicOverlay.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                FavoritesAcrylicOverlay.Visibility = Visibility.Visible;
+            }
+
             LoadElementData();
             CompoundInput.TextChanged += CompoundInput_TextChanged;
             this.SizeChanged += CalculatorPage_SizeChanged;
@@ -46,7 +56,7 @@ namespace Atomic_WinUI
 
             SetCardsGridLayout(this.ActualWidth);
 
-            LoadFavoritesAsync();
+            _ = LoadFavoritesAsync();
         }
 
         private void CalculatorPage_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -56,26 +66,17 @@ namespace Atomic_WinUI
 
         private void FavoritesList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
-            if (args.ItemContainer == null || args.Item == null)
+            if (args.ItemContainer?.ContentTemplateRoot is not FrameworkElement root || args.Item is not FavoriteCompound fav || string.IsNullOrEmpty(fav.Formula))
                 return;
 
-            var root = args.ItemContainer.ContentTemplateRoot as FrameworkElement;
-            if (root == null)
-                return;
-
-            var formulaTextBlock = root.FindName("FormulaTextBlock") as TextBlock;
-            if (formulaTextBlock == null)
+            if (root.FindName("FormulaTextBlock") is not TextBlock formulaTextBlock)
                 return;
 
             formulaTextBlock.Inlines.Clear();
-
-            if (args.Item is FavoriteCompound fav && !string.IsNullOrEmpty(fav.Formula))
-            {
-                FormatFormulaWithSubscripts(fav.Formula, formulaTextBlock.Inlines);
-            }
+            FormatFormulaWithSubscripts(fav.Formula, formulaTextBlock.Inlines);
         }
 
-        private async void LoadFavoritesAsync()
+        private async Task LoadFavoritesAsync()
         {
             try
             {
@@ -92,7 +93,10 @@ namespace Atomic_WinUI
                     }
                 }
             }
-            catch { /* Handle or log as needed */ }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ERROR] Loading favorites: {ex}");
+            }
         }
 
         private async Task SaveFavoritesAsync()
@@ -103,7 +107,10 @@ namespace Atomic_WinUI
                 using var stream = await file.OpenStreamForWriteAsync();
                 await JsonSerializer.SerializeAsync(stream, Favorites.ToList());
             }
-            catch { /* Handle or log as needed */ }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ERROR] Saving favorites: {ex}");
+            }
         }
 
         private async void AddFavorite_Click(object sender, RoutedEventArgs e)
@@ -118,9 +125,9 @@ namespace Atomic_WinUI
                 var elements = ParseFormulaWithGroups(f, multiplier);
                 foreach (var (symbol, count) in elements)
                 {
-                    if (!includedElements.ContainsKey(symbol))
-                        includedElements[symbol] = (0, elementWeights.GetValueOrDefault(symbol, 0), elementNames.GetValueOrDefault(symbol, symbol));
-                    includedElements[symbol] = (includedElements[symbol].count + count, includedElements[symbol].weight, includedElements[symbol].name);
+                    if (!includedElements.TryGetValue(symbol, out var entry))
+                        entry = (0, elementWeights.GetValueOrDefault(symbol, 0), elementNames.GetValueOrDefault(symbol, symbol));
+                    includedElements[symbol] = (entry.count + count, entry.weight, entry.name);
                 }
             }
             foreach (var (symbol, (count, weight, _)) in includedElements)
@@ -135,7 +142,7 @@ namespace Atomic_WinUI
 
         private async void FavoriteRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is MenuFlyoutItem item && item.Tag is FavoriteCompound fav)
+            if (sender is MenuFlyoutItem { Tag: FavoriteCompound fav })
             {
                 Favorites.Remove(fav);
                 await SaveFavoritesAsync();
@@ -144,10 +151,10 @@ namespace Atomic_WinUI
 
         private void FavoriteCopy_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is MenuFlyoutItem item && item.Tag is FavoriteCompound fav)
+            if (sender is MenuFlyoutItem { Tag: FavoriteCompound fav })
             {
                 var dataPackage = new DataPackage();
-                dataPackage.SetText($"{fav.MolarMass:0.#####} (u)");
+                dataPackage.SetText($"{fav.MolarMass:0.#####} (g/mol)");
                 Clipboard.SetContent(dataPackage);
             }
         }
@@ -190,7 +197,6 @@ namespace Atomic_WinUI
                 CardsGrid.ColumnDefinitions[2].Width = new GridLength(1, GridUnitType.Star);
             }
         }
-
 
         // When user taps the formatted text, switch to edit mode
         private void CompoundFormatted_Tapped(object sender, TappedRoutedEventArgs e)
@@ -250,8 +256,6 @@ namespace Atomic_WinUI
                     double mass = 0;
                     double.TryParse(massClean, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out mass);
 
-                    System.Diagnostics.Debug.WriteLine($"[DEBUG] {symbol}: \"{massRaw}\" -> {mass}");
-
                     if (!string.IsNullOrWhiteSpace(symbol))
                     {
                         elementWeights[symbol] = mass;
@@ -271,7 +275,7 @@ namespace Atomic_WinUI
             CompoundFormatted.Inlines.Clear();
             FormatFormulaWithSubscripts(CompoundInput.Text, CompoundFormatted.Inlines);
 
-            string input = CompoundInput.Text?.Trim();
+            var input = CompoundInput.Text?.Trim();
             if (string.IsNullOrEmpty(input))
             {
                 MolarMassText.Text = "0.0 (g/mol)";
@@ -288,9 +292,9 @@ namespace Atomic_WinUI
                 var elements = ParseFormulaWithGroups(formula, multiplier);
                 foreach (var (symbol, count) in elements)
                 {
-                    if (!includedElements.ContainsKey(symbol))
-                        includedElements[symbol] = (0, elementWeights.GetValueOrDefault(symbol, 0), elementNames.GetValueOrDefault(symbol, symbol));
-                    includedElements[symbol] = (includedElements[symbol].count + count, includedElements[symbol].weight, includedElements[symbol].name);
+                    if (!includedElements.TryGetValue(symbol, out var entry))
+                        entry = (0, elementWeights.GetValueOrDefault(symbol, 0), elementNames.GetValueOrDefault(symbol, symbol));
+                    includedElements[symbol] = (entry.count + count, entry.weight, entry.name);
                 }
             }
 
@@ -307,10 +311,11 @@ namespace Atomic_WinUI
                 double mass = count * weight;
                 double percent = totalMass > 0 ? (mass / totalMass) * 100 : 0;
 
+                // --- Begin: FavoriteListItem style recreation ---
                 var border = new Border
                 {
                     BorderBrush = new SolidColorBrush(Microsoft.UI.Colors.Gray),
-                    BorderThickness = new Thickness(1),
+                    BorderThickness = new Thickness(2),
                     CornerRadius = new CornerRadius(16),
                     Margin = new Thickness(0, 8, 0, 0),
                     Padding = new Thickness(12)
@@ -371,13 +376,13 @@ namespace Atomic_WinUI
             foreach (var part in input.Split('+'))
             {
                 var trimmed = part.Trim();
-                var match = Regex.Match(trimmed, @"^(\d+)?(.*)$");
+                var match = CompoundRegex.Match(trimmed);
                 int multiplier = 1;
                 string formula = trimmed;
                 if (match.Success)
                 {
-                    if (!string.IsNullOrEmpty(match.Groups[1].Value))
-                        multiplier = int.Parse(match.Groups[1].Value);
+                    if (!string.IsNullOrEmpty(match.Groups[1].Value) && int.TryParse(match.Groups[1].Value, out var parsedMultiplier))
+                        multiplier = parsedMultiplier;
                     formula = match.Groups[2].Value;
                 }
                 if (!string.IsNullOrWhiteSpace(formula))
@@ -417,8 +422,8 @@ namespace Atomic_WinUI
                     int groupMultiplier = 1;
                     int j = i;
                     while (j < formula.Length && char.IsDigit(formula[j])) j++;
-                    if (j > i)
-                        groupMultiplier = int.Parse(formula.Substring(i, j - i));
+                    if (j > i && int.TryParse(formula.Substring(i, j - i), out var parsedGroupMultiplier))
+                        groupMultiplier = parsedGroupMultiplier;
                     i = j;
                     var groupElements = ParseFormulaWithGroups(group, multiplier * groupMultiplier);
                     foreach (var kvp in groupElements)
@@ -433,8 +438,8 @@ namespace Atomic_WinUI
                     int count = 1;
                     int j = i;
                     while (j < formula.Length && char.IsDigit(formula[j])) j++;
-                    if (j > i)
-                        count = int.Parse(formula.Substring(i, j - i));
+                    if (j > i && int.TryParse(formula.Substring(i, j - i), out var parsedCount))
+                        count = parsedCount;
                     i = j;
                     AddElement(symbol, count * multiplier);
                 }
@@ -511,12 +516,16 @@ namespace Atomic_WinUI
                 _ => c
             };
         }
+        private void OpenProPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ProPage));
+        }
     }
+
     public class FavoriteCompound
     {
         public string Formula { get; set; }
         public double MolarMass { get; set; }
         public string MolarMassDisplay => $"{MolarMass:0.#####} (g/mol)";
-
     }
 }

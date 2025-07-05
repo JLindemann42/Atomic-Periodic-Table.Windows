@@ -1,6 +1,6 @@
 
 namespace Atomic_WinUI
-{ 
+{
     public class ElectrochemicalEntry
     {
         public string Name { get; set; }
@@ -15,5 +15,5 @@ namespace Atomic_WinUI
             Voltage = voltage;
             Charge = charge;
         }
-}
+    }
 }

@@ -1,6 +1,6 @@
 
 namespace Atomic_WinUI
-{ 
+{
     public class ConstantsEntry
     {
         public string Name { get; set; }

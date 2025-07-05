@@ -1,18 +1,15 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Shapes;
+﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI;
-using Microsoft.UI.Text;
-using Windows.ApplicationModel;
-using Microsoft.UI;
 
 namespace Atomic_PeriodicTable.Tables
 {
@@ -174,94 +171,94 @@ namespace Atomic_PeriodicTable.Tables
             LoadingPanel.Visibility = Visibility.Collapsed;
         }
 
-       private void AddIsotopeBlock(string elementShort, string elementFull, string decayType, string isotopeMassNumber,
-                             int protonNumber, int neutronNumber, JsonElement elementJsonRoot)
-{
-    var border = new Border
-    {
-        Width = IsotopeBlockWidth,
-        Height = IsotopeBlockHeight,
-        Background = new SolidColorBrush(GetDecayColor(decayType)),
-        BorderBrush = new SolidColorBrush(Colors.DarkGray),
-        BorderThickness = new Thickness(1),
-        CornerRadius = new CornerRadius(5),
-        Padding = new Thickness(4),
-        Tag = new IsotopeInfo
+        private void AddIsotopeBlock(string elementShort, string elementFull, string decayType, string isotopeMassNumber,
+                              int protonNumber, int neutronNumber, JsonElement elementJsonRoot)
         {
-            ElementShortName = elementShort,
-            ElementFullName = elementFull,
-            DecayType = decayType,
-            IsotopeMassNumber = isotopeMassNumber,
-            ProtonNumber = protonNumber,
-            NeutronNumber = neutronNumber,
-            ElementJson = elementJsonRoot
+            var border = new Border
+            {
+                Width = IsotopeBlockWidth,
+                Height = IsotopeBlockHeight,
+                Background = new SolidColorBrush(GetDecayColor(decayType)),
+                BorderBrush = new SolidColorBrush(Colors.DarkGray),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(5),
+                Padding = new Thickness(4),
+                Tag = new IsotopeInfo
+                {
+                    ElementShortName = elementShort,
+                    ElementFullName = elementFull,
+                    DecayType = decayType,
+                    IsotopeMassNumber = isotopeMassNumber,
+                    ProtonNumber = protonNumber,
+                    NeutronNumber = neutronNumber,
+                    ElementJson = elementJsonRoot
+                }
+            };
+
+            var grid = new Grid();
+
+            var massNumber = new TextBlock
+            {
+                Text = isotopeMassNumber,
+                FontSize = 14,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(0, 0, 2, 0),
+                Foreground = new SolidColorBrush(Colors.Black)
+            };
+
+            var elementSymbol = new TextBlock
+            {
+                Text = elementShort,
+                FontSize = 26,
+                FontWeight = Microsoft.UI.Text.FontWeights.Bold,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Foreground = new SolidColorBrush(Colors.Black)
+            };
+
+            var charge = new TextBlock
+            {
+                Text = GetChargeSymbol(decayType), // helper method to format decay types like β⁻
+                FontSize = 14,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Margin = new Thickness(2, 0, 0, 2),
+                Foreground = new SolidColorBrush(Colors.Black)
+            };
+
+            grid.Children.Add(massNumber);
+            grid.Children.Add(elementSymbol);
+            grid.Children.Add(charge);
+
+            border.Child = grid;
+
+            double x = LeftPadding + HorizontalSpacing + neutronNumber * (IsotopeBlockWidth + HorizontalSpacing);
+            double y = VerticalSpacing - TopPadding + protonNumber * (IsotopeBlockHeight + VerticalSpacing);
+
+            Canvas.SetLeft(border, x);
+            Canvas.SetTop(border, y);
+
+            border.Tapped += OnIsotopeTapped;
+
+            NuclideCanvas.Children.Add(border);
         }
-    };
 
-    var grid = new Grid();
-
-    var massNumber = new TextBlock
-    {
-        Text = isotopeMassNumber,
-        FontSize = 14,
-        HorizontalAlignment = HorizontalAlignment.Right,
-        VerticalAlignment = VerticalAlignment.Top,
-        Margin = new Thickness(0, 0, 2, 0),
-        Foreground = new SolidColorBrush(Colors.Black)
-    };
-
-    var elementSymbol = new TextBlock
-    {
-        Text = elementShort,
-        FontSize = 26,
-        FontWeight = Microsoft.UI.Text.FontWeights.Bold,
-        HorizontalAlignment = HorizontalAlignment.Center,
-        VerticalAlignment = VerticalAlignment.Center,
-        Foreground = new SolidColorBrush(Colors.Black)
-    };
-
-    var charge = new TextBlock
-    {
-        Text = GetChargeSymbol(decayType), // helper method to format decay types like β⁻
-        FontSize = 14,
-        HorizontalAlignment = HorizontalAlignment.Center,
-        VerticalAlignment = VerticalAlignment.Bottom,
-        Margin = new Thickness(2, 0, 0, 2),
-        Foreground = new SolidColorBrush(Colors.Black)
-    };
-
-    grid.Children.Add(massNumber);
-    grid.Children.Add(elementSymbol);
-    grid.Children.Add(charge);
-
-    border.Child = grid;
-
-    double x = LeftPadding + HorizontalSpacing + neutronNumber * (IsotopeBlockWidth + HorizontalSpacing);
-    double y = VerticalSpacing - TopPadding + protonNumber * (IsotopeBlockHeight + VerticalSpacing);
-
-    Canvas.SetLeft(border, x);
-    Canvas.SetTop(border, y);
-
-    border.Tapped += OnIsotopeTapped;
-
-    NuclideCanvas.Children.Add(border);
-}
-
-private string GetChargeSymbol(string decayType)
-{
-    return decayType.ToLowerInvariant() switch
-    {
-        "b-" => "β⁻",
-        "b+" => "β⁺",
-        "alpha" => "α",
-        "n" => "n",
-        "p" => "p",
-        "p+" => "p⁺",
-        "electron capture" => "EC",
-        "stable" => "",
-        _ => decayType
-    };
-}
+        private string GetChargeSymbol(string decayType)
+        {
+            return decayType.ToLowerInvariant() switch
+            {
+                "b-" => "β⁻",
+                "b+" => "β⁺",
+                "alpha" => "α",
+                "n" => "n",
+                "p" => "p",
+                "p+" => "p⁺",
+                "electron capture" => "EC",
+                "stable" => "",
+                _ => decayType
+            };
+        }
 
         private void OnIsotopeTapped(object sender, RoutedEventArgs e)
         {

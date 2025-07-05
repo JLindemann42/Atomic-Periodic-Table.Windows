@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Background="Transparent" Margin="56,24,0,0" HorizontalAlignment="Center">
+        <Grid Background="Transparent" Margin="56,24,56,0" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="48"/>
                 <RowDefinition Height="*"/>

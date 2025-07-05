@@ -125,7 +125,7 @@
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
-                                        <TextBlock Text="Spectrum"
+                                        <TextBlock Text="Detail View"
                                                FontSize="12"
                                                Margin="0,0,12,0.5"
                                                VerticalAlignment="Center"

@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Collections.ObjectModel;
-using System.Text.Json;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-using System.Text.Json.Nodes;
-using Atomic_WinUI;
-using Microsoft.UI.Xaml;
 using Atomic_PeriodicTable.Tables;
+using Microsoft.UI.Xaml.Controls;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Text.Json.Nodes;
 
 namespace Atomic_PeriodicTable
 {

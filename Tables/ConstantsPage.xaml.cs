@@ -1,15 +1,12 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System.Collections.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Atomic_PeriodicTable;
+﻿using Atomic_PeriodicTable;
 using Microsoft.UI.Xaml;
-using Windows.Storage;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Windows.Storage;
 
 
 namespace Atomic_WinUI
@@ -109,7 +106,7 @@ namespace Atomic_WinUI
             }
 
 
-                ConstantsEntries.Add(new ConstantsEntry("Pi (π)", "3.14159265358979323846", "-", "π", "mathematics"));
+            ConstantsEntries.Add(new ConstantsEntry("Pi (π)", "3.14159265358979323846", "-", "π", "mathematics"));
             ConstantsEntries.Add(new ConstantsEntry("Tau (τ)", "6.28318530717958647692", "-", "τ", "mathematics"));
             ConstantsEntries.Add(new ConstantsEntry("Euler's number", "2.71828182845904523536", "-", "e", "mathematics"));
             ConstantsEntries.Add(new ConstantsEntry("Euler's constant", "0.57721566490153286060", "-", "γ", "mathematics"));

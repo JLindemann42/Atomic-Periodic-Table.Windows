@@ -1,5 +1,5 @@
 namespace Atomic_WinUI
-{ 
+{
     public class DictionaryEntry
     {
         public string Category { get; set; }
@@ -14,5 +14,5 @@ namespace Atomic_WinUI
             Description = description;
             Url = url;
         }
-}
+    }
 }

@@ -7,6 +7,7 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
    mc:Ignorable="d">
     <Page.Resources>
+        <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
         <Style x:Key="DiamondButtonStyle" TargetType="Button">
             <Setter Property="RenderTransform">
                 <Setter.Value>
@@ -39,23 +40,143 @@
             </Setter>
         </Style>
 
+        <!-- Slide-in-from-side Storyboard -->
+        <Storyboard x:Key="SlideInStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="RootGrid"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                From="000" To="0" Duration="0:0:0" 
+                EasingFunction="{StaticResource SlideInEasing}" />
+        </Storyboard>
+        <CubicEase x:Key="SlideInEasing" EasingMode="EaseOut"/>
+
+        <!-- Successive Fade-in Storyboard -->
+        <Storyboard x:Key="FadeInBordersStoryboard">
+            <DoubleAnimation Storyboard.TargetName="FavoriteBar" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.0"/>
+            <DoubleAnimation Storyboard.TargetName="OverviewBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="PropertiesBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="TemperaturesBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.3"/>
+            <DoubleAnimation Storyboard.TargetName="AtomicPropertiesBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.4"/>
+            <DoubleAnimation Storyboard.TargetName="ElectromagneticBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.5"/>
+            <DoubleAnimation Storyboard.TargetName="ThermodynamicBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="NuclearBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="HardnessBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="AdditionalBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="AbundanceBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="HazardBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="OthersBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+        </Storyboard>
     </Page.Resources>
 
-    <Grid>
+    <!-- Add Name and RenderTransform to the root Grid -->
+    <Grid x:Name="RootGrid">
+        <Grid.RenderTransform>
+            <TranslateTransform X="400"/>
+        </Grid.RenderTransform>
         <!-- Page Content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto" >
             <StackPanel Padding="56,56,56,36" HorizontalAlignment="Center" MaxWidth="1856">
-                <TextBlock Text="{Binding OriginalName}" FontSize="54" FontWeight="Bold" />
+                <TextBlock x:Name="Title" Text="{Binding OriginalName}" FontSize="54" FontWeight="Bold" />
 
                 <!-- Buttons Section -->
-                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,12,0,0">
-                    <Button Content="Isotopes" Click="IsotopeClick" />
-                    <Button Content="Wikipedia" Click="WikipediaClick" />
-                </StackPanel>
+                <Grid Margin="0,12,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Isotopes" Click="IsotopeClick" Grid.Column="0"/>
+                    <Button Content="Wikipedia" Click="WikipediaClick" Grid.Column="1" Margin="8,0,0,0"/>
+                    <StackPanel Grid.Column="2"/>
+                    <Button Click="NotesClick" Grid.Column="3">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <FontIcon Glyph="&#xE70B;" FontSize="16" Margin="0,0,4,0"/>
+                            <TextBlock Text="Notes" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
 
                 <Border Width="1800"/>
+
+                <!-- Favorite Bar-->
+                    <Border x:Name="FavoriteBar"
+                    Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    Margin="0,12,0,0"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    HorizontalAlignment="Stretch"
+                    MinWidth="300"
+                    MaxWidth="1800">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Padding="14,8,8,8">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <ItemsControl ItemsSource="{Binding FavoriteProperties}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="local:FavoriteProperty">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <!-- Favorite bar item content -->
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" FontSize="14"/>
+                                                    <TextBlock Text=":" FontWeight="SemiBold" FontSize="14" Margin="0,0,4,0"/>
+                                                    <TextBlock Text="{Binding Value}" FontSize="14"/>
+                                                </StackPanel>
+                                                <!-- Vertical separator, hidden for last item -->
+                                                <Border
+                                                Width="1"
+                                                Margin="8,0"
+                                                Background="LightGray"
+                                                VerticalAlignment="Stretch"
+                                                Visibility="{Binding IsLast, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <!-- Edit Button at the far right -->
+                        <Button Grid.Column="1"
+                            Click="EditFavorites_Click"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,0"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            Padding="0"
+                            Width="40"
+                            Height="40">
+                            <FontIcon Glyph="&#xE104;" FontSize="18" />
+                        </Button>
+                    </Grid>
+                </Border>
                 <!-- Overview Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="OverviewBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <StackPanel>
                             <TextBlock Text="Overview" FontSize="20" FontWeight="SemiBold" />
@@ -163,7 +284,8 @@
                 </Border>  
 
                <!-- Properties Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">  
+                <Border x:Name="PropertiesBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">  
                    <StackPanel>  
                        <TextBlock Text="Properties" FontSize="20" FontWeight="SemiBold" />  
 
@@ -190,7 +312,8 @@
                </Border>
 
                 <!-- Temperatures Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="TemperaturesBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Temperatures" FontSize="20" FontWeight="SemiBold" />
 
@@ -216,7 +339,8 @@
                 </Border>
 
                 <!-- Atomic Properties Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="AtomicPropertiesBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Atomic Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -306,7 +430,8 @@
 
 
                 <!-- Electromagnetic Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="ElectromagneticBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Electromagnetic Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -326,7 +451,8 @@
                 </Border>
 
                 <!-- Thermodynamic Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="ThermodynamicBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Thermodynamic Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -347,7 +473,8 @@
 
 
                 <!-- Nuclear Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="NuclearBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Nuclear Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -363,7 +490,8 @@
                 </Border>
 
                 <!-- Hardness Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="HardnessBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Hardness Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -379,7 +507,8 @@
                 </Border>
 
                 <!-- Additional Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="AdditionalBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Additional Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -401,7 +530,8 @@
                 </Border>
 
                 <!-- Abundance Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="AbundanceBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Abundance" FontSize="20" FontWeight="SemiBold" />
 
@@ -429,7 +559,8 @@
                 </Border>
 
                 <!-- Hazard Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                <Border x:Name="HazardBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
         Padding="16"
         CornerRadius="8"
         Margin="0,12,0,0"
@@ -508,7 +639,8 @@
 
 
                 <!-- Others Card -->
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                <Border x:Name="OthersBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Others" FontSize="20" FontWeight="SemiBold" />
 
@@ -522,6 +654,44 @@
                 </Border>
 
             </StackPanel>  
-       </ScrollViewer>  
-   </Grid>  
+       </ScrollViewer>
+        
+        <ContentDialog
+                x:Name="NotesDialog"
+                Title="Element Notes"
+                PrimaryButtonText="Save"
+                SecondaryButtonText="Cancel"
+                DefaultButton="Primary"
+                IsPrimaryButtonEnabled="True"
+                RequestedTheme="Default"
+                xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+                >
+            <TextBox x:Name="NotesTextBox" AcceptsReturn="True" Height="150" TextWrapping="Wrap" Width="300"/>
+        </ContentDialog>
+
+        <ContentDialog
+    x:Name="FavoritePropertiesDialog"
+    Title="Select Favorite Properties"
+    PrimaryButtonText="Save"
+    SecondaryButtonText="Cancel"
+    DefaultButton="Primary"
+    IsPrimaryButtonEnabled="True"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls">
+            <StackPanel>
+                <ScrollViewer MaxHeight="400" Width="350">
+                    <ItemsControl x:Name="FavoritePropertiesList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:FavoriteProperty">
+                                <CheckBox
+                            Content="{x:Bind DisplayNameWithProSuffix}"
+                            IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                            IsEnabled="{x:Bind IsSelectable}"
+                            Foreground="{x:Bind ForegroundBrush}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+        </ContentDialog>
+    </Grid>  
 </Page>

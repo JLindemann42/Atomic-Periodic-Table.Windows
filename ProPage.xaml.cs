@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Windows.Services.Store;
+﻿using Atomic_WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
-using WinRT.Interop;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.Services.Store;
 using Windows.Storage;
-using Atomic_WinUI;
+using WinRT.Interop;
 
 namespace Atomic_PeriodicTable
 {
@@ -23,8 +23,11 @@ namespace Atomic_PeriodicTable
         public ObservableCollection<FeatureComparison> FeatureList { get; } = new()
         {
             new() { Title = "Element Overview", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Favorite Bar", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Element Notes", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Isotopes", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Dictionary", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Save Calculations", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Hardness Properties", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Young-, Bulk-, Shear Modulus", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Poisson's Constant, Sound of Speed", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
@@ -113,7 +116,7 @@ namespace Atomic_PeriodicTable
             {
                 var appLicense = await storeContext.GetAppLicenseAsync();
 
-                
+
                 bool isProUser = false;
                 bool isProPlusUser = false;
 

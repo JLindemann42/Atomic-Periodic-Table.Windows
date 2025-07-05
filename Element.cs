@@ -2,13 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-
 public class Element : INotifyPropertyChanged
 {
     private string _name;
@@ -63,6 +56,11 @@ public class Element : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
+    [JsonPropertyName("element")]
+    public string Title { get; set; }
+
+    [JsonPropertyName("element_atomic_number")]
+    public string Number { get; set; }
 
     [JsonPropertyName("description")]
     public string Description { get; set; }

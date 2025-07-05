@@ -20,14 +20,17 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="Transparent">
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid x:Name="CardsGrid"
-                  VerticalAlignment="Top"
-                  Margin="0,32,0,12"
-                  MaxWidth="1800"
-                  Padding="54,0,24,0"
-                  HorizontalAlignment="Center">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border MaxWidth="1854" HorizontalAlignment="Center">
+            <Grid Background="Transparent">
+                <Border Width="1854"/>
+                <Grid
+                x:Name="CardsGrid"
+                VerticalAlignment="Top"
+                Margin="0,32,0,12"
+                MaxWidth="1854"
+                Padding="54,0,24,0"
+                HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="24" />
@@ -41,15 +44,15 @@
                         BorderThickness="1"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         CornerRadius="24"
-                        Padding="18,0,18,18"
-                        MinWidth="300"
-                        MaxWidth="500"
-                        MaxHeight="500"
+                        Padding="0,0,0,18"
+                        MinWidth="200"
+                        MaxWidth="900"
+                        MaxHeight="650"
                         HorizontalAlignment="Stretch">
-                    <StackPanel Spacing="16">
-                        <Border Width="500"/>
+                    <StackPanel Spacing="16" Margin="18,0,0,0">
+                            <Border Width="900"/>
                         <TextBlock Text="Calculator:" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
-                        <Grid Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" Height="48" VerticalAlignment="Center">
+                            <Grid Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" Height="48" Margin="0,0,18,0" VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="48" />
@@ -94,75 +97,108 @@
                             <FontIcon Glyph="&#xE7C3;" FontSize="18" VerticalAlignment="Center" />
                             <TextBlock x:Name="MolarMassText" Text="0.0 (g/mol)" FontSize="16" FontWeight="SemiBold" />
                         </StackPanel>
-                        <ScrollViewer MaxHeight="320" VerticalScrollBarVisibility="Auto">
-                            <StackPanel x:Name="ElementsPanel"/>
+                        <ScrollViewer MaxHeight="540" VerticalScrollBarVisibility="Auto">
+                                <StackPanel x:Name="ElementsPanel" Padding="0,0,18,0"/>
                         </ScrollViewer>
                     </StackPanel>
                 </Border>
 
                 <!-- Favorites Card -->
-                <Border x:Name="FavoritesCard"
+                    <Border x:Name="FavoritesCard"
                         Grid.Column="2"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         BorderThickness="1"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         CornerRadius="24"
-                        Padding="18,0,18,18"
-                        MinWidth="300"
-                        MaxWidth="500"
-                        MaxHeight="500"
+                        Padding="0,0,0,18"
+                        MinWidth="200"
+                        MaxWidth="900"
+                        MaxHeight="650"
                         HorizontalAlignment="Stretch">
-                    <StackPanel Spacing="16">
-                        <Border Width="500"/>
-                        <TextBlock Text="Favorites:" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="16">
+                            <Border Width="900"/>
+                            <TextBlock Text="Favorites:" FontWeight="Bold" FontSize="16" Margin="18,0,0,4"/>
 
-                        <ListView x:Name="FavoritesList"
+                            <ListView x:Name="FavoritesList"
                                   ItemsSource="{x:Bind Favorites, Mode=OneWay}"
                                   SelectionMode="None"
                                   BorderThickness="0"
                                   Padding="0,0,0,100"
-                                  MaxHeight="500"
+                                  MaxHeight="650"
                                   Background="Transparent">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="local:FavoriteCompound">
-                                    <Border CornerRadius="16"
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:FavoriteCompound">
+                                        <Border CornerRadius="16"
                                             BorderThickness="1"
                                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                             Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
                                             Margin="0,0,0,12"
                                             Padding="18,12,18,12">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="40" />
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock x:Name="FormulaTextBlock" FontWeight="Bold" FontSize="18"/>
-                                                <TextBlock Text="{x:Bind MolarMassDisplay}" FontSize="14"/>
-                                            </StackPanel>
-                                            <Button Grid.Column="1"
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="40" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock x:Name="FormulaTextBlock" FontWeight="Bold" FontSize="18"/>
+                                                    <TextBlock Text="{x:Bind MolarMassDisplay}" FontSize="14"/>
+                                                </StackPanel>
+                                                <Button Grid.Column="1"
                                                     Width="40"
                                                     Height="40"
                                                     Background="Transparent"
                                                     BorderThickness="0"
                                                     HorizontalAlignment="Right"
                                                     VerticalAlignment="Center">
-                                                <Button.Flyout>
-                                                    <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource AcrylicMenuFlyoutPresenterStyle}">
-                                                        <MenuFlyoutItem Text="Copy" Click="FavoriteCopy_Click" Tag="{x:Bind}" />
-                                                        <MenuFlyoutItem Text="Remove" Click="FavoriteRemove_Click" Tag="{x:Bind}" />
-                                                    </MenuFlyout>
-                                                </Button.Flyout>
-                                                <FontIcon Glyph="&#xE70D;" FontSize="16"/>
-                                            </Button>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </ScrollViewer>
-    </Grid>
+                                                    <Button.Flyout>
+                                                        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource AcrylicMenuFlyoutPresenterStyle}">
+                                                            <MenuFlyoutItem Text="Copy" Click="FavoriteCopy_Click" Tag="{x:Bind}" />
+                                                            <MenuFlyoutItem Text="Remove" Click="FavoriteRemove_Click" Tag="{x:Bind}" />
+                                                        </MenuFlyout>
+                                                    </Button.Flyout>
+                                                    <FontIcon Glyph="&#xE70D;" FontSize="16"/>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+                    <!-- Acrylic Overlay (blocks interaction) -->
+                    <Border x:Name="FavoritesAcrylicOverlay"
+                    Margin="0,50,0,0"
+                    Grid.Column="2"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                    CornerRadius="24"
+                    IsHitTestVisible="True"
+                    Visibility="Visible">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="This feature requires PRO version."
+                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"/>
+                                <Button Content="Get PRO Version"
+                    Click="OpenProPage_Click"
+                    Background="{ThemeResource AccentFillColorDefaultBrush}"
+                    Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                    Width="200"
+                    HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+        </Grid>
+        </Border>
+    </ScrollViewer>
 </Page>

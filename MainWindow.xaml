@@ -99,17 +99,26 @@
                         <SymbolIcon Symbol="Calculator" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem Content="Flashcards" Tag="FlashcardsPage" x:Name="FlashcardsPageItem" ToolTipService.ToolTip="Flashcards" Visibility="Visible">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Document" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem Content="Blog" Tag="BlogPage" x:Name="BlogPageItem" ToolTipService.ToolTip="Blog" Visibility="Collapsed">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Globe" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+
+            </NavigationView.MenuItems>
+
+            <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="Get PRO Version" Tag="ProPage" x:Name="ProPageItem" SelectsOnInvoked="True" ToolTipService.ToolTip="Get PRO Version">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Add" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-            </NavigationView.MenuItems>
+            </NavigationView.FooterMenuItems>
 
             <NavigationView.PaneCustomContent>
                 <HyperlinkButton x:Name="PaneHyperlink" Content="More info" Margin="12,0" Visibility="Collapsed" />

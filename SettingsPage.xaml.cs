@@ -66,7 +66,7 @@ namespace Atomic_WinUI
                     break;
                 }
                 unitIndex++;
-                        }
+            }
             if (!unitFound)
             {
                 UnitComboBox.SelectedIndex = 0;
@@ -98,5 +98,6 @@ namespace Atomic_WinUI
                 ApplicationData.Current.LocalSettings.Values["DefaultUnit"] = selectedUnit;
             }
         }
+
     }
 }

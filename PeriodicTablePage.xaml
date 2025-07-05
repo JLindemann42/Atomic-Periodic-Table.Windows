@@ -15,69 +15,91 @@
             To="1"
             Duration="0:0:0.3" />
         </Storyboard>
+        <!-- Add brushes that use ThemeResource for dynamic theme support -->
+        <SolidColorBrush x:Key="PeriodicTableButtonBackground" Color="{ThemeResource CardBackgroundFillColorDefault}"/>
+        <SolidColorBrush x:Key="PeriodicTableButtonPointerOverBackground" Color="{ThemeResource CardBackgroundFillColorDefault}"/>
+        <SolidColorBrush x:Key="PeriodicTableButtonPressedBackground" Color="{ThemeResource CardBackgroundFillColorDefault}"/>
         <Style x:Key="PeriodicTableButtonStyle" TargetType="Button">
             <Setter Property="Template">
-               
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid Background="{TemplateBinding Background}"
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}"
                               BorderBrush="{TemplateBinding BorderBrush}" 
                               BorderThickness="{TemplateBinding BorderThickness}"
                               CornerRadius="8">
-                            <!-- Atomic Number in the Upper Right -->
-                            <TextBlock Text="{Binding AtomicNumber}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" />
-
-                            <!-- Element Symbol in the Center -->
-                            <TextBlock Text="{Binding Symbol}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                            <!-- Element Name Below the Symbol -->
-                            <TextBlock x:Name="ElementNameTextBlock" Text="{Binding Name}" TextWrapping="WrapWholeWords" TextAlignment="Center" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5" Visibility="Visible"/>
-                            
-                            <!-- VisualStateManager for animations -->
+                            <Grid.RenderTransform>
+                                <ScaleTransform x:Name="ButtonScale" ScaleX="1" ScaleY="1"/>
+                            </Grid.RenderTransform>
+                            <TextBlock Text="{Binding AtomicNumber}" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" />
+                            <TextBlock Text="{Binding Symbol}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="ElementNameTextBlock" Text="{Binding Name}" TextWrapping="WrapWholeWords" TextAlignment="Center" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5" Visibility="Visible"/>
                             <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonScale"
+                                                             Storyboard.TargetProperty="ScaleX"
+                                                             To="1"
+                                                             Duration="0:0:0.01"/>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonScale"
+                                                             Storyboard.TargetProperty="ScaleY"
+                                                             To="1"
+                                                             Duration="0:0:0.01"/>
+                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{StaticResource PeriodicTableButtonBackground}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{StaticResource PeriodicTableButtonPointerOverBackground}"/>
+                                            <Setter Target="ButtonScale.ScaleX" Value="1.02"/>
+                                            <Setter Target="ButtonScale.ScaleY" Value="1.02"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{StaticResource PeriodicTableButtonPressedBackground}"/>
+                                            <Setter Target="ButtonScale.ScaleX" Value="0.99"/>
+                                            <Setter Target="ButtonScale.ScaleY" Value="0.99"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
                                 <VisualStateGroup x:Name="TextChangeStates">
                                     <VisualState x:Name="NormalState" />
                                     <VisualState x:Name="TextChanging">
                                         <Storyboard>
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ElementNameTextBlock" 
                                                 Storyboard.TargetProperty="Opacity">
-                                                <!-- Fade out -->
                                                 <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1" />
                                                 <LinearDoubleKeyFrame KeyTime="0:0:0.0" Value="0" />
-                                                <!-- Fade in -->
-                                                <LinearDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
                                             </DoubleAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-
-
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="Background" Value="{StaticResource PeriodicTableButtonBackground}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="10" />
+            <Setter Property="Padding" Value="8" />
             <Setter Property="Margin" Value="2" />
-            <Setter Property="Width" Value="90" />
-            <Setter Property="Height" Value="90" />
+            <Setter Property="Width" Value="82" />
+            <Setter Property="Height" Value="82" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Page.Resources>
-        <Grid>
-        <!-- Define rows for DropDownButton and Periodic Table -->
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- For DropDownButton -->
             <RowDefinition Height="*" />
-            <!-- For Periodic Table -->
         </Grid.RowDefinitions>
-        
-        <!-- Top Section for DropDownButton -->
         <StackPanel Orientation="Horizontal" Margin="54,12,0,0" Grid.Row="0">
             <DropDownButton Content="Display Modes">
                 <DropDownButton.Flyout>
@@ -93,10 +115,8 @@
                     </MenuFlyout>
                 </DropDownButton.Flyout>
             </DropDownButton>
-
             <Button x:Name="RandomElementButton" Click="OnRandomElementButtonClick" Content="Random Element" Margin="8,0,0,0"/>
         </StackPanel>
-
         <ScrollViewer HorizontalScrollBarVisibility="Auto" 
               VerticalScrollBarVisibility="Auto" 
               ZoomMode="Enabled" 
@@ -104,166 +124,193 @@
               Grid.Row="1"
               MaxZoomFactor="3">
             <Viewbox x:Name="PeriodicTableContainer" Stretch="Uniform">
-
-                <Grid Margin="54,24,54,54" x:Name="PeriodicTableGrid">
-                <!-- Define rows and columns for the periodic table -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <!-- Add elements to the grid -->
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="0" Grid.Column="0" DataContext="{Binding Element1}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="0" Grid.Column="17" DataContext="{Binding Element2}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="0" DataContext="{Binding Element3}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="1" DataContext="{Binding Element4}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="12" DataContext="{Binding Element5}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="13" DataContext="{Binding Element6}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="14" DataContext="{Binding Element7}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="15" DataContext="{Binding Element8}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="16" DataContext="{Binding Element9}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="17" DataContext="{Binding Element10}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="0" DataContext="{Binding Element11}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="1" DataContext="{Binding Element12}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="12" DataContext="{Binding Element13}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="13" DataContext="{Binding Element14}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="14" DataContext="{Binding Element15}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="15" DataContext="{Binding Element16}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="16" DataContext="{Binding Element17}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="17" DataContext="{Binding Element18}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="0" DataContext="{Binding Element19}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="1" DataContext="{Binding Element20}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="2" DataContext="{Binding Element21}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="3" DataContext="{Binding Element22}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="4" DataContext="{Binding Element23}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="5" DataContext="{Binding Element24}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="6" DataContext="{Binding Element25}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="7" DataContext="{Binding Element26}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="8" DataContext="{Binding Element27}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="9" DataContext="{Binding Element28}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="10" DataContext="{Binding Element29}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="11" DataContext="{Binding Element30}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="12" DataContext="{Binding Element31}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="13" DataContext="{Binding Element32}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="14" DataContext="{Binding Element33}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="15" DataContext="{Binding Element34}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="16" DataContext="{Binding Element35}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="17" DataContext="{Binding Element36}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="0" DataContext="{Binding Element37}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="1" DataContext="{Binding Element38}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="2" DataContext="{Binding Element39}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="3" DataContext="{Binding Element40}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="4" DataContext="{Binding Element41}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="5" DataContext="{Binding Element42}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="6" DataContext="{Binding Element43}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="7" DataContext="{Binding Element44}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="8" DataContext="{Binding Element45}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="9" DataContext="{Binding Element46}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="10" DataContext="{Binding Element47}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="11" DataContext="{Binding Element48}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="12" DataContext="{Binding Element49}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="13" DataContext="{Binding Element50}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="14" DataContext="{Binding Element51}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="15" DataContext="{Binding Element52}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="16" DataContext="{Binding Element53}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="17" DataContext="{Binding Element54}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="0" DataContext="{Binding Element55}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="1" DataContext="{Binding Element56}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="2" DataContext="{Binding Lanthanoids}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="3" DataContext="{Binding Element57}" Click="OnElementButtonClick" Margin="0,24,0,0" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="4" DataContext="{Binding Element58}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="5" DataContext="{Binding Element59}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="6" DataContext="{Binding Element60}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="7" DataContext="{Binding Element61}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="8" DataContext="{Binding Element62}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="9" DataContext="{Binding Element63}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="10" DataContext="{Binding Element64}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="11" DataContext="{Binding Element65}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="12" DataContext="{Binding Element66}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="13" DataContext="{Binding Element67}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="14" DataContext="{Binding Element68}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="15" DataContext="{Binding Element69}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="16" DataContext="{Binding Element70}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="17" DataContext="{Binding Element71}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="3" DataContext="{Binding Element72}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="4" DataContext="{Binding Element73}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="5" DataContext="{Binding Element74}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="6" DataContext="{Binding Element75}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="7" DataContext="{Binding Element76}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="8" DataContext="{Binding Element77}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="9" DataContext="{Binding Element78}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="10" DataContext="{Binding Element79}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="11" DataContext="{Binding Element80}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="12" DataContext="{Binding Element81}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="13" DataContext="{Binding Element82}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="14" DataContext="{Binding Element83}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="15" DataContext="{Binding Element84}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="16" DataContext="{Binding Element85}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="17" DataContext="{Binding Element86}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="0" DataContext="{Binding Element87}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="1" DataContext="{Binding Element88}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="2" DataContext="{Binding Actinoids}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="3" DataContext="{Binding Element89}" Click="OnElementButtonClick"  />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="4" DataContext="{Binding Element90}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="5" DataContext="{Binding Element91}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="6" DataContext="{Binding Element92}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="7" DataContext="{Binding Element93}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="8" DataContext="{Binding Element94}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="9" DataContext="{Binding Element95}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="10" DataContext="{Binding Element96}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="11" DataContext="{Binding Element97}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="12" DataContext="{Binding Element98}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="13" DataContext="{Binding Element99}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="14" DataContext="{Binding Element100}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="15" DataContext="{Binding Element101}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="16" DataContext="{Binding Element102}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="17" DataContext="{Binding Element103}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="3" DataContext="{Binding Element104}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="4" DataContext="{Binding Element105}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="5" DataContext="{Binding Element106}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="6" DataContext="{Binding Element107}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="7" DataContext="{Binding Element108}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="8" DataContext="{Binding Element109}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="9" DataContext="{Binding Element110}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="10" DataContext="{Binding Element111}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="11" DataContext="{Binding Element112}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="12" DataContext="{Binding Element113}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="13" DataContext="{Binding Element114}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="14" DataContext="{Binding Element115}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="15" DataContext="{Binding Element116}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="16" DataContext="{Binding Element117}" Click="OnElementButtonClick" />
-                <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="17" DataContext="{Binding Element118}" Click="OnElementButtonClick" />
-
-            </Grid>
-    </Viewbox>
-
-    </ScrollViewer>
+                <Grid Margin="30,24,24,54" x:Name="PeriodicTableGrid">
+                    <!-- Axes -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Group axis -->
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="5" Text="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="6" Text="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="7" Text="7" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="8" Text="8" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="9" Text="9" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="10" Text="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="11" Text="11" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="12" Text="12" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="13" Text="13" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="14" Text="14" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="15" Text="15" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="16" Text="16" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="17" Text="17" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="18" Text="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,0,18" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <!-- Period axis -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="7" Grid.Column="0" Text="7" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="8" Grid.Column="0" Text="8" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Grid.Row="9" Grid.Column="0" Text="9" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Margin="0,0,24,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <!-- Element buttons, all shifted by +1 -->
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="1" DataContext="{Binding Element1}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="1" Grid.Column="18" DataContext="{Binding Element2}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="1" DataContext="{Binding Element3}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="2" DataContext="{Binding Element4}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="13" DataContext="{Binding Element5}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="14" DataContext="{Binding Element6}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="15" DataContext="{Binding Element7}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="16" DataContext="{Binding Element8}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="17" DataContext="{Binding Element9}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="2" Grid.Column="18" DataContext="{Binding Element10}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="1" DataContext="{Binding Element11}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="2" DataContext="{Binding Element12}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="13" DataContext="{Binding Element13}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="14" DataContext="{Binding Element14}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="15" DataContext="{Binding Element15}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="16" DataContext="{Binding Element16}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="17" DataContext="{Binding Element17}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="3" Grid.Column="18" DataContext="{Binding Element18}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="1" DataContext="{Binding Element19}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="2" DataContext="{Binding Element20}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="3" DataContext="{Binding Element21}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="4" DataContext="{Binding Element22}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="5" DataContext="{Binding Element23}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="6" DataContext="{Binding Element24}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="7" DataContext="{Binding Element25}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="8" DataContext="{Binding Element26}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="9" DataContext="{Binding Element27}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="10" DataContext="{Binding Element28}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="11" DataContext="{Binding Element29}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="12" DataContext="{Binding Element30}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="13" DataContext="{Binding Element31}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="14" DataContext="{Binding Element32}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="15" DataContext="{Binding Element33}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="16" DataContext="{Binding Element34}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="17" DataContext="{Binding Element35}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="4" Grid.Column="18" DataContext="{Binding Element36}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="1" DataContext="{Binding Element37}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="2" DataContext="{Binding Element38}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="3" DataContext="{Binding Element39}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="4" DataContext="{Binding Element40}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="5" DataContext="{Binding Element41}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="6" DataContext="{Binding Element42}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="7" DataContext="{Binding Element43}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="8" DataContext="{Binding Element44}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="9" DataContext="{Binding Element45}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="10" DataContext="{Binding Element46}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="11" DataContext="{Binding Element47}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="12" DataContext="{Binding Element48}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="13" DataContext="{Binding Element49}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="14" DataContext="{Binding Element50}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="15" DataContext="{Binding Element51}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="16" DataContext="{Binding Element52}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="17" DataContext="{Binding Element53}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="5" Grid.Column="18" DataContext="{Binding Element54}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="1" DataContext="{Binding Element55}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="2" DataContext="{Binding Element56}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="3" DataContext="{Binding Lanthanoids}" Click="OnElementButtonClick" IsEnabled="False" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="4" DataContext="{Binding Element57}" Click="OnElementButtonClick" Margin="0,24,0,0" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="5" DataContext="{Binding Element58}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="6" DataContext="{Binding Element59}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="7" DataContext="{Binding Element60}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="8" DataContext="{Binding Element61}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="9" DataContext="{Binding Element62}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="10" DataContext="{Binding Element63}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="11" DataContext="{Binding Element64}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="12" DataContext="{Binding Element65}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="13" DataContext="{Binding Element66}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="14" DataContext="{Binding Element67}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="15" DataContext="{Binding Element68}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="16" DataContext="{Binding Element69}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="17" DataContext="{Binding Element70}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="8" Grid.Column="18" DataContext="{Binding Element71}" Click="OnElementButtonClick" Margin="0,24,0,0"/>
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="4" DataContext="{Binding Element72}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="5" DataContext="{Binding Element73}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="6" DataContext="{Binding Element74}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="7" DataContext="{Binding Element75}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="8" DataContext="{Binding Element76}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="9" DataContext="{Binding Element77}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="10" DataContext="{Binding Element78}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="11" DataContext="{Binding Element79}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="12" DataContext="{Binding Element80}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="13" DataContext="{Binding Element81}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="14" DataContext="{Binding Element82}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="15" DataContext="{Binding Element83}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="16" DataContext="{Binding Element84}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="17" DataContext="{Binding Element85}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="6" Grid.Column="18" DataContext="{Binding Element86}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="1" DataContext="{Binding Element87}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="2" DataContext="{Binding Element88}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="3" DataContext="{Binding Actinoids}" Click="OnElementButtonClick" IsEnabled="False" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="4" DataContext="{Binding Element89}" Click="OnElementButtonClick"  />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="5" DataContext="{Binding Element90}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="6" DataContext="{Binding Element91}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="7" DataContext="{Binding Element92}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="8" DataContext="{Binding Element93}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="9" DataContext="{Binding Element94}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="10" DataContext="{Binding Element95}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="11" DataContext="{Binding Element96}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="12" DataContext="{Binding Element97}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="13" DataContext="{Binding Element98}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="14" DataContext="{Binding Element99}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="15" DataContext="{Binding Element100}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="16" DataContext="{Binding Element101}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="17" DataContext="{Binding Element102}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="9" Grid.Column="18" DataContext="{Binding Element103}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="4" DataContext="{Binding Element104}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="5" DataContext="{Binding Element105}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="6" DataContext="{Binding Element106}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="7" DataContext="{Binding Element107}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="8" DataContext="{Binding Element108}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="9" DataContext="{Binding Element109}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="10" DataContext="{Binding Element110}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="11" DataContext="{Binding Element111}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="12" DataContext="{Binding Element112}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="13" DataContext="{Binding Element113}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="14" DataContext="{Binding Element114}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="15" DataContext="{Binding Element115}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="16" DataContext="{Binding Element116}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="17" DataContext="{Binding Element117}" Click="OnElementButtonClick" />
+                    <Button Style="{StaticResource PeriodicTableButtonStyle}" Grid.Row="7" Grid.Column="18" DataContext="{Binding Element118}" Click="OnElementButtonClick" />
+                </Grid>
+            </Viewbox>
+        </ScrollViewer>
     </Grid>
 </Page>
