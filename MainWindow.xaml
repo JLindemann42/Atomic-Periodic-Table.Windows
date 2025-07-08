@@ -1,4 +1,4 @@
-<Window
+﻿<Window
     
     x:Class="Atomic_WinUI.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -99,7 +99,7 @@
                         <SymbolIcon Symbol="Calculator" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Flashcards" Tag="FlashcardsPage" x:Name="FlashcardsPageItem" ToolTipService.ToolTip="Flashcards" Visibility="Visible">
+                <NavigationViewItem Content="Flashcards" Tag="FlashcardsPage" x:Name="FlashcardsPageItem" ToolTipService.ToolTip="Flashcards" Visibility="Collapsed">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Document" />
                     </NavigationViewItem.Icon>

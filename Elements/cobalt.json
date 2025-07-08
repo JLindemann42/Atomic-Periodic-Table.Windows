@@ -25,6 +25,15 @@
     "element_electronegativty": "1.88",
     "element_block": "d - block",
     "element_shells_electrons": "K2 L8 M15 N2 O0 P0 Q0 R0",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "2.507 Å",
+        "c": "4.069 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "445 K",
+        "room_temperature": "385 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Electron_shell_027_Cobalt_-_no_label.svg/800px-Electron_shell_027_Cobalt_-_no_label.svg.png",
     "element_boiling_kelvin": "3200 (K)",
     "element_boiling_celsius": "2927 (°C)",

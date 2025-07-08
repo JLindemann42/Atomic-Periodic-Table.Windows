@@ -23,6 +23,15 @@
     "element_atomicmass": "138.905 (u)",
     "element_density": "6.15 (g/cm^3)",
     "element_electronegativty": "1.10",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "3.77 Å",
+        "c": "12.15 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "142 K",
+        "room_temperature": "120 K"
+    },
     "element_block": "d - block",
     "element_shells_electrons": "K2 L8 18 N18 O9 P2 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Electron_shell_057_Lanthanum_-_no_label.svg/1280px-Electron_shell_057_Lanthanum_-_no_label.svg.png",

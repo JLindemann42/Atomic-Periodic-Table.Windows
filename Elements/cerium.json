@@ -18,6 +18,12 @@
     "resistivity": "828 nΩm beta \n744 nΩm gamma",
     "resistivity_mult": "0.0000001",
     "magnetic_type": "Paramagnetic",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": { "a": "5.16 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "116 K",
+        "room_temperature": "105 K"
+    },
     "superconducting_point": "0.022",
     "element_atomic_number": "58",
     "element_atomicmass": "140.116 (u)",

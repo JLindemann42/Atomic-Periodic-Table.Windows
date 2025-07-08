@@ -24,6 +24,12 @@
     "element_density": "4.933 (g/cm^3)",
     "element_electronegativty": "2.66",
     "element_block": "p - block",
+    "crystal_structure": "Orthorhombic",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "165 K",
+        "room_temperature": "150 K"
+    },
     "element_shells_electrons": "K2 L8 18 N18 O7 P0 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Electron_shell_053_Iodine_%28diatomic_nonmetal%29_-_no_label.svg/1280px-Electron_shell_053_Iodine_%28diatomic_nonmetal%29_-_no_label.svg.png",
     "element_boiling_kelvin": "457.4 (K)",

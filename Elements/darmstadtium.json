@@ -24,6 +24,12 @@
     "element_density": "--- (g/cm^3)",
     "element_electronegativty": "---",
     "element_block": "d - block",
+    "crystal_structure": null,
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": null,
+        "room_temperature": null
+    },
     "element_shells_electrons": "K2 L8 M18 N32 O32 P16 Q2 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Electron_shell_110_Darmstadtium_-_no_label.svg/800px-Electron_shell_110_Darmstadtium_-_no_label.svg.png",
     "element_boiling_kelvin": "--- (K)",

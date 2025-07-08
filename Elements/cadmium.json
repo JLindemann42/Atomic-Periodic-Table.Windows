@@ -18,6 +18,15 @@
     "resistivity": "68 nΩm",
     "resistivity_mult": "0.00000001",
     "magnetic_type": "Diamagnetic",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "2.979 Å",
+        "c": "5.618 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "209 K",
+        "room_temperature": "195 K"
+    },
     "superconducting_point": "0.517",
     "element_atomic_number": "48",
     "element_atomicmass": "112.414 (u)",

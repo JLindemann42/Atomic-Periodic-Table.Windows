@@ -61,6 +61,7 @@
             Height="220">
                                 <Grid>
                                     <StackPanel>
+                                        <Border Width="340"/>
                                         <TextBlock Text="{x:Bind Term}" FontWeight="Bold" FontSize="18" Padding="16,16,16,0"/>
                                         <TextBlock Text="{x:Bind Category}" FontStyle="Italic" FontSize="12" Margin="0,2,0,0" Padding="16,0,16,0"/>
                                         <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="106" Margin="0,6,0,30" Padding="0,0,0,0">

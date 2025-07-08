@@ -74,6 +74,8 @@
                              From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
             <DoubleAnimation Storyboard.TargetName="AbundanceBorder" Storyboard.TargetProperty="Opacity"
                              From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="GridBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
             <DoubleAnimation Storyboard.TargetName="HazardBorder" Storyboard.TargetProperty="Opacity"
                              From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
             <DoubleAnimation Storyboard.TargetName="OthersBorder" Storyboard.TargetProperty="Opacity"
@@ -561,15 +563,14 @@
                 <!-- Hazard Card -->
                 <Border x:Name="HazardBorder" Opacity="0"
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-        Padding="16"
-        CornerRadius="8"
-        Margin="0,12,0,0"
-        BorderThickness="1"
-        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-        HorizontalAlignment="Stretch"
-        MinWidth="300"
-        MaxWidth="1800">
-
+                    Padding="16"
+                    CornerRadius="8"
+                    Margin="0,12,0,0"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    HorizontalAlignment="Stretch"
+                    MinWidth="300"
+                    MaxWidth="1800">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -632,6 +633,56 @@
                                 FontWeight="Bold"
                                 FontSize="12"
                                 Style="{StaticResource DiamondButtonStyle}" />
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- Grid Card -->
+                <Border x:Name="GridBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    Padding="16"
+                    CornerRadius="8"
+                    Margin="0,12,0,0"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    HorizontalAlignment="Stretch"
+                    MinWidth="300"
+                    MaxWidth="1800">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Text Section -->
+                        <StackPanel Grid.Column="0" Margin="0,0,24,0">
+                            <TextBlock Text="Grid Properties" FontSize="20" FontWeight="SemiBold" />
+
+                            <TextBlock Text="Crystal Structure:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" />
+                            <TextBlock x:Name="CrystalStructure" FontSize="14" TextWrapping="Wrap"/>
+
+                            <TextBlock Text="Grid Parameters: (lattice constants)" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4"/>
+                            <TextBlock x:Name="GridParameters" FontSize="14" TextWrapping="Wrap"/>
+
+                            <TextBlock Text="Debye Temperature: (low temperature limit)" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4"/>
+                            <TextBlock x:Name="DebyeTemperatureLowTemp" FontSize="14" TextWrapping="Wrap"/>
+
+                            <TextBlock Text="Debye Temperature: (room temperature)" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4"/>
+                            <TextBlock x:Name="DebyeTemperatureRoomTemp" FontSize="14" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <!-- 3D Display Section -->
+                        <Grid Grid.Column="1" Width="250" Height="250" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource LayerOnMicaBaseAltFillColorTertiary}" CornerRadius="8" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                            <Image x:Name="Cube3DImage" Width="250" Height="250"/>
+                                <TextBlock x:Name="CubeOverlayText"
+                                   Text="Vertex"
+                                   FontSize="24"
+                                   Visibility="Collapsed"
+                                   FontWeight="Bold"
+                                   Foreground="Red"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   IsHitTestVisible="False"/>
                         </Grid>
                     </Grid>
                 </Border>

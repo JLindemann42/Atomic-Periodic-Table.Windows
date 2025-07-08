@@ -48,6 +48,15 @@
     "element_fusion_heat": "24.44 (kJ/mol)",
     "element_specific_heat_capacity": "0.329 J/(g·K)",
     "element_vaporization_heat": "32.4 (kJ/mol)",
+    "crystal_structure": "Rhombohedral",
+    "lattice_constants": {
+        "a": "4.101 Å",
+        "c": "10.547 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "278 K",
+        "room_temperature": "250 K"
+    },
     "oxidation_state_neg": "3 2 1 0",
     "oxidation_state_pos": "1 2 3 4 5",
     "young_modulus": "8 (GPa)",

@@ -26,6 +26,15 @@
     "element_block": "d - block",
     "element_shells_electrons": "K2 L8 M8 N32 O10 P2 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Electron_shell_072_Hafnium_-_no_label.svg/800px-Electron_shell_072_Hafnium_-_no_label.svg.png",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "3.195 Å",
+        "c": "5.051 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "252 K",
+        "room_temperature": "230 K"
+    },
     "element_boiling_kelvin": "4876 (K)",
     "element_boiling_celsius": "4603 (°C)",
     "element_boiling_fahrenheit": "8317 (°F)",

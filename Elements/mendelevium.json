@@ -19,6 +19,12 @@
     "resistivity_mult": "---",
     "magnetic_type": "---",
     "superconducting_point": "---",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "110 K",
+        "room_temperature": "100 K"
+    },
     "element_atomic_number": "101",
     "element_atomicmass": "258 (u)",
     "element_density": "10.3 (g/cm^3)",

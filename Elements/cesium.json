@@ -23,6 +23,12 @@
     "element_atomicmass": "132.9055 (u)",
     "element_density": "1.93 (g/cm^3)",
     "element_electronegativty": "0.79",
+    "crystal_structure": "Body-centered cubic (bcc)",
+    "lattice_constants": { "a": "6.048 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "38 K",
+        "room_temperature": "35 K"
+    },
     "element_block": "s - block",
     "element_shells_electrons": "K2 L8 18 N18 O8 P1 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Electron_shell_055_Caesium_-_no_label.svg/1280px-Electron_shell_055_Caesium_-_no_label.svg.png",

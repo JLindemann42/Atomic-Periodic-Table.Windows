@@ -33,6 +33,12 @@
     "element_melting_celsius": "−189.34 (°C)",
     "element_melting_fahrenheit": "−308.81 (°F)",
     "element_electron_config": "3s^2 3p^6",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": { "a": "5.256 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "85 K",
+        "room_temperature": "80 K"
+    },
     "element_ion_charge": "---",
     "element_ionization_energy1": "15.75962 (eV)",
     "element_ionization_energy2": "27.62967 (eV)",

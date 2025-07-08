@@ -266,4 +266,35 @@ public class Element : INotifyPropertyChanged
     [JsonPropertyName("eg_number")]
     public string EGNumber { get; set; }
 
+    [JsonPropertyName("crystal_structure")]
+    public string CrystalStructure { get; set; }
+
+
+    [JsonPropertyName("lattice_constants")]
+    public LatticeConstants LatticeConstants { get; set; }
+
+    [JsonPropertyName("debye_temperature")]
+    public DebyeTemperature DebyeTemperature { get; set; }
+
+}
+
+public class LatticeConstants
+{
+    [JsonPropertyName("a")]
+    public string A { get; set; }
+
+    [JsonPropertyName("b")]
+    public string B { get; set; }
+
+    [JsonPropertyName("c")]
+    public string C { get; set; }
+}
+
+public class DebyeTemperature
+{
+    [JsonPropertyName("low_temperature_limit")]
+    public string LowTemperatureLimit { get; set; }
+
+    [JsonPropertyName("room_temperature")]
+    public string RoomTemperature { get; set; }
 }

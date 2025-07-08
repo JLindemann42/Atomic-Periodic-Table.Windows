@@ -25,6 +25,12 @@
     "element_electronegativty": "1.3",
     "element_block": "f - block",
     "element_shells_electrons": "K2 L8 M18 N32 O29 P8 Q2 R0",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "110 K",
+        "room_temperature": "100 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Electron_shell_099_Einsteinium_-_no_label.svg/800px-Electron_shell_099_Einsteinium_-_no_label.svg.png",
     "element_boiling_kelvin": "1269 (K)",
     "element_boiling_celsius": "996 (°C)",

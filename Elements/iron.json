@@ -24,6 +24,12 @@
     "element_density": "7.87 (g/cm^3)",
     "element_electronegativty": "1.83",
     "element_block": "d - block",
+    "crystal_structure": "Body-centered cubic (bcc)",
+    "lattice_constants": { "a": "2.866 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "470 K",
+        "room_temperature": "420 K"
+    },
     "element_shells_electrons": "K2 L8 M14 N2 O0 P0 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Electron_shell_026_Iron_-_no_label.svg/800px-Electron_shell_026_Iron_-_no_label.svg.png",
     "element_boiling_kelvin": "3134 (K)",

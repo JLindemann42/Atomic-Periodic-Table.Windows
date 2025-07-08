@@ -25,6 +25,12 @@
     "element_electronegativty": "1.55",
     "element_block": "d - block",
     "element_shells_electrons": "K2 L8 M13 N2 O0 P0 Q0 R0",
+    "crystal_structure": "Body-centered cubic (bcc)",
+    "lattice_constants": { "a": "8.91 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "310 K",
+        "room_temperature": "275 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Electron_shell_025_Manganese_-_no_label.svg/800px-Electron_shell_025_Manganese_-_no_label.svg.png",
     "element_boiling_kelvin": "2334 (K)",
     "element_boiling_celsius": "2061 (°C)",

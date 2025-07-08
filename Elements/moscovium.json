@@ -8,6 +8,12 @@
     "element_year": "---",
     "element_discovered_name": "---",
     "element_group": "Transition Metals",
+    "crystal_structure": null,
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": null,
+        "room_temperature": null
+    },
     "element_appearance": "---",
     "element_electrons": "---",
     "element_protons": "---",

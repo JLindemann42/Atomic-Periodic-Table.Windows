@@ -14,6 +14,15 @@
     "element_neutron_common": "50",
     "radioactive": "No",
     "neutron_cross_sectional": "1.28 (b)",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "3.647 Å",
+        "c": "5.731 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "330 K",
+        "room_temperature": "280 K"
+    },
     "electrical_type": "Conductor",
     "resistivity": "596 nΩm",
     "resistivity_mult": "0.0000001",

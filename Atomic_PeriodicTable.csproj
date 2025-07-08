@@ -14,11 +14,17 @@
     <Configurations>Debug;Release;deb</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\cube.obj" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="IsotopeDetailsPage.xaml" />
     <None Remove="IsotopePage.xaml" />
     <None Remove="Tables\FlashCardsPage.xaml" />
     <None Remove="Tables\FormulasDetailsPage.xaml" />
     <None Remove="Tables\NuclidePage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Tools\ElementButton.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -231,7 +237,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tools\" />
+    <None Update="Tools\ElementButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
   <!--

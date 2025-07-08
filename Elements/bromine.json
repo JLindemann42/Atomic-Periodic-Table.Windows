@@ -13,6 +13,12 @@
     "element_protons": "35",
     "element_neutron_common": "44",
     "radioactive": "No",
+    "crystal_structure": "Orthorhombic",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "80 K",
+        "room_temperature": "75 K"
+    },
     "neutron_cross_sectional": "6.8 (b)",
     "electrical_type": "Insulator",
     "resistivity": "7.8×10^10 Ωm",

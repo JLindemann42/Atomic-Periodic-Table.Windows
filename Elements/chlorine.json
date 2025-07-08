@@ -25,6 +25,12 @@
     "element_electronegativty": "3.16",
     "element_block": "p - block",
     "element_shells_electrons": "K2 L8 M7 N0 O0 P0 Q0 R0",
+    "crystal_structure": "Orthorhombic",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "81 K",
+        "room_temperature": "75 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Electron_shell_017_Chlorine_%28diatomic_nonmetal%29_-_no_label.svg/1280px-Electron_shell_017_Chlorine_%28diatomic_nonmetal%29_-_no_label.svg.png",
     "element_boiling_kelvin": "239.11 (K)",
     "element_boiling_celsius": "−34.04 (°C)",

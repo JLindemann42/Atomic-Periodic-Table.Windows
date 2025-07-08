@@ -43,6 +43,12 @@
     "element_covalent_radius": "90 (pm)",
     "element_van_der_waals": "153 (pm)",
     "element_phase": "Solid",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "2.286 Å",
+        "c": "3.583 Å"
+    },
+    "debye_temperature": "1440 K",
     "element_fusion_heat": "7.95 (kJ/mol)",
     "element_specific_heat_capacity": "1.825 J/(g·K)",
     "element_vaporization_heat": "297 (kJ/mol)",

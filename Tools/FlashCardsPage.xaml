@@ -9,21 +9,105 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
-            <!-- Element Name and Symbol -->
-            <TextBlock x:Name="ElementNameText" FontSize="28" FontWeight="Bold" TextAlignment="Center"/>
-            <TextBlock x:Name="ElementSymbolText" FontSize="24" FontStyle="Italic" TextAlignment="Center"/>
+    <Page.Resources>
+        <!-- Define the missing ElementButtonStyle -->
+        <Style x:Key="ElementButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <!-- Number (Tag) -->
+                                <TextBlock Text="{TemplateBinding Tag}" FontSize="14" HorizontalAlignment="Center"/>
+                                <!-- Symbol (Content) -->
+                                <TextBlock Text="{TemplateBinding Content}" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- ...other resources if any... -->
+    </Page.Resources>
 
+    <Grid>
+        <!-- Top bar: Back button (left) and Lives (right) -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!-- Back Button -->
+            <Button x:Name="BackButton"
+                    Content="⟵"
+                    FontSize="20"
+                    Width="40"
+                    Height="40"
+                    Margin="8"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Click="BackButton_Click"
+                    Visibility="Collapsed"/>
+            <!-- Spacer -->
+            <TextBlock Grid.Column="1"/>
+            <!-- Lives always top right -->
+            <TextBlock x:Name="LivesText"
+                       Grid.Column="2"
+                       FontSize="16"
+                       Text="Lives: 5"
+                       Margin="8"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right"/>
+        </Grid>
+
+        <!-- Difficulty selection panel -->
+        <StackPanel x:Name="DifficultyPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+            <TextBlock Text="Select Difficulty" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                <Button x:Name="EasyButton" Content="Easy" Click="DifficultyButton_Click" Tag="Easy" Width="100"/>
+                <Button x:Name="MediumButton" Content="Medium" Click="DifficultyButton_Click" Tag="Medium" Width="100"/>
+                <Button x:Name="HardButton" Content="Hard" Click="DifficultyButton_Click" Tag="Hard" Width="100"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Main quiz UI -->
+        <StackPanel x:Name="QuizPanel" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+            <!-- User stats row -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="32">
+                <TextBlock x:Name="CorrectText" FontSize="16" Text="Correct: 0"/>
+            </StackPanel>
+
+            <!-- Element display above question -->
+            <Button x:Name="QuizElementDisplay"
+                    Style="{StaticResource ElementButtonStyle}"
+                    IsHitTestVisible="False"
+                    Margin="0,0,0,8"
+                    Tag="{x:Bind QuizElementNumber, Mode=OneWay}"
+                    Content="{x:Bind QuizElementSymbol, Mode=OneWay}"/>
+            
             <!-- Question -->
             <TextBlock x:Name="QuestionText" FontSize="20" Margin="0,20,0,10" TextAlignment="Center"/>
 
-            <!-- Alternatives -->
+            <!-- Alternatives styled as element buttons -->
             <StackPanel x:Name="AlternativesPanel" Orientation="Vertical" Spacing="10">
-                <Button x:Name="AltButton1" Click="AltButton_Click"/>
-                <Button x:Name="AltButton2" Click="AltButton_Click"/>
-                <Button x:Name="AltButton3" Click="AltButton_Click"/>
-                <Button x:Name="AltButton4" Click="AltButton_Click"/>
+                <Button x:Name="AltButton1" Style="{StaticResource ElementButtonStyle}" Margin="0,0,0,4"
+                        Tag="{x:Bind Alt1Number, Mode=OneWay}" Content="{x:Bind Alt1Symbol, Mode=OneWay}"
+                        Tapped="AltButton_Tapped"/>
+                <Button x:Name="AltButton2" Style="{StaticResource ElementButtonStyle}" Margin="0,0,0,4"
+                        Tag="{x:Bind Alt2Number, Mode=OneWay}" Content="{x:Bind Alt2Symbol, Mode=OneWay}"
+                        Tapped="AltButton_Tapped"/>
+                <Button x:Name="AltButton3" Style="{StaticResource ElementButtonStyle}" Margin="0,0,0,4"
+                        Tag="{x:Bind Alt3Number, Mode=OneWay}" Content="{x:Bind Alt3Symbol, Mode=OneWay}"
+                        Tapped="AltButton_Tapped"/>
+                <Button x:Name="AltButton4" Style="{StaticResource ElementButtonStyle}" Margin="0,0,0,4"
+                        Tag="{x:Bind Alt4Number, Mode=OneWay}" Content="{x:Bind Alt4Symbol, Mode=OneWay}"
+                        Tapped="AltButton_Tapped"/>
             </StackPanel>
 
             <!-- Feedback -->
@@ -31,6 +115,9 @@
 
             <!-- Next Button -->
             <Button x:Name="NextButton" Content="Next" Click="NextButton_Click" Visibility="Collapsed"/>
+
+            <!-- Progress Indicator -->
+            <TextBlock x:Name="ProgressText" FontSize="16" Margin="0,0,0,8" HorizontalAlignment="Right"/>
         </StackPanel>
     </Grid>
 </Page>

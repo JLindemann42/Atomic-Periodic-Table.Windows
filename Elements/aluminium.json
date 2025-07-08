@@ -67,6 +67,12 @@
     "mohs_hardness": "2.75",
     "vickers_hardness": "160-350 (MPa)",
     "brinell_hardness": "160-550 (MPa)",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": { "a": "4.04958 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "428 K",
+        "room_temperature": "390 K"
+    },
     "cas_number": "7429-90-5",
     "eg_number": "231-072-3",
     "health": 0,

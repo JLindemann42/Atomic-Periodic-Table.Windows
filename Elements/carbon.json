@@ -18,6 +18,12 @@
     "resistivity": "13750 nΩm Graphite \n 8 nΩm Diamond",
     "resistivity_mult": "0.00001",
     "magnetic_type": "Diamagnetic",
+    "crystal_structure": "Diamond cubic",
+    "lattice_constants": { "a": "3.567 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "1860 K",
+        "room_temperature": "1700 K"
+    },
     "superconducting_point": "---",
     "element_atomic_number": "6",
     "element_atomicmass": "12.011 (u)",

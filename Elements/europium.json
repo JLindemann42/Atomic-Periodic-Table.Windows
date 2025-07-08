@@ -25,6 +25,12 @@
     "element_electronegativty": "1.2",
     "element_block": "f - block",
     "element_shells_electrons": "K2 L8 18 N25 O8 P2 Q0 R0",
+    "crystal_structure": "Body-centered cubic (bcc)",
+    "lattice_constants": { "a": "4.61 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "160 K",
+        "room_temperature": "140 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Electron_shell_063_Europium_-_no_label.svg/800px-Electron_shell_063_Europium_-_no_label.svg.png",
     "element_boiling_kelvin": "1802 (K)",
     "element_boiling_celsius": "1529 (°C)",

@@ -25,6 +25,12 @@
     "element_electronegativty": "2.2",
     "element_block": "d - block",
     "element_shells_electrons": "K2 L8 M8 N32 O15 P2 Q0 R0",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": { "a": "3.839 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "420 K",
+        "room_temperature": "420 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Electron_shell_077_Iridium_-_no_label.svg/800px-Electron_shell_077_Iridium_-_no_label.svg.png",
     "element_boiling_kelvin": "4403 (K)",
     "element_boiling_celsius": "4130 (°C)",

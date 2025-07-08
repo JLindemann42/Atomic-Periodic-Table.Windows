@@ -18,6 +18,10 @@
     "resistivity": "52.8 nΩm",
     "resistivity_mult": "0.00000001",
     "magnetic_type": "Paramagnetic",
+    "debye_temperature": {
+        "low_temperature_limit": "400 K",
+        "room_temperature": "370 K"
+    },
     "superconducting_point": "0.015",
     "element_atomic_number": "74",
     "element_atomicmass": "183.84 (u)",

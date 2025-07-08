@@ -24,6 +24,12 @@
     "element_density": "7.15 (g/cm^3)",
     "element_electronegativty": "1.66",
     "element_block": "d - block",
+    "crystal_structure": "Body-centered cubic (bcc)",
+    "lattice_constants": { "a": "2.884 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "630 K",
+        "room_temperature": "600 K"
+    }, 
     "element_shells_electrons": "K2 L8 M13 N1 O0 P0 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Electron_shell_024_Chromium_-_no_label.svg/800px-Electron_shell_024_Chromium_-_no_label.svg.png",
     "element_boiling_kelvin": "2944 (K)",

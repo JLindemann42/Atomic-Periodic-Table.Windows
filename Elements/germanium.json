@@ -24,6 +24,12 @@
     "element_density": "5.3234 (g/cm^3)",
     "element_electronegativty": "2.01",
     "element_block": "p - block",
+    "crystal_structure": "Diamond cubic",
+    "lattice_constants": { "a": "5.658 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "374 K",
+        "room_temperature": "360 K"
+    },
     "element_shells_electrons": "K2 L8 18 N4 O0 P0 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Electron_shell_032_Germanium_-_no_label.svg/1280px-Electron_shell_032_Germanium_-_no_label.svg.png",
     "element_boiling_kelvin": "3106 (K)",

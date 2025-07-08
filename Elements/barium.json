@@ -44,6 +44,12 @@
     "element_fusion_heat": "7.12 (kJ/mol)",
     "element_specific_heat_capacity": "0.204 J/(g·K)",
     "element_vaporization_heat": "140 (kJ/mol)",
+    "crystal_structure": "Body-centered cubic (bcc)",
+    "lattice_constants": { "a": "5.02 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "110 K",
+        "room_temperature": "95 K"
+    },
     "oxidation_state_neg": "",
     "oxidation_state_pos": "1 2",
     "speed_of_sound_gas": "---",

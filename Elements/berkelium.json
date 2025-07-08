@@ -45,6 +45,12 @@
     "element_vaporization_heat": "--- (kJ/mol)",
     "oxidation_state_neg": "",
     "oxidation_state_pos": "2 3 4 5",
+    "crystal_structure": "Double hexagonal close-packed (dhcp)",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "110 K",
+        "room_temperature": "100 K"
+    },
     "cas_number": "7440-40-6",
     "eg_number": "231-150-1",
     "iso_1": "Berkelium-233",

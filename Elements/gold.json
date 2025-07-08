@@ -24,6 +24,12 @@
     "element_density": "19.3 (g/cm^3)",
     "element_electronegativty": "2.54",
     "element_block": "d - block",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": { "a": "4.078 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "170 K",
+        "room_temperature": "165 K"
+    },
     "element_shells_electrons": "K2 L8 M18 N32 O18 P1 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Electron_shell_079_Gold_-_no_label.svg/800px-Electron_shell_079_Gold_-_no_label.svg.png",
     "element_boiling_kelvin": "3243 (K)",

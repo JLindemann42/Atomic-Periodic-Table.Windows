@@ -14,6 +14,12 @@
     "element_neutron_common": "117",
     "radioactive": "No",
     "neutron_cross_sectional": "0.96 (b)",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": { "a": "3.924 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "240 K",
+        "room_temperature": "230 K"
+    },
     "electrical_type": "Conductor",
     "resistivity": "105 nΩm",
     "resistivity_mult": "0.0000001",

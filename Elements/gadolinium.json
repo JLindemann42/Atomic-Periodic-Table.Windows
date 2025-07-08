@@ -20,6 +20,15 @@
     "magnetic_type": "Ferromagnetic",
     "superconducting_point": "---",
     "element_atomic_number": "64",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "3.636 Å",
+        "c": "5.781 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "197 K",
+        "room_temperature": "180 K"
+    },
     "element_atomicmass": "157.25 (u)",
     "element_density": "7.90 (g/cm^3)",
     "element_electronegativty": "1.20",

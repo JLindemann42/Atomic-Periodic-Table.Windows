@@ -34,6 +34,12 @@
     "element_melting_fahrenheit": "85.5763 (°F)",
     "element_electron_config": "3d^10 4s^2 4p^1",
     "element_ion_charge": "Ga^3+,",
+    "crystal_structure": "Orthorhombic",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "320 K",
+        "room_temperature": "270 K"
+    },
     "element_ionization_energy1": "5.99930 (eV)",
     "element_ionization_energy2": "20.5142 (eV)",
     "element_ionization_energy3": "30.71 (eV)",

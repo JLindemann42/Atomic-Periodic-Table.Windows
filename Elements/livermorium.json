@@ -18,6 +18,12 @@
     "resistivity": "---",
     "resistivity_mult": "---",
     "magnetic_type": "---",
+    "crystal_structure": null,
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": null,
+        "room_temperature": null
+    },
     "superconducting_point": "---",
     "element_atomic_number": "116",
     "element_atomicmass": "293 (u)",

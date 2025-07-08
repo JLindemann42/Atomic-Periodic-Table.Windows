@@ -53,6 +53,15 @@
     "speed_of_sound_gas": "---",
     "speed_of_sound_liquid": "---",
     "speed_of_sound_solid": "3420 (m/s) 20°C",
+    "crystal_structure": "Rhombohedral",
+    "lattice_constants": {
+        "a": "4.308 Å",
+        "c": "11.274 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "210 K",
+        "room_temperature": "190 K"
+    },
     "mohs_hardness": "3.0",
     "vickers_hardness": "---",
     "brinell_hardness": "294-384 (MPa)",

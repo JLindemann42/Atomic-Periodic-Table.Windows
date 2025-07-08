@@ -24,6 +24,15 @@
     "element_density": "7.31 (g/cm^3)",
     "element_electronegativty": "1.78",
     "element_block": "p - block",
+    "crystal_structure": "Tetragonal",
+    "lattice_constants": {
+        "a": "3.25 Å",
+        "c": "4.95 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "108 K",
+        "room_temperature": "105 K"
+    },
     "element_shells_electrons": "K2 L8 18 N18 O3 P0 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Electron_shell_049_Indium_-_no_label.svg/800px-Electron_shell_049_Indium_-_no_label.svg.png",
     "element_boiling_kelvin": "2345 (K)",

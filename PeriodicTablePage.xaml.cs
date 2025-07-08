@@ -199,7 +199,7 @@ namespace Atomic_WinUI
             Element52 = new Element { AtomicNumber = 52, Symbol = "Te", Name = "Tellurium", OriginalName = "Tellurium" };
             Element53 = new Element { AtomicNumber = 53, Symbol = "I", Name = "Iodine", OriginalName = "Iodine" };
             Element54 = new Element { AtomicNumber = 54, Symbol = "Xe", Name = "Xenon", OriginalName = "Xenon" };
-            Element55 = new Element { AtomicNumber = 55, Symbol = "Cs", Name = "Caesium", OriginalName = "Caesium" };
+            Element55 = new Element { AtomicNumber = 55, Symbol = "Cs", Name = "Cesium", OriginalName = "Cesium" };
             Element56 = new Element { AtomicNumber = 56, Symbol = "Ba", Name = "Barium", OriginalName = "Barium" };
             Element57 = new Element { AtomicNumber = 57, Symbol = "La", Name = "Lanthanum", OriginalName = "Lanthanum" };
             Element58 = new Element { AtomicNumber = 58, Symbol = "Ce", Name = "Cerium", OriginalName = "Cerium" };

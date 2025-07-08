@@ -34,6 +34,12 @@
     "element_melting_fahrenheit": "46.4 (°F)",
     "element_electron_config": "7s^1",
     "element_ion_charge": "Fr+",
+    "crystal_structure": "Body-centered cubic (bcc)",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": null,
+        "room_temperature": null
+    },
     "element_ionization_energy1": "4.0727 (eV)",
     "element_atomic_radius_e": "--- (pm)",
     "element_atomic_radius": "--- (pm)",

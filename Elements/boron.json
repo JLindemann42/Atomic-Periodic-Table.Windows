@@ -18,6 +18,15 @@
     "resistivity": "1.5×104 Ωm",
     "resistivity_mult": "1",
     "magnetic_type": "Diamagnetic",
+    "crystal_structure": "Rhombohedral",
+    "lattice_constants": {
+        "a": "5.062 Å",
+        "c": "12.064 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "1250 K",
+        "room_temperature": "1160 K"
+    },
     "superconducting_point": "---",
     "element_atomic_number": "5",
     "element_atomicmass": "10.81 (u)",

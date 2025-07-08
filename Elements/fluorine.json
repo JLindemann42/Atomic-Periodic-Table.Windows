@@ -25,6 +25,12 @@
     "element_electronegativty": "3.98",
     "element_block": "p - block",
     "element_shells_electrons": "K2 L7 M0 N0 O0 P0 Q0 R0",
+    "crystal_structure": "Monoclinic",
+    "lattice_constants": null,
+    "debye_temperature": {
+        "low_temperature_limit": "56 K",
+        "room_temperature": "50 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Electron_shell_009_Fluorine_%28diatomic_nonmetal%29_-_no_label.svg/1280px-Electron_shell_009_Fluorine_%28diatomic_nonmetal%29_-_no_label.svg.png",
     "element_boiling_kelvin": "85.03 (K)",
     "element_boiling_celsius": "−188.11 (°C)",

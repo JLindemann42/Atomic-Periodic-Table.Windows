@@ -24,6 +24,15 @@
     "element_density": "0.00017846 (g/cm^3)",
     "element_electronegativty": "---",
     "element_block": "s - block",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "3.57 Å",
+        "c": "5.85 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "25 K",
+        "room_temperature": "20 K"
+    },
     "element_shells_electrons": "K2 L0 M0 N0 O0 P0 Q0 R0",
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Electron_shell_002_Helium_-_no_label.svg/1024px-Electron_shell_002_Helium_-_no_label.svg.png",
     "element_boiling_kelvin": "4.222 (K)",

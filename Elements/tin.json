@@ -14,6 +14,15 @@
     "element_neutron_common": "70",
     "radioactive": "No",
     "neutron_cross_sectional": "0.626 (b)",
+    "crystal_structure": "Tetragonal",
+    "lattice_constants": {
+        "a": "5.831 Å",
+        "c": "3.182 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "200 K",
+        "room_temperature": "160 K"
+    },
     "electrical_type": "Conductor",
     "resistivity": "115 nΩm",
     "resistivity_mult": "0.0000001",

@@ -18,6 +18,12 @@
     "resistivity": "208 nΩm",
     "resistivity_mult": "0.0000001",
     "magnetic_type": "Diamagnetic",
+    "crystal_structure": "Face-centered cubic (fcc)",
+    "lattice_constants": { "a": "4.950 Å" },
+    "debye_temperature": {
+        "low_temperature_limit": "105 K",
+        "room_temperature": "88 K"
+    },
     "superconducting_point": "7.2",
     "element_atomic_number": "82",
     "element_atomicmass": "207.2 (u)",

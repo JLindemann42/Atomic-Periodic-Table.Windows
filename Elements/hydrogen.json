@@ -25,6 +25,15 @@
     "element_electronegativty": "2.2",
     "element_block": "s - block",
     "element_shells_electrons": "K1 L0 M0 N0 O0 P0 Q0 R0",
+    "crystal_structure": "Hexagonal",
+    "lattice_constants": {
+        "a": "3.75 Å",
+        "c": "6.12 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "104 K",
+        "room_temperature": "90 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Electron_shell_001_Hydrogen_-_no_label.svg/800px-Electron_shell_001_Hydrogen_-_no_label.svg.png",
     "element_boiling_kelvin": "20.271 (K)",
     "element_boiling_celsius": "-252.879 (°C)",

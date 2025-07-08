@@ -53,15 +53,29 @@ namespace Atomic_PeriodicTable
             _ = InitializeStoreAndLicensesAsync();
         }
 
+        public static bool IsProUser
+        {
+            get
+            {
+                var settings = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+                return settings.ContainsKey("IsProUser") && (bool)settings["IsProUser"];
+            }
+        }
+
+        public static bool IsProPlus
+        {
+            get
+            {
+                var settings = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+                return settings.ContainsKey("IsProPlus") && (bool)settings["IsProPlus"];
+            }
+        }
 
         private async Task InitializeStoreAndLicensesAsync()
         {
             await GetProProductsAsync();
             await CheckUserLicensesAsync();
-
         }
-
-
 
         private async Task GetProProductsAsync()
         {
@@ -109,13 +123,11 @@ namespace Atomic_PeriodicTable
             }
         }
 
-
         private async Task CheckUserLicensesAsync()
         {
             try
             {
                 var appLicense = await storeContext.GetAppLicenseAsync();
-
 
                 bool isProUser = false;
                 bool isProPlusUser = false;
@@ -189,7 +201,6 @@ namespace Atomic_PeriodicTable
                         BuyProButton.IsEnabled = true;
                         BuyProButton.Content = "Buy Pro";
 
-
                         BuyProPlusButton.IsEnabled = false;
                         BuyProPlusButton.Content = "Coming Soon";
 
@@ -200,16 +211,13 @@ namespace Atomic_PeriodicTable
                             ProPlusPrice.Text = proPlusProduct.Price.FormattedPrice;
                         }
                     }
-
                 });
-
             }
             catch (Exception ex)
             {
                 Utils.ReportExtendedError(ex);
             }
         }
-
 
         private async void BuyProVersion_Click(object sender, RoutedEventArgs e)
         {

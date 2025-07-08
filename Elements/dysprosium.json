@@ -25,6 +25,15 @@
     "element_electronegativty": "1.22",
     "element_block": "f - block",
     "element_shells_electrons": "K2 L8 M18 N28 O8 P2 Q0 R0",
+    "crystal_structure": "Hexagonal close-packed (hcp)",
+    "lattice_constants": {
+        "a": "3.591 Å",
+        "c": "5.650 Å"
+    },
+    "debye_temperature": {
+        "low_temperature_limit": "197 K",
+        "room_temperature": "180 K"
+    },
     "element_model": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Electron_shell_066_Dysprosium_-_no_label.svg/1024px-Electron_shell_066_Dysprosium_-_no_label.svg.png",
     "element_boiling_kelvin": "2840 (K)",
     "element_boiling_celsius": "2562 (°C)",
