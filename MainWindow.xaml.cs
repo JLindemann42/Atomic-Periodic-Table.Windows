@@ -301,7 +301,7 @@ namespace Atomic_WinUI
 
         private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
-            nvSample.PaneDisplayMode = e.Size.Width < 800
+            nvSample.PaneDisplayMode = e.Size.Width < 860
                 ? NavigationViewPaneDisplayMode.LeftCompact
                 : NavigationViewPaneDisplayMode.Left;
         }

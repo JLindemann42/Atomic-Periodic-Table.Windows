@@ -16,6 +16,8 @@
     "neutron_cross_sectional": "--- (b)",
     "crystal_structure": null,
     "lattice_constants": null,
+    "oxidation_state_neg": "",
+    "oxidation_state_pos": "",
     "debye_temperature": {
         "low_temperature_limit": null,
         "room_temperature": null

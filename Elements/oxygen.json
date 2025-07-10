@@ -14,7 +14,7 @@
     "element_neutron_common": "8",
     "radioactive": "No",
     "neutron_cross_sectional": "0.00019 (b)",
-    "crystal_structure": "Monoclinic",
+    "crystal_structure": "Cubic",
     "lattice_constants": {
         "a": "5.403 Å",
         "b": "3.429 Å",

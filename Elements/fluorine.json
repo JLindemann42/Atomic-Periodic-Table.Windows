@@ -25,7 +25,7 @@
     "element_electronegativty": "3.98",
     "element_block": "p - block",
     "element_shells_electrons": "K2 L7 M0 N0 O0 P0 Q0 R0",
-    "crystal_structure": "Monoclinic",
+    "crystal_structure": "Cubic",
     "lattice_constants": null,
     "debye_temperature": {
         "low_temperature_limit": "56 K",

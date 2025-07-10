@@ -18,6 +18,8 @@
     "resistivity": "---",
     "resistivity_mult": "---",
     "magnetic_type": "---",
+    "oxidation_state_neg": "",
+    "oxidation_state_pos": "",
     "crystal_structure": null,
     "lattice_constants": null,
     "debye_temperature": {

@@ -14,6 +14,8 @@
     "element_neutron_common": "---",
     "radioactive": "Yes",
     "neutron_cross_sectional": "767 (b)",
+    "oxidation_state_neg": "",
+    "oxidation_state_pos": "",
     "electrical_type": "---",
     "resistivity": "---",
     "resistivity_mult": "---",

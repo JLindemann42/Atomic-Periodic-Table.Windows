@@ -90,7 +90,7 @@
         </Grid.RenderTransform>
         <!-- Page Content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto" >
-            <StackPanel Padding="56,56,56,36" HorizontalAlignment="Center" MaxWidth="1856">
+            <StackPanel Padding="56,56,36,36" HorizontalAlignment="Center" MaxWidth="1856">
                 <TextBlock x:Name="Title" Text="{Binding OriginalName}" FontSize="54" FontWeight="Bold" />
 
                 <!-- Buttons Section -->
@@ -123,7 +123,7 @@
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     HorizontalAlignment="Stretch"
-                    MinWidth="300"
+                    MinWidth="450"
                     MaxWidth="1800">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -178,7 +178,7 @@
                 </Border>
                 <!-- Overview Card -->
                 <Border x:Name="OverviewBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <StackPanel>
                             <TextBlock Text="Overview" FontSize="20" FontWeight="SemiBold" />
@@ -287,7 +287,7 @@
 
                <!-- Properties Card -->
                 <Border x:Name="PropertiesBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">  
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">  
                    <StackPanel>  
                        <TextBlock Text="Properties" FontSize="20" FontWeight="SemiBold" />  
 
@@ -315,7 +315,7 @@
 
                 <!-- Temperatures Card -->
                 <Border x:Name="TemperaturesBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Temperatures" FontSize="20" FontWeight="SemiBold" />
 
@@ -342,7 +342,7 @@
 
                 <!-- Atomic Properties Card -->
                 <Border x:Name="AtomicPropertiesBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Atomic Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -352,53 +352,53 @@
                             <!-- First Row -->
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up1b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up1"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up1"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up2b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up2" />
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up2" />
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up3b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up3"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up3"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up4b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up4" />
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up4" />
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up5b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up5"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up5"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up6b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up6"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up6"/>
                                 </Border>
                             </StackPanel>
 
                             <!-- Second Row -->
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d1b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d1"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d1"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d2b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d2" />
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d2" />
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d3b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d3"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d3"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d4b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d4" />
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d4" />
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d5b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d5"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d5"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d6b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d6"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d6"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d7b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d7"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d7"/>
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d8b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d8" />
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d8" />
                                 </Border>
                                 <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d9b">
-                                    <TextBlock Text="-" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d9"/>
+                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d9"/>
                                 </Border>
                             </StackPanel>
                         </StackPanel>
@@ -433,7 +433,7 @@
 
                 <!-- Electromagnetic Card -->
                 <Border x:Name="ElectromagneticBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Electromagnetic Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -454,7 +454,7 @@
 
                 <!-- Thermodynamic Card -->
                 <Border x:Name="ThermodynamicBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Thermodynamic Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -476,7 +476,7 @@
 
                 <!-- Nuclear Card -->
                 <Border x:Name="NuclearBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Nuclear Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -493,7 +493,7 @@
 
                 <!-- Hardness Card -->
                 <Border x:Name="HardnessBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Hardness Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -510,7 +510,7 @@
 
                 <!-- Additional Card -->
                 <Border x:Name="AdditionalBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Additional Properties" FontSize="20" FontWeight="SemiBold" />
 
@@ -533,7 +533,7 @@
 
                 <!-- Abundance Card -->
                 <Border x:Name="AbundanceBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Abundance" FontSize="20" FontWeight="SemiBold" />
 
@@ -569,7 +569,7 @@
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     HorizontalAlignment="Stretch"
-                    MinWidth="300"
+                    MinWidth="450"
                     MaxWidth="1800">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -646,7 +646,7 @@
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     HorizontalAlignment="Stretch"
-                    MinWidth="300"
+                    MinWidth="450"
                     MaxWidth="1800">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -691,7 +691,7 @@
 
                 <!-- Others Card -->
                 <Border x:Name="OthersBorder" Opacity="0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="300" MaxWidth="1800">
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="Others" FontSize="20" FontWeight="SemiBold" />
 

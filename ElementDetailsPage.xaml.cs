@@ -1,5 +1,6 @@
 ﻿using Atomic_PeriodicTable;
 using Atomic_PeriodicTable.Tables;
+using Atomic_WinUI.Helpers;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -40,108 +41,13 @@ namespace Atomic_WinUI
     (ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true;
 
         private WriteableBitmap _cubeBitmap;
-        private double _cubeYaw = 0, _cubePitch = 0;
+        private double _cubeYaw = 0, _cubePitch = 0, _cubeRoll = 0;
         private Point _lastPointer;
         private bool _isDragging = false;
         private DispatcherTimer _cubeTimer;
 
-        private readonly Dictionary<string, (double[,], int[,], string)> _crystalStructures = new()
-        {
 
-            // Vertices, Edges, Display Name
-            // Cubic: a = b = c; α = β = γ = 90°
-            ["Cubic"] = (
-        new double[8, 3] {
-            { -1, -1, -1 }, { 1, -1, -1 }, { 1, 1, -1 }, { -1, 1, -1 },
-            { -1, -1,  1 }, { 1, -1,  1 }, { 1, 1,  1 }, { -1, 1,  1 }
-        },
-        new int[12, 2] {
-            {0,1},{1,2},{2,3},{3,0},
-            {4,5},{5,6},{6,7},{7,4},
-            {0,4},{1,5},{2,6},{3,7}
-        },
-        "Cubic"
-    ),
-            // Tetragonal: a = b ≠ c; α = β = γ = 90°
-            ["Tetragonal"] = (
-        new double[8, 3] {
-            { -1, -1, -1.5 }, { 1, -1, -1.5 }, { 1, 1, -1.5 }, { -1, 1, -1.5 },
-            { -1, -1,  1.5 }, { 1, -1,  1.5 }, { 1, 1,  1.5 }, { -1, 1,  1.5 }
-        },
-        new int[12, 2] {
-            {0,1},{1,2},{2,3},{3,0},
-            {4,5},{5,6},{6,7},{7,4},
-            {0,4},{1,5},{2,6},{3,7}
-        },
-        "Tetragonal"
-    ),
-            // Orthorhombic: a ≠ b ≠ c; α = β = γ = 90°
-            ["Orthorhombic"] = (
-        new double[8, 3] {
-            { -1.5, -1, -0.5 }, { 1.5, -1, -0.5 }, { 1.5, 1, -0.5 }, { -1.5, 1, -0.5 },
-            { -1.5, -1,  0.5 }, { 1.5, -1,  0.5 }, { 1.5, 1,  0.5 }, { -1.5, 1,  0.5 }
-        },
-        new int[12, 2] {
-            {0,1},{1,2},{2,3},{3,0},
-            {4,5},{5,6},{6,7},{7,4},
-            {0,4},{1,5},{2,6},{3,7}
-        },
-        "Orthorhombic"
-    ),
-            // Hexagonal: a = b ≠ c; α = β = 90°, γ = 120°
-            ["Hexagonal"] = (
-        new double[12, 3] {
-            { 1, 0, -1 }, { 0.5, 0.866, -1 }, { -0.5, 0.866, -1 }, { -1, 0, -1 }, { -0.5, -0.866, -1 }, { 0.5, -0.866, -1 },
-            { 1, 0, 1 }, { 0.5, 0.866, 1 }, { -0.5, 0.866, 1 }, { -1, 0, 1 }, { -0.5, -0.866, 1 }, { 0.5, -0.866, 1 }
-        },
-        new int[18, 2] {
-            {0,1},{1,2},{2,3},{3,4},{4,5},{5,0},
-            {6,7},{7,8},{8,9},{9,10},{10,11},{11,6},
-            {0,6},{1,7},{2,8},{3,9},{4,10},{5,11}
-        },
-        "Hexagonal"
-    ),
-            // Trigonal (Rhombohedral): a = b = c; α = β = γ ≠ 90°
-            ["Trigonal"] = (
-        new double[8, 3] {
-            { -1, -1, -1 }, { 1, -1, -1 }, { 1, 1, -1 }, { -1, 1, -1 },
-            { -0.5, -0.5, 1 }, { 1.5, -0.5, 1 }, { 1.5, 1.5, 1 }, { -0.5, 1.5, 1 }
-        },
-        new int[12, 2] {
-            {0,1},{1,2},{2,3},{3,0},
-            {4,5},{5,6},{6,7},{7,4},
-            {0,4},{1,5},{2,6},{3,7}
-        },
-        "Trigonal"
-    ),
-            // Monoclinic: a ≠ b ≠ c; α = γ = 90°, β ≠ 90°
-            ["Monoclinic"] = (
-        new double[8, 3] {
-            { -1, -1, -1 }, { 1, -1, -1 }, { 1.2, 1, -1 }, { -0.8, 1, -1 },
-            { -1, -1, 1 }, { 1, -1, 1 }, { 1.2, 1, 1 }, { -0.8, 1, 1 }
-        },
-        new int[12, 2] {
-            {0,1},{1,2},{2,3},{3,0},
-            {4,5},{5,6},{6,7},{7,4},
-            {0,4},{1,5},{2,6},{3,7}
-        },
-        "Monoclinic"
-    ),
-            // Triclinic: a ≠ b ≠ c; α ≠ β ≠ γ ≠ 90°
-            ["Triclinic"] = (
-        new double[8, 3] {
-            { -1, -1, -1 }, { 1.2, -0.8, -1 }, { 1, 1, -0.7 }, { -1.1, 1.1, -0.5 },
-            { -0.8, -1.2, 1 }, { 1, -1, 1.2 }, { 1.3, 1, 1 }, { -1, 1.2, 1.1 }
-        },
-        new int[12, 2] {
-            {0,1},{1,2},{2,3},{3,0},
-            {4,5},{5,6},{6,7},{7,4},
-            {0,4},{1,5},{2,6},{3,7}
-        },
-        "Triclinic"
-    ),
-
-        };
+      
 
         private string _currentCrystalSystem = "Cubic"; // Default
 
@@ -445,7 +351,26 @@ namespace Atomic_WinUI
 
                         Element.WikipediaLink = elementData.WikipediaLink;
                         string imageLink = elementData.ElementImage;
-                        ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(imageLink));
+                        if (!string.IsNullOrWhiteSpace(imageLink))
+                        {
+                            try
+                            {
+                                ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(imageLink));
+                            }
+                            catch (UriFormatException)
+                            {
+                                if (ActualTheme == ElementTheme.Dark)
+                                {
+                                    ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/no_image_dark.png"));
+
+                                }
+                                else
+                                {
+                                    ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/no_image_light.png"));
+
+                                }
+                            }
+                        }
 
                         Description.Text = elementData.Description;
                         YearDiscovered.Text = elementData.YearDiscovered;
@@ -570,13 +495,22 @@ namespace Atomic_WinUI
                         //Grid Parameters:
                         CrystalStructure.Text = elementData.CrystalStructure;
                         Show3DView(elementData.CrystalStructure); //Display the 3D View
-                        GridParameters.Text = GetLatticeSystemParameters(
+                        GridParameters.Text = LatticeParameterFormatter.GetLatticeSystemParameters(
                             elementData.CrystalStructure,
                             elementData.LatticeConstants
                         );
-                        DebyeTemperatureLowTemp.Text = FormatTemperatureAllUnits(elementData.DebyeTemperature?.LowTemperatureLimit);
-                        DebyeTemperatureRoomTemp.Text = FormatTemperatureAllUnits(elementData.DebyeTemperature?.RoomTemperature);
+                        DebyeTemperatureLowTemp.Text = TemperatureFormatter.FormatTemperatureAllUnits(elementData.DebyeTemperature?.LowTemperatureLimit);
 
+                        if (!string.IsNullOrWhiteSpace(elementData.DebyeTemperature?.RoomTemperature))
+                        {
+                            DebyeTemperatureRoomTemp.Text = TemperatureFormatter.FormatTemperatureAllUnits(elementData.DebyeTemperature.RoomTemperature);
+                            DebyeTemperatureRoomTemp.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            DebyeTemperatureRoomTemp.Text = string.Empty;
+                            DebyeTemperatureRoomTemp.Visibility = Visibility.Collapsed;
+                        }
                     }
                 }
                 else
@@ -593,89 +527,44 @@ namespace Atomic_WinUI
             UpdateFavoritePropertyValues();
         }
 
-        private static string GetLatticeSystemParameters(string crystalSystem, LatticeConstants constants)
-        {
-            // Fallbacks if values are missing
-            string a = constants?.A ?? "-";
-            string b = constants?.B ?? "-";
-            string c = constants?.C ?? "-";
-            string alpha = constants?.A ?? "-";
-            string beta = constants?.B ?? "-";
-            string gamma = constants?.C ?? "-";
-
-            // Wikipedia conventions for each system
-            return crystalSystem switch
-            {
-                "Cubic" => $"a = b = c = {a}; α = β = γ = 90°",
-                "Tetragonal" => $"a = b = {a}; c = {c}; α = β = γ = 90°",
-                "Orthorhombic" => $"a = {a}; b = {b}; c = {c}; α = β = γ = 90°",
-                "Hexagonal" => $"a = b = {a}; c = {c}; α = β = 90°; γ = 120°",
-                "Trigonal" or "Rhombohedral" => $"a = b = c = {a}; α = β = γ = {alpha}° (≠ 90°)",
-                "Monoclinic" => $"a = {a}; b = {b}; c = {c}; α = γ = 90°; β = {beta}° (≠ 90°)",
-                "Triclinic" => $"a = {a}; b = {b}; c = {c}; α = {alpha}°; β = {beta}°; γ = {gamma}° (all ≠ 90°)",
-                _ => $"a = {a}; b = {b}; c = {c}; α = {alpha}°; β = {beta}°; γ = {gamma}°"
-            };
-        }
-
-
-        private static string FormatTemperatureAllUnits(string input)
-        {
-            if (string.IsNullOrWhiteSpace(input))
-                return "-";
-
-            // Try to extract the numeric value and the unit
-            var parts = input.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length < 2)
-                return input;
-
-            if (!double.TryParse(parts[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double value))
-                return input;
-
-            string unit = parts[1].ToUpperInvariant();
-
-            double kelvin, celsius, fahrenheit;
-
-            switch (unit)
-            {
-                case "K":
-                    kelvin = value;
-                    celsius = kelvin - 273.15;
-                    fahrenheit = celsius * 9 / 5 + 32;
-                    break;
-                case "°C":
-                case "C":
-                    celsius = value;
-                    kelvin = celsius + 273.15;
-                    fahrenheit = celsius * 9 / 5 + 32;
-                    break;
-                case "°F":
-                case "F":
-                    fahrenheit = value;
-                    celsius = (fahrenheit - 32) * 5 / 9;
-                    kelvin = celsius + 273.15;
-                    break;
-                default:
-                    return input;
-            }
-
-            // Format with two decimals for C and F, no decimals for K
-            return $"{kelvin:0} K = {celsius:0.##} °C = {fahrenheit:0.##} °F";
-        }
 
         private void Show3DView(string crystalStructure)
         {
-            if (string.IsNullOrWhiteSpace(crystalStructure) || !_crystalStructures.ContainsKey(crystalStructure))
-                _currentCrystalSystem = "Cubic";
-            else
-                _currentCrystalSystem = crystalStructure;
-
             var cubeImage = this.FindName("Cube3DImage") as Image;
             var cubeText = this.FindName("CubeOverlayText") as TextBlock;
-            if (cubeImage != null && cubeText != null)
+
+            // Hide the 3D view if crystalStructure is null or empty
+            if (string.IsNullOrEmpty(crystalStructure))
             {
-                DrawCrystalStructure(cubeImage, cubeText);
+                _currentCrystalSystem = "Cubic";
+                if (cubeImage != null) cubeImage.Visibility = Visibility.Collapsed;
+                if (cubeText != null) cubeText.Visibility = Visibility.Collapsed;
+                return;
             }
+
+            if (crystalStructure.Contains("Hexagonal"))
+            {
+                _currentCrystalSystem = "Hexagonal";
+            }
+            else
+            {
+                _currentCrystalSystem = crystalStructure;
+            }
+
+            // Hide the 3D view if _currentCrystalSystem is null or empty
+            if (string.IsNullOrEmpty(_currentCrystalSystem))
+            {
+                if (cubeImage != null) cubeImage.Visibility = Visibility.Collapsed;
+                if (cubeText != null) cubeText.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            // Show the 3D view if valid
+            if (cubeImage != null) cubeImage.Visibility = Visibility.Visible;
+            if (cubeText != null) cubeText.Visibility = Visibility.Visible;
+            DrawCrystalStructure(cubeImage, cubeText);
         }
+
 
         private void Setup3DView()
         {
@@ -684,11 +573,15 @@ namespace Atomic_WinUI
             if (cubeImage == null || cubeText == null)
                 return;
 
+            // Set initial rotation: 20 degrees
+            _cubeYaw = 20 * Math.PI / 180;
+            _cubePitch = 20 * Math.PI / 180;
+            _cubeRoll = 20 * Math.PI / 180;
+
             // Determine which structure to show
             string structure = loadedElementData?.CrystalStructure ?? Element?.CrystalStructure ?? "Cubic";
-            if (!_crystalStructures.ContainsKey(structure))
-                structure = "Cubic"; // fallback
-
+            if (!CrystalStructures.Data.ContainsKey(structure))
+                structure = "Cubic";
             _currentCrystalSystem = structure;
 
             int size = 400;
@@ -728,11 +621,11 @@ namespace Atomic_WinUI
             DrawCrystalStructure(cubeImage, cubeText);
         }
 
+
         // New method to draw the selected structure
         private void DrawCrystalStructure(Image cubeImage, TextBlock cubeText)
         {
-            var (vertices, edges, displayName) = _crystalStructures[_currentCrystalSystem];
-            int vertexCount = vertices.GetLength(0);
+            var (vertices, edges, displayName) = Atomic_WinUI.Helpers.CrystalStructures.Data[_currentCrystalSystem]; int vertexCount = vertices.GetLength(0);
             int edgeCount = edges.GetLength(0);
 
             int size = _cubeBitmap.PixelWidth;
@@ -742,7 +635,7 @@ namespace Atomic_WinUI
             Point[] pts = new Point[vertexCount];
             for (int i = 0; i < vertexCount; i++)
             {
-                var v = Rotate(vertices[i, 0], vertices[i, 1], vertices[i, 2], _cubeYaw, _cubePitch);
+                var v = CrystalStructureRenderer.Rotate(vertices[i, 0], vertices[i, 1], vertices[i, 2], _cubeYaw, _cubePitch, _cubeRoll);
                 pts[i] = new Point(center + v.x * scale, center - v.y * scale);
             }
 
@@ -756,14 +649,14 @@ namespace Atomic_WinUI
             {
                 for (int i = 0; i < edgeCount; i++)
                 {
-                    DrawLine(_cubeBitmap, pts[edges[i, 0]], pts[edges[i, 1]], Colors.White);
+                    CrystalStructureRenderer.DrawLine(_cubeBitmap, pts[edges[i, 0]], pts[edges[i, 1]], Colors.White);
                 }
             }
             else
             {
                 for (int i = 0; i < edgeCount; i++)
                 {
-                    DrawLine(_cubeBitmap, pts[edges[i, 0]], pts[edges[i, 1]], Colors.Black);
+                    CrystalStructureRenderer.DrawLine(_cubeBitmap, pts[edges[i, 0]], pts[edges[i, 1]], Colors.Black);
                 }
             }
 
@@ -773,52 +666,13 @@ namespace Atomic_WinUI
 
             string crystalSystem = _currentCrystalSystem;
             LatticeConstants lattice = loadedElementData?.LatticeConstants ?? Element?.LatticeConstants;
-            string latticeParams = GetLatticeSystemParameters(crystalSystem, lattice);
+            string latticeParams = LatticeParameterFormatter.GetLatticeSystemParameters(crystalSystem, lattice);
 
             cubeText.Text = $"";
 
             _cubeBitmap.Invalidate();
         }
 
-        private (double x, double y, double z) Rotate(double x, double y, double z, double yaw, double pitch)
-        {
-            // Yaw (Y axis)
-            double cosa = Math.Cos(yaw), sina = Math.Sin(yaw);
-            double x1 = x * cosa - z * sina;
-            double z1 = x * sina + z * cosa;
-            // Pitch (X axis)
-            double cosb = Math.Cos(pitch), sinb = Math.Sin(pitch);
-            double y1 = y * cosb - z1 * sinb;
-            double z2 = y * sinb + z1 * cosb;
-            return (x1, y1, z2);
-        }
-
-        private void DrawLine(WriteableBitmap bmp, Point p1, Point p2, Windows.UI.Color color)
-        {
-            int x0 = (int)p1.X, y0 = (int)p1.Y, x1 = (int)p2.X, y1 = (int)p2.Y;
-            int dx = Math.Abs(x1 - x0), dy = Math.Abs(y1 - y0);
-            int sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1, err = dx - dy;
-            int w = bmp.PixelWidth, h = bmp.PixelHeight;
-            using (var buf = bmp.PixelBuffer.AsStream())
-            {
-                while (true)
-                {
-                    if (x0 >= 0 && x0 < w && y0 >= 0 && y0 < h)
-                    {
-                        long idx = (y0 * w + x0) * 4;
-                        buf.Position = idx;
-                        buf.WriteByte(color.B);
-                        buf.WriteByte(color.G);
-                        buf.WriteByte(color.R);
-                        buf.WriteByte(255);
-                    }
-                    if (x0 == x1 && y0 == y1) break;
-                    int e2 = 2 * err;
-                    if (e2 > -dy) { err -= dy; x0 += sx; }
-                    if (e2 < dx) { err += dx; y0 += sy; }
-                }
-            }
-        }
 
         private void setUpOxidationStates(Element elementData)
         {
@@ -955,41 +809,5 @@ namespace Atomic_WinUI
             // Add your button click logic here if needed
         }
     }
-
-
-
-    public class FavoriteProperty
-    {
-        public string Key { get; set; }
-        public string DisplayName { get; set; }
-        public string Value { get; set; }
-        public bool IsSelected { get; set; }
-        public bool IsProOnly { get; set; }
-
-        // These are set by the page before binding to the dialog
-        public bool IsSelectable { get; set; } = true;
-        public string DisplayNameWithProSuffix =>
-            !IsSelectable && IsProOnly ? $"{DisplayName} (Requires PRO)" : DisplayName;
-
-        public Brush ForegroundBrush { get; set; } = new SolidColorBrush(Microsoft.UI.Colors.Black);
-
-        // Add this property:
-        public bool IsLast { get; set; }
-    }
-
-    public class InverseBooleanToVisibilityConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            bool isLast = value is bool b && b;
-            return isLast ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
 
 }

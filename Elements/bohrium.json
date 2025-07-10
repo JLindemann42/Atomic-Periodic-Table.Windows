@@ -47,7 +47,7 @@
     "oxidation_state_pos": "7",
     "cas_number": "54037-58-4",
     "crystal_structure": null,
-    "lattice_constants": null,
+    "lattice_constants": { "a": null },
     "debye_temperature": {
         "low_temperature_limit": null,
         "room_temperature": null

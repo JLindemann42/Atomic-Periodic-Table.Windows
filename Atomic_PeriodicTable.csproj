@@ -15,6 +15,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Assets\cube.obj" />
+    <Content Remove="Assets\no_image_dark.png" />
+    <Content Remove="Assets\no_image_light.png" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="IsotopeDetailsPage.xaml" />
@@ -237,9 +239,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Assets\no_image_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\no_image_light.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Tools\ElementButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <!--

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 public class Element : INotifyPropertyChanged
@@ -274,6 +276,7 @@ public class Element : INotifyPropertyChanged
     public LatticeConstants LatticeConstants { get; set; }
 
     [JsonPropertyName("debye_temperature")]
+    [JsonConverter(typeof(DebyeTemperatureConverter))]
     public DebyeTemperature DebyeTemperature { get; set; }
 
 }
@@ -297,4 +300,42 @@ public class DebyeTemperature
 
     [JsonPropertyName("room_temperature")]
     public string RoomTemperature { get; set; }
+}
+
+
+public class DebyeTemperatureConverter : JsonConverter<DebyeTemperature>
+{
+    public override DebyeTemperature Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            // Handle: "debye_temperature": "1440 K"
+            var value = reader.GetString();
+            return new DebyeTemperature { LowTemperatureLimit = value };
+        }
+        else if (reader.TokenType == JsonTokenType.StartObject)
+        {
+            // Handle: "debye_temperature": { ... }
+            using (var doc = JsonDocument.ParseValue(ref reader))
+            {
+                var obj = doc.RootElement;
+                return new DebyeTemperature
+                {
+                    LowTemperatureLimit = obj.TryGetProperty("low_temperature_limit", out var low) ? low.GetString() : null,
+                    RoomTemperature = obj.TryGetProperty("room_temperature", out var room) ? room.GetString() : null
+                };
+            }
+        }
+        return null;
+    }
+
+    public override void Write(Utf8JsonWriter writer, DebyeTemperature value, JsonSerializerOptions options)
+    {
+        writer.WriteStartObject();
+        if (value.LowTemperatureLimit != null)
+            writer.WriteString("low_temperature_limit", value.LowTemperatureLimit);
+        if (value.RoomTemperature != null)
+            writer.WriteString("room_temperature", value.RoomTemperature);
+        writer.WriteEndObject();
+    }
 }
