@@ -46,15 +46,10 @@ namespace Atomic_WinUI
         private bool _isDragging = false;
         private DispatcherTimer _cubeTimer;
 
-
-      
-
-        private string _currentCrystalSystem = "Cubic"; // Default
-
+        private string _currentCrystalSystem = "Cubic"; // Default = Cubic, change later in Show3DView()
 
         public ObservableCollection<FavoriteProperty> FavoriteProperties { get; set; } = new();
         private List<FavoriteProperty> AllProperties { get; set; } = new();
-
         public ElementDetailsPage()
         {
             this.InitializeComponent();
@@ -64,7 +59,6 @@ namespace Atomic_WinUI
             LoadFavoriteProperties();
             UpdateIsLastOnFavoriteProperties();
             Setup3DView();
-
         }
 
         private void ElementDetailsPage_Loaded(object sender, RoutedEventArgs e)
@@ -96,11 +90,12 @@ namespace Atomic_WinUI
                     EmissionSpectrumImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(emissionSpectrumUrl));
                 }
 
-                // Update the navigation header
+                // Update the breadcrumb header
                 if (Window.Current?.Content is Frame frame &&
                     frame.Content is MainWindow mainWindow)
                 {
-                    mainWindow.UpdateHeader(Element.OriginalName);
+                    string breadcrumbName = !string.IsNullOrWhiteSpace(Element.Name) ? Element.Name : Element.OriginalName;
+                    mainWindow.UpdateElementBreadcrumb(breadcrumbName);
                 }
 
                 // Update favorite bar values after loading the element

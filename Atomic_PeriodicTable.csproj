@@ -14,16 +14,39 @@
     <Configurations>Debug;Release;deb</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\128x.png" />
+    <Content Remove="Assets\16x.png" />
+    <Content Remove="Assets\24x.png" />
+    <Content Remove="Assets\32x.png" />
+    <Content Remove="Assets\48x.png" />
+    <Content Remove="Assets\512x.png" />
+    <Content Remove="Assets\64x.png" />
     <Content Remove="Assets\cube.obj" />
+    <Content Remove="Assets\Icon1.ico" />
     <Content Remove="Assets\no_image_dark.png" />
     <Content Remove="Assets\no_image_light.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\256x.targetsize-16.png" />
+    <None Remove="Assets\256x.targetsize-16_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-24_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-256.png" />
+    <None Remove="Assets\256x.targetsize-256_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-32.png" />
+    <None Remove="Assets\256x.targetsize-32_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-48_altform-unplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-16.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-256.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-32.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-48.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
     <None Remove="IsotopeDetailsPage.xaml" />
     <None Remove="IsotopePage.xaml" />
     <None Remove="Tables\FlashCardsPage.xaml" />
     <None Remove="Tables\FormulasDetailsPage.xaml" />
     <None Remove="Tables\NuclidePage.xaml" />
+    <None Remove="Tools\UnitConverterPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Page Remove="Tools\ElementButton.xaml" />
@@ -239,6 +262,27 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Assets\128x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\24x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\32x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\48x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\512x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\64x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\no_image_dark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -248,6 +292,9 @@
     <None Update="Tools\ElementButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <Page Update="Tools\UnitConverterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />

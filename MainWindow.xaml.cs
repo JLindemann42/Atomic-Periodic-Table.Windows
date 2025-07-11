@@ -1,5 +1,6 @@
 using Atomic_PeriodicTable;
 using Atomic_PeriodicTable.Tables;
+using Atomic_PeriodicTable.Tools;
 using Microsoft.UI;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Text;
@@ -119,7 +120,8 @@ namespace Atomic_WinUI
             {
                 var t when t == typeof(PeriodicTablePage) => "Periodic Table",
                 var t when t == typeof(ProPage) => "PRO Version",
-                var t when t == typeof(ElementDetailsPage) => "Periodic Table > Element Details",
+                var t when t == typeof(ElementDetailsPage) =>
+                    "Periodic Table > " + (Instance?.BreadcrumbHeader ?? "Element Details"),
                 var t when t == typeof(PoissonDetailsPage) => "Poisson's Ratio Table > Poisson's Ratio Details",
                 var t when t == typeof(GeologyDetailsPage) => "Geology Table > Geology Table Details",
                 var t when t == typeof(FormulasDetailsPage) => "Equations > Equations Details",
@@ -196,6 +198,7 @@ namespace Atomic_WinUI
                 ("EquationsPage", typeof(FormulasPage), "Equations"),
                 ("IonizationPage", typeof(IonizationPage), "Ionization Table"),
                 ("CalculatorPage", typeof(CalculatorPage), "Calculator"),
+                ("UnitConverterPage", typeof(UnitConverterPage), "Unit Converter"),
                 ("FlashcardsPage", typeof(FlashCardsPage), "Flashcards"),
                 ("BlogPage", typeof(BlogPage), "Blog"),
                 ("phPage", typeof(phPage), "pH-Indicators"),
@@ -297,6 +300,11 @@ namespace Atomic_WinUI
             }
 
             return breadcrumb;
+        }
+
+        public void UpdateElementBreadcrumb(string elementName)
+        {
+            nvSample.Header = CreateBreadcrumb("Periodic Table", elementName);
         }
 
         private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs e)

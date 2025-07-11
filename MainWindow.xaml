@@ -99,6 +99,11 @@
                         <SymbolIcon Symbol="Calculator" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem Content="Unit Converter" Tag="UnitConverterPage" x:Name="UnitConverterPageItem" ToolTipService.ToolTip="Unit Converter" Visibility="Visible">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xECC6;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem Content="Flashcards" Tag="FlashcardsPage" x:Name="FlashcardsPageItem" ToolTipService.ToolTip="Flashcards" Visibility="Collapsed">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Document" />
