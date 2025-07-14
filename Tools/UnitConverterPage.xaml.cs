@@ -97,6 +97,16 @@ namespace Atomic_PeriodicTable.Tools
 
             // Initial state for favorite button
             UpdateFavoriteButtonState();
+
+            // Check PRO or Not:
+            if ((ApplicationData.Current.LocalSettings.Values["IsProUser"] as bool?) == true)
+            {
+                FavoritesAcrylicOverlay.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                FavoritesAcrylicOverlay.Visibility = Visibility.Visible;
+            }
         }
 
         private void UnitConverterPage_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -379,6 +389,11 @@ namespace Atomic_PeriodicTable.Tools
         {
             if (AddFavoriteButton != null)
                 AddFavoriteButton.IsEnabled = !IsCurrentConversionFavorite();
+        }
+
+        private void OpenProPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ProPage));
         }
     }
 

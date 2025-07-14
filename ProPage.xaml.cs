@@ -28,6 +28,7 @@ namespace Atomic_PeriodicTable
             new() { Title = "Isotopes", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Dictionary", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Save Calculations", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Save in Unit Converter", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Hardness Properties", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Young-, Bulk-, Shear Modulus", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Poisson's Constant, Sound of Speed", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
@@ -37,9 +38,7 @@ namespace Atomic_PeriodicTable
             new() { Title = "Constants Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Geology Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Emission Spectrum Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "30 Lives in Learning-Games", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Unlimited Lives in 'Learning-Games'", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
-            new() { Title = "Additional 'Learning-Games'", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = "Additional features too be announced", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
             new() { Title = "Early Access to DEV Features", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
         };
 

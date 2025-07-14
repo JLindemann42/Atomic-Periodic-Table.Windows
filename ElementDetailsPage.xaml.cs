@@ -95,7 +95,6 @@ namespace Atomic_WinUI
                     frame.Content is MainWindow mainWindow)
                 {
                     string breadcrumbName = !string.IsNullOrWhiteSpace(Element.Name) ? Element.Name : Element.OriginalName;
-                    mainWindow.UpdateElementBreadcrumb(breadcrumbName);
                 }
 
                 // Update favorite bar values after loading the element
