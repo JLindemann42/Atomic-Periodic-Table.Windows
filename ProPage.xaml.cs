@@ -37,7 +37,9 @@ namespace Atomic_PeriodicTable
             new() { Title = "Constants Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Geology Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Emission Spectrum Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "PRO Access on all platforms", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = "30 Lives in Learning-Games", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Unlimited Lives in 'Learning-Games'", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = "Additional 'Learning-Games'", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
             new() { Title = "Early Access to DEV Features", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
         };
 
