@@ -104,7 +104,7 @@
                         <FontIcon Glyph="&#xECC6;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Flashcards" Tag="FlashcardsPage" x:Name="FlashcardsPageItem" ToolTipService.ToolTip="Flashcards" Visibility="Collapsed">
+                <NavigationViewItem Content="Flashcards" Tag="FlashcardsPage" x:Name="FlashcardsPageItem" ToolTipService.ToolTip="Flashcards" Visibility="Visible">
                     <NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Document" />
                     </NavigationViewItem.Icon>
