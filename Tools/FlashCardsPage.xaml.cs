@@ -74,6 +74,15 @@ namespace Atomic_PeriodicTable.Tables
 
         }
 
+        private void CategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is string categoryName)
+            {
+                string normalized = categoryName.ToLower().Replace(" ", "_");
+                Frame.Navigate(typeof(Atomic_PeriodicTable.Tools.LearningGamesPage), normalized);
+            }
+        }
+
         private void FlashCardsPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             SetCardsGridLayout(e.NewSize.Width);

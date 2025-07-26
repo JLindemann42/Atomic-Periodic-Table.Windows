@@ -46,6 +46,7 @@
     <None Remove="Tables\FlashCardsPage.xaml" />
     <None Remove="Tables\FormulasDetailsPage.xaml" />
     <None Remove="Tables\NuclidePage.xaml" />
+    <None Remove="Tools\LearningGamesPage.xaml" />
     <None Remove="Tools\UnitConverterPage.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +293,9 @@
     <None Update="Tools\ElementButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <Page Update="Tools\LearningGamesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Tools\UnitConverterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

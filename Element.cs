@@ -38,6 +38,7 @@ public class Element : INotifyPropertyChanged
         }
     }
 
+
     public int AtomicNumber
     {
         get => _atomicNumber;
