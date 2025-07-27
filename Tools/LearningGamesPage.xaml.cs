@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 using System.Text.Json;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media;
-using System.IO;
 
 namespace Atomic_PeriodicTable.Tools
 {
@@ -81,21 +81,27 @@ namespace Atomic_PeriodicTable.Tools
                 _ => 20000
             };
 
-            var elements = await LoadElementsAsync();
-            if (elements == null || elements.Count == 0)
+            questions = new List<Question>();
+            for (int i = 0; i < totalQuestions; i++)
             {
-                // Show error or fallback UI
+                var q = await GenerateRandomQuestionAsync(category);
+                if (q != null)
+                    questions.Add(q);
+            }
+
+            if (questions.Count == 0)
+            {
                 ContentDialog dialog = new ContentDialog
                 {
                     Title = "Error",
-                    Content = "No elements found. Please check your data files.",
+                    Content = "No questions could be generated. Please check your data files.",
                     CloseButtonText = "OK",
                     XamlRoot = this.XamlRoot
                 };
                 await dialog.ShowAsync();
                 return;
             }
-            questions = GenerateQuestions(category, totalQuestions, elements); questions = GenerateQuestions(category, totalQuestions, elements);
+
             currentQuestionIndex = 0;
             quizCompleted = false;
             gameResults.Clear();
@@ -104,243 +110,131 @@ namespace Atomic_PeriodicTable.Tools
             ShowQuestion();
         }
 
-        private async Task<List<Element>> LoadElementsAsync()
+        // Combined helper for group, discovered_by, and discovery_year
+        private async Task<(string Group, string DiscoveredBy, string DiscoveryYear)> GetElementInfoFromJsonAsync(string elementName)
         {
-            var elements = new List<Element>();
+            string group = null, discoveredBy = null, discoveryYear = null;
             try
             {
                 string basePath = AppContext.BaseDirectory;
                 string elementsPath = Path.Combine(basePath, "Elements");
-                System.Diagnostics.Debug.WriteLine($"[DEBUG] Base path: {basePath}");
-                System.Diagnostics.Debug.WriteLine($"[DEBUG] Elements path: {elementsPath}");
+                string fileName = $"{elementName.ToLowerInvariant()}.json";
+                string filePath = Path.Combine(elementsPath, fileName);
 
-                if (!Directory.Exists(elementsPath))
+                if (!File.Exists(filePath))
+                    return (null, null, null);
+
+                using var stream = File.OpenRead(filePath);
+                using var doc = await JsonDocument.ParseAsync(stream);
+                var root = doc.RootElement;
+
+                // Try to get properties at root
+                if (root.TryGetProperty("element_group", out var groupProp))
+                    group = groupProp.GetString();
+                if (root.TryGetProperty("element_discovered_name", out var discoveredByProp))
+                    discoveredBy = discoveredByProp.GetString();
+                if (root.TryGetProperty("element_year", out var yearProp))
+                    discoveryYear = yearProp.GetString();
+
+                // If not found, try nested objects
+                foreach (var property in root.EnumerateObject())
                 {
-                    System.Diagnostics.Debug.WriteLine($"[ERROR] Elements directory not found: {elementsPath}");
-                    return elements;
-                }
-
-                if (Atomic_WinUI.ElementData.Elements == null)
-                {
-                    System.Diagnostics.Debug.WriteLine("[ERROR] ElementData.Elements is null.");
-                    return elements;
-                }
-
-                System.Diagnostics.Debug.WriteLine($"[DEBUG] ElementData.Elements count: {Atomic_WinUI.ElementData.Elements.Count}");
-
-                foreach (var elementData in Atomic_WinUI.ElementData.Elements)
-                {
-                    string fileName = $"{elementData.OriginalName.ToLower()}.json";
-                    string filePath = Path.Combine(elementsPath, fileName);
-
-                    System.Diagnostics.Debug.WriteLine($"[DEBUG] Looking for file: {filePath}");
-
-                    if (!File.Exists(filePath))
+                    if (property.Value.ValueKind == JsonValueKind.Object)
                     {
-                        System.Diagnostics.Debug.WriteLine($"[WARN] Element file not found: {filePath}");
-                        continue;
-                    }
-
-                    string jsonContent = await File.ReadAllTextAsync(filePath);
-                    try
-                    {
-                        // Try to deserialize as a single Element object
-                        var element = JsonSerializer.Deserialize<Element>(jsonContent);
-                        if (element != null && !string.IsNullOrWhiteSpace(element.Name) && !string.IsNullOrWhiteSpace(element.Symbol))
-                        {
-                            elements.Add(element);
-                            System.Diagnostics.Debug.WriteLine($"[DEBUG] Loaded element: {element.Name} ({element.Symbol}) from {fileName}");
-                        }
-                        else
-                        {
-                            System.Diagnostics.Debug.WriteLine($"[WARN] Deserialized element is null or missing Name/Symbol in {fileName}");
-                        }
-                    }
-                    catch (Exception ex1)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"[WARN] Direct deserialization failed for {fileName}: {ex1.Message}");
-                        // If not a single object, try to parse as array or object with array property
-                        try
-                        {
-                            using var stream = File.OpenRead(filePath);
-                            var json = await JsonDocument.ParseAsync(stream);
-                            var root = json.RootElement;
-
-                            if (root.ValueKind == JsonValueKind.Array)
-                            {
-                                foreach (var item in root.EnumerateArray())
-                                {
-                                    var name = item.TryGetProperty("element", out var n) ? n.GetString() : null;
-                                    var symbol = item.TryGetProperty("short", out var s) ? s.GetString() : null;
-                                    if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(symbol))
-                                    {
-                                        elements.Add(new Element { Name = name, Symbol = symbol });
-                                        System.Diagnostics.Debug.WriteLine($"[DEBUG] Loaded element from array: {name} ({symbol}) in {fileName}");
-                                    }
-                                    else
-                                    {
-                                        System.Diagnostics.Debug.WriteLine($"[WARN] Array item missing 'element' or 'short' in {fileName}");
-                                    }
-                                }
-                            }
-                            else if (root.ValueKind == JsonValueKind.Object)
-                            {
-                                bool foundArray = false;
-                                foreach (var property in root.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Array)
-                                    {
-                                        foundArray = true;
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            var name = item.TryGetProperty("element", out var n) ? n.GetString() : null;
-                                            var symbol = item.TryGetProperty("short", out var s) ? s.GetString() : null;
-                                            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(symbol))
-                                            {
-                                                elements.Add(new Element { Name = name, Symbol = symbol });
-                                                System.Diagnostics.Debug.WriteLine($"[DEBUG] Loaded element from object array: {name} ({symbol}) in {fileName}");
-                                            }
-                                            else
-                                            {
-                                                System.Diagnostics.Debug.WriteLine($"[WARN] Object array item missing 'element' or 'short' in {fileName}");
-                                            }
-                                        }
-                                    }
-                                }
-                                if (!foundArray)
-                                {
-                                    // Try alternate property names directly in the object
-                                    var name = root.TryGetProperty("element", out var n) ? n.GetString() : null;
-                                    var symbol = root.TryGetProperty("short", out var s) ? s.GetString() : null;
-                                    if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(symbol))
-                                    {
-                                        elements.Add(new Element { Name = name, Symbol = symbol });
-                                        System.Diagnostics.Debug.WriteLine($"[DEBUG] Loaded element from object: {name} ({symbol}) in {fileName}");
-                                    }
-                                    else
-                                    {
-                                        System.Diagnostics.Debug.WriteLine($"[WARN] Object missing 'element' or 'short' in {fileName}");
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                System.Diagnostics.Debug.WriteLine($"[WARN] Unrecognized JSON structure in {fileName}");
-                            }
-                        }
-                        catch (Exception ex2)
-                        {
-                            System.Diagnostics.Debug.WriteLine($"[ERROR] Failed to parse {fileName}: {ex2.Message}");
-                        }
+                        if (group == null && property.Value.TryGetProperty("element_group", out var groupProp2))
+                            group = groupProp2.GetString();
+                        if (discoveredBy == null && property.Value.TryGetProperty("element_discovered_name", out var discoveredByProp2))
+                            discoveredBy = discoveredByProp2.GetString();
+                        if (discoveryYear == null && property.Value.TryGetProperty("element_year", out var yearProp2))
+                            discoveryYear = yearProp2.GetString();
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                System.Diagnostics.Debug.WriteLine($"[ERROR] Loading elements: {ex}");
+                // Ignore errors
             }
-            System.Diagnostics.Debug.WriteLine($"[DEBUG] Total elements loaded: {elements.Count}");
-            return elements;
+            return (group, discoveredBy, discoveryYear);
         }
 
-
-        private List<Question> GenerateQuestions(string category, int count, List<Element> elements)
+        private async Task<Question> GenerateRandomQuestionAsync(string category)
         {
-            var questions = new List<Question>();
+            var allElements = Atomic_WinUI.ElementData.Elements;
+            if (allElements.Count < 4)
+                return null;
+
             var random = new Random();
-            var usedElements = new HashSet<string>();
+            var selectedElements = allElements.OrderBy(_ => random.Next()).Take(4).ToList();
+            int correctIndex = random.Next(4);
+            var correctElement = selectedElements[correctIndex];
 
-            // Helper for normalization (similar to Android's normalizeLabel)
-            string NormalizeLabel(string label)
+            string questionText, correct;
+            List<string> alternatives;
+
+            // Normalize category for robust comparison
+            var cat = (category ?? "").Trim().ToLowerInvariant();
+
+            if (cat == "element_groups" || cat == "group" || cat == "groups")
             {
-                if (string.IsNullOrWhiteSpace(label)) return "";
-                return label.Trim()
-                    .Replace("-", " ")
-                    .Replace("  ", " ")
-                    .Replace("metals", "Metal", StringComparison.OrdinalIgnoreCase)
-                    .Replace("metal", "Metal", StringComparison.OrdinalIgnoreCase)
-                    .Replace("---", "")
-                    .Trim();
+                var infoTasks = selectedElements.Select(e => GetElementInfoFromJsonAsync(e.OriginalName)).ToArray();
+                var infos = await Task.WhenAll(infoTasks);
+                var groups = infos.Select(i => i.Group).ToList();
+                if (groups.Any(g => string.IsNullOrWhiteSpace(g)))
+                    return null;
+                questionText = $"What is the group for {correctElement.OriginalName}?";
+                correct = groups[correctIndex];
+                alternatives = groups;
+            }
+            else if (cat == "discovered_by" || cat == "discoverer" || cat == "discovered")
+            {
+                var infoTasks = selectedElements.Select(e => GetElementInfoFromJsonAsync(e.OriginalName)).ToArray();
+                var infos = await Task.WhenAll(infoTasks);
+                var discoverers = infos.Select(i => i.DiscoveredBy).ToList();
+                if (discoverers.Any(d => string.IsNullOrWhiteSpace(d)))
+                    return null;
+                questionText = $"Who discovered {correctElement.OriginalName}?";
+                correct = discoverers[correctIndex];
+                alternatives = discoverers;
+            }
+            else if (cat == "discovery_year" || cat == "year" || cat == "discovered_year")
+            {
+                var infoTasks = selectedElements.Select(e => GetElementInfoFromJsonAsync(e.OriginalName)).ToArray();
+                var infos = await Task.WhenAll(infoTasks);
+                var years = infos.Select(i => i.DiscoveryYear).ToList();
+                if (years.Any(y => string.IsNullOrWhiteSpace(y)))
+                    return null;
+                questionText = $"In which year was {correctElement.OriginalName} discovered?";
+                correct = years[correctIndex];
+                alternatives = years;
+            }
+            else if (cat == "element_symbols" || cat == "symbols" || cat == "symbol")
+            {
+                questionText = $"What is the symbol for {correctElement.OriginalName}?";
+                correct = correctElement.Symbol;
+                alternatives = selectedElements.Select(e => e.Symbol).ToList();
+            }
+            else if (cat == "element_names" || cat == "names" || cat == "name")
+            {
+                questionText = $"What is the name for {correctElement.Symbol}?";
+                correct = correctElement.OriginalName;
+                alternatives = selectedElements.Select(e => e.OriginalName).ToList();
+            }
+            else
+            {
+                questionText = $"What is the name for {correctElement.Symbol}?";
+                correct = correctElement.OriginalName;
+                alternatives = selectedElements.Select(e => e.OriginalName).ToList();
             }
 
-            // Helper to get wrong answers for a field
-            List<string> WrongAnswersFor(Func<Element, string> fieldSelector, string correct)
+            alternatives = alternatives.OrderBy(_ => random.Next()).ToList();
+
+            return new Question
             {
-                return elements
-                    .Where(e => NormalizeLabel(fieldSelector(e)) != NormalizeLabel(correct) && !string.IsNullOrWhiteSpace(fieldSelector(e)))
-                    .Select(e => NormalizeLabel(fieldSelector(e)))
-                    .Distinct()
-                    .OrderBy(_ => random.Next())
-                    .Take(3)
-                    .ToList();
-            }
-
-            for (int i = 0; i < count; i++)
-            {
-                // Pick a random unused element
-                var available = elements.Where(e => !usedElements.Contains(e.Name)).ToList();
-                var element = available.Count > 0 ? available[random.Next(available.Count)] : elements[random.Next(elements.Count)];
-                usedElements.Add(element.Name);
-
-                string questionText, correct;
-                List<string> alternatives;
-
-                if (category == "element_symbols")
-                {
-                    questionText = $"What is the symbol for {NormalizeLabel(element.Name)}?";
-                    correct = NormalizeLabel(element.Symbol);
-                    var wrongs = WrongAnswersFor(e => e.Symbol, correct);
-                    alternatives = wrongs.Append(correct).Distinct().OrderBy(_ => random.Next()).ToList();
-                }
-                else if (category == "element_names")
-                {
-                    questionText = $"What is the name for {NormalizeLabel(element.Symbol)}?";
-                    correct = NormalizeLabel(element.Name);
-                    var wrongs = WrongAnswersFor(e => e.Name, correct);
-                    alternatives = wrongs.Append(correct).Distinct().OrderBy(_ => random.Next()).ToList();
-                }
-                else
-                {
-                    questionText = $"What is the symbol for {NormalizeLabel(element.Name)}?";
-                    correct = NormalizeLabel(element.Symbol);
-                    var wrongs = WrongAnswersFor(e => e.Symbol, correct);
-                    alternatives = wrongs.Append(correct).Distinct().OrderBy(_ => random.Next()).ToList();
-                }
-
-                // Filter out blanks and duplicates
-                alternatives = alternatives.Where(a => !string.IsNullOrWhiteSpace(a) && a != "---").Distinct().ToList();
-
-                // If less than 4 alternatives, fill with random wrongs
-                var allWrongs = elements
-              .Select(e => category == "element_symbols" ? NormalizeLabel(e.Symbol) : NormalizeLabel(e.Name))
-              .Where(a => !alternatives.Contains(a) && !string.IsNullOrWhiteSpace(a) && a != "---")
-              .Distinct()
-              .OrderBy(_ => random.Next())
-              .ToList();
-
-                int fillIndex = 0;
-                while (alternatives.Count < 4 && fillIndex < allWrongs.Count)
-                {
-                    alternatives.Add(allWrongs[fillIndex]);
-                    fillIndex++;
-                }
-
-                // If still less than 4, pad with empty strings (to avoid out-of-range)
-                while (alternatives.Count < 4)
-                {
-                    alternatives.Add("");
-                }
-
-                questions.Add(new Question
-                {
-                    Text = questionText,
-                    CorrectAnswer = correct,
-                    Alternatives = alternatives,
-                    BaseXp = 8 // You can use your getBaseXp logic here if needed
-                });
-            }
-
-            return questions;
+                Text = questionText,
+                CorrectAnswer = correct,
+                Alternatives = alternatives,
+                BaseXp = 8
+            };
         }
 
         private void ShowQuestion()
@@ -447,6 +341,13 @@ namespace Atomic_PeriodicTable.Tools
         private void FinishWithResults()
         {
             quizCompleted = true;
+
+            // Store XP in local settings for FlashCardsPage
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["LastQuizXP"] = xp;
+
+            // Add XP to global XP/level system
+            XpManager.AddXp(xp);
+
             var dialog = new ContentDialog
             {
                 Title = "Quiz Finished",
@@ -456,7 +357,6 @@ namespace Atomic_PeriodicTable.Tools
             };
             _ = dialog.ShowAsync();
         }
-
         private double GetXpMultiplier() => difficulty switch
         {
             "medium" => 1.3,

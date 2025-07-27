@@ -2,19 +2,20 @@
     x:Class="Atomic_PeriodicTable.Tables.FlashCardsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Atomic_PeriodicTable.Tools"
+    xmlns:local="using:Atomic_PeriodicTable.Tables"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+    <Grid>
         <Border MaxWidth="1854" HorizontalAlignment="Center">
             <Grid Background="Transparent">
                 <Border Width="1854"/>
                 <Grid
                     x:Name="CardsGrid"
                     VerticalAlignment="Top"
-                    Margin="0,32,0,12"
+                    Margin="0,32,0,0"
                     MaxWidth="1854"
                     Padding="54,0,24,0"
                     HorizontalAlignment="Left">
@@ -32,7 +33,6 @@
                             Padding="0,0,0,18"
                             MinWidth="200"
                             MaxWidth="900"
-                            MaxHeight="650"
                             HorizontalAlignment="Stretch">
                         <StackPanel Spacing="16" Margin="0,0,0,0">
                             
@@ -66,7 +66,7 @@
                                             Height="6"
                                             Foreground="{ThemeResource AccentFillColorDefaultBrush}"
                                             Background="{ThemeResource CardStrokeColorDefaultBrush}" />
-                                    <TextBlock x:Name="xp_text"
+                                        <TextBlock x:Name="LevelProgressTextBlock"
                                             Text="246/375"
                                             FontSize="14"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -83,12 +83,12 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                                            <TextBlock Text="17" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="LevelTextBlock" Text="17" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
                                             <TextBlock Text="Level" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                                            <TextBlock Text="3171" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="Total XP" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="TotalXpTextBlock" Text="3171" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="XpTextBlock" Text="Total XP" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                         <StackPanel Grid.Column="2" HorizontalAlignment="Center">
                                             <TextBlock Text="35" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
@@ -124,129 +124,84 @@
 
                         </Border>
 
-                    <!-- Favorites Card -->
-                    <Border x:Name="FavoritesCard"
+                    <Border x:Name="CategoriesCard"
                         Grid.Column="2"
- 
-                        Padding="0,0,0,18"
+                        Padding="0,0,0,0"
                         MinWidth="200"
+                            CornerRadius="0,0,0,0"
                         MaxWidth="900"
-                        MaxHeight="650"
                         HorizontalAlignment="Stretch">
-                        <Border
-                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                        CornerRadius="20"
-                        Padding="24,24,24,16"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        Margin="0">
-                            <StackPanel Spacing="0">
-                                <Border Width="900"/>
-                                <!-- Header -->
-                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                    <FontIcon Glyph="&#xE72E;" FontSize="20" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                    <TextBlock Text="Level 0 - 4" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                </StackPanel>
+                        <Border>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ItemsControl x:Name="CategoryGroupsControl" ItemsSource="{x:Bind CategoryGroups, Mode=OneWay}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="local:FlashCardCategoryGroup">
+                                            <Border
+                                                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                                CornerRadius="16"
+                                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                BorderThickness="1"
+                                                Padding="20"
+                                                Margin="0,0,0,24"
+>
+                                                <StackPanel>
+                                                    <!-- Group Header -->
+                                                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" Margin="0,0,0,12">
+                                                        <FontIcon Glyph="{x:Bind Icon}" FontSize="20" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                                        <TextBlock Text="{x:Bind GroupName}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                                                        <Border Width="900"/>
+                                                    </StackPanel>
+                                                    <!-- Categories in this group -->
+                                                    <StackPanel Spacing="8">
+                                                        <ItemsControl ItemsSource="{x:Bind Categories}">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate x:DataType="local:FlashCardCategory">
+                                                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                                                            CornerRadius="16"
+                                                                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                                            BorderThickness="1"
+                                                                            Padding="12,8"
+                                                                            Margin="0,0,0,8">
+                                                                        <Grid>
+                                                                            <TextBlock Text="{x:Bind Name}" FontSize="16" VerticalAlignment="Center" />
+                                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Spacing="8">
+                                                                                <Border Background="#FFFA5A36" CornerRadius="8" Padding="8,2" Margin="2"
+                                                                                        Visibility="{x:Bind ProBadgeVisibility}">
+                                                                                    <TextBlock Text="PRO+" Foreground="White" FontWeight="Bold" FontSize="14" TextAlignment="Center" VerticalAlignment="Center"/>
+                                                                                </Border>
+                                                                                <Button HorizontalAlignment="Right"
+                                                                                        VerticalAlignment="Center"
+                                                                                        Padding="12,0"
+                                                                                        MinWidth="120"
+                                                                                        Height="32"
+                                                                                        Foreground="{ThemeResource AccentFillColorDefaultBrush}"
+                                                                                        BorderThickness="0"
+                                                                                        CornerRadius="6"
+                                                                                        FontWeight="SemiBold"
+                                                                                        Tag="{x:Bind Name}"
+                                                                                        Click="CategoryButton_Click"
+                                                                                        IsEnabled="{x:Bind IsUnlocked}">
+                                                                                    <TextBlock Text="Start Flashcard >" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                                                </Button>
 
-                                <!-- Card Items -->
-                                <StackPanel Spacing="8" Margin="0,12">
-                                    <!-- Element Symbols -->
-                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    CornerRadius="16"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    Padding="12,8"
-                                    Margin="0,0,0,0">
-                                        <Grid>
-                                            <TextBlock Text="Element Symbols" FontSize="16" VerticalAlignment="Center" />
-                                            <Button HorizontalAlignment="Right" Tag="Element Symbols" Click="CategoryButton_Click" VerticalAlignment="Center" Width="40" Height="32"
-                                             Background="Transparent" BorderThickness="0">
-                                                <FontIcon Glyph="&#xE72A;" FontSize="18"  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                            </Button>
-                                        </Grid>
-                                    </Border>
-
-                                    <!-- Element Names -->
-                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                        CornerRadius="16"
-                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        Padding="12,8"
-                                        Margin="0,0,0,0">
-                                        <Grid>
-                                            <TextBlock Text="Element Names" FontSize="16" VerticalAlignment="Center" />
-                                            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="32"
-                                            Background="Transparent" BorderThickness="0" Tag="Element Symbols" Click="CategoryButton_Click">
-                                                <FontIcon Glyph="&#xE72A;" FontSize="18"  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                            </Button>
-                                        </Grid>
-                                    </Border>
-
-                                    <!-- Element Groups -->
-                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    CornerRadius="16"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    Padding="12,8"
-                                    Margin="0,0,0,0">
-                                        <Grid>
-                                            <TextBlock Text="Element Groups" FontSize="16" VerticalAlignment="Center" />
-                                            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="32"
-                                            Background="Transparent" BorderThickness="0">
-                                                <FontIcon Glyph="&#xE72A;" FontSize="18"  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                            </Button>
-                                        </Grid>
-                                    </Border>
-
-                                    <!-- Discovered By (PRO+) -->
-                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    CornerRadius="16"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    Padding="12,8"
-                                    Margin="0,0,0,0">
-                                        <Grid>
-                                            <TextBlock Text="Discovered By" FontSize="16" VerticalAlignment="Center" />
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Spacing="8">
-                                                <Border Background="#FFFA5A36" CornerRadius="8" Padding="8,2" Margin="2">
-                                                    <TextBlock Text="PRO+" Foreground="White" FontWeight="Bold" FontSize="14" TextAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <Button HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="32"
-                                            Background="Transparent" BorderThickness="0">
-                                                    <FontIcon Glyph="&#xE72A;" FontSize="18"  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                                </Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-
-                                    <!-- Discovery Year (PRO+) -->
-                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    CornerRadius="16"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    Padding="12,8"
-                                    Margin="0,0,0,0">
-                                        <Grid>
-                                            <TextBlock Text="Discovery Year" FontSize="16" VerticalAlignment="Center" />
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Spacing="8">
-                                                <Border Background="#FFFA5A36" CornerRadius="8" Padding="8,2" Margin="2">
-                                                    <TextBlock Text="PRO+" Foreground="White" FontWeight="Bold" FontSize="14" TextAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <Button HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="32"
-                                            Background="Transparent" BorderThickness="0">
-                                                    <FontIcon Glyph="&#xE72A;" FontSize="18"  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
-                                                </Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                </StackPanel>
-                            </StackPanel>
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </Border>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
                         </Border>
-
                     </Border>
-                   
                 </Grid>
             </Grid>
         </Border>
-    </ScrollViewer>
+    </Grid>
 </Page>
+

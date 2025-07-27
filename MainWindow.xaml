@@ -106,7 +106,7 @@
                 </NavigationViewItem>
                 <NavigationViewItem Content="Flashcards" Tag="FlashcardsPage" x:Name="FlashcardsPageItem" ToolTipService.ToolTip="Flashcards" Visibility="Visible">
                     <NavigationViewItem.Icon>
-                        <SymbolIcon Symbol="Document" />
+                        <FontIcon Glyph="&#xEA86;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="Blog" Tag="BlogPage" x:Name="BlogPageItem" ToolTipService.ToolTip="Blog" Visibility="Collapsed">
