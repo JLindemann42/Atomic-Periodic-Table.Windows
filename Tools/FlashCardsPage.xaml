@@ -60,9 +60,9 @@
                                         <ProgressBar
                                             x:Name="xp_progress_bar"
                                             Minimum="0"
-                                            Maximum="375"
+                                            Maximum="100"
                                             Padding="0,0,72,0"
-                                            Value="246"
+                                            Value="0"
                                             Height="6"
                                             Foreground="{ThemeResource AccentFillColorDefaultBrush}"
                                             Background="{ThemeResource CardStrokeColorDefaultBrush}" />
@@ -83,15 +83,15 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="LevelTextBlock" Text="17" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="LevelTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
                                             <TextBlock Text="Level" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="TotalXpTextBlock" Text="3171" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="TotalXpTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
                                             <TextBlock x:Name="XpTextBlock" Text="Total XP" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                         <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                                            <TextBlock Text="35" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="TotalGamesPlayedTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
                                             <TextBlock Text="Quiz Completed" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                     </Grid>

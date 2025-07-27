@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 
 namespace Atomic_PeriodicTable.Tools
 {
@@ -300,7 +301,7 @@ namespace Atomic_PeriodicTable.Tools
             CheckAnswer(selectedAnswer);
         }
 
-        private void CheckAnswer(string selectedAnswer)
+        private async void CheckAnswer(string selectedAnswer)
         {
             var q = questions[currentQuestionIndex];
             bool correct = NormalizeLabel(selectedAnswer) == NormalizeLabel(q.CorrectAnswer);
@@ -328,25 +329,49 @@ namespace Atomic_PeriodicTable.Tools
                     buttons[i].Background = new SolidColorBrush(Microsoft.UI.Colors.IndianRed);
             }
 
-            Task.Delay(1200).ContinueWith(_ =>
+            // Fade out question card, fade in feedback card
+            await FadeOut(QuestionCard);
+            if (correct)
             {
-                DispatcherQueue.TryEnqueue(() =>
-                {
-                    currentQuestionIndex++;
-                    ShowQuestion();
-                });
-            });
+                FeedbackTitle.Text = "Correct!";
+                FeedbackDetail.Text = $"+{xpGained} XP";
+                FeedbackDetail.Foreground = new SolidColorBrush(Microsoft.UI.Colors.ForestGreen);
+            }
+            else
+            {
+                FeedbackTitle.Text = "Wrong!";
+                FeedbackDetail.Text = $"-{GetLivesLost()} Life{(GetLivesLost() > 1 ? "s" : "")}";
+                FeedbackDetail.Foreground = new SolidColorBrush(Microsoft.UI.Colors.IndianRed);
+            }
+            await FadeIn(FeedbackCard);
+
+            // After delay, fade out feedback and fade in next question
+            await Task.Delay(1200);
+            await FadeOut(FeedbackCard);
+            currentQuestionIndex++;
+            ShowQuestion();
+            await FadeIn(QuestionCard);
         }
+
 
         private void FinishWithResults()
         {
             quizCompleted = true;
 
-            // Store XP in local settings for FlashCardsPage
+            // Storing the XP in local settings for FlashCardsPage
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["LastQuizXP"] = xp;
 
-            // Add XP to global XP/level system
+            // Adding XP to global XP/level system in XpManager Util
             XpManager.AddXp(xp);
+
+            // Increment total games played
+            var settings = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+            if (settings.TryGetValue("TotalGamesPlayed", out object value) && value is int games)
+                settings["TotalGamesPlayed"] = games + 1;
+            else if (settings.TryGetValue("TotalGamesPlayed", out value) && value is long gamesLong)
+                settings["TotalGamesPlayed"] = (int)gamesLong + 1;
+            else
+                settings["TotalGamesPlayed"] = 1;
 
             var dialog = new ContentDialog
             {
@@ -363,6 +388,58 @@ namespace Atomic_PeriodicTable.Tools
             "hard" => 1.5,
             _ => 1.0
         };
+
+        private bool isAnimating = false;
+
+        private async Task FadeOut(UIElement element)
+        {
+            // Create a new storyboard instance to avoid reuse issues
+            var original = (Storyboard)this.Resources["FadeOutStoryboard"];
+            var sb = new Storyboard();
+            foreach (var anim in original.Children)
+            {
+                if (anim is DoubleAnimation da)
+                {
+                    var clone = new DoubleAnimation
+                    {
+                        To = da.To,
+                        Duration = da.Duration
+                    };
+                    Storyboard.SetTarget(clone, element);
+                    Storyboard.SetTargetProperty(clone, Storyboard.GetTargetProperty(da));
+                    sb.Children.Add(clone);
+                }
+            }
+            sb.Begin();
+            await Task.Delay(250);
+            element.Visibility = Visibility.Collapsed;
+        }
+
+        private async Task FadeIn(UIElement element)
+        {
+            element.Visibility = Visibility.Visible;
+            var original = (Storyboard)this.Resources["FadeInStoryboard"];
+            var sb = new Storyboard();
+            foreach (var anim in original.Children)
+            {
+                if (anim is DoubleAnimation da)
+                {
+                    var clone = new DoubleAnimation
+                    {
+                        To = da.To,
+                        Duration = da.Duration
+                    };
+                    Storyboard.SetTarget(clone, element);
+                    Storyboard.SetTargetProperty(clone, Storyboard.GetTargetProperty(da));
+                    sb.Children.Add(clone);
+                }
+            }
+            sb.Begin();
+            await Task.Delay(250);
+        }
+
+
+
 
         private int GetLivesLost() => difficulty == "hard" ? 2 : 1;
 

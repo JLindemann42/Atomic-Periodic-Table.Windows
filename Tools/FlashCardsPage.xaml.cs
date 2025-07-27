@@ -31,7 +31,7 @@ namespace Atomic_PeriodicTable.Tables
         public int LastQuizXP { get; set; }
 
         // --- PRO status (replace with your real logic) ---
-        private bool IsProUser => false; // Set to true to unlock PRO categories
+        private bool IsProUser => true; // Set to true to unlock PRO categories
 
         public List<FlashCardCategoryGroup> CategoryGroups { get; set; } = new();
 
@@ -41,6 +41,7 @@ namespace Atomic_PeriodicTable.Tables
             LoadLastQuizXP();
             BuildCategoryGroups();
             UpdateStatsUI();
+            LoadTotalGamesPlayed();
 
             this.SizeChanged += FlashCardsPage_SizeChanged;
             SetCardsGridLayout(this.ActualWidth);
@@ -156,6 +157,22 @@ namespace Atomic_PeriodicTable.Tables
             LevelTextBlock.Text = $"{userLevel}";
             TotalXpTextBlock.Text = $"{userXp}";
             LevelProgressTextBlock.Text = $"{progressCurrent} / {progressTotal}";
+            xp_progress_bar.Value = progressTotal > 0
+                ? (double)progressCurrent / progressTotal * 100
+                : 0;
+        }
+
+        private void LoadTotalGamesPlayed()
+        {
+            int totalGames = 0;
+            var settings = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+            if (settings.TryGetValue("TotalGamesPlayed", out object value) && value is int games)
+                totalGames = games;
+            else if (settings.TryGetValue("TotalGamesPlayed", out value) && value is long gamesLong)
+                totalGames = (int)gamesLong;
+
+            // Example: display in a TextBlock named TotalGamesPlayedTextBlock
+            TotalGamesPlayedTextBlock.Text = totalGames.ToString();
         }
 
         private void CategoryButton_Click(object sender, RoutedEventArgs e)

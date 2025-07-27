@@ -6,10 +6,59 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <!-- Fade Out Storyboard -->
+        <Storyboard x:Key="FadeOutStoryboard">
+            <DoubleAnimation
+            Storyboard.TargetProperty="Opacity"
+            To="0"
+            Duration="0:0:0.25"/>
+        </Storyboard>
+        <!-- Fade In Storyboard -->
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation
+            Storyboard.TargetProperty="Opacity"
+            To="1"
+            Duration="0:0:0.25"/>
+        </Storyboard>
+    </Page.Resources>
+
 
     <!-- Dark blurred background for Fluent look -->
     <Grid>
-        <Grid>
+        <!-- Feedback Card (initially hidden) -->
+        <Grid x:Name="FeedbackCard"
+      Grid.Row="1" Grid.Column="1" Opacity="0"
+      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+      CornerRadius="24"
+      Width="400"
+      MinHeight="200"
+      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+      BorderThickness="1"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center"
+      Padding="32"
+      Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+                <TextBlock x:Name="FeedbackTitle"
+                   Text="Correct!"
+                   FontSize="36"
+                   FontWeight="Bold"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                <TextBlock x:Name="FeedbackDetail"
+                   Text="+8 XP"
+                   FontSize="24"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+            </StackPanel>
+        </Grid>
+
+
+        <!-- Question Card -->
+        <Grid x:Name="QuestionCard" Opacity="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
