@@ -4,17 +4,37 @@ using Microsoft.UI.Xaml.Data;
 using System;
 using System.Collections.Generic;
 using Windows.Storage;
+using System.Collections.ObjectModel;
+using Atomic_PeriodicTable.Tables;
+using System.Linq;
 
 namespace Atomic_PeriodicTable.Tables
 {
+    public class Achievement
+    {
+        public string Icon { get; set; }
+        public string Header { get; set; }
+        public string Description { get; set; }
+        public int Progress { get; set; }
+        public int Goal { get; set; }
+        public bool IsCompleted => Progress >= Goal;
+
+        public int ClampedProgress => Math.Min(Progress, Goal);
+        public string ProgressText => $"{ClampedProgress} / {Goal}";
+
+        // Use trophy icon for completed, otherwise the original icon
+        public string DisplayIcon => IsCompleted ? "\uE73E" : Icon;
+
+        // Opacity: 1 for completed, 0.75 for not completed
+        public double DisplayOpacity => IsCompleted ? 1.0 : 0.75;
+    }
+
     public class FlashCardCategory
     {
         public string Name { get; set; }
         public int UnlockLevel { get; set; }
         public bool IsPro { get; set; }
         public bool IsUnlocked { get; set; }
-
-        // Add this property for direct XAML binding without a converter
         public Visibility ProBadgeVisibility => IsPro ? Visibility.Visible : Visibility.Collapsed;
     }
 
@@ -28,12 +48,46 @@ namespace Atomic_PeriodicTable.Tables
 
     public sealed partial class FlashCardsPage : Page
     {
+        public ObservableCollection<Achievement> Achievements { get; set; } = new();
         public int LastQuizXP { get; set; }
+        public List<FlashCardCategoryGroup> CategoryGroups { get; set; } = new();
 
         // --- PRO status (replace with your real logic) ---
         private bool IsProUser => true; // Set to true to unlock PRO categories
+        private bool IsProPlusUser => false; // Set to true for unlimited lives
 
-        public List<FlashCardCategoryGroup> CategoryGroups { get; set; } = new();
+        // Lives logic
+        public int MaxLives => IsProPlusUser ? int.MaxValue : (IsProUser ? 60 : 30);
+
+        public int Lives
+        {
+            get
+            {
+                if (IsProPlusUser) return int.MaxValue;
+                if (ApplicationData.Current.LocalSettings.Values.TryGetValue("Lives", out object value) && value is int l)
+                    return l;
+                return MaxLives;
+            }
+            set
+            {
+                if (!IsProPlusUser)
+                    ApplicationData.Current.LocalSettings.Values["Lives"] = Math.Min(value, MaxLives);
+                UpdateLivesUI();
+            }
+        }
+
+        public DateTime NextRefillTime
+        {
+            get
+            {
+                if (ApplicationData.Current.LocalSettings.Values.TryGetValue("NextRefillTime", out object value) && value is string s && DateTime.TryParse(s, out var dt))
+                    return dt;
+                return DateTime.UtcNow;
+            }
+            set => ApplicationData.Current.LocalSettings.Values["NextRefillTime"] = value.ToString("o");
+        }
+
+        private DispatcherTimer refillTimer;
 
         public FlashCardsPage()
         {
@@ -42,9 +96,148 @@ namespace Atomic_PeriodicTable.Tables
             BuildCategoryGroups();
             UpdateStatsUI();
             LoadTotalGamesPlayed();
+            LoadAchievements();
+            InitLives();
 
             this.SizeChanged += FlashCardsPage_SizeChanged;
             SetCardsGridLayout(this.ActualWidth);
+        }
+
+        private void InitLives()
+        {
+            if (IsProPlusUser)
+            {
+                Lives = int.MaxValue;
+            }
+            else if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("Lives"))
+            {
+                Lives = MaxLives;
+            }
+            UpdateLivesUI();
+            StartRefillTimer();
+        }
+
+        private void UpdateLivesUI()
+        {
+            int displayLives = IsProPlusUser ? 999 : Math.Min(Lives, MaxLives);
+            double percent = IsProPlusUser ? 1.0 : (double)displayLives / MaxLives;
+
+            if (LivesCountTextBlock != null)
+                LivesCountTextBlock.Text = IsProPlusUser ? "∞" : displayLives.ToString();
+            if (LivesProgressBar != null)
+                LivesProgressBar.Value = percent * 100;
+
+            if (NextRefillTextBlock != null)
+            {
+                if (IsProPlusUser)
+                {
+                    NextRefillTextBlock.Text = "Unlimited";
+                }
+                else
+                {
+                    TimeSpan untilRefill = NextRefillTime - DateTime.UtcNow;
+                    if (Lives >= MaxLives)
+                        NextRefillTextBlock.Text = "Full!";
+                    else if (untilRefill > TimeSpan.Zero)
+                        NextRefillTextBlock.Text = $"Next +5 in {untilRefill:mm\\:ss}";
+                    else
+                        NextRefillTextBlock.Text = "Refilling...";
+                }
+            }
+        }
+
+        private void StartRefillTimer()
+        {
+            if (refillTimer != null)
+            {
+                refillTimer.Stop();
+                refillTimer = null;
+            }
+            refillTimer = new DispatcherTimer();
+            refillTimer.Interval = TimeSpan.FromSeconds(1);
+            refillTimer.Tick += (s, e) =>
+            {
+                if (IsProPlusUser)
+                {
+                    refillTimer.Stop();
+                    return;
+                }
+                if (Lives < MaxLives)
+                {
+                    TimeSpan untilRefill = NextRefillTime - DateTime.UtcNow;
+                    if (untilRefill <= TimeSpan.Zero)
+                    {
+                        Lives = Math.Min(Lives + 5, MaxLives);
+                        if (Lives < MaxLives)
+                            NextRefillTime = DateTime.UtcNow.AddMinutes(30); // 30 min for next refill
+                        else
+                            NextRefillTime = DateTime.UtcNow;
+                    }
+                }
+                UpdateLivesUI();
+            };
+            refillTimer.Start();
+        }
+
+        private void LoadAchievements()
+        {
+            var settings = ApplicationData.Current.LocalSettings.Values;
+
+            int totalGamesPlayed = 0;
+            int perfectGames = 0;
+
+            if (settings.TryGetValue("TotalGamesPlayed", out object gamesObj))
+            {
+                if (gamesObj is int gamesInt)
+                    totalGamesPlayed = gamesInt;
+                else if (gamesObj is long gamesLong)
+                    totalGamesPlayed = (int)gamesLong;
+            }
+            if (settings.TryGetValue("PerfectGames", out object perfectObj))
+            {
+                if (perfectObj is int perfectInt)
+                    perfectGames = perfectInt;
+                else if (perfectObj is long perfectLong)
+                    perfectGames = (int)perfectLong;
+            }
+
+            var achievementList = new List<Achievement>
+            {
+                new Achievement
+                {
+                    Icon = "\uEA86",
+                    Header = "Perfect Game",
+                    Description = "Get all questions correct in a game.",
+                    Progress = perfectGames > 0 ? 1 : 0,
+                    Goal = 1
+                },
+                new Achievement
+                {
+                    Icon = "\uE7FC",
+                    Header = "Quiz Enthusiast",
+                    Description = "Play 10 games.",
+                    Progress = totalGamesPlayed,
+                    Goal = 10
+                },
+                new Achievement
+                {
+                    Icon = "\uE7FC",
+                    Header = "Quiz Master",
+                    Description = "Play 100 games.",
+                    Progress = totalGamesPlayed,
+                    Goal = 100
+                }
+            };
+
+            // Sort: completed first, then by progress descending
+            var sorted = achievementList
+                .OrderByDescending(a => a.IsCompleted)
+                .ThenByDescending(a => a.ClampedProgress)
+                .ToList();
+
+            Achievements.Clear();
+            foreach (var a in sorted)
+                Achievements.Add(a);
         }
 
         private void LoadLastQuizXP()
@@ -62,8 +255,8 @@ namespace Atomic_PeriodicTable.Tables
                 LastQuizXP = 0;
             }
 
-            // Example: display in a TextBlock named TotalXpTextBlock
-            TotalXpTextBlock.Text = LastQuizXP.ToString();
+            if (TotalXpTextBlock != null)
+                TotalXpTextBlock.Text = LastQuizXP.ToString();
         }
 
         private void BuildCategoryGroups()
@@ -137,13 +330,11 @@ namespace Atomic_PeriodicTable.Tables
                 }
             };
 
-            // Set icon based on unlock state
             foreach (var group in CategoryGroups)
             {
                 group.Icon = group.IsUnlocked ? "\uE785" : "\uE72E";
             }
 
-            // Refresh binding if needed
             CategoryGroupsControl.ItemsSource = null;
             CategoryGroupsControl.ItemsSource = CategoryGroups;
         }
@@ -154,12 +345,16 @@ namespace Atomic_PeriodicTable.Tables
             int userLevel = XpManager.GetCurrentLevel();
             var (progressCurrent, progressTotal) = XpManager.GetXpProgressInLevel();
 
-            LevelTextBlock.Text = $"{userLevel}";
-            TotalXpTextBlock.Text = $"{userXp}";
-            LevelProgressTextBlock.Text = $"{progressCurrent} / {progressTotal}";
-            xp_progress_bar.Value = progressTotal > 0
-                ? (double)progressCurrent / progressTotal * 100
-                : 0;
+            if (LevelTextBlock != null)
+                LevelTextBlock.Text = $"{userLevel}";
+            if (TotalXpTextBlock != null)
+                TotalXpTextBlock.Text = $"{userXp}";
+            if (LevelProgressTextBlock != null)
+                LevelProgressTextBlock.Text = $"{progressCurrent} / {progressTotal}";
+            if (xp_progress_bar != null)
+                xp_progress_bar.Value = progressTotal > 0
+                    ? (double)progressCurrent / progressTotal * 100
+                    : 0;
         }
 
         private void LoadTotalGamesPlayed()
@@ -171,8 +366,8 @@ namespace Atomic_PeriodicTable.Tables
             else if (settings.TryGetValue("TotalGamesPlayed", out value) && value is long gamesLong)
                 totalGames = (int)gamesLong;
 
-            // Example: display in a TextBlock named TotalGamesPlayedTextBlock
-            TotalGamesPlayedTextBlock.Text = totalGames.ToString();
+            if (TotalGamesPlayedTextBlock != null)
+                TotalGamesPlayedTextBlock.Text = totalGames.ToString();
         }
 
         private void CategoryButton_Click(object sender, RoutedEventArgs e)
@@ -193,7 +388,6 @@ namespace Atomic_PeriodicTable.Tables
         {
             if (width < 900)
             {
-                // Stack vertically
                 if (CardsGrid.RowDefinitions.Count == 0)
                 {
                     CardsGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -205,13 +399,11 @@ namespace Atomic_PeriodicTable.Tables
                 CategoriesCard.SetValue(Grid.RowProperty, 2);
                 CategoriesCard.SetValue(Grid.ColumnProperty, 0);
 
-                // Hide columns except the first
                 for (int i = 0; i < CardsGrid.ColumnDefinitions.Count; i++)
                     CardsGrid.ColumnDefinitions[i].Width = (i == 0) ? new GridLength(1, GridUnitType.Star) : new GridLength(0);
             }
             else
             {
-                // Side by side
                 if (CardsGrid.RowDefinitions.Count > 0)
                 {
                     CardsGrid.RowDefinitions.Clear();
@@ -221,7 +413,6 @@ namespace Atomic_PeriodicTable.Tables
                 CategoriesCard.SetValue(Grid.RowProperty, 0);
                 CategoriesCard.SetValue(Grid.ColumnProperty, 2);
 
-                // Restore columns
                 CardsGrid.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
                 CardsGrid.ColumnDefinitions[1].Width = new GridLength(24);
                 CardsGrid.ColumnDefinitions[2].Width = new GridLength(1, GridUnitType.Star);

@@ -7,6 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
+        <local:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+        <local:BoolToResultTextConverter x:Key="BoolToResultTextConverter"/>
+
         <!-- Fade Out Storyboard -->
         <Storyboard x:Key="FadeOutStoryboard">
             <DoubleAnimation
@@ -55,6 +58,9 @@
                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
             </StackPanel>
         </Grid>
+
+      
+
 
 
         <!-- Question Card -->
@@ -226,7 +232,54 @@
 
 
                 </Grid>
+                
             </Grid>
         </Grid>
+        
+        <Border x:Name="ResultCard"
+Background="White"
+CornerRadius="12"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+        BorderThickness="1"     
+Padding="24"
+Margin="24"
+Visibility="Collapsed"
+HorizontalAlignment="Center"
+VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="ResultXpSummary"
+           FontSize="24"
+           FontWeight="Bold"
+           Margin="0,0,0,12"/>
+                <TextBlock x:Name="ResultXpBreakdown"
+           FontSize="16"
+           Margin="0,0,0,16"/>
+                <ScrollView MaxHeight="200" VerticalScrollMode="Auto">
+                    <ListView x:Name="ResultList"
+          Margin="0,0,0,16"
+          SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:GameResultItem">
+                            <StackPanel Margin="0,0,0,12">
+                                <TextBlock Text="{x:Bind Question}" FontWeight="Bold"/>
+                                <TextBlock>
+                    <Run Text="Your answer: "/>
+                    <Run Text="{x:Bind PickedAnswer}"/>
+                                </TextBlock>
+                                <TextBlock>
+                    <Run Text="Correct answer: "/>
+                    <Run Text="{x:Bind CorrectAnswer}"/>
+                                </TextBlock>
+                                <TextBlock Foreground="{x:Bind WasCorrect, Converter={StaticResource BoolToBrushConverter}}">
+                    <Run Text="{x:Bind WasCorrect, Converter={StaticResource BoolToResultTextConverter}}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </ScrollView>
+                <Button Content="Close" Click="ResultCard_Close_Click" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

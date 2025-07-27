@@ -34,9 +34,9 @@
                             MinWidth="200"
                             MaxWidth="900"
                             HorizontalAlignment="Stretch">
-                        <StackPanel Spacing="16" Margin="0,0,0,0">
-                            
-                            <Border
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Spacing="16" Margin="0,0,0,0">
+                                <Border
                                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                 CornerRadius="20"
                                 Padding="20"
@@ -45,19 +45,18 @@
                                 MinWidth="220"
                                 MaxWidth="900"
                                 HorizontalAlignment="Left">
-                                
 
-                                <StackPanel>
-                                    <Border Width="900"/>
-                                    <!-- Header -->
-                                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                        <TextBlock Text="Statistics" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                    </StackPanel>
+                                    <StackPanel>
+                                        <Border Width="900"/>
+                                        <!-- Header -->
+                                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                            <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                            <TextBlock Text="Statistics" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                        </StackPanel>
 
-                                    <!-- Progress bar and value -->
-                                    <Grid Margin="0,16,0,8">
-                                        <ProgressBar
+                                        <!-- Progress bar and value -->
+                                        <Grid Margin="0,16,0,8">
+                                            <ProgressBar
                                             x:Name="xp_progress_bar"
                                             Minimum="0"
                                             Maximum="100"
@@ -66,40 +65,76 @@
                                             Height="6"
                                             Foreground="{ThemeResource AccentFillColorDefaultBrush}"
                                             Background="{ThemeResource CardStrokeColorDefaultBrush}" />
-                                        <TextBlock x:Name="LevelProgressTextBlock"
+                                            <TextBlock x:Name="LevelProgressTextBlock"
                                             Text="246/375"
                                             FontSize="14"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Center"
                                             Margin="0,0,4,0"/>
-                                    </Grid>
+                                        </Grid>
 
-                                    <!-- Stats row -->
-                                    <Grid Margin="0,8,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="LevelTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="Level" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="TotalXpTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                            <TextBlock x:Name="XpTextBlock" Text="Total XP" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="TotalGamesPlayedTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="Quiz Completed" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </StackPanel>
-                            </Border>
+                                        <!-- Stats row -->
+                                        <Grid Margin="0,8,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                                                <TextBlock x:Name="LevelTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Level" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                                                <TextBlock x:Name="TotalXpTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="XpTextBlock" Text="Total XP" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                                                <TextBlock x:Name="TotalGamesPlayedTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Quiz Completed" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                                <!-- Lives Box-->
+                                <Border
+                                       Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                       CornerRadius="20"
+                                    x:Name="LivesBox"
+                                       Padding="20"
+                                       BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                       BorderThickness="1"
+                                       MinWidth="220"
+                                       MaxWidth="900"
+                                       HorizontalAlignment="Left">
 
-                            <!-- Achievements Box-->
-                            <Border
+                                    <StackPanel>
+                                        <Border Width="900"/>
+                                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                            <FontIcon Glyph="&#xEB51;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                            <TextBlock Text="Lives" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                        </StackPanel>
+                                        <Grid Margin="0,16,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <!-- Circular ProgressBar -->
+                                            <Grid Width="64" Height="64" Grid.Column="0" VerticalAlignment="Center">
+                                                <ProgressRing IsIndeterminate="False" x:Name="LivesProgressBar" Width="64" Height="64" IsActive="True" Value="100" Maximum="100"/>
+                                                <TextBlock x:Name="LivesCountTextBlock" Text="30" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,0,0">
+                                                <TextBlock x:Name="NextRefillTextBlock" Text="Next +5 in 29:59" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+
+                                </Border>
+
+
+                                <!-- Achievements Box-->
+                                <Border
                                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                 CornerRadius="20"
                                 Padding="20"
@@ -110,19 +145,46 @@
                                 HorizontalAlignment="Left">
 
 
-                                <StackPanel>
-                                    <Border Width="900"/>
-                                    <!-- Header -->
-                                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xF272;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                        <TextBlock Text="Achievements" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                    <StackPanel>
+                                        <Border Width="900"/>
+                                        <!-- Header -->
+                                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                            <FontIcon Glyph="&#xF272;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                            <TextBlock Text="Achievements" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                        </StackPanel>
+                                        <ItemsControl ItemsSource="{x:Bind Achievements, Mode=OneWay}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="local:Achievement">
+                                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                                    CornerRadius="12"
+                                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                    BorderThickness="1"
+                                                    Padding="12"
+                                                        Opacity="{x:Bind DisplayOpacity}"
+                                                    Margin="0,12,0,0">
+                                                        <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+                                                            <FontIcon Glyph="{x:Bind DisplayIcon}" 
+                                                                  FontSize="28" 
+                                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" 
+                                                                  VerticalAlignment="Center"
+                                                                  />
+                                                            <StackPanel >
+                                                                <Border Width="600"/>
+                                                                <TextBlock Text="{x:Bind Header}" FontWeight="Bold" FontSize="16"/>
+                                                                <TextBlock Text="{x:Bind Description}" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                                                <ProgressBar  Minimum="0" Maximum="{x:Bind Goal}" Value="{x:Bind Progress}" Height="6" Margin="0,6,0,0" />
+                                                                <TextBlock Text="{x:Bind ProgressText}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Margin="0,2,0,0"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </StackPanel>
-                                </StackPanel>
-                            </Border>
-
-                        </StackPanel>
-
-                        </Border>
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
 
                     <Border x:Name="CategoriesCard"
                         Grid.Column="2"

@@ -9,9 +9,20 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Atomic_PeriodicTable.Tables;
 
 namespace Atomic_PeriodicTable.Tools
 {
+    public class Achievement
+    {
+        public string Icon { get; set; }
+        public string Header { get; set; }
+        public string Description { get; set; }
+        public int Progress { get; set; }
+        public int Goal { get; set; }
+        public bool IsCompleted => Progress >= Goal;
+        public string ProgressText => $"{Progress} / {Goal}";
+    }
     public class GameResultItem
     {
         public string Question { get; set; }
@@ -354,9 +365,30 @@ namespace Atomic_PeriodicTable.Tools
         }
 
 
-        private void FinishWithResults()
+        private async void FinishWithResults()
         {
             quizCompleted = true;
+
+            // Bonus: Completed all questions
+            int bonusXp = 0;
+            if (gameResults.Count == questions.Count)
+                bonusXp += 25;
+
+            // Bonus: All correct
+            if (gameResults.All(r => r.WasCorrect))
+            {
+                bonusXp += 25;
+
+                var achievement = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+                if (!achievement.ContainsKey("PerfectGames") || Convert.ToInt32(achievement["PerfectGames"]) == 0)
+                {
+                    achievement["PerfectGames"] = 1;
+                }
+            }
+
+            int correctCount = gameResults.Count(r => r.WasCorrect);
+            int baseXp = gameResults.Sum(r => r.WasCorrect ? (int)(r.BaseXp * GetXpMultiplier()) : 0);
+            xp = baseXp + bonusXp;
 
             // Storing the XP in local settings for FlashCardsPage
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["LastQuizXP"] = xp;
@@ -373,15 +405,32 @@ namespace Atomic_PeriodicTable.Tools
             else
                 settings["TotalGamesPlayed"] = 1;
 
-            var dialog = new ContentDialog
-            {
-                Title = "Quiz Finished",
-                Content = $"XP: {xp}\nLives left: {lives}\nCorrect: {gameResults.Count(r => r.WasCorrect)}/{gameResults.Count}",
-                CloseButtonText = "OK",
-                XamlRoot = this.XamlRoot
-            };
-            _ = dialog.ShowAsync();
+            // Show result card with animation
+            ResultXpSummary.Text = $"Total XP: {xp}";
+            ResultXpBreakdown.Text =
+                $"Correct answers: {correctCount}/{gameResults.Count}\n" +
+                $"Base XP: {baseXp}\n" +
+                $"Bonus for completion: {(gameResults.Count == questions.Count ? 25 : 0)}\n" +
+                $"Bonus for all correct: {(gameResults.All(r => r.WasCorrect) ? 25 : 0)}\n" +
+                $"Lives left: {lives}";
+
+            ResultList.ItemsSource = gameResults;
+
+            // Animate out the question card, then animate in the result card
+            await FadeOut(QuestionCard);
+            await FadeIn(ResultCard);
         }
+
+
+        private void ResultCard_Close_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigate to FlashCardsPage
+            if (this.Frame != null)
+            {
+                this.Frame.Navigate(typeof(FlashCardsPage));
+            }
+        }
+
         private double GetXpMultiplier() => difficulty switch
         {
             "medium" => 1.3,
