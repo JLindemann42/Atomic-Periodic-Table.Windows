@@ -7,6 +7,8 @@ using Windows.Storage;
 using System.Collections.ObjectModel;
 using Atomic_PeriodicTable.Tables;
 using System.Linq;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Media;
 
 namespace Atomic_PeriodicTable.Tables
 {
@@ -34,8 +36,9 @@ namespace Atomic_PeriodicTable.Tables
         public string Name { get; set; }
         public int UnlockLevel { get; set; }
         public bool IsPro { get; set; }
+        public bool IsProPlusUser { get; set; } // Used for badge visibility
         public bool IsUnlocked { get; set; }
-        public Visibility ProBadgeVisibility => IsPro ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility ProBadgeVisibility => (IsPro && !IsProPlusUser) ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public class FlashCardCategoryGroup
@@ -48,13 +51,35 @@ namespace Atomic_PeriodicTable.Tables
 
     public sealed partial class FlashCardsPage : Page
     {
+        private bool _isSingleColumnMode;
+        public bool IsSingleColumnMode
+        {
+            get => _isSingleColumnMode;
+            set
+            {
+                if (_isSingleColumnMode != value)
+                {
+                    _isSingleColumnMode = value;
+                    if (MainScrollViewer != null && CardsGrid_SingleColumn != null && CardsGrid != null)
+                    {
+                        MainScrollViewer.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                        CardsGrid.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                    }
+                }
+            }
+        }
+
         public ObservableCollection<Achievement> Achievements { get; set; } = new();
         public int LastQuizXP { get; set; }
         public List<FlashCardCategoryGroup> CategoryGroups { get; set; } = new();
 
-        // --- PRO status (replace with your real logic) ---
-        private bool IsProUser => true; // Set to true to unlock PRO categories
-        private bool IsProPlusUser => false; // Set to true for unlimited lives
+        // Backing fields for PRO/PRO+ status
+        private bool _isProUser = false;
+        private bool _isProPlusUser = false;
+
+        // Properties for PRO/PRO+ status
+        private bool IsProUser => _isProUser && !_isProPlusUser; // Only true if not ProPlus
+        private bool IsProPlusUser => _isProPlusUser; // ProPlus always overrides Pro
 
         // Lives logic
         public int MaxLives => IsProPlusUser ? int.MaxValue : (IsProUser ? 60 : 30);
@@ -71,7 +96,7 @@ namespace Atomic_PeriodicTable.Tables
             set
             {
                 if (!IsProPlusUser)
-                    ApplicationData.Current.LocalSettings.Values["Lives"] = Math.Min(value, MaxLives);
+                    ApplicationData.Current.LocalSettings.Values["Lives"] = Math.Max(0, Math.Min(value, MaxLives));
                 UpdateLivesUI();
             }
         }
@@ -89,9 +114,80 @@ namespace Atomic_PeriodicTable.Tables
 
         private DispatcherTimer refillTimer;
 
+        private void SetStartFlashcardsButtonsEnabled(bool enabled)
+        {
+            int userLevel = XpManager.GetCurrentLevel();
+
+            void UpdateButtons(ItemsControl groupsControl)
+            {
+                if (groupsControl == null) return;
+                foreach (var group in groupsControl.Items)
+                {
+                    var groupObj = group as FlashCardCategoryGroup;
+                    var container = groupsControl.ContainerFromItem(group) as ContentPresenter;
+                    if (container != null && groupObj != null)
+                    {
+                        var buttons = FindVisualChildren<Button>(container);
+                        foreach (var btn in buttons)
+                        {
+                            if (btn.Tag is string categoryName)
+                            {
+                                var category = groupObj.Categories.FirstOrDefault(c => c.Name == categoryName);
+                                if (category != null)
+                                {
+                                    btn.IsEnabled = enabled && userLevel >= category.UnlockLevel && category.IsUnlocked;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            UpdateButtons(CategoryGroupsControl);
+            UpdateButtons(CategoryGroupsControl_Single);
+        }
+
+        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T t)
+                    {
+                        yield return t;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
         public FlashCardsPage()
         {
             this.InitializeComponent();
+
+            // Set Pro/ProPlus status from local settings
+            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("IsProPlusUser", out object proPlusObj) && proPlusObj is bool proPlus)
+                _isProPlusUser = proPlus;
+            else
+                _isProPlusUser = false;
+
+            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("IsProUser", out object proObj) && proObj is bool pro)
+                _isProUser = pro;
+            else
+                _isProUser = false;
+
+            // ProPlus always overrides Pro for UI and logic
+            if (ProPlusBox != null)
+                ProPlusBox.Visibility = _isProPlusUser ? Visibility.Collapsed : Visibility.Visible;
+            if (ProPlusBox_single != null)
+                ProPlusBox_single.Visibility = _isProPlusUser ? Visibility.Collapsed : Visibility.Visible;
+
             LoadLastQuizXP();
             BuildCategoryGroups();
             UpdateStatsUI();
@@ -100,7 +196,15 @@ namespace Atomic_PeriodicTable.Tables
             InitLives();
 
             this.SizeChanged += FlashCardsPage_SizeChanged;
+            this.Loaded += (s, e) => { UpdateLivesUI(); };
+
             SetCardsGridLayout(this.ActualWidth);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            UpdateLivesUI();
         }
 
         private void InitLives()
@@ -119,31 +223,32 @@ namespace Atomic_PeriodicTable.Tables
 
         private void UpdateLivesUI()
         {
-            int displayLives = IsProPlusUser ? 999 : Math.Min(Lives, MaxLives);
+            int displayLives = IsProPlusUser ? 999 : Math.Max(0, Math.Min(Lives, MaxLives));
             double percent = IsProPlusUser ? 1.0 : (double)displayLives / MaxLives;
 
+            // Two-column
             if (LivesCountTextBlock != null)
                 LivesCountTextBlock.Text = IsProPlusUser ? "∞" : displayLives.ToString();
             if (LivesProgressBar != null)
                 LivesProgressBar.Value = percent * 100;
-
             if (NextRefillTextBlock != null)
-            {
-                if (IsProPlusUser)
-                {
-                    NextRefillTextBlock.Text = "Unlimited";
-                }
-                else
-                {
-                    TimeSpan untilRefill = NextRefillTime - DateTime.UtcNow;
-                    if (Lives >= MaxLives)
-                        NextRefillTextBlock.Text = "Full!";
-                    else if (untilRefill > TimeSpan.Zero)
-                        NextRefillTextBlock.Text = $"Next +5 in {untilRefill:mm\\:ss}";
-                    else
-                        NextRefillTextBlock.Text = "Refilling...";
-                }
-            }
+                NextRefillTextBlock.Text = IsProPlusUser ? "Unlimited" :
+                    (Lives >= MaxLives ? "Full!" :
+                    (NextRefillTime - DateTime.UtcNow > TimeSpan.Zero ?
+                        $"Next +5 in {(NextRefillTime - DateTime.UtcNow):mm\\:ss}" : "Refilling..."));
+
+            // Single-column
+            if (LivesCountTextBlock_single != null)
+                LivesCountTextBlock_single.Text = IsProPlusUser ? "∞" : displayLives.ToString();
+            if (LivesProgressBar_single != null)
+                LivesProgressBar_single.Value = percent * 100;
+            if (NextRefillTextBlock_single != null)
+                NextRefillTextBlock_single.Text = IsProPlusUser ? "Unlimited" :
+                    (Lives >= MaxLives ? "Full!" :
+                    (NextRefillTime - DateTime.UtcNow > TimeSpan.Zero ?
+                        $"Next +5 in {(NextRefillTime - DateTime.UtcNow):mm\\:ss}" : "Refilling..."));
+
+            SetStartFlashcardsButtonsEnabled(Lives > 0 || IsProPlusUser);
         }
 
         private void StartRefillTimer()
@@ -169,7 +274,7 @@ namespace Atomic_PeriodicTable.Tables
                     {
                         Lives = Math.Min(Lives + 5, MaxLives);
                         if (Lives < MaxLives)
-                            NextRefillTime = DateTime.UtcNow.AddMinutes(30); // 30 min for next refill
+                            NextRefillTime = DateTime.UtcNow.AddMinutes(20);
                         else
                             NextRefillTime = DateTime.UtcNow;
                     }
@@ -226,10 +331,17 @@ namespace Atomic_PeriodicTable.Tables
                     Description = "Play 100 games.",
                     Progress = totalGamesPlayed,
                     Goal = 100
+                },
+                new Achievement
+                {
+                    Icon = "\uE7FC",
+                    Header = "Getting the hang of it",
+                    Description = "Play 500 games.",
+                    Progress = totalGamesPlayed,
+                    Goal = 500
                 }
             };
 
-            // Sort: completed first, then by progress descending
             var sorted = achievementList
                 .OrderByDescending(a => a.IsCompleted)
                 .ThenByDescending(a => a.ClampedProgress)
@@ -257,12 +369,14 @@ namespace Atomic_PeriodicTable.Tables
 
             if (TotalXpTextBlock != null)
                 TotalXpTextBlock.Text = LastQuizXP.ToString();
+            if (TotalXpTextBlock_single != null)
+                TotalXpTextBlock_single.Text = LastQuizXP.ToString();
         }
 
         private void BuildCategoryGroups()
         {
             int userLevel = XpManager.GetCurrentLevel();
-            bool isPro = IsProUser;
+            bool isProPlus = _isProPlusUser;
 
             CategoryGroups = new List<FlashCardCategoryGroup>
             {
@@ -272,11 +386,11 @@ namespace Atomic_PeriodicTable.Tables
                     Icon = "\uE72E",
                     Categories = new List<FlashCardCategory>
                     {
-                        new FlashCardCategory { Name = "Element Symbols", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0 },
-                        new FlashCardCategory { Name = "Element Names", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0 },
-                        new FlashCardCategory { Name = "Element Groups", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0 },
-                        new FlashCardCategory { Name = "Discovered By", UnlockLevel = 0, IsPro = true, IsUnlocked = isPro },
-                        new FlashCardCategory { Name = "Discovery Year", UnlockLevel = 0, IsPro = true, IsUnlocked = isPro }
+                        new FlashCardCategory { Name = "Element Symbols", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Element Names", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Element Groups", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Discovered By", UnlockLevel = 0, IsPro = true, IsUnlocked = isProPlus, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Discovery Year", UnlockLevel = 0, IsPro = true, IsUnlocked = isProPlus, IsProPlusUser = isProPlus }
                     }
                 },
                 new FlashCardCategoryGroup
@@ -285,10 +399,10 @@ namespace Atomic_PeriodicTable.Tables
                     Icon = "\uE72E",
                     Categories = new List<FlashCardCategory>
                     {
-                        new FlashCardCategory { Name = "Appearance", UnlockLevel = 5, IsPro = false, IsUnlocked = userLevel >= 5 },
-                        new FlashCardCategory { Name = "Atomic Number", UnlockLevel = 5, IsPro = false, IsUnlocked = userLevel >= 5 },
-                        new FlashCardCategory { Name = "Electrical Type", UnlockLevel = 5, IsPro = true, IsUnlocked = isPro & userLevel >= 5 },
-                        new FlashCardCategory { Name = "Radioactive", UnlockLevel = 5, IsPro = true, IsUnlocked = isPro & userLevel >= 5 }
+                        new FlashCardCategory { Name = "Appearance", UnlockLevel = 5, IsPro = false, IsUnlocked = userLevel >= 5, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Atomic Number", UnlockLevel = 5, IsPro = false, IsUnlocked = userLevel >= 5, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Electrical Type", UnlockLevel = 5, IsPro = true, IsUnlocked = isProPlus && userLevel >= 5, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Radioactive", UnlockLevel = 5, IsPro = true, IsUnlocked = isProPlus && userLevel >= 5, IsProPlusUser = isProPlus }
                     }
                 },
                 new FlashCardCategoryGroup
@@ -297,10 +411,10 @@ namespace Atomic_PeriodicTable.Tables
                     Icon = "\uE72E",
                     Categories = new List<FlashCardCategory>
                     {
-                        new FlashCardCategory { Name = "Atomic Mass", UnlockLevel = 10, IsPro = false, IsUnlocked = userLevel >= 10 },
-                        new FlashCardCategory { Name = "Density", UnlockLevel = 10, IsPro = false, IsUnlocked = userLevel >= 10 },
-                        new FlashCardCategory { Name = "Electronegativity", UnlockLevel = 10, IsPro = true, IsUnlocked = isPro & userLevel >= 10 },
-                        new FlashCardCategory { Name = "Block", UnlockLevel = 10, IsPro = true, IsUnlocked = isPro & userLevel >= 10 }
+                        new FlashCardCategory { Name = "Atomic Mass", UnlockLevel = 10, IsPro = false, IsUnlocked = userLevel >= 10, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Density", UnlockLevel = 10, IsPro = false, IsUnlocked = userLevel >= 10, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Electronegativity", UnlockLevel = 10, IsPro = true, IsUnlocked = isProPlus && userLevel >= 10, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Block", UnlockLevel = 10, IsPro = true, IsUnlocked = isProPlus && userLevel >= 10, IsProPlusUser = isProPlus }
                     }
                 },
                 new FlashCardCategoryGroup
@@ -309,10 +423,10 @@ namespace Atomic_PeriodicTable.Tables
                     Icon = "\uE72E",
                     Categories = new List<FlashCardCategory>
                     {
-                        new FlashCardCategory { Name = "Magnetic Type", UnlockLevel = 15, IsPro = false, IsUnlocked = userLevel >= 15 },
-                        new FlashCardCategory { Name = "Phase (STP)", UnlockLevel = 15, IsPro = false, IsUnlocked = userLevel >= 15 },
-                        new FlashCardCategory { Name = "Crystal Structure", UnlockLevel = 15, IsPro = true, IsUnlocked = isPro & userLevel >= 15 },
-                        new FlashCardCategory { Name = "Superconducting Point", UnlockLevel = 15, IsPro = true, IsUnlocked = isPro & userLevel >= 15 }
+                        new FlashCardCategory { Name = "Magnetic Type", UnlockLevel = 15, IsPro = false, IsUnlocked = userLevel >= 15, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Phase (STP)", UnlockLevel = 15, IsPro = false, IsUnlocked = userLevel >= 15, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Crystal Structure", UnlockLevel = 15, IsPro = true, IsUnlocked = isProPlus && userLevel >= 15, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Superconducting Point", UnlockLevel = 15, IsPro = true, IsUnlocked = isProPlus && userLevel >= 15, IsProPlusUser = isProPlus }
                     }
                 },
                 new FlashCardCategoryGroup
@@ -321,11 +435,11 @@ namespace Atomic_PeriodicTable.Tables
                     Icon = "\uE72E",
                     Categories = new List<FlashCardCategory>
                     {
-                        new FlashCardCategory { Name = "Meutron Cross Sectional", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20 },
-                        new FlashCardCategory { Name = "Specific Heat Capacity", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20 },
-                        new FlashCardCategory { Name = "Mohs Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isPro & userLevel >= 20 },
-                        new FlashCardCategory { Name = "Vickers Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isPro & userLevel >= 20 },
-                        new FlashCardCategory { Name = "Brinell Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isPro & userLevel >= 20 }
+                        new FlashCardCategory { Name = "Meutron Cross Sectional", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Specific Heat Capacity", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Mohs Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Vickers Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Brinell Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus }
                     }
                 }
             };
@@ -337,6 +451,16 @@ namespace Atomic_PeriodicTable.Tables
 
             CategoryGroupsControl.ItemsSource = null;
             CategoryGroupsControl.ItemsSource = CategoryGroups;
+            if (CategoryGroupsControl_Single != null)
+            {
+                CategoryGroupsControl_Single.ItemsSource = null;
+                CategoryGroupsControl_Single.ItemsSource = CategoryGroups;
+            }
+        }
+
+        private void OpenProPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ProPage));
         }
 
         private void UpdateStatsUI()
@@ -347,12 +471,25 @@ namespace Atomic_PeriodicTable.Tables
 
             if (LevelTextBlock != null)
                 LevelTextBlock.Text = $"{userLevel}";
+            if (LevelTextBlock_single != null)
+                LevelTextBlock_single.Text = $"{userLevel}";
+
             if (TotalXpTextBlock != null)
                 TotalXpTextBlock.Text = $"{userXp}";
+            if (TotalXpTextBlock_single != null)
+                TotalXpTextBlock_single.Text = $"{userXp}";
+
             if (LevelProgressTextBlock != null)
                 LevelProgressTextBlock.Text = $"{progressCurrent} / {progressTotal}";
+            if (LevelProgressTextBlock_single != null)
+                LevelProgressTextBlock_single.Text = $"{progressCurrent} / {progressTotal}";
+
             if (xp_progress_bar != null)
                 xp_progress_bar.Value = progressTotal > 0
+                    ? (double)progressCurrent / progressTotal * 100
+                    : 0;
+            if (xp_progress_bar_single != null)
+                xp_progress_bar_single.Value = progressTotal > 0
                     ? (double)progressCurrent / progressTotal * 100
                     : 0;
         }
@@ -368,10 +505,15 @@ namespace Atomic_PeriodicTable.Tables
 
             if (TotalGamesPlayedTextBlock != null)
                 TotalGamesPlayedTextBlock.Text = totalGames.ToString();
+            if (TotalGamesPlayedTextBlock_single != null)
+                TotalGamesPlayedTextBlock_single.Text = totalGames.ToString();
         }
 
         private void CategoryButton_Click(object sender, RoutedEventArgs e)
         {
+            if (Lives <= 0 && !IsProPlusUser)
+                return;
+
             if (sender is Button btn && btn.Tag is string categoryName)
             {
                 string normalized = categoryName.ToLower().Replace(" ", "_");
@@ -386,8 +528,13 @@ namespace Atomic_PeriodicTable.Tables
 
         private void SetCardsGridLayout(double width)
         {
+            MainScrollViewer.Visibility = (width < 900) ? Visibility.Visible : Visibility.Collapsed;
+            CardsGrid.Visibility = (width < 900) ? Visibility.Collapsed : Visibility.Visible;
+
             if (width < 900)
             {
+                IsSingleColumnMode = true;
+
                 if (CardsGrid.RowDefinitions.Count == 0)
                 {
                     CardsGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -404,6 +551,8 @@ namespace Atomic_PeriodicTable.Tables
             }
             else
             {
+                IsSingleColumnMode = false;
+
                 if (CardsGrid.RowDefinitions.Count > 0)
                 {
                     CardsGrid.RowDefinitions.Clear();
@@ -411,6 +560,7 @@ namespace Atomic_PeriodicTable.Tables
                 UnitConverterCard.SetValue(Grid.RowProperty, 0);
                 UnitConverterCard.SetValue(Grid.ColumnProperty, 0);
                 CategoriesCard.SetValue(Grid.RowProperty, 0);
+                CategoriesCard.SetValue(Grid.ColumnProperty, 2);
                 CategoriesCard.SetValue(Grid.ColumnProperty, 2);
 
                 CardsGrid.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);

@@ -38,7 +38,9 @@ namespace Atomic_PeriodicTable
             new() { Title = "Constants Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Geology Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
             new() { Title = "Emission Spectrum Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Additional features too be announced", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = "60 lives in flashcards", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = "Unlimited lives in flashcards", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = "Additional flashcard games", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
             new() { Title = "Early Access to DEV Features", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
         };
 
@@ -182,8 +184,7 @@ namespace Atomic_PeriodicTable
                         FreeButton.Content = "Has PRO Version";
                         FreePrice.Text = "---";
 
-                        BuyProPlusButton.IsEnabled = false;
-                        BuyProPlusButton.Content = "Coming Soon";
+                        BuyProPlusButton.IsEnabled = true;
 
                         // Show upgrade price if available
                         if (proUpgradeProduct != null)
@@ -202,8 +203,7 @@ namespace Atomic_PeriodicTable
                         BuyProButton.IsEnabled = true;
                         BuyProButton.Content = "Buy Pro";
 
-                        BuyProPlusButton.IsEnabled = false;
-                        BuyProPlusButton.Content = "Coming Soon";
+                        BuyProPlusButton.IsEnabled = true;
 
                         FreeButton.Content = "Free Version";
 

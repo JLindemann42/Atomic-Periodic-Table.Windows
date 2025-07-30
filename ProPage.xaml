@@ -125,8 +125,8 @@
                                 <TextBlock x:Name="ProPlusPrice" Text="---" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
                                 <Button x:Name="BuyProPlusButton" Content="Purchase" Margin="0,15,0,10" Style="{StaticResource AccentButtonStyle}" Click="BuyProPlusVersion_Click" HorizontalAlignment="Stretch"/>
                                 <TextBlock Text="• All PRO features" />
+                                <TextBlock Text="• Additional flashcards and lives" />
                                 <TextBlock Text="• Early access to DEV features" />
-                                <TextBlock Text="• Access to PRO Version on mobile" />
    
                             </StackPanel>
                         </Border>

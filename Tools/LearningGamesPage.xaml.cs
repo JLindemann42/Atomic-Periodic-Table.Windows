@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Windows.System;
 using Atomic_PeriodicTable.Tables;
 
 namespace Atomic_PeriodicTable.Tools
@@ -31,11 +32,7 @@ namespace Atomic_PeriodicTable.Tools
         public bool WasCorrect { get; set; }
         public int BaseXp { get; set; }
     }
-    public class Element
-    {
-        public string Name { get; set; }
-        public string Symbol { get; set; }
-    }
+
     public class Question
     {
         public string Text { get; set; }
@@ -61,6 +58,9 @@ namespace Atomic_PeriodicTable.Tools
         private int lives = 5;
         private int xp = 0;
 
+        // Prevents dialog loop on programmatic navigation
+        private bool _confirmedBackNavigation = false;
+
         public LearningGamesPage()
         {
             this.InitializeComponent();
@@ -74,6 +74,49 @@ namespace Atomic_PeriodicTable.Tools
                 category = categoryName;
             }
             await SetupGameAsync();
+        }
+
+        protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            if (!quizCompleted && e.NavigationMode == NavigationMode.Back && !_confirmedBackNavigation)
+            {
+                e.Cancel = true;
+                var dialog = new ContentDialog
+                {
+                    Title = "Leave Game?",
+                    Content = "Are you sure you want to leave? You will lose 5 lives.",
+                    PrimaryButtonText = "Leave",
+                    CloseButtonText = "Cancel",
+                    XamlRoot = this.XamlRoot
+                };
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    // Deduct 5 lives in local settings
+                    var settings = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+                    if (settings.TryGetValue("Lives", out object value) && value is int currentLives)
+                        settings["Lives"] = Math.Max(0, currentLives - 5);
+                    else
+                        settings["Lives"] = 0;
+
+                    // End the quiz and stop the timer to prevent further ticks/life loss
+                    quizCompleted = true;
+                    timer?.Stop();
+
+                    // Set flag and navigate back after this method returns
+                    _confirmedBackNavigation = true;
+                    DispatcherQueue.TryEnqueue(() =>
+                    {
+                        if (Frame.CanGoBack)
+                            Frame.GoBack();
+                    });
+                }
+                // else: stay on page
+            }
+            else
+            {
+                base.OnNavigatingFrom(e);
+            }
         }
 
         private async Task SetupGameAsync()
@@ -177,7 +220,7 @@ namespace Atomic_PeriodicTable.Tools
 
             var random = new Random();
             var selectedElements = allElements.OrderBy(_ => random.Next()).Take(4).ToList();
-            int correctIndex = random.Next(4);
+            int correctIndex = random.Next(selectedElements.Count);
             var correctElement = selectedElements[correctIndex];
 
             string questionText, correct;
@@ -186,66 +229,313 @@ namespace Atomic_PeriodicTable.Tools
             // Normalize category for robust comparison
             var cat = (category ?? "").Trim().ToLowerInvariant();
 
-            if (cat == "element_groups" || cat == "group" || cat == "groups")
+            // Helper to get a property from JSON, skipping "---" and ensuring at least two valid values
+            async Task<List<string>> GetJsonPropertyForElements(string propertyName)
             {
-                var infoTasks = selectedElements.Select(e => GetElementInfoFromJsonAsync(e.OriginalName)).ToArray();
-                var infos = await Task.WhenAll(infoTasks);
-                var groups = infos.Select(i => i.Group).ToList();
-                if (groups.Any(g => string.IsNullOrWhiteSpace(g)))
-                    return null;
+                var results = new List<string>();
+                var usedElements = new HashSet<Element>(selectedElements);
+                foreach (var el in selectedElements)
+                {
+                    string value = null;
+                    try
+                    {
+                        string basePath = AppContext.BaseDirectory;
+                        string elementsPath = Path.Combine(basePath, "Elements");
+                        string fileName = $"{el.OriginalName.ToLowerInvariant()}.json";
+                        string filePath = Path.Combine(elementsPath, fileName);
+
+                        if (!File.Exists(filePath))
+                        {
+                            continue;
+                        }
+
+                        using var stream = File.OpenRead(filePath);
+                        using var doc = await JsonDocument.ParseAsync(stream);
+                        var root = doc.RootElement;
+
+                        // Try to get property at root
+                        if (root.TryGetProperty(propertyName, out var prop))
+                            value = prop.GetString();
+
+                        // If not found, try nested objects
+                        if (value == null)
+                        {
+                            foreach (var property in root.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Object)
+                                {
+                                    if (property.Value.TryGetProperty(propertyName, out var prop2))
+                                    {
+                                        value = prop2.GetString();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        value = null;
+                    }
+                    if (!string.IsNullOrWhiteSpace(value) && value.Trim() != "---")
+                        results.Add(value);
+                }
+
+                // If less than 2 valid results, try to get more elements until we have at least 2
+                int attempts = 0;
+                while (results.Count < 2 && attempts < 10)
+                {
+                    var extraElement = allElements.OrderBy(_ => random.Next()).FirstOrDefault(e => !usedElements.Contains(e));
+                    if (extraElement == null) break;
+                    usedElements.Add(extraElement);
+
+                    string value = null;
+                    try
+                    {
+                        string basePath = AppContext.BaseDirectory;
+                        string elementsPath = Path.Combine(basePath, "Elements");
+                        string fileName = $"{extraElement.OriginalName.ToLowerInvariant()}.json";
+                        string filePath = Path.Combine(elementsPath, fileName);
+
+                        if (!File.Exists(filePath))
+                        {
+                            attempts++;
+                            continue;
+                        }
+
+                        using var stream = File.OpenRead(filePath);
+                        using var doc = await JsonDocument.ParseAsync(stream);
+                        var root = doc.RootElement;
+
+                        if (root.TryGetProperty(propertyName, out var prop))
+                            value = prop.GetString();
+
+                        if (value == null)
+                        {
+                            foreach (var property in root.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Object)
+                                {
+                                    if (property.Value.TryGetProperty(propertyName, out var prop2))
+                                    {
+                                        value = prop2.GetString();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        value = null;
+                    }
+                    if (!string.IsNullOrWhiteSpace(value) && value.Trim() != "---")
+                        results.Add(value);
+                    attempts++;
+                }
+
+                return results;
+            }
+
+            if (cat == "element_symbols" || cat == "symbols" || cat == "symbol")
+            {
+                alternatives = selectedElements.Select(e => e.Symbol).Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().ToList();
+                if (alternatives.Count < 2) return null;
+                questionText = $"What is the symbol for {correctElement.OriginalName}?";
+                correct = correctElement.Symbol;
+            }
+            else if (cat == "element_names" || cat == "names" || cat == "name")
+            {
+                alternatives = selectedElements.Select(e => e.OriginalName).Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().ToList();
+                if (alternatives.Count < 2) return null;
+                questionText = $"What is the name for {correctElement.Symbol}?";
+                correct = correctElement.OriginalName;
+            }
+            else if (cat == "element_groups" || cat == "group" || cat == "groups")
+            {
+                var groups = await GetJsonPropertyForElements("element_group");
+                if (groups.Count < 2) return null;
                 questionText = $"What is the group for {correctElement.OriginalName}?";
-                correct = groups[correctIndex];
+                correct = groups.FirstOrDefault();
                 alternatives = groups;
             }
             else if (cat == "discovered_by" || cat == "discoverer" || cat == "discovered")
             {
-                var infoTasks = selectedElements.Select(e => GetElementInfoFromJsonAsync(e.OriginalName)).ToArray();
-                var infos = await Task.WhenAll(infoTasks);
-                var discoverers = infos.Select(i => i.DiscoveredBy).ToList();
-                if (discoverers.Any(d => string.IsNullOrWhiteSpace(d)))
-                    return null;
+                var discoverers = await GetJsonPropertyForElements("element_discovered_name");
+                if (discoverers.Count < 2) return null;
                 questionText = $"Who discovered {correctElement.OriginalName}?";
-                correct = discoverers[correctIndex];
+                correct = discoverers.FirstOrDefault();
                 alternatives = discoverers;
             }
             else if (cat == "discovery_year" || cat == "year" || cat == "discovered_year")
             {
-                var infoTasks = selectedElements.Select(e => GetElementInfoFromJsonAsync(e.OriginalName)).ToArray();
-                var infos = await Task.WhenAll(infoTasks);
-                var years = infos.Select(i => i.DiscoveryYear).ToList();
-                if (years.Any(y => string.IsNullOrWhiteSpace(y)))
-                    return null;
+                var years = await GetJsonPropertyForElements("element_year");
+                if (years.Count < 2) return null;
                 questionText = $"In which year was {correctElement.OriginalName} discovered?";
-                correct = years[correctIndex];
+                correct = years.FirstOrDefault();
                 alternatives = years;
             }
-            else if (cat == "element_symbols" || cat == "symbols" || cat == "symbol")
+            else if (cat == "appearance")
             {
-                questionText = $"What is the symbol for {correctElement.OriginalName}?";
-                correct = correctElement.Symbol;
-                alternatives = selectedElements.Select(e => e.Symbol).ToList();
+                var appearances = await GetJsonPropertyForElements("element_appearance");
+                if (appearances.Count < 2) return null;
+                questionText = $"What is the appearance of {correctElement.OriginalName}?";
+                correct = appearances.FirstOrDefault();
+                alternatives = appearances;
             }
-            else if (cat == "element_names" || cat == "names" || cat == "name")
+            else if (cat == "atomic_number")
             {
-                questionText = $"What is the name for {correctElement.Symbol}?";
-                correct = correctElement.OriginalName;
-                alternatives = selectedElements.Select(e => e.OriginalName).ToList();
+                var atomicNumbers = await GetJsonPropertyForElements("element_atomic_number");
+                if (atomicNumbers.Count < 2) return null;
+                questionText = $"What is the atomic number of {correctElement.OriginalName}?";
+                correct = atomicNumbers.FirstOrDefault();
+                alternatives = atomicNumbers;
+            }
+            else if (cat == "electrical_type")
+            {
+                var electricalTypes = await GetJsonPropertyForElements("electrical_type");
+                if (electricalTypes.Count < 2) return null;
+                questionText = $"What is the electrical type of {correctElement.OriginalName}?";
+                correct = electricalTypes.FirstOrDefault();
+                alternatives = electricalTypes;
+            }
+            else if (cat == "radioactive")
+            {
+                alternatives = new List<string> { "Yes", "No" };
+                questionText = $"Is {correctElement.OriginalName} radioactive?";
+                var radioactiveVals = await GetJsonPropertyForElements("radioactive");
+                bool isRadioactive = radioactiveVals.FirstOrDefault()?.Trim().ToLowerInvariant() == "yes";
+                correct = isRadioactive ? "Yes" : "No";
+            }
+            else if (cat == "atomic_mass")
+            {
+                var atomicMasses = await GetJsonPropertyForElements("element_atomicmass");
+                if (atomicMasses.Count < 2) return null;
+                questionText = $"What is the atomic mass of {correctElement.OriginalName}?";
+                correct = atomicMasses.FirstOrDefault();
+                alternatives = atomicMasses;
+            }
+            else if (cat == "density")
+            {
+                var densities = await GetJsonPropertyForElements("element_density");
+                if (densities.Count < 2) return null;
+                questionText = $"What is the density of {correctElement.OriginalName}?";
+                correct = densities.FirstOrDefault();
+                alternatives = densities;
+            }
+            else if (cat == "electronegativity")
+            {
+                var electronegativities = await GetJsonPropertyForElements("element_electronegativty");
+                if (electronegativities.Count < 2) return null;
+                questionText = $"What is the electronegativity of {correctElement.OriginalName}?";
+                correct = electronegativities.FirstOrDefault();
+                alternatives = electronegativities;
+            }
+            else if (cat == "block")
+            {
+                var blocks = await GetJsonPropertyForElements("element_block");
+                if (blocks.Count < 2) return null;
+                questionText = $"What block does {correctElement.OriginalName} belong to?";
+                correct = blocks.FirstOrDefault();
+                alternatives = blocks;
+            }
+            else if (cat == "magnetic_type")
+            {
+                var magneticTypes = await GetJsonPropertyForElements("magnetic_type");
+                if (magneticTypes.Count < 2) return null;
+                questionText = $"What is the magnetic type of {correctElement.OriginalName}?";
+                correct = magneticTypes.FirstOrDefault();
+                alternatives = magneticTypes;
+            }
+            else if (cat == "phase_stp" || cat == "phase" || cat == "element_phase" || cat == "phase (STP)" || cat == "phase_(stp)")
+            {
+                var phases = await GetJsonPropertyForElements("element_phase");
+                if (phases.Count < 2) return null;
+                questionText = $"What is the phase of {correctElement.OriginalName} at STP?";
+                correct = phases.FirstOrDefault();
+                alternatives = phases;
+            }
+            else if (cat == "crystal_structure")
+            {
+                var crystalStructures = await GetJsonPropertyForElements("crystal_structure");
+                if (crystalStructures.Count < 2) return null;
+                questionText = $"What is the crystal structure of {correctElement.OriginalName}?";
+                correct = crystalStructures.FirstOrDefault();
+                alternatives = crystalStructures;
+            }
+            else if (cat == "superconducting_point")
+            {
+                var superconductingPoints = await GetJsonPropertyForElements("superconducting_point");
+                if (superconductingPoints.Count < 2) return null;
+                questionText = $"What is the superconducting point of {correctElement.OriginalName}?";
+                correct = superconductingPoints.FirstOrDefault();
+                alternatives = superconductingPoints;
+            }
+            else if (cat == "neutron_cross_sectional")
+            {
+                var neutronCrossSectionals = await GetJsonPropertyForElements("neutron_cross_sectional");
+                if (neutronCrossSectionals.Count < 2) return null;
+                questionText = $"What is the neutron cross sectional of {correctElement.OriginalName}?";
+                correct = neutronCrossSectionals.FirstOrDefault();
+                alternatives = neutronCrossSectionals;
+            }
+            else if (cat == "specific_heat_capacity")
+            {
+                var specificHeatCapacities = await GetJsonPropertyForElements("specific_heat_capacity");
+                if (specificHeatCapacities.Count < 2) return null;
+                questionText = $"What is the specific heat capacity of {correctElement.OriginalName}?";
+                correct = specificHeatCapacities.FirstOrDefault();
+                alternatives = specificHeatCapacities;
+            }
+            else if (cat == "mohs_hardness")
+            {
+                var mohsHardnesses = await GetJsonPropertyForElements("mohs_hardness");
+                if (mohsHardnesses.Count < 2) return null;
+                questionText = $"What is the mohs hardness of {correctElement.OriginalName}?";
+                correct = mohsHardnesses.FirstOrDefault();
+                alternatives = mohsHardnesses;
+            }
+            else if (cat == "vickers_hardness")
+            {
+                var vickersHardnesses = await GetJsonPropertyForElements("vickers_hardness");
+                if (vickersHardnesses.Count < 2) return null;
+                questionText = $"What is the vickers hardness of {correctElement.OriginalName}?";
+                correct = vickersHardnesses.FirstOrDefault();
+                alternatives = vickersHardnesses;
+            }
+            else if (cat == "brinell_hardness")
+            {
+                var brinellHardnesses = await GetJsonPropertyForElements("brinell_hardness");
+                if (brinellHardnesses.Count < 2) return null;
+                questionText = $"What is the brinell hardness of {correctElement.OriginalName}?";
+                correct = brinellHardnesses.FirstOrDefault();
+                alternatives = brinellHardnesses;
             }
             else
             {
+                // fallback: element_names
+                alternatives = selectedElements.Select(e => e.OriginalName).Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().ToList();
+                if (alternatives.Count < 2) return null;
                 questionText = $"What is the name for {correctElement.Symbol}?";
                 correct = correctElement.OriginalName;
-                alternatives = selectedElements.Select(e => e.OriginalName).ToList();
             }
 
-            alternatives = alternatives.OrderBy(_ => random.Next()).ToList();
+            // Remove empty/null, deduplicate, shuffle
+            alternatives = alternatives.Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().OrderBy(_ => random.Next()).ToList();
+
+            if (alternatives.Count < 2)
+                return null;
+
+            // Pick correct answer from alternatives if possible
+            if (!alternatives.Contains(correct))
+                correct = alternatives.First();
 
             return new Question
             {
                 Text = questionText,
                 CorrectAnswer = correct,
                 Alternatives = alternatives,
-                BaseXp = 8
+                BaseXp = GetBaseXp(cat)
             };
         }
 
@@ -327,8 +617,18 @@ namespace Atomic_PeriodicTable.Tools
             });
 
             int xpGained = (selectedAnswer == "__TIMEOUT__" || !correct) ? 0 : (int)(q.BaseXp * GetXpMultiplier());
-            if (correct) xp += xpGained;
-            else lives -= GetLivesLost();
+            if (correct)
+                xp += xpGained;
+            else
+            {
+                lives -= GetLivesLost();
+                // Deduct lives in local settings for global sync
+                var settings = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+                if (settings.TryGetValue("Lives", out object value) && value is int currentLives)
+                    settings["Lives"] = Math.Max(0, currentLives - GetLivesLost());
+                else
+                    settings["Lives"] = Math.Max(0, lives);
+            }
 
             var buttons = new[] { Answer1, Answer2, Answer3, Answer4 };
             for (int i = 0; i < buttons.Length; i++)
@@ -363,7 +663,6 @@ namespace Atomic_PeriodicTable.Tools
             ShowQuestion();
             await FadeIn(QuestionCard);
         }
-
 
         private async void FinishWithResults()
         {
@@ -411,8 +710,7 @@ namespace Atomic_PeriodicTable.Tools
                 $"Correct answers: {correctCount}/{gameResults.Count}\n" +
                 $"Base XP: {baseXp}\n" +
                 $"Bonus for completion: {(gameResults.Count == questions.Count ? 25 : 0)}\n" +
-                $"Bonus for all correct: {(gameResults.All(r => r.WasCorrect) ? 25 : 0)}\n" +
-                $"Lives left: {lives}";
+                $"Bonus for all correct: {(gameResults.All(r => r.WasCorrect) ? 25 : 0)}\n";
 
             ResultList.ItemsSource = gameResults;
 
@@ -421,6 +719,35 @@ namespace Atomic_PeriodicTable.Tools
             await FadeIn(ResultCard);
         }
 
+        private int GetBaseXp(string category)
+        {
+            return category switch
+            {
+                "element_symbols" or "symbols" or "symbol" => 8,
+                "element_names" or "names" or "name" => 8,
+                "element_groups" => 13,
+                "discovered_by" or "discoverer" or "discovered" => 16,
+                "discovery_year" or "year" or "discovered_year" => 16,
+                "appearance" => 12,
+                "atomic_number" => 8,
+                "electrical_type" => 16,
+                "radioactive" => 16,
+                "atomic_mass" => 25,
+                "density" => 40,
+                "electronegativity" => 30,
+                "block" => 15,
+                "magnetic_type" => 18,
+                "phase_stp" or "phase" or "element_phase" or "phase_(stp)" => 10,
+                "crystal_structure" => 40,
+                "superconducting_point" => 50,
+                "neutron_cross_sectional" => 50,
+                "specific_heat_capacity" or "specific heat capacity" => 50,
+                "mohs_hardness" => 60,
+                "vickers_hardness" => 60,
+                "brinell_hardness" => 60,
+                _ => 5
+            };
+        }
 
         private void ResultCard_Close_Click(object sender, RoutedEventArgs e)
         {
@@ -442,7 +769,6 @@ namespace Atomic_PeriodicTable.Tools
 
         private async Task FadeOut(UIElement element)
         {
-            // Create a new storyboard instance to avoid reuse issues
             var original = (Storyboard)this.Resources["FadeOutStoryboard"];
             var sb = new Storyboard();
             foreach (var anim in original.Children)
@@ -486,9 +812,6 @@ namespace Atomic_PeriodicTable.Tools
             sb.Begin();
             await Task.Delay(250);
         }
-
-
-
 
         private int GetLivesLost() => difficulty == "hard" ? 2 : 1;
 
