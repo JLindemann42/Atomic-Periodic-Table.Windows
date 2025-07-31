@@ -284,6 +284,8 @@ namespace Atomic_PeriodicTable.Tables
             refillTimer.Start();
         }
 
+
+
         private void LoadAchievements()
         {
             var settings = ApplicationData.Current.LocalSettings.Values;
@@ -435,7 +437,7 @@ namespace Atomic_PeriodicTable.Tables
                     Icon = "\uE72E",
                     Categories = new List<FlashCardCategory>
                     {
-                        new FlashCardCategory { Name = "Meutron Cross Sectional", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20, IsProPlusUser = isProPlus },
+                        new FlashCardCategory { Name = "Neutron Cross Sectional", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20, IsProPlusUser = isProPlus },
                         new FlashCardCategory { Name = "Specific Heat Capacity", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20, IsProPlusUser = isProPlus },
                         new FlashCardCategory { Name = "Mohs Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus },
                         new FlashCardCategory { Name = "Vickers Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus },

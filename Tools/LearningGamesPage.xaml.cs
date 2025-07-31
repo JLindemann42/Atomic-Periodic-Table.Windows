@@ -481,7 +481,7 @@ namespace Atomic_PeriodicTable.Tools
             }
             else if (cat == "specific_heat_capacity")
             {
-                var specificHeatCapacities = await GetJsonPropertyForElements("specific_heat_capacity");
+                var specificHeatCapacities = await GetJsonPropertyForElements("element_specific_heat_capacity");
                 if (specificHeatCapacities.Count < 2) return null;
                 questionText = $"What is the specific heat capacity of {correctElement.OriginalName}?";
                 correct = specificHeatCapacities.FirstOrDefault();
