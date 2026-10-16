@@ -24,6 +24,9 @@ namespace Atomic.App
 
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            // Before the window, so the first pane build already resolves in the right language.
+            AppLanguage.ApplySaved();
+
             MainWindow = new MainWindow();
             ApplyAppTheme(SettingsStore.AppTheme);
             MainWindow.Activate();

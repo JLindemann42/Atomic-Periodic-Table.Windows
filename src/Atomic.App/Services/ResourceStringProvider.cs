@@ -21,21 +21,40 @@ namespace Atomic.App.Services
     /// </summary>
     public sealed class ResourceStringProvider : IStringProvider
     {
-        private const string Subtree = "Resources";
+        private const string DefaultLanguage = "en-US";
+
+        /// <summary>
+        /// Two resource files ship per language and they have different owners.
+        /// <c>Resources</c> is generated from Android's strings.xml and must never be hand-edited;
+        /// <c>App</c> holds strings that exist only on Windows, or that Windows words differently.
+        /// App is searched first so it can deliberately override an Android string.
+        /// </summary>
+        private static readonly string[] Subtrees = ["App", "Resources"];
 
         private static readonly ResourceManager Manager = new();
         private static readonly ConcurrentDictionary<string, ResourceStringProvider> Cache =
             new(StringComparer.OrdinalIgnoreCase);
 
-        private readonly ResourceMap _map;
+        private readonly ResourceMap[] _maps;
         private readonly ResourceContext _context;
+        private readonly ResourceContext? _fallbackContext;
 
         private ResourceStringProvider(string language)
         {
             Language = language;
-            _map = Manager.MainResourceMap.GetSubtree(Subtree);
+            _maps = System.Array.ConvertAll(Subtrees, s => Manager.MainResourceMap.GetSubtree(s));
+
             _context = Manager.CreateResourceContext();
             _context.QualifierValues["Language"] = language;
+
+            // Pinning a single Language qualifier turns MRT's own fallback off, so a key present
+            // only in en-US resolves to nothing rather than to English. That is right for the
+            // generated resources - a missing translation should be visible - but wrong for the
+            // Windows-only strings in App.resw, which are English-only by design. Hence an
+            // explicit second context rather than relying on MRT.
+            _fallbackContext = IsDefault(language) ? null : Manager.CreateResourceContext();
+            if (_fallbackContext is not null)
+                _fallbackContext.QualifierValues["Language"] = DefaultLanguage;
         }
 
         public string Language { get; }
@@ -69,15 +88,28 @@ namespace Atomic.App.Services
 
         private string? Lookup(string key)
         {
-            try
+            foreach (var context in new[] { _context, _fallbackContext })
             {
-                return _map.TryGetValue(key, _context)?.ValueAsString;
+                if (context is null)
+                    continue;
+
+                foreach (var map in _maps)
+                {
+                    try
+                    {
+                        if (map.TryGetValue(key, context)?.ValueAsString is { } value)
+                            return value;
+                    }
+                    catch (Exception)
+                    {
+                        // MRT throws rather than returning null for some malformed keys.
+                    }
+                }
             }
-            catch (Exception)
-            {
-                // MRT throws rather than returning null for some malformed keys.
-                return null;
-            }
+            return null;
         }
+
+        private static bool IsDefault(string language) =>
+            language.StartsWith("en", StringComparison.OrdinalIgnoreCase);
     }
 }

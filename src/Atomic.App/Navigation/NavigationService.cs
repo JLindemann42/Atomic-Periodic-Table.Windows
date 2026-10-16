@@ -1,5 +1,7 @@
-using System;
+﻿using System;
 using System.Linq;
+using Atomic.App.Services;
+using Atomic.Core.Localization;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -23,6 +25,12 @@ namespace Atomic.App.Navigation
         private readonly NavigationView _nav;
         private readonly Frame _frame;
         private NavigationViewItem? _tablesGroup;
+
+        /// <summary>
+        /// Resolves route keys. Re-read on every pane build rather than cached, so a language
+        /// change is picked up by <see cref="RefreshPane"/> without reconstructing the service.
+        /// </summary>
+        private static IStringProvider Strings => ResourceStringProvider.For(AppLanguage.Current);
 
         public NavigationService(NavigationView nav, Frame frame)
         {
@@ -56,14 +64,45 @@ namespace Atomic.App.Navigation
                 _frame.GoBack();
         }
 
-        /// <summary>
-        /// Rebuilds the pane in place. Phase 2 calls this after a language change, once the labels
-        /// come from resources rather than literals.
-        /// </summary>
+        /// <summary>Rebuilds the pane in place, re-resolving every label.</summary>
         public void RefreshPane()
         {
             BuildPane();
             SyncSelection(_frame.CurrentSourcePageType);
+        }
+
+        /// <summary>
+        /// Repaints everything after a language change.
+        ///
+        /// <para>MRT resolves a resource once per element and caches it, so setting
+        /// <c>PrimaryLanguageOverride</c> alone changes nothing already on screen. The pane is
+        /// rebuilt from scratch and the current page re-entered, which re-runs its constructor and
+        /// so re-reads its strings. The back stack is deliberately left alone - the user changed a
+        /// setting, they did not ask to lose their place.</para>
+        /// </summary>
+        public void ReloadForLanguageChange()
+        {
+            var current = _frame.CurrentSourcePageType;
+
+            RefreshPane();
+
+            if (current is null)
+                return;
+
+            // Re-navigating to the same type is a no-op for Frame, so clear its cache first.
+            var cacheSize = _frame.CacheSize;
+            _frame.CacheSize = 0;
+            _frame.Navigate(current);
+            _frame.CacheSize = cacheSize;
+
+            // Navigating pushed a duplicate entry; drop it so Back still goes where it did.
+            if (_frame.BackStackDepth > 0 &&
+                _frame.BackStack[^1].SourcePageType == current)
+            {
+                _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
+            }
+
+            _nav.IsBackEnabled = _frame.CanGoBack;
         }
 
         /// <summary>Relabels the PRO entry once ownership is known.</summary>
@@ -86,14 +125,15 @@ namespace Atomic.App.Navigation
             var tables = AppRoutes.InGroup(NavGroup.Tables).ToList();
             if (tables.Count > 0)
             {
+                var tablesLabel = Strings.Get("activity_table_title");
                 _tablesGroup = new NavigationViewItem
                 {
-                    Content = "Tables",
+                    Content = tablesLabel,
                     Tag = TablesGroupTag,
                     Icon = new FontIcon { Glyph = "" },
                     SelectsOnInvoked = false,
                 };
-                ToolTipService.SetToolTip(_tablesGroup, "Tables");
+                ToolTipService.SetToolTip(_tablesGroup, tablesLabel);
                 foreach (var route in tables)
                     _tablesGroup.MenuItems.Add(CreateItem(route));
                 _nav.MenuItems.Add(_tablesGroup);
@@ -102,20 +142,31 @@ namespace Atomic.App.Navigation
             var tools = AppRoutes.InGroup(NavGroup.Tools).ToList();
             if (tools.Count > 0)
             {
-                _nav.MenuItems.Add(new NavigationViewItemHeader { Content = "Tools" });
+                _nav.MenuItems.Add(new NavigationViewItemHeader { Content = Strings.Get("tools") });
                 foreach (var route in tools)
                     _nav.MenuItems.Add(CreateItem(route));
             }
 
             foreach (var route in AppRoutes.InGroup(NavGroup.Footer))
                 _nav.FooterMenuItems.Add(CreateItem(route));
+
+            // The settings entry belongs to NavigationView, not to MenuItems, so rebuilding the
+            // pane leaves its label at whatever MRT resolved when the template first loaded.
+            // Without this it keeps the previous language after a switch.
+            if (_nav.SettingsItem is NavigationViewItem settings)
+            {
+                var label = Strings.Get("settings_title");
+                settings.Content = label;
+                ToolTipService.SetToolTip(settings, label);
+            }
         }
 
         private static NavigationViewItem CreateItem(RouteDescriptor route)
         {
+            var label = Strings.Get(route.PaneTextKey);
             var item = new NavigationViewItem
             {
-                Content = route.PaneText,
+                Content = label,
                 Tag = route.Tag,
             };
 
@@ -124,7 +175,7 @@ namespace Atomic.App.Navigation
             else if (!string.IsNullOrEmpty(route.Glyph))
                 item.Icon = new FontIcon { Glyph = route.Glyph };
 
-            ToolTipService.SetToolTip(item, route.PaneText);
+            ToolTipService.SetToolTip(item, label);
             return item;
         }
 
@@ -155,9 +206,15 @@ namespace Atomic.App.Navigation
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
             var route = AppRoutes.ByType(e.SourcePageType);
-            var crumbs = AppRoutes.BreadcrumbFor(e.SourcePageType, _frame);
-            if (crumbs.Length > 0)
+            var keys = AppRoutes.BreadcrumbFor(e.SourcePageType, _frame);
+            if (keys.Length > 0)
+            {
+                // An explicit lambda, not a method group: Get takes a params array, so a method
+                // group cannot bind to Converter<string, string>.
+                var strings = Strings;
+                var crumbs = System.Array.ConvertAll(keys, k => strings.Get(k));
                 _nav.Header = BuildBreadcrumb(crumbs, route?.WideContent ?? false);
+            }
 
             _nav.IsBackEnabled = _frame.CanGoBack;
             SyncSelection(e.SourcePageType);

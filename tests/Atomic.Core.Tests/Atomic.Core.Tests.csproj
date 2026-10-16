@@ -29,7 +29,7 @@
     <Content Include="..\..\src\Atomic.App\Assets\Elements\elements_*.json"
              Link="assets\%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="..\..\src\Atomic.App\Strings\**\Resources.resw"
+    <Content Include="..\..\src\Atomic.App\Strings\**\*.resw"
              Link="strings\%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
     <Content Include="corpus\**\*.tsv"

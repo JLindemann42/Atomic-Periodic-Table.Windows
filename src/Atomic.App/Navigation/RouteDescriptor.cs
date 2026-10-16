@@ -38,11 +38,15 @@ namespace Atomic.App.Navigation
 
         public required Type PageType { get; init; }
 
-        /// <summary>Breadcrumb text, and the pane text unless <see cref="NavLabel"/> overrides it.</summary>
-        public required string Title { get; init; }
+        /// <summary>
+        /// Resource key for the breadcrumb text, and for the pane text unless
+        /// <see cref="NavLabelKey"/> overrides it. Resolved through <see cref="IStringProvider"/>,
+        /// so it follows the app language.
+        /// </summary>
+        public required string TitleKey { get; init; }
 
-        /// <summary>Pane text, when it needs to differ from <see cref="Title"/>.</summary>
-        public string? NavLabel { get; init; }
+        /// <summary>Resource key for the pane text, when it differs from <see cref="TitleKey"/>.</summary>
+        public string? NavLabelKey { get; init; }
 
         /// <summary>
         /// Tag of the route this one sits under. The breadcrumb walks this chain to the root, so
@@ -71,6 +75,7 @@ namespace Atomic.App.Navigation
         /// </summary>
         public Func<Frame, string[]?>? BreadcrumbOverride { get; init; }
 
-        public string PaneText => NavLabel ?? Title;
+        /// <summary>Key to show in the navigation pane.</summary>
+        public string PaneTextKey => NavLabelKey ?? TitleKey;
     }
 }

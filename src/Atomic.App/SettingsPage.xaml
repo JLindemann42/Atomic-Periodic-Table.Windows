@@ -89,15 +89,41 @@
                     </ComboBox>
                 </Grid>
 
+                <!-- App Language Setting -->
+                <Grid Grid.Row="3"
+                      HorizontalAlignment="Stretch"
+                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                      BorderThickness="1"
+                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                      Padding="12"
+                      CornerRadius="8"
+                      Margin="0,-12,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock x:Name="LanguageHeader" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock x:Name="LanguageDescription"
+                                   FontSize="12"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
+                    <ComboBox x:Name="LanguageComboBox"
+                              Grid.Column="1"
+                              MinWidth="180"
+                              HorizontalAlignment="Right"
+                              SelectionChanged="LanguageComboBox_SelectionChanged" />
+                </Grid>
+
                 <!-- About Section -->
-                <TextBlock Grid.Row="3"
+                <TextBlock Grid.Row="4"
                            Text="About"
                            FontSize="14"
                            FontWeight="Bold"
                            Margin="0,8,0,16"/>
 
                 <!-- Android App Card -->
-                <Grid Grid.Row="4"
+                <Grid Grid.Row="5"
                       HorizontalAlignment="Stretch"
                       Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                       BorderThickness="1"
@@ -122,7 +148,7 @@
                 </Grid>
 
                 <!-- GitHub Card -->
-                <Grid Grid.Row="5"
+                <Grid Grid.Row="6"
                       HorizontalAlignment="Stretch"
                       Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                       BorderThickness="1"
@@ -147,7 +173,7 @@
                 </Grid>
 
                 <!-- Version Info Card -->
-                <Grid Grid.Row="6"
+                <Grid Grid.Row="7"
                       HorizontalAlignment="Stretch"
                       Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                       BorderThickness="1"

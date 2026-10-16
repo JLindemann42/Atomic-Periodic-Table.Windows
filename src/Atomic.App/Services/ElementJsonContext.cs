@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Atomic.App.Tools;
 
@@ -26,6 +26,8 @@ namespace Atomic.App.Services
     [JsonSerializable(typeof(List<FavoriteCompound>))]
     [JsonSerializable(typeof(List<UnitConversionFavorite>))]
     [JsonSerializable(typeof(List<string>))]
+    [JsonSerializable(typeof(List<SavedEquation>))]
+    [JsonSerializable(typeof(List<SavedIdealGas>))]
     internal sealed partial class ElementJsonContext : JsonSerializerContext
     {
     }

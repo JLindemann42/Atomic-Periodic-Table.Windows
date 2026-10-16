@@ -1,0 +1,135 @@
+﻿<Page
+    x:Class="Atomic.App.Tools.EquationBalancerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic.App.Tools"
+    xmlns:controls="using:Atomic.App.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid HorizontalAlignment="Center" MaxWidth="1856" Margin="0,24,0,24" Padding="56,0,36,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Balancer -->
+            <Grid Grid.Row="0" Grid.Column="0"
+                  VerticalAlignment="Top"
+                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                  BorderThickness="1"
+                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                  Padding="16" CornerRadius="8" Margin="0,0,8,16">
+                <StackPanel Spacing="12">
+                    <TextBlock x:Name="CardTitle" FontSize="14" FontWeight="SemiBold"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="EquationBox"
+                                 TextChanged="EquationBox_TextChanged"
+                                 IsSpellCheckEnabled="False"
+                                 FontFamily="Consolas"
+                                 FontSize="16"/>
+                        <Button x:Name="SaveButton" Grid.Column="1" Margin="8,0,0,0"
+                                Click="SaveFavorite_Click" ToolTipService.ToolTip="Save">
+                            <FontIcon Glyph="&#xE734;" FontSize="14"/>
+                        </Button>
+                    </Grid>
+
+                    <!-- Result, or the reason there is none -->
+                    <TextBlock x:Name="ResultText"
+                               FontSize="18"
+                               TextWrapping="Wrap"
+                               IsTextSelectionEnabled="True"/>
+
+                    <!-- Atom check: the proof both sides agree -->
+                    <StackPanel x:Name="TallyPanel" Spacing="2" Visibility="Collapsed">
+                        <TextBlock x:Name="TallyHeader" FontWeight="SemiBold" FontSize="13" Margin="0,4,0,2"/>
+                        <ItemsControl x:Name="TallyItems">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="local:TallyRow">
+                                    <TextBlock Text="{x:Bind Text}" FontSize="13"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <TextBlock x:Name="ExamplesHeader" FontWeight="SemiBold" FontSize="13" Margin="0,8,0,0"/>
+                    <controls:WrapPanel x:Name="ExamplesPanel"/>
+
+                    <TextBlock x:Name="NoteText"
+                               FontSize="12" TextWrapping="Wrap" Margin="0,8,0,0"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Favourites -->
+            <Grid Grid.Row="0" Grid.Column="1"
+                  VerticalAlignment="Top"
+                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                  BorderThickness="1"
+                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                  Padding="16" CornerRadius="8" Margin="8,0,0,16">
+                <StackPanel Spacing="12">
+                    <TextBlock x:Name="FavoritesTitle" FontSize="14" FontWeight="SemiBold"/>
+
+                    <StackPanel x:Name="ProGate" Spacing="12" Visibility="Collapsed"
+                                HorizontalAlignment="Center" Margin="0,24,0,24">
+                        <TextBlock x:Name="ProGateText" FontSize="16" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center" TextWrapping="Wrap"
+                                   TextAlignment="Center"/>
+                        <Button x:Name="ProGateButton" Click="OpenProPage_Click"
+                                HorizontalAlignment="Center"
+                                Style="{ThemeResource AccentButtonStyle}"/>
+                    </StackPanel>
+
+                    <TextBlock x:Name="FavoritesEmpty" FontSize="13" TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Visibility="Collapsed"/>
+
+                    <ItemsControl x:Name="FavoritesList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:SavedEquation">
+                                <Grid Margin="0,0,0,8" Padding="10" CornerRadius="6"
+                                      Background="{ThemeResource SubtleFillColorSecondaryBrush}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{x:Bind Balanced}" FontFamily="Consolas" FontSize="14"
+                                                   TextWrapping="Wrap"/>
+                                        <TextBlock Text="{x:Bind Input}" FontSize="11"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Click="CopyFavorite_Click" Tag="{x:Bind Balanced}"
+                                            Background="Transparent" BorderThickness="0"
+                                            ToolTipService.ToolTip="Copy">
+                                        <FontIcon Glyph="&#xE8C8;" FontSize="14"/>
+                                    </Button>
+                                    <Button Grid.Column="2" Click="RemoveFavorite_Click" Tag="{x:Bind Input}"
+                                            Background="Transparent" BorderThickness="0"
+                                            ToolTipService.ToolTip="Remove">
+                                        <FontIcon Glyph="&#xE74D;" FontSize="14"/>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

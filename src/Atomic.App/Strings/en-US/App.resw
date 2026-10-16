@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="alloy_base_metal" xml:space="preserve">
+    <value>Base metal</value>
+  </data>
+  <data name="alloy_composition" xml:space="preserve">
+    <value>Composition</value>
+  </data>
+  <data name="alloy_go_to_element" xml:space="preserve">
+    <value>Open element</value>
+  </data>
+  <data name="alloy_search" xml:space="preserve">
+    <value>Search alloys</value>
+  </data>
+  <data name="dialog_close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="nav_blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="nav_constants" xml:space="preserve">
+    <value>Constants</value>
+  </data>
+  <data name="nav_element_details" xml:space="preserve">
+    <value>Element Details</value>
+  </data>
+  <data name="nav_emission" xml:space="preserve">
+    <value>Emission Spectrums</value>
+  </data>
+  <data name="nav_emission_details" xml:space="preserve">
+    <value>Emission Spectrum Table Details</value>
+  </data>
+  <data name="nav_equations" xml:space="preserve">
+    <value>Equations</value>
+  </data>
+  <data name="nav_equations_details" xml:space="preserve">
+    <value>Equations Details</value>
+  </data>
+  <data name="nav_geology_details" xml:space="preserve">
+    <value>Geology Table Details</value>
+  </data>
+  <data name="nav_ionization_details" xml:space="preserve">
+    <value>Ionization Energies Details</value>
+  </data>
+  <data name="nav_isotope_details" xml:space="preserve">
+    <value>Isotope Details</value>
+  </data>
+  <data name="nav_periodic_table" xml:space="preserve">
+    <value>Periodic Table</value>
+  </data>
+  <data name="nav_poisson_details" xml:space="preserve">
+    <value>Poisson's Ratio Details</value>
+  </data>
+  <data name="nav_solubility" xml:space="preserve">
+    <value>Solubility</value>
+  </data>
+  <data name="settings_language" xml:space="preserve">
+    <value>App language</value>
+  </data>
+  <data name="settings_language_desc" xml:space="preserve">
+    <value>Choose the language used for the interface</value>
+  </data>
+  <data name="settings_language_system" xml:space="preserve">
+    <value>Use system setting</value>
+  </data>
+</root>

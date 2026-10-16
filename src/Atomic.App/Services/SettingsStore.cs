@@ -26,6 +26,10 @@ namespace Atomic.App.Services
         public static class Keys
         {
             public const string AppTheme = "AppTheme";
+
+            /// <summary>BCP-47 tag, or empty to follow Windows. See <see cref="AppLanguage"/>.</summary>
+            public const string AppLanguage = "AppLanguage";
+
             public const string DefaultUnit = "DefaultUnit";
             public const string WindowWidth = "WindowWidth";
             public const string WindowHeight = "WindowHeight";
@@ -38,6 +42,9 @@ namespace Atomic.App.Services
             public const string LastQuizXp = "LastQuizXP";
             public const string TotalGamesPlayed = "TotalGamesPlayed";
             public const string PerfectGames = "PerfectGames";
+
+            /// <summary>Lowercase element key, or empty for "all". See AlloyPage.</summary>
+            public const string AlloyBaseFilter = "AlloyBaseFilter";
 
             /// <summary>Per-element note, keyed by atomic number.</summary>
             public static string ElementNotes(int atomicNumber) =>

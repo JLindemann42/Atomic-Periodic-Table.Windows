@@ -8,7 +8,7 @@
 
 namespace Atomic.Core.Localization;
 
-public static class S
+public static partial class S
 {
     public const string Dictionary = "Dictionary";
     public const string New = "New";

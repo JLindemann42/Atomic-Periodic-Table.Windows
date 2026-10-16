@@ -21,7 +21,57 @@ namespace Atomic.App
             _isInitializing = true;
             updateThemeComboBox();
             updateUnitComboBox();
+            UpdateLanguageComboBox();
             _isInitializing = false;
+        }
+
+        private void UpdateLanguageComboBox()
+        {
+            var strings = ResourceStringProvider.For(AppLanguage.Current);
+            LanguageHeader.Text = strings.Get("settings_language");
+            LanguageDescription.Text = strings.Get("settings_language_desc");
+
+            LanguageComboBox.Items.Clear();
+            LanguageComboBox.Items.Add(new ComboBoxItem
+            {
+                Content = strings.Get("settings_language_system"),
+                Tag = AppLanguage.System,
+            });
+            foreach (var (tag, nativeName) in AppLanguage.Supported)
+            {
+                // Listed in each language's own name - a user looking for their language cannot
+                // be expected to recognise its English exonym.
+                LanguageComboBox.Items.Add(new ComboBoxItem { Content = nativeName, Tag = tag });
+            }
+
+            var preference = AppLanguage.Preference;
+            LanguageComboBox.SelectedIndex = 0;
+            for (var i = 0; i < LanguageComboBox.Items.Count; i++)
+            {
+                if (LanguageComboBox.Items[i] is ComboBoxItem item &&
+                    (item.Tag as string) == preference)
+                {
+                    LanguageComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isInitializing || LanguageComboBox.SelectedItem is not ComboBoxItem selected)
+                return;
+
+            var tag = selected.Tag as string ?? AppLanguage.System;
+            if (tag == AppLanguage.Preference)
+                return;
+
+            AppLanguage.Preference = tag;
+            AppLanguage.Apply(tag);
+
+            // MRT resolves each resource once per element and caches it, so text already realised
+            // does not change on its own. Rebuild the pane and re-enter the current page.
+            MainWindow.Instance?.Navigation?.ReloadForLanguageChange();
         }
 
         private void updateThemeComboBox()

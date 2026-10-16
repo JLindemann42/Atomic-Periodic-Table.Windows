@@ -90,27 +90,42 @@ namespace Atomic.Core.Tests.Fixtures
         private static bool IsEnglish(string language) =>
             language.StartsWith("en", StringComparison.OrdinalIgnoreCase);
 
+        /// <summary>
+        /// Both resource files for one language, merged.
+        ///
+        /// <para>App.resw is read last so it wins, matching <c>ResourceStringProvider</c>, which
+        /// searches the App subtree before Resources precisely so Windows can override an Android
+        /// string. A test reading only Resources.resw would report every Windows-only key as
+        /// missing.</para>
+        /// </summary>
         private static IReadOnlyDictionary<string, string> Load(string language) =>
             Tables.GetOrAdd(language, lang =>
             {
-                var path = ResolvePath(lang);
-                if (path is null)
-                    return new Dictionary<string, string>();
+                var folder = ResolveFolder(lang);
+                var table = new Dictionary<string, string>(StringComparer.Ordinal);
+                if (folder is null)
+                    return table;
 
-                return XDocument.Load(path).Root!
-                    .Elements("data")
-                    .Where(d => d.Attribute("name") is not null)
-                    .ToDictionary(
-                        d => d.Attribute("name")!.Value,
-                        d => d.Element("value")?.Value ?? string.Empty,
-                        StringComparer.Ordinal);
+                foreach (var file in new[] { "Resources.resw", "App.resw" })
+                {
+                    var path = Path.Combine(folder, file);
+                    if (!File.Exists(path))
+                        continue;
+
+                    foreach (var data in XDocument.Load(path).Root!.Elements("data"))
+                    {
+                        if (data.Attribute("name") is { } name)
+                            table[name.Value] = data.Element("value")?.Value ?? string.Empty;
+                    }
+                }
+                return table;
             });
 
         /// <summary>
         /// Resolves a base code onto a resource folder. The folders are BCP-47, so several are
         /// region-qualified ("pt-BR", "zh-Hans") and cannot be derived from the base code alone.
         /// </summary>
-        private static string? ResolvePath(string language)
+        private static string? ResolveFolder(string language)
         {
             if (!Directory.Exists(StringsRoot))
                 return null;
@@ -129,16 +144,15 @@ namespace Atomic.Core.Tests.Fixtures
 
             foreach (var candidate in candidates)
             {
-                var path = Path.Combine(StringsRoot, candidate, "Resources.resw");
-                if (File.Exists(path))
-                    return path;
+                var folder = Path.Combine(StringsRoot, candidate);
+                if (File.Exists(Path.Combine(folder, "Resources.resw")))
+                    return folder;
             }
 
             // Last resort: any folder whose language part matches, e.g. "sv" -> "sv-SE".
             var prefix = language + "-";
-            var match = Directory.EnumerateDirectories(StringsRoot)
+            return Directory.EnumerateDirectories(StringsRoot)
                 .FirstOrDefault(d => Path.GetFileName(d)!.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
-            return match is null ? null : Path.Combine(match, "Resources.resw");
         }
     }
 }
