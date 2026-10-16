@@ -41,6 +41,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label_electrons" xml:space="preserve">
+    <value>Elektrone</value>
+  </data>
   <data name="nav_constants" xml:space="preserve">
     <value>Konstantes Tabel</value>
   </data>
@@ -52,5 +55,58 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>Oplosbaarheidstabel</value>
+  </data>
+  <data name="settings_android_desc" xml:space="preserve">
+    <value>Laai die app af vir jou mobiele toestelle om oral toegang tot alle data te kry</value>
+  </data>
+  <data name="settings_android_link" xml:space="preserve">
+    <value>Laai af vir Android</value>
+  </data>
+  <data name="settings_android_title" xml:space="preserve">
+    <value>Kry Atomic vir Android</value>
+  </data>
+  <data name="settings_general" xml:space="preserve">
+    <value>Algemeen</value>
+  </data>
+  <data name="settings_github_desc" xml:space="preserve">
+    <value>Atomic's oopbron Github-bewaarplek</value>
+  </data>
+  <data name="settings_language" xml:space="preserve">
+    <value>Tale</value>
+  </data>
+  <data name="settings_language_desc" xml:space="preserve">
+    <value>Kies Taal</value>
+  </data>
+  <data name="settings_language_system" xml:space="preserve">
+    <value>Stelsel Verstek</value>
+  </data>
+  <data name="settings_temperature_desc" xml:space="preserve">
+    <value>Eenheid wat gebruik word oral waar 'n temperatuur gewys word</value>
+  </data>
+  <data name="settings_temperature_title" xml:space="preserve">
+    <value>Temperatuur</value>
+  </data>
+  <data name="settings_theme_desc" xml:space="preserve">
+    <value>Kies Tema</value>
+  </data>
+  <data name="settings_theme_title" xml:space="preserve">
+    <value>Temas</value>
+  </data>
+  <data name="ultimate_badge" xml:space="preserve">
+    <value>Alle platforms</value>
+  </data>
+  <data name="ultimate_bullets" xml:space="preserve">
+    <value>• Alles in PRO+
+• Elke platform waarop jy aanmeld
+• Een aankoop, geen opgradering nodig</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Koop Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Binnekort</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>PRO+ op Windows en Android, een keer gekoop.</value>
   </data>
 </root>

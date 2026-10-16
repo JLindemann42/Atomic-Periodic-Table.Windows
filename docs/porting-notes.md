@@ -454,6 +454,29 @@ every visible bubble would allocate one. The card draws a static isometric wiref
 lattice table using shapes, for the same reason Win2D was kept out of the other charts. The element
 page keeps the interactive version.
 
+### D20 — register from bin/AppxManifest.xml, not bin/AppX/AppxManifest.xml
+
+`Add-AppxPackage -Register` was pointed at
+`bin\x64\Debug\net8.0-windows10.0.26100.0\**AppX**\AppxManifest.xml` throughout the port. That file
+is a leftover from an older packaging run and **the ordinary build does not refresh it** — it was
+three days stale when this was found.
+
+It went unnoticed for phases because the binaries, assets and `.resw` files live in the parent
+directory and are picked up from there, so code and resource changes appeared to work. Only a
+*manifest* change exposes it: the `windows.protocol` extension was declared, the build wrote it to
+`bin\…\AppxManifest.xml`, and the shell kept registering the stale copy without it, so
+`HKCU:\SOFTWARE\Classes\atomic` was never created and `atomic://` launched nothing.
+
+Register from the manifest **beside the executable**:
+
+```
+Add-AppxPackage -Register <abs>\src\Atomic.App\bin\x64\Debug\net8.0-windows10.0.26100.0\AppxManifest.xml
+```
+
+A dev-mode package also refuses re-registration with `0x80073CFB` once installed, so a manifest
+change needs `Remove-AppxPackage` first — a plain re-register silently leaves the old extensions in
+place.
+
 ## Environment facts worth not rediscovering
 
 - **Firebase project:** `atomic---periodic-table-41532`, project number `315118082769`. Every
@@ -463,6 +486,24 @@ page keeps the interactive version.
   makes cross-device sync work at all — verify it again if the client ID ever changes.
   The `AIza…` key in `google-services.json` is the *Android-restricted* key; the desktop client
   needs the Firebase **Web** API key for `identitytoolkit` calls.
+
+- **The Web API key is verified.** `AIzaSyDNPscfJNeg6wm1cFW6-V5sQm0sm-kfFa0` resolves through
+  `identitytoolkit.googleapis.com/v1/projects?key=…` to project number `315118082769` with
+  `atomic---periodic-table-41532.firebaseapp.com` among its authorized domains — the same Firebase
+  project Android uses. That is the half of the P0 precondition that holds.
+
+- **The desktop OAuth client supplied on 2026-08-14 does _not_ satisfy it.**
+  `945214413416-6i7sk6h30dtmeslo4krgf79lhnbogkk8.apps.googleusercontent.com` carries project number
+  **945214413416**, while the Firebase project and all three Android clients are **315118082769**.
+  Firebase checks a Google ID token's `aud` against the project's own clients, so this is normally
+  rejected outright; and were it accepted, the uid would not be Android's — which is the *silent*
+  failure the P0 spike exists to prevent, because sync then appears to work while every Windows user
+  writes to a fresh document.
+
+  Fix either by creating the "Desktop app" client inside `atomic---periodic-table-41532`
+  (recommended — keeps one project), or by allowlisting the foreign client under that project's
+  Google sign-in provider. **Re-run the `?key=` check above against any replacement before
+  believing it**; the project number in the client ID prefix is the thing to compare.
 - **The app is packaged and full-trust** (`runFullTrust` in `Package.appxmanifest`), so it is
   not in an AppContainer and the loopback network-isolation restriction does not apply. That is
   what makes the RFC 8252 loopback OAuth flow viable here.

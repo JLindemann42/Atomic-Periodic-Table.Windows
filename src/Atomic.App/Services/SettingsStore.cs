@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -35,6 +35,12 @@ namespace Atomic.App.Services
             public const string WindowHeight = "WindowHeight";
             public const string IsProUser = "IsProUser";
             public const string IsProPlusUser = "IsProPlusUser";
+
+            /// <summary>Ultimate: PRO+ on every platform, bought once. See ProPage.</summary>
+            public const string HasUltimate = "HasUltimate";
+
+            /// <summary>The phone's tier, as last reported by the account document. Read-only here.</summary>
+            public const string AndroidTier = "AndroidTier";
             public const string FavoritePropertyKeys = "FavoritePropertyKeys";
             public const string UserXp = "user_xp";
             public const string Lives = "Lives";
@@ -51,6 +57,11 @@ namespace Atomic.App.Services
             public const string QuizDifficulty = "QuizDifficulty";
             public const string TotalGamesPlayed = "TotalGamesPlayed";
             public const string PerfectGames = "PerfectGames";
+
+            // Account (P9). The picture and name Google returns at sign-in, kept so the pane can
+            // draw an avatar before - or without - a session restore reaching the network.
+            public const string AccountPhotoUrl = "AccountPhotoUrl";
+            public const string AccountDisplayName = "AccountDisplayName";
 
             /// <summary>Lowercase element key, or empty for "all". See AlloyPage.</summary>
             public const string AlloyBaseFilter = "AlloyBaseFilter";
@@ -137,6 +148,45 @@ namespace Atomic.App.Services
         /// does not necessarily set the PRO flag.
         /// </summary>
         public static bool HasAnyPro => IsProUser || IsProPlusUser;
+
+        /// <summary>
+        /// Ultimate, the one product that crosses stores.
+        /// </summary>
+        /// <remarks>
+        /// Stored separately from the two tier flags because it is the reason for them rather than
+        /// one of them: it is bought on one platform and arrives on the others through the account
+        /// document, where the local store has no licence to show for it.
+        /// </remarks>
+        public static bool HasUltimate
+        {
+            get => Get(Keys.HasUltimate, false);
+            set => Set(Keys.HasUltimate, value);
+        }
+
+        /// <summary>
+        /// What the phone last reported owning, in wire form.
+        /// </summary>
+        /// <remarks>
+        /// Cached so the account page can show both platforms before a sync completes, or without
+        /// a network at all. Never written to the cloud - Windows does not get to claim a tier for
+        /// a device it cannot see.
+        /// </remarks>
+        public static string AndroidTier
+        {
+            get => Get(Keys.AndroidTier, string.Empty);
+            set => Set(Keys.AndroidTier, value);
+        }
+
+        /// <summary>The entitlement this machine's store has granted, as one value.</summary>
+        public static Atomic.Core.Licensing.Entitlement Entitlement
+        {
+            get => new(IsProUser, IsProPlusUser);
+            set
+            {
+                IsProUser = value.IsPro;
+                IsProPlusUser = value.IsProPlus;
+            }
+        }
 
         // -- element detail --------------------------------------------------------------------
 

@@ -102,6 +102,7 @@ namespace Atomic.App.Tools
                 {
                     // Deduct 5 lives in local settings
                     ProgressStore.Spend(5);
+                    NotificationScheduler.ScheduleLivesRefill();
 
                     // End the quiz and stop the timer to prevent further ticks/life loss
                     quizCompleted = true;
@@ -348,6 +349,12 @@ namespace Atomic.App.Tools
         {
             quizCompleted = true;
 
+            // Finishing a game is what a "day played" means. Nothing recorded this before, so the
+            // streak counter never moved off zero however much the user played - the arithmetic
+            // was there, but no path reached it.
+            ProgressStore.RecordPlay();
+            NotificationScheduler.ScheduleStreakReminder();
+
             // Bonus: Completed all questions
             int bonusXp = 0;
             if (gameResults.Count == questions.Count)
@@ -364,6 +371,8 @@ namespace Atomic.App.Tools
                 {
                     SettingsStore.PerfectGames = 1;
                 }
+
+                AchievementStore.Record(AchievementTrigger.PerfectGame);
             }
 
             int correctCount = gameResults.Count(r => r.WasCorrect);
@@ -378,6 +387,7 @@ namespace Atomic.App.Tools
 
             // Increment total games played
             SettingsStore.TotalGamesPlayed = SettingsStore.TotalGamesPlayed + 1;
+            AchievementStore.Record(AchievementTrigger.GamePlayed);
 
             // Show result card with animation
             ResultXpSummary.Text = $"Total XP: {xp}";

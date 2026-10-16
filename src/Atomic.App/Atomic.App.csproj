@@ -360,4 +360,14 @@
     <PackageProjectUrl>https://jlindemann.se/homepage</PackageProjectUrl>
     <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
   </PropertyGroup>
+  <!--
+    The Firebase OAuth client secret, when the developer or CI has placed one here. Conditional so
+    a clone without it builds cleanly - the app then reports cloud sync as unconfigured and
+    everything else works. .gitignore keeps the file out of the repository; see
+    Services/FirebaseSecrets.cs for why it is not committed.
+  -->
+  <ItemGroup Condition="Exists('firebase.client_secret')">
+    <Content Include="firebase.client_secret" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

@@ -18,7 +18,7 @@
                 <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="18" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" MinWidth="600" MaxWidth="1780">
                     <StackPanel>
                         <StackPanel>
-                            <TextBlock x:Name="PoissonTitle" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="Poisson's Ratio:" FontSize="20" FontWeight="SemiBold" Margin="12,0,0,12"/>
+                            <TextBlock x:Name="PoissonTitle" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="{loc:Str Key=element_poisson_ratio}" FontSize="20" FontWeight="SemiBold" Margin="12,0,0,12"/>
                             <TextBlock x:Name="PoissonRangeInfo" Foreground="{ThemeResource TextFillColorPrimaryBrush}" Text="Value Range: xx% - yy%" FontSize="16" Margin="12,0,0,12"/>
                             <StackPanel Margin="12,4,12,0">
                                 <!-- Progress bar container -->
@@ -62,7 +62,7 @@
 
         <!-- Message and Button if user does NOT have PRO -->
         <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="This feature requires PRO version."
+            <TextBlock Text="{loc:Str Key=requires_pro}"
                        FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
             <Button Content="{loc:Str Key=get_pro_title}"
                     Click="OpenProPage_Click"

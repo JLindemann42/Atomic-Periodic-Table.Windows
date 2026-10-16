@@ -144,13 +144,58 @@ def main() -> int:
 
     if unmatched:
         print(f"\n{len(unmatched)} strings have no English resource and were left alone:")
-        for text, files in sorted(unmatched.items(), key=lambda e: -len(e[1]))[:40]:
+        # Every one, not a top-40: the cap hid two thirds of the backlog, which made the list
+        # look finished each time the visible rows were dealt with.
+        for text, files in sorted(unmatched.items(), key=lambda e: -len(e[1])):
             where = ", ".join(sorted(set(files))[:3])
             print(f'    "{text[:56]}"  ({where})')
+
+    report_code_behind()
 
     if not args.write:
         print("\nDRY RUN - nothing written.")
     return 0
+
+
+# Assignment of a literal to a property the user reads. Interpolated strings count: a header built
+# as $"Info about {name}:" is half English however the other half is filled in.
+CODE_BEHIND = re.compile(r'[.](?:Text|Content|PlaceholderText|Header|Message|Title)\s*=\s*([$]?"[^"]*")')
+
+
+def report_code_behind() -> None:
+    """
+    List English literals assigned in the code-behind.
+
+    This tool rewrites markup, and for a long time it only *looked* at markup - so a page whose
+    labels are assigned in OnNavigatedTo read as fully localized when not one of its strings was.
+    GeologyDetailsPage was the case that surfaced it: nine `Text="- Type:"` values sat in the XAML
+    looking like work to do, and every one of them was overwritten in C# before a user saw it.
+
+    Reported rather than rewritten. Half of these are format strings that need a resource with a
+    placeholder rather than a swapped attribute, and that is a judgement per call site.
+    """
+    found: dict[str, list[str]] = {}
+    for source in sorted(APP.rglob("*.xaml.cs")):
+        if "obj" in source.parts or "bin" in source.parts:
+            continue
+        text = source.read_text(encoding="utf-8-sig", errors="replace")
+        for number, line in enumerate(text.splitlines(), 1):
+            for match in CODE_BEHIND.finditer(line):
+                literal = match.group(1).lstrip("$").strip('"')
+                # Words, not glyphs, numbers or format-only fragments.
+                if len(re.findall(r"[A-Za-z]{3,}", literal)) >= 1:
+                    found.setdefault(str(source.relative_to(APP)), []).append(
+                        f"{number}: {literal[:56]}")
+
+    total = sum(len(v) for v in found.values())
+    if not total:
+        return
+
+    print(f"\n{total} English literals are assigned in code-behind, which this tool cannot rewrite:")
+    for name, rows in sorted(found.items(), key=lambda e: -len(e[1])):
+        print(f"    {name}  ({len(rows)})")
+        for row in rows:
+            print(f"        {row}")
 
 
 if __name__ == "__main__":

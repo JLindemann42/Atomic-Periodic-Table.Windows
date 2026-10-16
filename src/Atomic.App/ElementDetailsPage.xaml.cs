@@ -1,6 +1,7 @@
 ﻿using Atomic.App;
 using Atomic.App.Tables;
 using Atomic.App.Helpers;
+using Atomic.Core.Localization;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -152,47 +153,70 @@ namespace Atomic.App
             }
         }
 
+        /// <summary>
+        /// The properties a user can pin to the summary bar.
+        /// </summary>
+        /// <remarks>
+        /// <para>Labels come from resources rather than English literals. This list is the reason
+        /// the element page read half-translated after P2e: the page's own headings went through
+        /// <c>{loc:Str}</c>, but these are built in code, so "Atomic Weight" and "Density" stayed
+        /// English beside a Swedish "Översikt".</para>
+        ///
+        /// <para>Every key already existed - these are the same labels the property tables below
+        /// use - so this needed no new vocabulary. The trailing colon is trimmed because those keys
+        /// are authored for a "Label: value" row and these are chips.</para>
+        /// </remarks>
         private void InitializeAllProperties()
         {
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+
+            FavoriteProperty Property(string key, string labelKey, bool isProOnly = false) =>
+                new()
+                {
+                    Key = key,
+                    DisplayName = strings.Get(labelKey).TrimEnd(':', '：', ' '),
+                    IsProOnly = isProOnly,
+                };
+
             AllProperties = new List<FavoriteProperty>
-    {
-        new FavoriteProperty { Key = "AtomicNumber", DisplayName = "Atomic Number" },
-        new FavoriteProperty { Key = "ElementAtomicWeight", DisplayName = "Atomic Weight" },
-        new FavoriteProperty { Key = "ElementDensity", DisplayName = "Density" },
-        new FavoriteProperty { Key = "ElementElectronegativity", DisplayName = "Electronegativity" },
-        new FavoriteProperty { Key = "ElementBlock", DisplayName = "Block" },
-        new FavoriteProperty { Key = "BoilingPointCelsius", DisplayName = "Boiling Point (°C)" },
-        new FavoriteProperty { Key = "BoilingPointKelvin", DisplayName = "Boiling Point (K)" },
-        new FavoriteProperty { Key = "BoilingPointFahrenheit", DisplayName = "Boiling Point (°F)" },
-        new FavoriteProperty { Key = "MeltingPointCelsius", DisplayName = "Melting Point (°C)" },
-        new FavoriteProperty { Key = "MeltingPointKelvin", DisplayName = "Melting Point (K)" },
-        new FavoriteProperty { Key = "MeltingPointFahrenheit", DisplayName = "Melting Point (°F)" },
-        new FavoriteProperty { Key = "Phase", DisplayName = "Phase (STP)" },
-        new FavoriteProperty { Key = "Radioactive", DisplayName = "Radioactive" },
-        new FavoriteProperty { Key = "ElementGroup", DisplayName = "Group" },
-        new FavoriteProperty { Key = "ElementAppearance", DisplayName = "Appearance" },
-        new FavoriteProperty { Key = "ElectronConfiguration", DisplayName = "Electron Configuration" },
-        new FavoriteProperty { Key = "IonCharge", DisplayName = "Ion Charge" },
-        new FavoriteProperty { Key = "IonizationEnergies", DisplayName = "Ionization Energies" },
-        new FavoriteProperty { Key = "AtomicRadiusEmpirical", DisplayName = "Atomic Radius (Empirical)" },
-        new FavoriteProperty { Key = "AtomicRadiusCalculated", DisplayName = "Atomic Radius (Calculated)" },
-        new FavoriteProperty { Key = "CovalentRadius", DisplayName = "Covalent Radius" },
-        new FavoriteProperty { Key = "VanDerWallsRadius", DisplayName = "Van Der Waals Radius" },
-        new FavoriteProperty { Key = "ElectricalType", DisplayName = "Electrical Type" },
-        new FavoriteProperty { Key = "ElectricalResistivity", DisplayName = "Electrical Resistivity" },
-        new FavoriteProperty { Key = "MagneticType", DisplayName = "Magnetic Type" },
-        new FavoriteProperty { Key = "SuperconductingPoint", DisplayName = "Superconducting Point" },
-        new FavoriteProperty { Key = "FusionHeat", DisplayName = "Fusion Heat" },
-        new FavoriteProperty { Key = "SpecificHeatCapacity", DisplayName = "Specific Heat Capacity" },
-        new FavoriteProperty { Key = "VaporizationHeat", DisplayName = "Vaporization Heat" },
-        new FavoriteProperty { Key = "NeutronCrossSectional", DisplayName = "Neutron Cross Sectional" },
-        // PRO-only properties:
-        new FavoriteProperty { Key = "MohsHardness", DisplayName = "Mohs Hardness", IsProOnly = true },
-        new FavoriteProperty { Key = "VickersHardness", DisplayName = "Vickers Hardness", IsProOnly = true },
-        new FavoriteProperty { Key = "BrinellHardness", DisplayName = "Brinell Hardness", IsProOnly = true },
-        new FavoriteProperty { Key = "CASNumber", DisplayName = "CAS Number" },
-        new FavoriteProperty { Key = "EGNumber", DisplayName = "EG Number" }
-    };
+            {
+                Property("AtomicNumber", S.atomic_number),
+                Property("ElementAtomicWeight", S.atomic_weight),
+                Property("ElementDensity", S.density),
+                Property("ElementElectronegativity", S.electronegativity),
+                Property("ElementBlock", S.block),
+                Property("BoilingPointCelsius", S.boiling_point_celsius),
+                Property("BoilingPointKelvin", S.boiling_point_kelvin),
+                Property("BoilingPointFahrenheit", S.boiling_point_fahrenheit),
+                Property("MeltingPointCelsius", S.melting_point_celsius),
+                Property("MeltingPointKelvin", S.melting_point_kelvin),
+                Property("MeltingPointFahrenheit", S.melting_point_fahrenheit),
+                Property("Phase", S.phase_stp),
+                Property("Radioactive", S.radioactive),
+                Property("ElementGroup", S.ai_group),
+                Property("ElementAppearance", S.appearance),
+                Property("ElectronConfiguration", S.electron_configuration_colon),
+                Property("IonCharge", S.ion_charge_colon),
+                Property("IonizationEnergies", S.ion),
+                Property("AtomicRadiusEmpirical", S.atomic_radius_empirical_colon),
+                Property("AtomicRadiusCalculated", S.atomic_radius_calculated_colon),
+                Property("CovalentRadius", S.covalent_radius_colon),
+                Property("VanDerWallsRadius", S.van_der_waals_radius_colon),
+                Property("ElectricalType", S.electrical_type),
+                Property("ElectricalResistivity", S.electrical_resistivity),
+                Property("MagneticType", S.magnetic_type),
+                Property("SuperconductingPoint", S.superconducting_point),
+                Property("FusionHeat", S.fusion_heat),
+                Property("SpecificHeatCapacity", S.specific_heat_capacity),
+                Property("VaporizationHeat", S.vaporization_heat),
+                Property("NeutronCrossSectional", S.neutron_cross_sectional),
+                // PRO-only properties:
+                Property("MohsHardness", S.mohs_hardness, isProOnly: true),
+                Property("VickersHardness", S.vickers_hardness, isProOnly: true),
+                Property("BrinellHardness", S.brinell_hardness, isProOnly: true),
+                Property("CASNumber", S.cas_number),
+                Property("EGNumber", S.eg_number),
+            };
         }
 
         private void UpdateIsLastOnFavoriteProperties()

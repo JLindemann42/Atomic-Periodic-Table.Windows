@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Windows.Graphics;
 using Windows.Storage;
@@ -63,9 +64,18 @@ namespace Atomic.App
             // reader announces "button" and nothing else.
             Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(AskAtomicButton, askAtomic);
 
-            if (SettingsStore.HasAnyPro)
+            // Named by platform: "PRO Member" could not say whether the tier came from this
+            // machine's Store or the phone's, and with Ultimate in the mix that distinction is
+            // the difference between one purchase and two.
+            var badge = SettingsStore.HasUltimate
+                ? Atomic.Core.Licensing.EntitlementRules.UltimateBadge
+                : Atomic.Core.Licensing.EntitlementRules.BadgeFor(
+                    Atomic.Core.Licensing.EntitlementRules.WindowsPlatform,
+                    SettingsStore.Entitlement.Tier);
+
+            if (badge is not null)
             {
-                Navigation.SetProLabel("PRO Member");
+                Navigation.SetProLabel(badge);
             }
         }
 
@@ -89,6 +99,20 @@ namespace Atomic.App
 
         private void AskAtomic_Click(object sender, RoutedEventArgs e) => ChatPanel.Toggle();
 
+        /// <summary>
+        /// Open the assistant and put a question to it.
+        /// </summary>
+        /// <remarks>
+        /// The entry point for <c>atomic://ask?q=…</c>, which the Quick Ask widget and any
+        /// "ask about this" link use. Opening without asking would leave the user staring at an
+        /// empty panel wondering what the link did.
+        /// </remarks>
+        public void AskAtomic(string question)
+        {
+            ChatPanel.Open();
+            _ = ChatPanel.Session.AskAsync(question);
+        }
+
         private void AskAtomic_Invoked(
             Microsoft.UI.Xaml.Input.KeyboardAccelerator sender,
             Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
@@ -97,7 +121,30 @@ namespace Atomic.App
             ChatPanel.Toggle();
         }
 
-        private void MainWindow_Closed(object sender, WindowEventArgs args)
+        /// <summary>How long a closing window will wait for a final sync.</summary>
+        /// <remarks>
+        /// Short on purpose. Everything here is monotonic and re-runs at next launch, so a slow
+        /// network costs the user nothing but a delay - and a delay on quit is the one thing that
+        /// makes an app feel broken.
+        /// </remarks>
+        private static readonly TimeSpan CloseSyncBudget = TimeSpan.FromSeconds(5);
+
+        private bool _closingForReal;
+
+        /// <summary>
+        /// Save the window size, then push progress before the process goes away.
+        /// </summary>
+        /// <remarks>
+        /// <para>The close is cancelled and re-issued rather than being awaited in place: a
+        /// <c>Closed</c> handler cannot hold the window open by awaiting, so a fire-and-forget sync
+        /// here would race the process exit and usually lose. The window is hidden first, so from
+        /// the user's side it closed immediately.</para>
+        ///
+        /// <para>Without this, XP earned in the last few minutes of a session waited for the next
+        /// launch to reach the phone - which, if the next thing the user picks up is the phone, is
+        /// exactly when they would notice it missing.</para>
+        /// </remarks>
+        private async void MainWindow_Closed(object sender, WindowEventArgs args)
         {
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
             var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
@@ -106,6 +153,17 @@ namespace Atomic.App
             var size = appWindow.Size;
             SettingsStore.WindowWidth = size.Width;
             SettingsStore.WindowHeight = size.Height;
+
+            if (_closingForReal || !CloudSync.CanSync) return;
+
+            _closingForReal = true;
+            args.Handled = true;
+            appWindow.Hide();
+
+            var sync = CloudSync.AutoSyncAsync(force: true);
+            await Task.WhenAny(sync, Task.Delay(CloseSyncBudget));
+
+            Close();
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -131,6 +189,8 @@ namespace Atomic.App
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
+            AchievementStore.Record(Atomic.Core.Progression.AchievementTrigger.Search);
+
             string elementName = args.QueryText;
             var element = ElementRepository.Get(elementName);
 

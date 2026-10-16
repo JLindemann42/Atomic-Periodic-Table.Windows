@@ -387,6 +387,8 @@ namespace Atomic.App
         }
         private void OnRandomElementButtonClick(object sender, RoutedEventArgs e)
         {
+            Services.AchievementStore.Record(Atomic.Core.Progression.AchievementTrigger.RandomElement);
+
             // Use reflection to get all Element properties named "Element1" to "Element118"
             var elementList = new List<Element>();
 

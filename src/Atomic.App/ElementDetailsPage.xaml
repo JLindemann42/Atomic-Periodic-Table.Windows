@@ -244,7 +244,7 @@
 
                                     <!-- Electrons -->
                                     <StackPanel Grid.Column="0" HorizontalAlignment="Center" Spacing="4">
-                                        <TextBlock Text="Electrons"
+                                        <TextBlock Text="{loc:Str Key=label_electrons}"
                                            FontSize="14"
                                            FontWeight="SemiBold"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -422,7 +422,7 @@
                         <TextBlock Text="{loc:Str Key=ionization_energies_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <Grid>
                             <TextBlock x:Name="IonizationEnergies" Text="{Binding IonizationEnergies}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" HorizontalAlignment="Left"/>
-                            <Button Content="View all Ionization Energies ->" Click="IonizationClick" HorizontalAlignment="Right"/>
+                            <Button Content="{loc:Str Key=table_ionization}" Click="IonizationClick" HorizontalAlignment="Right"/>
                         </Grid>
 
                         
@@ -471,7 +471,7 @@
                         <TextBlock Text="{loc:Str Key=phase_stp_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
                         <TextBlock x:Name="Phase" Text="{Binding Phase}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="Fusion Heat:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=fusion_heat}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="FusionHeat" Text="{Binding FusionHeat}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
                         <TextBlock Text="{loc:Str Key=specific_heat_capacity_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
@@ -507,13 +507,13 @@
                     <StackPanel>
                         <TextBlock Text="{loc:Str Key=hardness_properties}" FontSize="20" FontWeight="SemiBold" />
 
-                        <TextBlock Text="Mohs Hardness:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock Text="{loc:Str Key=mohs_hardness}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
                         <TextBlock x:Name="MohsHardness" Text="{Binding MohsHardness}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="Vickers Hardness:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=vickers_hardness}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="VickersHardness" Text="{Binding VickersHardness}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="Brinell Hardness:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=brinell_hardness}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="BrinellHardness" Text="{Binding BrinellHardness}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
                     </StackPanel>
                 </Border>
@@ -524,19 +524,19 @@
                     <StackPanel>
                         <TextBlock Text="{loc:Str Key=element_more_title}" FontSize="20" FontWeight="SemiBold" />
 
-                        <TextBlock Text="Sound of Speed:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock Text="{loc:Str Key=element_speed_sound}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
                         <TextBlock x:Name="SoundOfSpeed"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="Poisson's Constant:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=element_poisson_ratio}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="PoissonConstant"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="Young's Modulus:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=element_young_modulus}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="YoungModulus"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="Bulk Modulus:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=bulk_modulus}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="BulkModulus"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="Shear Modulus:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=element_shear_modulus}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="ShearModulus" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
                     </StackPanel>
                 </Border>
@@ -556,25 +556,25 @@
                                                    Margin="0,12,0,4"
                                                    HorizontalAlignment="Stretch" />
 
-                        <TextBlock Text="In earth's crust:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        <TextBlock Text="{loc:Str Key=abundance_earth_crust}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
                         <TextBlock x:Name="EarthCrustAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="In earth's soil:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=abundance_earth_soils}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="EarthSoilAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="In urban soil:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=abundance_urban_soil}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="UrbanSoilAbundance" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="In crustal rocks:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=abundance_crustal_rocks}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="CrustalRocksAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="In sea water:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=abundance_sea_water}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="SeaWaterAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="In sun atoms:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=abundance_sun}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="SunAtomsAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="In solar system atoms:" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                        <TextBlock Text="{loc:Str Key=abundance_solar_system}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="SolarSystemAtomsAbundance"  FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
                     </StackPanel>
                 </Border>

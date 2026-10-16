@@ -41,6 +41,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label_electrons" xml:space="preserve">
+    <value>इलेक्ट्रॉन</value>
+  </data>
   <data name="nav_constants" xml:space="preserve">
     <value>स्थिरांक तालिका</value>
   </data>
@@ -52,5 +55,58 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>द्राव्यता तालिका</value>
+  </data>
+  <data name="settings_android_desc" xml:space="preserve">
+    <value>अपने मोबाइल उपकरणों के लिए ऐप डाउनलोड करें और हर जगह सभी डेटा देखें</value>
+  </data>
+  <data name="settings_android_link" xml:space="preserve">
+    <value>Android के लिए डाउनलोड करें</value>
+  </data>
+  <data name="settings_android_title" xml:space="preserve">
+    <value>Android के लिए Atomic पाएं</value>
+  </data>
+  <data name="settings_general" xml:space="preserve">
+    <value>सामान्य</value>
+  </data>
+  <data name="settings_github_desc" xml:space="preserve">
+    <value>एटॉमिक का ओपन-सोर्स गिटहब रिपो</value>
+  </data>
+  <data name="settings_language" xml:space="preserve">
+    <value>भाषाएँ</value>
+  </data>
+  <data name="settings_language_desc" xml:space="preserve">
+    <value>भाषा चुनें</value>
+  </data>
+  <data name="settings_language_system" xml:space="preserve">
+    <value>सिस्टम डिफ़ॉल्ट</value>
+  </data>
+  <data name="settings_temperature_desc" xml:space="preserve">
+    <value>तापमान दिखाए जाने पर उपयोग की जाने वाली इकाई</value>
+  </data>
+  <data name="settings_temperature_title" xml:space="preserve">
+    <value>तापमान</value>
+  </data>
+  <data name="settings_theme_desc" xml:space="preserve">
+    <value>थीम चुनें</value>
+  </data>
+  <data name="settings_theme_title" xml:space="preserve">
+    <value>थीम्स</value>
+  </data>
+  <data name="ultimate_badge" xml:space="preserve">
+    <value>सभी प्लेटफ़ॉर्म</value>
+  </data>
+  <data name="ultimate_bullets" xml:space="preserve">
+    <value>• PRO+ की सभी सुविधाएँ
+• हर वह प्लेटफ़ॉर्म जहाँ आप साइन इन करते हैं
+• एक खरीद, अपग्रेड की ज़रूरत नहीं</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Ultimate खरीदें</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>जल्द आ रहा है</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>Windows और Android पर PRO+, एक ही बार खरीदें।</value>
   </data>
 </root>

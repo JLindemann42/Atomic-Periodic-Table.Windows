@@ -42,7 +42,7 @@
                             <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
                             <MenuFlyoutItem Text="{loc:Str Key=favorite_settings_general}" Click="OnDisplayModeSelected" />
                             <MenuFlyoutItem Text="Mechanics" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Thermodynamics" Click="OnDisplayModeSelected" />
+                            <MenuFlyoutItem Text="{loc:Str Key=favorite_settings_thermodynamics}" Click="OnDisplayModeSelected" />
                             <MenuFlyoutItem Text="Wavelengths" Click="OnDisplayModeSelected" />
                             <MenuFlyoutItem Text="Electricity" Click="OnDisplayModeSelected" />
                             <MenuFlyoutItem Text="Magnetism and Induction" Click="OnDisplayModeSelected" />

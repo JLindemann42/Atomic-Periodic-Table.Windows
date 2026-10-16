@@ -19,6 +19,7 @@ namespace Atomic.App.Navigation
         public const string PeriodicTable = "PeriodicTablePage";
         public const string Settings = "SettingsPage";
         public const string Pro = "ProPage";
+        public const string Account = "AccountPage";
 
         public static readonly IReadOnlyList<RouteDescriptor> All = new RouteDescriptor[]
         {
@@ -67,6 +68,21 @@ namespace Atomic.App.Navigation
                 NavLabelKey = "get_pro_title",
                 Group = NavGroup.Footer,
                 Symbol = Microsoft.UI.Xaml.Controls.Symbol.Add,
+            },
+
+            // Footer entries are added ahead of NavigationView's own settings item, so this one
+            // sits directly above it - the position the account entry holds on Android.
+            //
+            // Labelled with user_title, not account: "account" has no German or Swedish
+            // translation, and a pane that reads "Account" between "Skaffa PRO" and
+            // "Installningar" is exactly the half-translated seam P2e was about.
+            new()
+            {
+                Tag = Account,
+                PageType = typeof(AccountPage),
+                TitleKey = "user_title",
+                Group = NavGroup.Footer,
+                Symbol = Microsoft.UI.Xaml.Controls.Symbol.Contact,
             },
 
             // ---- Reached by navigation, not from the pane --------------------------------

@@ -41,6 +41,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label_electrons" xml:space="preserve">
+    <value>Elétrons</value>
+  </data>
   <data name="nav_constants" xml:space="preserve">
     <value>Tabela de constantes</value>
   </data>
@@ -52,5 +55,58 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>Tabela de solubilidade</value>
+  </data>
+  <data name="settings_android_desc" xml:space="preserve">
+    <value>Baixe o aplicativo para seus dispositivos móveis e acesse todos os dados em qualquer lugar</value>
+  </data>
+  <data name="settings_android_link" xml:space="preserve">
+    <value>Baixar para Android</value>
+  </data>
+  <data name="settings_android_title" xml:space="preserve">
+    <value>Obtenha o Atomic para Android</value>
+  </data>
+  <data name="settings_general" xml:space="preserve">
+    <value>Geral</value>
+  </data>
+  <data name="settings_github_desc" xml:space="preserve">
+    <value>Repositório GitHub de código aberto do Atomic</value>
+  </data>
+  <data name="settings_language" xml:space="preserve">
+    <value>Idiomas</value>
+  </data>
+  <data name="settings_language_desc" xml:space="preserve">
+    <value>Selecionar idioma</value>
+  </data>
+  <data name="settings_language_system" xml:space="preserve">
+    <value>Padrão do sistema</value>
+  </data>
+  <data name="settings_temperature_desc" xml:space="preserve">
+    <value>Unidade usada sempre que uma temperatura é exibida</value>
+  </data>
+  <data name="settings_temperature_title" xml:space="preserve">
+    <value>Temperaturas</value>
+  </data>
+  <data name="settings_theme_desc" xml:space="preserve">
+    <value>Selecionar tema</value>
+  </data>
+  <data name="settings_theme_title" xml:space="preserve">
+    <value>Temas</value>
+  </data>
+  <data name="ultimate_badge" xml:space="preserve">
+    <value>Todas as plataformas</value>
+  </data>
+  <data name="ultimate_bullets" xml:space="preserve">
+    <value>• Tudo do PRO+
+• Todas as plataformas em que você entrar
+• Uma compra, sem precisar de upgrade</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Comprar o Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Em breve</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>PRO+ no Windows e no Android, com uma única compra.</value>
   </data>
 </root>

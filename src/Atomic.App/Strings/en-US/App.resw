@@ -65,6 +65,9 @@
   <data name="flashcard_level_band" xml:space="preserve">
     <value>Level %1$s - %2$s</value>
   </data>
+  <data name="label_electrons" xml:space="preserve">
+    <value>Electrons</value>
+  </data>
   <data name="nav_blog" xml:space="preserve">
     <value>Blog</value>
   </data>
@@ -104,6 +107,33 @@
   <data name="nav_solubility" xml:space="preserve">
     <value>Solubility</value>
   </data>
+  <data name="notif_lives_body" xml:space="preserve">
+    <value>Your lives have been refilled - come back and play!</value>
+  </data>
+  <data name="notif_lives_title" xml:space="preserve">
+    <value>Lives refilled</value>
+  </data>
+  <data name="notif_streak_body" xml:space="preserve">
+    <value>You have a %1$s day streak going. A quick round keeps it alive.</value>
+  </data>
+  <data name="notif_streak_title" xml:space="preserve">
+    <value>Keep your streak</value>
+  </data>
+  <data name="settings_android_desc" xml:space="preserve">
+    <value>Download the app for your mobile devices to access all data everywhere</value>
+  </data>
+  <data name="settings_android_link" xml:space="preserve">
+    <value>Download for Android</value>
+  </data>
+  <data name="settings_android_title" xml:space="preserve">
+    <value>Get Atomic for Android</value>
+  </data>
+  <data name="settings_general" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="settings_github_desc" xml:space="preserve">
+    <value>Open-source repository for the Windows app</value>
+  </data>
   <data name="settings_language" xml:space="preserve">
     <value>App language</value>
   </data>
@@ -112,5 +142,34 @@
   </data>
   <data name="settings_language_system" xml:space="preserve">
     <value>Use system setting</value>
+  </data>
+  <data name="settings_temperature_desc" xml:space="preserve">
+    <value>Unit used wherever a temperature is shown</value>
+  </data>
+  <data name="settings_temperature_title" xml:space="preserve">
+    <value>Default temperature unit</value>
+  </data>
+  <data name="settings_theme_desc" xml:space="preserve">
+    <value>Select which app theme to display</value>
+  </data>
+  <data name="settings_theme_title" xml:space="preserve">
+    <value>App theme</value>
+  </data>
+  <data name="ultimate_badge" xml:space="preserve">
+    <value>All platforms</value>
+  </data>
+  <data name="ultimate_bullets" xml:space="preserve">
+    <value>• Everything in PRO+
+• Every platform you sign in on
+• One purchase, no upgrade needed</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Buy Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Coming soon</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>PRO+ on Windows and Android, bought once.</value>
   </data>
 </root>

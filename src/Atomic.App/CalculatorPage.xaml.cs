@@ -222,6 +222,7 @@ namespace Atomic.App
             {
                 CompoundFormatted.Visibility = Visibility.Visible;
                 CompoundInput.Visibility = Visibility.Collapsed;
+                Services.AchievementStore.Record(Atomic.Core.Progression.AchievementTrigger.Calculation);
             }
         }
 

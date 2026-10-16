@@ -182,7 +182,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="This feature requires PRO version."
+                                <TextBlock Text="{loc:Str Key=requires_pro}"
                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                        FontSize="18"
                        FontWeight="Bold"

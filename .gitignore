@@ -360,4 +360,8 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
-FodyWeavers.xsd
+FodyWeavers.xsd# The Firebase OAuth client secret. It genuinely ships inside the binary - Google documents
+# installed-app secrets as not confidential - but GitHub secret scanning recognises the GOCSPX-
+# prefix and reports it to Google, which revokes the credential. So it is supplied at build time
+# and never committed. See Services/FirebaseSecrets.cs.
+firebase.client_secret

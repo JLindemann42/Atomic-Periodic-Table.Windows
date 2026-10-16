@@ -82,7 +82,7 @@
                 <AutoSuggestBox 
                     QueryIcon="Find" 
                     AutomationProperties.Name="Search" 
-                    PlaceholderText="Search elements..."
+                    PlaceholderText="{loc:Str Key=search}"
                     TextChanged="AutoSuggestBox_TextChanged" 
                     QuerySubmitted="AutoSuggestBox_QuerySubmitted" />
             </NavigationView.AutoSuggestBox>

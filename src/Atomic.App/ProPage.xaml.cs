@@ -1,4 +1,5 @@
 ﻿using Atomic.App.Services;
+using Atomic.Core.Licensing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.AppNotifications;
@@ -19,6 +20,32 @@ namespace Atomic.App
         private StoreProduct proProduct;
         private StoreProduct proPlusProduct;
         private StoreProduct proUpgradeProduct;
+        private StoreProduct ultimateProduct;
+
+        // Store ids, in one place rather than repeated as literals through the file.
+        private const string ProStoreId = "9NMMDNZHJKP4";
+        private const string ProPlusStoreId = "9N506D1VGBPL";
+        private const string ProUpgradeStoreId = "9MTF8DGJ688J";
+
+        /// <summary>
+        /// The Ultimate add-on: PRO+ on every platform, bought once.
+        /// </summary>
+        /// <remarks>
+        /// <b>Replace this with the real product id once it exists in Partner Center.</b> Until the
+        /// catalogue returns a product under this id the card stays collapsed, so an unfinished
+        /// listing shows nothing rather than a button that cannot complete a purchase.
+        /// </remarks>
+        private const string UltimateStoreId = "ULTIMATE-STORE-ID-PENDING";
+
+        /// <summary>
+        /// Whether the Store answered the catalogue query well enough to be believed about licences.
+        /// </summary>
+        /// <remarks>
+        /// A catalogue that came back with an error, or without a single one of the three known
+        /// add-ons in it, is a Store that has nothing to say about this installation. Its silence
+        /// about licences then means nothing either - see <see cref="EntitlementRules.Reconcile"/>.
+        /// </remarks>
+        private bool storeAnswered;
 
         public ObservableCollection<FeatureComparison> FeatureList { get; } = new()
         {
@@ -60,14 +87,40 @@ namespace Atomic.App
 
         public static bool IsProPlus => SettingsStore.IsProPlusUser;
 
+        /// <summary>
+        /// The Ultimate card's text.
+        /// </summary>
+        /// <remarks>
+        /// In code rather than markup because the card is built before the catalogue answers, and
+        /// its title is the product name - "Ultimate" is not translated in any language, so it is
+        /// a literal rather than a resource that would hold the same word twelve times.
+        /// </remarks>
+        private void ApplyUltimateStrings()
+        {
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+
+            Ultimate.Text = "Ultimate";
+            UltimateDescription.Text = strings.Get(Atomic.Core.Localization.S.ultimate_description);
+            UltimateBullets.Text = strings.Get(Atomic.Core.Localization.S.ultimate_bullets);
+            UltimateBadge.Text = strings.Get(Atomic.Core.Localization.S.ultimate_badge);
+
+            // Until the catalogue answers, the card is a placeholder: it describes the tier and
+            // says when, rather than offering a button that cannot complete a purchase.
+            BuyUltimateButton.Content = strings.Get(Atomic.Core.Localization.S.ultimate_coming_soon);
+            BuyUltimateButton.IsEnabled = false;
+        }
+
         private async Task InitializeStoreAndLicensesAsync()
         {
+            ApplyUltimateStrings();
+
             await GetProProductsAsync();
             await CheckUserLicensesAsync();
         }
 
         private async Task GetProProductsAsync()
         {
+
             string[] filterList = new[] { "Durable" };
             StoreProductQueryResult addOns = await storeContext.GetAssociatedStoreProductsAsync(filterList);
 
@@ -77,8 +130,14 @@ namespace Atomic.App
                 return;
             }
 
+            // Recognising any one of the three is enough: it proves the query reached a Store that
+            // knows this app, which is the only thing the licence check needs from here.
+            storeAnswered = addOns.Products.ContainsKey(ProStoreId)
+                            || addOns.Products.ContainsKey(ProPlusStoreId)
+                            || addOns.Products.ContainsKey(ProUpgradeStoreId);
+
             // Load Pro
-            if (addOns.Products.TryGetValue("9NMMDNZHJKP4", out var pro))
+            if (addOns.Products.TryGetValue(ProStoreId, out var pro))
             {
                 proProduct = pro;
                 Pro.Text = pro.Title;
@@ -90,7 +149,7 @@ namespace Atomic.App
             }
 
             // Load ProPlus
-            if (addOns.Products.TryGetValue("9N506D1VGBPL", out var proPlus))
+            if (addOns.Products.TryGetValue(ProPlusStoreId, out var proPlus))
             {
                 proPlusProduct = proPlus;
                 ProPlus.Text = proPlus.Title;
@@ -102,13 +161,25 @@ namespace Atomic.App
             }
 
             // Load Pro Upgrade
-            if (addOns.Products.TryGetValue("9MTF8DGJ688J", out var upgrade))
+            if (addOns.Products.TryGetValue(ProUpgradeStoreId, out var upgrade))
             {
                 proUpgradeProduct = upgrade;
             }
             else
             {
                 ShowError("Missing PRO Upgrade", "Store item 'Pro Upgrade Version' was not found.");
+            }
+
+            // Ultimate. Absence is not an error the way the other three are - the product may
+            // simply not be published yet - so it hides the card instead of reporting a fault.
+            if (addOns.Products.TryGetValue(UltimateStoreId, out var ultimate))
+            {
+                var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+
+                ultimateProduct = ultimate;
+                UltimatePrice.Text = ultimate.Price.FormattedPrice;
+                BuyUltimateButton.Content = strings.Get(Atomic.Core.Localization.S.ultimate_buy);
+                BuyUltimateButton.IsEnabled = true;
             }
         }
 
@@ -118,26 +189,44 @@ namespace Atomic.App
             {
                 var appLicense = await storeContext.GetAppLicenseAsync();
 
-                bool isProUser = false;
-                bool isProPlusUser = false;
+                bool hasProUpgrade = appLicense.AddOnLicenses.TryGetValue(ProUpgradeStoreId + "/0010", out var upgradeLicense) && upgradeLicense.IsActive;
+                bool hasPro = appLicense.AddOnLicenses.TryGetValue(ProStoreId + "/0010", out var proLicense) && proLicense.IsActive;
+                bool hasProPlus = appLicense.AddOnLicenses.TryGetValue(ProPlusStoreId + "/0010", out var proPlusLicense) && proPlusLicense.IsActive;
+                bool hasUltimate = appLicense.AddOnLicenses.TryGetValue(UltimateStoreId + "/0010", out var ultimateLicense) && ultimateLicense.IsActive;
 
-                bool hasProUpgrade = appLicense.AddOnLicenses.TryGetValue("9MTF8DGJ688J/0010", out var upgradeLicense) && upgradeLicense.IsActive;
-                bool hasPro = appLicense.AddOnLicenses.TryGetValue("9NMMDNZHJKP4/0010", out var proLicense) && proLicense.IsActive;
-                bool hasProPlus = appLicense.AddOnLicenses.TryGetValue("9N506D1VGBPL/0010", out var proPlusLicense) && proPlusLicense.IsActive;
+                if (hasUltimate) SettingsStore.HasUltimate = true;
 
-                isProPlusUser = hasProUpgrade || hasProPlus;
+                // Null means "the Store had nothing to say", which is not the same as "nothing is
+                // owned". A sideloaded build, a machine with nobody signed into the Store, or a
+                // first run behind a captive portal all return a perfectly successful query with
+                // no add-on licences in it - and this method used to write that straight over a
+                // paid entitlement, so opening this page was enough to lose PRO.
+                Entitlement? answer =
+                    storeAnswered && appLicense.IsActive
+                        ? EntitlementRules.FromLicences(hasPro, hasProPlus, hasProUpgrade, hasUltimate)
+                        : null;
 
-                // PRO+ always implies PRO. Buying PRO+ outright means owning neither the plain PRO
-                // add-on nor the PRO->PRO+ upgrade, so deriving IsProUser from hasPro alone left
-                // those users with IsProUser == false. The purchase handler set it to true, but
-                // this method overwrote it on the next launch and every PRO gate closed again.
-                isProUser = isProPlusUser || hasPro;
+                // Ultimate applied last, and only ever upward: bought on the phone it arrives
+                // through the account document, where this machine's Store has no licence to show
+                // for it and would otherwise answer a confident "free".
+                var entitlement = EntitlementRules.WithUltimate(
+                    EntitlementRules.Reconcile(SettingsStore.Entitlement, answer),
+                    SettingsStore.HasUltimate);
+
+                bool isProUser = entitlement.IsPro;
+                bool isProPlusUser = entitlement.IsProPlus;
 
                 SettingsStore.IsProUser = isProUser;
                 SettingsStore.IsProPlusUser = isProPlusUser;
 
                 DispatcherQueue.TryEnqueue(() =>
                 {
+                    if (SettingsStore.HasUltimate)
+                    {
+                        BuyUltimateButton.IsEnabled = false;
+                        BuyUltimateButton.Content = EntitlementRules.UltimateBadge;
+                    }
+
                     if (isProPlusUser)
                     {
                         BuyProPlusButton.IsEnabled = false;
@@ -220,6 +309,11 @@ namespace Atomic.App
             }
         }
 
+        private async void BuyUltimate_Click(object sender, RoutedEventArgs e)
+        {
+            await PurchaseStoreItem(ultimateProduct, "Ultimate");
+        }
+
         private async Task PurchaseStoreItem(StoreProduct item, string label)
         {
             if (item == null)
@@ -242,7 +336,18 @@ namespace Atomic.App
                 case StorePurchaseStatus.Succeeded:
                     SettingsStore.IsProUser = true;
 
-                    if (item.StoreId == "9N506D1VGBPL" || item.StoreId == "9MTF8DGJ688J")
+                    // Ultimate is recorded separately as well as granting PRO+, because that flag
+                    // is what the account document carries to the other platforms - the tier alone
+                    // would tell the phone only that this machine has PRO+, not that it may too.
+                    if (item.StoreId == UltimateStoreId)
+                    {
+                        SettingsStore.HasUltimate = true;
+                        SettingsStore.IsProPlusUser = true;
+                        _ = CloudSync.AutoSyncAsync(force: true);
+                    }
+
+                    if (item.StoreId == ProPlusStoreId || item.StoreId == ProUpgradeStoreId
+                        || item.StoreId == UltimateStoreId)
                     {
                         SettingsStore.IsProPlusUser = true;
 

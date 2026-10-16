@@ -41,9 +41,9 @@
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom">
                                 <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
-                                <MenuFlyoutItem Text="Rock" Click="OnDisplayModeSelected" />
-                                <MenuFlyoutItem Text="Soil" Click="OnDisplayModeSelected" />
-                                <MenuFlyoutItem Text="Mineral" Click="OnDisplayModeSelected" />
+                                <MenuFlyoutItem Text="{loc:Str Key=activity_geology_rock}" Click="OnDisplayModeSelected" />
+                                <MenuFlyoutItem Text="{loc:Str Key=activity_geology_soil}" Click="OnDisplayModeSelected" />
+                                <MenuFlyoutItem Text="{loc:Str Key=activity_geology_mineral}" Click="OnDisplayModeSelected" />
                             </MenuFlyout>
                         </DropDownButton.Flyout>
                     </DropDownButton>

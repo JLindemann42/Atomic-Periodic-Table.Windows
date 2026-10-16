@@ -42,7 +42,7 @@
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom">
                                 <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
-                                <MenuFlyoutItem Text="Mineral" Click="OnDisplayModeSelected" />
+                                <MenuFlyoutItem Text="{loc:Str Key=activity_geology_mineral}" Click="OnDisplayModeSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=chip_rocks}" Click="OnDisplayModeSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=chip_soils}" Click="OnDisplayModeSelected" />
                             </MenuFlyout>
@@ -154,7 +154,7 @@
         </Grid>
         <!-- Message and Button if user does NOT have PRO -->
         <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="This feature requires PRO version."
+            <TextBlock Text="{loc:Str Key=requires_pro}"
                        FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
             <Button Content="{loc:Str Key=get_pro_title}"
                     Click="OpenProPage_Click"

@@ -28,12 +28,12 @@
             <Button x:Name="HideInfoButton" Content="Hide Info" Margin="180,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="HideInfoPanel"/>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Nuclide Table Info:"  Margin="0,0,100,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="Grey: Stable" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="α: Alpha decay" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                <TextBlock  Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="Grey: "/><Run Text="{loc:Str Key=ai_stable_label}"/></TextBlock>
+                <TextBlock Text="{loc:Str Key=decay_alpha}" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                 <TextBlock Text="β: Beta decay" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="ε: Electron capture" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="P: Proton emission" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="SF: Spontaneous fission" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                <TextBlock  Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="ε: "/><Run Text="{loc:Str Key=decay_electron_capture}"/></TextBlock>
+                <TextBlock  Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="P: "/><Run Text="{loc:Str Key=decay_proton_emission}"/></TextBlock>
+                <TextBlock  Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="SF: "/><Run Text="{loc:Str Key=decay_spontaneous_fission}"/></TextBlock>
             </StackPanel>
         </Grid>
 
@@ -52,7 +52,7 @@
         
                 <!-- Message and Button if user does NOT have PRO -->
         <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="This feature requires PRO version."
+            <TextBlock Text="{loc:Str Key=requires_pro}"
                        FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
             <Button Content="{loc:Str Key=get_pro_title}"
                     Click="OpenProPage_Click"

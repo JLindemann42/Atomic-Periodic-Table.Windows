@@ -18,6 +18,9 @@ namespace Atomic.App.Tools
 {
     public class Achievement
     {
+        /// <summary>The numeric Android id, and the key the sync merges on.</summary>
+        public string Id { get; set; }
+
         public string Icon { get; set; }
         public string Header { get; set; }
         public string Description { get; set; }
@@ -293,52 +296,8 @@ namespace Atomic.App.Tools
 
         private void LoadAchievements()
         {
-            int totalGamesPlayed = SettingsStore.TotalGamesPlayed;
-            int perfectGames = SettingsStore.PerfectGames;
-
-            var achievementList = new List<Achievement>
-            {
-                new Achievement
-                {
-                    Icon = "\uEA86",
-                    Header = "Perfect Game",
-                    Description = "Get all questions correct in a game.",
-                    Progress = perfectGames > 0 ? 1 : 0,
-                    Goal = 1
-                },
-                new Achievement
-                {
-                    Icon = "\uE7FC",
-                    Header = "Quiz Enthusiast",
-                    Description = "Play 10 games.",
-                    Progress = totalGamesPlayed,
-                    Goal = 10
-                },
-                new Achievement
-                {
-                    Icon = "\uE7FC",
-                    Header = "Quiz Master",
-                    Description = "Play 100 games.",
-                    Progress = totalGamesPlayed,
-                    Goal = 100
-                },
-                new Achievement
-                {
-                    Icon = "\uE7FC",
-                    Header = "Getting the hang of it",
-                    Description = "Play 500 games.",
-                    Progress = totalGamesPlayed,
-                    Goal = 500
-                }
-            };
-
-            var sorted = achievementList
-                .OrderByDescending(a => a.IsCompleted)
-                .ThenByDescending(a => a.ClampedProgress)
-                .ToList();
-
             Achievements.Clear();
-            foreach (var a in sorted)
+            foreach (var a in AchievementCatalog.Build())
                 Achievements.Add(a);
         }
 

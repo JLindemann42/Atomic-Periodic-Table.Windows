@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Atomic.App.Services;
 using Atomic.Core.Localization;
+using Atomic.Core.Progression;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -42,6 +44,14 @@ namespace Atomic.App.Navigation
             _nav.SelectionChanged += OnSelectionChanged;
             _nav.BackRequested += (_, _) => GoBack();
             _frame.Navigated += OnNavigated;
+
+            // Signing in or out changes the account entry's icon while the pane is already built.
+            //
+            // Marshalled: the automatic sync raises this from a timer thread, and assigning
+            // NavigationViewItem.Icon off the UI thread throws into a task nobody awaits - so the
+            // pane silently kept the placeholder glyph until the next launch.
+            UserProfile.Changed += (_, _) =>
+                _nav.DispatcherQueue.TryEnqueue(() => _ = RefreshAccountAvatarAsync());
         }
 
         /// <summary>The route currently displayed, if the page is registered.</summary>
@@ -112,6 +122,31 @@ namespace Atomic.App.Navigation
                 item.Content = text;
         }
 
+        /// <summary>
+        /// Put the signed-in user's picture on the account entry, in place of the person glyph.
+        /// </summary>
+        /// <remarks>
+        /// <para>The bitmap arrives already masked to a circle - see <see cref="UserProfile"/>.
+        /// <c>NavigationViewItem.Icon</c> takes an <c>IconElement</c>, which cannot be clipped or
+        /// given a shape, so a square photo here would read as a square photo.</para>
+        ///
+        /// <para>Sized to 24 to match the <c>SymbolIcon</c>s beside it; letting it take the icon
+        /// slot's natural size makes the account row taller than every other row in the pane.</para>
+        /// </remarks>
+        public async Task RefreshAccountAvatarAsync()
+        {
+            if (FindItem(AppRoutes.Account) is not { } item) return;
+
+            var avatar = await UserProfile.AvatarAsync(AvatarSize);
+
+            item.Icon = avatar is null
+                ? new SymbolIcon(Symbol.Contact)
+                : new ImageIcon { Source = avatar, Width = AvatarSize, Height = AvatarSize };
+        }
+
+        /// <summary>Matches the pane's SymbolIcon metrics, so the account row keeps its height.</summary>
+        private const int AvatarSize = 24;
+
         // -- pane construction ----------------------------------------------------------------
 
         private void BuildPane()
@@ -159,6 +194,10 @@ namespace Atomic.App.Navigation
                 settings.Content = label;
                 ToolTipService.SetToolTip(settings, label);
             }
+
+            // CreateItem gave the account entry the person glyph. A rebuild - construction, or a
+            // language switch - discards the item the avatar was on, so it goes back afterwards.
+            _ = RefreshAccountAvatarAsync();
         }
 
         private static NavigationViewItem CreateItem(RouteDescriptor route)
@@ -218,6 +257,31 @@ namespace Atomic.App.Navigation
 
             _nav.IsBackEnabled = _frame.CanGoBack;
             SyncSelection(e.SourcePageType);
+            RecordVisit(route);
+        }
+
+        /// <summary>
+        /// Advance the achievements that count visits.
+        /// </summary>
+        /// <remarks>
+        /// <para>Here rather than in each page's OnNavigatedTo because every navigation passes
+        /// through this one handler however it was started - pane, search box, in-page link, back
+        /// button or an <c>atomic:</c> link - and because the registry already knows which routes
+        /// are tables, so the group does not have to be restated as a list of page types.</para>
+        ///
+        /// <para>Android instead calls into each activity, which is how its "open different tables"
+        /// achievement ended up declared and never wired to anything.</para>
+        /// </remarks>
+        private static void RecordVisit(RouteDescriptor? route)
+        {
+            if (route is null) return;
+
+            if (route.PageType == typeof(ElementDetailsPage))
+                AchievementStore.Record(AchievementTrigger.ElementOpened);
+            else if (route.Tag == "DictionaryPage")
+                AchievementStore.Record(AchievementTrigger.DictionaryOpened);
+            else if (route.Group == NavGroup.Tables)
+                AchievementStore.Record(AchievementTrigger.TableOpened);
         }
 
         /// <summary>

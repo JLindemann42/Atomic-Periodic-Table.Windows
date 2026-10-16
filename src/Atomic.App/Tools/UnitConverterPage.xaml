@@ -39,7 +39,7 @@
                             HorizontalAlignment="Stretch">
                         <StackPanel Spacing="16" Margin="18,0,0,0">
                             <Border Width="900"/>
-                            <TextBlock Text="Unit Converter:" FontWeight="Bold" FontSize="16" Margin="0,0,0,0"/>
+                            <TextBlock Text="{loc:Str Key=uni}" FontWeight="Bold" FontSize="16" Margin="0,0,0,0"/>
                             <Grid Margin="0,0,18,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />

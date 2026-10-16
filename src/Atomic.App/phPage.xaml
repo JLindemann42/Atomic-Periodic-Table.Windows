@@ -77,13 +77,13 @@
                             <Canvas Width="600" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsHitTestVisible="False">
                                 <!-- Acid line and label -->
                                 <Line X1="100" Y1="0" X2="100" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="50" Canvas.Top="35" Text="Acid (pH 0–6.0)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="50" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_acid}"/><Run Text=" (pH 0–6.0)"/></TextBlock>
                                 <!-- Neutral line and label -->
                                 <Line X1="300" Y1="0" X2="300" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="240" Canvas.Top="35" TextAlignment="Center" Text="Neutral (pH 6.0-7.6)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="240" Canvas.Top="35" TextAlignment="Center"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_neutral}"/><Run Text=" (pH 6.0-7.6)"/></TextBlock>
                                 <!-- Alkaline line and label -->
                                 <Line X1="500" Y1="0" X2="500" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="450" Canvas.Top="35" Text="Alkaline (pH 8–14)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="450" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_alkaline}"/><Run Text=" (pH 8–14)"/></TextBlock>
                             </Canvas>
                         </Grid>
                     </StackPanel>
@@ -154,13 +154,13 @@
                             <Canvas Width="600" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsHitTestVisible="False">
                                 <!-- Acid line and label -->
                                 <Line X1="100" Y1="0" X2="100" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="50" Canvas.Top="35" Text="Acid (pH 0–6.0)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="50" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_acid}"/><Run Text=" (pH 0–6.0)"/></TextBlock>
                                 <!-- Neutral line and label -->
                                 <Line X1="300" Y1="0" X2="300" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="240" Canvas.Top="35" TextAlignment="Center" Text="Neutral (pH 7.0)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="240" Canvas.Top="35" TextAlignment="Center"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_neutral}"/><Run Text=" (pH 7.0)"/></TextBlock>
                                 <!-- Alkaline line and label -->
                                 <Line X1="500" Y1="0" X2="500" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="450" Canvas.Top="35" Text="Alkaline (pH 8–14)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="450" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_alkaline}"/><Run Text=" (pH 8–14)"/></TextBlock>
                             </Canvas>
                         </Grid>
                     </StackPanel>
@@ -172,7 +172,7 @@
 
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Methyl Orange" FontSize="20" FontWeight="SemiBold" Margin="8,8,0,0" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{loc:Str Key=activity_ph_methyl_orange}" FontSize="20" FontWeight="SemiBold" Margin="8,8,0,0" HorizontalAlignment="Left"/>
                             </StackPanel>
                             <Button
                                 x:Name="MethylOrangeInfoButton"
@@ -231,13 +231,13 @@
                             <Canvas Width="600" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsHitTestVisible="False">
                                 <!-- Acid line and label -->
                                 <Line X1="40" Y1="0" X2="40" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="0" Canvas.Top="35" Text="Acid (pH 0–3.1)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="0" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_acid}"/><Run Text=" (pH 0–3.1)"/></TextBlock>
                                 <!-- Neutral line and label -->
                                 <Line X1="140" Y1="0" X2="150" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="110" Canvas.Top="35" TextAlignment="Center" Text="Neutral (pH 3.1-4.4)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="110" Canvas.Top="35" TextAlignment="Center"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_neutral}"/><Run Text=" (pH 3.1-4.4)"/></TextBlock>
                                 <!-- Alkaline line and label -->
                                 <Line X1="400" Y1="0" X2="400" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                <TextBlock Canvas.Left="335" Canvas.Top="35" Text="Alkaline (pH 4.4–14)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Canvas.Left="335" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_alkaline}"/><Run Text=" (pH 4.4–14)"/></TextBlock>
                             </Canvas>
                         </Grid>
                     </StackPanel>
@@ -306,13 +306,13 @@
                                 <Canvas Width="600" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsHitTestVisible="False">
                                     <!-- Acid line and label -->
                                     <Line X1="40" Y1="0" X2="40" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                    <TextBlock Canvas.Left="0" Canvas.Top="35" Text="Acid (pH 0–3.0)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                    <TextBlock Canvas.Left="0" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_acid}"/><Run Text=" (pH 0–3.0)"/></TextBlock>
                                     <!-- Neutral line and label -->
                                     <Line X1="150" Y1="0" X2="150" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                    <TextBlock Canvas.Left="110" Canvas.Top="35" TextAlignment="Center" Text="Neutral (pH 3.0-5.0)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                    <TextBlock Canvas.Left="110" Canvas.Top="35" TextAlignment="Center"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_neutral}"/><Run Text=" (pH 3.0-5.0)"/></TextBlock>
                                     <!-- Alkaline line and label -->
                                     <Line X1="425" Y1="0" X2="425" Y2="30" Stroke="{ThemeResource TextFillColorPrimaryBrush}" StrokeThickness="1.5"/>
-                                    <TextBlock Canvas.Left="350" Canvas.Top="35" Text="Alkaline (pH 5.0–14)" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                    <TextBlock Canvas.Left="350" Canvas.Top="35"  FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="{loc:Str Key=activity_ph_alkaline}"/><Run Text=" (pH 5.0–14)"/></TextBlock>
                                 </Canvas>
                             </Grid>
                         </StackPanel>

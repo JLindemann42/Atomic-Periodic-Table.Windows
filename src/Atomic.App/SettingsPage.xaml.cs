@@ -14,6 +14,7 @@ namespace Atomic.App
         {
             this.InitializeComponent();
             this.Loaded += SettingsPage_Loaded;
+            NameOpenAccountButton();
         }
 
         private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
@@ -125,6 +126,25 @@ namespace Atomic.App
 
             UnitComboBox.SelectionChanged += UnitComboBox_SelectionChanged;
         }
+
+        /// <summary>
+        /// Open the account screen, where cloud sync is signed in and run.
+        /// </summary>
+        private void OpenAccount_Click(object sender, RoutedEventArgs e) =>
+            Frame.Navigate(typeof(Atomic.App.Tools.AccountPage));
+
+        /// <summary>
+        /// Name the chevron for a screen reader.
+        /// </summary>
+        /// <remarks>
+        /// Its content is an icon, so without this it is announced as "button" and nothing else.
+        /// </remarks>
+        private void NameOpenAccountButton() =>
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(
+                OpenAccountButton,
+                Services.ResourceStringProvider
+                    .For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current))
+                    .Get(Atomic.Core.Localization.S.user_title));
 
         private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

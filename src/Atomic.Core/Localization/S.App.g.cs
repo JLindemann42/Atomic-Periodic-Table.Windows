@@ -18,6 +18,7 @@ public static partial class S
     public const string chat_send = "chat_send";
     public const string chat_thinking = "chat_thinking";
     public const string flashcard_level_band = "flashcard_level_band";
+    public const string label_electrons = "label_electrons";
     public const string nav_blog = "nav_blog";
     public const string nav_constants = "nav_constants";
     public const string nav_element_details = "nav_element_details";
@@ -31,7 +32,22 @@ public static partial class S
     public const string nav_periodic_table = "nav_periodic_table";
     public const string nav_poisson_details = "nav_poisson_details";
     public const string nav_solubility = "nav_solubility";
+    public const string notif_lives_body = "notif_lives_body";
+    public const string notif_lives_title = "notif_lives_title";
+    public const string notif_streak_body = "notif_streak_body";
+    public const string notif_streak_title = "notif_streak_title";
+    public const string settings_android_desc = "settings_android_desc";
+    public const string settings_android_link = "settings_android_link";
+    public const string settings_android_title = "settings_android_title";
+    public const string settings_general = "settings_general";
+    public const string settings_github_desc = "settings_github_desc";
     public const string settings_language = "settings_language";
     public const string settings_language_desc = "settings_language_desc";
     public const string settings_language_system = "settings_language_system";
+    public const string settings_temperature_desc = "settings_temperature_desc";
+    public const string settings_temperature_title = "settings_temperature_title";
+    public const string settings_theme_desc = "settings_theme_desc";
+    public const string settings_theme_title = "settings_theme_title";
+    public const string ultimate_badge = "ultimate_badge";
+    public const string ultimate_bullets = "ultimate_bullets";
 }

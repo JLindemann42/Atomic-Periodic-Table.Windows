@@ -62,6 +62,22 @@
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+
+      <Extensions>
+        <!--
+          The atomic: scheme. Registered for three things that all need a way back into a running
+          app from outside it: activation from the scheduled toasts P8 queues, chat deep links, and
+          the Widgets Board entries in P10.
+
+          Without it a toast is inert - the notification appears, the user clicks it, and nothing
+          happens. That was the state until this landed.
+        -->
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="atomic">
+            <uap:DisplayName>Atomic - Periodic Table</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
 

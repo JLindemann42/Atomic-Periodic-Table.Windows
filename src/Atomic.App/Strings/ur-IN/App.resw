@@ -53,4 +53,57 @@
   <data name="nav_solubility" xml:space="preserve">
     <value>حل پذیری ٹیبل</value>
   </data>
+  <data name="settings_android_desc" xml:space="preserve">
+    <value>اپنے موبائل آلات کے لیے ایپ ڈاؤن لوڈ کریں اور ہر جگہ تمام ڈیٹا تک رسائی حاصل کریں</value>
+  </data>
+  <data name="settings_android_link" xml:space="preserve">
+    <value>اینڈرائڈ کے لیے ڈاؤن لوڈ کریں</value>
+  </data>
+  <data name="settings_android_title" xml:space="preserve">
+    <value>اینڈرائڈ کے لیے Atomic حاصل کریں</value>
+  </data>
+  <data name="settings_general" xml:space="preserve">
+    <value>جنرل</value>
+  </data>
+  <data name="settings_github_desc" xml:space="preserve">
+    <value>ایٹامک کا اوپن سورس گٹ ہب ریپو</value>
+  </data>
+  <data name="settings_language" xml:space="preserve">
+    <value>زبانیں</value>
+  </data>
+  <data name="settings_language_desc" xml:space="preserve">
+    <value>زبان منتخب کریں</value>
+  </data>
+  <data name="settings_language_system" xml:space="preserve">
+    <value>سسٹم ڈیفالٹ</value>
+  </data>
+  <data name="settings_temperature_desc" xml:space="preserve">
+    <value>وہ اکائی جو ہر جگہ درجہ حرارت دکھانے کے لیے استعمال ہوتی ہے</value>
+  </data>
+  <data name="settings_temperature_title" xml:space="preserve">
+    <value>درجہ حرارت</value>
+  </data>
+  <data name="settings_theme_desc" xml:space="preserve">
+    <value>تھیم منتخب کریں</value>
+  </data>
+  <data name="settings_theme_title" xml:space="preserve">
+    <value>تھیمز</value>
+  </data>
+  <data name="ultimate_badge" xml:space="preserve">
+    <value>تمام پلیٹ فارمز</value>
+  </data>
+  <data name="ultimate_bullets" xml:space="preserve">
+    <value>• PRO+ کی تمام خصوصیات
+• ہر وہ پلیٹ فارم جہاں آپ سائن اِن کرتے ہیں
+• ایک خریداری، اپ گریڈ کی ضرورت نہیں</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Ultimate خریدیں</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>جلد آ رہا ہے</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>ونڈوز اور اینڈرائڈ پر PRO+، ایک بار خریدیں۔</value>
+  </data>
 </root>

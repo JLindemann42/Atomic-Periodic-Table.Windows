@@ -18,7 +18,7 @@
                         <MenuFlyoutItem Text="{loc:Str Key=chip_chemistry}" Click="OnDisplayModeSelected" />
                         <MenuFlyoutItem Text="{loc:Str Key=chip_physics}" Click="OnDisplayModeSelected" />
                         <MenuFlyoutItem Text="{loc:Str Key=chip_reactions}" Click="OnDisplayModeSelected" />
-                        <MenuFlyoutItem Text="Mathemathics" Click="OnDisplayModeSelected" />
+                        <MenuFlyoutItem Text="{loc:Str Key=chip_math}" Click="OnDisplayModeSelected" />
                     </MenuFlyout>
                 </DropDownButton.Flyout>
             </DropDownButton>

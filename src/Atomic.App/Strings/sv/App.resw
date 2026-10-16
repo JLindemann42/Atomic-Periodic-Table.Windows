@@ -41,6 +41,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label_electrons" xml:space="preserve">
+    <value>Elektroner</value>
+  </data>
   <data name="nav_constants" xml:space="preserve">
     <value>Konstanttabell</value>
   </data>
@@ -52,5 +55,58 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>Löslighetstabell</value>
+  </data>
+  <data name="settings_android_desc" xml:space="preserve">
+    <value>Ladda ner appen till dina mobila enheter för att nå all data överallt</value>
+  </data>
+  <data name="settings_android_link" xml:space="preserve">
+    <value>Ladda ner för Android</value>
+  </data>
+  <data name="settings_android_title" xml:space="preserve">
+    <value>Skaffa Atomic för Android</value>
+  </data>
+  <data name="settings_general" xml:space="preserve">
+    <value>Allmänt</value>
+  </data>
+  <data name="settings_github_desc" xml:space="preserve">
+    <value>Atomics öppen källkods GitHub-repo</value>
+  </data>
+  <data name="settings_language" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="settings_language_desc" xml:space="preserve">
+    <value>Välj språk</value>
+  </data>
+  <data name="settings_language_system" xml:space="preserve">
+    <value>Systemstandard</value>
+  </data>
+  <data name="settings_temperature_desc" xml:space="preserve">
+    <value>Enhet som används överallt där en temperatur visas</value>
+  </data>
+  <data name="settings_temperature_title" xml:space="preserve">
+    <value>Temperaturer</value>
+  </data>
+  <data name="settings_theme_desc" xml:space="preserve">
+    <value>Välj tema</value>
+  </data>
+  <data name="settings_theme_title" xml:space="preserve">
+    <value>Teman</value>
+  </data>
+  <data name="ultimate_badge" xml:space="preserve">
+    <value>Alla plattformar</value>
+  </data>
+  <data name="ultimate_bullets" xml:space="preserve">
+    <value>• Allt i PRO+
+• Alla plattformar du loggar in på
+• Ett köp, ingen uppgradering behövs</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Köp Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Kommer snart</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>PRO+ på Windows och Android, köpt en gång.</value>
   </data>
 </root>

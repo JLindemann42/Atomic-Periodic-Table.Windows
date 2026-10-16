@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -8,6 +8,7 @@ using Atomic.Core.Ai.Data;
 using Atomic.Core.Localization;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace Atomic.App.Tools
 {
@@ -165,6 +166,24 @@ namespace Atomic.App.Tools
         private void Unit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!_initialising) Recalculate();
+        }
+
+        /// <summary>
+        /// Count one calculation for a visit that produced a result.
+        /// </summary>
+        /// <remarks>
+        /// <para>Not on every solve. The page has no calculate button - it re-solves on each
+        /// keystroke - so counting there would score a dozen calculations for one answer. Android
+        /// counts a button press; a visit that ended with a real number is the closest this page
+        /// has to that, and it cannot inflate.</para>
+        /// </remarks>
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            var result = ResultText.Text;
+            if (!string.IsNullOrEmpty(result) && !result.StartsWith("---", StringComparison.Ordinal))
+                AchievementStore.Record(Atomic.Core.Progression.AchievementTrigger.Calculation);
         }
 
         private void Recalculate()
