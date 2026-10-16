@@ -3,7 +3,9 @@
     x:Class="Atomic.App.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="using:Atomic.App.Localization"
     xmlns:local="using:Atomic.App"
+    xmlns:controls="using:Atomic.App.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -14,6 +16,11 @@
     </Window.SystemBackdrop>
 
     <Grid x:Name="RootGrid">
+        <Grid.KeyboardAccelerators>
+            <!-- Ctrl+K reaches the assistant from any page without leaving the keyboard. -->
+            <KeyboardAccelerator Modifiers="Control" Key="K" Invoked="AskAtomic_Invoked" />
+        </Grid.KeyboardAccelerators>
+
         <!-- Define rows for the title bar and the main content -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -39,7 +46,7 @@
                    Width="16" Height="16"
                    Margin="8,0,0,0"/>
             <TextBlock x:Name="TitleBarTextBlock" 
-                       Text="Atomic - Periodic Table" 
+                       Text="{loc:Str Key=about_app_name}" 
                        Style="{StaticResource CaptionTextBlockStyle}"
                        Grid.Column="1"
                        VerticalAlignment="Center"
@@ -82,5 +89,36 @@
 
             <Frame x:Name="contentFrame" />
         </NavigationView>
+
+        <!--
+            The Ask Atomic launcher, matching Android's extended FAB: bottom-right, over the
+            content. Hidden while the panel is open, so it is never stranded on top of the scrim.
+        -->
+        <Button x:Name="AskAtomicButton"
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,24,24"
+                Padding="16,10"
+                CornerRadius="20"
+                Click="AskAtomic_Click"
+                Style="{StaticResource AccentButtonStyle}">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <FontIcon Glyph="&#xE99A;" FontSize="16" />
+                <TextBlock x:Name="AskAtomicLabel" />
+            </StackPanel>
+        </Button>
+
+        <!--
+            Ask Atomic.
+
+            Last child and spanning both rows, so it overlays the whole window including the title
+            bar - one panel reachable from every page, mirroring Android where a single controller
+            served both hosts. Holding it here rather than per page is also what keeps the BM25
+            index warm across navigation; see ChatSession.
+        -->
+        <controls:AiChatPanel x:Name="ChatPanel"
+                              Grid.Row="0"
+                              Grid.RowSpan="2" />
     </Grid>
 </Window>

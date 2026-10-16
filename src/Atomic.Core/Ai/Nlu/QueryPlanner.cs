@@ -1,0 +1,1235 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Atomic.Core.Ai.Data;
+using Atomic.Core.Ai.Engine;
+using Atomic.Core.Ai.Retrieval;
+using Atomic.Core.Text;
+
+namespace Atomic.Core.Ai.Nlu
+{
+    /// <summary>
+    /// The planning cascade. The sub-planners it calls, and the constants, are in
+    /// QueryPlanner.Support.cs.
+    ///
+    /// <para><b>The order of the guards below is the specification.</b> Each one exists because a
+    /// query it claims was previously claimed by a later branch and answered as a different
+    /// question; the comment on each records which. Reordering them does not fail loudly - it makes
+    /// an intent unreachable and produces a confident answer to a question nobody asked.
+    /// <c>QueryPlannerCascadeTest</c> pins the order.</para>
+    /// </summary>
+    public sealed partial class QueryPlanner
+    {
+        /// <summary>
+        /// The order intents are attempted in, as a fact a test can assert.
+        ///
+        /// <para>Not used by <see cref="Plan"/> - it is documentation with teeth. A future Android
+        /// sync that moves a guard changes behaviour silently; changing this list is what makes the
+        /// change visible in review.</para>
+        /// </summary>
+        internal static readonly IReadOnlyList<string> CascadeOrder =
+        [
+            "defer-to-personality",
+            "out-of-range-element",
+            "unbacked-concept",
+            "count-of-all-elements",
+            "calculation",          // BALANCE, SOLUTION, DECAY, MOLE, ISOTOPE_COMPARISON,
+                                    // NUCLIDE_COUNT, ISOTOPES, FORMULA_MASS - see CalculationPlan
+            "unit-convert",
+            "narrative-decline",
+            "etymology-decline",
+            "explanation",
+            "comparative-against-focus",
+            "comparative-over-previous-answer",
+            "periphrastic-comparative",
+            "same-group-as",
+            "direct-comparative",
+            "aggregate",
+            "superlative-or-filtered-list",
+            "subset-list",
+            "field-coverage-list",
+            "compare-with-focus",
+            "neighbour",
+            "alloy",
+            "selective-comparison",
+            "comparison",
+            "isotopes",
+            "safety",
+            "emission-spectrum",
+            "category-lookup",
+            "property-lookup",
+            "dataset-row",
+        ];
+
+        public QueryPlan Plan(string rawQuery, DialogueState state)
+        {
+            var normalized = TextMatching.NormalizeForLookup(rawQuery);
+
+            if (EarlyDecline(rawQuery, normalized) is { } declined) return declined;
+
+            // ---- Calculations ---------------------------------------------------------------
+            // Checked first among the real intents: these questions name a formula or a nuclide,
+            // which the element and field resolvers would otherwise pick apart into unrelated
+            // matches. "the molar mass of H2SO4" used to retrieve the dictionary definition of
+            // molar mass instead of a number.
+            if (CalculationPlan(rawQuery, normalized) is { } calculation) return calculation;
+
+            var operators = OperatorExtractor.Extract(rawQuery);
+            var elementMatches = _entities.ResolveAll(rawQuery, limit: 4);
+            var fieldMatches = _fields.ResolveAll(rawQuery, limit: 3);
+            var evidence = new List<string>(6);
+
+            // ---- Standalone unit conversion --------------------------------------------------
+            // Placed here rather than in CalculationPlan, because the guard that separates this
+            // from a property lookup needs the resolved field and element, and neither is available
+            // where the calculations run.
+            if (UnitConvertPlan(rawQuery, operators) is { } conversion) return conversion;
+
+            // ---- Narrative questions ---------------------------------------------------------
+            // Usage, biological role and etymology are answered from prose, not from a field. They
+            // are declined here rather than left to fall through, because falling through is what
+            // caused the worst defect in the agent: the query names an element, resolves no field,
+            // and the inheritance below hands it the previous turn's field. "Vad används titan
+            // till" was answered with titanium's atomic number that way.
+            //
+            // A resolved field wins over this: "what is titanium used for in aerospace, and its
+            // density" still has a real question in it.
+            if (fieldMatches.Count == 0 &&
+                Lexicon.NARRATIVE_INTENTS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
+                return Decline(rawQuery);
+
+            // Etymology declines even with a field in hand, because the field is the *subject* of
+            // the question rather than the thing being asked for: "where does that symbol come
+            // from" resolves `symbol`, and answering it with a value - tin's nine abundance
+            // reservoirs, as reported - mistakes what the sentence is about.
+            if (Lexicon.ETYMOLOGY_INTENTS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
+                return Decline(rawQuery);
+
+            // ---- Explanations ----------------------------------------------------------------
+            // "Why does atomic radius increase down a group" and "what is a halogen" want prose,
+            // not a value or a list of matching elements. Both would otherwise be captured: the
+            // first by the plain field definition, the second by a subset list.
+            //
+            // An operator disqualifies the definitional reading. "What is the average
+            // electronegativity of the halogens" opens with a definition frame and names a topic
+            // the dictionary has, so it was answered with the definition of electronegativity - the
+            // word "average" and the subset were never reached, because this check runs before
+            // aggregation. A subset on its own is deliberately not disqualifying: "what is a
+            // halogen" names a family and wants the definition of it, not a list of its members.
+            var carriesOperator = operators.Aggregation != Aggregation.None ||
+                                  operators.SuperlativeDescending is not null ||
+                                  operators.Comparators.Count > 0 ||
+                                  operators.TopN is not null ||
+                                  operators.Range is not null;
+
+            // A follow-up with a subject in play is asking about that subject. "What are its
+            // isotopes" opens with a definition frame and names a topic the dictionary holds, so it
+            // was answered with the definition of "isotope" instead of the element's isotopes.
+            var continuesAThread = elementMatches.Count == 0 &&
+                                   state.FocusElement is not null &&
+                                   ReadsAsFollowUp(normalized);
+
+            // A mechanism question is checked even mid-thread. Every reported case was a follow-up
+            // - "why does that trend hold", "how does that change above Curie temperature" - so
+            // excluding follow-ups here exempted exactly the turns that were failing.
+            if (AsksHowItWorks(normalized) || (!carriesOperator && !continuesAThread))
+            {
+                if (ExplanationPlan(rawQuery, normalized, elementMatches.Count > 0) is { } explanation)
+                    return explanation;
+            }
+
+            // ---- Slot-emptiness inheritance --------------------------------------------------
+            // A follow-up supplies one slot and inherits the other. This is what makes "and its
+            // density?" work in every language without pronoun lists.
+            var elementKeys = elementMatches.Select(m => m.Key).ToList();
+            var fieldIds = fieldMatches.Select(m => m.Spec.Id).ToList();
+
+            // A question that ranges over the whole table has no subject to inherit. Without this
+            // guard, "which element has the highest melting point" asked three turns into a thread
+            // about tungsten inherits tungsten and collapses into a plain property lookup - the
+            // opposite failure to a stale field, and just as wrong.
+            //
+            // Deliberately *not* keyed on IsListQuestion: Lexicon.WHICH contains "what", so that
+            // flag is true for "what is its density" and using it here silently disabled the whole
+            // follow-up mechanism. Only the operators that genuinely scan the table count.
+            var rangesOverTable =
+                operators.SuperlativeDescending is not null ||
+                operators.TopN is not null ||
+                // "How many are there" ranges; "how many neutrons does it have" does not, and the
+                // difference is whether a field was named.
+                (operators.Aggregation != Aggregation.None && fieldMatches.Count == 0) ||
+                // "Which elements are radioactive" ranges; "is it radioactive" carries the same
+                // subset word but is a question about the subject already in play.
+                (operators.SubsetFilters.Count > 0 && operators.IsListQuestion) ||
+                // "Noble gases", "the halogens", "ädelgaserna" - a family name and nothing else is
+                // a request for that family, not a continuation of whatever came before.
+                NamesOnlyAFamily(normalized, operators, elementMatches.Count > 0);
+
+            if (elementKeys.Count == 0 && !rangesOverTable)
+            {
+                // Inherit the subject whenever the turn reads as a continuation, not only when a
+                // field resolved. "and in fahrenheit" resolves no field, "what are its isotopes"
+                // resolves no field the isotope branch uses, and both were falling through to a
+                // dataset match.
+                //
+                // A plural anaphor inherits the whole set, not the focus. "And their melting
+                // points" after comparing gold and silver is a two-element question; taking only
+                // the focus answered half of it and gave no sign that half was dropped.
+                var plural = Lexicon.PLURAL_ANAPHORS.Any(a => TextMatching.ContainsWord(normalized, a));
+                var previousSet = PreviousPair(state);
+
+                // Spanish "sus" and Portuguese "seus" agree with the thing possessed, not the
+                // possessor, so "cuáles son sus isótopos" is *its* isotopes - one element with
+                // several isotopes - and inheriting the pair answered it as a comparison.
+                if (plural && previousSet is not null && !AsksForIsotopes(normalized))
+                {
+                    elementKeys = previousSet.ToList();
+                    evidence.Add($"inherited {previousSet.Count} elements");
+                }
+                else if ((fieldIds.Count > 0 || ContinuesTheThread(normalized)) &&
+                         state.FocusElement is { } focus)
+                {
+                    elementKeys = [focus];
+                    evidence.Add($"inherited element {focus}");
+                }
+            }
+
+            // Inheriting a *field* is riskier than inheriting an element, because a full question
+            // that resolved no field is usually a new question rather than a continuation - and
+            // answering it with the previous field is confidently wrong rather than merely
+            // unhelpful. So it is limited to queries that actually read as follow-ups.
+            //
+            // A follow-up that ranges over the set rather than over one element inherits the field
+            // too: "is that the highest" after listing metals by density has no element and no
+            // field of its own, and every part of it comes from the turn before.
+            var elliptical = ContinuesTheThread(normalized) &&
+                             (elementKeys.Count > 0 ||
+                              operators.SuperlativeDescending is not null ||
+                              operators.Aggregation != Aggregation.None);
+
+            if (fieldIds.Count == 0 && state.LastFieldIds.Count > 0 && elliptical)
+            {
+                fieldIds = state.LastFieldIds.ToList();
+                evidence.Add($"inherited field {fieldIds[0]}");
+            }
+
+            // A bare "how many are there" after "list the noble gases" is asking about that set.
+            // The filters are inherited rather than the question being answered over all 118
+            // elements, which is the only reading that makes the follow-up mean anything.
+            var subsetFilters = operators.SubsetFilters;
+            if (subsetFilters.Count == 0)
+            {
+                // Only a follow-up that itself ranges over a set - "how many are there", "which is
+                // the densest" - inherits the previous turn's filters. A follow-up asking for one
+                // field of one element must not, or "what is its atomic number" after listing the
+                // halogens turns back into a list of halogens.
+                var previous = state.LastPlan?.Filters ?? [];
+                var wantsASet = operators.Aggregation != Aggregation.None ||
+                                operators.SuperlativeDescending is not null;
+
+                if (previous.Count > 0 && elementKeys.Count == 0 && wantsASet && ReadsAsFollowUp(normalized))
+                {
+                    evidence.Add($"inherited {previous.Count} filter(s)");
+                    subsetFilters = previous;
+                }
+                else
+                {
+                    subsetFilters = [];
+                }
+            }
+
+            var comparatorFilters = operators.Comparators
+                // A comparator needs a field to compare against.
+                .Where(_ => fieldIds.Count > 0)
+                .Select(c => new Filter.FieldCompare(fieldIds[0], c.Op, c.Value))
+                .ToList();
+
+            // ---- Comparative against the focus element ---------------------------------------
+            // "is gold denser" after a turn about lead, "which is denser" after comparing two. The
+            // adjective is the signal - it is what makes the turn a comparison rather than a
+            // lookup, and without this the question fell through to a filtered list of everything
+            // denser.
+            //
+            // Hindi and Urdu have no comparative adjective to key on: the comparison is carried by
+            // the particle alone, and the adjective stays in its plain form - "क्या यह चांदी से भारी है"
+            // is "is it heavier than silver" with भारी meaning simply "heavy". The particle plus a
+            // named field plus a pronoun standing for the other subject is the whole of the
+            // evidence there is, and without accepting it the turn was answered as a lookup.
+            var comparativeCue =
+                Lexicon.COMPARATIVE_ADJECTIVES.Keys.Any(a => normalized.Contains(a, StringComparison.Ordinal)) ||
+                (fieldIds.Count > 0 &&
+                 MentionsAny(normalized, Lexicon.THAN_WORDS) &&
+                 MentionsAny(normalized, Lexicon.ANAPHORS));
+
+            if (elementMatches.Count == 1 && state.FocusElement is { } focusKey &&
+                !string.Equals(elementMatches[0].Key, focusKey, StringComparison.Ordinal) && comparativeCue)
+            {
+                var pair = new[] { focusKey, elementMatches[0].Key };
+                if (ComparativePlan(rawQuery, normalized, pair, fieldIds) is { } against)
+                {
+                    evidence.Add("comparative against focus element");
+                    return against with { Evidence = [.. against.Evidence, .. evidence] };
+                }
+
+                // ComparativePlan reads an explicit "X is denser than Y" and needs a comparator, an
+                // adjective or a degree word to do it - none of which a Hindi or Urdu comparative
+                // has. When the cue said this is a comparison and the sentence cannot be parsed as
+                // one, the pair and the field are still enough to answer it.
+                if (fieldIds.Count > 0)
+                {
+                    evidence.Add("comparative against focus element");
+                    return new QueryPlan(
+                        Intent.Comparative,
+                        Entities: pair.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
+                        FieldIds: [fieldIds[0]],
+                        TargetUnit: operators.TargetUnit ?? state.LastTargetUnit,
+                        Confidence: 0.8,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- Comparative over the previous answer ----------------------------------------
+            // Neither element named - "which is denser", "which melts first", "which conducts heat
+            // better". Both subjects come from the previous turn, which is the only place they
+            // exist.
+            //
+            // elementMatches, not elementKeys: by this point inheritance has already put the focus
+            // element into elementKeys, which masked every elliptical comparative the thread
+            // produced.
+            var recentPair = PreviousPair(state);
+            if (elementMatches.Count == 0 && recentPair is not null &&
+                operators.Comparators.Count == 0 && operators.SubsetFilters.Count == 0)
+            {
+                var adjective = LongestComparativeAdjective(normalized);
+                var comparativeField = fieldIds.FirstOrDefault()
+                                       ?? adjective?.Value.Field
+                                       ?? state.LastFieldIds.FirstOrDefault();
+
+                // A bare request for the margin - "by how much", "what is the difference" - names
+                // neither subject nor field and is only meaningful as a continuation.
+                var wantsTheMargin = Lexicon.MARGIN_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal));
+
+                // Naming the word "element" is what says the question ranges over the table rather
+                // than over the pair - "which **element** has the highest melting point" is a
+                // superlative however deep into a thread it is asked, while the elliptical "which
+                // is densest" is not. Without that half, three explicit superlatives collapsed into
+                // comparisons.
+                var ellipticalSuperlative = operators.SuperlativeDescending is not null &&
+                                            !MentionsAny(normalized, Lexicon.ELEMENT_WORDS);
+
+                // Exactly a pair, and the turn before must not have been a list. After "which
+                // elements are radioactive" the follow-up "which is the heaviest" ranges over that
+                // list and is a superlative; only a thread with two elements in play makes it a
+                // comparison.
+                //
+                // A morphological superlative counts too. Swedish and German mark it on the word -
+                // "tätast", "dichteste" - so CarriesADegreeWord cannot see it, and "vilket är
+                // tätast" after asking about gold and then silver ranked all 118 instead of
+                // choosing between the two under discussion.
+                var comparesThePair = recentPair.Count == 2 &&
+                                      state.LastResultKeys.Count <= 2 &&
+                                      operators.SubsetFilters.Count == 0 &&
+                                      (CarriesADegreeWord(normalized) || ellipticalSuperlative);
+
+                // An isotope question is not a comparison, however elliptical: "what are its
+                // isotopes" was being answered as one.
+                var asksSomethingElse = Lexicon.ISOTOPE_WORDS.Any(w => TextMatching.ContainsWord(normalized, w));
+
+                var readsAsComparison =
+                    !asksSomethingElse &&
+                    (operators.SuperlativeDescending is null || comparesThePair) &&
+                    (adjective is not null || wantsTheMargin ||
+                     (comparesThePair && operators.SuperlativeDescending is not null) ||
+                     (fieldIds.Count > 0 && !NamesOneSubject(normalized) &&
+                      Lexicon.SELECTIVE.Any(w => TextMatching.ContainsWord(normalized, w))));
+
+                if (comparativeField is not null && readsAsComparison)
+                {
+                    evidence.Add("comparative over the previous answer");
+                    return new QueryPlan(
+                        Intent.Comparative,
+                        Entities: recentPair.Take(2).Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
+                        FieldIds: [comparativeField],
+                        // The shared target unit is derived further down; take it from the operators
+                        // and the thread directly, so an elliptical turn keeps the unit asked for.
+                        TargetUnit: operators.TargetUnit ?? state.LastTargetUnit,
+                        Confidence: 0.8,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- Periphrastic comparative ----------------------------------------------------
+            // Two elements and a degree word is a comparison *between those two*. Decided ahead of
+            // the superlative branch, because the languages that need it mark both with the same
+            // word: "l'oro è più denso del piombo" would otherwise rank the whole table.
+            //
+            // Chinese writes "compare" as 比较, which *contains* its comparison particle 比 - so
+            // "比较这两个" ("compare the two") looked like "this is more … than that" and was
+            // answered with a winner instead of a side-by-side table. The verb is masked before the
+            // particle is looked for, the same way the degree phrases are in OperatorExtractor.
+            var withoutCompareVerbs = Lexicon.COMPARE.Aggregate(normalized, (acc, verb) =>
+                verb.Length > 1
+                    ? acc.Replace(verb, new string(' ', verb.Length), StringComparison.Ordinal)
+                    : acc);
+
+            var marksAComparison = CarriesADegreeWord(normalized) ||
+                                   MentionsAny(withoutCompareVerbs, Lexicon.THAN_WORDS);
+
+            if (elementKeys.Count == 2 && fieldIds.Count > 0 && marksAComparison &&
+                operators.Comparators.Count == 0 && operators.SubsetFilters.Count == 0)
+            {
+                // ComparativePlan first: it reads the explicit "is X denser than Y" shape and is
+                // what produces the ratio for "how much denser is gold than aluminium". Only when
+                // it cannot parse the sentence is the plan built here.
+                if (ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } explicitPlan)
+                {
+                    evidence.Add($"comparative {string.Join(", ", fieldIds)}");
+                    return explicitPlan with { Evidence = [.. explicitPlan.Evidence, .. evidence] };
+                }
+
+                evidence.Add("periphrastic comparative");
+                return new QueryPlan(
+                    Intent.Comparative,
+                    Entities: elementKeys.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
+                    FieldIds: [fieldIds[0]],
+                    TargetUnit: operators.TargetUnit,
+                    Confidence: 0.8,
+                    RawQuery: rawQuery,
+                    Evidence: evidence);
+            }
+
+            // A threshold can name an element instead of a number: "denser than iron" means denser
+            // than iron's density. Only when a single element is named - with two, the question is
+            // a direct comparison between them and the elements are the subject rather than a bound.
+            if (comparatorFilters.Count == 0 && elementKeys.Count == 1 &&
+                ElementThreshold(normalized, elementKeys, fieldIds) is { } threshold)
+            {
+                comparatorFilters.Add(threshold);
+                // The element supplied the threshold; it is not also a subject of the query.
+                elementKeys = [];
+                // The adjective also names the property, so the results can be sorted and shown by
+                // it: "lighter than aluminium" is about density even though no field was written.
+                if (fieldIds.Count == 0) fieldIds = [threshold.FieldId];
+                evidence.Add("threshold from element");
+            }
+
+            // A range: "which elements melt between 1000 and 2000 kelvin".
+            if (operators.Range is { } range && fieldIds.Count > 0)
+            {
+                comparatorFilters.Add(
+                    new Filter.FieldCompare(fieldIds[0], Op.Between, range.Low, range.High));
+                evidence.Add($"range on {fieldIds[0]}");
+            }
+
+            if (comparatorFilters.Count > 0)
+                evidence.Add($"comparator on {fieldIds.FirstOrDefault()}");
+            if (subsetFilters.Count > 0)
+                evidence.Add($"subset {subsetFilters.Count}");
+
+            var allFilters = subsetFilters.Concat(comparatorFilters).ToList();
+            var targetUnit = operators.TargetUnit ?? (fieldIds.Count > 0 ? state.LastTargetUnit : null);
+
+            // ---- "in the same group as carbon" -----------------------------------------------
+            // The named element supplies the group or period; it is the reference, not the answer.
+            if (Lexicon.SAME_AS_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
+                elementKeys.FirstOrDefault() is { } sameAsKey &&
+                _store.Element(sameAsKey) is { } reference)
+            {
+                var byPeriod = normalized.Contains("period", StringComparison.Ordinal) ||
+                               normalized.Contains("row", StringComparison.Ordinal);
+
+                Filter filter = byPeriod
+                    ? new Filter.InPeriod(reference.Period)
+                    : reference.GroupNumber is { } group
+                        ? new Filter.InGroup(group)
+                        : new Filter.InSeries(new HashSet<SeriesId> { reference.Series });
+
+                evidence.Add($"same {(byPeriod ? "period" : "group")} as {reference.Key}");
+                return new QueryPlan(
+                    Intent.FilterList,
+                    Filters: [filter],
+                    Limit: DefaultListLimit,
+                    Confidence: 0.85,
+                    RawQuery: rawQuery,
+                    Evidence: evidence);
+            }
+
+            // ---- Direct comparative: "is gold denser than lead" ------------------------------
+            // A question with a one-word answer should get one, not a property table. Checked
+            // before the general comparison so the answer leads with yes/no or the winner.
+            if (elementKeys.Count >= 2 &&
+                ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } direct)
+                return direct with { Evidence = [.. direct.Evidence, .. evidence] };
+
+            // ---- Aggregation: "average electronegativity of the halogens" --------------------
+            // A filter is not required: "the average density of all elements" ranges over the whole
+            // table, which is a complete question. It previously fell through to a dataset match.
+            var aggregatesOverEverything = operators.Aggregation != Aggregation.None &&
+                                           elementKeys.Count == 0 && fieldIds.Count > 0;
+
+            if (operators.Aggregation != Aggregation.None &&
+                (allFilters.Count > 0 || elementKeys.Count > 1 || aggregatesOverEverything))
+            {
+                var fieldId = fieldIds.FirstOrDefault();
+                if (operators.Aggregation == Aggregation.Count || fieldId is not null)
+                {
+                    evidence.Add($"aggregation {operators.Aggregation}");
+                    return new QueryPlan(
+                        Intent.Aggregate,
+                        Entities: elementKeys.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
+                        FieldIds: fieldId is null ? [] : [fieldId],
+                        Filters: allFilters,
+                        Aggregation: operators.Aggregation,
+                        SortField: fieldId,
+                        TargetUnit: targetUnit,
+                        Confidence: 0.85,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- Superlative and filtered list -----------------------------------------------
+            var wantsRanking = operators.SuperlativeDescending is not null || operators.TopN is not null;
+            if (wantsRanking || comparatorFilters.Count > 0)
+            {
+                var sortField = fieldIds.FirstOrDefault() ?? InferSortField(rawQuery);
+                if (sortField is not null)
+                {
+                    // "which element has the lowest X" is a superlative, not a list, even though it
+                    // opens with "which". Only an explicit count, a threshold, or a list question
+                    // with no superlative asks for more than one row.
+                    var isList = operators.TopN is not null || comparatorFilters.Count > 0 ||
+                                 (operators.IsListQuestion && operators.SuperlativeDescending is null);
+                    evidence.Add(isList ? $"filtered list on {sortField}" : $"superlative on {sortField}");
+
+                    // "the third densest element" wants one element, the third down the ranking,
+                    // not the top one. Carried as FieldOrdinal so the executor can skip past.
+                    var rankOrdinal = operators.RankOrdinal;
+                    if (rankOrdinal is not null) evidence.Add($"rank {rankOrdinal}");
+
+                    return new QueryPlan(
+                        isList && rankOrdinal is null ? Intent.FilterList : Intent.Superlative,
+                        FieldIds: [sortField],
+                        FieldOrdinal: rankOrdinal,
+                        Filters: allFilters,
+                        SortField: sortField,
+                        SortDescending: operators.SuperlativeDescending ?? true,
+                        Limit: rankOrdinal is not null ? 1 : operators.TopN ?? (isList ? DefaultListLimit : 1),
+                        TargetUnit: targetUnit,
+                        Confidence: comparatorFilters.Count > 0 ? 0.85 : 0.8,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- Subset list: "which elements are radioactive", "list the noble gases" -------
+            // "compare the halogens on electronegativity" names no elements to compare - the subset
+            // is the operand. The honest answer is the family ranked by that field, so a compare
+            // cue counts as a list request when a subset is present.
+            var comparesASubset = Lexicon.COMPARE.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
+                                  elementKeys.Count == 0;
+
+            if (subsetFilters.Count > 0 &&
+                (operators.IsListQuestion || comparesASubset ||
+                 NamesOnlyAFamily(normalized, operators, elementKeys.Count > 0)))
+            {
+                // A named field is only used as the displayed column when it is something
+                // measurable - "radioactive" resolves to a field but is already expressed by the
+                // filter itself, so requiring no field here would make that query unplannable.
+                var displayField = NumericFieldOrNull(fieldIds.FirstOrDefault());
+                evidence.Add("subset list");
+                return new QueryPlan(
+                    Intent.FilterList,
+                    FieldIds: displayField is null ? [] : [displayField],
+                    // Every filter, not just the subset: "which metals are lighter than aluminium"
+                    // is a subset question that also carries a threshold, and dropping it here
+                    // would list all metals.
+                    Filters: allFilters,
+                    SortField: displayField,
+                    Limit: DefaultListLimit,
+                    Confidence: 0.75,
+                    RawQuery: rawQuery,
+                    Evidence: evidence);
+            }
+
+            // ---- Field coverage: "which elements have a recorded curie point" ----------------
+            // A list question with a field and no constraint at all. The set is everything with a
+            // value, which for the sparse fields is the interesting part of the answer: the
+            // composer already reports how many of the pool were missing, so this says "17 of 118"
+            // rather than implying the other 101 are zero.
+            if (allFilters.Count == 0 && elementKeys.Count == 0 && operators.IsListQuestion &&
+                Lexicon.HAS_VALUE_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
+            {
+                var coverageField = NumericFieldOrNull(fieldIds.FirstOrDefault());
+                if (coverageField is not null)
+                {
+                    evidence.Add("field coverage");
+                    return new QueryPlan(
+                        Intent.FilterList,
+                        FieldIds: [coverageField],
+                        SortField: coverageField,
+                        SortDescending: true,
+                        Limit: DefaultListLimit,
+                        Confidence: 0.75,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- "compare with iron" while the conversation is about gold --------------------
+            // The second element is the one already in focus.
+            if (elementKeys.Count == 1 && state.FocusElement is { } compareFocus &&
+                !string.Equals(elementKeys[0], compareFocus, StringComparison.Ordinal) &&
+                Lexicon.COMPARE.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
+            {
+                elementKeys = [compareFocus, elementKeys[0]];
+                evidence.Add("comparison against focus element");
+
+                // The direct-comparative check ran further up, when only one element was known, so
+                // it could not fire. Re-run it now that the pair is complete: "how does that
+                // compare to iron" is a request for a winner, and without this it fell through to
+                // the side-by-side table the branch below builds.
+                if (ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } rerun)
+                    return rerun with { Evidence = [.. rerun.Evidence, .. evidence] };
+            }
+
+            // ---- Neighbour: "what comes after carbon" ----------------------------------------
+            if (elementKeys.FirstOrDefault() is { } neighbourKey &&
+                _store.Element(neighbourKey) is { } subject &&
+                NeighbourDirection(normalized) is { } direction &&
+                _store.ByNumber(subject.AtomicNumber + direction) is { } target)
+            {
+                evidence.Add($"neighbour {(direction > 0 ? "after" : "before")}");
+                return new QueryPlan(
+                    Intent.Neighbour,
+                    Entities: [new EntityRef.Element(subject.Key), new EntityRef.Element(target.Key)],
+                    Limit: direction,
+                    Confidence: 0.85,
+                    RawQuery: rawQuery,
+                    Evidence: evidence);
+            }
+
+            // ---- Element versus alloy: "the difference between iron and steel" ---------------
+            // An alloy is not an element, so a side-by-side property table is not available and not
+            // what is being asked. The alloy's own entry explains how it differs from its base
+            // metal, which is the answer.
+            //
+            // Unless the query also names an element *and* a field, in which case it is an ordinary
+            // property lookup that happens to mention an alloy: "Young's modulus of steel's iron"
+            // asks for iron's stiffness, and returning the encyclopaedia entry for steel answered a
+            // question nobody asked.
+            var asksForAFieldOfAnElement = elementKeys.Count > 0 && fieldIds.Count > 0;
+            if (!asksForAFieldOfAnElement && AlloyIn(normalized) is { } alloy)
+            {
+                evidence.Add($"alloy {alloy.Id}");
+                return new QueryPlan(
+                    Intent.DatasetLookup,
+                    Entities: [new EntityRef.DatasetRow(DatasetIndex.Datasets.Alloy, alloy.Id)],
+                    Confidence: 0.8,
+                    RawQuery: rawQuery,
+                    Evidence: evidence);
+            }
+
+            // ---- Selective comparison: "which melts first, iron or copper" -------------------
+            // Two elements and a question that asks to *choose* between them. A side-by-side table
+            // technically contains the answer, but the question was a question.
+            if (elementKeys.Count == 2 && fieldIds.Count == 1 &&
+                Lexicon.SELECTIVE.Any(w => TextMatching.ContainsWord(normalized, w)) &&
+                ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } selective)
+            {
+                evidence.Add("selective comparison");
+                return selective with { Evidence = [.. selective.Evidence, .. evidence] };
+            }
+
+            // ---- Comparison: two or more elements named together ----------------------------
+            if (elementKeys.Count >= 2)
+            {
+                // "in terms of reactivity, density and applications" names several aspects at once.
+                // Every aspect that maps to a field is compared; the rest are reported as not
+                // comparable from stored data rather than silently dropped.
+                var aspects = _fields.ResolveAll(rawQuery, limit: 6).Select(m => m.Spec.Id).ToList();
+                var unsupported = UnsupportedAspects(normalized);
+
+                evidence.Add($"comparison of {elementKeys.Count} elements");
+                if (aspects.Count > 1) evidence.Add($"aspects {aspects.Count}");
+
+                IReadOnlyList<string> comparisonFields =
+                    aspects.Count > 0 ? aspects :
+                    fieldIds.Count > 0 ? fieldIds :
+                    DefaultComparisonFields;
+
+                return new QueryPlan(
+                    Intent.Comparison,
+                    Entities: elementKeys.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
+                    FieldIds: comparisonFields,
+                    TargetUnit: targetUnit,
+                    Confidence: 0.8,
+                    RawQuery: rawQuery,
+                    Evidence: [.. evidence, .. unsupported.Select(a => $"no field for {a}")]);
+            }
+
+            var element = elementKeys.FirstOrDefault() is { } singleKey ? _store.Element(singleKey) : null;
+
+            // "In the earth's crust" is one question, and the data answers it in two columns:
+            // earth_crust covers 47 elements and crustal_rocks covers 72, with different elements
+            // in each. Gold and oxygen are in the second and not the first, so asking for their
+            // crustal abundance resolved a real field, found it empty and replied "no data
+            // recorded" - with the number sitting in the sibling column. The two are the same
+            // measurement from different sources, so falling through is not a guess.
+            if (element is not null)
+            {
+                fieldIds = fieldIds.Select(fieldId =>
+                    CrustSiblings.TryGetValue(fieldId, out var sibling) &&
+                    element.Value(fieldId).IsMissing &&
+                    !element.Value(sibling).IsMissing
+                        ? sibling
+                        : fieldId).ToList();
+            }
+
+            // ---- Isotopes, safety and spectra: their own shapes, not single fields -----------
+            // Checked before field resolution because "isotopes" and "half life" both resolve to a
+            // field label, which would answer with the common-neutron count instead of the list.
+            if (element is not null)
+            {
+                if (MentionsAny(normalized, Lexicon.ISOTOPE_WORDS))
+                {
+                    evidence.Add("isotopes");
+                    return new QueryPlan(
+                        Intent.Isotopes,
+                        Entities: [new EntityRef.Element(element.Key)],
+                        Limit: operators.TopN ?? DefaultIsotopeLimit,
+                        Confidence: 0.85,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+
+                if (MentionsAny(normalized, Lexicon.SAFETY_WORDS))
+                {
+                    evidence.Add("safety");
+                    return new QueryPlan(
+                        Intent.Safety,
+                        Entities: [new EntityRef.Element(element.Key)],
+                        Confidence: 0.85,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+
+                // Also checked before field resolution: "what does the emission spectrum of iron
+                // look like" matched `appearance` and answered with the metal's colour, and
+                // "emission spectrum of sodium" resolved nothing at all and was declined.
+                if (MentionsAny(normalized, Lexicon.SPECTRUM_WORDS))
+                {
+                    evidence.Add("emission spectrum");
+                    return new QueryPlan(
+                        Intent.EmissionSpectrum,
+                        Entities: [new EntityRef.Element(element.Key)],
+                        Confidence: 0.85,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- Category lookup: a whole family of properties for one element ---------------
+            // A specific field wins over a family word. Several field names contain one - "thermal
+            // conductivity" contains "thermal" - and because this branch sits above property
+            // lookup, asking for one figure returned the whole family instead.
+            //
+            // Abundance is the exception, and it has to be, because the nine abundance fields all
+            // carry "abundance" in their labels - so "what is the abundance of gold" resolves a
+            // field and would lose the whole-family answer it has always given.
+            if (element is not null &&
+                (fieldMatches.Count == 0 || AbundanceFamilyQuestion(normalized) || AsksForAFamily(normalized)) &&
+                CategoryIn(normalized) is { } category)
+            {
+                var populated = FieldRegistry.ByCategory(category)
+                    .Where(spec => !element.Value(spec.Id).IsMissing)
+                    .Select(spec => spec.Id)
+                    .ToList();
+
+                if (populated.Count >= 2)
+                {
+                    evidence.Add($"category {category}");
+                    return new QueryPlan(
+                        Intent.CategoryLookup,
+                        Entities: [new EntityRef.Element(element.Key)],
+                        FieldIds: populated,
+                        TargetUnit: targetUnit,
+                        Confidence: 0.8,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- Property lookup --------------------------------------------------------------
+            if (element is not null && fieldIds.FirstOrDefault() is { } propertyField)
+            {
+                // A bare "tell me about gold" is narrative, not a field lookup, and belongs to the
+                // personality layer. Only decline when no field was actually named, though - "what
+                // is the density of gold" also opens with "what is".
+                //
+                // "Was ist mit Kupfer" opens with the same two words as "was ist Kupfer" and means
+                // the opposite thing - it asks for the field the thread is already about. Without
+                // the exemption the overview guard declined every German and Filipino "what about X".
+                var overviewOnly = fieldMatches.Count == 0 &&
+                                   Lexicon.OVERVIEW_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
+                                   !AsksWhatAbout(normalized);
+
+                if (!overviewOnly)
+                {
+                    evidence.Add(
+                        element.Value(propertyField).IsMissing &&
+                        _store.QuantityIn(element, propertyField, targetUnit) is null
+                            ? $"no data for {propertyField}"
+                            : $"property {propertyField}");
+
+                    return new QueryPlan(
+                        Intent.PropertyLookup,
+                        Entities: [new EntityRef.Element(element.Key)],
+                        FieldIds: [propertyField],
+                        FieldOrdinal: operators.Ordinal,
+                        TargetUnit: targetUnit,
+                        Confidence: 0.8,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
+
+            // ---- Dataset row, when retrieval is confident ------------------------------------
+            if (DatasetPlan(rawQuery, normalized, elementKeys, fieldIds, evidence) is { } dataset)
+                return dataset;
+
+            return Decline(rawQuery);
+        }
+
+        /// <summary>
+        /// The four guards that run before any real intent is considered.
+        ///
+        /// <para>Separated because none of them needs the operators, the resolvers or the dialogue
+        /// state - they are decisions about whether the sentence is a chemistry question at all.</para>
+        /// </summary>
+        private QueryPlan? EarlyDecline(string rawQuery, string normalized)
+        {
+            // ---- Conversation, not chemistry -------------------------------------------------
+            // Checked before anything else. A greeting or a quiz request has no grounded answer,
+            // but the dataset fallback further down will happily supply one: "quiz me" scored 0.70
+            // against the constants table and was answered with the mass of an electron. Retrieval
+            // cannot tell that a query is not a question, so this has to be an explicit early exit.
+            if (Lexicon.DEFER_TO_PERSONALITY.Any(
+                    w => TextMatching.ContainsWord(normalized, w) ||
+                         (w.Contains(' ', StringComparison.Ordinal) &&
+                          normalized.Contains(w, StringComparison.Ordinal))))
+                return Decline(rawQuery);
+
+            // An element number past 118 has a definite answer - there is no such element - and the
+            // worst thing to do is guess. Declining lets the personality layer say so; answering
+            // from retrieval produced "Electron mass" for "tell me about element 119".
+            if (_entities.OutOfRangeElementNumber(rawQuery) is not null) return Decline(rawQuery);
+
+            // ---- Concepts with no backing field ----------------------------------------------
+            // "समान" is Hindi for "similar" and also the first word of "समान समूह" - "the same
+            // group". The unbacked-concept guard therefore declined every Hindi "which elements are
+            // in the same group as carbon", which is a perfectly answerable structural question.
+            var namesTheSameGroup = Lexicon.SAME_AS_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal));
+
+            // An equation is written, not described. "Balance this reaction: Fe + O2 -> Fe2O3"
+            // carries a reaction word, and the unbacked-concept guard declines every sentence that
+            // does - but the arrow is far stronger evidence of what the sentence is than the noun
+            // beside it.
+            var writesAnEquation = EquationArrow.IsMatch(rawQuery);
+
+            if (!namesTheSameGroup && !writesAnEquation &&
+                Lexicon.UNBACKED_CONCEPTS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
+            {
+                // A question *about* one of these concepts wants it explained, and the dictionary
+                // can do that: "why are alkali metals so reactive". A question asking which element
+                // is the most reactive wants an element, and only the bespoke scoring rule can
+                // answer it - so a superlative disqualifies the explanation.
+                var superlative =
+                    Lexicon.MOST.Any(w => normalized.Contains(w, StringComparison.Ordinal)) ||
+                    Lexicon.LEAST.Any(w => normalized.Contains(w, StringComparison.Ordinal));
+
+                if (!superlative &&
+                    ExplanationPlan(rawQuery, normalized, hasElement: false) is { } explanation)
+                    return explanation;
+
+                // Mentioning one of these in passing does not block a comparison that also asks
+                // about real properties: "compare lithium, sodium and potassium on reactivity,
+                // density and applications" answers the parts it has fields for and says which
+                // parts it could not.
+                //
+                // A comparable field is required, not just several elements. Without that condition
+                // "compare the reactivity of sodium and gold" and "what happens when sodium and
+                // chlorine react" would both be answered as property tables, which is not what
+                // either is asking.
+                var comparableAspect = _fields.ResolveAll(rawQuery, limit: 3).Count > 0;
+                var severalElements = _entities.ResolveAll(rawQuery, limit: 3).Count >= 2;
+                if (!comparableAspect || !severalElements) return Decline(rawQuery);
+            }
+
+            // ---- "How many elements are there" -----------------------------------------------
+            // A plain fact about the table itself. Without this it retrieves whichever dictionary
+            // entry happens to score highest, which is not an answer.
+            //
+            // The aggregation has to actually *be* a count. Chinese asks for every statistic with
+            // 多少 ("how much"), so "镧系元素的中位原子量是多少" - the median atomic mass of the
+            // lanthanides - matched the count word, the word "element" and no subset, and came back
+            // as the size of the periodic table.
+            if (Lexicon.COUNT.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
+                Lexicon.ELEMENT_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
+                _entities.ResolveAll(rawQuery, limit: 1).Count == 0)
+            {
+                var operators = OperatorExtractor.Extract(rawQuery);
+                if (operators.SubsetFilters.Count == 0 && operators.Aggregation == Aggregation.Count)
+                {
+                    return new QueryPlan(
+                        Intent.Aggregate,
+                        Aggregation: Aggregation.Count,
+                        Confidence: 0.85,
+                        RawQuery: rawQuery,
+                        Evidence: ["count of all elements"]);
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// A row from one of the app's tables, when retrieval is confident and the element and
+        /// field path has nothing to offer.
+        ///
+        /// <para>A one- or two-word query carries too little signal for a lexical match to mean
+        /// anything: "sure" retrieved sulfur, "hey" and "42" retrieved dictionary rows. Anything
+        /// that short and unrecognised is conversational, and the personality layer owns it.</para>
+        ///
+        /// <para>An element in the query does not disqualify it. "Standard electrode potential of
+        /// zinc" and "solubility of sodium chloride" both name an element and both are dataset
+        /// questions - the element alone cannot answer them, because no <i>field</i> resolved
+        /// either. The bar is raised when an element is present, so a bare "tell me about gold"
+        /// still falls through to the overview.</para>
+        /// </summary>
+        private QueryPlan? DatasetPlan(
+            string rawQuery,
+            string normalized,
+            IReadOnlyList<string> elementKeys,
+            IReadOnlyList<string> fieldIds,
+            List<string> evidence)
+        {
+            if (elementKeys.Count > 0 && fieldIds.Count > 0) return null;
+            if (TextMatching.SplitQueryTokens(normalized).Count < MinDatasetTokens) return null;
+            if (_retriever is null) return null;
+
+            // Searched with the English name of anything the query named in another language. The
+            // reference tables are English and BM25 is lexical, so "vad är stål gjort av" matched
+            // nothing at all - the row is titled "Steel". Only the *search* string is glossed; the
+            // answer is still composed in the user's language.
+            var searchQuery = WithDatasetGloss(rawQuery, normalized);
+
+            // The best *dataset* row, not the best row overall. "Standard electrode potential of
+            // zinc" ranks zinc itself first - of course it does, the query says zinc - and the
+            // element hit is worth nothing here: it is already known, and no field resolved to look
+            // up on it. Taking the top hit meant these questions were declined rather than answered
+            // from the table that holds them.
+            var hit = _retriever.Search(searchQuery, DatasetSearchDepth)
+                .FirstOrDefault(h => h.Ref is RetrievedRef.Dataset);
+
+            // A query naming something the corpus has never heard of must retrieve a row that is at
+            // least *about* it. Neither test works alone: unknown words appear in perfectly good
+            // questions ("define molar mass"), and title overlap alone would not have been needed.
+            // Together they are what tells "define molar mass" from "write me a poem".
+            if (hit is not null &&
+                MentionsSomethingUnknown(rawQuery) &&
+                !_retriever.LooksRelevant(searchQuery, hit)) hit = null;
+
+            if (hit?.Ref is not RetrievedRef.Dataset reference) return null;
+
+            // The bar stays higher when the query names an element: the element is itself strong
+            // evidence the question is about it.
+            //
+            // Two relaxations were measured and rejected. Dropping this bar to the element-free one
+            // recovers five dataset rows and loses four must-defer rows; gating the drop on the
+            // retrieved row sharing a word with the query recovers the same five and still loses
+            // three. Both are bad trades: declining "solubility of sodium chloride" is a gap, while
+            // answering "what is the weather today" from the constants table is a wrong answer, and
+            // a wrong answer costs more than a missing one.
+            //
+            // Naming a *table topic* is the third possibility that two-way choice missed. "Standard
+            // electrode potential of zinc" names an element, so it got the high bar - but it also
+            // names a subject no element field covers and that only the electrode table holds. That
+            // is evidence of the same kind the element is, pointing the other way, and it admits
+            // nothing the rejected relaxations did: chatter names no table.
+            var namesATableTopic = Lexicon.DATASET_TOPIC_CUES.Any(
+                cue => normalized.Contains(cue, StringComparison.Ordinal));
+
+            var minimumScore = elementKeys.Count == 0 || namesATableTopic
+                ? DatasetConfidence
+                : DatasetConfidenceWithElement;
+
+            if (hit.Score < minimumScore) return null;
+
+            evidence.Add($"dataset {reference.Name}");
+            return new QueryPlan(
+                Intent.DatasetLookup,
+                Entities: [new EntityRef.DatasetRow(reference.Name, reference.Id)],
+                Confidence: 0.7,
+                RawQuery: rawQuery,
+                Evidence: evidence);
+        }
+
+        /// <summary>
+        /// Route "why …" and "what is a …" to the concept that explains it.
+        ///
+        /// <para>A definitional frame is ignored when an element is named, so "what is the atomic
+        /// mass of gold" gives gold's value rather than the definition of atomic mass. A "why"
+        /// question still takes the explanation even with an element present, because "why is
+        /// chromium's electron configuration unusual" is asking about the rule.</para>
+        /// </summary>
+        private QueryPlan? ExplanationPlan(string rawQuery, string normalized, bool hasElement)
+        {
+            var isWhy = Lexicon.WHY_WORDS.Any(
+                w => normalized.StartsWith(w + " ", StringComparison.Ordinal) ||
+                     normalized.Contains(" " + w + " ", StringComparison.Ordinal));
+
+            // A definitional frame over a family named in the *plural* is a request for its members,
+            // not for its definition. Deliberately narrowed to isDefinition: "why are noble gases
+            // unreactive" is still a question the dictionary answers, and isWhy is untouched.
+            var isDefinition = !hasElement &&
+                Lexicon.DEFINITION_FRAMES.Any(f => normalized.StartsWith(f, StringComparison.Ordinal)) &&
+                !Lexicon.PLURAL_SERIES_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal));
+
+            var isMechanism = AsksHowItWorks(normalized);
+            if (!isWhy && !isDefinition && !isMechanism) return null;
+
+            // Longest topic first, so "electron configuration unusual" beats "electron".
+            var topic = ExplanationTopicsByLength
+                .Cast<KeyValuePair<string, string>?>()
+                .FirstOrDefault(e => normalized.Contains(e!.Value.Key, StringComparison.Ordinal));
+
+            // A "why" question is answered from the dictionary when the topic is genuinely what it
+            // is about - "why are alkali metals so reactive" wants the reactivity entry. A
+            // *mechanism* frame is not: it asks how one thing follows from another, and any topic
+            // it happens to mention is incidental. Returning a definition there looks like an
+            // answer and is not one.
+            var row = isMechanism || topic is null
+                ? null
+                : _datasets.Row(DatasetIndex.Datasets.Dictionary, topic.Value.Value);
+
+            // No explanation to give - so decline, rather than falling through to the property path.
+            //
+            // This is the single most damaging behaviour reported. A mechanism question mentions a
+            // real field in passing, the planner resolves it, and the user gets a confident, cited
+            // number answering a question they did not ask: "why does radius decrease left to
+            // right, despite adding electrons" came back "Potassium's Electrons is 19". Saying
+            // nothing is a far better answer than saying that.
+            if (row is null) return isWhy || isMechanism ? Decline(rawQuery) : null;
+
+            return new QueryPlan(
+                Intent.DatasetLookup,
+                Entities: [new EntityRef.DatasetRow(DatasetIndex.Datasets.Dictionary, row.Id)],
+                Confidence: 0.85,
+                RawQuery: rawQuery,
+                Evidence: [isWhy ? $"explains {topic!.Value.Value}" : $"defines {topic!.Value.Value}"]);
+        }
+
+        // ---- Cascade predicates --------------------------------------------------------------
+
+        /// <summary>Whether the query carries a degree word that could mark either degree.</summary>
+        private static bool CarriesADegreeWord(string normalized) =>
+            MentionsAny(normalized, Lexicon.AMBIGUOUS_DEGREE);
+
+        /// <summary>
+        /// Whether the query asks how something works rather than what a value is.
+        ///
+        /// <para>A comparison cue disqualifies it. "How does it compare to lead" opens with the same
+        /// "how does" as "how does that change above the Curie temperature", but it has a grounded
+        /// answer and declining it would break the compound question it usually arrives in.</para>
+        /// </summary>
+        private static bool AsksHowItWorks(string normalized)
+        {
+            if (!Lexicon.MECHANISM_FRAMES.Any(f => normalized.Contains(f, StringComparison.Ordinal)))
+                return false;
+            if (Lexicon.COMPARE.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
+                return false;
+            if (Lexicon.COMPARATIVE_ADJECTIVES.Keys.Any(a => TextMatching.ContainsWord(normalized, a)))
+                return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Whether the query explicitly asks for a <i>family</i> of properties.
+        ///
+        /// <para>"Magnetic properties of iron" names a family even though <c>magnetic_type</c> also
+        /// resolves, so the specific-field-wins rule has to yield to the word "properties".</para>
+        /// </summary>
+        private static bool AsksForAFamily(string normalized) =>
+            FamilyWords.Any(w => normalized.Contains(w, StringComparison.Ordinal));
+
+        /// <summary>
+        /// Whether an abundance question is about the whole picture rather than one reservoir.
+        ///
+        /// <para>"What is the abundance of gold" wants all nine figures; "how much gold is in sea
+        /// water" wants one. Both resolve an abundance field, because every one of those labels
+        /// contains the word "abundance", so the distinction has to come from whether a reservoir
+        /// is named.</para>
+        /// </summary>
+        private static bool AbundanceFamilyQuestion(string normalized)
+        {
+            if (CategoryIn(normalized) != FieldCategory.Abundance) return false;
+            return !ReservoirWords.Any(w => normalized.Contains(w, StringComparison.Ordinal));
+        }
+
+        /// <summary>
+        /// Whether a query reads as a continuation of the previous turn rather than a new question.
+        ///
+        /// <para>Deliberately shape-based rather than a list of pronouns and connectives per
+        /// language. A follow-up that means "the same thing, for this element" is short - "and
+        /// iron?", "what about silver", "och silver", "und kupfer" - because everything else is
+        /// carried by context.</para>
+        ///
+        /// <para>Counted over whitespace-separated words rather than over tokens, because a token
+        /// split also breaks on the hyphen and the apostrophe: French "combien y en a-t-il" is four
+        /// words and six tokens, so a four-word follow-up was over the five-token limit and every
+        /// French "how many are there" was declined.</para>
+        /// </summary>
+        private static bool ReadsAsFollowUp(string normalized, int limit = MaxFollowUpTokens) =>
+            Whitespace.Split(normalized.Trim()).Count(w => w.Length > 0) <= limit;
+
+        /// <summary>
+        /// Whether the query names something the corpus has never heard of.
+        ///
+        /// <para>BM25 always has a best answer however unlike the corpus the query is, and no
+        /// threshold on its score can say otherwise - the scores are normalised against the top hit,
+        /// so the best one is always the same number. What <i>can</i> be said with certainty is that
+        /// "poem", "weather" and "dinner" appear in no document.</para>
+        /// </summary>
+        private bool MentionsSomethingUnknown(string rawQuery) =>
+            _retriever?.MentionsUnknownTopic(rawQuery) ?? false;
+
+        /// <summary>
+        /// Whether a short turn is continuing the thread rather than changing the subject.
+        ///
+        /// <para>Length alone said yes to "what's the weather today", which then inherited iron and
+        /// its electrical type and answered "Iron's Electrical Type is Conductor" - the thread's own
+        /// subject, attached to a question that had nothing to do with it.</para>
+        ///
+        /// <para>The asymmetry is what makes this safe to act on: refusing to inherit produces a
+        /// decline, which the personality layer handles gracefully, while inheriting wrongly
+        /// produces a cited answer to a question nobody asked. When no retriever is wired the check
+        /// cannot run and the old length-only behaviour stands.</para>
+        /// </summary>
+        private bool ContinuesTheThread(string normalized)
+        {
+            // An explicit anaphor settles it. The unknown-word test exists to catch a turn that
+            // changes the subject, and "is it dangerous" plainly does not - while its content word
+            // is safety vocabulary, which appears nowhere in a corpus built from element data.
+            var anaphoric = Lexicon.ANAPHORS.Any(a => TextMatching.ContainsWord(normalized, a));
+
+            // An anaphor also buys two more words of room. Hindi and Urdu spell "its" as two words
+            // and put the copula in a third, so the same follow-up that is five words in English is
+            // seven in Urdu, and the length gate declined it.
+            if (!ReadsAsFollowUp(normalized, anaphoric ? MaxAnaphoricFollowUp : MaxFollowUpTokens))
+                return false;
+            if (anaphoric) return true;
+
+            // So does an explicit "what about X" frame, with the same failure if it is missing:
+            // "paano naman ang tanso" is built from two Filipino function words that appear in no
+            // document, so the unknown-term test read a follow-up as a new subject.
+            if (AsksWhatAbout(normalized)) return true;
+
+            // So does a bare unit. "In celsius" is only ever a request to restate the previous
+            // answer, and the transliterated unit names - सेल्सियस, سیلسیس, 摄氏度 - appear in no
+            // document.
+            if (Lexicon.UNIT_WORDS.Keys.Any(
+                    u => u.Length >= MinUnitCue && TextMatching.ContainsWord(normalized, u)))
+                return true;
+
+            // Safety vocabulary appears in no document - the corpus is element data and dataset
+            // rows, not hazard sheets - so "è pericoloso" reads as a change of subject on every
+            // measure the index has. It is not one: it is the shortest possible follow-up.
+            if (Lexicon.SAFETY_WORDS.Any(w => TextMatching.ContainsWord(normalized, w))) return true;
+
+            return !MentionsSomethingUnknown(normalized);
+        }
+
+        /// <summary>Whether the query is the "same question, different subject" frame.</summary>
+        private static bool AsksWhatAbout(string normalized) =>
+            Lexicon.WHAT_ABOUT_FRAMES.Any(f => normalized.Contains(f, StringComparison.Ordinal));
+
+        /// <summary>
+        /// Whether the query points at <i>one</i> subject already in play.
+        ///
+        /// <para>The Romance interrogatives are all in <c>SELECTIVE</c> - "cuál", "quelle", "qual" -
+        /// and they open an ordinary question as readily as a choosing one: "cuál es su densidad" is
+        /// "what is its density", not "which of the two is denser". The singular possessive settles
+        /// it, and without this every fourth turn of a Spanish, French, Italian or Portuguese thread
+        /// turned into a comparison of the two elements before it.</para>
+        /// </summary>
+        private static bool NamesOneSubject(string normalized)
+        {
+            if (Lexicon.PLURAL_ANAPHORS.Any(a => TextMatching.ContainsWord(normalized, a))) return false;
+            return Lexicon.ANAPHORS.Any(a => TextMatching.ContainsWord(normalized, a));
+        }
+
+        /// <summary>Whether the query is asking about isotopes, however elliptically.</summary>
+        private static bool AsksForIsotopes(string normalized) =>
+            Lexicon.ISOTOPE_WORDS.Any(w => TextMatching.ContainsWord(normalized, w));
+
+        /// <summary>
+        /// Whether the query is a family name and little else.
+        ///
+        /// <para>The token budget is what makes this safe: "noble gases" and "the halogens" qualify,
+        /// while "which noble gas has the highest boiling point" does not and is handled by the
+        /// superlative branch.</para>
+        /// </summary>
+        private static bool NamesOnlyAFamily(string normalized, Operators operators, bool hasElement)
+        {
+            // An element in the query means it is the subject, however short the query is: "is gold
+            // radioactive" is three tokens and carries a subset filter, but it asks about gold.
+            if (hasElement) return false;
+
+            // An anaphor means the subject is already in play. "Is it radioactive" is the same
+            // length as "noble gases" and carries a family word too, but it is a follow-up.
+            if (Lexicon.ANAPHORS.Any(a => TextMatching.ContainsWord(normalized, a))) return false;
+
+            if (operators.SubsetFilters.Count == 0) return false;
+            if (operators.Aggregation != Aggregation.None ||
+                operators.SuperlativeDescending is not null) return false;
+
+            return TextMatching.SplitQueryTokens(normalized).Count(t => t.Trim().Length > 0)
+                   <= MaxBareFamilyTokens;
+        }
+
+        /// <summary>
+        /// The two elements the thread has in play, or null.
+        ///
+        /// <para>The previous answer when it named two, otherwise the last two discussed - "which is
+        /// bigger" after looking up sodium and then potassium in separate turns is the same
+        /// question, and neither turn produced a pair.</para>
+        /// </summary>
+        private static IReadOnlyList<string>? PreviousPair(DialogueState state)
+        {
+            if (state.LastResultKeys.Count >= 2) return state.LastResultKeys;
+            var recent = state.RecentElements.Take(2).ToList();
+            return recent.Count == 2 ? recent : null;
+        }
+
+        /// <summary>The field id when it names a numeric field, otherwise null.</summary>
+        private static string? NumericFieldOrNull(string? fieldId) =>
+            fieldId is not null &&
+            FieldRegistry.ById.TryGetValue(fieldId, out var spec) &&
+            spec.Kind == FieldKind.Numeric
+                ? fieldId
+                : null;
+
+        /// <summary>A plan the caller should fall through on.</summary>
+        private static QueryPlan Decline(string rawQuery) =>
+            new(Intent.Unknown, Confidence: 0.0, RawQuery: rawQuery);
+
+        private static readonly Regex Whitespace = JavaRegex.Compile(@"\s+");
+
+        private static readonly KeyValuePair<string, string>[] ExplanationTopicsByLength =
+            Lexicon.EXPLANATION_TOPICS.OrderByDescending(e => e.Key.Length).ToArray();
+    }
+}

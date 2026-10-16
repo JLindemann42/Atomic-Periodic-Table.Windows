@@ -2,6 +2,7 @@
     x:Class="Atomic.App.Tools.LearningGamesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="using:Atomic.App.Localization"
     xmlns:local="using:Atomic.App.Tools"
     xmlns:conv="using:Atomic.App.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -314,7 +315,7 @@ CornerRadius="12"
                     </ListView.ItemTemplate>
                 </ListView>
                 </ScrollView>
-                <Button Content="Close" Click="ResultCard_Close_Click" HorizontalAlignment="Right"/>
+                <Button Content="{loc:Str Key=chat_close}" Click="ResultCard_Close_Click" HorizontalAlignment="Right"/>
             </StackPanel>
         </Border>
     </Grid>

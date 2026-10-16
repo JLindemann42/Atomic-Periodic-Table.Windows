@@ -40,6 +40,15 @@ namespace Atomic.App.Services
             public const string Lives = "Lives";
             public const string NextRefillTime = "NextRefillTime";
             public const string LastQuizXp = "LastQuizXP";
+
+            // Progression (P8). LastLifeRefill replaces NextRefillTime, which could only ever
+            // describe one pending refill; see ProgressStore.
+            public const string LastLifeRefill = "LastLifeRefill";
+            public const string XpMultiplier = "XpMultiplier";
+            public const string Streak = "Streak";
+            public const string BestStreak = "BestStreak";
+            public const string LastPlayDate = "LastPlayDate";
+            public const string QuizDifficulty = "QuizDifficulty";
             public const string TotalGamesPlayed = "TotalGamesPlayed";
             public const string PerfectGames = "PerfectGames";
 
@@ -155,6 +164,50 @@ namespace Atomic.App.Services
         {
             get => Get(Keys.Lives, 0);
             set => Set(Keys.Lives, value);
+        }
+
+        public static string LastLifeRefill
+        {
+            get => Get(Keys.LastLifeRefill, string.Empty);
+            set => Set(Keys.LastLifeRefill, value);
+        }
+
+        /// <summary>The persistent reward bonus, e.g. 1.05 for +5%.</summary>
+        public static double XpMultiplier
+        {
+            get => Get(Keys.XpMultiplier, 1.0);
+            set => Set(Keys.XpMultiplier, value);
+        }
+
+        public static int Streak
+        {
+            get => Get(Keys.Streak, 0);
+            set => Set(Keys.Streak, value);
+        }
+
+        public static int BestStreak
+        {
+            get => Get(Keys.BestStreak, 0);
+            set => Set(Keys.BestStreak, value);
+        }
+
+        /// <summary>The last day played, ISO yyyy-MM-dd. See StreakMath for why it is a string.</summary>
+        public static string LastPlayDate
+        {
+            get => Get(Keys.LastPlayDate, string.Empty);
+            set => Set(Keys.LastPlayDate, value);
+        }
+
+        /// <summary>
+        /// "easy", "medium" or "hard".
+        ///
+        /// <para>Before P8 the quiz hardcoded "easy" and nothing could change it, so the medium and
+        /// hard question counts, timers and fairness margins were all unreachable.</para>
+        /// </summary>
+        public static string QuizDifficulty
+        {
+            get => Get(Keys.QuizDifficulty, "easy");
+            set => Set(Keys.QuizDifficulty, value);
         }
 
         public static int LastQuizXp

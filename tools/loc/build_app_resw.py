@@ -64,6 +64,28 @@ DECLARATIONS: dict[str, tuple[str, str | None, str]] = {
     "alloy_search":         ("Search alloys", None, ""),
     "alloy_base_metal":     ("Base metal", None, ""),
     "alloy_composition":    ("Composition", None, ""),
+
+    # Ask Atomic chrome. Android's ai_chat_panel.xml drives these four with icon-only ImageButtons
+    # carrying no contentDescription, so there is nothing to borrow - it has no string for them in
+    # any language. On Windows they are tooltips and AutomationProperties.Name values, which a
+    # screen reader reads aloud, so leaving them unset is not an option the way it is there.
+    #
+    # Everything the user actually *reads* in the panel comes from translated Android keys:
+    # ask_atomic (title), ai_hint (input), ai_greeting (empty state), ai_beta_badge,
+    # ai_card_pro_locked. These four are the whole English-only surface.
+    "chat_send":            ("Send", None, "icon button; Android has no string"),
+    "chat_close":           ("Close", None, "icon button; Android has no string"),
+    "chat_new":             ("New conversation", None, "icon button; Android has no string"),
+    "chat_thinking":        ("Thinking", None, "read aloud while the engine runs"),
+
+    # Flashcard level bands. Android draws its boxes with the range baked into a layout string per
+    # box; the Windows screen renders them from FlashcardCatalog, so it needs one format instead.
+    #
+    # NOT "level_range_format" - that is an existing Android key meaning a single level ("Level
+    # %1$d"), and declaring it here shadowed it with a two-argument version. The generator warns
+    # about shadowing and StringResourceTest fails on the argument-count mismatch, which is how
+    # this was caught.
+    "flashcard_level_band": ("Level %1$s - %2$s", None, "flashcard box heading; a range, not a level"),
 }
 
 RESW_HEADER_PATH_HINT = "see strings_xml_to_resw.py; the schema block is identical"

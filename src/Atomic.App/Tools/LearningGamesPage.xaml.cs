@@ -12,8 +12,11 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Windows.System;
 using Atomic.App.Tables;
 
-using Atomic.App.Utils;
 using Atomic.App.Services;
+using Atomic.Core.Ai.Retrieval;
+using Atomic.Core.Ai.Data;
+using Atomic.Core.Progression;
+using Atomic.Core.Quiz;
 namespace Atomic.App.Tools
 {
     public class GameResultItem
@@ -24,6 +27,10 @@ namespace Atomic.App.Tools
         public bool WasCorrect { get; set; }
         public int BaseXp { get; set; }
     }
+
+    /// <summary>What a caller asks for when starting a game.</summary>
+    /// <param name="Difficulty">"easy", "medium" or "hard". Was hardcoded before P8.</param>
+    public sealed record GameRequest(string Category, string Difficulty);
 
     public class Question
     {
@@ -61,9 +68,18 @@ namespace Atomic.App.Tools
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.Parameter is string categoryName)
+            switch (e.Parameter)
             {
-                category = categoryName;
+                // The request form carries the difficulty the user picked. The bare string is kept
+                // because several call sites still navigate with one; it means "easy", which is
+                // what the page always did.
+                case GameRequest request:
+                    category = request.Category;
+                    difficulty = request.Difficulty;
+                    break;
+                case string categoryName:
+                    category = categoryName;
+                    break;
             }
             await SetupGameAsync();
         }
@@ -85,7 +101,7 @@ namespace Atomic.App.Tools
                 if (result == ContentDialogResult.Primary)
                 {
                     // Deduct 5 lives in local settings
-                    SettingsStore.Lives = Math.Max(0, SettingsStore.Lives - 5);
+                    ProgressStore.Spend(5);
 
                     // End the quiz and stop the timer to prevent further ticks/life loss
                     quizCompleted = true;
@@ -109,13 +125,15 @@ namespace Atomic.App.Tools
 
         private async Task SetupGameAsync()
         {
-            totalQuestions = difficulty switch
-            {
-                "easy" => 8,
-                "medium" => 16,
-                "hard" => 24,
-                _ => 8
-            };
+            totalQuestions = FlashcardCatalog.ExamFor(category) is { } exam
+                ? FlashcardCatalog.ExamQuestionCount(exam, difficulty)
+                : difficulty switch
+                {
+                    "easy" => 8,
+                    "medium" => 16,
+                    "hard" => 24,
+                    _ => 8,
+                };
             timeLimitMs = difficulty switch
             {
                 "easy" => 20000,
@@ -124,13 +142,7 @@ namespace Atomic.App.Tools
                 _ => 20000
             };
 
-            questions = new List<Question>();
-            for (int i = 0; i < totalQuestions; i++)
-            {
-                var q = await GenerateRandomQuestionAsync(category);
-                if (q != null)
-                    questions.Add(q);
-            }
+            questions = [.. BuildQuestions()];
 
             if (questions.Count == 0)
             {
@@ -153,352 +165,63 @@ namespace Atomic.App.Tools
             ShowQuestion();
         }
 
-        // Combined helper for group, discovered_by, and discovery_year
-        private async Task<(string Group, string DiscoveredBy, string DiscoveryYear)> GetElementInfoFromJsonAsync(string elementName)
+        /// <summary>
+        /// Build the whole question set for this game.
+        /// </summary>
+        /// <remarks>
+        /// <para>Replaces a ~325-line if/else that read raw JSON strings, plus a per-question
+        /// re-read of the element file - <c>ElementRepository.All()</c> and a JSON re-parse ran once
+        /// for <i>every question</i>, so a 24-question hard game deserialized 118 elements 24 times
+        /// over. The store is built once here and shared by every question.</para>
+        ///
+        /// <para>An exam draws across every category it covers rather than from one, which is what
+        /// makes it an exam; <see cref="FlashcardCatalog"/> owns that list so the flashcard screen
+        /// and this page cannot disagree about what a given exam contains.</para>
+        /// </remarks>
+        private IReadOnlyList<Question> BuildQuestions()
         {
-            string group = null, discoveredBy = null, discoveryYear = null;
-            try
-            {
-                if (ElementRepository.Raw(elementName) is not { } root)
-                    return (null, null, null);
+            var store = RetrievalService.Get(ElementRepository.Source)?.Store;
+            if (store is null) return [];
 
-                group = root.Field("element_group");
-                discoveredBy = root.Field("element_discovered_name");
-                discoveryYear = root.Field("element_year");
-            }
-            catch
+            var language = AppLanguage.BaseCode(AppLanguage.Current);
+            var context = new GeneratorContext(
+                store,
+                KnowledgeStore.Overlay(ElementRepository.Source, language),
+                ResourceStringProvider.For(language),
+                difficulty);
+
+            var built = new List<Question>(totalQuestions);
+
+            foreach (var key in CategoriesToAsk())
             {
-                // Ignore errors
+                if (QuestionGenerators.ForCategory(key) is not { } generator) continue;
+
+                // An exam spreads its questions over its categories; a single-category game asks
+                // for the lot from one.
+                var share = Math.Max(1, totalQuestions / Math.Max(1, CategoriesToAsk().Count));
+                foreach (var q in generator.Generate(context, share))
+                {
+                    built.Add(new Question
+                    {
+                        Text = q.Question,
+                        CorrectAnswer = q.CorrectAnswer,
+                        Alternatives = [.. q.Alternatives],
+                        BaseXp = q.BaseXp,
+                    });
+                }
             }
-            return (group, discoveredBy, discoveryYear);
+
+            // Shuffled so an exam does not walk its categories in curriculum order, which would
+            // tell the player what is coming.
+            return built.OrderBy(_ => Random.Shared.Next()).Take(totalQuestions).ToList();
         }
 
-        private async Task<Question> GenerateRandomQuestionAsync(string category)
-        {
-            var allElements = ElementRepository.All();
-            if (allElements.Count < 4)
-                return null;
+        /// <summary>The categories this game draws from: one, or every category an exam covers.</summary>
+        private IReadOnlyList<string> CategoriesToAsk() =>
+            FlashcardCatalog.ExamFor(category) is { } exam
+                ? FlashcardCatalog.CategoriesForExam(exam).Select(c => c.Key).ToList()
+                : [category];
 
-            var random = new Random();
-            var selectedElements = allElements.OrderBy(_ => random.Next()).Take(4).ToList();
-            int correctIndex = random.Next(selectedElements.Count);
-            var correctElement = selectedElements[correctIndex];
-
-            string questionText, correct;
-            List<string> alternatives;
-
-            // Normalize category for robust comparison
-            var cat = (category ?? "").Trim().ToLowerInvariant();
-
-            // Helper to get a property from JSON, skipping "---" and ensuring at least two valid values
-            async Task<List<string>> GetJsonPropertyForElements(string propertyName)
-            {
-                var results = new List<string>();
-                var usedElements = new HashSet<Element>(selectedElements);
-                foreach (var el in selectedElements)
-                {
-                    string value = null;
-                    try
-                    {
-                        string basePath = AppContext.BaseDirectory;
-                        string elementsPath = Path.Combine(basePath, "Elements");
-                        string fileName = $"{el.OriginalName.ToLowerInvariant()}.json";
-                        string filePath = Path.Combine(elementsPath, fileName);
-
-                        if (!File.Exists(filePath))
-                        {
-                            continue;
-                        }
-
-                        using var stream = File.OpenRead(filePath);
-                        using var doc = await JsonDocument.ParseAsync(stream);
-                        var root = doc.RootElement;
-
-                        // Try to get property at root
-                        if (root.TryGetProperty(propertyName, out var prop))
-                            value = prop.GetString();
-
-                        // If not found, try nested objects
-                        if (value == null)
-                        {
-                            foreach (var property in root.EnumerateObject())
-                            {
-                                if (property.Value.ValueKind == JsonValueKind.Object)
-                                {
-                                    if (property.Value.TryGetProperty(propertyName, out var prop2))
-                                    {
-                                        value = prop2.GetString();
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        value = null;
-                    }
-                    if (!string.IsNullOrWhiteSpace(value) && value.Trim() != "---")
-                        results.Add(value);
-                }
-
-                // If less than 2 valid results, try to get more elements until we have at least 2
-                int attempts = 0;
-                while (results.Count < 2 && attempts < 10)
-                {
-                    var extraElement = allElements.OrderBy(_ => random.Next()).FirstOrDefault(e => !usedElements.Contains(e));
-                    if (extraElement == null) break;
-                    usedElements.Add(extraElement);
-
-                    string value = null;
-                    try
-                    {
-                        string basePath = AppContext.BaseDirectory;
-                        string elementsPath = Path.Combine(basePath, "Elements");
-                        string fileName = $"{extraElement.OriginalName.ToLowerInvariant()}.json";
-                        string filePath = Path.Combine(elementsPath, fileName);
-
-                        if (!File.Exists(filePath))
-                        {
-                            attempts++;
-                            continue;
-                        }
-
-                        using var stream = File.OpenRead(filePath);
-                        using var doc = await JsonDocument.ParseAsync(stream);
-                        var root = doc.RootElement;
-
-                        if (root.TryGetProperty(propertyName, out var prop))
-                            value = prop.GetString();
-
-                        if (value == null)
-                        {
-                            foreach (var property in root.EnumerateObject())
-                            {
-                                if (property.Value.ValueKind == JsonValueKind.Object)
-                                {
-                                    if (property.Value.TryGetProperty(propertyName, out var prop2))
-                                    {
-                                        value = prop2.GetString();
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        value = null;
-                    }
-                    if (!string.IsNullOrWhiteSpace(value) && value.Trim() != "---")
-                        results.Add(value);
-                    attempts++;
-                }
-
-                return results;
-            }
-
-            if (cat == "element_symbols" || cat == "symbols" || cat == "symbol")
-            {
-                alternatives = selectedElements.Select(e => e.Symbol).Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().ToList();
-                if (alternatives.Count < 2) return null;
-                questionText = $"What is the symbol for {correctElement.OriginalName}?";
-                correct = correctElement.Symbol;
-            }
-            else if (cat == "element_names" || cat == "names" || cat == "name")
-            {
-                alternatives = selectedElements.Select(e => e.OriginalName).Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().ToList();
-                if (alternatives.Count < 2) return null;
-                questionText = $"What is the name for {correctElement.Symbol}?";
-                correct = correctElement.OriginalName;
-            }
-            else if (cat == "element_groups" || cat == "group" || cat == "groups")
-            {
-                var groups = await GetJsonPropertyForElements("element_group");
-                if (groups.Count < 2) return null;
-                questionText = $"What is the group for {correctElement.OriginalName}?";
-                correct = groups.FirstOrDefault();
-                alternatives = groups;
-            }
-            else if (cat == "discovered_by" || cat == "discoverer" || cat == "discovered")
-            {
-                var discoverers = await GetJsonPropertyForElements("element_discovered_name");
-                if (discoverers.Count < 2) return null;
-                questionText = $"Who discovered {correctElement.OriginalName}?";
-                correct = discoverers.FirstOrDefault();
-                alternatives = discoverers;
-            }
-            else if (cat == "discovery_year" || cat == "year" || cat == "discovered_year")
-            {
-                var years = await GetJsonPropertyForElements("element_year");
-                if (years.Count < 2) return null;
-                questionText = $"In which year was {correctElement.OriginalName} discovered?";
-                correct = years.FirstOrDefault();
-                alternatives = years;
-            }
-            else if (cat == "appearance")
-            {
-                var appearances = await GetJsonPropertyForElements("element_appearance");
-                if (appearances.Count < 2) return null;
-                questionText = $"What is the appearance of {correctElement.OriginalName}?";
-                correct = appearances.FirstOrDefault();
-                alternatives = appearances;
-            }
-            else if (cat == "atomic_number")
-            {
-                var atomicNumbers = await GetJsonPropertyForElements("element_atomic_number");
-                if (atomicNumbers.Count < 2) return null;
-                questionText = $"What is the atomic number of {correctElement.OriginalName}?";
-                correct = atomicNumbers.FirstOrDefault();
-                alternatives = atomicNumbers;
-            }
-            else if (cat == "electrical_type")
-            {
-                var electricalTypes = await GetJsonPropertyForElements("electrical_type");
-                if (electricalTypes.Count < 2) return null;
-                questionText = $"What is the electrical type of {correctElement.OriginalName}?";
-                correct = electricalTypes.FirstOrDefault();
-                alternatives = electricalTypes;
-            }
-            else if (cat == "radioactive")
-            {
-                alternatives = new List<string> { "Yes", "No" };
-                questionText = $"Is {correctElement.OriginalName} radioactive?";
-                var radioactiveVals = await GetJsonPropertyForElements("radioactive");
-                bool isRadioactive = radioactiveVals.FirstOrDefault()?.Trim().ToLowerInvariant() == "yes";
-                correct = isRadioactive ? "Yes" : "No";
-            }
-            else if (cat == "atomic_mass")
-            {
-                var atomicMasses = await GetJsonPropertyForElements("element_atomicmass");
-                if (atomicMasses.Count < 2) return null;
-                questionText = $"What is the atomic mass of {correctElement.OriginalName}?";
-                correct = atomicMasses.FirstOrDefault();
-                alternatives = atomicMasses;
-            }
-            else if (cat == "density")
-            {
-                var densities = await GetJsonPropertyForElements("element_density");
-                if (densities.Count < 2) return null;
-                questionText = $"What is the density of {correctElement.OriginalName}?";
-                correct = densities.FirstOrDefault();
-                alternatives = densities;
-            }
-            else if (cat == "electronegativity")
-            {
-                var electronegativities = await GetJsonPropertyForElements("element_electronegativty");
-                if (electronegativities.Count < 2) return null;
-                questionText = $"What is the electronegativity of {correctElement.OriginalName}?";
-                correct = electronegativities.FirstOrDefault();
-                alternatives = electronegativities;
-            }
-            else if (cat == "block")
-            {
-                var blocks = await GetJsonPropertyForElements("element_block");
-                if (blocks.Count < 2) return null;
-                questionText = $"What block does {correctElement.OriginalName} belong to?";
-                correct = blocks.FirstOrDefault();
-                alternatives = blocks;
-            }
-            else if (cat == "magnetic_type")
-            {
-                var magneticTypes = await GetJsonPropertyForElements("magnetic_type");
-                if (magneticTypes.Count < 2) return null;
-                questionText = $"What is the magnetic type of {correctElement.OriginalName}?";
-                correct = magneticTypes.FirstOrDefault();
-                alternatives = magneticTypes;
-            }
-            else if (cat == "phase_stp" || cat == "phase" || cat == "element_phase" || cat == "phase (STP)" || cat == "phase_(stp)")
-            {
-                var phases = await GetJsonPropertyForElements("element_phase");
-                if (phases.Count < 2) return null;
-                questionText = $"What is the phase of {correctElement.OriginalName} at STP?";
-                correct = phases.FirstOrDefault();
-                alternatives = phases;
-            }
-            else if (cat == "crystal_structure")
-            {
-                var crystalStructures = await GetJsonPropertyForElements("crystal_structure");
-                if (crystalStructures.Count < 2) return null;
-                questionText = $"What is the crystal structure of {correctElement.OriginalName}?";
-                correct = crystalStructures.FirstOrDefault();
-                alternatives = crystalStructures;
-            }
-            else if (cat == "superconducting_point")
-            {
-                var superconductingPoints = await GetJsonPropertyForElements("superconducting_point");
-                if (superconductingPoints.Count < 2) return null;
-                questionText = $"What is the superconducting point of {correctElement.OriginalName}?";
-                correct = superconductingPoints.FirstOrDefault();
-                alternatives = superconductingPoints;
-            }
-            else if (cat == "neutron_cross_sectional")
-            {
-                var neutronCrossSectionals = await GetJsonPropertyForElements("neutron_cross_sectional");
-                if (neutronCrossSectionals.Count < 2) return null;
-                questionText = $"What is the neutron cross sectional of {correctElement.OriginalName}?";
-                correct = neutronCrossSectionals.FirstOrDefault();
-                alternatives = neutronCrossSectionals;
-            }
-            else if (cat == "specific_heat_capacity")
-            {
-                var specificHeatCapacities = await GetJsonPropertyForElements("element_specific_heat_capacity");
-                if (specificHeatCapacities.Count < 2) return null;
-                questionText = $"What is the specific heat capacity of {correctElement.OriginalName}?";
-                correct = specificHeatCapacities.FirstOrDefault();
-                alternatives = specificHeatCapacities;
-            }
-            else if (cat == "mohs_hardness")
-            {
-                var mohsHardnesses = await GetJsonPropertyForElements("mohs_hardness");
-                if (mohsHardnesses.Count < 2) return null;
-                questionText = $"What is the mohs hardness of {correctElement.OriginalName}?";
-                correct = mohsHardnesses.FirstOrDefault();
-                alternatives = mohsHardnesses;
-            }
-            else if (cat == "vickers_hardness")
-            {
-                var vickersHardnesses = await GetJsonPropertyForElements("vickers_hardness");
-                if (vickersHardnesses.Count < 2) return null;
-                questionText = $"What is the vickers hardness of {correctElement.OriginalName}?";
-                correct = vickersHardnesses.FirstOrDefault();
-                alternatives = vickersHardnesses;
-            }
-            else if (cat == "brinell_hardness")
-            {
-                var brinellHardnesses = await GetJsonPropertyForElements("brinell_hardness");
-                if (brinellHardnesses.Count < 2) return null;
-                questionText = $"What is the brinell hardness of {correctElement.OriginalName}?";
-                correct = brinellHardnesses.FirstOrDefault();
-                alternatives = brinellHardnesses;
-            }
-            else
-            {
-                // fallback: element_names
-                alternatives = selectedElements.Select(e => e.OriginalName).Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().ToList();
-                if (alternatives.Count < 2) return null;
-                questionText = $"What is the name for {correctElement.Symbol}?";
-                correct = correctElement.OriginalName;
-            }
-
-            // Remove empty/null, deduplicate, shuffle
-            alternatives = alternatives.Where(a => !string.IsNullOrWhiteSpace(a) && a.Trim() != "---").Distinct().OrderBy(_ => random.Next()).ToList();
-
-            if (alternatives.Count < 2)
-                return null;
-
-            // Pick correct answer from alternatives if possible
-            if (!alternatives.Contains(correct))
-                correct = alternatives.First();
-
-            return new Question
-            {
-                Text = questionText,
-                CorrectAnswer = correct,
-                Alternatives = alternatives,
-                BaseXp = GetBaseXp(cat)
-            };
-        }
 
         private void ShowQuestion()
         {
@@ -651,7 +374,7 @@ namespace Atomic.App.Tools
             SettingsStore.LastQuizXp = xp;
 
             // Adding XP to global XP/level system in XpManager Util
-            XpManager.AddXp(xp);
+            ProgressStore.AddGameXp(xp);
 
             // Increment total games played
             SettingsStore.TotalGamesPlayed = SettingsStore.TotalGamesPlayed + 1;
@@ -671,35 +394,6 @@ namespace Atomic.App.Tools
             await FadeIn(ResultCard);
         }
 
-        private int GetBaseXp(string category)
-        {
-            return category switch
-            {
-                "element_symbols" or "symbols" or "symbol" => 8,
-                "element_names" or "names" or "name" => 8,
-                "element_groups" => 13,
-                "discovered_by" or "discoverer" or "discovered" => 16,
-                "discovery_year" or "year" or "discovered_year" => 16,
-                "appearance" => 12,
-                "atomic_number" => 8,
-                "electrical_type" => 16,
-                "radioactive" => 16,
-                "atomic_mass" => 25,
-                "density" => 40,
-                "electronegativity" => 30,
-                "block" => 15,
-                "magnetic_type" => 18,
-                "phase_stp" or "phase" or "element_phase" or "phase_(stp)" => 10,
-                "crystal_structure" => 40,
-                "superconducting_point" => 50,
-                "neutron_cross_sectional" => 50,
-                "specific_heat_capacity" or "specific heat capacity" => 50,
-                "mohs_hardness" => 60,
-                "vickers_hardness" => 60,
-                "brinell_hardness" => 60,
-                _ => 5
-            };
-        }
 
         private void ResultCard_Close_Click(object sender, RoutedEventArgs e)
         {

@@ -34,6 +34,15 @@
              CopyToOutputDirectory="PreserveNewest" />
     <Content Include="corpus\**\*.tsv"
              CopyToOutputDirectory="PreserveNewest" />
+    <!--
+      The page markup, so a test can check that every {loc:Str Key=...} names a real resource.
+      Linked rather than copied for the same reason the .resw files are: the test must see
+      exactly what ships.
+    -->
+    <Content Include="..\..\src\Atomic.App\**\*.xaml"
+             Exclude="..\..\src\Atomic.App\bin\**\*.xaml;..\..\src\Atomic.App\obj\**\*.xaml"
+             Link="pagexaml\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
     <Content Include="golden\**\*.tsv"
              CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

@@ -47,14 +47,23 @@
   <data name="alloy_composition" xml:space="preserve">
     <value>Composition</value>
   </data>
-  <data name="alloy_go_to_element" xml:space="preserve">
-    <value>Open element</value>
-  </data>
   <data name="alloy_search" xml:space="preserve">
     <value>Search alloys</value>
   </data>
-  <data name="dialog_close" xml:space="preserve">
+  <data name="chat_close" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="chat_new" xml:space="preserve">
+    <value>New conversation</value>
+  </data>
+  <data name="chat_send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="chat_thinking" xml:space="preserve">
+    <value>Thinking</value>
+  </data>
+  <data name="flashcard_level_band" xml:space="preserve">
+    <value>Level %1$s - %2$s</value>
   </data>
   <data name="nav_blog" xml:space="preserve">
     <value>Blog</value>

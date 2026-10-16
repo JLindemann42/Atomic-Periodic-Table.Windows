@@ -265,39 +265,99 @@ this — it needs translation, on both platforms, since the JSON is now shared. 
 `RetrievalServiceTest.AppearanceIsUntranslatedInTheDataAndThatIsKnown` so it is not rediscovered as
 a bug.
 
-### D13 — eight dead entries in the lexicon, live on Android
+### D13 — seven accented lexicon entries, five of them dead on Android
 
 `Lexicon.kt` opens by stating its own invariant: entries are matched against text that has already
 been lowercased and stripped of Latin diacritics, so accented forms must be written in their folded
-shape. Seven entries break that rule and are therefore **unreachable — they can never match any
-input**, on either platform:
+shape. Seven entries are written unfolded. **The corpus gate showed they are not all the same
+thing**, and the earlier draft of this note got two of them wrong.
 
-| declaration | entry | would have to be |
-|---|---|---|
-| `OVERVIEW_WORDS` | `berätta om` | `beratta om` |
-| `DEFER_TO_PERSONALITY` | `berätta nagot intressant` | `beratta nagot intressant` |
-| `NEUTRON_WORDS` | `neutrões` | `neutroes` |
-| `YESNO_OPENERS` | `è ` | `e ` |
-| `YESNO_OPENERS` | `é ` | `e ` |
-| `AMBIGUOUS_DEGREE` | `más` | `mas` |
-| `AMBIGUOUS_DEGREE` | `più` | `piu` |
+**Two are accented on purpose and must stay that way.** `YESNO_OPENERS` holds `è ` and `é `, and
+`QueryPlanner.ComparativePlan` tests that list against the **raw** lowercased query as well as the
+normalised one, with a comment saying why: the Romance copulas differ from their conjunctions by
+nothing but the accent — Italian `è` (is) against `e` (and), Portuguese `é` against `e`. Folding
+them makes *"e le loro densità"* ("and their densities") open a yes/no question. That is not a
+guess: folding them flipped three conversation rows in `it` and `pt` from `COMPARISON` to
+`COMPARATIVE`, which is how the defect was found. `kt2cs_lexicon.py` exempts the declaration by name
+and reports the two separately, so nobody folds them again.
 
-`berätta om` is the costly one: it is Swedish for "tell me about", the trigger for the overview
-path, so "berätta om guld" has never taken it. The second entry is half-folded already — `nagot` is
-folded, `berätta` is not — which is what a hand-maintained file drifts into.
+**Five really are unreachable and are now folded on the way out:**
 
-An eighth entry is dead a different way: `COMPARATIVE_ADJECTIVES["conducts electricity better"]`
-maps to `electrical_conductivity`, which is not a field in either app's `FieldRegistry` and not a
-key in the element JSON, where the only conductivity is thermal.
+| declaration | entry | emitted as | had a folded twin already? |
+|---|---|---|---|
+| `NEUTRON_WORDS` | `neutrões` | `neutroes` | **no — genuinely lost vocabulary** |
+| `DEFER_TO_PERSONALITY` | `berätta nagot intressant` | `beratta nagot intressant` | **no — genuinely lost** |
+| `OVERVIEW_WORDS` | `berätta om` | `beratta om` | yes |
+| `AMBIGUOUS_DEGREE` | `más` | `mas` | yes |
+| `AMBIGUOUS_DEGREE` | `più` | `piu` | yes |
 
-**Preserved verbatim rather than fixed.** Unlike the hydrate bug (D9), folding these *adds*
-vocabulary that has never been live, which could change corpus outcomes — and the corpus is the
-spec for Phase 4. The decision belongs after that gate, not before it. `kt2cs_lexicon.py` reports
-all of them on every run, and `LexiconTest` pins the exact set so a ninth cannot join unnoticed.
+Only the first two changed any behaviour. `neutrões` is European Portuguese for "neutrons", so
+neutron questions in that spelling resolved nothing; the Swedish entry is half-folded in the source
+already (`nagot` folded, `berätta` not), which is what a hand-maintained file drifts into. The other
+three had their folded twin sitting in the same list, so folding produced a duplicate and nothing
+else — **the earlier claim here that `berätta om` meant Swedish "tell me about" never took the
+overview path was wrong**: `beratta om` is the very next entry.
+
+Folding happens in the generator rather than in `Lexicon.kt`, so the port stays a pure function of
+the Kotlin and a future Android sync picks the fix up again instead of silently reverting it.
+
+**`ClauseSplitter.kt` has the same defect in its own two tables**, which the generator does not see
+because they are declared in that file rather than in `Lexicon.kt`. Both are folded here by hand:
+
+- `CLAUSE_OPENERS` contained `berätta`, with no folded twin — so a Swedish second clause opening
+  "berätta om…" genuinely never counted as opening a question. Every other Swedish opener in the
+  list *is* folded (`varfor`, `ar`), which is what makes this a slip rather than a convention.
+- `PROPERTY_LINKERS` contained `för`, which folds to `for` — already listed one line above, so this
+  one was harmless. Folded anyway, which makes it a duplicate.
+
+An eighth entry is dead a different way and is **left alone**:
+`COMPARATIVE_ADJECTIVES["conducts electricity better"]` maps to `electrical_conductivity`, which is
+not a field in either app's `FieldRegistry` and not a key in the element JSON, where the only
+conductivity is thermal. Folding cannot help it; it needs a field that does not exist.
+
+The whole corpus is green with these changes: 2,793 of 2,793. `LexiconTest` pins the two exempt
+entries to `YESNO_OPENERS` and asserts the five folded ones are reachable in their folded shape.
 
 Nineteen further entries are duplicate map keys (`SERIES_WORDS["noble gas"]` twice, and so on).
 Every one maps to the same value, so collapsing them is precisely what Kotlin's `mapOf` does; the
 generator reports any future duplicate that maps to a *different* value as a conflict.
+
+### D14 — the neutron-count branch accepted an impossible nuclide
+
+`QueryPlanner`'s nuclide pattern is deliberately loose (`word gap digits`), so three branches guard
+it by requiring the mass number to be at least the atomic number — no nuclide has fewer nucleons
+than protons. **On Android, only two of the three do.** `ISOTOPE_COMPARISON` and `ISOTOPES` both
+check it; `NUCLIDE_COUNT` does not, so "how many neutrons in uranium-3" is claimed and reaches the
+executor with mass 3 and Z 92, where the subtraction gives −89.
+
+**Fixed here, with corpus evidence rather than on inspection.** The guard was left off while the
+corpus was being ported, because tightening a guard can move rows and the corpus is the
+specification for Phase 4. With P4h green the experiment is cheap: adding it leaves the score at
+2,793 of 2,793, so no row depended on the loose branch. Pinned by
+`QueryPlannerSupportTest.EveryNuclideBranchRejectsAnImpossibleMassNumber`. Still live on Android.
+
+### D15 — the "what is known" list could offer properties that are also missing
+
+`AnswerComposer.noData` exists to turn a dead end into somewhere to go: after "tungsten has no
+recorded Curie point" it names the neighbouring thermal properties that *are* recorded. It selects
+them with
+
+```kotlin
+.filter { element.value(it.id) != null }
+```
+
+and `KnowledgeStore.value` is `values[fieldId] ?: FieldValue.Missing` — it never returns null. The
+filter is always true, so the list is the first four fields of the category regardless of whether
+the element has them, which is the opposite of what the paragraph above it promises.
+
+**Fixed rather than preserved**, because C# cannot express it: `Value()` returns a non-nullable
+`FieldValue`, so `!= null` is not a compilable check. The port uses `!element.Value(s.Id).IsMissing`,
+which is the evident intent. Pinned by
+`AnswerComposerTest.TheAlternativesOfferedAreOnesTheElementActuallyHas`.
+
+This was the one place the port changed user-visible behaviour without the corpus having ruled on
+it. **P4h has now ruled**: the corpus is green, and since the change can only ever *remove* a
+suggestion, a row that asserted the old text would have failed loudly. Settled.
 
 ### D8 — widgets: three of five
 
@@ -308,6 +368,91 @@ Command are dropped — both are search shortcuts, better served on Windows by t
 `AutoSuggestBox` and a taskbar jump list.
 
 ---
+
+### D16 — the corpus is 2,793 questions, not 3,162
+
+The plan and several earlier notes quote the corpus as "3,162 rows". That is its **line** count
+across the 31 TSVs. Subtract 338 `#` comment lines and 31 headers and the corpus holds **2,793
+questions**, every one of which the harness evaluates — `QuestionCorpus` treats a malformed row as a
+hard error rather than skipping it, precisely so a pass rate is always taken over a set of known
+size.
+
+Two further departures from `CorpusTest.kt`, both deliberate:
+
+- **One xUnit case per replayable unit, not one per file.** A session replays as a unit because its
+  turns share a `DialogueState`; standalone rows are units of one. A failure then names the row in
+  the test explorer — `Properties_Pass(key: "prop-z-1")` — and can be re-run alone, instead of
+  arriving buried in a 40-line assertion message. The Kotlin's scoreboard survives as
+  `CorpusTest.Scoreboard`, which evaluates everything in one pass and reports a pass rate per file;
+  that is the number to watch when a change moves the corpus, and the per-row theories are where an
+  individual row is diagnosed.
+- **The corpus names Kotlin's enum members.** `expect_intent` reads `PROPERTY_LOOKUP` and
+  `expect_card` reads `NFPA_DIAMOND`, while the C# enums are PascalCase. `CorpusTest.NameMatches`
+  drops underscores and compares case-insensitively, so the TSVs stay byte-identical to Android's
+  and the next sync is a file copy. `EnumNamesSurviveTheSnakeCaseFold` proves the fold is injective
+  over both enums, so it can never quietly accept the wrong member.
+
+Where Android skips the corpus when its assets are unreachable, the port fails: here the TSVs, the
+element tables and the `.resw` files are all copied into the test output by the csproj, so
+unreachable means broken — and a silently skipped 2,793-row gate is exactly the vacuous pass the
+harness exists to prevent.
+
+### D17 — Win2D is pinned to 1.3.2, and the pin is load-bearing
+
+The PRO card gate needs a real Gaussian blur, which means an `IGraphicsEffect` implementation, which
+means Win2D — WinUI ships no effect types of its own. **Win2D 1.4.0 depends on WindowsAppSDK 1.8**
+and pulling it in fails the restore outright (`NU1605`, a downgrade of
+`Microsoft.Windows.SDK.BuildTools` from 10.0.26100.4654 to .1742), because this app is pinned to
+WindowsAppSDK 1.7.
+
+`Microsoft.Graphics.Win2D` **1.3.2** is the newest release that restores against 1.7, and the blur
+is verified working on it. Do not let a tool "update" this package without moving the app to
+WindowsAppSDK 1.8 deliberately and re-testing the whole shell.
+
+The gate keeps Android's numbers from `ProCardGate.kt` — blur radius 28, fallback content opacity
+0.35, scrim opacity 0.92 — and, importantly, its *structure*: blur and scrim are **alternatives, not
+layers**. Android applies the blur alone on API 31+ (with `alpha = 1f`) and the scrim alone below
+it. `ProGate` does the same, falling back only when the effect cannot be created — a remote session,
+a basic display adapter, or a driver that refuses it. The failure is remembered so the throwing call
+is not repeated on every recycle of a virtualized list row.
+
+Android's other decision is carried over verbatim and matters more than the visuals: **the content
+behind the gate stays bound**, so unlocking is one property change with no re-bind and no reload.
+
+### D18 — a shared element name is not evidence of a language
+
+`EntityResolver.DetectLanguage` is Windows-only (Android's chat detects language differently), so
+this is a defect the port introduced in P3h rather than one it inherited.
+
+It scored every language whose alias table claimed a matched surface, then broke ties by preferring
+**any non-English leader**, reasoning that "guld" is Swedish evidence even though English also lists
+that key. True for a distinctive surface; false for a shared one. Element names are shared across
+these twelve languages far more often than not - `gold` is the English, German *and* Afrikaans name,
+`argon` and `platinum` are near-universal - so the rule discarded English on exactly the queries
+where English was right. **"electron configuration of gold" was answered in German**: correct data,
+wrong language, and nothing on screen to explain why.
+
+Now only a surface claimed by **exactly one** language scores. `guld` still selects Swedish, `eisen`
+still selects German, and a shared name contributes nothing, so the query falls through to the
+active language. Corpus-neutral: 2,793 of 2,793 either way, which is unsurprising - every corpus row
+declares its own language, so none of them exercised the tie-break. Pinned by four cases in
+`EntityResolverTest`, including the gold one.
+
+### D19 — one card view, not eight data templates
+
+The plan put a `DataTemplate` per `ChatCardKind` on `ChatTemplateSelector`, selected through
+`ChatCardCodec.KindOf`. Each would have had to repeat the whole assistant bubble - text, PRO gate,
+citation chips - around a single differing child, and eight copies of a bubble is eight places for
+them to drift apart. The kind switch lives in `ChatCardView` instead, on the one element that
+differs; `KindOf` still does the cheap decode it exists for, just there. The selector keeps the only
+distinction a *container* needs: who is speaking.
+
+`CrystalStructureChart` also departs from the plan, which suggested reusing
+`CrystalStructureRenderer`. That renderer is right where it is used - a lattice the user can rotate -
+but it writes pixels into a `WriteableBitmap`, and a chat card lives in a virtualized list where
+every visible bubble would allocate one. The card draws a static isometric wireframe from the same
+lattice table using shapes, for the same reason Win2D was kept out of the other charts. The element
+page keeps the interactive version.
 
 ## Environment facts worth not rediscovering
 

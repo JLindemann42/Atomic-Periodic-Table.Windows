@@ -39,4 +39,15 @@
     <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!--
+      QueryPlanner's sub-planners are internal rather than private so they can be tested one at a
+      time. On Android they are private and reachable only through an 876-line cascade, so the only
+      thing that covers them is the 3,162-row corpus - which tells you a query came out wrong, not
+      which of eight ordered branches claimed it. Testing them directly is the one place this port
+      deliberately improves on the original's testability.
+    -->
+    <InternalsVisibleTo Include="Atomic.Core.Tests" />
+  </ItemGroup>
+
 </Project>

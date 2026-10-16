@@ -75,6 +75,51 @@ namespace Atomic.App
             slideStoryboard.Begin();
         }
 
+        /// <summary>
+        /// Fill the two charts this page shares with the chat cards.
+        ///
+        /// <para>Both draw from the same reducers, so the figure a user sees here is the figure the
+        /// assistant shows - which is the point of putting them in one place. A chart with no data
+        /// is collapsed rather than left as an empty box.</para>
+        /// </summary>
+        private void PopulateCharts(Element element)
+        {
+            var store = Atomic.Core.Ai.Retrieval.RetrievalService
+                .Get(Services.ElementRepository.Source)?.Store;
+            var record = store?.Element(Services.ElementRepository.Normalise(element.OriginalName ?? string.Empty));
+
+            if (record is null)
+            {
+                ShellChart.Visibility = Visibility.Collapsed;
+                AbundanceChart.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            var shells = (record.Value("electron_shells") as Atomic.Core.Ai.Data.FieldValue.Text)?.Raw;
+            if (Atomic.Core.Ai.Cards.ElectronShells.Parse(shells).Count > 0)
+            {
+                ShellChart.Visibility = Visibility.Visible;
+                ShellChart.SetShells(shells, record.Symbol);
+            }
+            else
+            {
+                ShellChart.Visibility = Visibility.Collapsed;
+            }
+
+            var strings = Services.ResourceStringProvider.For(
+                Services.AppLanguage.BaseCode(Services.AppLanguage.Current));
+
+            if (Atomic.Core.Ai.Cards.AbundanceReducer.Of(record, strings) is { } profile)
+            {
+                AbundanceChart.Visibility = Visibility.Visible;
+                AbundanceChart.SetProfile(profile);
+            }
+            else
+            {
+                AbundanceChart.Visibility = Visibility.Collapsed;
+            }
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -85,6 +130,7 @@ namespace Atomic.App
                 // Do NOT set DataContext = Element; This breaks FavoriteProperties binding!
 
                 PopulateDescriptionFromJson(Element);
+                PopulateCharts(Element);
 
                 // Construct the emission spectrum URL
                 if (!string.IsNullOrEmpty(Element.Symbol))

@@ -9,8 +9,10 @@ using Atomic.App.Tables;
 using System.Linq;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media;
-using Atomic.App.Utils;
 using Atomic.App.Services;
+using System.Globalization;
+using Atomic.Core.Localization;
+using Atomic.Core.Progression;
 
 namespace Atomic.App.Tools
 {
@@ -35,6 +37,15 @@ namespace Atomic.App.Tools
 
     public class FlashCardCategory
     {
+        /// <summary>
+        /// The catalog key, which is what the generators are registered under.
+        ///
+        /// <para>Carried explicitly because the page used to derive it from the English display
+        /// name by lowercasing and replacing spaces - which silently stopped resolving the moment
+        /// the name was translated, and could never have matched a key like "periodic_period".</para>
+        /// </summary>
+        public string Key { get; set; }
+
         public string Name { get; set; }
         public int UnlockLevel { get; set; }
         public bool IsPro { get; set; }
@@ -116,7 +127,7 @@ namespace Atomic.App.Tools
 
         private void SetStartFlashcardsButtonsEnabled(bool enabled)
         {
-            int userLevel = XpManager.GetCurrentLevel();
+            int userLevel = ProgressStore.Level;
 
             void UpdateButtons(ItemsControl groupsControl)
             {
@@ -341,81 +352,43 @@ namespace Atomic.App.Tools
                 TotalXpTextBlock_single.Text = LastQuizXP.ToString();
         }
 
+        /// <summary>
+        /// Render the level boxes from <see cref="FlashcardCatalog"/>.
+        ///
+        /// <para>Was ~85 lines of hand-written bands listing 22 categories in English. The catalog
+        /// is now the single source for both this screen and the quiz page, so a category cannot
+        /// appear here without a generator behind it - <c>CurriculumWiringTest</c> asserts exactly
+        /// that - and all 47 arrive with their translated labels.</para>
+        /// </summary>
         private void BuildCategoryGroups()
         {
-            int userLevel = XpManager.GetCurrentLevel();
-            bool isProPlus = _isProPlusUser;
+            var userLevel = ProgressStore.Level;
+            var isProPlus = _isProPlusUser;
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
 
-            CategoryGroups = new List<FlashCardCategoryGroup>
-            {
-                new FlashCardCategoryGroup
+            CategoryGroups = FlashcardCatalog.LevelBoxes
+                .Select(box => new FlashCardCategoryGroup
                 {
-                    GroupName = "Level 0 - 4",
-                    Icon = "\uE72E",
-                    Categories = new List<FlashCardCategory>
-                    {
-                        new FlashCardCategory { Name = "Element Symbols", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Element Names", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Element Groups", UnlockLevel = 0, IsPro = false, IsUnlocked = userLevel >= 0, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Discovered By", UnlockLevel = 0, IsPro = true, IsUnlocked = isProPlus, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Discovery Year", UnlockLevel = 0, IsPro = true, IsUnlocked = isProPlus, IsProPlusUser = isProPlus }
-                    }
-                },
-                new FlashCardCategoryGroup
-                {
-                    GroupName = "Level 5 - 9",
-                    Icon = "\uE72E",
-                    Categories = new List<FlashCardCategory>
-                    {
-                        new FlashCardCategory { Name = "Appearance", UnlockLevel = 5, IsPro = false, IsUnlocked = userLevel >= 5, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Atomic Number", UnlockLevel = 5, IsPro = false, IsUnlocked = userLevel >= 5, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Electrical Type", UnlockLevel = 5, IsPro = true, IsUnlocked = isProPlus && userLevel >= 5, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Radioactive", UnlockLevel = 5, IsPro = true, IsUnlocked = isProPlus && userLevel >= 5, IsProPlusUser = isProPlus }
-                    }
-                },
-                new FlashCardCategoryGroup
-                {
-                    GroupName = "Level 10 - 14",
-                    Icon = "\uE72E",
-                    Categories = new List<FlashCardCategory>
-                    {
-                        new FlashCardCategory { Name = "Atomic Mass", UnlockLevel = 10, IsPro = false, IsUnlocked = userLevel >= 10, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Density", UnlockLevel = 10, IsPro = false, IsUnlocked = userLevel >= 10, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Electronegativity", UnlockLevel = 10, IsPro = true, IsUnlocked = isProPlus && userLevel >= 10, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Block", UnlockLevel = 10, IsPro = true, IsUnlocked = isProPlus && userLevel >= 10, IsProPlusUser = isProPlus }
-                    }
-                },
-                new FlashCardCategoryGroup
-                {
-                    GroupName = "Level 15 - 19",
-                    Icon = "\uE72E",
-                    Categories = new List<FlashCardCategory>
-                    {
-                        new FlashCardCategory { Name = "Magnetic Type", UnlockLevel = 15, IsPro = false, IsUnlocked = userLevel >= 15, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Phase (STP)", UnlockLevel = 15, IsPro = false, IsUnlocked = userLevel >= 15, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Crystal Structure", UnlockLevel = 15, IsPro = true, IsUnlocked = isProPlus && userLevel >= 15, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Superconducting Point", UnlockLevel = 15, IsPro = true, IsUnlocked = isProPlus && userLevel >= 15, IsProPlusUser = isProPlus }
-                    }
-                },
-                new FlashCardCategoryGroup
-                {
-                    GroupName = "Level 20 - 24",
-                    Icon = "\uE72E",
-                    Categories = new List<FlashCardCategory>
-                    {
-                        new FlashCardCategory { Name = "Neutron Cross Sectional", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Specific Heat Capacity", UnlockLevel = 20, IsPro = false, IsUnlocked = userLevel >= 20, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Mohs Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Vickers Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus },
-                        new FlashCardCategory { Name = "Brinell Hardness", UnlockLevel = 20, IsPro = true, IsUnlocked = isProPlus && userLevel >= 20, IsProPlusUser = isProPlus }
-                    }
-                }
-            };
-
-            foreach (var group in CategoryGroups)
-            {
-                group.Icon = group.IsUnlocked ? "\uE785" : "\uE72E";
-            }
+                    GroupName = strings.Get(
+                        S.flashcard_level_band,
+                        box.Range.First.ToString(CultureInfo.InvariantCulture),
+                        box.Range.Last.ToString(CultureInfo.InvariantCulture)),
+                    Icon = userLevel >= box.Range.First ? "" : "",
+                    Categories = box.Categories
+                        .Select(category => new FlashCardCategory
+                        {
+                            Key = category.Key,
+                            Name = strings.Get(category.LabelKey),
+                            UnlockLevel = box.Range.First,
+                            IsPro = category.IsPro,
+                            IsProPlusUser = isProPlus,
+                            // Two gates, and both must pass: the level unlocks the box, the
+                            // subscription unlocks the PRO+ cards inside it.
+                            IsUnlocked = userLevel >= box.Range.First && (!category.IsPro || isProPlus),
+                        })
+                        .ToList(),
+                })
+                .ToList();
 
             CategoryGroupsControl.ItemsSource = null;
             CategoryGroupsControl.ItemsSource = CategoryGroups;
@@ -433,9 +406,9 @@ namespace Atomic.App.Tools
 
         private void UpdateStatsUI()
         {
-            int userXp = XpManager.GetXp();
-            int userLevel = XpManager.GetCurrentLevel();
-            var (progressCurrent, progressTotal) = XpManager.GetXpProgressInLevel();
+            int userXp = ProgressStore.Xp;
+            int userLevel = ProgressStore.Level;
+            var (progressCurrent, progressTotal) = ProgressStore.LevelProgress;
 
             if (LevelTextBlock != null)
                 LevelTextBlock.Text = $"{userLevel}";
@@ -477,10 +450,11 @@ namespace Atomic.App.Tools
             if (Lives <= 0 && !IsProPlusUser)
                 return;
 
-            if (sender is Button btn && btn.Tag is string categoryName)
+            if (sender is Button { Tag: string categoryKey })
             {
-                string normalized = categoryName.ToLower().Replace(" ", "_");
-                Frame.Navigate(typeof(Atomic.App.Tools.LearningGamesPage), normalized);
+                Frame.Navigate(
+                    typeof(Atomic.App.Tools.LearningGamesPage),
+                    new GameRequest(categoryKey, SettingsStore.QuizDifficulty));
             }
         }
 

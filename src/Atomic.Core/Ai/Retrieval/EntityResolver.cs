@@ -153,6 +153,98 @@ namespace Atomic.Core.Ai.Retrieval
         /// <summary>The single best element match, or null when the query names none.</summary>
         public ElementMatch? Resolve(string query) => ResolveAll(query, limit: 1).FirstOrDefault();
 
+        /// <summary>
+        /// Which language the user is writing in, judged by whose element names they used.
+        ///
+        /// <para>The alias table already holds every shipped language's names, so the detector is a
+        /// tally over it rather than a separate model: "vad är guldets densitet" contains a Swedish
+        /// element name and nothing else identifying, which is exactly the evidence available.</para>
+        ///
+        /// <para>A tie keeps the current language. Spurious switching is worse than not switching -
+        /// most element names are shared across several languages, and a thread that flips language
+        /// every third turn reads as broken even when each individual guess was defensible.</para>
+        /// </summary>
+        /// <param name="active">The language in play, returned unchanged when nothing is decisive.</param>
+        public string DetectLanguage(string query, string active)
+        {
+            var lower = query.ToLowerInvariant();
+            var normalized = TextMatching.NormalizeForLookup(query);
+            var scores = new Dictionary<string, int>(StringComparer.Ordinal);
+
+            foreach (var word in TextMatching.SplitQueryTokens(lower))
+            {
+                var folded = TextMatching.NormalizeForLookup(word);
+                if (!_aliases.TryGetValue(folded, out var matches) &&
+                    !_aliases.TryGetValue(word, out matches)) continue;
+
+                Score(matches, scores);
+            }
+
+            // Nothing matched token-by-token, so fall back to scanning the whole query. The scripts
+            // that write no spaces need this: 金的密度 is one token to a splitter and three
+            // characters to a containment check.
+            if (scores.Count == 0)
+            {
+                foreach (var (surface, matches) in _aliases)
+                {
+                    if (!TextMatching.ContainsToken(lower, normalized, surface)) continue;
+                    Score(matches, scores);
+                }
+            }
+
+            if (scores.Count == 0) return active;
+
+            var best = scores.Values.Max();
+            var leaders = scores.Where(e => e.Value == best).Select(e => e.Key).ToList();
+
+            if (leaders.Contains(active, StringComparer.OrdinalIgnoreCase)) return active;
+
+            // Ordinal, so the choice between two equally-distinctive leaders is at least stable
+            // rather than dependent on dictionary iteration order.
+            leaders.Sort(StringComparer.Ordinal);
+            return leaders[0];
+        }
+
+        /// <summary>
+        /// Credit a matched surface to the language that actually claims it.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>Only a surface claimed by exactly one language is evidence.</b> Element names
+        /// are shared across these twelve far more often than not - "gold" is the English, German
+        /// and Afrikaans name, "argon" and "platinum" are near-universal - and a name several
+        /// languages share tells you nothing about which one the user is writing in.</para>
+        ///
+        /// <para>The previous rule scored every claimant and then broke ties by preferring any
+        /// non-English leader, on the reasoning that "guld" is Swedish evidence even though English
+        /// also lists the key. That is true for a distinctive surface and false for a shared one:
+        /// it made "electron configuration of gold" answer in German, because German ties with
+        /// English on "gold" and English was then discarded on purpose. Scoring distinctiveness
+        /// instead keeps the "guld" case working - Swedish alone claims it - and leaves a shared
+        /// name contributing nothing, so the query falls through to the active language.</para>
+        /// </remarks>
+        private static void Score(
+            IReadOnlyList<ElementAlias> matches, Dictionary<string, int> scores)
+        {
+            string? only = null;
+
+            foreach (var alias in matches)
+            {
+                if (alias.Kind != AliasKind.Name) continue;
+
+                if (only is null)
+                {
+                    only = alias.Language;
+                    continue;
+                }
+
+                // A second language claims the same spelling, so it distinguishes nothing.
+                if (!string.Equals(only, alias.Language, StringComparison.Ordinal)) return;
+            }
+
+            if (only is null) return;
+            scores[only] = scores.TryGetValue(only, out var n) ? n + 1 : 1;
+        }
+
         private bool Matches(
             ElementAlias alias,
             string rawQuery,

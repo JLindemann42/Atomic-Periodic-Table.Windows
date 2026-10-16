@@ -38,6 +38,14 @@ namespace Atomic.Core.Tests.Ai.Retrieval
                 {
                     ["gold"] = ("سونا", "Au", "79"),
                 },
+                // German shares "Gold" and "Argon" with English but not "Eisen" - which is exactly
+                // the mix that made shared names misroute. See the detection tests below.
+                ["de"] = new Dictionary<string, (string, string, string)>
+                {
+                    ["gold"] = ("Gold", "Au", "79"),
+                    ["argon"] = ("Argon", "Ar", "18"),
+                    ["iron"] = ("Eisen", "Fe", "26"),
+                },
             };
 
         private static readonly IReadOnlyDictionary<string, IReadOnlyList<ElementAlias>> Aliases =
@@ -199,5 +207,51 @@ namespace Atomic.Core.Tests.Ai.Retrieval
         public void TokensLongerThanTwoCharsAreNeverCollisions() =>
             Assert.False(EntityResolver.IsCommonWordCollision(
                 "gold", "gold is dense", ["gold", "is", "dense"], "en"));
+
+        // ---- Language detection -----------------------------------------------------------------
+
+        /// <summary>
+        /// A name only one language uses is real evidence, and outweighs the active language.
+        /// </summary>
+        [Fact]
+        public void ADistinctiveNameSwitchesTheAnswerLanguage()
+        {
+            Assert.Equal("sv", Resolver("en").DetectLanguage("hur tung ar guld", "en"));
+            Assert.Equal("de", Resolver("en").DetectLanguage("wie schwer ist eisen", "en"));
+        }
+
+        /// <summary>
+        /// The defect this rule exists to prevent.
+        ///
+        /// <para>"Gold" is the English, German and Afrikaans name for the same element, so it says
+        /// nothing about which language the user is writing in. The earlier rule scored all three
+        /// and then deliberately discarded English on a tie, which answered "electron configuration
+        /// of gold" in German - correct data, wrong language, and no way for the user to tell why.
+        /// A shared name now contributes nothing and the query keeps the active language.</para>
+        /// </summary>
+        [Fact]
+        public void ANameSeveralLanguagesShareIsNotEvidenceForAnyOfThem()
+        {
+            Assert.Equal("en", Resolver("en").DetectLanguage("electron configuration of gold", "en"));
+            Assert.Equal("sv", Resolver("sv").DetectLanguage("electron configuration of gold", "sv"));
+            Assert.Equal("sv", Resolver("sv").DetectLanguage("what is argon used for", "sv"));
+        }
+
+        /// <summary>A query naming no element at all cannot change the language.</summary>
+        [Fact]
+        public void AQueryWithNoElementKeepsTheActiveLanguage()
+        {
+            Assert.Equal("sv", Resolver("sv").DetectLanguage("which element has the highest density", "sv"));
+            Assert.Equal("en", Resolver("en").DetectLanguage("vilket grundamne ar tyngst", "en"));
+        }
+
+        /// <summary>
+        /// A script with no spaces has to be found by scanning, not by splitting - and the same
+        /// distinctiveness rule has to apply on that path too.
+        /// </summary>
+        [Fact]
+        public void ADistinctiveNameIsFoundInAScriptThatWritesNoSpaces() =>
+            Assert.Equal("zh", Resolver("en").DetectLanguage("金的密度", "en"));
+
     }
 }

@@ -2,6 +2,7 @@
     x:Class="Atomic.App.Tables.NuclidePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="using:Atomic.App.Localization"
     Background="Transparent">
 
     <Grid>
@@ -53,7 +54,7 @@
         <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="This feature requires PRO version."
                        FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
-            <Button Content="Get PRO Version"
+            <Button Content="{loc:Str Key=get_pro_title}"
                     Click="OpenProPage_Click"
                     Width="200"
                     HorizontalAlignment="Center"/>

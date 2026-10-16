@@ -70,26 +70,32 @@ namespace Atomic.Core.Tests.Ai.Nlu
         /// vowels rather than accents.</para>
         /// </summary>
         /// <summary>
-        /// The seven entries in Lexicon.kt that violate the file's own rule and are therefore dead
-        /// vocabulary - on both platforms. See docs/porting-notes.md D13.
+        /// The only entries allowed to carry a Latin diacritic, and the reason they are allowed.
         ///
-        /// <para>Pinned exactly rather than allowed by pattern, so an eighth cannot join them
-        /// unnoticed. If they are ever folded upstream this test fails and gets deleted, which is
-        /// the outcome it is arguing for.</para>
+        /// <para>Both are Romance copulas in <c>YESNO_OPENERS</c>, which
+        /// <c>QueryPlanner.ComparativePlan</c> tests against the <b>raw</b> query as well as the
+        /// folded one - Italian <c>è</c> ("is") and Portuguese <c>é</c> ("is") differ from the
+        /// conjunction <c>e</c> ("and") by nothing but the accent. Fold them and "e le loro
+        /// densità" becomes a yes/no question. The corpus proves it: folding these two flips three
+        /// conversation rows in <c>it</c> and <c>pt</c> from COMPARISON to COMPARATIVE.</para>
+        ///
+        /// <para>Android writes five <i>other</i> accented entries that really are dead, because
+        /// they are only ever compared against folded text. The generator folds those on the way
+        /// out (D13), so they no longer appear here - which is what this test's emptiness now
+        /// means.</para>
         /// </summary>
-        private static readonly string[] KnownUnreachable =
+        private static readonly string[] AccentedByDesign =
         [
-            "berätta nagot intressant",  // sv, half-folded already: "nagot" is folded, "berätta" is not
-            "berätta om",                // sv "tell me about" - the overview trigger
-            "neutrões",                  // pt
-            "è ",                        // it yes/no opener
-            "é ",                        // pt yes/no opener
-            "más",                       // es
-            "più",                       // it
+            "è ",  // it "is" - against "e " ("and")
+            "é ",  // pt "is" - against "e " ("and")
         ];
 
+        /// <summary>
+        /// The invariant the whole file rests on: every entry is already folded, except the two
+        /// that are deliberately matched against unfolded text.
+        /// </summary>
         [Fact]
-        public void OnlyTheSevenKnownEntriesCarryALatinDiacritic()
+        public void OnlyTheTwoRawTextOpenersCarryALatinDiacritic()
         {
             var offenders = new List<string>();
 
@@ -99,7 +105,7 @@ namespace Atomic.Core.Tests.Ai.Nlu
                 {
                     var folded = TextMatching.NormalizeForLookup(key);
                     if (!string.Equals(folded, key, StringComparison.Ordinal) &&
-                        !KnownUnreachable.Contains(key, StringComparer.Ordinal))
+                        !AccentedByDesign.Contains(key, StringComparer.Ordinal))
                         offenders.Add($"{name}: \"{key}\" folds to \"{folded}\" and can never match");
                 }
             }
@@ -108,14 +114,46 @@ namespace Atomic.Core.Tests.Ai.Nlu
         }
 
         /// <summary>
-        /// The other half of the same claim: each known entry really is unreachable, so the list
-        /// above is a record of a defect rather than a list of permitted spellings.
+        /// The two exempt entries live only in <c>YESNO_OPENERS</c>.
+        ///
+        /// <para>The exemption is granted per declaration, because it is a fact about how that one
+        /// list is used. An accented entry appearing anywhere else is dead vocabulary, and this is
+        /// what stops the exemption being read as a licence to spell entries however they came.</para>
         /// </summary>
         [Fact]
-        public void TheKnownUnreachableEntriesAreGenuinelyUnreachable()
+        public void TheAccentedEntriesAppearOnlyWhereTheRawQueryIsMatched()
         {
-            foreach (var entry in KnownUnreachable)
+            foreach (var entry in AccentedByDesign)
+            {
                 Assert.NotEqual(entry, TextMatching.NormalizeForLookup(entry));
+                Assert.True(Lexicon.YESNO_OPENERS.Contains(entry), entry);
+
+                foreach (var (name, keys) in AllVocabularies())
+                {
+                    if (string.Equals(name, nameof(Lexicon.YESNO_OPENERS), StringComparison.Ordinal))
+                        continue;
+                    Assert.False(keys.Contains(entry, StringComparer.Ordinal),
+                        $"{name} carries \"{entry}\", which is folded away before it is compared");
+                }
+            }
+        }
+
+        /// <summary>
+        /// The five entries the generator folds, proven reachable in their folded shape.
+        ///
+        /// <para>Two of them were genuinely lost vocabulary on Android - Portuguese "neutrões" and
+        /// the Swedish defer trigger. The other three had a folded twin already sitting in the same
+        /// list, so folding them only produced a duplicate; they are kept here because the
+        /// assertion is about the vocabulary being reachable, not about which fix mattered.</para>
+        /// </summary>
+        [Fact]
+        public void TheFoldedEntriesAreReachableInTheirFoldedShape()
+        {
+            Assert.Contains("neutroes", Lexicon.NEUTRON_WORDS);
+            Assert.Contains("beratta nagot intressant", Lexicon.DEFER_TO_PERSONALITY);
+            Assert.Contains("beratta om", Lexicon.OVERVIEW_WORDS);
+            Assert.Contains("mas", Lexicon.AMBIGUOUS_DEGREE);
+            Assert.Contains("piu", Lexicon.AMBIGUOUS_DEGREE);
         }
 
         /// <summary>

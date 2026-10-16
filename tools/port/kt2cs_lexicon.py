@@ -35,9 +35,34 @@ from kt2cs_model import KotlinScanner, kotlin_string_to_csharp  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve()
 WIN_REPO = HERE.parents[2]
-SOURCE = WIN_REPO.parents[1] / "Atomic-Periodic-Table.Android" / "app" / "src" / "main" / \
-    "java" / "com" / "jlindemann" / "science" / "ai" / "nlu" / "Lexicon.kt"
-OUT = WIN_REPO / "src" / "Atomic.Core" / "Ai" / "Nlu" / "Lexicon.g.cs"
+NLU = WIN_REPO.parents[1] / "Atomic-Periodic-Table.Android" / "app" / "src" / "main" / \
+    "java" / "com" / "jlindemann" / "science" / "ai" / "nlu"
+OUT_DIR = WIN_REPO / "src" / "Atomic.Core" / "Ai" / "Nlu"
+
+# The vocabulary tables to convert: (Kotlin file, generated C# class, output file, doc summary).
+#
+# FieldResolver's five alias tables are here for the same reason Lexicon's are - they are pure
+# folded-surface-form data with no logic, and hand-copying 540 lines of "densidad" to "density"
+# is exactly the transcription a converter should be doing.
+SOURCES = [
+    ("Lexicon.kt", "Lexicon", "Lexicon.g.cs",
+     "The operator vocabulary the planner recognises, across all twelve supported languages.\n"
+     "///\n"
+     "/// <para>These are the words that turn a lookup into a computation - comparators,\n"
+     "/// superlatives, aggregations, counts and subset names. The legacy agent had superlatives in\n"
+     "/// one undifferentiated bag, so it could not tell \"densest\" from \"least dense\" and had to\n"
+     "/// re-test with English Contains checks inside its handler. Here the two directions are\n"
+     "/// separate sets from the start.</para>"),
+    ("FieldResolver.kt", "FieldAliases", "FieldAliases.g.cs",
+     "Surface forms that name a field, in twelve languages.\n"
+     "///\n"
+     "/// <para>Split from the resolver's logic so the data can be regenerated from Android without\n"
+     "/// touching the matcher. Same rule as the lexicon: every entry is already folded, so an\n"
+     "/// accented spelling here is unreachable.</para>"),
+]
+
+# Kept for the audit, which reports against the file it read.
+SOURCE = NLU / "Lexicon.kt"
 
 # Kotlin enum member -> the C# member. The C# enums are PascalCase where Kotlin is SCREAMING_CASE,
 # so the mapping is mechanical, but it is written out rather than derived: a silent mis-mapping
@@ -264,12 +289,30 @@ def convert_value(raw: str, enums: dict[str, dict[str, str]]) -> str:
     """One Kotlin expression -> a C# expression."""
     text = raw.strip()
 
+    # A bare pair - `"group" to "group_number"`, or `listOf("speed", "sound") to "field"` - has to
+    # be tested before the string branch, which would otherwise report the ` to …` tail as trailing
+    # text after the key.
+    if has_top_level_to(text):
+        left, right = split_list_pair(text)
+        return f"({convert_value(left, enums)}, {convert_value(right, enums)})"
+
     if text.startswith('"'):
+        # A few rows are written as "a" + "b" + "c" to keep source lines readable. The pieces are
+        # concatenated here rather than emitted as a C# expression, so the generated literal is
+        # what actually ships and a diff against the Kotlin stays meaningful.
         scanner = KotlinScanner(text)
-        value = kotlin_string_to_csharp(scanner.skip_string())
-        if scanner.i != len(text):
-            raise ValueError(f"trailing text after string: {text!r}")
-        return f'"{value}"'
+        pieces = [kotlin_string_to_csharp(scanner.skip_string())]
+        while scanner.i < len(text):
+            rest = text[scanner.i:].lstrip()
+            if not rest.startswith("+"):
+                raise ValueError(f"trailing text after string: {text!r}")
+            scanner.i = len(text) - len(rest) + 1
+            while scanner.i < len(text) and text[scanner.i] in " \t\r\n":
+                scanner.i += 1
+            if scanner.i >= len(text) or text[scanner.i] != '"':
+                raise ValueError(f"'+' not followed by a string literal: {text!r}")
+            pieces.append(kotlin_string_to_csharp(scanner.skip_string()))
+        return '"' + "".join(pieces) + '"'
 
     if re.fullmatch(r"-?\d+", text):
         return text
@@ -286,8 +329,8 @@ def convert_value(raw: str, enums: dict[str, dict[str, str]]) -> str:
         scanner = KotlinScanner(text)
         scanner.i = len("setOf")
         items = [convert_value(i, enums) for i in scanner.read_args()]
-        element_type = items[0].split(".")[0] if items else "string"
-        return f"new HashSet<{element_type}> {{ " + ", ".join(items) + " }"
+        member_type = items[0].split(".")[0] if items else "string"
+        return f"new HashSet<{member_type}> {{ " + ", ".join(items) + " }"
 
     if text.startswith("listOf("):
         scanner = KotlinScanner(text)
@@ -302,6 +345,7 @@ def convert_value(raw: str, enums: dict[str, dict[str, str]]) -> str:
         if len(inner) == 1 and " to " in inner[0]:
             left, right = split_pair(inner[0])
             return f"({convert_value(left, enums)}, {convert_value(right, enums)})"
+
 
     # An enum member, possibly fully qualified.
     member = text.split(".")
@@ -335,6 +379,78 @@ def split_pair(entry: str) -> tuple[str, str]:
     key = scanner.text[:scanner.i]
     value = stripped[len("to "):]
     return key, value
+
+
+def has_top_level_to(entry: str) -> bool:
+    """Whether ` to ` appears outside any string literal or bracket."""
+    try:
+        split_list_pair(entry)
+        return True
+    except ValueError:
+        return False
+
+
+def split_list_pair(entry: str) -> tuple[str, str]:
+    """
+    Split `<expr> to <expr>` where the left side may itself be a call.
+
+    split_pair only handles a string-literal key, which is right for a map; a list of pairs can
+    have `listOf("speed", "sound") to "speed_of_sound_gas"` on the left.
+    """
+    scanner = KotlinScanner(entry.strip())
+    depth = 0
+    while scanner.i < len(scanner.text):
+        c = scanner.text[scanner.i]
+        if c == '"':
+            scanner.skip_string()
+            continue
+        if c in "([{":
+            depth += 1
+        elif c in ")]}":
+            depth -= 1
+        elif depth == 0 and scanner.text.startswith(" to ", scanner.i):
+            return scanner.text[:scanner.i], scanner.text[scanner.i + 4:]
+        scanner.i += 1
+    raise ValueError(f"no top-level 'to' in pair: {entry!r}")
+
+
+def element_type(decl, enums) -> str:
+    """The C# element type of a list, read from the Kotlin annotation or inferred."""
+    kt = (decl.kotlin_type or "").strip()
+    if kt.startswith("List<Pair<"):
+        inner = kt[len("List<Pair<"):]
+        if inner.endswith(">>"):
+            inner = inner[:-2]
+        left, right = (p.strip() for p in split_top_level_type(inner))
+        return f"({csharp_type(left)}, {csharp_type(right)})"
+    return "string"
+
+
+def split_top_level_type(text: str) -> list[str]:
+    parts, depth, start = [], 0, 0
+    for i, c in enumerate(text):
+        if c == "<":
+            depth += 1
+        elif c == ">":
+            depth -= 1
+        elif c == "," and depth == 0:
+            parts.append(text[start:i])
+            start = i + 1
+    parts.append(text[start:])
+    return parts
+
+
+def csharp_type(kt: str) -> str:
+    kt = kt.strip()
+    if kt == "String":
+        return "string"
+    if kt == "Boolean":
+        return "bool"
+    if kt == "Int":
+        return "int"
+    if kt.startswith("List<"):
+        return f"IReadOnlyList<{csharp_type(kt[5:-1])}>"
+    return kt.split(".")[-1]
 
 
 def value_type(decl, enums) -> str:
@@ -375,10 +491,44 @@ def value_type(decl, enums) -> str:
     return converted.split(".")[0]
 
 
-def emit(decls: list[Declaration], enums) -> str:
+# Declarations compared against the *raw* query rather than the folded one, where an accent is
+# meaningful and folding an entry destroys the distinction it exists to draw.
+#
+# YESNO_OPENERS is the whole list: `QueryPlanner.ComparativePlan` tests both `normalized` and the
+# raw lowercased query against it, precisely because the Romance copulas differ from their
+# conjunctions only by an accent - Italian `è` (is) against `e` (and), Portuguese `é` against `e`.
+# Fold those two and "e le loro densità" ("and their densities") becomes a yes/no question. The
+# corpus caught it: three conversation rows in `it` and `pt` flipped COMPARISON to COMPARATIVE.
+RAW_TEXT_DECLARATIONS = {"YESNO_OPENERS"}
+
+
+def fold_literal(rendered: str, decl_name: str) -> str:
+    """
+    Fold a rendered C# value, if it is a string literal.
+
+    The lexicon's own invariant is that entries are compared against text `Tokenizer.Normalize` has
+    already folded, so an entry carrying a Latin diacritic can never match anything. Seven of
+    Android's 2,867 break that rule and are dead on both platforms (D13) - `berätta om`, the Swedish
+    trigger for the overview path, among them.
+
+    Folding them here rather than in `Lexicon.kt` keeps the port a pure function of the Kotlin, so a
+    future Android sync picks the fix up again automatically instead of silently reverting it. Only
+    entries and map *keys* go through this: a map value is a field id or an enum member, and folding
+    one would change what the entry means rather than whether it can be reached.
+
+    Anything that is not a quoted literal - an enum member, a number - passes through untouched.
+    """
+    if decl_name in RAW_TEXT_DECLARATIONS:
+        return rendered
+    if len(rendered) < 2 or not rendered.startswith('"') or not rendered.endswith('"'):
+        return rendered
+    return '"' + fold(rendered[1:-1]) + '"'
+
+
+def emit(decls: list[Declaration], enums, class_name: str, summary: str) -> str:
     lines = [
         "// <auto-generated/>",
-        "// Generated by tools/port/kt2cs_lexicon.py from Android's nlu/Lexicon.kt.",
+        f"// Generated by tools/port/kt2cs_lexicon.py from Android's nlu/{class_name}.",
         "// Do not edit by hand, and do not \"fix\" the spelling.",
         "//",
         "// Every entry is already lowercased and stripped of Latin diacritics, because that is the",
@@ -393,15 +543,9 @@ def emit(decls: list[Declaration], enums) -> str:
         "namespace Atomic.Core.Ai.Nlu;",
         "",
         "/// <summary>",
-        "/// The operator vocabulary the planner recognises, across all twelve supported languages.",
-        "///",
-        "/// <para>These are the words that turn a lookup into a computation - comparators,",
-        "/// superlatives, aggregations, counts and subset names. The legacy agent had superlatives in",
-        "/// one undifferentiated bag, so it could not tell \"densest\" from \"least dense\" and had to",
-        "/// re-test with English Contains checks inside its handler. Here the two directions are",
-        "/// separate sets from the start.</para>",
+        *[f"/// {line}" for line in summary.splitlines()],
         "/// </summary>",
-        "public static class Lexicon",
+        f"public static class {class_name}",
         "{",
     ]
 
@@ -409,7 +553,8 @@ def emit(decls: list[Declaration], enums) -> str:
         rows = source_lines(decl)
 
         if decl.kind in ("listOf", "setOf"):
-            kind = SET_TYPE if decl.kind == "setOf" else LIST_TYPE
+            kind = SET_TYPE if decl.kind == "setOf" else \
+                f"IReadOnlyList<{element_type(decl, enums)}>"
             opener = "    [" if decl.kind == "listOf" else \
                      f"    new HashSet<string>(StringComparer.Ordinal)\n    {{"
             closer = "    ];" if decl.kind == "listOf" else \
@@ -417,7 +562,7 @@ def emit(decls: list[Declaration], enums) -> str:
             lines.append(f"    public static readonly {kind} {decl.name} =")
             lines.append(opener)
             for values, comment in rows:
-                converted = [convert_value(v, enums) for v in values]
+                converted = [fold_literal(convert_value(v, enums), decl.name) for v in values]
                 text = "        " + ", ".join(converted) + ("," if converted else "")
                 if comment:
                     text = (text + "  " if converted else "        ") + f"// {comment}"
@@ -434,7 +579,8 @@ def emit(decls: list[Declaration], enums) -> str:
                 for entry in values:
                     key, value = split_pair(entry)
                     entries.append(
-                        f"[{convert_value(key, enums)}] = {convert_value(value, enums)},")
+                        f"[{fold_literal(convert_value(key, enums), decl.name)}] = "
+                        f"{convert_value(value, enums)},")
                 text = "            " + " ".join(entries)
                 if comment:
                     text = (text + "  " if entries else "            ") + f"// {comment}"
@@ -478,7 +624,7 @@ def audit(decls, enums) -> None:
     than repairs. Preserving them keeps the port faithful; the corpus gate decides whether they
     are worth fixing on both platforms.
     """
-    unfolded, collapsed = [], []
+    unfolded, collapsed, exempt = [], [], []
 
     for decl in decls:
         seen: dict[str, str] = {}
@@ -488,7 +634,8 @@ def audit(decls, enums) -> None:
                 text = convert_value(key, enums).strip('"')
 
                 if text and fold(text) != text:
-                    unfolded.append((decl.name, text, fold(text)))
+                    bucket = exempt if decl.name in RAW_TEXT_DECLARATIONS else unfolded
+                    bucket.append((decl.name, text, fold(text)))
 
                 if decl.kind != "listOf":
                     mapped = convert_value(split_pair(value)[1], enums) if decl.kind == "mapOf" else ""
@@ -496,11 +643,18 @@ def audit(decls, enums) -> None:
                         collapsed.append((decl.name, text, seen[text] == mapped))
                     seen[text] = mapped
 
+    if exempt:
+        print(f"\n{len(exempt)} accented entries are compared against the RAW query and are left "
+              f"exactly as Android writes them - the accent IS the distinction they draw:")
+        for name, text, folded in exempt:
+            print(f"    {name:24s} {text!r}  (folding it to {folded!r} breaks it)")
+
     if unfolded:
-        print(f"\n{len(unfolded)} entries carry Latin diacritics and can NEVER match - the lexicon "
-              f"is compared against text that has already been folded:")
+        print(f"\n{len(unfolded)} source entries carry Latin diacritics and can never match as "
+              f"written - the lexicon is compared against already-folded text. Each is FOLDED ON "
+              f"THE WAY OUT (D13); these are dead on Android, live here:")
         for name, text, folded in unfolded:
-            print(f"    {name:24s} {text!r} would have to be {folded!r}")
+            print(f"    {name:24s} {text!r} -> {folded!r}")
 
     if collapsed:
         conflicting = [c for c in collapsed if not c[2]]
@@ -511,13 +665,16 @@ def audit(decls, enums) -> None:
 
 
 def main() -> int:
+    # The audit prints the very entries it is reporting, which are by definition the ones carrying
+    # characters a Windows console's cp1252 default cannot encode. Without this the script dies with
+    # a UnicodeEncodeError part-way through its own report - the only part anyone runs it for.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     args = ap.parse_args()
-
-    if not SOURCE.is_file():
-        print(f"Lexicon.kt not found: {SOURCE}")
-        return 1
 
     enums = {name: csharp_enum_members(name) for name in ("SeriesId", "Block", "FieldCategory")}
     missing = [n for n, m in enums.items() if not m]
@@ -525,31 +682,40 @@ def main() -> int:
         print(f"could not read C# enum(s): {', '.join(missing)}")
         return 1
 
-    decls = parse(SOURCE.read_text(encoding="utf-8"))
-    if not decls:
-        print("no declarations parsed - has Lexicon.kt changed shape?")
-        return 1
+    for filename, class_name, out_name, summary in SOURCES:
+        source = NLU / filename
+        if not source.is_file():
+            print(f"{filename} not found: {source}")
+            return 1
 
-    try:
-        code = emit(decls, enums)
-    except ValueError as e:
-        print(f"FAILED: {e}")
-        return 1
+        decls = parse(source.read_text(encoding="utf-8"))
+        if not decls:
+            print(f"no declarations parsed from {filename} - has it changed shape?")
+            return 1
 
-    entries = sum(len(d.args) for d in decls)
-    lists = sum(1 for d in decls if d.kind == "listOf")
-    maps = sum(1 for d in decls if d.kind == "mapOf")
-    sets = sum(1 for d in decls if d.kind == "setOf")
-    print(f"{len(decls)} declarations ({lists} lists, {maps} maps, {sets} sets), {entries} entries")
+        try:
+            code = emit(decls, enums, class_name, summary)
+        except ValueError as e:
+            print(f"{filename} FAILED: {e}")
+            return 1
 
-    audit(decls, enums)
+        entries = sum(len(d.args) for d in decls)
+        lists = sum(1 for d in decls if d.kind == "listOf")
+        maps = sum(1 for d in decls if d.kind == "mapOf")
+        sets = sum(1 for d in decls if d.kind == "setOf")
+        print(f"{filename}: {len(decls)} declarations "
+              f"({lists} lists, {maps} maps, {sets} sets), {entries} entries")
 
-    if args.write:
-        OUT.parent.mkdir(parents=True, exist_ok=True)
-        OUT.write_text(code, encoding="utf-8")
-        print(f"wrote {OUT.relative_to(WIN_REPO)}")
-    else:
-        print("\nDRY RUN - nothing written.")
+        audit(decls, enums)
+
+        if args.write:
+            OUT_DIR.mkdir(parents=True, exist_ok=True)
+            (OUT_DIR / out_name).write_text(code, encoding="utf-8")
+            print(f"  wrote {out_name}")
+        print()
+
+    if not args.write:
+        print("DRY RUN - nothing written.")
     return 0
 
 

@@ -2,6 +2,7 @@
     x:Class="Atomic.App.IsotopeDetailsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="using:Atomic.App.Localization"
     xmlns:local="using:Atomic.App"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -43,15 +44,15 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                                    <TextBlock Text="Protons:" FontSize="20" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{loc:Str Key=protons}" FontSize="20" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{x:Bind Protons}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="8"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                                    <TextBlock Text="Neutrons:" FontSize="20" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{loc:Str Key=neutrons}" FontSize="20" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{x:Bind Neutrons}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="8"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                                    <TextBlock Text="Nucleons:" FontSize="20" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{loc:Str Key=nucleons}" FontSize="20" Foreground="{ThemeResource TextFillColorPrimaryBrush}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{x:Bind Nucleons}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="8"/>
                                 </StackPanel>
                             </Grid>

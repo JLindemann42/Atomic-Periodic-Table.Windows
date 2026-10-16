@@ -2,6 +2,7 @@
     x:Class="Atomic.App.Tools.FlashCardsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="using:Atomic.App.Localization"
     xmlns:local="using:Atomic.App.Tools"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -50,7 +51,7 @@
                                             <Border Width="900"/>
                                             <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                 <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                                <TextBlock Text="Statistics" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                                <TextBlock Text="{loc:Str Key=flashcards_statistics}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                             </StackPanel>
                                             <Grid Margin="0,16,0,8">
                                                 <ProgressBar
@@ -78,11 +79,11 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
                                                     <TextBlock x:Name="LevelTextBlock_single" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="Level" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="{loc:Str Key=flashcards_level}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
                                                     <TextBlock x:Name="TotalXpTextBlock_single" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                                    <TextBlock x:Name="XpTextBlock_single" Text="Total XP" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                    <TextBlock x:Name="XpTextBlock_single" Text="{loc:Str Key=flashcards_total_xp}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2" HorizontalAlignment="Center">
                                                     <TextBlock x:Name="TotalGamesPlayedTextBlock_single" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
@@ -138,7 +139,7 @@
                                             <Border Width="900"/>
                                             <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                 <FontIcon Glyph="&#xE710;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                                <TextBlock Text="Get PRO+" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                                <TextBlock Text="{loc:Str Key=get_pro_plus}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                             </StackPanel>
                                             <StackPanel>
                                                 <TextBlock Text="Unlock the full potential of 'Atomic - Periodic Table' with access to all learning games and unlimited lives."
@@ -146,7 +147,7 @@
                                                         Margin="4,4,20,4"
                                                         TextWrapping="Wrap"
                                                         FontSize="14"/>
-                                                <Button Content="Get PRO Version"
+                                                <Button Content="{loc:Str Key=get_pro_title}"
                                                         Click="OpenProPage_Click"
                                                         CornerRadius="8"
                                                         Margin="0,8,0,0"
@@ -171,7 +172,7 @@
                                             <Border Width="900"/>
                                             <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                 <FontIcon Glyph="&#xF272;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                                <TextBlock Text="Achievements" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                                <TextBlock Text="{loc:Str Key=user_achievements}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                             </StackPanel>
                                             <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="300">
                                                 <ItemsControl ItemsSource="{x:Bind Achievements, Mode=OneWay}">
@@ -259,7 +260,7 @@
                                                                                             BorderThickness="0"
                                                                                             CornerRadius="6"
                                                                                             FontWeight="SemiBold"
-                                                                                            Tag="{x:Bind Name}"
+                                                                                            Tag="{x:Bind Key}"
                                                                                             Click="CategoryButton_Click"
                                                                                             IsEnabled="{x:Bind IsUnlocked}">
                                                                                         <TextBlock Text="Start Flashcard >" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -320,7 +321,7 @@
                                         <Border Width="900"/>
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                             <FontIcon Glyph="&#xE946;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                            <TextBlock Text="Statistics" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                            <TextBlock Text="{loc:Str Key=flashcards_statistics}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                         </StackPanel>
                                         <Grid Margin="0,16,0,8">
                                             <ProgressBar
@@ -348,11 +349,11 @@
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Column="0" HorizontalAlignment="Center">
                                                 <TextBlock x:Name="LevelTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Level" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{loc:Str Key=flashcards_level}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                             </StackPanel>
                                             <StackPanel Grid.Column="1" HorizontalAlignment="Center">
                                                 <TextBlock x:Name="TotalXpTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                                <TextBlock x:Name="XpTextBlock" Text="Total XP" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="XpTextBlock" Text="{loc:Str Key=flashcards_total_xp}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                             </StackPanel>
                                             <StackPanel Grid.Column="2" HorizontalAlignment="Center">
                                                 <TextBlock x:Name="TotalGamesPlayedTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
@@ -408,7 +409,7 @@
                                         <Border Width="900"/>
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                             <FontIcon Glyph="&#xE710;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                            <TextBlock Text="Get PRO+" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                            <TextBlock Text="{loc:Str Key=get_pro_plus}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                         </StackPanel>
                                         <StackPanel>
                                             <TextBlock Text="Unlock the full potential of 'Atomic - Periodic Table' with access to all learning games and unlimited lives."
@@ -416,7 +417,7 @@
                                                        Margin="4,4,20,4"
                                                        TextWrapping="Wrap"
                                                        FontSize="14"/>
-                                            <Button Content="Get PRO Version"
+                                            <Button Content="{loc:Str Key=get_pro_title}"
                                                     Click="OpenProPage_Click"
                                                     CornerRadius="8"
                                                     Margin="0,8,0,0"
@@ -441,7 +442,7 @@
                                         <Border Width="900"/>
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                             <FontIcon Glyph="&#xF272;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                            <TextBlock Text="Achievements" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                            <TextBlock Text="{loc:Str Key=user_achievements}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                         </StackPanel>
                                         <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="300">
                                             <ItemsControl ItemsSource="{x:Bind Achievements, Mode=OneWay}">
@@ -529,7 +530,7 @@
                                                                                         BorderThickness="0"
                                                                                         CornerRadius="6"
                                                                                         FontWeight="SemiBold"
-                                                                                        Tag="{x:Bind Name}"
+                                                                                        Tag="{x:Bind Key}"
                                                                                         Click="CategoryButton_Click"
                                                                                         IsEnabled="{x:Bind IsUnlocked}">
                                                                                     <TextBlock Text="Start Flashcard >" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>

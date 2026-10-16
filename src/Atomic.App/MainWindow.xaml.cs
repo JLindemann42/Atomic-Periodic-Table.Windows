@@ -50,6 +50,19 @@ namespace Atomic.App
             Navigation = new NavigationService(nvSample, contentFrame);
             Navigation.Navigate(AppRoutes.PeriodicTable);
 
+            ChatPanel.Navigation = Navigation;
+            // The panel closes itself from four places, so the launcher follows its state rather
+            // than being toggled alongside it.
+            ChatPanel.OpenChanged += (_, open) =>
+                AskAtomicButton.Visibility = open ? Visibility.Collapsed : Visibility.Visible;
+            var askAtomic = ResourceStringProvider
+                .For(AppLanguage.BaseCode(AppLanguage.Current))
+                .Get(Atomic.Core.Localization.S.ask_atomic);
+            AskAtomicLabel.Text = askAtomic;
+            // The button's content is a panel, so it has no accessible name of its own - a screen
+            // reader announces "button" and nothing else.
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(AskAtomicButton, askAtomic);
+
             if (SettingsStore.HasAnyPro)
             {
                 Navigation.SetProLabel("PRO Member");
@@ -72,6 +85,16 @@ namespace Atomic.App
             var appWindow = AppWindow.GetFromWindowId(windowId);
 
             appWindow.Resize(new SizeInt32(SettingsStore.WindowWidth, SettingsStore.WindowHeight));
+        }
+
+        private void AskAtomic_Click(object sender, RoutedEventArgs e) => ChatPanel.Toggle();
+
+        private void AskAtomic_Invoked(
+            Microsoft.UI.Xaml.Input.KeyboardAccelerator sender,
+            Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
+        {
+            args.Handled = true;
+            ChatPanel.Toggle();
         }
 
         private void MainWindow_Closed(object sender, WindowEventArgs args)

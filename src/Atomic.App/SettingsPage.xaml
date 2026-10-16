@@ -2,6 +2,7 @@
     x:Class="Atomic.App.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="using:Atomic.App.Localization"
     xmlns:local="using:Atomic.App"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -54,9 +55,9 @@
                               Grid.Column="1"
                               HorizontalAlignment="Right"
                               SelectionChanged="ThemeComboBox_SelectionChanged">
-                        <ComboBoxItem Content="Use system setting" Tag="Default" />
-                        <ComboBoxItem Content="Light" Tag="Light" />
-                        <ComboBoxItem Content="Dark" Tag="Dark" />
+                        <ComboBoxItem Content="{loc:Str Key=settings_language_system}" Tag="Default" />
+                        <ComboBoxItem Content="{loc:Str Key=light}" Tag="Light" />
+                        <ComboBoxItem Content="{loc:Str Key=dark}" Tag="Dark" />
                     </ComboBox>
                 </Grid>
 
@@ -117,7 +118,7 @@
 
                 <!-- About Section -->
                 <TextBlock Grid.Row="4"
-                           Text="About"
+                           Text="{loc:Str Key=about_title}"
                            FontSize="14"
                            FontWeight="Bold"
                            Margin="0,8,0,16"/>
@@ -186,7 +187,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel>
-                        <TextBlock Text="Atomic - Periodic Table" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock Text="{loc:Str Key=about_app_name}" FontSize="14" FontWeight="SemiBold" />
                         <TextBlock Text="J.LINDEMANN"
                                    FontSize="12"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
