@@ -30,6 +30,7 @@ namespace Atomic.App.Services
     [JsonSerializable(typeof(List<SavedIdealGas>))]
     // The chat thread. Its Actions and Cards are codec strings rather than nested objects, so this
     // stays a flat record and a message written by an older build still deserializes.
+    [JsonSerializable(typeof(Dictionary<string, int>))]
     [JsonSerializable(typeof(List<ChatMessage>))]
     internal sealed partial class ElementJsonContext : JsonSerializerContext
     {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Atomic.Core.Localization;
@@ -63,6 +63,8 @@ namespace Atomic.App.Services
             Cache.GetOrAdd(string.IsNullOrWhiteSpace(language) ? "en" : language,
                            lang => new ResourceStringProvider(lang));
 
+        public bool Has(string key) => Lookup(key) is not null;
+
         public string Get(string key, params object?[] args)
         {
             var template = Lookup(key);
@@ -99,6 +101,9 @@ namespace Atomic.App.Services
                     {
                         if (map.TryGetValue(key, context)?.ValueAsString is { } value)
                             return value;
+
+                        if (Nested(map, key, context) is { } nested)
+                            return nested;
                     }
                     catch (Exception)
                     {
@@ -107,6 +112,29 @@ namespace Atomic.App.Services
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// A dotted key read as MRT stores it: a subtree, then a name inside it.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>MRT treats "." in a resource name as a hierarchy separator.</b> A resw entry
+        /// called <c>lives_lost_result.Other</c> is not a resource of that name - it is a resource
+        /// called <c>Other</c> inside a subtree called <c>lives_lost_result</c>, which is the same
+        /// convention that makes <c>SomeUid.Text</c> work in XAML. Asking for the flat string finds
+        /// nothing and raises nothing.</para>
+        ///
+        /// <para>Every dotted key in the resources is affected: the plural forms, and the
+        /// <c>key.0</c>, <c>key.1</c> arrays that <see cref="Array"/> reads.</para>
+        /// </remarks>
+        private static string? Nested(ResourceMap map, string key, ResourceContext context)
+        {
+            var dot = key.LastIndexOf('.');
+            if (dot <= 0 || dot == key.Length - 1)
+                return null;
+
+            var subtree = map.GetSubtree(key[..dot]);
+            return subtree?.TryGetValue(key[(dot + 1)..], context)?.ValueAsString;
         }
 
         private static bool IsDefault(string language) =>

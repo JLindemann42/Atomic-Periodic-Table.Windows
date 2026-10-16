@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using Atomic.Core.Ai;
 using Atomic.Core.Ai.Data;
@@ -224,12 +224,16 @@ namespace Atomic.Core.Tests.Ai
             ?? throw new InvalidOperationException("element assets not readable");
 
         private static ChatOrchestrator Chat(
-            Func<Entitlements>? entitlements = null, string language = "en") =>
+            Func<Entitlements>? entitlements = null, string language = "en", int? seed = null) =>
             new(Service,
                 lang => new ReswStringProvider(lang, fallBackToEnglish: true),
                 entitlements,
                 null,
-                language);
+                language,
+                seed is { } value ? new Random(value) : null);
+
+        private static IStringProvider Strings(string language = "en") =>
+            new ReswStringProvider(language, fallBackToEnglish: true);
 
         // ---- The order is the contract ---------------------------------------------------------
 
@@ -258,6 +262,107 @@ namespace Atomic.Core.Tests.Ai
             Assert.Equal(ReplySource.Personality, reply.Source);
             Assert.Empty(reply.Actions);
             Assert.Null(reply.Plan);
+        }
+
+        // ---- Remembering the user ---------------------------------------------------------------
+
+        /// <summary>A first-time user gets the plain greeting; there is nothing to remember yet.</summary>
+        [Fact]
+        public void AFirstGreetingIsThePlainOne()
+        {
+            var chat = Chat();
+
+            Assert.Equal(Strings().Get(S.ai_greeting), chat.Ask("hello").Text);
+        }
+
+        /// <summary>
+        /// After a few questions about one element, the greeting names it - Android's
+        /// getPersonalizedGreeting, which is the only half of AILearningManager that ever runs.
+        /// </summary>
+        [Fact]
+        public void AReturningUserIsGreetedByTheirElement()
+        {
+            var chat = Chat();
+            chat.Ask("what is the density of gold");
+            chat.Ask("what is the melting point of gold");
+
+            var greeting = chat.Ask("hello").Text;
+
+            Assert.NotEqual(Strings().Get(S.ai_greeting), greeting);
+            Assert.Contains("Gold", greeting, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// The element is named in the reader's language. Android interpolates the raw key, so a
+        /// Swedish user is greeted about "gold" in an otherwise Swedish sentence.
+        /// </summary>
+        [Fact]
+        public void TheRememberedElementIsNamedInTheReadersLanguage()
+        {
+            var chat = Chat(language: "sv");
+            chat.Ask("vad är densiteten för guld");
+
+            var greeting = chat.Ask("hej").Text;
+
+            Assert.Contains("Guld", greeting, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("gold", greeting, StringComparison.OrdinalIgnoreCase);
+        }
+
+        // ---- Questions about the app, and fact requests ----------------------------------------
+
+        /// <summary>
+        /// The engine defers on these by design - capabilities.tsv asserts it does - so something
+        /// below it has to answer. Before AppFeatures existed, all three reached the decline.
+        /// </summary>
+        [Theory]
+        [InlineData("what can you do")]
+        [InlineData("do you have flashcards")]
+        [InlineData("tell me about the unit converter")]
+        [InlineData("is there a reaction balancer")]
+        public void AQuestionAboutTheAppIsAnsweredNotDeclined(string message)
+        {
+            var reply = Chat().Ask(message);
+
+            Assert.Equal(ReplySource.Personality, reply.Source);
+            Assert.NotEqual(Strings().Get(S.ai_no_data), reply.Text);
+        }
+
+        /// <summary>A fact request gets one of the ten shipped facts.</summary>
+        [Theory]
+        [InlineData("tell me a fun fact")]
+        [InlineData("did you know anything interesting")]
+        public void AFactRequestGetsAShippedFact(string message)
+        {
+            var reply = Chat(seed: 7).Ask(message);
+
+            Assert.Equal(ReplySource.Personality, reply.Source);
+            Assert.Contains(reply.Text, Strings().Array("ai_facts"));
+        }
+
+        /// <summary>
+        /// The fact comes from the language the question was asked in. Android's fallback is a
+        /// hardcoded English sentence about oxygen, which is the one thing a Swedish reader should
+        /// not get; here a missing array falls through to the decline instead.
+        /// </summary>
+        [Fact]
+        public void ASwedishFactRequestIsAnsweredInSwedish()
+        {
+            var reply = Chat(language: "sv", seed: 3).Ask("visste du nagot intressant");
+
+            Assert.Contains(reply.Text, Strings("sv").Array("ai_facts"));
+            Assert.DoesNotContain(reply.Text, Strings("en").Array("ai_facts"));
+        }
+
+        /// <summary>
+        /// "Cool" and "interesting" are fact keywords and broad enough to sit inside a real
+        /// question. The engine runs first, so a grounded question keeps its grounded answer.
+        /// </summary>
+        [Fact]
+        public void AGroundedQuestionIsNotDerailedByAFactKeyword()
+        {
+            var reply = Chat().Ask("what is the interesting property of the melting point of gold");
+
+            Assert.NotEqual(ReplySource.Personality, reply.Source);
         }
 
         [Fact]

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 
 namespace Atomic.Core.Sync
@@ -72,12 +72,6 @@ namespace Atomic.Core.Sync
         /// </remarks>
         public string? Validate()
         {
-            if (string.IsNullOrWhiteSpace(OAuthClientSecret))
-            {
-                return "No OAuth client secret is configured. Google requires one at the token " +
-                       "endpoint even for a desktop client; it is shipped, not withheld.";
-            }
-
             if (string.IsNullOrWhiteSpace(OAuthClientSecret))
             {
                 return "No OAuth client secret has been supplied. Google requires one at the token "

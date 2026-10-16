@@ -582,3 +582,140 @@ do in languages I cannot proofread.
 Left alone deliberately: `-{n} Life/Lives` in the quiz. It needs plural forms, and the plural
 mechanism (`key.One` / `key.Other`) exists only on the Android-sourced side of the pipeline —
 `build_app_resw.py` cannot declare one. Authoring a single form would make English wrong at n=1.
+### D41 — the app could not answer questions about itself
+
+`ChatOrchestrator.Personality` handled greetings and thanks and then declined. "What can you do",
+"do you have flashcards" and "tell me about the unit converter" all reached that decline, so the
+app answered questions about its own features with *"Hmm, I couldn't find anything about that. Try
+asking about an element like 'oxygen' or 'gold'!"*
+
+The engine is right to defer on these — `capabilities.tsv` asserts exactly that, with
+`must_defer=y`, and it passes. Deferring is only correct if something downstream answers, and
+nothing did.
+
+Android answers them in `LocalKnowledgeManager.resolveAppFeature`, the first of eight resolvers it
+tries. **The other seven are already covered here by the engine**: equations, constants,
+indicators, Poisson values, geology, ions and the dictionary all read tables `DatasetIndex` owns,
+and `datasets.tsv` holds the engine to answering them — 14 dictionary rows, 8 constants, 3 Poisson,
+3 equations, and 2 each for ions, indicators and geology, all green. `app_feature` was the only one
+of the eight with no dataset behind it, which is why it was the only one missing.
+
+Both halves of it were already here and neither was reachable. The vocabulary — nine features,
+keywords in all twelve languages — has been in `Lexicon.APP_FEATURE_WORDS` since P4, with no
+reference anywhere in the solution. The nine answers have been translated in all twelve languages
+since P2. Only the twenty lines joining them were absent. `Ai/AppFeatures.cs` is those lines.
+
+Three things worth keeping:
+
+**Match order is load-bearing and `FrozenDictionary` does not have one.** Android iterates a Kotlin
+`mapOf`, which enumerates in declaration order, and takes the first feature that matches. Several
+questions match two — "help me with the reaction balancer" matches `reaction_balancer` and the
+"help me" in `capabilities`. `FrozenDictionary` promises no enumeration order at all, so iterating
+it directly would have picked between them arbitrarily, differing from Android and potentially
+between .NET versions. `AppFeatures.Order` writes the order down, and `EveryFeatureIsOrdered` fails
+if Android adds a tenth feature rather than letting it be silently unreachable.
+
+**Word boundaries, not `Contains`.** Carried over from Android's comment, which records what the
+substring version did: it found "unit" inside "opportunity" and "reaction" inside "interaction",
+and answered a chemistry question with a tour of the app.
+
+**One deliberate divergence, in Windows' favour.** Android matches these keywords against its own
+`normalize()`, which lowercases and strips punctuation but folds no diacritics — while the keywords
+themselves are diacritic-folded ASCII (`"vad kan du gora"`, not `"göra"`). So a Swede typing the
+full *"vad kan du göra"* only matches on Android by way of the shorter `"vad kan du"` also being in
+the list, and where no shorter prefix exists the accented spelling does not match at all. Windows
+matches against `TextMatching.NormalizeForLookup`, which folds first: it matches everything Android
+matches, plus the accented spellings. Fixing it on Android is a one-line change to `normalize()`.
+
+### D42 — English won a language tie it was only in by coincidence
+
+`EntityResolver.DetectLanguage` scores languages by the element names a query contains. When the
+active language is not among the leaders, Android takes `topLangs.firstOrNull { it != "en" }` —
+English loses the tie. Windows sorted the leaders ordinally and took the first, so leaders
+`{en, sv}` answered a Swede in English.
+
+The ordinal sort was itself a deliberate improvement, and it stays: Android's fallback
+`topLangs.first()` is whatever the set happens to yield, which is not stable. The rule is now
+Android's preference with Windows' determinism behind it — prefer a non-English leader, and choose
+among equals by ordinal sort.
+
+Note that the *other* half of this function is already identical and should not be "fixed":
+`if (scores.Count == 0) return active` matches Android's line 556 exactly. An English question with
+no element name in it — "what can you do" — carries no evidence of a language, so it is answered in
+the language the conversation is already in. A Swedish turn followed by an English one is answered
+in Swedish on both platforms. That looks like a bug and is parity.
+### D43 — the daily message allowance was not enforced at all
+
+Android caps chat at **16 messages a day for free users and 64 for PRO**; PRO+ is uncounted.
+Windows enforced nothing, so a free Windows user had unlimited access to the assistant. That is a
+parity gap and a pricing one — the cap is part of what PRO is sold for.
+
+`Ai/RateLimit.cs` is the policy, `Services/AiChatLimiter.cs` the count and the clock. The split is
+the usual one: `Atomic.Core` has neither storage nor a time zone, so everything in `RateLimit` is a
+function of a tier, a count and a `DateTimeOffset` the caller passes in.
+
+Two details carried over deliberately:
+
+**The reset is the next local midnight, not 24 hours out.** Android's comment makes the point and
+it is the whole reason for telling the user: someone who runs out at 23:50 gets their messages back
+in ten minutes, not tomorrow evening. The counter is keyed by local calendar day and the announced
+reset is derived from the same boundary, so the sentence cannot disagree with the counter.
+
+**PRO+ reads "Unlimited" rather than losing the badge**, which said nothing about why it had gone.
+
+One Windows-specific hazard, worth naming because it has bitten this codebase before: the day key
+is formatted with `InvariantCulture`. Under `ur-PK`, `ToString("yyyy-MM-dd")` with the ambient
+culture formats in the **Hijri calendar** — the same trap `StreakMath` was written around in P8. An
+Urdu user would write a key that never matches the one written yesterday and get a fresh 16
+messages on every launch.
+
+The free and PRO countdowns are covered by 15 unit tests; the PRO+ branch is what was verified
+live, this machine being PRO+. Watching the number actually decrement would mean writing a lower
+tier over the user's real entitlement, which is not a thing to do to someone's licence state to
+satisfy a test.
+
+### D44 — fact requests, and greeting someone the app already knows
+
+Two more replies that Android gives and Windows declined.
+
+**"Tell me a fun fact."** The ten facts have been translated in all twelve languages since P2 as
+`ai_facts.0`–`.9`, unused. Android's fallback when the array is missing is a hardcoded English
+sentence about oxygen; here a missing array falls through to the decline instead, because an
+English sentence is the one thing a Swedish reader should not get from a Swedish question.
+
+The keywords are Android's list verbatim, "interesting" and "cool" included. They are broad enough
+to sit inside a real question, which is safe only because the engine is asked first and its answer
+is never replaced — the same ordering contract that already protects the greeting branch.
+
+**The returning-user greeting.** `InterestProfile` counts which elements get asked about and the
+greeting names the most frequent one. Counts only; no question text and no answer is stored, which
+is Android's promise ("Does NOT store user-provided facts") kept structurally rather than by
+discipline.
+
+Two deliberate departures:
+
+*It is much smaller than Android's `AILearningManager`.* That class also keeps a property-interest
+map and a "technical score" that leans the reply style — but `trackPropertyInterest` and
+`incrementSession` **are never called anywhere in the Android source**. The score therefore sits at
+its initial 0.5 forever, `isTechnicalPreferred()` is always false, and
+`ai_personalized_greeting_interest` is unreachable. Only the element half runs, so only the element
+half is ported. This is the D1 principle again: porting the rest would be porting dead code.
+
+*The element is named in the reader's language.* Android interpolates the raw element key, so a
+Swedish user is greeted about "gold" inside an otherwise Swedish sentence. Same class of gap as
+D41, fixed here rather than reproduced.
+
+Ties break on the key rather than on map order, so the greeting does not change between launches
+for someone who has asked about two elements equally often.
+
+### D45 — turn telemetry is not ported, and this is why
+
+`AiTurnStats` records a path, intent, confidence bucket, latency, language, card kind and query
+shape for every turn, and `AiChatPanelController` forwards it to Firebase Analytics.
+
+Windows has no analytics pipeline — no `AnalyticsHelper`, no event sink, nothing that would read
+the struct. Porting it would add a type that is written and never read, which is worth less than
+nothing: it looks like coverage.
+
+It changes no user-visible behaviour, so it is not an AI-parity item. If Windows telemetry is
+wanted, the missing piece is an analytics backend, and the struct is a half-hour once that exists.

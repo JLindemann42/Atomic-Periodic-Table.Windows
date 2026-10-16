@@ -237,6 +237,16 @@ def write_keys(path: pathlib.Path, keys: list[str], header: str | None = None) -
         "public static partial class S",
         "{",
     ]
+    # Plurals are stored as key.One / key.Other, and IStringProvider.Plural is given the stem -
+    # it picks the form from the count. Without a constant for the stem the one call site that
+    # needs it would be the only place in the app passing a raw string key.
+    stems = {
+        key.rsplit(".", 1)[0]
+        for key in keys
+        if key.endswith((".One", ".Other"))
+    }
+    keys = list(keys) + sorted(stems - set(keys))
+
     for key in sorted(keys):
         ident = identifier(key)
         if ident in seen:

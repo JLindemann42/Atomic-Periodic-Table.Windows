@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
@@ -49,6 +49,7 @@ namespace Atomic.App.Controls
 
             Session = new ChatSession();
             Session.PropertyChanged += Session_PropertyChanged;
+            Session.LimitChanged += (_, _) => ApplyLimitBadge();
             Session.Messages.CollectionChanged += Messages_Changed;
 
             ApplyStrings();
@@ -88,11 +89,32 @@ namespace Atomic.App.Controls
             Set(CloseButton, strings.Get(S.chat_close));
             Set(NewChatButton, strings.Get(S.chat_new));
 
+            ApplyLimitBadge();
+
             static void Set(DependencyObject control, string label)
             {
                 AutomationProperties.SetName(control, label);
                 ToolTipService.SetToolTip(control, label);
             }
+        }
+
+        /// <summary>
+        /// The day's remaining messages, and when they come back.
+        ///
+        /// <para>Re-read rather than cached: the count is stored per calendar day and shared by
+        /// every window, and the tier behind it can change while the panel is open - buying PRO
+        /// on the store page must widen the allowance without a restart.</para>
+        /// </summary>
+        private void ApplyLimitBadge()
+        {
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+
+            LimitBadge.Text = AiChatLimiter.Badge(strings);
+
+            var reset = AiChatLimiter.ResetDisplay(strings);
+            ToolTipService.SetToolTip(
+                LimitBadge,
+                reset is null ? null : strings.Get(S.ai_limit_reset_badge, reset));
         }
 
         // ---- Open and close ---------------------------------------------------------------------

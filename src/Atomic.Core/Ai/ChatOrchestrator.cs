@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -80,6 +80,12 @@ namespace Atomic.Core.Ai
         /// </summary>
         private readonly Dictionary<string, AiEngine> _engines = new(StringComparer.OrdinalIgnoreCase);
 
+        /// <summary>
+        /// Picks among the shipped facts. Per-orchestrator rather than <c>Random.Shared</c> so a
+        /// test can seed one and get a reply it can name.
+        /// </summary>
+        private readonly Random _random;
+
         /// <summary>The entitlements the cached engines were built with, so a purchase invalidates them.</summary>
         private Entitlements _builtWith;
 
@@ -88,8 +94,10 @@ namespace Atomic.Core.Ai
             Func<string, IStringProvider> stringsFor,
             Func<Entitlements>? entitlements = null,
             ChatCardPolicy? cardPolicy = null,
-            string language = "en")
+            string language = "en",
+            Random? random = null)
         {
+            _random = random ?? new Random();
             _retrieval = retrieval;
             _store = retrieval.Store;
             _stringsFor = stringsFor;
@@ -102,6 +110,12 @@ namespace Atomic.Core.Ai
 
         /// <summary>What the conversation remembers. Public so a host can persist and restore a thread.</summary>
         public DialogueState State { get; }
+
+        /// <summary>
+        /// Which elements this user keeps asking about. Public for the same reason
+        /// <see cref="State"/> is: the host saves and restores it.
+        /// </summary>
+        public InterestProfile Profile { get; } = new();
 
         /// <summary>The language the last message was answered in.</summary>
         public string Language => State.ActiveLanguage;
@@ -130,6 +144,11 @@ namespace Atomic.Core.Ai
             // ---- The engine, first ----------------------------------------------------------
             if (engine.Answer(message, State) is { } answered)
             {
+                // The element the answer was about, which is the one worth remembering. Taken from
+                // the plan rather than the message so "what about its density" counts towards the
+                // element in focus rather than towards nothing.
+                Profile.Track(engine.LastPlan?.ElementKeys.FirstOrDefault() ?? State.FocusElement);
+
                 return new ChatReply(
                     answered.Text, ReplySource.Engine, answered.Actions, answered.Card,
                     Suggestions(strings, engine.LastPlan), engine.LastPlan);
@@ -180,14 +199,12 @@ namespace Atomic.Core.Ai
         }
 
         /// <summary>
-        /// A greeting, a thank-you, or an honest decline.
+        /// A greeting, a thank-you, a fun fact, an answer about the app itself, or an honest
+        /// decline - everything with no grounded answer behind it.
         ///
-        /// <para>Deliberately not a keyword cascade. Every branch answers something with no grounded
-        /// answer at all, so the only decision is which of three sentences to say.</para>
-        ///
-        /// <para>There is no separate "what can you do" reply, because there is no shipped string
-        /// for one. The suggestion chips <i>are</i> that answer - they name what the assistant can
-        /// do, in twelve languages, and they are attached to every reply on this path.</para>
+        /// <para>The order is Android's: greeting, then facts, then the app's own features. Each
+        /// branch is reachable only because the one above it did not match, so a question matching
+        /// two is answered the same way on both platforms.</para>
         /// </summary>
         private ChatReply Personality(string message, IStringProvider strings, string language)
         {
@@ -195,7 +212,8 @@ namespace Atomic.Core.Ai
 
             if (Mentions(normalized, Greetings))
                 return new ChatReply(
-                    strings.Get(S.ai_greeting), ReplySource.Personality, [], null,
+                    PersonalGreeting(strings) ?? strings.Get(S.ai_greeting),
+                    ReplySource.Personality, [], null,
                     Suggestions(strings, null));
 
             if (Mentions(normalized, Thanks))
@@ -203,7 +221,57 @@ namespace Atomic.Core.Ai
                     strings.Get(S.ai_encouragement), ReplySource.Personality, [], null,
                     Suggestions(strings, null));
 
+            // "Tell me something interesting." Android checks this between the greeting and its
+            // local knowledge, so it is checked here in the same place.
+            if (Mentions(normalized, FactWords) && Fact(strings) is { } fact)
+                return new ChatReply(
+                    fact, ReplySource.Personality, [], null,
+                    Suggestions(strings, null));
+
+            // Questions about the app itself. After the greetings, as on Android, where the
+            // greeting branch is tested before local knowledge is consulted - "help me" is a
+            // capabilities keyword and a greeting is the better answer to it.
+            if (AppFeatures.Resolve(normalized) is { } feature)
+                return new ChatReply(
+                    strings.Get(feature), ReplySource.Personality, [], null,
+                    Suggestions(strings, null));
+
             return Decline(language);
+        }
+
+        /// <summary>
+        /// "I remember you were checking out Gold recently", or null for a first-time user.
+        /// </summary>
+        /// <remarks>
+        /// The element is named in the reader's language. Android interpolates the raw key, so a
+        /// Swedish user is greeted about "gold" in an otherwise Swedish sentence - the same class
+        /// of gap as D41, and fixed here rather than reproduced.
+        /// </remarks>
+        private string? PersonalGreeting(IStringProvider strings)
+        {
+            if (Profile.Favourite is not { } key) return null;
+            if (!strings.Has(S.ai_personalized_greeting_fav)) return null;
+
+            var localized = _retrieval.Localized(State.ActiveLanguage)?.Name(key);
+            var name = localized is { Length: > 0 }
+                ? localized
+                : char.ToUpperInvariant(key[0]) + key[1..];
+
+            return strings.Get(S.ai_personalized_greeting_fav, name);
+        }
+
+        /// <summary>
+        /// One of the ten shipped facts, at random.
+        ///
+        /// <para>Null when the array is missing rather than inventing an English sentence: Android's
+        /// catch falls back to a hardcoded "Oxygen is the most abundant element in Earth's crust",
+        /// which is the one outcome a Swedish reader should not get. Falling through to the decline
+        /// keeps the reply in the right language.</para>
+        /// </summary>
+        private string? Fact(IStringProvider strings)
+        {
+            var facts = strings.Array(Facts);
+            return facts.Count == 0 ? null : facts[_random.Next(facts.Count)];
         }
 
         /// <summary>
@@ -341,6 +409,26 @@ namespace Atomic.Core.Ai
             "thanks", "thank you", "tack", "danke", "merci", "gracias", "grazie", "obrigado",
             "dankie", "salamat", "shukriya", "dhanyavaad", "谢谢", "多谢",
         ];
+
+        /// <summary>
+        /// Words that make a message a request for a fact rather than a question.
+        ///
+        /// <para>Android's list, verbatim, including that "interesting" and "cool" are on it. They
+        /// are broad enough to catch a real question - but only reach here once the engine has
+        /// declined, and the same words reach the same branch on Android.</para>
+        /// </summary>
+        private static readonly string[] FactWords =
+        [
+            "fact", "fun fact", "did you know", "interesting", "cool",
+            "fakta", "kul fakta", "visste du", "intressant", "haftigt",
+            "faktum", "interessant", "fait", "curiosite", "dato curioso", "curiosidad",
+            "curiosita", "interessante", "fatti", "curiosidade", "curiosidades", "fatos",
+            "तथ्य", "क्या आप जानते हैं", "दिलचस्प",
+            "事实", "你知道吗", "有趣", "shishi", "haqiqat", "feit", "katotohanan",
+        ];
+
+        /// <summary>The shipped fact array - ai_facts.0 through .9.</summary>
+        private const string Facts = "ai_facts";
 
         private const int MaxSuggestions = 3;
     }

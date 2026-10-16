@@ -1,6 +1,7 @@
 ﻿using Atomic.App;
 using Atomic.App.Tables;
 using Atomic.App.Helpers;
+using Atomic.Core.Ai.Data;
 using Atomic.Core.Localization;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
@@ -93,6 +94,7 @@ namespace Atomic.App
             {
                 ShellChart.Visibility = Visibility.Collapsed;
                 AbundanceChart.Visibility = Visibility.Collapsed;
+                AbundanceBorder.Visibility = Visibility.Collapsed;
                 return;
             }
 
@@ -112,12 +114,21 @@ namespace Atomic.App
 
             if (Atomic.Core.Ai.Cards.AbundanceReducer.Of(record, strings) is { } profile)
             {
+                AbundanceBorder.Visibility = Visibility.Visible;
                 AbundanceChart.Visibility = Visibility.Visible;
                 AbundanceChart.SetProfile(profile);
+
+                // The same grouping the chart draws. One source for both means a row can no longer
+                // claim a unit the bar beside it disagrees with.
+                AbundanceRows.ItemsSource = profile.Groups;
             }
             else
             {
+                // No reservoir has a figure for this element - most of the synthetic ones. An empty
+                // card headed "Abundance" is worse than no card.
+                AbundanceBorder.Visibility = Visibility.Collapsed;
                 AbundanceChart.Visibility = Visibility.Collapsed;
+                AbundanceRows.ItemsSource = null;
             }
         }
 
@@ -397,6 +408,47 @@ namespace Atomic.App
             }
         }
 
+        /// <summary>
+        /// Show the element's photograph, or the "no image" placeholder.
+        /// </summary>
+        /// <remarks>
+        /// <para>The URL is composed from the English name by <see cref="ElementImages"/>, the same
+        /// rule Android uses, so both apps ask for the same file. The element table's own
+        /// <c>element_image</c> field is not used: it is empty for all 118 rows, which is why no
+        /// picture ever appeared here.</para>
+        ///
+        /// <para><b>The failure has to be handled on the event, not in a catch.</b> A
+        /// <c>BitmapImage</c> downloads after the constructor returns, so a 404 arrives as
+        /// <c>ImageFailed</c> long after any try block has exited - the previous code caught
+        /// <c>UriFormatException</c>, which a well-formed URL never raises however dead the link.</para>
+        /// </remarks>
+        private void LoadElementImage(string englishName)
+        {
+            if (ElementImages.UrlFor(englishName) is not { } url)
+            {
+                ShowNoElementImage();
+                return;
+            }
+
+            var bitmap = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(url));
+
+            // Not every element has a photograph on the server, and that is ordinary rather than an
+            // error - the placeholder is the answer, not a message.
+            bitmap.ImageFailed += (_, _) => ShowNoElementImage();
+
+            ElementImage.Source = bitmap;
+        }
+
+        /// <summary>The placeholder, in whichever theme is showing.</summary>
+        private void ShowNoElementImage()
+        {
+            var asset = ActualTheme == ElementTheme.Dark
+                ? "ms-appx:///Assets/no_image_dark.png"
+                : "ms-appx:///Assets/no_image_light.png";
+
+            ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(asset));
+        }
+
         private void PopulateDescriptionFromJson(Element element)
         {
             try
@@ -410,27 +462,7 @@ namespace Atomic.App
                         AtomicNumber.Text = elementData.Number;
 
                         Element.WikipediaLink = elementData.WikipediaLink;
-                        string imageLink = elementData.ElementImage;
-                        if (!string.IsNullOrWhiteSpace(imageLink))
-                        {
-                            try
-                            {
-                                ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(imageLink));
-                            }
-                            catch (UriFormatException)
-                            {
-                                if (ActualTheme == ElementTheme.Dark)
-                                {
-                                    ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/no_image_dark.png"));
-
-                                }
-                                else
-                                {
-                                    ElementImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/no_image_light.png"));
-
-                                }
-                            }
-                        }
+                        LoadElementImage(element.OriginalName);
 
                         Description.Text = elementData.Description;
                         YearDiscovered.Text = elementData.YearDiscovered;
@@ -519,13 +551,8 @@ namespace Atomic.App
                             ShearModulus.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
                         }
 
-                        EarthCrustAbundance.Text = elementData.EarthCrust + " mg/kg (ppm)";
-                        EarthSoilAbundance.Text = elementData.EarthSoils + " mg/kg (ppm)";
-                        UrbanSoilAbundance.Text = elementData.UrbanSoils + " mg/kg (ppm)";
-                        SeaWaterAbundance.Text = elementData.SeaWater + " mg/kg (ppm)";
-                        CrustalRocksAbundance.Text = elementData.CrustalRocks + " μg/l";
-                        SunAtomsAbundance.Text = elementData.Sun + " (atoms per 10^6 atoms of silicon)";
-                        SolarSystemAtomsAbundance.Text = elementData.SolarSystem + " (atoms per 10^6 atoms of silicon)";
+                        // Abundance rows come from the reducer, in PopulateCharts - the units are
+                        // FieldRegistry's, not literals repeated here.
 
                         if (SettingsStore.HasAnyPro)
                         {

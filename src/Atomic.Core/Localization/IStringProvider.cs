@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Atomic.Core.Localization
 {
@@ -28,5 +28,16 @@ namespace Atomic.Core.Localization
 
         /// <summary>Language these strings are in: a base code such as "sv", not "sv-SE".</summary>
         string Language { get; }
+
+        /// <summary>
+        /// Whether a key exists.
+        /// </summary>
+        /// <remarks>
+        /// <see cref="Get"/> deliberately never fails, so it cannot answer this - it returns the
+        /// key, or a sentinel, and both are indistinguishable from a translation that happens to
+        /// look like one. Plural resolution needs a real answer: Chinese has no singular form, so
+        /// <c>lives_lost_result.One</c> is genuinely absent there.
+        /// </remarks>
+        bool Has(string key);
     }
 }

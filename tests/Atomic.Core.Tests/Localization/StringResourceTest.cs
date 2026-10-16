@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -25,8 +25,49 @@ namespace Atomic.Core.Tests.Localization
             // S.g.cs is generated from the English resources, so a key there with no value would
             // mean the generator and the writer disagreed.
             var english = new ReswStringProvider("en");
-            var missing = KeysInS().Where(k => !english.HasOwn(k)).ToList();
+            var missing = Resolvable().Where(k => !english.HasOwn(k)).ToList();
             Assert.Empty(missing);
+        }
+
+        /// <summary>
+        /// A plural stem names a family, not a value.
+        /// </summary>
+        /// <remarks>
+        /// <c>lives_lost_result</c> exists in <c>S</c> so the one call site can pass it to
+        /// <see cref="Atomic.Core.Localization.IStringProvider.Plural"/>, which appends the form.
+        /// The resource itself is only ever <c>lives_lost_result.One</c> or <c>.Other</c>, so
+        /// looking the stem up directly is expected to find nothing.
+        /// </remarks>
+        private static IEnumerable<string> Resolvable()
+        {
+            var keys = KeysInS().ToList();
+            var stems = keys
+                .Where(k => k.EndsWith(".One", StringComparison.Ordinal)
+                         || k.EndsWith(".Other", StringComparison.Ordinal))
+                .Select(k => k[..k.LastIndexOf('.')])
+                .ToHashSet(StringComparer.Ordinal);
+
+            return keys.Where(k => !stems.Contains(k));
+        }
+
+        /// <summary>Every plural family must ship the form the generator promised.</summary>
+        [Fact]
+        public void EveryPluralStemHasItsOtherForm()
+        {
+            var english = new ReswStringProvider("en");
+            var keys = KeysInS().ToHashSet(StringComparer.Ordinal);
+
+            var stems = keys
+                .Where(k => k.EndsWith(".One", StringComparison.Ordinal))
+                .Select(k => k[..k.LastIndexOf('.')])
+                .ToList();
+
+            Assert.NotEmpty(stems);
+            Assert.All(stems, stem =>
+            {
+                Assert.Contains(stem, keys);
+                Assert.True(english.HasOwn(stem + ".Other"), $"{stem} has no .Other form");
+            });
         }
 
         [Theory]
@@ -41,7 +82,7 @@ namespace Atomic.Core.Tests.Localization
         {
             var english = new ReswStringProvider("en");
             var other = new ReswStringProvider(language);
-            var keys = KeysInS().ToList();
+            var keys = Resolvable().ToList();
 
             var covered = keys.Count(other.HasOwn);
             var ratio = (double)covered / keys.Count;

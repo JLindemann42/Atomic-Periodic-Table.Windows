@@ -333,7 +333,12 @@ namespace Atomic.App.Tools
             else
             {
                 FeedbackTitle.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.wrong);
-                FeedbackDetail.Text = $"-{GetLivesLost()} Life{(GetLivesLost() > 1 ? "s" : "")}";
+                // Android already ships this as a plural, translated in all twelve - the English
+                // here was picking "Life"/"Lives" with a ternary, which no other language can be
+                // expressed with. See PluralRules for why count == 1 is not the rule everywhere.
+                FeedbackDetail.Text = Services.ResourceStringProvider
+                    .For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current))
+                    .Plural(S.lives_lost_result, GetLivesLost());
                 FeedbackDetail.Foreground = new SolidColorBrush(Microsoft.UI.Colors.IndianRed);
             }
             await FadeIn(FeedbackCard);

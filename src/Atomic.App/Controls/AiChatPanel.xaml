@@ -200,6 +200,17 @@
                                        FontSize="10"
                                        Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
                         </Border>
+
+                        <!--
+                            The day's remaining messages, as Android shows them. PRO+ reads
+                            "Unlimited" rather than the badge vanishing, which said nothing about
+                            why it had gone. ToolTip carries the reset time so the number does not
+                            have to explain itself.
+                        -->
+                        <TextBlock x:Name="LimitBadge"
+                                   FontSize="11"
+                                   VerticalAlignment="Center"
+                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
                     </StackPanel>
 
                     <Button x:Name="NewChatButton" Grid.Column="1"

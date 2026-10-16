@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -37,6 +37,14 @@ namespace Atomic.App.Services
         private IReadOnlyList<string> _suggestions = [];
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
+        /// Raised when the day's remaining messages change, so the badge can follow.
+        ///
+        /// <para>Separate from <see cref="PropertyChanged"/> because the count is not a property of
+        /// the session - it is stored per day and shared by every session on the machine.</para>
+        /// </summary>
+        public event EventHandler? LimitChanged;
 
         /// <summary>The thread, oldest first. Bound directly by the message list.</summary>
         public ObservableCollection<ChatMessage> Messages { get; } = [];
@@ -83,6 +91,20 @@ namespace Atomic.App.Services
                 Suggestions = [];
                 Messages.Add(ChatMessage.FromUser(question.Trim()));
 
+                // The allowance, before any work is done. The question stays in the thread: the
+                // user asked it, and hiding it would make the refusal look like it answered
+                // nothing in particular.
+                if (!AiChatLimiter.CanSend())
+                {
+                    Messages.Add(new ChatMessage(
+                        ChatRole.Assistant, AiChatLimiter.ReachedMessage(Strings())));
+                    LimitChanged?.Invoke(this, EventArgs.Empty);
+                    return;
+                }
+
+                AiChatLimiter.Increment();
+                LimitChanged?.Invoke(this, EventArgs.Empty);
+
                 var thinking = ChatMessage.Thinking();
                 Messages.Add(thinking);
 
@@ -116,6 +138,8 @@ namespace Atomic.App.Services
             // right here: losing the last turn to a failed write is a far smaller cost than making
             // the user wait on one, and the next turn rewrites the whole thread anyway.
             _ = ChatHistoryStore.SaveAsync(Messages);
+
+            if (_orchestrator is { } chat) _ = InterestProfileStore.SaveAsync(chat.Profile);
         }
 
         /// <summary>Clear the thread and the dialogue state, keeping the warm index.</summary>
@@ -141,6 +165,11 @@ namespace Atomic.App.Services
 
             foreach (var message in await ChatHistoryStore.LoadAsync().ConfigureAwait(true))
                 Messages.Add(message);
+
+            // The greeting for a returning user depends on this, and the panel greets before the
+            // first question is asked - so it has to be loaded here rather than lazily.
+            if (Orchestrator() is { } orchestrator)
+                await InterestProfileStore.LoadAsync(orchestrator.Profile).ConfigureAwait(true);
         }
 
         /// <summary>

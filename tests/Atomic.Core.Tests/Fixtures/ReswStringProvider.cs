@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -52,6 +52,16 @@ namespace Atomic.Core.Tests.Fixtures
 
         /// <summary>True when this language has its own value, rather than borrowing English.</summary>
         public bool HasOwn(string key) => _own.ContainsKey(key);
+
+        /// <summary>
+        /// Whether <see cref="Get"/> would find anything - own value or English fallback.
+        /// </summary>
+        /// <remarks>
+        /// Fallback counts, matching <c>Get</c>. It does not have to exclude it for plurals:
+        /// a language with no singular form is one <see cref="PluralRules"/> already answers
+        /// "other" for, so the missing key is never asked about.
+        /// </remarks>
+        public bool Has(string key) => _own.ContainsKey(key) || _fallback.ContainsKey(key);
 
         public string Get(string key, params object?[] args)
         {

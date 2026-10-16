@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Globalization;
@@ -200,9 +200,17 @@ namespace Atomic.Core.Ai.Retrieval
             if (leaders.Contains(active, StringComparer.OrdinalIgnoreCase)) return active;
 
             // Ordinal, so the choice between two equally-distinctive leaders is at least stable
-            // rather than dependent on dictionary iteration order.
+            // rather than dependent on dictionary iteration order. Android takes whichever the set
+            // happens to yield first, which is not.
             leaders.Sort(StringComparer.Ordinal);
-            return leaders[0];
+
+            // English loses a tie it is only in by coincidence. We are here because the active
+            // language is not among the leaders, so the user is not reading English either, and a
+            // name shared by English and one other language is evidence for the other one - which
+            // is the rule Android applies. Without this, leaders {en, sv} sorted ordinally answer
+            // a Swede in English.
+            return leaders.FirstOrDefault(l => !string.Equals(l, "en", StringComparison.Ordinal))
+                   ?? leaders[0];
         }
 
         /// <summary>

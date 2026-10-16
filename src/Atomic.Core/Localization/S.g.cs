@@ -848,6 +848,7 @@ public static partial class S
     public const string light = "light";
     public const string lives_label = "lives_label";
     public const string lives_lost_detail = "lives_lost_detail";
+    public const string lives_lost_result = "lives_lost_result";
     public const string lives_lost_result_One = "lives_lost_result.One";
     public const string lives_lost_result_Other = "lives_lost_result.Other";
     public const string lives_unlimited = "lives_unlimited";
@@ -880,6 +881,7 @@ public static partial class S
     public const string neutron_cross_sectional_colon = "neutron_cross_sectional_colon";
     public const string neutrons = "neutrons";
     public const string new_label = "new_label";
+    public const string next_life_gain = "next_life_gain";
     public const string next_life_gain_One = "next_life_gain.One";
     public const string next_life_gain_Other = "next_life_gain.Other";
     public const string next_life_in_detail = "next_life_in_detail";
