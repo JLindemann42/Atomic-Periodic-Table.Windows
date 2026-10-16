@@ -309,15 +309,8 @@ namespace Atomic.App
                             continue;
                         }
 
-                        string elementName = element.OriginalName.ToLower(); // Use OriginalName here
-                        string filePath = Path.Combine(AppContext.BaseDirectory, "Elements", $"{elementName}.json");
-
-                        if (File.Exists(filePath))
+                        if (ElementRepository.Raw(element.OriginalName) is { } elementData)
                         {
-                            string jsonData = File.ReadAllText(filePath);
-                            var elementData = JsonSerializer.Deserialize<JsonElement>(jsonData);
-
-                            if (elementData.ValueKind == JsonValueKind.Object)
                             {
                                 // Trigger the fade-out and fade-in animation
                                 VisualStateManager.GoToState(button, "NormalState", false); // Reset to NormalState
@@ -386,7 +379,7 @@ namespace Atomic.App
                         }
                         else
                         {
-                            System.Diagnostics.Debug.WriteLine($"File not found: {filePath}");
+                            System.Diagnostics.Debug.WriteLine($"Element not found: {element.OriginalName}");
                         }
                     }
                 }

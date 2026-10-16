@@ -25,8 +25,28 @@
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
   </Dependencies>
 
+  <!--
+    The twelve shipped languages, listed explicitly rather than left as x-generate.
+    x-generate asks the packaging step to infer the set from whatever resources it happens to
+    find, which is how a language quietly stops shipping. en-US is first and is the fallback.
+    The regional variants (es-AR, es-MX, ur-IN) resolve through their base language.
+  -->
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="en-US"/>
+    <Resource Language="af"/>
+    <Resource Language="de"/>
+    <Resource Language="es"/>
+    <Resource Language="es-AR"/>
+    <Resource Language="es-MX"/>
+    <Resource Language="fil"/>
+    <Resource Language="fr"/>
+    <Resource Language="hi"/>
+    <Resource Language="it"/>
+    <Resource Language="pt-BR"/>
+    <Resource Language="sv"/>
+    <Resource Language="ur"/>
+    <Resource Language="ur-IN"/>
+    <Resource Language="zh-Hans"/>
   </Resources>
 
   <Applications>

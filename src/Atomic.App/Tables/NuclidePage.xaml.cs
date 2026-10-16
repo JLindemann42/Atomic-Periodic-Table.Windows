@@ -92,31 +92,28 @@ namespace Atomic.App.Tables
 
             try
             {
-                StorageFolder installedLocation = Package.Current.InstalledLocation;
-                StorageFolder elementsFolder = await installedLocation.GetFolderAsync("Elements");
-                var files = await elementsFolder.GetFilesAsync();
+                // Was 118 async file reads through Package.Current.InstalledLocation - which also
+                // meant the chart could not draw at all in an unpackaged build. The table is
+                // already parsed and cached by now, so this is a walk over memory.
+                var keys = ElementRepository.Keys();
 
-                _totalFiles = files.Count;
+                _totalFiles = keys.Count;
                 _filesLoaded = 0;
 
                 LoadingPanel.Visibility = Visibility.Visible;
                 LoadingProgressRing.IsActive = true;
 
-                foreach (var file in files)
+                foreach (var key in keys)
                 {
                     try
                     {
-                        string jsonText = await FileIO.ReadTextAsync(file);
-                        using JsonDocument doc = JsonDocument.Parse(jsonText);
-                        JsonElement root = doc.RootElement;
-
-                        string shortName = root.GetProperty("short").GetString() ?? "N/A";
-                        string fullName = root.TryGetProperty("element", out var nameProp) ? nameProp.GetString() ?? shortName : shortName;
-
-                        if (!root.TryGetProperty("element_protons", out JsonElement protonsElem))
+                        if (ElementRepository.Raw(key) is not { } root)
                             continue;
 
-                        if (!int.TryParse(protonsElem.GetString(), out int protonNumber))
+                        string shortName = root.Field("short") ?? "N/A";
+                        string fullName = root.Field("element") ?? shortName;
+
+                        if (!int.TryParse(root.Field("element_protons"), out int protonNumber))
                             continue;
 
                         for (int i = 1; i <= 25; i++)
@@ -131,10 +128,10 @@ namespace Atomic.App.Tables
                                 root.TryGetProperty(isoANumberKey, out JsonElement isoANumElem) &&
                                 root.TryGetProperty(isoNNumberKey, out JsonElement isoNNumElem))
                             {
-                                string isotopeName = isoElem.GetString() ?? "";
-                                string decayType = decayElem.GetString() ?? "";
-                                string isotopeMassNum = isoANumElem.GetString() ?? "";
-                                string neutronNumberStr = isoNNumElem.GetString() ?? "";
+                                string isotopeName = isoElem.ValueKind == JsonValueKind.String ? isoElem.GetString() ?? "" : "";
+                                string decayType = decayElem.ValueKind == JsonValueKind.String ? decayElem.GetString() ?? "" : "";
+                                string isotopeMassNum = isoANumElem.ValueKind == JsonValueKind.String ? isoANumElem.GetString() ?? "" : "";
+                                string neutronNumberStr = isoNNumElem.ValueKind == JsonValueKind.String ? isoNNumElem.GetString() ?? "" : "";
 
                                 if (!string.IsNullOrWhiteSpace(isotopeName) && isotopeName != "---" &&
                                     !string.IsNullOrWhiteSpace(decayType) && decayType != "---" &&
@@ -156,7 +153,7 @@ namespace Atomic.App.Tables
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Error loading file {file.Name}: {ex.Message}");
+                        System.Diagnostics.Debug.WriteLine($"Error loading element {key}: {ex.Message}");
                     }
 
                     _filesLoaded++;

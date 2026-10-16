@@ -1,0 +1,3552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dictionary" xml:space="preserve">
+    <value>Wörterbuch</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Tabellen</value>
+  </data>
+  <data name="about_app_name" xml:space="preserve">
+    <value>Atomic - Periodensystem</value>
+  </data>
+  <data name="about_title" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="abundance_crustal_rocks" xml:space="preserve">
+    <value>In Krustengestein</value>
+  </data>
+  <data name="abundance_earth_crust" xml:space="preserve">
+    <value>In der Erdkruste</value>
+  </data>
+  <data name="abundance_earth_soils" xml:space="preserve">
+    <value>In Erdboden</value>
+  </data>
+  <data name="abundance_sea_water" xml:space="preserve">
+    <value>Im Meerwasser</value>
+  </data>
+  <data name="abundance_solar_system" xml:space="preserve">
+    <value>In Sonnensystematomen</value>
+  </data>
+  <data name="abundance_sun" xml:space="preserve">
+    <value>In Sonnenatomen</value>
+  </data>
+  <data name="abundance_title" xml:space="preserve">
+    <value>Häufigkeit</value>
+  </data>
+  <data name="abundance_urban_soil" xml:space="preserve">
+    <value>In Stadtboden</value>
+  </data>
+  <data name="achievement_reached_prefix" xml:space="preserve">
+    <value>Erfolg erreicht: </value>
+  </data>
+  <data name="activity_alloy_title" xml:space="preserve">
+    <value>Legierungen</value>
+  </data>
+  <data name="activity_equations_title" xml:space="preserve">
+    <value>Formeln</value>
+  </data>
+  <data name="activity_formulas_search" xml:space="preserve">
+    <value>Nach Formeln suchen:</value>
+  </data>
+  <data name="activity_geology_mineral" xml:space="preserve">
+    <value>Mineralien</value>
+  </data>
+  <data name="activity_geology_rock" xml:space="preserve">
+    <value>Gesteine</value>
+  </data>
+  <data name="activity_geology_soil" xml:space="preserve">
+    <value>Böden</value>
+  </data>
+  <data name="activity_geology_title" xml:space="preserve">
+    <value>Geologie</value>
+  </data>
+  <data name="activity_io_title" xml:space="preserve">
+    <value>Ionisierungsenergien</value>
+  </data>
+  <data name="activity_ph_acid" xml:space="preserve">
+    <value>Säure</value>
+  </data>
+  <data name="activity_ph_alkaline" xml:space="preserve">
+    <value>Alkalisch</value>
+  </data>
+  <data name="activity_ph_bromothymol_blue" xml:space="preserve">
+    <value>Bromthymolblau</value>
+  </data>
+  <data name="activity_ph_congo_red" xml:space="preserve">
+    <value>Kongorot</value>
+  </data>
+  <data name="activity_ph_methyl_orange" xml:space="preserve">
+    <value>Methylorange</value>
+  </data>
+  <data name="activity_ph_neutral" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="activity_ph_phenolphthalein" xml:space="preserve">
+    <value>Phenolphthalein</value>
+  </data>
+  <data name="activity_ph_title" xml:space="preserve">
+    <value>pH-Indikatoren</value>
+  </data>
+  <data name="activity_table_title" xml:space="preserve">
+    <value>Tabellen</value>
+  </data>
+  <data name="activity_unit_title" xml:space="preserve">
+    <value>Tabelleneinheiten</value>
+  </data>
+  <data name="add_widget" xml:space="preserve">
+    <value>Widget hinzufügen</value>
+  </data>
+  <data name="additional_data_item" xml:space="preserve">
+    <value>- Zusätzliche Daten:</value>
+  </data>
+  <data name="additional_flashcards_games" xml:space="preserve">
+    <value>Zusätzliche Karteikarten-Spiele:</value>
+  </data>
+  <data name="additional_properties_requires_pro" xml:space="preserve">
+    <value>Zusätzliche Eigenschaften erfordern PRO-Version. Holen Sie sich PRO, um mehr Daten und Tabellen freizuschalten:</value>
+  </data>
+  <data name="additional_tables_item" xml:space="preserve">
+    <value>- Zusätzliche Tabellen:</value>
+  </data>
+  <data name="ai_abundance_caption" xml:space="preserve">
+    <value>Logarithmische Skala. Die Einheiten unterscheiden sich je nach Vorkommen und lassen sich nicht ineinander umrechnen.</value>
+  </data>
+  <data name="ai_abundance_header" xml:space="preserve">
+    <value>Hier sind die Häufigkeitsdaten für **%1$s** aus der Datenbank der App:</value>
+  </data>
+  <data name="ai_abundance_relative" xml:space="preserve">
+    <value>(bezogen auf H=10¹²)</value>
+  </data>
+  <data name="ai_adv_header" xml:space="preserve">
+    <value>Erweiterte Eigenschaften von %1$s:</value>
+  </data>
+  <data name="ai_aggregate_average" xml:space="preserve">
+    <value>Durchschnittliche %1$s</value>
+  </data>
+  <data name="ai_aggregate_median" xml:space="preserve">
+    <value>Median der %1$s</value>
+  </data>
+  <data name="ai_aggregate_missing_note" xml:space="preserve">
+    <value>%1$d stimmten überein, haben aber keinen erfassten Wert und wurden ausgeschlossen.</value>
+  </data>
+  <data name="ai_aggregate_over" xml:space="preserve">
+    <value>Berechnet über %1$d von %2$d passenden Elementen.</value>
+  </data>
+  <data name="ai_aggregate_result" xml:space="preserve">
+    <value>**%1$s**: %2$s</value>
+  </data>
+  <data name="ai_aggregate_spread" xml:space="preserve">
+    <value>Reicht von %1$s (%2$s) bis %3$s (%4$s).</value>
+  </data>
+  <data name="ai_aggregate_sum" xml:space="preserve">
+    <value>Gesamt %1$s</value>
+  </data>
+  <data name="ai_all_covered" xml:space="preserve">
+    <value>Wir haben viel über %1$s behandelt! Wusstest du? </value>
+  </data>
+  <data name="ai_another_isotope" xml:space="preserve">
+    <value>" Ein weiteres Isotop ist %1$s."</value>
+  </data>
+  <data name="ai_appears_as" xml:space="preserve">
+    <value>%1$s sieht so aus: %2$s</value>
+  </data>
+  <data name="ai_aspects_not_compared" xml:space="preserve">
+    <value>Ich kann %1$s nicht aus gespeicherten Daten vergleichen — das ist keine erfasste Eigenschaft. Frag danach für ein einzelnes Element, dann kann ich es erklären.</value>
+  </data>
+  <data name="ai_avogadro_note" xml:space="preserve">
+    <value>Mit der Avogadro-Konstante, 6,02214076 × 10²³ pro Mol.</value>
+  </data>
+  <data name="ai_beta_badge" xml:space="preserve">
+    <value>Beta</value>
+  </data>
+  <data name="ai_bio_role_header" xml:space="preserve">
+    <value>In Bezug auf die biologische Rolle habe ich Folgendes über **%1$s** gefunden:</value>
+  </data>
+  <data name="ai_block_d" xml:space="preserve">
+    <value>Der d-Block enthält die Übergangsmetalle der Gruppen 3 bis 12.</value>
+  </data>
+  <data name="ai_block_f" xml:space="preserve">
+    <value>Der f-Block enthält die Lanthanoiden- und Actinoiden-Serien, die normalerweise unter der Haupttabelle angezeigt werden.</value>
+  </data>
+  <data name="ai_block_generic" xml:space="preserve">
+    <value>Ich bin mir nicht sicher, welchen Block du meinst. Ich kenne s-, p-, d- und f-Blöcke!</value>
+  </data>
+  <data name="ai_block_p" xml:space="preserve">
+    <value>Der p-Block enthält die Gruppen 13 bis 18, einschließlich aller Nichtmetalle (außer H und He), Metalloide und Post-Übergangsmetalle.</value>
+  </data>
+  <data name="ai_block_s" xml:space="preserve">
+    <value>Der s-Block besteht aus den ersten beiden Gruppen: Alkalimetalle, Erdalkalimetalle, plus Wasserstoff und Helium.</value>
+  </data>
+  <data name="ai_card_pro_locked" xml:space="preserve">
+    <value>Visuelle Antworten freischalten</value>
+  </data>
+  <data name="ai_chat_setting" xml:space="preserve">
+    <value>KI-Chat-Assistenten aktivieren</value>
+  </data>
+  <data name="ai_chat_setting_description" xml:space="preserve">
+    <value>Dem KI-Assistenten erlauben, Fragen zu Elementen zu beantworten</value>
+  </data>
+  <data name="ai_check_isotope_table" xml:space="preserve">
+    <value>%1$s hat verschiedene Isotope. In der ausführlichen Isotopentabelle findest du die vollständige Liste!</value>
+  </data>
+  <data name="ai_common_isotopes" xml:space="preserve">
+    <value>Häufige Isotope von %1$s sind %2$s.</value>
+  </data>
+  <data name="ai_comparative_no" xml:space="preserve">
+    <value>**Nein** — es ist umgekehrt. %1$s (%2$s) übertrifft %3$s (%4$s) bei %5$s.</value>
+  </data>
+  <data name="ai_comparative_ratio" xml:space="preserve">
+    <value>%1$s hat die **%2$s-fache** %5$s von %3$s — %4$s.</value>
+  </data>
+  <data name="ai_comparative_winner" xml:space="preserve">
+    <value>**%1$s.** Seine %5$s beträgt %2$s, gegenüber %4$s bei %3$s.</value>
+  </data>
+  <data name="ai_comparative_yes" xml:space="preserve">
+    <value>**Ja.** %1$s (%2$s) übertrifft %3$s (%4$s) bei %5$s.</value>
+  </data>
+  <data name="ai_compare_all_same" xml:space="preserve">
+    <value>
+• **%1$s:** Alle sind %2$s%3$s.</value>
+  </data>
+  <data name="ai_compare_difference_value" xml:space="preserve">
+    <value>Es gibt einen Unterschied von **%1$s%2$s** zwischen ihnen.</value>
+  </data>
+  <data name="ai_compare_mixed_item" xml:space="preserve">
+    <value>%1$s ist %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_property_row" xml:space="preserve">
+    <value>• %1$s: %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_the_others" xml:space="preserve">
+    <value>die anderen</value>
+  </data>
+  <data name="ai_comparing_title" xml:space="preserve">
+    <value>Vergleich von %1$s:</value>
+  </data>
+  <data name="ai_comparison_all" xml:space="preserve">
+    <value>"alle "</value>
+  </data>
+  <data name="ai_comparison_and" xml:space="preserve">
+    <value>" und "</value>
+  </data>
+  <data name="ai_comparison_are" xml:space="preserve">
+    <value>" sind "</value>
+  </data>
+  <data name="ai_comparison_but" xml:space="preserve">
+    <value>", aber "</value>
+  </data>
+  <data name="ai_comparison_is" xml:space="preserve">
+    <value>" ist "</value>
+  </data>
+  <data name="ai_comparison_verdict" xml:space="preserve">
+    <value>%1$s hat den höheren Wert bei %2$d von %3$d verglichenen Eigenschaften.</value>
+  </data>
+  <data name="ai_comparison_vs" xml:space="preserve">
+    <value>" gegen "</value>
+  </data>
+  <data name="ai_comparison_while" xml:space="preserve">
+    <value>", während "</value>
+  </data>
+  <data name="ai_composition_header" xml:space="preserve">
+    <value>Zusammensetzung von %1$s</value>
+  </data>
+  <data name="ai_composition_row" xml:space="preserve">
+    <value>• **%1$s** ×%2$d — %3$s g/mol (%4$s%%)</value>
+  </data>
+  <data name="ai_concept_atomic_number" xml:space="preserve">
+    <value>Die **Ordnungszahl** ist die Anzahl der Protonen in einem Atom. Es ist die primäre Art und Weise, wie Elemente im Periodensystem geordnet sind.</value>
+  </data>
+  <data name="ai_concept_electron" xml:space="preserve">
+    <value>**Elektronen** sind negativ geladene Teilchen, die den Kern umkreisen. Sie sind an Bindungen und Elektrizität beteiligt.</value>
+  </data>
+  <data name="ai_concept_electronegativity" xml:space="preserve">
+    <value>**Elektronegativität** misst, wie stark ein Atom Elektronen in einer chemischen Bindung an sich zieht. Fluor ist das elektronegativste Element!</value>
+  </data>
+  <data name="ai_concept_generic" xml:space="preserve">
+    <value>Das ist ein Kernkonzept der Chemie! In welchen Teil davon möchtest du tiefer eintauchen? Ich weiß Bescheid über Protonen, Bindungen, Radioaktivität und mehr.</value>
+  </data>
+  <data name="ai_concept_group" xml:space="preserve">
+    <value>Eine **Gruppe** ist eine vertikale Spalte. Elemente in einer Gruppe haben normalerweise ähnliche chemische Eigenschaften und die gleiche Anzahl an Valenzelektronen.</value>
+  </data>
+  <data name="ai_concept_ionization" xml:space="preserve">
+    <value>Die **Ionisierungsenergie** ist die Energie, die erforderlich ist, um ein Elektron von einem Atom zu entfernen. Sie nimmt im Allgemeinen zu, wenn man sich im Periodensystem nach rechts bewegt.</value>
+  </data>
+  <data name="ai_concept_isotope" xml:space="preserve">
+    <value>Ein **Isotop** ist eine Variante eines Elements mit der gleichen Anzahl an Protonen, aber einer unterschiedlichen Anzahl an Neutronen. Dies beeinflusst seine Atommasse!</value>
+  </data>
+  <data name="ai_concept_neutron" xml:space="preserve">
+    <value>**Neutronen** sind neutrale Teilchen im Kern. Sie fügen Masse hinzu und helfen, den Kern zu stabilisieren, insbesondere bei schwereren Elementen.</value>
+  </data>
+  <data name="ai_concept_orbital" xml:space="preserve">
+    <value>**Orbitale** sind Bereiche im Raum um einen Kern, in denen eine hohe Wahrscheinlichkeit besteht, ein Elektron zu finden. Sie haben Formen wie s, p, d und f.</value>
+  </data>
+  <data name="ai_concept_period" xml:space="preserve">
+    <value>Eine **Periode** ist eine horizontale Reihe im Periodensystem. Elemente in derselben Periode haben die gleiche Anzahl an Elektronenschalen.</value>
+  </data>
+  <data name="ai_concept_proton" xml:space="preserve">
+    <value>**Protonen** sind positiv geladene Teilchen im Kern. Die Anzahl der Protonen (Ordnungszahl) definiert, um welches Element es sich handelt!</value>
+  </data>
+  <data name="ai_concept_radioactivity" xml:space="preserve">
+    <value>**Radioactivity** ist der Prozess, bei dem ein instabiler Atomkern Energie verliert, indem er Strahlung aussendet. Elemente wie Uran sind dafür bekannt!</value>
+  </data>
+  <data name="ai_concept_shell" xml:space="preserve">
+    <value>Elektronen befinden sich in **Schalen** (Energieniveaus) um den Kern. Die Konfiguration bestimmt die Position des Elements in der Tabelle.</value>
+  </data>
+  <data name="ai_concept_valence" xml:space="preserve">
+    <value>**Valenzelektronen** sind die Elektronen in der äußersten Schale eines Atoms. Sie bestimmen, wie ein Element mit anderen reagiert.</value>
+  </data>
+  <data name="ai_config_is" xml:space="preserve">
+    <value>Seine Elektronenkonfiguration ist %1$s.</value>
+  </data>
+  <data name="ai_connector_question_1" xml:space="preserve">
+    <value>Um deine Frage zu beantworten,</value>
+  </data>
+  <data name="ai_connector_question_2" xml:space="preserve">
+    <value>Ich verstehe. Hier ist, was ich gefunden habe:</value>
+  </data>
+  <data name="ai_connector_question_3" xml:space="preserve">
+    <value>Diesbezüglich,</value>
+  </data>
+  <data name="ai_connector_why_1" xml:space="preserve">
+    <value>Das ist eine tolle Anschlussfrage!</value>
+  </data>
+  <data name="ai_connector_why_2" xml:space="preserve">
+    <value>Guter Punkt. Lass mich das näher erläutern.</value>
+  </data>
+  <data name="ai_connector_why_3" xml:space="preserve">
+    <value>Um auf das Gesagte aufzubauen,</value>
+  </data>
+  <data name="ai_context_lost" xml:space="preserve">
+    <value>Kontext verloren</value>
+  </data>
+  <data name="ai_context_series" xml:space="preserve">
+    <value>%1$s ist %2$s, in Periode %3$d.</value>
+  </data>
+  <data name="ai_converted_from" xml:space="preserve">
+    <value>Umgerechnet aus dem erfassten Wert %1$s.</value>
+  </data>
+  <data name="ai_count_result" xml:space="preserve">
+    <value>**%1$d** Elemente stimmen überein.</value>
+  </data>
+  <data name="ai_coverage_note" xml:space="preserve">
+    <value>%1$s ist für %2$d von %3$d Elementen erfasst.</value>
+  </data>
+  <data name="ai_covered_all" xml:space="preserve">
+    <value>Wir haben viel über **%1$s** erfahren!</value>
+  </data>
+  <data name="ai_dataset_english_note" xml:space="preserve">
+    <value>*Dieser Nachschlage-Eintrag ist nur auf Englisch verfügbar.*</value>
+  </data>
+  <data name="ai_decay_effectively_none" xml:space="preserve">
+    <value>Nach %2$s %3$s ist praktisch nichts von %1$s übrig.</value>
+  </data>
+  <data name="ai_decay_elapsed" xml:space="preserve">
+    <value>Von **%1$s g** auf **%2$s g** %3$s zu kommen dauert etwa **%4$s %5$s**.</value>
+  </data>
+  <data name="ai_decay_half_lives" xml:space="preserve">
+    <value>In dieser Zeit durchläuft %1$s **%2$s** Halbwertszeiten, es bleiben etwa **%3$s%%** der Probe.</value>
+  </data>
+  <data name="ai_decay_no_half_life" xml:space="preserve">
+    <value>%1$s ist aufgeführt, aber die Halbwertszeit ist als "%2$s" hinterlegt, damit lässt sich kein Zerfall berechnen.</value>
+  </data>
+  <data name="ai_decay_remaining" xml:space="preserve">
+    <value>Nach %5$s %6$s sind noch etwa **%1$s %2$s** der ursprünglichen %3$s g %4$s übrig.</value>
+  </data>
+  <data name="ai_decay_stable" xml:space="preserve">
+    <value>%1$s ist stabil — es zerfällt nicht, es geht also mit der Zeit nichts verloren.</value>
+  </data>
+  <data name="ai_decay_unlisted" xml:space="preserve">
+    <value>Die App führt %1$s nicht unter den Isotopen dieses Elements, daher habe ich keine Halbwertszeit dafür.</value>
+  </data>
+  <data name="ai_decay_working_half_life" xml:space="preserve">
+    <value>Halbwertszeit von %1$s: %2$s</value>
+  </data>
+  <data name="ai_decay_working_header" xml:space="preserve">
+    <value>Rechenweg</value>
+  </data>
+  <data name="ai_decay_working_n" xml:space="preserve">
+    <value>n = t / t½ = %1$s → 2⁻ⁿ = %2$s%%</value>
+  </data>
+  <data name="ai_difference_group" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_mass" xml:space="preserve">
+    <value>• **%1$s**: %2$s ist deutlich schwerer.</value>
+  </data>
+  <data name="ai_difference_need_two" xml:space="preserve">
+    <value>Ich brauche zwei Elemente, um ihre Unterschiede zu erklären!</value>
+  </data>
+  <data name="ai_difference_phase" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_similar" xml:space="preserve">
+    <value>%1$s und %2$s sind sich recht ähnlich! Sie sind beide %3$s %4$s Elemente in der %5$s Serie.</value>
+  </data>
+  <data name="ai_difference_type" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_dilution_add_solvent" xml:space="preserve">
+    <value>Gib **%1$s mL** Lösungsmittel hinzu.</value>
+  </data>
+  <data name="ai_dilution_result" xml:space="preserve">
+    <value>**%1$s mol/L** aus **%2$s mL** verdünnt ergibt **%3$s mol/L** bei **%4$s mL**.</value>
+  </data>
+  <data name="ai_discovered_by" xml:space="preserve">
+    <value>%1$s wurde von %2$s im Jahr %3$s entdeckt.</value>
+  </data>
+  <data name="ai_discovered_in" xml:space="preserve">
+    <value>%1$s wurde im Jahr %2$s entdeckt.</value>
+  </data>
+  <data name="ai_elec_mag_header" xml:space="preserve">
+    <value>Elektrische &amp; magnetische Eigenschaften von %1$s:</value>
+  </data>
+  <data name="ai_elec_mag_properties" xml:space="preserve">
+    <value>Elektrische &amp; magnetische Eigenschaften von **%1$s**:</value>
+  </data>
+  <data name="ai_element" xml:space="preserve">
+    <value>Element</value>
+  </data>
+  <data name="ai_element_overview_appearance" xml:space="preserve">
+    <value>" Es erscheint normalerweise als %1$s."</value>
+  </data>
+  <data name="ai_element_overview_electrons" xml:space="preserve">
+    <value>" Es hat %1$s Elektronen, die seinen Kern umkreisen."</value>
+  </data>
+  <data name="ai_element_overview_intro" xml:space="preserve">
+    <value>%1$s %2$s (%3$s) ist ein faszinierendes Element! Es hat die Ordnungszahl %4$s und gehört zur Gruppe der %5$s.</value>
+  </data>
+  <data name="ai_element_overview_isotopes" xml:space="preserve">
+    <value>" Ein Atom von %1$s enthält %2$s Protonen, %3$s Elektronen und normalerweise %4$s Neutronen."</value>
+  </data>
+  <data name="ai_element_overview_series" xml:space="preserve">
+    <value>" Es ist Teil der %1$s-Serie."</value>
+  </data>
+  <data name="ai_emission_spectrum" xml:space="preserve">
+    <value>Hier ist das Emissionsspektrum von %1$s: das Licht, das seine Atome aussenden, wenn angeregte Elektronen zurückfallen. Die App speichert es als Bild, daher kann ich das Muster zeigen, aber keine einzelnen Linien benennen.</value>
+  </data>
+  <data name="ai_encouragement" xml:space="preserve">
+    <value>Gute Frage! 🌟</value>
+  </data>
+  <data name="ai_eqn_no_desc" xml:space="preserve">
+    <value>Die App enthält diese Gleichung als visuelle Referenz.</value>
+  </data>
+  <data name="ai_equation_balanced" xml:space="preserve">
+    <value>**%1$s → %2$s**</value>
+  </data>
+  <data name="ai_equation_check_header" xml:space="preserve">
+    <value>Atombilanz</value>
+  </data>
+  <data name="ai_equation_no_solution" xml:space="preserve">
+    <value>Diese Gleichung hat keinen Ausgleich mit ganzen positiven Koeffizienten.</value>
+  </data>
+  <data name="ai_equation_one_sided" xml:space="preserve">
+    <value>Diese Gleichung lässt sich nicht ausgleichen: ein Element steht nur auf einer Seite, das können keine Koeffizienten beheben.</value>
+  </data>
+  <data name="ai_equation_one_sided_named" xml:space="preserve">
+    <value>Diese Gleichung lässt sich nicht ausgleichen: %1$s steht nur auf einer Seite, das können keine Koeffizienten beheben.</value>
+  </data>
+  <data name="ai_equation_parse_failed" xml:space="preserve">
+    <value>Das konnte ich nicht als chemische Gleichung lesen. Versuche eine Form wie Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_equation_tally_row" xml:space="preserve">
+    <value>• **%1$s** — %2$d links, %3$d rechts</value>
+  </data>
+  <data name="ai_equation_too_large" xml:space="preserve">
+    <value>Diese Gleichung bräuchte Koeffizienten, die für eine echte Reaktion zu groß sind. Prüfe die Formeln.</value>
+  </data>
+  <data name="ai_equation_underdetermined" xml:space="preserve">
+    <value>Diese Gleichung hat mehr als einen unabhängigen Ausgleich — sie liest sich wie zwei Reaktionen in einer. Trenne sie, dann gleiche ich jede aus.</value>
+  </data>
+  <data name="ai_etymology_header" xml:space="preserve">
+    <value>Der Name **%1$s** hat einen interessanten Ursprung:</value>
+  </data>
+  <data name="ai_facts.0" xml:space="preserve">
+    <value>Wusstest du schon? Sauerstoff ist das am häufigsten vorkommende Element in der Erdkruste!</value>
+  </data>
+  <data name="ai_facts.1" xml:space="preserve">
+    <value>Fun Fact: Gold rostet oder korrodiert niemals. Es bleibt für immer glänzend!</value>
+  </data>
+  <data name="ai_facts.2" xml:space="preserve">
+    <value>Hier ist etwas Cooles: Wasserstoff ist das am häufigsten vorkommende Element im Universum! 🌌</value>
+  </data>
+  <data name="ai_facts.3" xml:space="preserve">
+    <value>Erstaunlich: Kohlenstoff ist die Basis für alles bekannte Leben auf der Erde!</value>
+  </data>
+  <data name="ai_facts.4" xml:space="preserve">
+    <value>Interessant: Helium ist das einzige Element, das unter normalem Druck nicht fest wird!</value>
+  </data>
+  <data name="ai_facts.5" xml:space="preserve">
+    <value>Fun Fact: Quecksilber ist das einzige Element, das bei Raumtemperatur flüssig ist! 💧</value>
+  </data>
+  <data name="ai_facts.6" xml:space="preserve">
+    <value>Wusstest du schon? Das Element Francium ist so radioaktiv, dass es sofort verdampfen würde!</value>
+  </data>
+  <data name="ai_facts.7" xml:space="preserve">
+    <value>Cool: Diamant und Graphit bestehen beide aus reinem Kohlenstoff, haben aber völlig unterschiedliche Eigenschaften!</value>
+  </data>
+  <data name="ai_facts.8" xml:space="preserve">
+    <value>Erstaunlich: Eine einzige Unze Gold kann zu einem Blech von 300 Quadratfuß Fläche geschlagen werden!</value>
+  </data>
+  <data name="ai_facts.9" xml:space="preserve">
+    <value>Interessant: Neon bildet unter normalen Bedingungen eigentlich keine chemischen Verbindungen!</value>
+  </data>
+  <data name="ai_feature_achievements" xml:space="preserve">
+    <value>Verfolge deinen Fortschritt mit **Erfolgen** und Nutzungsstatistiken auf der Benutzerseite.</value>
+  </data>
+  <data name="ai_feature_capabilities" xml:space="preserve">
+    <value>Ich kann Elementeigenschaften nachschlagen und vergleichen, Gleichungen ausgleichen, Molmassen und Lösungskonzentrationen berechnen, Einheiten umrechnen und Zerfallsrechnungen durchführen. Frag nach einem Element, oder schreib eine Formel oder Gleichung.</value>
+  </data>
+  <data name="ai_feature_emission_spectrum" xml:space="preserve">
+    <value>Das **Emissionsspektrum** eines Elements findest du in seiner Detailansicht. Es zeigt das einzigartige Lichtmuster dieses Elements.</value>
+  </data>
+  <data name="ai_feature_flashcards" xml:space="preserve">
+    <value>Die App bietet mehrere **Lernkarten-Minispiele** zu Elementsymbolen, Atommassen und Klassifikationen, mit Level und XP.</value>
+  </data>
+  <data name="ai_feature_ideal_gas" xml:space="preserve">
+    <value>Mit dem **Idealgas-Rechner** findest du Druck, Volumen, Stoffmenge oder Temperatur aus PV = nRT.</value>
+  </data>
+  <data name="ai_feature_molar_mass" xml:space="preserve">
+    <value>Es gibt einen eingebauten **Molmassenrechner** für das Molekulargewicht komplexer Verbindungen. Ich kann das auch hier — nenn mir einfach eine Formel.</value>
+  </data>
+  <data name="ai_feature_nuclide_table" xml:space="preserve">
+    <value>Die App enthält eine ausführliche **Nuklidkarte** mit den Isotopen aller Elemente, farblich nach Zerfallsart geordnet (Alpha, Beta und so weiter).</value>
+  </data>
+  <data name="ai_feature_reaction_balancer" xml:space="preserve">
+    <value>Der **Reaktionsgleichungs-Rechner** hilft beim Ausgleichen von Gleichungen und speichert Favoriten. Du kannst mich auch hier fragen — schreibe etwa Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_feature_unit_converter" xml:space="preserve">
+    <value>Die App enthält einen **Einheitenumrechner** für Temperaturen und andere wissenschaftliche Einheiten. Du kannst mich auch einfach fragen, etwa "500 K in °C".</value>
+  </data>
+  <data name="ai_field_abundance_crustal_rocks" xml:space="preserve">
+    <value>Häufigkeit im Krustengestein</value>
+  </data>
+  <data name="ai_field_abundance_earth_crust" xml:space="preserve">
+    <value>Häufigkeit in der Erdkruste</value>
+  </data>
+  <data name="ai_field_abundance_earth_soils" xml:space="preserve">
+    <value>Häufigkeit im Boden</value>
+  </data>
+  <data name="ai_field_abundance_human_body" xml:space="preserve">
+    <value>Häufigkeit im menschlichen Körper</value>
+  </data>
+  <data name="ai_field_abundance_meteorites" xml:space="preserve">
+    <value>Häufigkeit in Meteoriten</value>
+  </data>
+  <data name="ai_field_abundance_sea_water" xml:space="preserve">
+    <value>Häufigkeit im Meerwasser</value>
+  </data>
+  <data name="ai_field_abundance_solar_system" xml:space="preserve">
+    <value>Häufigkeit im Sonnensystem</value>
+  </data>
+  <data name="ai_field_abundance_sun" xml:space="preserve">
+    <value>Häufigkeit in der Sonne</value>
+  </data>
+  <data name="ai_field_abundance_urban_soils" xml:space="preserve">
+    <value>Häufigkeit in städtischem Boden</value>
+  </data>
+  <data name="ai_field_nfpa_flammability" xml:space="preserve">
+    <value>Entflammbarkeitsbewertung</value>
+  </data>
+  <data name="ai_field_nfpa_health" xml:space="preserve">
+    <value>Gesundheitsbewertung</value>
+  </data>
+  <data name="ai_field_nfpa_instability" xml:space="preserve">
+    <value>Instabilitätsbewertung</value>
+  </data>
+  <data name="ai_field_nfpa_special" xml:space="preserve">
+    <value>besondere Gefahr</value>
+  </data>
+  <data name="ai_filter_matched" xml:space="preserve">
+    <value>%1$d Elemente stimmen überein:</value>
+  </data>
+  <data name="ai_filter_none" xml:space="preserve">
+    <value>Keine Elemente erfüllen diese Bedingungen.</value>
+  </data>
+  <data name="ai_filter_top" xml:space="preserve">
+    <value>Top %1$d von %2$d passenden Elementen:</value>
+  </data>
+  <data name="ai_formula_c6h12o6" xml:space="preserve">
+    <value>C6H12O6 ist Glukose, ein einfacher Zucker, der Lebewesen Energie liefert. Es hat 6 Kohlenstoff-, 12 Wasserstoff- und 6 Sauerstoffatome.</value>
+  </data>
+  <data name="ai_formula_ch4" xml:space="preserve">
+    <value>CH4 ist Methan, das einfachste Alkan und ein starkes Treibhausgas. Es besteht aus einem Kohlenstoff- und vier Wasserstoffatomen.</value>
+  </data>
+  <data name="ai_formula_co2" xml:space="preserve">
+    <value>CO2 ist Kohlendioxid. Es besteht aus einem Kohlenstoffatom und zwei Sauerstoffatomen.</value>
+  </data>
+  <data name="ai_formula_composition_offer" xml:space="preserve">
+    <value>" Möchtest du, dass ich die elementare Zusammensetzung aufschlüssele?"</value>
+  </data>
+  <data name="ai_formula_consists_of" xml:space="preserve">
+    <value>Es besteht aus:</value>
+  </data>
+  <data name="ai_formula_generic" xml:space="preserve">
+    <value>Ich erkenne, dass das wie eine chemische Formel aussieht, aber ich lerne noch etwas über Moleküle! Frag mich nach den einzelnen Elementen.</value>
+  </data>
+  <data name="ai_formula_h2o" xml:space="preserve">
+    <value>H2O ist Wasser! Es besteht aus zwei Wasserstoffatomen und einem Sauerstoffatom.</value>
+  </data>
+  <data name="ai_formula_h2so4" xml:space="preserve">
+    <value>H2SO4 ist Schwefelsäure, eine sehr starke und wichtige Industriesäure. Sie enthält Wasserstoff, Schwefel und Sauerstoff.</value>
+  </data>
+  <data name="ai_formula_hcl" xml:space="preserve">
+    <value>HCl ist Salzsäure, die sogar in deinem Magen vorkommt, um bei der Verdauung zu helfen!</value>
+  </data>
+  <data name="ai_formula_item" xml:space="preserve">
+    <value>• %1$s × %2$s (%3$s)</value>
+  </data>
+  <data name="ai_formula_mass" xml:space="preserve">
+    <value>Die molare Masse von **%1$s** ist **%2$s g/mol**.</value>
+  </data>
+  <data name="ai_formula_nacl" xml:space="preserve">
+    <value>NaCl ist Natriumchlorid, besser bekannt als Kochsalz! Es kombiniert Natrium und Chlor.</value>
+  </data>
+  <data name="ai_formula_nh3" xml:space="preserve">
+    <value>NH3 ist Ammoniak, das oft in Reinigungsmitteln verwendet wird. Es besteht aus einem Stickstoff- und drei Wasserstoffatomen.</value>
+  </data>
+  <data name="ai_formula_o2" xml:space="preserve">
+    <value>O2 ist der Sauerstoff, den wir atmen! Es sind zwei aneinander gebundene Sauerstoffatome.</value>
+  </data>
+  <data name="ai_formula_pro_plus" xml:space="preserve">
+    <value>Die Analyse chemischer Verbindungen wie **%1$s** ist eine **PRO+**-Funktion. Als %2$s-Nutzer kann ich dir nur bei einzelnen Elementen helfen!</value>
+  </data>
+  <data name="ai_formula_recognize" xml:space="preserve">
+    <value>Ich erkenne **%1$s** als eine chemische Verbindung mit einer molaren Masse von **%2$s**.</value>
+  </data>
+  <data name="ai_free_user" xml:space="preserve">
+    <value>Kostenlos</value>
+  </data>
+  <data name="ai_geo_color" xml:space="preserve">
+    <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
+  </data>
+  <data name="ai_geo_dens" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_hard" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_info" xml:space="preserve">
+    <value>%1$s ist ein %2$s in der %3$s-Gruppe. Farbe: %4$s. Härte: %5$s. Dichte: %6$s. Magnetismus: %7$s.</value>
+  </data>
+  <data name="ai_grams_to_moles" xml:space="preserve">
+    <value>**%1$s g** %2$s sind **%3$s mol**.</value>
+  </data>
+  <data name="ai_greeting" xml:space="preserve">
+    <value>Hallo! 👋 Ich bin dein Chemie-Buddy. Frag mich alles über die Elemente!</value>
+  </data>
+  <data name="ai_group" xml:space="preserve">
+    <value>Gruppe</value>
+  </data>
+  <data name="ai_hard_header" xml:space="preserve">
+    <value>Härteeigenschaften von %1$s:</value>
+  </data>
+  <data name="ai_help_response" xml:space="preserve">
+    <value>Ich bin ausschließlich auf die in dieser App verfügbaren Daten trainiert! Ich kann dir helfen bei:
+
+🧪 **Detaillierte Elemente**: Eigenschaften, Aussehen und Entdeckungsfakten direkt aus unserer JSON-Datenbank.
+⚖️ **Datenvergleiche**: Vergleiche Dichte, Masse, Radius und Reaktivität zwischen Elementen.
+💥 **Reaktivität**: Ich nutze die Gruppen- und Periodendaten der App, um zu erklären, wie Elemente wie Natrium mit Wasser reagieren.
+🧬 **Biologie/Sicherheit**: Toxizität und biologische Rollen aus den Elementbeschreibungen.
+⚛️ **Isotope &amp; Häufigkeit**: Spezifische Daten aus unseren speziellen Isotopen- und Häufigkeitstabellen.
+📉 **Periodische Trends**: Erklärung von Mustern wie Elektronegativität basierend auf der Tabellenstruktur.
+🔢 **Molare Masse**: Genaue Berechnungen unter Verwendung der Atomgewichte in der App.
+📝 **Definitionen**: Erklärungen für chemische Begriffe, die in der App verwendet werden.
+
+Frag einfach und ich finde die Antwort in den Aufzeichnungen der App! 🌟</value>
+  </data>
+  <data name="ai_higher_than" xml:space="preserve">
+    <value>%1$s hat eine höhere %2$s als %3$s.</value>
+  </data>
+  <data name="ai_hint" xml:space="preserve">
+    <value>Frag mich alles...</value>
+  </data>
+  <data name="ai_history_pro_only" xml:space="preserve">
+    <value>Der Chatverlauf ist eine PRO-Funktion</value>
+  </data>
+  <data name="ai_history_sign_in" xml:space="preserve">
+    <value>Melde dich an, um den Chatverlauf zu sehen</value>
+  </data>
+  <data name="ai_id_header" xml:space="preserve">
+    <value>Identifikatoren für %1$s:</value>
+  </data>
+  <data name="ai_identifiers_for" xml:space="preserve">
+    <value>Identifikatoren für **%1$s**:</value>
+  </data>
+  <data name="ai_identity_result" xml:space="preserve">
+    <value>Nach den Werten in der App ist das Element mit einem Wert nahe **%1$s** für seine Eigenschaften **%2$s** (tatsächlich: %3$s).</value>
+  </data>
+  <data name="ai_ion_count" xml:space="preserve">
+    <value>%1$s hat %2$d Ionisierungsenergiewert(e) in der App verfügbar.</value>
+  </data>
+  <data name="ai_isotope_compare_header" xml:space="preserve">
+    <value>%1$s gegen %2$s</value>
+  </data>
+  <data name="ai_isotope_compare_row" xml:space="preserve">
+    <value>• **%1$s**: %2$s gegen %3$s</value>
+  </data>
+  <data name="ai_isotope_decay" xml:space="preserve">
+    <value>(Zerfall: %1$s)</value>
+  </data>
+  <data name="ai_isotope_decays" xml:space="preserve">
+    <value>• **%1$s** — %2$s, Halbwertszeit %3$s</value>
+  </data>
+  <data name="ai_isotope_half_life" xml:space="preserve">
+    <value>" Es hat eine Halbwertszeit von %1$s und zerfällt über %2$s."</value>
+  </data>
+  <data name="ai_isotope_halflife_only" xml:space="preserve">
+    <value>• **%1$s** — Halbwertszeit %2$s</value>
+  </data>
+  <data name="ai_isotope_header" xml:space="preserve">
+    <value>Laut der Isotopentabelle der App sind hier die wichtigsten Isotope für **%1$s**:</value>
+  </data>
+  <data name="ai_isotope_neutron_diff" xml:space="preserve">
+    <value>%1$s hat %2$d Neutronen, %3$s hat %4$d — ein Unterschied von %5$d.</value>
+  </data>
+  <data name="ai_isotope_same_element" xml:space="preserve">
+    <value>Beide sind Isotope von %1$s, haben also dieselben %2$d Protonen und unterscheiden sich nur in den Neutronen.</value>
+  </data>
+  <data name="ai_isotope_stable" xml:space="preserve">
+    <value>• **%1$s** — stabil</value>
+  </data>
+  <data name="ai_isotope_unlisted" xml:space="preserve">
+    <value>nicht in der Isotopentabelle aufgeführt</value>
+  </data>
+  <data name="ai_isotopes_header" xml:space="preserve">
+    <value>Isotope von %1$s</value>
+  </data>
+  <data name="ai_isotopes_summary" xml:space="preserve">
+    <value>%1$d bekannte Isotope, davon %2$d stabil.</value>
+  </data>
+  <data name="ai_label_decay" xml:space="preserve">
+    <value>Zerfallsart</value>
+  </data>
+  <data name="ai_label_half_life" xml:space="preserve">
+    <value>Halbwertszeit</value>
+  </data>
+  <data name="ai_label_mass_number" xml:space="preserve">
+    <value>Massenzahl</value>
+  </data>
+  <data name="ai_label_neutrons" xml:space="preserve">
+    <value>Neutronen</value>
+  </data>
+  <data name="ai_label_protons" xml:space="preserve">
+    <value>Protonen</value>
+  </data>
+  <data name="ai_lang_switched" xml:space="preserve">
+    <value>AI-Sprache gewechselt zu: %1$s 🌐</value>
+  </data>
+  <data name="ai_limit_reset_badge" xml:space="preserve">
+    <value>Zurückgesetzt um %1$s</value>
+  </data>
+  <data name="ai_limit_unlimited" xml:space="preserve">
+    <value>Unbegrenzt</value>
+  </data>
+  <data name="ai_list_header" xml:space="preserve">
+    <value>Hier sind die **%1$s** Elemente:</value>
+  </data>
+  <data name="ai_list_more" xml:space="preserve">
+    <value>…und %1$d weitere.</value>
+  </data>
+  <data name="ai_list_row" xml:space="preserve">
+    <value>• **%1$s** — %2$s</value>
+  </data>
+  <data name="ai_list_row_plain" xml:space="preserve">
+    <value>• **%1$s**</value>
+  </data>
+  <data name="ai_list_spread" xml:space="preserve">
+    <value>Die Werte reichen von %1$s bis %2$s.</value>
+  </data>
+  <data name="ai_locked_fields" xml:space="preserve">
+    <value>%1$s gehört zu %2$s. Führe ein Upgrade durch, um es hier und auf jeder Elementseite zu sehen.</value>
+  </data>
+  <data name="ai_locked_generic" xml:space="preserve">
+    <value>Diese Antwort gehört zu %1$s. Führe ein Upgrade durch, um sie freizuschalten.</value>
+  </data>
+  <data name="ai_lower_than" xml:space="preserve">
+    <value>%1$s hat eine niedrigere %2$s als %3$s.</value>
+  </data>
+  <data name="ai_mech_header" xml:space="preserve">
+    <value>%1$s für %2$s:</value>
+  </data>
+  <data name="ai_molar_mass_generic" xml:space="preserve">
+    <value>Ich kann bei molaren Massen helfen! Frag mich zum Beispiel: "Wie hoch ist die molare Masse von H2O?"</value>
+  </data>
+  <data name="ai_molar_mass_of" xml:space="preserve">
+    <value>Die molare Masse von %1$s beträgt %2$s.</value>
+  </data>
+  <data name="ai_molar_mass_pro_plus" xml:space="preserve">
+    <value>Die Berechnung der molaren Masse von Verbindungen ist eine **PRO+**-Funktion. Als %1$s-Nutzer erhältst du weiterhin die molare Masse einzelner Elemente!</value>
+  </data>
+  <data name="ai_moles_of" xml:space="preserve">
+    <value>**%1$s mol** %2$s enthält **%3$s** Atome.</value>
+  </data>
+  <data name="ai_moles_to_particles" xml:space="preserve">
+    <value>**%1$s mol** enthält **%2$s** Teilchen.</value>
+  </data>
+  <data name="ai_naturally_occurring" xml:space="preserve">
+    <value>Kommt natürlich vor</value>
+  </data>
+  <data name="ai_neighbour_after" xml:space="preserve">
+    <value>**%1$s** (Ordnungszahl %2$d) kommt direkt nach %3$s.</value>
+  </data>
+  <data name="ai_neighbour_before" xml:space="preserve">
+    <value>**%1$s** (Ordnungszahl %2$d) kommt direkt vor %3$s.</value>
+  </data>
+  <data name="ai_nfpa_flammable_0" xml:space="preserve">
+    <value>Brennt nicht</value>
+  </data>
+  <data name="ai_nfpa_flammable_1" xml:space="preserve">
+    <value>Muss zum Brennen vorerhitzt werden</value>
+  </data>
+  <data name="ai_nfpa_flammable_2" xml:space="preserve">
+    <value>Entzündet sich bei mäßiger Erwärmung</value>
+  </data>
+  <data name="ai_nfpa_flammable_3" xml:space="preserve">
+    <value>Entzündet sich bei normalen Temperaturen</value>
+  </data>
+  <data name="ai_nfpa_flammable_4" xml:space="preserve">
+    <value>Extrem entflammbar</value>
+  </data>
+  <data name="ai_nfpa_health_0" xml:space="preserve">
+    <value>Normales Material</value>
+  </data>
+  <data name="ai_nfpa_health_1" xml:space="preserve">
+    <value>Leicht gefährlich</value>
+  </data>
+  <data name="ai_nfpa_health_2" xml:space="preserve">
+    <value>Gefährlich</value>
+  </data>
+  <data name="ai_nfpa_health_3" xml:space="preserve">
+    <value>Extreme Gefahr</value>
+  </data>
+  <data name="ai_nfpa_health_4" xml:space="preserve">
+    <value>Tödlich</value>
+  </data>
+  <data name="ai_nfpa_instability_0" xml:space="preserve">
+    <value>Stabil</value>
+  </data>
+  <data name="ai_nfpa_instability_1" xml:space="preserve">
+    <value>Bei Erwärmung instabil</value>
+  </data>
+  <data name="ai_nfpa_instability_2" xml:space="preserve">
+    <value>Heftige chemische Reaktion möglich</value>
+  </data>
+  <data name="ai_nfpa_instability_3" xml:space="preserve">
+    <value>Kann bei starker Initialzündung detonieren</value>
+  </data>
+  <data name="ai_nfpa_instability_4" xml:space="preserve">
+    <value>Kann leicht detonieren</value>
+  </data>
+  <data name="ai_nfpa_special_none" xml:space="preserve">
+    <value>Keine besondere Gefahr erfasst</value>
+  </data>
+  <data name="ai_nfpa_special_ox" xml:space="preserve">
+    <value>Oxidationsmittel</value>
+  </data>
+  <data name="ai_nfpa_special_sa" xml:space="preserve">
+    <value>Einfaches Erstickungsmittel</value>
+  </data>
+  <data name="ai_nfpa_special_w" xml:space="preserve">
+    <value>Reagiert mit Wasser</value>
+  </data>
+  <data name="ai_nfpa_unrated" xml:space="preserve">
+    <value>Nicht eingestuft</value>
+  </data>
+  <data name="ai_no_abundance_data" xml:space="preserve">
+    <value>Ich habe keine spezifischen numerischen Häufigkeitswerte für %1$s, aber in der Beschreibung heißt es: %2$s.</value>
+  </data>
+  <data name="ai_no_bio_data" xml:space="preserve">
+    <value>Ich habe keine detaillierten biologischen Daten für %1$s, aber die Standardsicherheit besagt:</value>
+  </data>
+  <data name="ai_no_data" xml:space="preserve">
+    <value>Hmm, dazu konnte ich keine Informationen finden. Versuche es mit einem Element wie 'Sauerstoff' oder 'Gold'!</value>
+  </data>
+  <data name="ai_no_data_alternatives" xml:space="preserve">
+    <value>Erfasst für %1$s: %2$s.</value>
+  </data>
+  <data name="ai_no_data_right_now" xml:space="preserve">
+    <value>Ich kann das gerade nicht überprüfen.</value>
+  </data>
+  <data name="ai_no_etymology_data" xml:space="preserve">
+    <value>Ich bin mir über die Wurzel des Namens nicht ganz sicher, aber es wurde von %2$s im Jahr %3$s entdeckt.</value>
+  </data>
+  <data name="ai_no_isotope_data" xml:space="preserve">
+    <value>Ich habe keine detaillierte Liste von Isotopen für %1$s in meinen Schnellzugriffsdaten, aber du findest eine umfassende Liste in der Isotopentabelle!</value>
+  </data>
+  <data name="ai_no_list_data" xml:space="preserve">
+    <value>Ich konnte keine Elemente in unserer Datenbank finden, die diesen Kriterien entsprechen.</value>
+  </data>
+  <data name="ai_no_physical_data" xml:space="preserve">
+    <value>Ich habe keine detaillierten physikalischen Eigenschaften für %1$s in den Schnellzugriffsdaten, aber du kannst die detaillierten Eigenschaftspanels überprüfen!</value>
+  </data>
+  <data name="ai_no_property_data" xml:space="preserve">
+    <value>Es tut mir leid, ich habe momentan keine Daten für die %2$s von %1$s.</value>
+  </data>
+  <data name="ai_no_usage_data" xml:space="preserve">
+    <value>Ich habe keine spezifische Liste von Verwendungen für %1$s, aber es ist ein faszinierendes Element! Mehr dazu findest du in der detaillierten Beschreibung.</value>
+  </data>
+  <data name="ai_nuclide_body" xml:space="preserve">
+    <value>• **Protonen:** %1$d
+• **Neutronen:** %2$d
+• **Massenzahl:** %3$d</value>
+  </data>
+  <data name="ai_nuclide_explain" xml:space="preserve">
+    <value>Neutronen = Massenzahl − Ordnungszahl = %1$d − %2$d = **%3$d**.</value>
+  </data>
+  <data name="ai_nuclide_header" xml:space="preserve">
+    <value>%1$s-%2$d</value>
+  </data>
+  <data name="ai_open_in_app" xml:space="preserve">
+    <value>%1$s öffnen</value>
+  </data>
+  <data name="ai_ordinal_suffix_nd" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="ai_ordinal_suffix_rd" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="ai_ordinal_suffix_st" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="ai_ordinal_suffix_th" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="ai_oxidation_neg" xml:space="preserve">
+    <value>• Negativ: %1$s</value>
+  </data>
+  <data name="ai_oxidation_pos" xml:space="preserve">
+    <value>• Positiv: %1$s</value>
+  </data>
+  <data name="ai_oxidation_states" xml:space="preserve">
+    <value>**%1$s** hat mehrere mögliche Oxidationsstufen.</value>
+  </data>
+  <data name="ai_period" xml:space="preserve">
+    <value>Periode</value>
+  </data>
+  <data name="ai_personalized_greeting_fav" xml:space="preserve">
+    <value>Hey! Ich erinnere mich, dass du dir vor kurzem %1$s angesehen hast. Möchtest du mehr Details sehen?</value>
+  </data>
+  <data name="ai_personalized_greeting_interest" xml:space="preserve">
+    <value>Willkommen zurück! Bereit, mehr über %1$s zu erfahren? Wir könnten uns %2$s noch einmal ansehen.</value>
+  </data>
+  <data name="ai_ph_info" xml:space="preserve">
+    <value>%1$s: Sauer unter pH %2$s ist %3$s, neutraler Bereich %4$s ist %5$s, und über pH %6$s ist es %7$s.</value>
+  </data>
+  <data name="ai_ph_info_short" xml:space="preserve">
+    <value>%1$s: pH-Bereich %2$s ist %3$s.</value>
+  </data>
+  <data name="ai_phase_gas" xml:space="preserve">
+    <value>gasförmig</value>
+  </data>
+  <data name="ai_phase_liquid" xml:space="preserve">
+    <value>flüssig</value>
+  </data>
+  <data name="ai_phase_solid" xml:space="preserve">
+    <value>fest</value>
+  </data>
+  <data name="ai_physical_header" xml:space="preserve">
+    <value>Basierend auf den in der App gespeicherten physikalischen Eigenschaften für **%1$s**:</value>
+  </data>
+  <data name="ai_poi_info" xml:space="preserve">
+    <value>%1$s: Poisson-Verhältnis-Bereich %2$s (%3$s).</value>
+  </data>
+  <data name="ai_pro_tip_hint" xml:space="preserve">
+    <value>Profi-Tipp: Du kannst mich auch nach Herkunft, biologischer Rolle oder Reaktivität fragen!</value>
+  </data>
+  <data name="ai_pro_user" xml:space="preserve">
+    <value>PRO</value>
+  </data>
+  <data name="ai_property_is" xml:space="preserve">
+    <value>Die %2$s von %1$s ist %3$s.</value>
+  </data>
+  <data name="ai_quiz_atomic" xml:space="preserve">
+    <value>Welches Element hat die Ordnungszahl **%1$s**?</value>
+  </data>
+  <data name="ai_quiz_correct" xml:space="preserve">
+    <value>✨ **Richtig!** Gut gemacht. Die Antwort war tatsächlich **%1$s**. Bereit für die nächste Frage?</value>
+  </data>
+  <data name="ai_quiz_history" xml:space="preserve">
+    <value>Dieses Element wurde von **%1$s** im Jahr **%2$s** entdeckt. Kannst du erraten, welches es ist?</value>
+  </data>
+  <data name="ai_quiz_no_start" xml:space="preserve">
+    <value>Ich kann gerade kein Quiz starten.</value>
+  </data>
+  <data name="ai_quiz_not_active" xml:space="preserve">
+    <value>Ich befinde mich gerade nicht im Quiz-Modus.</value>
+  </data>
+  <data name="ai_quiz_start" xml:space="preserve">
+    <value>Ich denke an ein Element. Sein Symbol ist **%1$s**. Wie heißt es?</value>
+  </data>
+  <data name="ai_quiz_wrong" xml:space="preserve">
+    <value>Nicht ganz! Die Antwort war **%1$s**. Möchtest du es noch einmal versuchen? Sag einfach 'Quiz'!</value>
+  </data>
+  <data name="ai_radioactive_no" xml:space="preserve">
+    <value>%1$s gilt allgemein als stabil und nicht radioaktiv.</value>
+  </data>
+  <data name="ai_radioactive_yes" xml:space="preserve">
+    <value>%1$s ist radioaktiv: %2$s</value>
+  </data>
+  <data name="ai_radius_details" xml:space="preserve">
+    <value>Hier sind die Radiusdetails für **%1$s**:</value>
+  </data>
+  <data name="ai_radius_header" xml:space="preserve">
+    <value>Radiusdetails für %1$s:</value>
+  </data>
+  <data name="ai_rank_highest" xml:space="preserve">
+    <value>Das ist der höchste Wert der %1$d Elemente mit erfasster %2$s.</value>
+  </data>
+  <data name="ai_rank_lowest" xml:space="preserve">
+    <value>Das ist der niedrigste Wert der %1$d Elemente mit erfasster %2$s.</value>
+  </data>
+  <data name="ai_rank_nth" xml:space="preserve">
+    <value>Damit liegt es auf Platz **%1$d von %2$d** Elementen nach %3$s.</value>
+  </data>
+  <data name="ai_rate_limit_reached" xml:space="preserve">
+    <value>Sie haben Ihr tägliches Limit von %1$d Nachrichten erreicht. Upgraden Sie auf PRO oder PRO+ für mehr!</value>
+  </data>
+  <data name="ai_rate_limit_resets" xml:space="preserve">
+    <value>Deine täglichen Nachrichten stehen ab %1$s wieder zur Verfügung.</value>
+  </data>
+  <data name="ai_reaction_acid" xml:space="preserve">
+    <value>Viele Metalle reagieren mit Säuren unter Freisetzung von Wasserstoffgas. Die Reaktivität von %1$s hängt von seiner Position in der Spannungsreihe ab.</value>
+  </data>
+  <data name="ai_reaction_alkali_halogen" xml:space="preserve">
+    <value>Diese reagieren heftig zu einem **Salz** (einer Ionenverbindung). Zum Beispiel können %1$s und %2$s zu einer einzigartigen Verbindung kombiniert werden!</value>
+  </data>
+  <data name="ai_reaction_alkali_water" xml:space="preserve">
+    <value>Alkalimetalle wie %1$s reagieren **heftig** mit Wasser und erzeugen Wasserstoffgas und eine starke Base. Es kann sogar explodieren!</value>
+  </data>
+  <data name="ai_reaction_alkaline_earth_water" xml:space="preserve">
+    <value>%1$s reagiert lebhaft mit Wasser unter Bildung von Wasserstoffgas und seinem Hydroxid.</value>
+  </data>
+  <data name="ai_reaction_complex" xml:space="preserve">
+    <value>Reaktionen können komplex sein! Im Allgemeinen hängt das Verhalten von %1$s von seiner Gruppe (%2$s) und Elektronegativität ab.</value>
+  </data>
+  <data name="ai_reaction_generic_elements" xml:space="preserve">
+    <value>Die Reaktion zwischen %1$s und %2$s hängt von ihren Elektronenkonfigurationen ab. Sie könnten eine Verbindung bilden, wenn einer Elektronen abgeben und der andere sie aufnehmen kann!</value>
+  </data>
+  <data name="ai_reaction_generic_water" xml:space="preserve">
+    <value>Ich habe keine spezifischen Daten für die Reaktion von %1$s mit Wasser, aber viele Metalle bilden im Laufe der Zeit Oxide oder Hydroxide.</value>
+  </data>
+  <data name="ai_reaction_magnesium_water" xml:space="preserve">
+    <value>%1$s reagiert langsam mit kaltem Wasser, aber schnell mit Wasserdampf.</value>
+  </data>
+  <data name="ai_reaction_noble_gas" xml:space="preserve">
+    <value>%1$s ist ein Edelgas und extrem stabil. Es reagiert fast nie mit etwas, da es eine volle Außenschale hat.</value>
+  </data>
+  <data name="ai_reaction_oxygen" xml:space="preserve">
+    <value>Die meisten Elemente reagieren mit Sauerstoff zu Oxiden. Metalle wie %1$s bilden beispielsweise oft eine Schutzschicht oder rosten.</value>
+  </data>
+  <data name="ai_reactivity_more" xml:space="preserve">
+    <value>**%1$s** ist im Allgemeinen reaktiver als **%2$s**, basierend auf seiner Position im Periodensystem.</value>
+  </data>
+  <data name="ai_reactivity_need_two" xml:space="preserve">
+    <value>Ich brauche mindestens zwei Elemente, um ihre Reaktivität zu vergleichen!</value>
+  </data>
+  <data name="ai_reactivity_no_result" xml:space="preserve">
+    <value>Ich konnte das reaktivste Element nicht bestimmen.</value>
+  </data>
+  <data name="ai_reactivity_result" xml:space="preserve">
+    <value>Das reaktivste %1$s ist **%2$s**.</value>
+  </data>
+  <data name="ai_reactivity_similar" xml:space="preserve">
+    <value>Sowohl **%1$s** als auch **%2$s** haben ähnliche Reaktivitätsstufen.</value>
+  </data>
+  <data name="ai_recap_is" xml:space="preserve">
+    <value>Nochmal zur Erinnerung: Die %2$s von %1$s ist %3$s.</value>
+  </data>
+  <data name="ai_related_label" xml:space="preserve">
+    <value>Verwandte Info:</value>
+  </data>
+  <data name="ai_related_offer" xml:space="preserve">
+    <value>Ich habe lokal verwandte Informationen gefunden. Frage nach 'verwandte anzeigen', um sie zu sehen.</value>
+  </data>
+  <data name="ai_related_offer_lang" xml:space="preserve">
+    <value>Ich habe lokal verwandte Informationen gefunden, aber nicht in der gewählten Sprache. Versuche, die Sprache zu ändern oder frage trotzdem.</value>
+  </data>
+  <data name="ai_rich_overview_advanced" xml:space="preserve">
+    <value>Erweiterte Atomdaten</value>
+  </data>
+  <data name="ai_rich_overview_applications" xml:space="preserve">
+    <value>Anwendungen &amp; Verwendung</value>
+  </data>
+  <data name="ai_rich_overview_basic_facts" xml:space="preserve">
+    <value>Grundlegende Fakten</value>
+  </data>
+  <data name="ai_rich_overview_biological" xml:space="preserve">
+    <value>Biologische Rolle</value>
+  </data>
+  <data name="ai_rich_overview_compounds" xml:space="preserve">
+    <value>Häufige Verbindungen</value>
+  </data>
+  <data name="ai_rich_overview_etymology" xml:space="preserve">
+    <value>Herkunft &amp; Geschichte</value>
+  </data>
+  <data name="ai_rich_overview_isotopes" xml:space="preserve">
+    <value>Wichtige Isotope</value>
+  </data>
+  <data name="ai_rich_overview_properties" xml:space="preserve">
+    <value>Eigenschaften</value>
+  </data>
+  <data name="ai_rich_overview_safety" xml:space="preserve">
+    <value>Sicherheit &amp; Gefahren</value>
+  </data>
+  <data name="ai_rich_overview_where_found" xml:space="preserve">
+    <value>Wo wird %1$s gefunden?</value>
+  </data>
+  <data name="ai_runner_up" xml:space="preserve">
+    <value>Als nächstes kommt %1$s mit %2$s.</value>
+  </data>
+  <data name="ai_safety_caution_flammable" xml:space="preserve">
+    <value>Vorsicht: Dieses Element ist extrem entflammbar!</value>
+  </data>
+  <data name="ai_safety_caution_health" xml:space="preserve">
+    <value>Vorsicht: Dieses Element ist stark gesundheitsgefährdend!</value>
+  </data>
+  <data name="ai_safety_flammability" xml:space="preserve">
+    <value>• **Entflammbarkeit:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_header" xml:space="preserve">
+    <value>Sicherheitsprofil für %1$s (NFPA 704):</value>
+  </data>
+  <data name="ai_safety_health" xml:space="preserve">
+    <value>• **Gesundheit:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_instability" xml:space="preserve">
+    <value>• **Instabilität:** %1$d/4</value>
+  </data>
+  <data name="ai_safety_no_data" xml:space="preserve">
+    <value>Ich habe keine spezifischen NFPA-Gefahrenbewertungen für %1$s, befolgen Sie jedoch immer die Standard-Laborsicherheitsprotokolle.</value>
+  </data>
+  <data name="ai_safety_none_recorded" xml:space="preserve">
+    <value>Für %1$s sind keine NFPA-Gefahrenwerte erfasst.</value>
+  </data>
+  <data name="ai_safety_radioactive" xml:space="preserve">
+    <value>%1$s ist radioaktiv (%2$s), was sein primäres Sicherheitsrisiko darstellt. Mit extremer Vorsicht behandeln!</value>
+  </data>
+  <data name="ai_safety_radioactive_note" xml:space="preserve">
+    <value>Dieses Element ist radioaktiv.</value>
+  </data>
+  <data name="ai_safety_special" xml:space="preserve">
+    <value>• **Besonderes:** %1$s</value>
+  </data>
+  <data name="ai_same_value" xml:space="preserve">
+    <value>Beide haben den gleichen Wert für %1$s!</value>
+  </data>
+  <data name="ai_series_actinide" xml:space="preserve">
+    <value>Actinoide sind die 15 Elemente mit den Ordnungszahlen 89 bis 103. Sie sind alle radioaktiv!</value>
+  </data>
+  <data name="ai_series_actinide_label" xml:space="preserve">
+    <value>Actinoid</value>
+  </data>
+  <data name="ai_series_alkali" xml:space="preserve">
+    <value>Alkalimetalle befinden sich in Gruppe 1. Sie sind sehr reaktiv und haben ein Elektron in ihrer Außenschale. Beispiele sind Lithium, Natrium und Kalium.</value>
+  </data>
+  <data name="ai_series_alkali_metal_label" xml:space="preserve">
+    <value>Alkalimetall</value>
+  </data>
+  <data name="ai_series_alkaline_earth_label" xml:space="preserve">
+    <value>Erdalkalimetall</value>
+  </data>
+  <data name="ai_series_generic" xml:space="preserve">
+    <value>Ich kenne diese Serie! Sie haben einzigartige chemische Eigenschaften. Über welches spezifische Element in dieser Serie möchtest du etwas wissen?</value>
+  </data>
+  <data name="ai_series_halogen" xml:space="preserve">
+    <value>Halogene befinden sich in Gruppe 17. Sie sind hochreaktive Nichtmetalle. Fluor und Chlor sind die bekanntesten!</value>
+  </data>
+  <data name="ai_series_halogen_label" xml:space="preserve">
+    <value>Halogen</value>
+  </data>
+  <data name="ai_series_lanthanide" xml:space="preserve">
+    <value>Lanthanoide sind die 15 Elemente mit den Ordnungszahlen 57 bis 71. Sie werden auch als 'Seltenerdelemente' bezeichnet.</value>
+  </data>
+  <data name="ai_series_lanthanide_label" xml:space="preserve">
+    <value>Lanthanoid</value>
+  </data>
+  <data name="ai_series_metalloid" xml:space="preserve">
+    <value>Metalloide haben sowohl Eigenschaften von Metallen als auch von Nichtmetallen. Sie befinden sich entlang der 'Treppe' im Periodensystem.</value>
+  </data>
+  <data name="ai_series_metalloid_label" xml:space="preserve">
+    <value>Metalloid</value>
+  </data>
+  <data name="ai_series_noble_gas" xml:space="preserve">
+    <value>Edelgase befinden sich in Gruppe 18. Sie sind sehr stabil und reagieren selten mit anderen Elementen, da ihre Außenschalen voll sind.</value>
+  </data>
+  <data name="ai_series_noble_gas_label" xml:space="preserve">
+    <value>Edelgas</value>
+  </data>
+  <data name="ai_series_nonmetal_label" xml:space="preserve">
+    <value>Nichtmetall</value>
+  </data>
+  <data name="ai_series_transition" xml:space="preserve">
+    <value>Übergangsmetalle sind die Elemente der Gruppen 3-12. Sie sind gute Leiter und bilden oft farbige Verbindungen.</value>
+  </data>
+  <data name="ai_series_transition_metal_label" xml:space="preserve">
+    <value>Übergangsmetall</value>
+  </data>
+  <data name="ai_similarity_generic" xml:space="preserve">
+    <value>**%1$s** ist Teil der %2$s Serie. Andere Elemente in dieser Serie haben verwandte Eigenschaften!</value>
+  </data>
+  <data name="ai_similarity_no_element" xml:space="preserve">
+    <value>Ich bin mir nicht sicher, für welches Element du Ähnlichkeiten finden möchtest.</value>
+  </data>
+  <data name="ai_similarity_result_footer" xml:space="preserve">
+    <value>.
+
+Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!</value>
+  </data>
+  <data name="ai_similarity_result_header" xml:space="preserve">
+    <value>Wie **%1$s** sind auch diese Elemente **%2$ss**: 
+
+</value>
+  </data>
+  <data name="ai_solution_generic_substance" xml:space="preserve">
+    <value>der Lösung</value>
+  </data>
+  <data name="ai_solution_mass_needed" xml:space="preserve">
+    <value>Du brauchst **%1$s g** %2$s für %3$s mL einer %4$s mol/L-Lösung.</value>
+  </data>
+  <data name="ai_solution_molarity" xml:space="preserve">
+    <value>Die Konzentration von %2$s beträgt **%1$s mol/L**.</value>
+  </data>
+  <data name="ai_solution_moles" xml:space="preserve">
+    <value>Das sind **%1$s mol** %2$s.</value>
+  </data>
+  <data name="ai_solution_volume" xml:space="preserve">
+    <value>Du brauchst **%1$s mL** bei **%2$s mol/L**.</value>
+  </data>
+  <data name="ai_solution_working_c1v1" xml:space="preserve">
+    <value>C₁V₁ = C₂V₂ → %1$s × %2$s = %3$s × %4$s</value>
+  </data>
+  <data name="ai_solution_working_header" xml:space="preserve">
+    <value>Rechenweg</value>
+  </data>
+  <data name="ai_solution_working_mass" xml:space="preserve">
+    <value>m = n × M → %1$s g = %2$s mol × %3$s g/mol</value>
+  </data>
+  <data name="ai_solution_working_nvc" xml:space="preserve">
+    <value>n = c × V → %1$s mol = %2$s mol/L × %3$s L</value>
+  </data>
+  <data name="ai_source_element_data" xml:space="preserve">
+    <value>%1$s — Elementdaten (%2$s)</value>
+  </data>
+  <data name="ai_source_table" xml:space="preserve">
+    <value>%1$s — Tabelle %2$s</value>
+  </data>
+  <data name="ai_sources_header" xml:space="preserve">
+    <value>Quellen</value>
+  </data>
+  <data name="ai_stable_label" xml:space="preserve">
+    <value>Stabil</value>
+  </data>
+  <data name="ai_structural_no_results" xml:space="preserve">
+    <value>Ich konnte in dieser Gruppe oder Periode nichts finden. Denken Sie daran: es gibt 18 Gruppen und 7 Perioden!</value>
+  </data>
+  <data name="ai_structural_result" xml:space="preserve">
+    <value>Die Elemente in **%1$s %2$s** sind: 
+</value>
+  </data>
+  <data name="ai_structural_specify_number" xml:space="preserve">
+    <value>Bitte geben Sie eine Gruppen- oder Periodennummer an!</value>
+  </data>
+  <data name="ai_suggest_element.0" xml:space="preserve">
+    <value>Verwendung von %1$s</value>
+  </data>
+  <data name="ai_suggest_element.1" xml:space="preserve">
+    <value>Atommasse von %1$s</value>
+  </data>
+  <data name="ai_suggest_element.2" xml:space="preserve">
+    <value>Ist %1$s gefährlich?</value>
+  </data>
+  <data name="ai_suggest_element.3" xml:space="preserve">
+    <value>Wo kommt %1$s vor?</value>
+  </data>
+  <data name="ai_suggest_element.4" xml:space="preserve">
+    <value>Elektronenkonfiguration von %1$s</value>
+  </data>
+  <data name="ai_suggest_element.5" xml:space="preserve">
+    <value>Isotope von %1$s</value>
+  </data>
+  <data name="ai_suggest_general.0" xml:space="preserve">
+    <value>Erzähl mir einen Fakt</value>
+  </data>
+  <data name="ai_suggest_general.1" xml:space="preserve">
+    <value>Starte ein Quiz</value>
+  </data>
+  <data name="ai_suggest_general.2" xml:space="preserve">
+    <value>Was sind die Alkalimetalle?</value>
+  </data>
+  <data name="ai_suggest_general.3" xml:space="preserve">
+    <value>Schwerstes Element?</value>
+  </data>
+  <data name="ai_suggest_tools.0" xml:space="preserve">
+    <value>Gleiche Fe + O2 -&gt; Fe2O3 aus</value>
+  </data>
+  <data name="ai_suggest_tools.1" xml:space="preserve">
+    <value>Rechne 500 K in °C um</value>
+  </data>
+  <data name="ai_suggest_tools.2" xml:space="preserve">
+    <value>Wie viel Gramm NaCl für 250 mL 0,5 mol/L?</value>
+  </data>
+  <data name="ai_suggest_tools.3" xml:space="preserve">
+    <value>Wie viel von 100 g Kohlenstoff-14 bleibt nach 11460 Jahren?</value>
+  </data>
+  <data name="ai_suggest_trends.0" xml:space="preserve">
+    <value>Was sind periodische Trends?</value>
+  </data>
+  <data name="ai_suggest_trends.1" xml:space="preserve">
+    <value>Trend der Elektronegativität</value>
+  </data>
+  <data name="ai_suggest_trends.2" xml:space="preserve">
+    <value>Trend des Atomradius</value>
+  </data>
+  <data name="ai_suggest_trends.3" xml:space="preserve">
+    <value>Ionisierungsenergie</value>
+  </data>
+  <data name="ai_suggestion_abundance" xml:space="preserve">
+    <value>Sollen wir uns ansehen, wo es im Universum vorkommt?</value>
+  </data>
+  <data name="ai_suggestion_bio" xml:space="preserve">
+    <value>Möchtest du etwas über seine biologische Rolle erfahren?</value>
+  </data>
+  <data name="ai_suggestion_compare" xml:space="preserve">
+    <value>Möchtest du es mit einem anderen Element vergleichen?</value>
+  </data>
+  <data name="ai_suggestion_iso" xml:space="preserve">
+    <value>Ich kann dir auch etwas über seine Isotope erzählen.</value>
+  </data>
+  <data name="ai_suggestion_safety" xml:space="preserve">
+    <value>Ich habe auch Sicherheitsdaten dazu, falls dich das interessiert.</value>
+  </data>
+  <data name="ai_superlative_among" xml:space="preserve">
+    <value>Unter den %1$ss, %2$s</value>
+  </data>
+  <data name="ai_superlative_generic" xml:space="preserve">
+    <value>Das ist eine tolle Frage! Ich kann die dichtesten, schwersten oder elektronegativsten Elemente finden. Welches möchtest du wissen?</value>
+  </data>
+  <data name="ai_superlative_highest" xml:space="preserve">
+    <value>höchste</value>
+  </data>
+  <data name="ai_superlative_lowest" xml:space="preserve">
+    <value>niedrigste</value>
+  </data>
+  <data name="ai_superlative_no_calculate" xml:space="preserve">
+    <value>Das konnte ich gerade nicht berechnen.</value>
+  </data>
+  <data name="ai_superlative_nth" xml:space="preserve">
+    <value>Das **%1$d**%2$s %3$s %4$s ist **%5$s**, mit %6$s.</value>
+  </data>
+  <data name="ai_superlative_result" xml:space="preserve">
+    <value>Das Element mit der/dem %1$s %2$s ist **%3$s**, mit einem Wert von %4$s.</value>
+  </data>
+  <data name="ai_synthetic_only" xml:space="preserve">
+    <value>Synthetisch (kommt natürlich nicht vor)</value>
+  </data>
+  <data name="ai_technical_config" xml:space="preserve">
+    <value>" Es hat eine Elektronenkonfiguration von %1$s."</value>
+  </data>
+  <data name="ai_technical_mass" xml:space="preserve">
+    <value>" Seine genaue Atommasse beträgt %1$s."</value>
+  </data>
+  <data name="ai_thermal_header" xml:space="preserve">
+    <value>Thermische Eigenschaften von %1$s:</value>
+  </data>
+  <data name="ai_thermal_properties" xml:space="preserve">
+    <value>Thermische Eigenschaften von **%1$s**:</value>
+  </data>
+  <data name="ai_trend_electronegativity" xml:space="preserve">
+    <value>Die Elektronegativität nimmt im Allgemeinen von links nach rechts innerhalb einer Periode zu und nimmt innerhalb einer Gruppe von oben nach unten ab. Fluor ist hier der Spitzenreiter!</value>
+  </data>
+  <data name="ai_trend_general" xml:space="preserve">
+    <value>Periodische Trends sind Muster in den Eigenschaften der Elemente! Für welchen Trend interessierst du dich: Atomradius, Elektronegativität oder Ionisierungsenergie?</value>
+  </data>
+  <data name="ai_trend_ionization" xml:space="preserve">
+    <value>Die Ionisierungsenergie nimmt innerhalb einer Periode zu und innerhalb einer Gruppe nach unten ab. Es wird schwieriger, ein Elektron zu entfernen, je weiter man sich nach rechts bewegt!</value>
+  </data>
+  <data name="ai_trend_metallic" xml:space="preserve">
+    <value>Der metallische Charakter nimmt innerhalb einer Periode ab und innerhalb einer Gruppe nach unten zu. Die metallischsten Elemente befinden sich unten links (wie Francium).</value>
+  </data>
+  <data name="ai_trend_radius" xml:space="preserve">
+    <value>Der Atomradius nimmt innerhalb einer Periode (von links nach rechts) ab, da der Kern die Elektronen stärker anzieht, und nimmt innerhalb einer Gruppe nach unten zu, da mehr Schalen hinzugefügt werden.</value>
+  </data>
+  <data name="ai_unit_atoms_per_si" xml:space="preserve">
+    <value>Atome pro 10⁶ Siliciumatome</value>
+  </data>
+  <data name="ai_unit_bridge_note" xml:space="preserve">
+    <value>Umgerechnet mit 1 eV = 96,485 kJ/mol — dieselbe Energie, je Teilchen statt je Mol gezählt.</value>
+  </data>
+  <data name="ai_unit_converted" xml:space="preserve">
+    <value>**%1$s %2$s** sind **%3$s %4$s**.</value>
+  </data>
+  <data name="ai_unit_mg_per_kg" xml:space="preserve">
+    <value>mg/kg (ppm)</value>
+  </data>
+  <data name="ai_unit_ug_per_l" xml:space="preserve">
+    <value>µg/l</value>
+  </data>
+  <data name="ai_usage_header" xml:space="preserve">
+    <value>Hier sind einige häufige Anwendungen und Fakten über **%1$s**:</value>
+  </data>
+  <data name="ai_valence_alkali" xml:space="preserve">
+    <value>Als Alkalimetall hat es **1 Valenzelektron** in seiner Außenschale.</value>
+  </data>
+  <data name="ai_valence_alkaline" xml:space="preserve">
+    <value>Als Erdalkalimetall hat es **2 Valenzelektronen**.</value>
+  </data>
+  <data name="ai_valence_halogen" xml:space="preserve">
+    <value>Als Halogen hat es **7 Valenzelektronen** und möchte unbedingt eines dazugewinnen!</value>
+  </data>
+  <data name="ai_valence_noble_helium" xml:space="preserve">
+    <value>Helium hat **2 Valenzelektronen**, die seine einzige Schale vervollständigen.</value>
+  </data>
+  <data name="ai_valence_noble_other" xml:space="preserve">
+    <value>Es hat eine volle Außenschale mit **8 Valenzelektronen**, was es sehr stabil macht.</value>
+  </data>
+  <data name="ai_value_is_range" xml:space="preserve">
+    <value>Dies ist ein Bereich; die Rangfolge nutzt seinen Mittelwert.</value>
+  </data>
+  <data name="ai_value_trace" xml:space="preserve">
+    <value>Spuren</value>
+  </data>
+  <data name="ai_versus" xml:space="preserve">
+    <value>gegen</value>
+  </data>
+  <data name="all_core_features" xml:space="preserve">
+    <value>Alle Kernfunktionen</value>
+  </data>
+  <data name="alloy_base_aluminium" xml:space="preserve">
+    <value>Aluminium</value>
+  </data>
+  <data name="alloy_base_copper" xml:space="preserve">
+    <value>Kupfer</value>
+  </data>
+  <data name="alloy_base_gold" xml:space="preserve">
+    <value>Gold</value>
+  </data>
+  <data name="alloy_base_iron" xml:space="preserve">
+    <value>Eisen</value>
+  </data>
+  <data name="alloy_base_mercury" xml:space="preserve">
+    <value>Quecksilber</value>
+  </data>
+  <data name="alloy_base_nickel" xml:space="preserve">
+    <value>Nickel</value>
+  </data>
+  <data name="alloy_base_silver" xml:space="preserve">
+    <value>Silber</value>
+  </data>
+  <data name="alloy_base_tin" xml:space="preserve">
+    <value>Zinn</value>
+  </data>
+  <data name="alloy_base_titanium" xml:space="preserve">
+    <value>Titan</value>
+  </data>
+  <data name="alloy_clear_filter" xml:space="preserve">
+    <value>Filter zurücksetzen</value>
+  </data>
+  <data name="alo" xml:space="preserve">
+    <value>Legierungstabelle</value>
+  </data>
+  <data name="alphabetical" xml:space="preserve">
+    <value>Alphabetisch</value>
+  </data>
+  <data name="and_more_item" xml:space="preserve">
+    <value>- Und mehr</value>
+  </data>
+  <data name="answer_no" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="answer_timeout" xml:space="preserve">
+    <value>Zeit abgelaufen</value>
+  </data>
+  <data name="answer_yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>Atomic</value>
+  </data>
+  <data name="appearance" xml:space="preserve">
+    <value>Aussehen</value>
+  </data>
+  <data name="appearance_colon" xml:space="preserve">
+    <value>Aussehen:</value>
+  </data>
+  <data name="appwidget_text" xml:space="preserve">
+    <value>BEISPIEL</value>
+  </data>
+  <data name="ask_atomic" xml:space="preserve">
+    <value>Atomic fragen</value>
+  </data>
+  <data name="atomic_mass" xml:space="preserve">
+    <value>Atommasse</value>
+  </data>
+  <data name="atomic_mass_colon" xml:space="preserve">
+    <value>Atommasse:</value>
+  </data>
+  <data name="atomic_number" xml:space="preserve">
+    <value>Ordnungszahl</value>
+  </data>
+  <data name="atomic_number_label" xml:space="preserve">
+    <value>Ordnungszahl:</value>
+  </data>
+  <data name="atomic_properties" xml:space="preserve">
+    <value>Atomare Eigenschaften</value>
+  </data>
+  <data name="atomic_radius_calculated_colon" xml:space="preserve">
+    <value>Atomradius (berechnet):</value>
+  </data>
+  <data name="atomic_radius_empirical_colon" xml:space="preserve">
+    <value>Atomradius (empirisch):</value>
+  </data>
+  <data name="atomic_weight" xml:space="preserve">
+    <value>Atomgewicht</value>
+  </data>
+  <data name="atomic_weight_relative_atomic_mass" xml:space="preserve">
+    <value>Atomgewicht (relative Atommasse):</value>
+  </data>
+  <data name="auto_hide_bottombar" xml:space="preserve">
+    <value>Untere Leiste automatisch ausblenden</value>
+  </data>
+  <data name="auto_hide_bottombar_desc" xml:space="preserve">
+    <value>Deaktiviert das Standardverhalten</value>
+  </data>
+  <data name="bal" xml:space="preserve">
+    <value>Ausgleich</value>
+  </data>
+  <data name="balance_equation" xml:space="preserve">
+    <value>Gleichung ausgleichen:</value>
+  </data>
+  <data name="balance_equation_colon" xml:space="preserve">
+    <value>Gleichung ausgleichen:</value>
+  </data>
+  <data name="balancer_text" xml:space="preserve">
+    <value>Gleichen Sie verschiedene chemische Reaktionen aus und speichern Sie Favoriten für die spätere Verwendung</value>
+  </data>
+  <data name="balancer_title" xml:space="preserve">
+    <value>Chemische Reaktionen</value>
+  </data>
+  <data name="balancer_tool_card_title" xml:space="preserve">
+    <value>Eine Gleichung ausgleichen</value>
+  </data>
+  <data name="balancer_tool_copied" xml:space="preserve">
+    <value>Gleichung kopiert</value>
+  </data>
+  <data name="balancer_tool_examples" xml:space="preserve">
+    <value>Beispiele</value>
+  </data>
+  <data name="balancer_tool_hint" xml:space="preserve">
+    <value>Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="balancer_tool_note" xml:space="preserve">
+    <value>Pfeile lassen sich als -&gt;, =&gt;, = oder → schreiben. Zustandsangaben wie (s), (l), (g) und (aq) werden ignoriert.</value>
+  </data>
+  <data name="balancer_tool_prompt" xml:space="preserve">
+    <value>Gib eine Gleichung mit einem Pfeil ein, zum Beispiel Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="balancer_tool_result" xml:space="preserve">
+    <value>Ausgeglichene Gleichung</value>
+  </data>
+  <data name="balancer_tool_text" xml:space="preserve">
+    <value>Chemische Gleichungen mit exakten ganzzahligen Koeffizienten ausgleichen</value>
+  </data>
+  <data name="balancer_tool_title" xml:space="preserve">
+    <value>Gleichungsrechner</value>
+  </data>
+  <data name="base_label" xml:space="preserve">
+    <value>"Basismetall: "</value>
+  </data>
+  <data name="block" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="block_colon" xml:space="preserve">
+    <value>Block:</value>
+  </data>
+  <data name="blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="boiling_point" xml:space="preserve">
+    <value>Siedepunkt</value>
+  </data>
+  <data name="boiling_point_celsius" xml:space="preserve">
+    <value>Siedepunkt (°C):</value>
+  </data>
+  <data name="boiling_point_colon" xml:space="preserve">
+    <value>Siedepunkt:</value>
+  </data>
+  <data name="boiling_point_fahrenheit" xml:space="preserve">
+    <value>Siedepunkt (°F):</value>
+  </data>
+  <data name="boiling_point_kelvin" xml:space="preserve">
+    <value>Siedepunkt (Kelvin):</value>
+  </data>
+  <data name="bonus_xp" xml:space="preserve">
+    <value>+0% Bonus aktiv</value>
+  </data>
+  <data name="brinell_hardness" xml:space="preserve">
+    <value>Brinell-Härte</value>
+  </data>
+  <data name="brinell_hardness_colon" xml:space="preserve">
+    <value>Brinellhärte:</value>
+  </data>
+  <data name="bug" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="bulk_modulus" xml:space="preserve">
+    <value>Kompressionsmodul</value>
+  </data>
+  <data name="cal" xml:space="preserve">
+    <value>Rechner</value>
+  </data>
+  <data name="calc_elements_shown" xml:space="preserve">
+    <value>Enthaltene Elemente werden hier angezeigt</value>
+  </data>
+  <data name="calc_favorites" xml:space="preserve">
+    <value>Favoriten:</value>
+  </data>
+  <data name="calc_molar_mass" xml:space="preserve">
+    <value>Molare Masse:</value>
+  </data>
+  <data name="calc_no_favorites" xml:space="preserve">
+    <value>Derzeit keine Favoriten</value>
+  </data>
+  <data name="calc_no_pro_text" xml:space="preserve">
+    <value>Um auf die Favoriten zuzugreifen und dort zu speichern, benötigen Sie die PRO-Version</value>
+  </data>
+  <data name="calculations" xml:space="preserve">
+    <value>Berechnungen</value>
+  </data>
+  <data name="calculations_stat" xml:space="preserve">
+    <value>Berechnungen</value>
+  </data>
+  <data name="calculator_card_title" xml:space="preserve">
+    <value>Rechner:</value>
+  </data>
+  <data name="calculator_default_value" xml:space="preserve">
+    <value>0,0 (g/mol)</value>
+  </data>
+  <data name="calculator_formula" xml:space="preserve">
+    <value>Formel:</value>
+  </data>
+  <data name="calculator_text" xml:space="preserve">
+    <value>Enthält einen Rechner zur Berechnung der molaren Masse für verschiedene Verbindungen sowie zum Speichern von Favoriten</value>
+  </data>
+  <data name="calculator_title" xml:space="preserve">
+    <value>Rechner</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="card_order" xml:space="preserve">
+    <value>Kartenreihenfolge</value>
+  </data>
+  <data name="cas_number" xml:space="preserve">
+    <value>CAS-Nummer:</value>
+  </data>
+  <data name="cas_number_colon" xml:space="preserve">
+    <value>CAS-Nummer:</value>
+  </data>
+  <data name="chip_chemistry" xml:space="preserve">
+    <value>Chemie</value>
+  </data>
+  <data name="chip_math" xml:space="preserve">
+    <value>Mathematik</value>
+  </data>
+  <data name="chip_minerals" xml:space="preserve">
+    <value>Mineralien</value>
+  </data>
+  <data name="chip_physics" xml:space="preserve">
+    <value>Physik</value>
+  </data>
+  <data name="chip_reactions" xml:space="preserve">
+    <value>Reaktionen</value>
+  </data>
+  <data name="chip_rocks" xml:space="preserve">
+    <value>Gesteine</value>
+  </data>
+  <data name="chip_soils" xml:space="preserve">
+    <value>Böden</value>
+  </data>
+  <data name="chip_water" xml:space="preserve">
+    <value>Wasser</value>
+  </data>
+  <data name="clear_cache_title" xml:space="preserve">
+    <value>Cache löschen</value>
+  </data>
+  <data name="clear_filter" xml:space="preserve">
+    <value>Filter löschen</value>
+  </data>
+  <data name="color_label" xml:space="preserve">
+    <value>Farbe: </value>
+  </data>
+  <data name="composition_label" xml:space="preserve">
+    <value>"Zusammensetzung: "</value>
+  </data>
+  <data name="con" xml:space="preserve">
+    <value>Konstantentabelle</value>
+  </data>
+  <data name="confirm_sign_out" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie sich abmelden möchten?</value>
+  </data>
+  <data name="constants_search" xml:space="preserve">
+    <value>Nach Konstante suchen</value>
+  </data>
+  <data name="constants_table_label" xml:space="preserve">
+    <value>Konstantentabelle:</value>
+  </data>
+  <data name="constants_tite" xml:space="preserve">
+    <value>Konstantentabelle</value>
+  </data>
+  <data name="correct" xml:space="preserve">
+    <value>Richtig</value>
+  </data>
+  <data name="correct_answer" xml:space="preserve">
+    <value>Richtige Antwort: %s</value>
+  </data>
+  <data name="credits_electro_boy_info" xml:space="preserve">
+    <value>Übersetzungen für Afrikaans</value>
+  </data>
+  <data name="credits_giancarlo_info" xml:space="preserve">
+    <value>Übersetzungen für Spanisch und Italienisch</value>
+  </data>
+  <data name="credits_text" xml:space="preserve">
+    <value>Danksagungen an Mitwirkende</value>
+  </data>
+  <data name="credits_title" xml:space="preserve">
+    <value>Danksagungen</value>
+  </data>
+  <data name="cristal_structure_label" xml:space="preserve">
+    <value>Kristallstruktur: </value>
+  </data>
+  <data name="crystal_structure" xml:space="preserve">
+    <value>Kristallstruktur:</value>
+  </data>
+  <data name="currently_no_favorites" xml:space="preserve">
+    <value>Derzeit keine Favoriten</value>
+  </data>
+  <data name="customize_detail_card_order" xml:space="preserve">
+    <value>Reihenfolge der Detailkarten anpassen</value>
+  </data>
+  <data name="customize_units_table" xml:space="preserve">
+    <value>Einheiten in der Haupttabelle anpassen</value>
+  </data>
+  <data name="dark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="data_issue" xml:space="preserve">
+    <value>Datenproblem</value>
+  </data>
+  <data name="data_visualisations" xml:space="preserve">
+    <value>Datenvisualisierungen:</value>
+  </data>
+  <data name="debye_temperature_low_temperature_limit" xml:space="preserve">
+    <value>Debye-Temperatur: (Niedertemperaturgrenze)</value>
+  </data>
+  <data name="debye_temperature_room_temperature" xml:space="preserve">
+    <value>Debye-Temperatur: (Raumtemperatur)</value>
+  </data>
+  <data name="decay_alpha" xml:space="preserve">
+    <value>Alphazerfall (α)</value>
+  </data>
+  <data name="decay_beta_minus" xml:space="preserve">
+    <value>Beta-minus-Zerfall (β−)</value>
+  </data>
+  <data name="decay_beta_plus" xml:space="preserve">
+    <value>Beta-plus-Zerfall (β+)</value>
+  </data>
+  <data name="decay_electron_capture" xml:space="preserve">
+    <value>Elektroneneinfang</value>
+  </data>
+  <data name="decay_info_fab" xml:space="preserve">
+    <value>Informationen zu verschiedenen Zerfallstypen</value>
+  </data>
+  <data name="decay_neutron_emission" xml:space="preserve">
+    <value>Neutronenemission</value>
+  </data>
+  <data name="decay_proton_emission" xml:space="preserve">
+    <value>Protonenemission</value>
+  </data>
+  <data name="decay_spontaneous_fission" xml:space="preserve">
+    <value>Spontane Spaltung</value>
+  </data>
+  <data name="density" xml:space="preserve">
+    <value>Dichte</value>
+  </data>
+  <data name="density_colon" xml:space="preserve">
+    <value>Dichte:</value>
+  </data>
+  <data name="density_label" xml:space="preserve">
+    <value>Dichte: </value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="description_colon" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
+  <data name="detail_card_order" xml:space="preserve">
+    <value>Detailkartenreihenfolge</value>
+  </data>
+  <data name="dictionary" xml:space="preserve">
+    <value>Wörterbuch</value>
+  </data>
+  <data name="dictionary_search" xml:space="preserve">
+    <value>Nach Wörterbucheintrag suchen</value>
+  </data>
+  <data name="discovered_by" xml:space="preserve">
+    <value>Entdeckt von</value>
+  </data>
+  <data name="discovered_by_colon" xml:space="preserve">
+    <value>Entdeckt von:</value>
+  </data>
+  <data name="discovery_year" xml:space="preserve">
+    <value>Entdeckungsjahr</value>
+  </data>
+  <data name="display_mode" xml:space="preserve">
+    <value>Anzeigemodus</value>
+  </data>
+  <data name="early_access_features" xml:space="preserve">
+    <value>Früher Zugriff auf neue Funktionen:</value>
+  </data>
+  <data name="easy" xml:space="preserve">
+    <value>Einfach</value>
+  </data>
+  <data name="eg_number" xml:space="preserve">
+    <value>EG-Nummer:</value>
+  </data>
+  <data name="eg_number_colon" xml:space="preserve">
+    <value>EG-Nummer:</value>
+  </data>
+  <data name="ele" xml:space="preserve">
+    <value>Elektrochemische Reihe</value>
+  </data>
+  <data name="electrical_resistivity" xml:space="preserve">
+    <value>Elektrischer Widerstand</value>
+  </data>
+  <data name="electrical_resistivity_colon" xml:space="preserve">
+    <value>Elektrischer Widerstand:</value>
+  </data>
+  <data name="electrical_type" xml:space="preserve">
+    <value>Elektrischer Typ</value>
+  </data>
+  <data name="electrical_type_colon" xml:space="preserve">
+    <value>Elektrischer Typ:</value>
+  </data>
+  <data name="electrochemical_series" xml:space="preserve">
+    <value>Elektrochemische Reihe</value>
+  </data>
+  <data name="electrochemical_series_search" xml:space="preserve">
+    <value>Nach Element suchen</value>
+  </data>
+  <data name="electromagnetic_properties" xml:space="preserve">
+    <value>Elektromagnetische Eigenschaften</value>
+  </data>
+  <data name="electron_affinity_colon" xml:space="preserve">
+    <value>Elektronenaffinität:</value>
+  </data>
+  <data name="electron_configuration_colon" xml:space="preserve">
+    <value>Elektronenkonfiguration:</value>
+  </data>
+  <data name="electron_shell_colon" xml:space="preserve">
+    <value>Elektronenschale:</value>
+  </data>
+  <data name="electronegativity" xml:space="preserve">
+    <value>Elektronegativität</value>
+  </data>
+  <data name="electronegativity_colon" xml:space="preserve">
+    <value>Elektronegativität:</value>
+  </data>
+  <data name="element_bulk_modulus" xml:space="preserve">
+    <value>Kompressionsmodul:</value>
+  </data>
+  <data name="element_description_title" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="element_elastic_modulus" xml:space="preserve">
+    <value>Elastizitätsmodul:</value>
+  </data>
+  <data name="element_electrons" xml:space="preserve">
+    <value>Elektronen:</value>
+  </data>
+  <data name="element_groups" xml:space="preserve">
+    <value>Elementgruppen</value>
+  </data>
+  <data name="element_info_title" xml:space="preserve">
+    <value>Elementinformationen</value>
+  </data>
+  <data name="element_more_title" xml:space="preserve">
+    <value>Zusätzliche Eigenschaften</value>
+  </data>
+  <data name="element_name_default" xml:space="preserve">
+    <value>Elementname (Standard)</value>
+  </data>
+  <data name="element_names" xml:space="preserve">
+    <value>Elementnamen</value>
+  </data>
+  <data name="element_number" xml:space="preserve">
+    <value>Elementnummer</value>
+  </data>
+  <data name="element_overview" xml:space="preserve">
+    <value>Elementübersicht:</value>
+  </data>
+  <data name="element_poisson_ratio" xml:space="preserve">
+    <value>Poissonzahl:</value>
+  </data>
+  <data name="element_shear_modulus" xml:space="preserve">
+    <value>Schubmodul:</value>
+  </data>
+  <data name="element_speed_sound" xml:space="preserve">
+    <value>Schallgeschwindigkeit:</value>
+  </data>
+  <data name="element_symbols" xml:space="preserve">
+    <value>Elementsymbole</value>
+  </data>
+  <data name="element_young_modulus" xml:space="preserve">
+    <value>Elastizitätsmodul:</value>
+  </data>
+  <data name="elements_included_will_be_shown_here" xml:space="preserve">
+    <value>Enthaltene Elemente werden hier angezeigt</value>
+  </data>
+  <data name="elements_opened" xml:space="preserve">
+    <value>Geöffnete Elemente</value>
+  </data>
+  <data name="emi" xml:space="preserve">
+    <value>Emissionsspektrumtabelle</value>
+  </data>
+  <data name="emission_spectrum_colon" xml:space="preserve">
+    <value>Emissionsspektrum:</value>
+  </data>
+  <data name="emission_spectrum_table" xml:space="preserve">
+    <value>Emissionsspektrumtabelle:</value>
+  </data>
+  <data name="emission_text" xml:space="preserve">
+    <value>Emissionsspektrum für Elemente, das die Frequenzen elektromagnetischer Strahlung zeigt, die aufgrund von Elektronenübergängen von einem höheren zu einem niedrigeren Energieniveau emittiert wird.</value>
+  </data>
+  <data name="emission_title" xml:space="preserve">
+    <value>Emissionsspektrumtabelle</value>
+  </data>
+  <data name="enable_sync" xml:space="preserve">
+    <value>Synchronisation aktivieren</value>
+  </data>
+  <data name="enable_sync_desc" xml:space="preserve">
+    <value>Die Synchronisation des Fortschritts für Level, XP, Erfolge usw. ist für PRO- und PRO+-Benutzer verfügbar</value>
+  </data>
+  <data name="enable_sync_pro_button" xml:space="preserve">
+    <value>Upgraden</value>
+  </data>
+  <data name="enable_zoom_in_tables" xml:space="preserve">
+    <value>Zoom in Tabellen aktivieren</value>
+  </data>
+  <data name="english_name_colon" xml:space="preserve">
+    <value>Englischer Name:</value>
+  </data>
+  <data name="enter_new_text" xml:space="preserve">
+    <value>Neuen Text eingeben</value>
+  </data>
+  <data name="eqe" xml:space="preserve">
+    <value>Formeln</value>
+  </data>
+  <data name="equations_search_other" xml:space="preserve">
+    <value>Versuchen Sie, nach einem anderen Wort zu suchen oder überprüfen Sie die Schreibweise.</value>
+  </data>
+  <data name="exam_best_score" xml:space="preserve">
+    <value>Bestergebnis: %1$d %%</value>
+  </data>
+  <data name="exam_finished_xp" xml:space="preserve">
+    <value>Prüfung abgeschlossen: +%1$d XP</value>
+  </data>
+  <data name="exam_locked" xml:space="preserve">
+    <value>Erreiche Level %1$d zum Freischalten</value>
+  </data>
+  <data name="exam_not_taken" xml:space="preserve">
+    <value>Noch nicht versucht</value>
+  </data>
+  <data name="exam_passed" xml:space="preserve">
+    <value>Bestanden · Bestergebnis %1$d %%</value>
+  </data>
+  <data name="exam_pro_locked" xml:space="preserve">
+    <value>Für diese Prüfung wird PRO+ benötigt</value>
+  </data>
+  <data name="exam_results" xml:space="preserve">
+    <value>Prüfungsergebnisse</value>
+  </data>
+  <data name="exam_start" xml:space="preserve">
+    <value>Prüfung starten</value>
+  </data>
+  <data name="exam_test_subtitle" xml:space="preserve">
+    <value>Alles von Level %1$d bis %2$d, gemischt</value>
+  </data>
+  <data name="exam_test_title" xml:space="preserve">
+    <value>Prüfung</value>
+  </data>
+  <data name="experimental" xml:space="preserve">
+    <value>Experimentell</value>
+  </data>
+  <data name="experimental_text" xml:space="preserve">
+    <value>Zusätzliche experimentelle Einstellungen</value>
+  </data>
+  <data name="experimental_title" xml:space="preserve">
+    <value>Experimentelle Einstellungen</value>
+  </data>
+  <data name="favorite_bar" xml:space="preserve">
+    <value>Favoritenleiste</value>
+  </data>
+  <data name="favorite_settings_atomic_properties" xml:space="preserve">
+    <value>Atomare Eigenschaften</value>
+  </data>
+  <data name="favorite_settings_electromagnetic" xml:space="preserve">
+    <value>Elektromagnetische Eigenschaften</value>
+  </data>
+  <data name="favorite_settings_general" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="favorite_settings_nuclear" xml:space="preserve">
+    <value>Nuklear</value>
+  </data>
+  <data name="favorite_settings_temperatures" xml:space="preserve">
+    <value>Temperaturen</value>
+  </data>
+  <data name="favorite_settings_thermodynamics" xml:space="preserve">
+    <value>Thermodynamik</value>
+  </data>
+  <data name="favorite_settings_title" xml:space="preserve">
+    <value>Favoritenleiste</value>
+  </data>
+  <data name="favorites_colon" xml:space="preserve">
+    <value>Favoriten:</value>
+  </data>
+  <data name="features" xml:space="preserve">
+    <value>Funktionen:</value>
+  </data>
+  <data name="fifty_lives_in_flashcards" xml:space="preserve">
+    <value>50 Leben in Karteikarten:</value>
+  </data>
+  <data name="finished_game_xp" xml:space="preserve">
+    <value>Spiel beendet: +%dxp</value>
+  </data>
+  <data name="fire_hazard" xml:space="preserve">
+    <value>Brandgefahr:</value>
+  </data>
+  <data name="fla" xml:space="preserve">
+    <value>Lernkarten</value>
+  </data>
+  <data name="flashcards_atomic_mass" xml:space="preserve">
+    <value>Atommasse</value>
+  </data>
+  <data name="flashcards_chemical_reactions" xml:space="preserve">
+    <value>Chemische Reaktionen</value>
+  </data>
+  <data name="flashcards_difficulty" xml:space="preserve">
+    <value>Schwierigkeit wählen:</value>
+  </data>
+  <data name="flashcards_difficulty_title" xml:space="preserve">
+    <value>Schwierigkeit</value>
+  </data>
+  <data name="flashcards_element_classifications" xml:space="preserve">
+    <value>Elementklassifizierungen</value>
+  </data>
+  <data name="flashcards_element_symbols" xml:space="preserve">
+    <value>Elementsymbole</value>
+  </data>
+  <data name="flashcards_free_games" xml:space="preserve">
+    <value>Kostenlose Spiele:</value>
+  </data>
+  <data name="flashcards_game_element_appearance" xml:space="preserve">
+    <value>Aussehen</value>
+  </data>
+  <data name="flashcards_game_element_atomic_mass" xml:space="preserve">
+    <value>Atommasse</value>
+  </data>
+  <data name="flashcards_game_element_density" xml:space="preserve">
+    <value>Dichte</value>
+  </data>
+  <data name="flashcards_game_element_groups" xml:space="preserve">
+    <value>Elementgruppen</value>
+  </data>
+  <data name="flashcards_game_element_names" xml:space="preserve">
+    <value>Elementnamen</value>
+  </data>
+  <data name="flashcards_game_element_symbols" xml:space="preserve">
+    <value>Elementsymbole</value>
+  </data>
+  <data name="flashcards_info" xml:space="preserve">
+    <value>Lernen Sie das Periodensystem mit den integrierten "Lernspielen"</value>
+  </data>
+  <data name="flashcards_level" xml:space="preserve">
+    <value>Stufe</value>
+  </data>
+  <data name="flashcards_lives_info" xml:space="preserve">
+    <value>Jede falsche Antwort führt zum Verlust eines Lebens</value>
+  </data>
+  <data name="flashcards_mixed_questions" xml:space="preserve">
+    <value>Gemischte Fragen</value>
+  </data>
+  <data name="flashcards_pro_level_0_5" xml:space="preserve">
+    <value>Stufe 0:</value>
+  </data>
+  <data name="flashcards_pro_level_10_15" xml:space="preserve">
+    <value>Stufe 10:</value>
+  </data>
+  <data name="flashcards_pro_level_5_10" xml:space="preserve">
+    <value>Stufe 5:</value>
+  </data>
+  <data name="flashcards_pro_plus_games" xml:space="preserve">
+    <value>PRO+ Spiele:</value>
+  </data>
+  <data name="flashcards_statistics" xml:space="preserve">
+    <value>Statistiken</value>
+  </data>
+  <data name="flashcards_title" xml:space="preserve">
+    <value>Lernkarten</value>
+  </data>
+  <data name="flashcards_total_games" xml:space="preserve">
+    <value>Spiele</value>
+  </data>
+  <data name="flashcards_total_xp" xml:space="preserve">
+    <value>Gesamt-XP</value>
+  </data>
+  <data name="flashcards_unlimited_lives" xml:space="preserve">
+    <value>Unbegrenzte Leben in Lernkarten:</value>
+  </data>
+  <data name="formula_will_be_displayed_here" xml:space="preserve">
+    <value>Formel wird hier angezeigt</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>KOSTENLOS</value>
+  </data>
+  <data name="fusion_heat" xml:space="preserve">
+    <value>Schmelzwärme</value>
+  </data>
+  <data name="fusion_heat_colon" xml:space="preserve">
+    <value>Schmelzwärme:</value>
+  </data>
+  <data name="game_compare_pair" xml:space="preserve">
+    <value>Direktvergleich</value>
+  </data>
+  <data name="game_extremes_advanced" xml:space="preserve">
+    <value>Fortgeschrittene Extremwerte</value>
+  </data>
+  <data name="game_group" xml:space="preserve">
+    <value>Gruppen</value>
+  </data>
+  <data name="game_highest" xml:space="preserve">
+    <value>Was ist am höchsten?</value>
+  </data>
+  <data name="game_isotope_decay" xml:space="preserve">
+    <value>Zerfallsarten</value>
+  </data>
+  <data name="game_isotope_half_life" xml:space="preserve">
+    <value>Halbwertszeit</value>
+  </data>
+  <data name="game_isotope_neutrons" xml:space="preserve">
+    <value>Neutronenzahl</value>
+  </data>
+  <data name="game_isotope_stability" xml:space="preserve">
+    <value>Stabile Isotope</value>
+  </data>
+  <data name="game_lowest" xml:space="preserve">
+    <value>Was ist am niedrigsten?</value>
+  </data>
+  <data name="game_molar_mass" xml:space="preserve">
+    <value>Molare Masse</value>
+  </data>
+  <data name="game_odd_one_out" xml:space="preserve">
+    <value>Was passt nicht?</value>
+  </data>
+  <data name="game_period" xml:space="preserve">
+    <value>Perioden</value>
+  </data>
+  <data name="game_results" xml:space="preserve">
+    <value>Spielergebnisse</value>
+  </data>
+  <data name="game_valence_electrons" xml:space="preserve">
+    <value>Valenzelektronen</value>
+  </data>
+  <data name="geo" xml:space="preserve">
+    <value>Geologietabelle</value>
+  </data>
+  <data name="geo_clear_filter" xml:space="preserve">
+    <value>Filter löschen</value>
+  </data>
+  <data name="geo_no_results" xml:space="preserve">
+    <value>Keine Ergebnisse</value>
+  </data>
+  <data name="geo_search_hint" xml:space="preserve">
+    <value>Nach Geologieelement suchen</value>
+  </data>
+  <data name="geo_try_another_search" xml:space="preserve">
+    <value>Versuchen Sie, nach einem anderen Wort zu suchen oder überprüfen Sie die Schreibweise.</value>
+  </data>
+  <data name="geology_table" xml:space="preserve">
+    <value>Geologietabelle:</value>
+  </data>
+  <data name="get_pro" xml:space="preserve">
+    <value>PRO holen</value>
+  </data>
+  <data name="get_pro_button" xml:space="preserve">
+    <value>PRO holen</value>
+  </data>
+  <data name="get_pro_element_text" xml:space="preserve">
+    <value>Holen Sie sich die PRO-Version, um zusätzliche Informationen zu Elementen freizuschalten</value>
+  </data>
+  <data name="get_pro_plus" xml:space="preserve">
+    <value>PRO+ holen</value>
+  </data>
+  <data name="get_pro_plus_button" xml:space="preserve">
+    <value>PRO+ holen</value>
+  </data>
+  <data name="get_pro_title" xml:space="preserve">
+    <value>PRO-Version erhalten</value>
+  </data>
+  <data name="git_text" xml:space="preserve">
+    <value>Atomics Open-Source-GitHub-Repository</value>
+  </data>
+  <data name="go_online_for_emission" xml:space="preserve">
+    <value>Online gehen für Emissionslinien</value>
+  </data>
+  <data name="go_online_for_emission_lines" xml:space="preserve">
+    <value>Online gehen für Emissionslinien</value>
+  </data>
+  <data name="go_pro_more_features" xml:space="preserve">
+    <value>Gehe Pro - mehr Funktionen</value>
+  </data>
+  <data name="go_pro_school_start_sale" xml:space="preserve">
+    <value>GEHE PRO - SCHULSTART-VERKAUF</value>
+  </data>
+  <data name="grid_parameters" xml:space="preserve">
+    <value>Gitterparameter: (Gitterkonstanten)</value>
+  </data>
+  <data name="grid_title" xml:space="preserve">
+    <value>Gittereigenschaften</value>
+  </data>
+  <data name="group_label" xml:space="preserve">
+    <value>Gruppe: </value>
+  </data>
+  <data name="hard" xml:space="preserve">
+    <value>Schwer</value>
+  </data>
+  <data name="hardness_label" xml:space="preserve">
+    <value>Härte: </value>
+  </data>
+  <data name="hardness_properties" xml:space="preserve">
+    <value>Härteeigenschaften</value>
+  </data>
+  <data name="hardness_properties_requires_pro" xml:space="preserve">
+    <value>Härte-Eigenschaften erfordern PRO-Version. Holen Sie sich PRO, um mehr Daten und Tabellen freizuschalten:</value>
+  </data>
+  <data name="hazard_diamond" xml:space="preserve">
+    <value>Gefahrendiamant</value>
+  </data>
+  <data name="hazard_flammability" xml:space="preserve">
+    <value>Entflammbarkeit</value>
+  </data>
+  <data name="hazard_health" xml:space="preserve">
+    <value>Gesundheitsgefahr</value>
+  </data>
+  <data name="hazard_instability" xml:space="preserve">
+    <value>Instabilität</value>
+  </data>
+  <data name="hazard_materials" xml:space="preserve">
+    <value>Gefahrstoffe:</value>
+  </data>
+  <data name="hazard_title" xml:space="preserve">
+    <value>Gefährlichkeit von Materialien</value>
+  </data>
+  <data name="hazard_title_requires_pro" xml:space="preserve">
+    <value>Gefährlichkeit von Materialien erfordert PRO-Version. Holen Sie sich PRO, um mehr Daten und Tabellen freizuschalten:</value>
+  </data>
+  <data name="health_hazard" xml:space="preserve">
+    <value>Gesundheitsgefahr:</value>
+  </data>
+  <data name="highest" xml:space="preserve">
+    <value>höchste</value>
+  </data>
+  <data name="info_text" xml:space="preserve">
+    <value>App-Version und Details</value>
+  </data>
+  <data name="info_title" xml:space="preserve">
+    <value>Informationen</value>
+  </data>
+  <data name="intro_calculator_description" xml:space="preserve">
+    <value>Berechnen Sie Molmassen chemischer Verbindungen schnell und genau. Perfekt für Chemiestudenten und Fachleute.</value>
+  </data>
+  <data name="intro_calculator_title" xml:space="preserve">
+    <value>Molmassen-Rechner</value>
+  </data>
+  <data name="intro_finish" xml:space="preserve">
+    <value>Loslegen</value>
+  </data>
+  <data name="intro_flashcards_description" xml:space="preserve">
+    <value>Meistern Sie das Periodensystem mit interaktiven Lernkarten. Testen Sie Ihr Wissen über Elementsymbole, Atommassen und chemische Eigenschaften.</value>
+  </data>
+  <data name="intro_flashcards_title" xml:space="preserve">
+    <value>Lernen mit Lernkarten</value>
+  </data>
+  <data name="intro_image_description" xml:space="preserve">
+    <value>Einführungsbild</value>
+  </data>
+  <data name="intro_next" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="intro_pro_description" xml:space="preserve">
+    <value>Erhalten Sie Zugriff auf zusätzliche Daten, erweiterte Tabellen, verbesserte Rechner und exklusive Funktionen mit der PRO-Version.</value>
+  </data>
+  <data name="intro_pro_title" xml:space="preserve">
+    <value>PRO-Funktionen freischalten</value>
+  </data>
+  <data name="intro_skip" xml:space="preserve">
+    <value>Überspringen</value>
+  </data>
+  <data name="intro_welcome_description" xml:space="preserve">
+    <value>Ihre umfassende Periodensystem-Referenz mit detaillierten Elementinformationen, interaktiven Tools und Lernfunktionen.</value>
+  </data>
+  <data name="intro_welcome_title" xml:space="preserve">
+    <value>Willkommen bei Atomic</value>
+  </data>
+  <data name="ion" xml:space="preserve">
+    <value>Ionisierungsenergien</value>
+  </data>
+  <data name="ion_charge_colon" xml:space="preserve">
+    <value>Ionenladung:</value>
+  </data>
+  <data name="ion_no_results" xml:space="preserve">
+    <value>Keine Ergebnisse</value>
+  </data>
+  <data name="ion_try_another_search" xml:space="preserve">
+    <value>Versuchen Sie, nach einem anderen Wort zu suchen oder überprüfen Sie die Schreibweise.</value>
+  </data>
+  <data name="ionization_energies_colon" xml:space="preserve">
+    <value>Ionisierungsenergien:</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>Isotope</value>
+  </data>
+  <data name="iso_half_life_colon" xml:space="preserve">
+    <value>Halbwertszeit:</value>
+  </data>
+  <data name="iso_no_results" xml:space="preserve">
+    <value>Keine Ergebnisse</value>
+  </data>
+  <data name="iso_search_hint" xml:space="preserve">
+    <value>Nach Isotopen suchen</value>
+  </data>
+  <data name="iso_try_another_search" xml:space="preserve">
+    <value>Versuchen Sie, nach einem anderen Wort zu suchen oder überprüfen Sie die Schreibweise.</value>
+  </data>
+  <data name="isotope" xml:space="preserve">
+    <value>Isotop</value>
+  </data>
+  <data name="isotopes_colon" xml:space="preserve">
+    <value>Isotope:</value>
+  </data>
+  <data name="isotopes_table_description" xml:space="preserve">
+    <value>Eine Tabelle mit Isotopen für verschiedene Elemente sowie Halbwertszeit-, Massen-, Protonen-, Neutronen- und Nukleonendaten.</value>
+  </data>
+  <data name="isotopes_title" xml:space="preserve">
+    <value>Isotope</value>
+  </data>
+  <data name="language_content" xml:space="preserve">
+    <value>Sprache auswählen</value>
+  </data>
+  <data name="language_title" xml:space="preserve">
+    <value>Sprachen</value>
+  </data>
+  <data name="learning_games" xml:space="preserve">
+    <value>Lernspiele:</value>
+  </data>
+  <data name="leave_game_confirm" xml:space="preserve">
+    <value>Verlassen</value>
+  </data>
+  <data name="leave_game_message" xml:space="preserve">
+    <value>Möchtest du das Spiel wirklich verlassen? Du verlierst %1$d Leben.</value>
+  </data>
+  <data name="leave_game_stay" xml:space="preserve">
+    <value>Bleiben</value>
+  </data>
+  <data name="leave_game_title" xml:space="preserve">
+    <value>Spiel verlassen?</value>
+  </data>
+  <data name="level_0_4" xml:space="preserve">
+    <value>Stufe 0</value>
+  </data>
+  <data name="level_10_14" xml:space="preserve">
+    <value>Stufe 10</value>
+  </data>
+  <data name="level_15_19" xml:space="preserve">
+    <value>Stufe 15</value>
+  </data>
+  <data name="level_20_24" xml:space="preserve">
+    <value>Stufe 20</value>
+  </data>
+  <data name="level_25_29" xml:space="preserve">
+    <value>Stufe 25</value>
+  </data>
+  <data name="level_30_34" xml:space="preserve">
+    <value>Stufe 30</value>
+  </data>
+  <data name="level_5_9" xml:space="preserve">
+    <value>Stufe 5</value>
+  </data>
+  <data name="level_range_format" xml:space="preserve">
+    <value>Stufe %1$d</value>
+  </data>
+  <data name="level_up_message" xml:space="preserve">
+    <value>Glückwunsch, du hast Level %1$d erreicht!</value>
+  </data>
+  <data name="level_up_title" xml:space="preserve">
+    <value>Level-Aufstieg!</value>
+  </data>
+  <data name="level_x_y" xml:space="preserve">
+    <value>Stufe X-Y</value>
+  </data>
+  <data name="license_title" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="licenses_text" xml:space="preserve">
+    <value>Lizenzen von Atomic verwendeter Werke</value>
+  </data>
+  <data name="licenses_title" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="light" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="lives_label" xml:space="preserve">
+    <value>Leben: %s</value>
+  </data>
+  <data name="lives_lost_detail" xml:space="preserve">
+    <value>Verlorene Leben: %1$d (%2$d pro falscher/Zeitüberschreitungs-Antwort)</value>
+  </data>
+  <data name="lives_lost_result.One" xml:space="preserve">
+    <value>%d Leben verloren</value>
+  </data>
+  <data name="lives_lost_result.Other" xml:space="preserve">
+    <value>%d Leben verloren</value>
+  </data>
+  <data name="lives_unlimited" xml:space="preserve">
+    <value>Leben: ∞</value>
+  </data>
+  <data name="login_for_sync" xml:space="preserve">
+    <value>Anmelden, um Synchronisation zu aktivieren</value>
+  </data>
+  <data name="login_for_sync_and_more" xml:space="preserve">
+    <value>Anmelden, um Daten zu synchronisieren</value>
+  </data>
+  <data name="lowest" xml:space="preserve">
+    <value>niedrigste</value>
+  </data>
+  <data name="magnetic_type" xml:space="preserve">
+    <value>Magnetischer Typ</value>
+  </data>
+  <data name="magnetic_type_colon" xml:space="preserve">
+    <value>Magnetischer Typ:</value>
+  </data>
+  <data name="magnetism_label" xml:space="preserve">
+    <value>Magnetismus: </value>
+  </data>
+  <data name="medium" xml:space="preserve">
+    <value>Mittel</value>
+  </data>
+  <data name="melting_point" xml:space="preserve">
+    <value>Schmelzpunkt</value>
+  </data>
+  <data name="melting_point_celsius" xml:space="preserve">
+    <value>Schmelzpunkt (°C):</value>
+  </data>
+  <data name="melting_point_colon" xml:space="preserve">
+    <value>Schmelzpunkt:</value>
+  </data>
+  <data name="melting_point_fahrenheit" xml:space="preserve">
+    <value>Schmelzpunkt (°F):</value>
+  </data>
+  <data name="melting_point_kelvin" xml:space="preserve">
+    <value>Schmelzpunkt (Kelvin):</value>
+  </data>
+  <data name="member_already" xml:space="preserve">
+    <value>Sie sind PRO-Mitglied!</value>
+  </data>
+  <data name="member_btn" xml:space="preserve">
+    <value>Ihre PRO-Vorteile</value>
+  </data>
+  <data name="member_desch" xml:space="preserve">
+    <value>Vielen Dank, dass Sie die Entwicklung von 'Atomic - Periodensystem' unterstützen. Auf dieser Seite finden Sie Informationen zu Ihren PRO-Vorteilen, sobald weitere PRO-Funktionen hinzugefügt werden.</value>
+  </data>
+  <data name="member_title" xml:space="preserve">
+    <value>PRO-Mitgliederseite</value>
+  </data>
+  <data name="mohs_hardness" xml:space="preserve">
+    <value>Mohs-Härte</value>
+  </data>
+  <data name="mohs_hardness_colon" xml:space="preserve">
+    <value>Mohshärte:</value>
+  </data>
+  <data name="molar_mass_value" xml:space="preserve">
+    <value>%1$s g/mol</value>
+  </data>
+  <data name="more_information" xml:space="preserve">
+    <value>Weitere Informationen:</value>
+  </data>
+  <data name="most_advanced" xml:space="preserve">
+    <value>Am fortschrittlichsten</value>
+  </data>
+  <data name="most_used" xml:space="preserve">
+    <value>Am häufigsten verwendet:</value>
+  </data>
+  <data name="neutron_cross_sectional" xml:space="preserve">
+    <value>Neutronen-Querschnitt</value>
+  </data>
+  <data name="neutron_cross_sectional_colon" xml:space="preserve">
+    <value>Neutronenquerschnitt:</value>
+  </data>
+  <data name="neutrons" xml:space="preserve">
+    <value>Neutronen:</value>
+  </data>
+  <data name="new_label" xml:space="preserve">
+    <value>NEU</value>
+  </data>
+  <data name="next_life_gain.One" xml:space="preserve">
+    <value>Du erhältst %d Leben.</value>
+  </data>
+  <data name="next_life_gain.Other" xml:space="preserve">
+    <value>Du erhältst %d Leben.</value>
+  </data>
+  <data name="next_life_in_detail" xml:space="preserve">
+    <value>Nächstes Leben in %1$d Minuten und %2$d Sekunden.
+%3$s</value>
+  </data>
+  <data name="no_image" xml:space="preserve">
+    <value>Kein Bild</value>
+  </data>
+  <data name="no_questions_title" xml:space="preserve">
+    <value>Nicht genügend Daten</value>
+  </data>
+  <data name="no_results" xml:space="preserve">
+    <value>Keine Ergebnisse</value>
+  </data>
+  <data name="no_unlocked_games" xml:space="preserve">
+    <value>Keine freigeschalteten Spiele verfügbar!</value>
+  </data>
+  <data name="non_pro" xml:space="preserve">
+    <value>NICHT-PRO</value>
+  </data>
+  <data name="notes_placeholder" xml:space="preserve">
+    <value>Notizen für das Element machen:</value>
+  </data>
+  <data name="nuc" xml:space="preserve">
+    <value>Nuklidtabelle</value>
+  </data>
+  <data name="nuclear_properties" xml:space="preserve">
+    <value>Nukleare Eigenschaften</value>
+  </data>
+  <data name="nucleons" xml:space="preserve">
+    <value>Nukleonen:</value>
+  </data>
+  <data name="nuclide_table" xml:space="preserve">
+    <value>Nuklidtabelle:</value>
+  </data>
+  <data name="nuclide_table_title" xml:space="preserve">
+    <value>Nuklidtabelle</value>
+  </data>
+  <data name="offline_mode" xml:space="preserve">
+    <value>Offline-Modus</value>
+  </data>
+  <data name="offline_mode_desc" xml:space="preserve">
+    <value>Deaktiviert das Laden von Bildern</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="open_base_element" xml:space="preserve">
+    <value>Basiselement öffnen</value>
+  </data>
+  <data name="open_table_button" xml:space="preserve">
+    <value>Tabelle öffnen</value>
+  </data>
+  <data name="other_settings" xml:space="preserve">
+    <value>Erweitert</value>
+  </data>
+  <data name="other_title" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
+  <data name="out_of_lives_hours" xml:space="preserve">
+    <value>Keine Leben mehr! Mehr Leben in %1$d Stunden, %2$d Minuten und %3$d Sekunden.</value>
+  </data>
+  <data name="out_of_lives_minutes" xml:space="preserve">
+    <value>Keine Leben mehr! Mehr Leben in %1$d Minuten und %2$d Sekunden.</value>
+  </data>
+  <data name="overview" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="owns_pro_plus" xml:space="preserve">
+    <value>Besitzt PRO+</value>
+  </data>
+  <data name="oxidation_states_colon" xml:space="preserve">
+    <value>Oxidationsstufen:</value>
+  </data>
+  <data name="perfect_all_correct_xp" xml:space="preserve">
+    <value>Perfekt (Alles richtig): +%dxp</value>
+  </data>
+  <data name="personalise_favorite_bar" xml:space="preserve">
+    <value>Favoritenleiste personalisieren</value>
+  </data>
+  <data name="personalization_settings" xml:space="preserve">
+    <value>Personalisierung</value>
+  </data>
+  <data name="ph_title" xml:space="preserve">
+    <value>pH-Indikatoren</value>
+  </data>
+  <data name="phase_stp" xml:space="preserve">
+    <value>Phase (STP)</value>
+  </data>
+  <data name="phase_stp_colon" xml:space="preserve">
+    <value>Phase (STP):</value>
+  </data>
+  <data name="phi" xml:space="preserve">
+    <value>pH-Indikatoren</value>
+  </data>
+  <data name="poi" xml:space="preserve">
+    <value>Poissonzahl-Tabelle</value>
+  </data>
+  <data name="poi_clear_filter" xml:space="preserve">
+    <value>Filter löschen</value>
+  </data>
+  <data name="poi_no_results" xml:space="preserve">
+    <value>Keine Ergebnisse</value>
+  </data>
+  <data name="poi_search_hint" xml:space="preserve">
+    <value>Nach Wörterbucheintrag suchen</value>
+  </data>
+  <data name="poi_try_another_search" xml:space="preserve">
+    <value>Versuchen Sie, nach einem anderen Wort zu suchen oder überprüfen Sie die Schreibweise.</value>
+  </data>
+  <data name="poisson_constants_sound_speed" xml:space="preserve">
+    <value>Poisson-Konstanten, Schallgeschwindigkeit:</value>
+  </data>
+  <data name="poisson_ratio_table" xml:space="preserve">
+    <value>Poisson-Verhältnis-Tabelle:</value>
+  </data>
+  <data name="poissons_ratio" xml:space="preserve">
+    <value>Poissonzahl</value>
+  </data>
+  <data name="poissons_ratio_title" xml:space="preserve">
+    <value>Poissonzahl</value>
+  </data>
+  <data name="popup_action_button" xml:space="preserve">
+    <value>Auf PRO+ upgraden</value>
+  </data>
+  <data name="popup_content_text" xml:space="preserve">
+    <value>Upgraden Sie 'Atomic - Periodensystem', um zusätzliche Daten, Tabellen und Lernkarten freizuschalten und mehr über das Periodensystem zu erfahren.</value>
+  </data>
+  <data name="popup_secondary_button" xml:space="preserve">
+    <value>Heute nicht</value>
+  </data>
+  <data name="popup_title" xml:space="preserve">
+    <value>Auf PRO+ upgraden</value>
+  </data>
+  <data name="price_placeholder" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="pro_additional_data" xml:space="preserve">
+    <value>Zusätzliche Daten</value>
+  </data>
+  <data name="pro_additional_data_descr" xml:space="preserve">
+    <value>Zusätzliche Daten wie Härteeigenschaften (Mohs-, Vickers- und Brinell-Härte) sowie Schallgeschwindigkeit, Poisson-Konstante, Elastizitäts-, Kompressions- und Schubmodul usw. Auch Informationen zur Identifizierung von Mineralien.</value>
+  </data>
+  <data name="pro_additional_flashcards" xml:space="preserve">
+    <value>Zusätzliche Lernkarten und Synchronisation</value>
+  </data>
+  <data name="pro_additional_flashcards_descr" xml:space="preserve">
+    <value>Zugriff auf zusätzliche Lernkarten, mehr Leben und Synchronisation Ihres Fortschritts</value>
+  </data>
+  <data name="pro_additional_sync" xml:space="preserve">
+    <value>Synchronisierung für Notizen und Fortschritt</value>
+  </data>
+  <data name="pro_additional_sync_descr" xml:space="preserve">
+    <value>Aktivieren Sie die Synchronisierung für Notizen und Fortschritt, um Ihr Studium auf allen Ihren Geräten zu erleichtern</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>Zusätzliche Tabellen</value>
+  </data>
+  <data name="pro_additional_tables_descr" xml:space="preserve">
+    <value>Zusätzliche Tabellen, darunter eine Nuklidtabelle, Poissonzahl-Tabelle, Konstanten-Tabelle, Geologie-Tabelle usw., mit weiteren Tabellen in Zukunft</value>
+  </data>
+  <data name="pro_additional_visualisations" xml:space="preserve">
+    <value>Zusätzliche Visualisierungen</value>
+  </data>
+  <data name="pro_additional_visualisations_descr" xml:space="preserve">
+    <value>Zugriff auf mehr Visualisierungen in der Haupttabelle wie Poissonzahl, Kompressionsmodul usw.</value>
+  </data>
+  <data name="pro_already_purchased_check" xml:space="preserve">
+    <value>Produkt auf Konto überprüfen</value>
+  </data>
+  <data name="pro_already_purchased_title" xml:space="preserve">
+    <value>Bereits Atomic - Periodensystem PRO gekauft?</value>
+  </data>
+  <data name="pro_better_ai" xml:space="preserve">
+    <value>Zusätzliche KI-Funktionen</value>
+  </data>
+  <data name="pro_better_ai_descr" xml:space="preserve">
+    <value>Schalten Sie alle Funktionen des KI-Assistenten frei, mit Quiz, Zugriff auf PRO-Daten und vielem mehr</value>
+  </data>
+  <data name="pro_better_calculator" xml:space="preserve">
+    <value>Verbesserter Rechner</value>
+  </data>
+  <data name="pro_better_calculator_descr" xml:space="preserve">
+    <value>Ein verbesserter Rechner mit der Möglichkeit, molare Massen verschiedener Verbindungen auf der Favoritenseite zu speichern.</value>
+  </data>
+  <data name="pro_descr" xml:space="preserve">
+    <value>'Atomic - Periodensystem' ist eine kostenlose und Open-Source-Anwendung, die ich in meiner Freizeit in Schweden erstellt habe. Durch den Kauf der PRO-Version unterstützen Sie die Entwicklung und erhalten zusätzliche Daten und Funktionen!</value>
+  </data>
+  <data name="pro_features_descr" xml:space="preserve">
+    <value>Entdecken Sie einige der vielen Funktionen der PRO-Version und was sie beinhalten.</value>
+  </data>
+  <data name="pro_features_table_description" xml:space="preserve">
+    <value>In der folgenden Tabelle sind die in den KOSTENLOSEN, PRO- und PRO+-Versionen enthaltenen Funktionen detailliert aufgeführt:</value>
+  </data>
+  <data name="pro_features_title" xml:space="preserve">
+    <value>Funktionen der PRO-Version:</value>
+  </data>
+  <data name="pro_get_more_out" xml:space="preserve">
+    <value>Mehr aus Atomic herausholen</value>
+  </data>
+  <data name="pro_plus_badge_text" xml:space="preserve">
+    <value>Am fortschrittlichsten</value>
+  </data>
+  <data name="pro_plus_rewards" xml:space="preserve">
+    <value>PRO+ Belohnungen: %s</value>
+  </data>
+  <data name="pro_plus_subtitle" xml:space="preserve">
+    <value>Erweiterte Daten und zusätzliche Lernkarten freischalten.</value>
+  </data>
+  <data name="pro_plus_user" xml:space="preserve">
+    <value>PRO+ BENUTZER</value>
+  </data>
+  <data name="pro_plus_version" xml:space="preserve">
+    <value>PRO+-Version</value>
+  </data>
+  <data name="pro_price_loading" xml:space="preserve">
+    <value>Preis wird abgerufen...</value>
+  </data>
+  <data name="pro_title" xml:space="preserve">
+    <value>PRO-Version</value>
+  </data>
+  <data name="pro_upgrade_to_pro" xml:space="preserve">
+    <value>Auf PRO upgraden</value>
+  </data>
+  <data name="pro_user" xml:space="preserve">
+    <value>PRO BENUTZER</value>
+  </data>
+  <data name="pro_user_badge" xml:space="preserve">
+    <value>PRO-Benutzer</value>
+  </data>
+  <data name="pro_version" xml:space="preserve">
+    <value>PRO-Version</value>
+  </data>
+  <data name="properties" xml:space="preserve">
+    <value>Eigenschaften</value>
+  </data>
+  <data name="protons" xml:space="preserve">
+    <value>Protonen:</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Frage</value>
+  </data>
+  <data name="question_appearance" xml:space="preserve">
+    <value>Wie ist das Aussehen von %s?</value>
+  </data>
+  <data name="question_atomic_mass" xml:space="preserve">
+    <value>Was ist die Atommasse von %s?</value>
+  </data>
+  <data name="question_atomic_number" xml:space="preserve">
+    <value>Was ist die Ordnungszahl von %s?</value>
+  </data>
+  <data name="question_block" xml:space="preserve">
+    <value>Zu welchem Block gehört %s?</value>
+  </data>
+  <data name="question_boiling_point_celsius" xml:space="preserve">
+    <value>Was ist der Siedepunkt (°C) von %s?</value>
+  </data>
+  <data name="question_boiling_point_fahrenheit" xml:space="preserve">
+    <value>Was ist der Siedepunkt (°F) von %s?</value>
+  </data>
+  <data name="question_boiling_point_kelvin" xml:space="preserve">
+    <value>Was ist der Siedepunkt (Kelvin) von %s?</value>
+  </data>
+  <data name="question_brinell_hardness" xml:space="preserve">
+    <value>Was ist die Brinellhärte von %s?</value>
+  </data>
+  <data name="question_crystal_structure" xml:space="preserve">
+    <value>Was ist die Kristallstruktur von %s?</value>
+  </data>
+  <data name="question_density" xml:space="preserve">
+    <value>Was ist die Dichte von %s?</value>
+  </data>
+  <data name="question_discovered_by" xml:space="preserve">
+    <value>Wer hat %s entdeckt?</value>
+  </data>
+  <data name="question_discovery_year" xml:space="preserve">
+    <value>In welchem Jahr wurde %s entdeckt?</value>
+  </data>
+  <data name="question_earth_crust_abundance" xml:space="preserve">
+    <value>Wie hoch ist die Häufigkeit von %s in der Erdkruste? mg/kg (ppm)</value>
+  </data>
+  <data name="question_earth_soils_abundance" xml:space="preserve">
+    <value>Wie hoch ist die Häufigkeit von %s in Erdböden? mg/kg (ppm)</value>
+  </data>
+  <data name="question_electrical_type" xml:space="preserve">
+    <value>Was ist der elektrische Typ von %s?</value>
+  </data>
+  <data name="question_electronegativity" xml:space="preserve">
+    <value>Was ist die Elektronegativität von %s?</value>
+  </data>
+  <data name="question_element_group" xml:space="preserve">
+    <value>Was ist die Elementgruppe von %s?</value>
+  </data>
+  <data name="question_element_name" xml:space="preserve">
+    <value>Wie lautet der Name für %s?</value>
+  </data>
+  <data name="question_element_symbol" xml:space="preserve">
+    <value>Wie lautet das Symbol für %s?</value>
+  </data>
+  <data name="question_group_of" xml:space="preserve">
+    <value>In welcher Gruppe steht %1$s?</value>
+  </data>
+  <data name="question_highest_atomic_mass" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Atommasse?</value>
+  </data>
+  <data name="question_highest_boiling_point" xml:space="preserve">
+    <value>Welches dieser Elemente hat den höchsten Siedepunkt?</value>
+  </data>
+  <data name="question_highest_brinell_hardness" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Brinellhärte?</value>
+  </data>
+  <data name="question_highest_bulk_modulus" xml:space="preserve">
+    <value>Welches dieser Elemente hat den höchsten Kompressionsmodul?</value>
+  </data>
+  <data name="question_highest_density" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Dichte?</value>
+  </data>
+  <data name="question_highest_electronegativity" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Elektronegativität?</value>
+  </data>
+  <data name="question_highest_fusion_heat" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Schmelzwärme?</value>
+  </data>
+  <data name="question_highest_melting_point" xml:space="preserve">
+    <value>Welches dieser Elemente hat den höchsten Schmelzpunkt?</value>
+  </data>
+  <data name="question_highest_mohs_hardness" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Mohshärte?</value>
+  </data>
+  <data name="question_highest_shear_modulus" xml:space="preserve">
+    <value>Welches dieser Elemente hat den höchsten Schubmodul?</value>
+  </data>
+  <data name="question_highest_speed_of_sound" xml:space="preserve">
+    <value>In welchem dieser Elemente breitet sich Schall am schnellsten aus?</value>
+  </data>
+  <data name="question_highest_thermal_conductivity" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Wärmeleitfähigkeit?</value>
+  </data>
+  <data name="question_highest_vaporization_heat" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Verdampfungswärme?</value>
+  </data>
+  <data name="question_highest_vickers_hardness" xml:space="preserve">
+    <value>Welches dieser Elemente hat die höchste Vickershärte?</value>
+  </data>
+  <data name="question_highest_young_modulus" xml:space="preserve">
+    <value>Welches dieser Elemente hat den höchsten Elastizitätsmodul?</value>
+  </data>
+  <data name="question_isotope_decay" xml:space="preserve">
+    <value>Wie zerfällt %1$s?</value>
+  </data>
+  <data name="question_isotope_longest_half_life" xml:space="preserve">
+    <value>Welches dieser Isotope hat die längste Halbwertszeit?</value>
+  </data>
+  <data name="question_isotope_neutrons" xml:space="preserve">
+    <value>Wie viele Neutronen hat %1$s?</value>
+  </data>
+  <data name="question_isotope_shortest_half_life" xml:space="preserve">
+    <value>Welches dieser Isotope hat die kürzeste Halbwertszeit?</value>
+  </data>
+  <data name="question_isotope_stable" xml:space="preserve">
+    <value>Welches dieser Isotope ist stabil?</value>
+  </data>
+  <data name="question_largest_atomic_radius" xml:space="preserve">
+    <value>Welches dieser Elemente hat den größten Atomradius?</value>
+  </data>
+  <data name="question_largest_molar_volume" xml:space="preserve">
+    <value>Welches dieser Elemente hat das größte Molvolumen?</value>
+  </data>
+  <data name="question_lowest_atomic_mass" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Atommasse?</value>
+  </data>
+  <data name="question_lowest_boiling_point" xml:space="preserve">
+    <value>Welches dieser Elemente hat den niedrigsten Siedepunkt?</value>
+  </data>
+  <data name="question_lowest_brinell_hardness" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Brinellhärte?</value>
+  </data>
+  <data name="question_lowest_bulk_modulus" xml:space="preserve">
+    <value>Welches dieser Elemente hat den niedrigsten Kompressionsmodul?</value>
+  </data>
+  <data name="question_lowest_density" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Dichte?</value>
+  </data>
+  <data name="question_lowest_electronegativity" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Elektronegativität?</value>
+  </data>
+  <data name="question_lowest_fusion_heat" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Schmelzwärme?</value>
+  </data>
+  <data name="question_lowest_melting_point" xml:space="preserve">
+    <value>Welches dieser Elemente hat den niedrigsten Schmelzpunkt?</value>
+  </data>
+  <data name="question_lowest_mohs_hardness" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Mohshärte?</value>
+  </data>
+  <data name="question_lowest_shear_modulus" xml:space="preserve">
+    <value>Welches dieser Elemente hat den niedrigsten Schubmodul?</value>
+  </data>
+  <data name="question_lowest_speed_of_sound" xml:space="preserve">
+    <value>In welchem dieser Elemente breitet sich Schall am langsamsten aus?</value>
+  </data>
+  <data name="question_lowest_thermal_conductivity" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Wärmeleitfähigkeit?</value>
+  </data>
+  <data name="question_lowest_vaporization_heat" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Verdampfungswärme?</value>
+  </data>
+  <data name="question_lowest_vickers_hardness" xml:space="preserve">
+    <value>Welches dieser Elemente hat die niedrigste Vickershärte?</value>
+  </data>
+  <data name="question_lowest_young_modulus" xml:space="preserve">
+    <value>Welches dieser Elemente hat den niedrigsten Elastizitätsmodul?</value>
+  </data>
+  <data name="question_magnetic_type" xml:space="preserve">
+    <value>Was ist der magnetische Typ von %s?</value>
+  </data>
+  <data name="question_melting_point_celsius" xml:space="preserve">
+    <value>Was ist der Schmelzpunkt (°C) von %s?</value>
+  </data>
+  <data name="question_melting_point_fahrenheit" xml:space="preserve">
+    <value>Was ist der Schmelzpunkt (°F) von %s?</value>
+  </data>
+  <data name="question_melting_point_kelvin" xml:space="preserve">
+    <value>Was ist der Schmelzpunkt (Kelvin) von %s?</value>
+  </data>
+  <data name="question_mohs_hardness" xml:space="preserve">
+    <value>Was ist die Mohshärte von %s?</value>
+  </data>
+  <data name="question_molar_mass" xml:space="preserve">
+    <value>Wie groß ist die molare Masse von %1$s?</value>
+  </data>
+  <data name="question_neutron_cross_sectional" xml:space="preserve">
+    <value>Was ist der Neutronenquerschnitt von %s?</value>
+  </data>
+  <data name="question_nfpa_diamond" xml:space="preserve">
+    <value>Wie lautet der NFPA-704-Gefahrendiamant von %s? (Gesundheit / Entflammbarkeit / Instabilität)</value>
+  </data>
+  <data name="question_nfpa_flammability" xml:space="preserve">
+    <value>Welche NFPA-704-Entflammbarkeit hat %s?</value>
+  </data>
+  <data name="question_nfpa_health" xml:space="preserve">
+    <value>Welche NFPA-704-Gesundheitsgefahr hat %s?</value>
+  </data>
+  <data name="question_nfpa_instability" xml:space="preserve">
+    <value>Welche NFPA-704-Instabilität hat %s?</value>
+  </data>
+  <data name="question_not_a_series" xml:space="preserve">
+    <value>Welches davon ist KEIN %1$s?</value>
+  </data>
+  <data name="question_period_of" xml:space="preserve">
+    <value>In welcher Periode steht %1$s?</value>
+  </data>
+  <data name="question_phase_stp" xml:space="preserve">
+    <value>Was ist der Aggregatzustand von %s bei STP?</value>
+  </data>
+  <data name="question_radioactive" xml:space="preserve">
+    <value>Ist %s radioaktiv?</value>
+  </data>
+  <data name="question_smallest_atomic_radius" xml:space="preserve">
+    <value>Welches dieser Elemente hat den kleinsten Atomradius?</value>
+  </data>
+  <data name="question_smallest_molar_volume" xml:space="preserve">
+    <value>Welches dieser Elemente hat das kleinste Molvolumen?</value>
+  </data>
+  <data name="question_specific_heat_capacity" xml:space="preserve">
+    <value>Was ist die spezifische Wärmekapazität von %s?</value>
+  </data>
+  <data name="question_superconducting_point" xml:space="preserve">
+    <value>Was ist der Supraleitungspunkt von %s?</value>
+  </data>
+  <data name="question_text" xml:space="preserve">
+    <value>Fragetext</value>
+  </data>
+  <data name="question_valence_electrons" xml:space="preserve">
+    <value>Wie viele Valenzelektronen hat %1$s?</value>
+  </data>
+  <data name="question_vickers_hardness" xml:space="preserve">
+    <value>Was ist die Vickershärte von %s?</value>
+  </data>
+  <data name="question_xp_detail" xml:space="preserve">
+    <value>XP für diese Frage: +%1$d</value>
+  </data>
+  <data name="questions_correct_xp" xml:space="preserve">
+    <value>Richtige Fragen: +%dxp</value>
+  </data>
+  <data name="quiz_loading" xml:space="preserve">
+    <value>Fragen werden vorbereitet …</value>
+  </data>
+  <data name="quiz_no_questions" xml:space="preserve">
+    <value>Für dieses Spiel konnten keine Fragen erstellt werden. Bitte wähle ein anderes.</value>
+  </data>
+  <data name="radioactive" xml:space="preserve">
+    <value>Radioaktiv</value>
+  </data>
+  <data name="radioactive_colon" xml:space="preserve">
+    <value>Radioaktiv:</value>
+  </data>
+  <data name="random_element" xml:space="preserve">
+    <value>Zufälliges Element</value>
+  </data>
+  <data name="rate" xml:space="preserve">
+    <value>Bewerten</value>
+  </data>
+  <data name="rate_app" xml:space="preserve">
+    <value>App bewerten</value>
+  </data>
+  <data name="rate_app_description" xml:space="preserve">
+    <value>Teilen Sie uns mit, was Sie von der App halten, indem Sie sie im Play Store bewerten!</value>
+  </data>
+  <data name="reaction_balancer" xml:space="preserve">
+    <value>Reaktionsausgleicher:</value>
+  </data>
+  <data name="reactivity_hazard" xml:space="preserve">
+    <value>Reaktivität:</value>
+  </data>
+  <data name="read_more" xml:space="preserve">
+    <value>..mehr</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>Chemische Reaktionen</value>
+  </data>
+  <data name="requires_pro" xml:space="preserve">
+    <value>Erfordert PRO-Version</value>
+  </data>
+  <data name="reward_5pct_title" xml:space="preserve">
+    <value>+5% XP-Bonus</value>
+  </data>
+  <data name="rewards_available" xml:space="preserve">
+    <value>Belohnungen:</value>
+  </data>
+  <data name="save_calculations" xml:space="preserve">
+    <value>Berechnungen speichern:</value>
+  </data>
+  <data name="save_equations" xml:space="preserve">
+    <value>Gleichungen speichern:</value>
+  </data>
+  <data name="save_units" xml:space="preserve">
+    <value>Einheiten speichern:</value>
+  </data>
+  <data name="score_summary" xml:space="preserve">
+    <value>Punktzahl: %1$d/%2$d</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Elemente suchen</value>
+  </data>
+  <data name="search_elements" xml:space="preserve">
+    <value>Nach Elementen suchen</value>
+  </data>
+  <data name="search_for_element" xml:space="preserve">
+    <value>Nach Element suchen</value>
+  </data>
+  <data name="searches" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="select_theme" xml:space="preserve">
+    <value>Thema auswählen</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="settings_favorite_content" xml:space="preserve">
+    <value>Favoritenleiste personalisieren</value>
+  </data>
+  <data name="settings_favorite_title" xml:space="preserve">
+    <value>Favoritenleiste</value>
+  </data>
+  <data name="settings_nav_bar_content" xml:space="preserve">
+    <value>Deaktiviert das Standardverhalten</value>
+  </data>
+  <data name="settings_nav_bar_title" xml:space="preserve">
+    <value>Untere Leiste automatisch ausblenden</value>
+  </data>
+  <data name="settings_offline_content" xml:space="preserve">
+    <value>Deaktiviert das Laden von Bildern</value>
+  </data>
+  <data name="settings_offline_title" xml:space="preserve">
+    <value>Offline-Modus</value>
+  </data>
+  <data name="settings_order_content" xml:space="preserve">
+    <value>Reihenfolge der Detailkarten anpassen</value>
+  </data>
+  <data name="settings_order_title" xml:space="preserve">
+    <value>Detailkartenreihenfolge</value>
+  </data>
+  <data name="settings_themes_content" xml:space="preserve">
+    <value>Thema auswählen</value>
+  </data>
+  <data name="settings_themes_title" xml:space="preserve">
+    <value>Themen</value>
+  </data>
+  <data name="settings_title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="settings_unit_content" xml:space="preserve">
+    <value>Einheiten in der Haupttabelle anpassen</value>
+  </data>
+  <data name="settings_unit_title" xml:space="preserve">
+    <value>Tabelleneinheiten</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>Teilen</value>
+  </data>
+  <data name="share_app" xml:space="preserve">
+    <value>App teilen</value>
+  </data>
+  <data name="share_app_description" xml:space="preserve">
+    <value>Wenn Sie die App nützlich finden, teilen Sie sie bitte mit Ihren Freunden und anderen!</value>
+  </data>
+  <data name="shear_modulus" xml:space="preserve">
+    <value>Schubmodul</value>
+  </data>
+  <data name="short_voltage" xml:space="preserve">
+    <value>Spannung</value>
+  </data>
+  <data name="show_atomic_radius_calculated" xml:space="preserve">
+    <value>Atomradius anzeigen (Berechnet)</value>
+  </data>
+  <data name="show_atomic_radius_empirical" xml:space="preserve">
+    <value>Atomradius anzeigen (Empirisch)</value>
+  </data>
+  <data name="show_boiling_point" xml:space="preserve">
+    <value>Siedepunkt anzeigen</value>
+  </data>
+  <data name="show_covalent_radius" xml:space="preserve">
+    <value>Kovalenten Radius anzeigen</value>
+  </data>
+  <data name="show_density" xml:space="preserve">
+    <value>Dichte anzeigen</value>
+  </data>
+  <data name="show_electronegativity" xml:space="preserve">
+    <value>Elektronegativität anzeigen</value>
+  </data>
+  <data name="show_fusion_heat" xml:space="preserve">
+    <value>Schmelzwärme anzeigen</value>
+  </data>
+  <data name="show_if_radioactive" xml:space="preserve">
+    <value>Radioaktives Element anzeigen</value>
+  </data>
+  <data name="show_melting_point" xml:space="preserve">
+    <value>Schmelzpunkt anzeigen</value>
+  </data>
+  <data name="show_molar_mass" xml:space="preserve">
+    <value>Molare Masse anzeigen</value>
+  </data>
+  <data name="show_resistivity" xml:space="preserve">
+    <value>Widerstand anzeigen</value>
+  </data>
+  <data name="show_specific_heat_capacity" xml:space="preserve">
+    <value>Spezifische Wärmekapazität anzeigen</value>
+  </data>
+  <data name="show_stp_phase" xml:space="preserve">
+    <value>STP-Phase anzeigen</value>
+  </data>
+  <data name="show_van_der_waals_radius" xml:space="preserve">
+    <value>Van-der-Waals-Radius anzeigen</value>
+  </data>
+  <data name="show_vaporization_heat" xml:space="preserve">
+    <value>Verdampfungswärme anzeigen</value>
+  </data>
+  <data name="sign_in_failed" xml:space="preserve">
+    <value>Anmeldung fehlgeschlagen</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>Anmelden…</value>
+  </data>
+  <data name="sol" xml:space="preserve">
+    <value>Löslichkeitstabelle</value>
+  </data>
+  <data name="solubility_info_c" xml:space="preserve">
+    <value>S: Löslich
+Ss: Schwer löslich
+I: Unlöslich</value>
+  </data>
+  <data name="solubility_info_t" xml:space="preserve">
+    <value>Löslichkeitshilfe</value>
+  </data>
+  <data name="solubility_table" xml:space="preserve">
+    <value>Löslichkeitstabelle</value>
+  </data>
+  <data name="sources_settings_title" xml:space="preserve">
+    <value>Quellen</value>
+  </data>
+  <data name="sources_wwe_title" xml:space="preserve">
+    <value>Wasser- und Abwassertechnik</value>
+  </data>
+  <data name="specific_hazard" xml:space="preserve">
+    <value>Spezifische Gefahr:</value>
+  </data>
+  <data name="specific_heat_capacity" xml:space="preserve">
+    <value>Spezifische Wärmekapazität</value>
+  </data>
+  <data name="specific_heat_capacity_colon" xml:space="preserve">
+    <value>Spezifische Wärmekapazität:</value>
+  </data>
+  <data name="spelling" xml:space="preserve">
+    <value>Versuchen Sie, nach einem anderen Wort zu suchen oder überprüfen Sie die Schreibweise</value>
+  </data>
+  <data name="split_view" xml:space="preserve">
+    <value>Element-Split-Ansicht</value>
+  </data>
+  <data name="streak_label" xml:space="preserve">
+    <value>Streifen: </value>
+  </data>
+  <data name="streak_notification_body" xml:space="preserve">
+    <value>Spielen Sie heute, um Ihre %1$d-Tage-Serie zu retten.</value>
+  </data>
+  <data name="streak_notification_title" xml:space="preserve">
+    <value>Behalten Sie Ihre %1$d-Tage-Serie!</value>
+  </data>
+  <data name="submit_activity_title" xml:space="preserve">
+    <value>Problem melden</value>
+  </data>
+  <data name="submit_bug" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="submit_data_i" xml:space="preserve">
+    <value>Datenproblem</value>
+  </data>
+  <data name="submit_data_issue" xml:space="preserve">
+    <value>Datenproblem melden</value>
+  </data>
+  <data name="submit_issue" xml:space="preserve">
+    <value>Problem</value>
+  </data>
+  <data name="submit_question" xml:space="preserve">
+    <value>Frage</value>
+  </data>
+  <data name="submit_send" xml:space="preserve">
+    <value>Problem senden</value>
+  </data>
+  <data name="submit_text" xml:space="preserve">
+    <value>Fehler und Datenfehler melden</value>
+  </data>
+  <data name="submit_title" xml:space="preserve">
+    <value>Problem melden</value>
+  </data>
+  <data name="superconducting_point" xml:space="preserve">
+    <value>Supraleiter-Punkt</value>
+  </data>
+  <data name="superconducting_point_colon" xml:space="preserve">
+    <value>Supraleitungspunkt:</value>
+  </data>
+  <data name="sync_available_pro_only" xml:space="preserve">
+    <value>Holen Sie sich PRO oder PRO+, um Cloud-Synchronisation zu aktivieren</value>
+  </data>
+  <data name="sync_complete" xml:space="preserve">
+    <value>Fortschritt synchronisiert</value>
+  </data>
+  <data name="sync_data" xml:space="preserve">
+    <value>Daten synchronisieren:</value>
+  </data>
+  <data name="sync_failed" xml:space="preserve">
+    <value>Synchronisation fehlgeschlagen</value>
+  </data>
+  <data name="sync_status" xml:space="preserve">
+    <value>Nicht synchronisiert</value>
+  </data>
+  <data name="syncing_progress" xml:space="preserve">
+    <value>Fortschritt wird synchronisiert…</value>
+  </data>
+  <data name="system_default" xml:space="preserve">
+    <value>Systemstandard</value>
+  </data>
+  <data name="table_alloy" xml:space="preserve">
+    <value>Legierungstabelle</value>
+  </data>
+  <data name="table_alloy_text" xml:space="preserve">
+    <value>Eine Tabelle gängiger Legierungen, woraus sie bestehen und warum sie anstelle des reinen Metalls verwendet werden</value>
+  </data>
+  <data name="table_constants_text" xml:space="preserve">
+    <value>Eine Tabelle mit üblichen Konstanten für Berechnungen einschließlich Mathematik, Physik, Standard-Wasserströme usw.</value>
+  </data>
+  <data name="table_electrochemical" xml:space="preserve">
+    <value>Elektrochemische Reihe</value>
+  </data>
+  <data name="table_electrochemical_text" xml:space="preserve">
+    <value>Eine Tabelle mit einer elektrochemischen Reihe, sortiert nach (-) bis (+) Spannung</value>
+  </data>
+  <data name="table_equations" xml:space="preserve">
+    <value>Formeln</value>
+  </data>
+  <data name="table_equations_text" xml:space="preserve">
+    <value>Eine Tabelle mit Formeln für Mathematik, Physik und Chemie</value>
+  </data>
+  <data name="table_geology" xml:space="preserve">
+    <value>Geologietabelle</value>
+  </data>
+  <data name="table_geology_text" xml:space="preserve">
+    <value>Eine Tabelle mit Informationen über Mineralien, Gesteine und Böden</value>
+  </data>
+  <data name="table_ionization" xml:space="preserve">
+    <value>Ionisierungsenergien</value>
+  </data>
+  <data name="table_ionization_text" xml:space="preserve">
+    <value>Eine Tabelle mit verschiedenen Elementionisierungsenergien</value>
+  </data>
+  <data name="table_nuclide" xml:space="preserve">
+    <value>Nuklidtabelle</value>
+  </data>
+  <data name="table_nuclide_text" xml:space="preserve">
+    <value>Eine zweidimensionale Tabelle der Nuklide, mit Farben zur Unterscheidung des Zerfallstyps</value>
+  </data>
+  <data name="table_order_text" xml:space="preserve">
+    <value>Reihenfolge der Tabellen bestimmen</value>
+  </data>
+  <data name="table_order_title" xml:space="preserve">
+    <value>Tabellenliste sortieren</value>
+  </data>
+  <data name="table_ph" xml:space="preserve">
+    <value>pH-Indikatoren</value>
+  </data>
+  <data name="table_ph_text" xml:space="preserve">
+    <value>Eine pH-Indikatortabelle für Farben auf verschiedenen Säure-/Baseniveaus</value>
+  </data>
+  <data name="table_poisson" xml:space="preserve">
+    <value>Poissonzahl-Tabelle</value>
+  </data>
+  <data name="table_poisson_text" xml:space="preserve">
+    <value>Eine Tabelle mit Poissonzahlen für verschiedene Gesteine, Böden, Mineralien und andere Materialien</value>
+  </data>
+  <data name="table_solubility" xml:space="preserve">
+    <value>Löslichkeitstabelle</value>
+  </data>
+  <data name="table_solubility_text" xml:space="preserve">
+    <value>Eine Tabelle mit Informationen zur Löslichkeit verschiedener Substanzen</value>
+  </data>
+  <data name="table_units" xml:space="preserve">
+    <value>Tabelleneinheiten</value>
+  </data>
+  <data name="take_notes_for_element" xml:space="preserve">
+    <value>Notizen für Element machen</value>
+  </data>
+  <data name="temperatures" xml:space="preserve">
+    <value>Temperaturen</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>Themen</value>
+  </data>
+  <data name="thermodynamic_properties" xml:space="preserve">
+    <value>Thermodynamische Eigenschaften</value>
+  </data>
+  <data name="time_up" xml:space="preserve">
+    <value>Zeit ist abgelaufen</value>
+  </data>
+  <data name="tool_btn_open" xml:space="preserve">
+    <value>Werkzeug öffnen</value>
+  </data>
+  <data name="tools" xml:space="preserve">
+    <value>Werkzeuge</value>
+  </data>
+  <data name="tools_title" xml:space="preserve">
+    <value>Werkzeuge (z.B. Rechner)</value>
+  </data>
+  <data name="total_xp_stat" xml:space="preserve">
+    <value>Gesamt-XP: %d</value>
+  </data>
+  <data name="total_xp_with_multiplier" xml:space="preserve">
+    <value>Gesamt-XP: %1$d (%2$s ×%3$s)</value>
+  </data>
+  <data name="try_another_search" xml:space="preserve">
+    <value>Versuchen Sie, nach einem anderen Wort zu suchen oder überprüfen Sie die Schreibweise.</value>
+  </data>
+  <data name="type_label" xml:space="preserve">
+    <value>Typ: </value>
+  </data>
+  <data name="uni" xml:space="preserve">
+    <value>Einheitenumrechner</value>
+  </data>
+  <data name="unit_add_favorite" xml:space="preserve">
+    <value>Zu Favoriten hinzufügen:</value>
+  </data>
+  <data name="unit_category" xml:space="preserve">
+    <value>Kategorie:</value>
+  </data>
+  <data name="unit_converter_title" xml:space="preserve">
+    <value>Einheitenumrechner</value>
+  </data>
+  <data name="unit_description" xml:space="preserve">
+    <value>Ein einfacher Einheitenumrechner für mehrere Zwecke</value>
+  </data>
+  <data name="unit_display_formula" xml:space="preserve">
+    <value>Formel wird hier angezeigt</value>
+  </data>
+  <data name="unit_enter_value" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="unit_favorites" xml:space="preserve">
+    <value>Favoriten:</value>
+  </data>
+  <data name="unit_formula" xml:space="preserve">
+    <value>Formel:</value>
+  </data>
+  <data name="unit_output_value" xml:space="preserve">
+    <value>Ausgabe</value>
+  </data>
+  <data name="unit_settings_title" xml:space="preserve">
+    <value>Tabelleneinheiten</value>
+  </data>
+  <data name="unit_temperature" xml:space="preserve">
+    <value>Temperaturen</value>
+  </data>
+  <data name="unit_title" xml:space="preserve">
+    <value>Einheitenumrechner</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>Unbekannt</value>
+  </data>
+  <data name="unlock_advanced_data_and_additional_flashcards" xml:space="preserve">
+    <value>Schalten Sie erweiterte Daten und zusätzliche Karteikarten frei.</value>
+  </data>
+  <data name="unlock_advanced_data_and_extra_atomic_content" xml:space="preserve">
+    <value>Schalten Sie erweiterte Daten und zusätzliche atomare Inhalte frei.</value>
+  </data>
+  <data name="unlock_all_flashcards" xml:space="preserve">
+    <value>Alle Lernkarten und Funktionen freischalten</value>
+  </data>
+  <data name="upgrade_pro_plus_description" xml:space="preserve">
+    <value>Erhalten Sie unbegrenzte Leben und zusätzliche Lernkartenspiele wie Elektronegativität, Radioaktivität, Kristallstruktur und mehr!</value>
+  </data>
+  <data name="upgrade_to_pro_plus" xml:space="preserve">
+    <value>Auf PRO+ upgraden</value>
+  </data>
+  <data name="usage_statistics" xml:space="preserve">
+    <value>Nutzungsstatistiken</value>
+  </data>
+  <data name="user_achievements" xml:space="preserve">
+    <value>Erfolge</value>
+  </data>
+  <data name="user_achievements_Text" xml:space="preserve">
+    <value>Verfolgen Sie Ihren Fortschritt beim Lernen der Elemente der Welt mit Erfolgen</value>
+  </data>
+  <data name="user_img" xml:space="preserve">
+    <value>Profilbild ändern</value>
+  </data>
+  <data name="user_signed_in_fmt" xml:space="preserve">
+    <value>Angemeldet als %1$s</value>
+  </data>
+  <data name="user_signed_out" xml:space="preserve">
+    <value>Nicht angemeldet</value>
+  </data>
+  <data name="user_title" xml:space="preserve">
+    <value>Benutzerseite</value>
+  </data>
+  <data name="vaporization_heat" xml:space="preserve">
+    <value>Verdampfungswärme</value>
+  </data>
+  <data name="vaporization_heat_colon" xml:space="preserve">
+    <value>Verdampfungswärme:</value>
+  </data>
+  <data name="vickers_hardness" xml:space="preserve">
+    <value>Vickers-Härte</value>
+  </data>
+  <data name="vickers_hardness_colon" xml:space="preserve">
+    <value>Vickershärte:</value>
+  </data>
+  <data name="view_all_isotopes" xml:space="preserve">
+    <value>Alle Isotope anzeigen</value>
+  </data>
+  <data name="weight_calculator_title" xml:space="preserve">
+    <value>Gewichtsrechner</value>
+  </data>
+  <data name="win_text" xml:space="preserve">
+    <value>Die App für Windows herunterladen</value>
+  </data>
+  <data name="win_title" xml:space="preserve">
+    <value>Desktop-App erhalten</value>
+  </data>
+  <data name="wrong" xml:space="preserve">
+    <value>Falsch</value>
+  </data>
+  <data name="xp_bonus" xml:space="preserve">
+    <value>+%d%% Bonus-XP</value>
+  </data>
+  <data name="xp_bonus_unlocked" xml:space="preserve">
+    <value>5 %% XP-Bonus auf Level %1$d freigeschaltet!</value>
+  </data>
+  <data name="year_discovered" xml:space="preserve">
+    <value>Entdeckungsjahr</value>
+  </data>
+  <data name="year_discovered_colon" xml:space="preserve">
+    <value>Entdeckungsjahr:</value>
+  </data>
+  <data name="you_have_full_lives" xml:space="preserve">
+    <value>Sie haben volle Leben!</value>
+  </data>
+  <data name="young_bulk_shear_modulus" xml:space="preserve">
+    <value>Young-, Kompressions-, Schermodul:</value>
+  </data>
+  <data name="youngs_modulus" xml:space="preserve">
+    <value>Elastizitätsmodul</value>
+  </data>
+  <data name="your_answer" xml:space="preserve">
+    <value>Ihre Antwort: %s</value>
+  </data>
+</root>

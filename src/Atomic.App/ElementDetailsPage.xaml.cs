@@ -164,7 +164,7 @@ namespace Atomic.App
             {
                 try
                 {
-                    var keys = JsonSerializer.Deserialize<List<string>>(json);
+                    var keys = JsonSerializer.Deserialize(json, ElementJsonContext.Default.ListString);
                     if (keys != null && keys.Count > 0)
                     {
                         FavoriteProperties.Clear();
@@ -331,13 +331,7 @@ namespace Atomic.App
         {
             try
             {
-                string jsonFilePath = Path.Combine(AppContext.BaseDirectory, "Elements", $"{element.OriginalName.ToLower()}.json");
-
-                if (File.Exists(jsonFilePath))
-                {
-                    string jsonContent = File.ReadAllText(jsonFilePath);
-                    var elementData = JsonSerializer.Deserialize<Element>(jsonContent);
-
+                var elementData = ElementRepository.Get(element.OriginalName);
                     if (elementData != null)
                     {
                         loadedElementData = elementData; // Store for FavoriteBar use
@@ -508,15 +502,14 @@ namespace Atomic.App
                             DebyeTemperatureRoomTemp.Visibility = Visibility.Collapsed;
                         }
                     }
-                }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine($"JSON file not found: {jsonFilePath}");
+                    System.Diagnostics.Debug.WriteLine($"Element not found: {element.OriginalName}");
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error reading JSON file: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Error reading element data: {ex.Message}");
             }
 
             // Always update favorite bar after loading JSON
@@ -764,7 +757,7 @@ namespace Atomic.App
         private void SaveFavoriteProperties()
         {
             var selectedKeys = FavoriteProperties.Select(f => f.Key).ToList();
-            var json = JsonSerializer.Serialize(selectedKeys);
+            var json = JsonSerializer.Serialize(selectedKeys, ElementJsonContext.Default.ListString);
             SettingsStore.FavoritePropertyKeys = json;
         }
 

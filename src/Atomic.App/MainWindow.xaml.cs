@@ -93,7 +93,7 @@ namespace Atomic.App
             string userInput = sender.Text?.Trim();
             if (!string.IsNullOrEmpty(userInput))
             {
-                var filtered = ElementData.Elements
+                var filtered = ElementRepository.All()
                     .Where(element => element.OriginalName.StartsWith(userInput, StringComparison.OrdinalIgnoreCase))
                     .Select(element => element.OriginalName)
                     .ToList();
@@ -109,7 +109,7 @@ namespace Atomic.App
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             string elementName = args.QueryText;
-            var element = ElementData.GetElementByName(elementName);
+            var element = ElementRepository.Get(elementName);
 
             if (element != null)
             {

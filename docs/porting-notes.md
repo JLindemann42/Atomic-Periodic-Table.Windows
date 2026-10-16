@@ -132,11 +132,28 @@ user-visible behaviour without the `BackgroundTaskBuilder` / COM-server apparatu
 ### D6 — element data merge is bidirectional
 
 The shared `elements_{lang}.json` files are **not** simply Android's copied over. Windows held
-fields Android lacks — most importantly `emission_spectrum`, which is present on 0 of 118
-Android records and which `EmissionPage` depends on, plus `cas_number`, `eg_number`,
-`oxidation_state_pos`/`_neg`, NFPA triples for 5 elements, and extra isotope slots for ~10
-elements. The merge preserves both sides; see `tools/data/merge_elements.py` and the review
-artifact `tools/data/merge_report.tsv`.
+fields Android lacks: `cas_number` (30 elements), `eg_number` (19), `oxidation_state_pos`/`_neg`
+(9), the NFPA triple `health`/`flammability`/`instability` for 5 elements Android omits,
+`special` (2), `note_text` (1), and extra isotope slots on 10 elements — 16 additional on
+berkelium, 15 on einsteinium, 12–14 each on seven other transuranics, 1 on antimony. The merge
+preserves both sides; see `tools/data/merge_elements.py` and the review artifact
+`tools/data/merge_report.tsv`.
+
+Android is the better source almost everywhere else, and materially so: it has real values where
+Windows is blank for `electrical_type` on 37 elements, `element_electrons` and `element_protons`
+on 12 each, `poisson_ratio` and `magnetic_type` on 10 each.
+
+**Blank markers differ and this is the trap in the merge.** Android normalises absence to `---`.
+Windows uses at least `---`, `--`, `empty`, `unknown`, `???`, `N/A`, `""` and even `--- (ms)`. A
+naive "keep the non-blank side" rule reads those as data and reintroduces junk over good Android
+values. The merge normalises Windows' markers first; the set lives in `BLANK_MARKERS` in the
+script.
+
+**Correction to an earlier claim:** `emission_spectrum` was recorded here and in the plan as a
+Windows-only field that `EmissionPage` depended on. It is not. The field is present on **0 of 118
+records on both sides** — it exists only as an unused `[JsonPropertyName]` on the `Element` model,
+and `EmissionPage` builds its own table in code and never reads element JSON. The merge is still
+bidirectional, for the fields listed above.
 
 Related: Android keys caesium as `caesium`, Windows filed it as `cesium.json`. The merged data
 uses `caesium`, with `cesium` kept as an entity-resolver alias so the American spelling still
@@ -179,3 +196,27 @@ Command are dropped — both are search shortcuts, better served on Windows by t
 - The MSIX signing certificate (thumbprint `31ABC53F…`) **has expired** — `APPX0108`.
 - `<PublishProfile>win-$(Platform).pubxml</PublishProfile>` refers to profiles that do not
   exist in the repo — `NETSDK1198`.
+- **`PublishTrimmed=true` produced a blank periodic table.** Fixed by turning trimming off; see
+  below.
+
+## Trimming
+
+`PublishTrimmed` is **off**, deliberately, and there is a comment in `Atomic.App.csproj` saying
+why. The short version: the app binds with classic `{Binding}`, which resolves by reflection at
+runtime, so the trimmer strips the properties it cannot see being used and every binding silently
+yields nothing. A published trimmed build showed all 118 periodic-table tiles empty — no symbol,
+no name, no atomic number — and clicking one did nothing.
+
+Confirmed by publishing the identical Release build twice, once with trimming and once without.
+`dotnet build` never reproduces it: `PublishTrimmed` only applies on `dotnet publish`.
+
+Two consequences for the port:
+
+1. **Anything reflection-based needs the same scrutiny**, not just JSON. If trimming is ever
+   re-enabled, the blocker is the XAML, and the fix is converting `{Binding}` to `{x:Bind}`,
+   which is compile-time and trim-safe.
+2. **`ElementJsonContext` stays regardless.** Source-generated `System.Text.Json` metadata is the
+   right thing whether or not the trimmer runs — it removes a reflection dependency, it is
+   faster, and it is a precondition for ever adopting AOT. It covers `Element`, the two favourite
+   record types and `List<string>`; the trim analyser reported those five call sites and reports
+   none now.

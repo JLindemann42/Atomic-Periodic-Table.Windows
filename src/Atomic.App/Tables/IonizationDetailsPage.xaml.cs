@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json.Nodes;
+using Atomic.App.Services;
 
 
 namespace Atomic.App.Tables
@@ -47,18 +48,14 @@ namespace Atomic.App.Tables
 
             if (!string.IsNullOrEmpty(elementName))
             {
-                string jsonFilePath = Path.Combine(AppContext.BaseDirectory, "Elements", $"{elementName.ToLower()}.json");
-                if (File.Exists(jsonFilePath))
+                if (ElementRepository.Raw(elementName) is { } row)
                 {
-                    string jsonContent = File.ReadAllText(jsonFilePath);
-                    var node = JsonNode.Parse(jsonContent)?.AsObject();
-                    if (node != null)
                     {
                         IonizationEnergies.Clear();
                         int i = 1;
-                        while (node.ContainsKey($"element_ionization_energy{i}"))
+                        while (row.TryGetProperty($"element_ionization_energy{i}", out _))
                         {
-                            var energy = node[$"element_ionization_energy{i}"]?.ToString();
+                            var energy = row.Field($"element_ionization_energy{i}");
                             IonizationEnergies.Add($"{i}: {energy}");
                             i++;
                         }

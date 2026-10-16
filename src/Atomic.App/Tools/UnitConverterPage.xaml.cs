@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -304,7 +305,7 @@ namespace Atomic.App.Tools
                 if (file != null)
                 {
                     using var stream = await file.OpenStreamForReadAsync();
-                    var loaded = await JsonSerializer.DeserializeAsync<List<UnitConversionFavorite>>(stream);
+                    var loaded = await JsonSerializer.DeserializeAsync(stream, ElementJsonContext.Default.ListUnitConversionFavorite);
                     if (loaded != null)
                     {
                         Favorites.Clear();
@@ -326,7 +327,7 @@ namespace Atomic.App.Tools
             {
                 var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(FavoritesFileName, CreationCollisionOption.ReplaceExisting);
                 using var stream = await file.OpenStreamForWriteAsync();
-                await JsonSerializer.SerializeAsync(stream, Favorites);
+                await JsonSerializer.SerializeAsync(stream, Favorites.ToList(), ElementJsonContext.Default.ListUnitConversionFavorite);
             }
             catch (Exception ex)
             {

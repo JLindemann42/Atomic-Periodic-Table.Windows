@@ -1,0 +1,3714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dictionary" xml:space="preserve">
+    <value>Diksiyonaryo</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Bago</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Mga Talahanayan</value>
+  </data>
+  <data name="about_app_name" xml:space="preserve">
+    <value>Atomic - Talahanayan ng Elemento</value>
+  </data>
+  <data name="about_title" xml:space="preserve">
+    <value>Tungkol sa</value>
+  </data>
+  <data name="abundance_crustal_rocks" xml:space="preserve">
+    <value>Sa mga crustal na bato</value>
+  </data>
+  <data name="abundance_earth_crust" xml:space="preserve">
+    <value>Sa balat ng mundo</value>
+  </data>
+  <data name="abundance_earth_soils" xml:space="preserve">
+    <value>Sa lupa ng mundo</value>
+  </data>
+  <data name="abundance_human_body" xml:space="preserve">
+    <value>Sa katawan ng tao</value>
+  </data>
+  <data name="abundance_meteorites" xml:space="preserve">
+    <value>Sa mga meteorite</value>
+  </data>
+  <data name="abundance_sea_water" xml:space="preserve">
+    <value>Sa tubig dagat</value>
+  </data>
+  <data name="abundance_solar_system" xml:space="preserve">
+    <value>Sa mga atom ng solar system</value>
+  </data>
+  <data name="abundance_sun" xml:space="preserve">
+    <value>Sa atom ng araw</value>
+  </data>
+  <data name="abundance_title" xml:space="preserve">
+    <value>Kasaganaan</value>
+  </data>
+  <data name="abundance_urban_soil" xml:space="preserve">
+    <value>Sa urbanong lupa</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="achievement_reached_prefix" xml:space="preserve">
+    <value>Nakamit ang Achievement: </value>
+  </data>
+  <data name="activity_alloy_title" xml:space="preserve">
+    <value>Mga Haluang Metal</value>
+  </data>
+  <data name="activity_equations_title" xml:space="preserve">
+    <value>Mga Pormula</value>
+  </data>
+  <data name="activity_formulas_search" xml:space="preserve">
+    <value>Maghanap ng mga Pormula:</value>
+  </data>
+  <data name="activity_geology_mineral" xml:space="preserve">
+    <value>Mineral</value>
+  </data>
+  <data name="activity_geology_rock" xml:space="preserve">
+    <value>Bato</value>
+  </data>
+  <data name="activity_geology_soil" xml:space="preserve">
+    <value>Lupa</value>
+  </data>
+  <data name="activity_geology_title" xml:space="preserve">
+    <value>Heolohiya</value>
+  </data>
+  <data name="activity_io_title" xml:space="preserve">
+    <value>Energies ng Ionization</value>
+  </data>
+  <data name="activity_ph_acid" xml:space="preserve">
+    <value>Asido</value>
+  </data>
+  <data name="activity_ph_alkaline" xml:space="preserve">
+    <value>Alkalina</value>
+  </data>
+  <data name="activity_ph_bromothymol_blue" xml:space="preserve">
+    <value>Bromothymol Blue</value>
+  </data>
+  <data name="activity_ph_congo_red" xml:space="preserve">
+    <value>Congo Red</value>
+  </data>
+  <data name="activity_ph_methyl_orange" xml:space="preserve">
+    <value>Methyl-orange</value>
+  </data>
+  <data name="activity_ph_neutral" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="activity_ph_phenolphthalein" xml:space="preserve">
+    <value>Phenolphthalein</value>
+  </data>
+  <data name="activity_ph_title" xml:space="preserve">
+    <value>pH Tagapahiwatig</value>
+  </data>
+  <data name="activity_table_title" xml:space="preserve">
+    <value>Mga Talahanayan</value>
+  </data>
+  <data name="activity_unit_title" xml:space="preserve">
+    <value>Mga Yunit ng Talahanayan</value>
+  </data>
+  <data name="add_widget" xml:space="preserve">
+    <value>Magdagdag ng widget</value>
+  </data>
+  <data name="additional_ai_messages" xml:space="preserve">
+    <value>Tumaas na limitasyon sa mga mensahe ng AI:</value>
+  </data>
+  <data name="additional_data_item" xml:space="preserve">
+    <value>- Karagdagang Data:</value>
+  </data>
+  <data name="additional_flashcards_games" xml:space="preserve">
+    <value>Karagdagang Flashcards games:</value>
+  </data>
+  <data name="additional_properties_requires_pro" xml:space="preserve">
+    <value>Ang karagdagang properties ay nangangailangan ng PRO-version. Kumuha ng PRO upang i-unlock ang mas maraming data at tables:</value>
+  </data>
+  <data name="additional_tables_item" xml:space="preserve">
+    <value>- Karagdagang Tables:</value>
+  </data>
+  <data name="ai_abundance_caption" xml:space="preserve">
+    <value>Logarithmic na sukat. Magkaiba ang yunit sa bawat reservoir at hindi maaaring i-convert ang isa sa iba.</value>
+  </data>
+  <data name="ai_abundance_header" xml:space="preserve">
+    <value>Narito ang data ng kasaganaan para sa **%1$s** mula sa database ng app:</value>
+  </data>
+  <data name="ai_abundance_relative" xml:space="preserve">
+    <value>(kaugnay sa H=10¹²)</value>
+  </data>
+  <data name="ai_adv_header" xml:space="preserve">
+    <value>Advanced na mga katangian ng %1$s:</value>
+  </data>
+  <data name="ai_aggregate_average" xml:space="preserve">
+    <value>Karaniwang %1$s</value>
+  </data>
+  <data name="ai_aggregate_median" xml:space="preserve">
+    <value>Median na %1$s</value>
+  </data>
+  <data name="ai_aggregate_missing_note" xml:space="preserve">
+    <value>%1$d ang tugma ngunit walang naitalang halaga, kaya hindi kasama.</value>
+  </data>
+  <data name="ai_aggregate_over" xml:space="preserve">
+    <value>Kinalkula sa %1$d sa %2$d tugmang elemento.</value>
+  </data>
+  <data name="ai_aggregate_result" xml:space="preserve">
+    <value>**%1$s**: %2$s</value>
+  </data>
+  <data name="ai_aggregate_spread" xml:space="preserve">
+    <value>Mula %1$s (%2$s) hanggang %3$s (%4$s).</value>
+  </data>
+  <data name="ai_aggregate_sum" xml:space="preserve">
+    <value>Kabuuang %1$s</value>
+  </data>
+  <data name="ai_all_covered" xml:space="preserve">
+    <value>Marami na kaming tinalakay tungkol sa %1$s! Alam mo ba?</value>
+  </data>
+  <data name="ai_another_isotope" xml:space="preserve">
+    <value> Ang isa pang isotope ay %1$s.</value>
+  </data>
+  <data name="ai_appears_as" xml:space="preserve">
+    <value>Ang %1$s ay mukhang: %2$s</value>
+  </data>
+  <data name="ai_aspects_not_compared" xml:space="preserve">
+    <value>Hindi ko maikukumpara ang %1$s mula sa nakaimbak na data — hindi ito naitalang katangian. Itanong ito para sa isang elemento at maipapaliwanag ko.</value>
+  </data>
+  <data name="ai_avogadro_note" xml:space="preserve">
+    <value>Gamit ang bilang ni Avogadro, 6.02214076 × 10²³ kada mole.</value>
+  </data>
+  <data name="ai_beta_badge" xml:space="preserve">
+    <value>Beta</value>
+  </data>
+  <data name="ai_bio_role_header" xml:space="preserve">
+    <value>Tungkol sa papel nito sa biyolohiya, narito ang nahanap ko tungkol sa **%1$s**:</value>
+  </data>
+  <data name="ai_block_d" xml:space="preserve">
+    <value>Ang d-block ay naglalaman ng mga transition metal mula groups 3 hanggang 12.</value>
+  </data>
+  <data name="ai_block_f" xml:space="preserve">
+    <value>Ang f-block ay naglalaman ng mga serye ng lanthanide at actinide, na karaniwang ipinapakita sa ibaba ng pangunahing table.</value>
+  </data>
+  <data name="ai_block_generic" xml:space="preserve">
+    <value>Hindi ako sigurado kung aling block ang tinutukoy mo. Alam ko ang tungkol sa s, p, d at f blocks!</value>
+  </data>
+  <data name="ai_block_p" xml:space="preserve">
+    <value>Ang p-block ay naglalaman ng groups 13 hanggang 18, kabilang ang lahat ng nonmetal (maliban sa H at He), metalloids, at post-transition metals.</value>
+  </data>
+  <data name="ai_block_s" xml:space="preserve">
+    <value>Ang s-block ay binubuo ng unang dalawang group: alkali metals, alkaline earth metals, kasama ang hydrogen at helium.</value>
+  </data>
+  <data name="ai_card_pro_locked" xml:space="preserve">
+    <value>I-unlock ang mga visual na sagot</value>
+  </data>
+  <data name="ai_chat_setting" xml:space="preserve">
+    <value>Paganahin ang AI Chat Assistant</value>
+  </data>
+  <data name="ai_chat_setting_description" xml:space="preserve">
+    <value>Payagan ang AI assistant na sagutin ang mga tanong tungkol sa mga elemento</value>
+  </data>
+  <data name="ai_check_isotope_table" xml:space="preserve">
+    <value>Ang %1$s ay may iba't ibang isotopes. Maaari mong tingnan ang detalyadong talahanayan ng isotope para sa kumpletong listahan!</value>
+  </data>
+  <data name="ai_common_isotopes" xml:space="preserve">
+    <value>Ang mga karaniwang isotope para sa %1$s ay kinabibilangan ng %2$s.</value>
+  </data>
+  <data name="ai_comparative_no" xml:space="preserve">
+    <value>**Hindi** — kabaligtaran ito. Ang %1$s (%2$s) ay mas mataas kaysa %3$s (%4$s) sa %5$s.</value>
+  </data>
+  <data name="ai_comparative_ratio" xml:space="preserve">
+    <value>Ang %1$s ay may **%2$s beses** na %5$s ng %3$s — %4$s.</value>
+  </data>
+  <data name="ai_comparative_winner" xml:space="preserve">
+    <value>**%1$s.** Ang %5$s nito ay %2$s, kumpara sa %4$s ng %3$s.</value>
+  </data>
+  <data name="ai_comparative_yes" xml:space="preserve">
+    <value>**Oo.** Ang %1$s (%2$s) ay mas mataas kaysa %3$s (%4$s) sa %5$s.</value>
+  </data>
+  <data name="ai_compare_all_same" xml:space="preserve">
+    <value>
+• **%1$s:** Ang lahat ay %2$s%3$s.</value>
+  </data>
+  <data name="ai_compare_difference_value" xml:space="preserve">
+    <value>May pagkakaiba na **%1$s%2$s** sa pagitan nila.</value>
+  </data>
+  <data name="ai_compare_mixed_item" xml:space="preserve">
+    <value>Ang %1$s ay %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_property_row" xml:space="preserve">
+    <value>• %1$s: %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_the_others" xml:space="preserve">
+    <value>ang iba pa</value>
+  </data>
+  <data name="ai_comparing_title" xml:space="preserve">
+    <value>Paghahambing ng %1$s:</value>
+  </data>
+  <data name="ai_comparison_all" xml:space="preserve">
+    <value>lahat </value>
+  </data>
+  <data name="ai_comparison_and" xml:space="preserve">
+    <value> at </value>
+  </data>
+  <data name="ai_comparison_are" xml:space="preserve">
+    <value> ay </value>
+  </data>
+  <data name="ai_comparison_but" xml:space="preserve">
+    <value>, ngunit </value>
+  </data>
+  <data name="ai_comparison_is" xml:space="preserve">
+    <value> ay </value>
+  </data>
+  <data name="ai_comparison_verdict" xml:space="preserve">
+    <value>Mas mataas ang halaga ng %1$s sa %2$d sa %3$d na inihambing na katangian.</value>
+  </data>
+  <data name="ai_comparison_vs" xml:space="preserve">
+    <value> laban sa </value>
+  </data>
+  <data name="ai_comparison_while" xml:space="preserve">
+    <value>, habang </value>
+  </data>
+  <data name="ai_composition_header" xml:space="preserve">
+    <value>Komposisyon ng %1$s</value>
+  </data>
+  <data name="ai_composition_row" xml:space="preserve">
+    <value>• **%1$s** ×%2$d — %3$s g/mol (%4$s%%)</value>
+  </data>
+  <data name="ai_concept_atomic_number" xml:space="preserve">
+    <value>Ang **Atomic Number** ay ang bilang ng mga proton sa isang atom. Ito ang pangunahing paraan kung paano inaayos ang mga elemento sa periodic table.</value>
+  </data>
+  <data name="ai_concept_electron" xml:space="preserve">
+    <value>Ang mga **Electron** ay mga particle na may negatibong charge na umiikot sa nucleus. Kasangkot sila sa bonding at kuryente.</value>
+  </data>
+  <data name="ai_concept_electronegativity" xml:space="preserve">
+    <value>Sinusukat ng **Electronegativity** kung gaano kalakas ang paghila ng isang atom sa mga electron patungo sa sarili nito sa isang chemical bond. Ang Fluorine ang pinaka-electronegative!</value>
+  </data>
+  <data name="ai_concept_generic" xml:space="preserve">
+    <value>Iyan ay isang pangunahing konsepto sa chemistry! Aling bahagi nito ang gusto mong mas palalimin ko? May alam ako tungkol sa mga proton, bonding, radioactivity, at marami pa.</value>
+  </data>
+  <data name="ai_concept_group" xml:space="preserve">
+    <value>Ang isang **Group** ay isang vertical column. Ang mga elemento sa isang grupo ay karaniwang may magkatulad na katangiang kemikal at parehong bilang ng valence electrons.</value>
+  </data>
+  <data name="ai_concept_ionization" xml:space="preserve">
+    <value>Ang **Ionization energy** ay ang enerhiyang kailangan para maalis ang isang electron mula sa isang atom. Karaniwan itong tumataas habang gumagalaw ka pakanan sa periodic table.</value>
+  </data>
+  <data name="ai_concept_isotope" xml:space="preserve">
+    <value>Ang isang **isotope** ay isang variation ng isang elemento na may parehong bilang ng mga proton ngunit magkaibang bilang ng mga neutron. Naaapektuhan nito ang atomic mass nito!</value>
+  </data>
+  <data name="ai_concept_neutron" xml:space="preserve">
+    <value>Ang mga **Neutron** ay mga neutral particle sa nucleus. Nagdaragdag sila ng mass at tumutulong na patatagin ang nucleus, lalo na sa mas mabibigat na elemento.</value>
+  </data>
+  <data name="ai_concept_orbital" xml:space="preserve">
+    <value>Ang mga **Orbital** ay mga rehiyon sa espasyo sa paligid ng isang nucleus kung saan may mataas na posibilidad na makahanap ng electron. Mayroon silang mga hugis tulad ng s, p, d, at f.</value>
+  </data>
+  <data name="ai_concept_period" xml:space="preserve">
+    <value>Ang isang **Period** ay isang horizontal row sa periodic table. Ang mga elemento sa parehong period ay may parehong bilang ng electron shells.</value>
+  </data>
+  <data name="ai_concept_proton" xml:space="preserve">
+    <value>Ang mga **Proton** ay mga particle na may positibong charge sa nucleus. Ang bilang ng mga proton (Atomic Number) ang tumutukoy kung anong elemento ito!</value>
+  </data>
+  <data name="ai_concept_radioactivity" xml:space="preserve">
+    <value>Ang **Radioactivity** ay ang proseso kung saan nawawalan ng enerhiya ang isang hindi matatag na atomic nucleus sa pamamagitan ng paglalabas ng radiation. Sikat ang mga elemento tulad ng Uranium para dito!</value>
+  </data>
+  <data name="ai_concept_shell" xml:space="preserve">
+    <value>Ang mga electron ay naninirahan sa mga **shell** (mga antas ng enerhiya) sa paligid ng nucleus. Ang configuration ang tumutukoy sa posisyon ng elemento sa talahanayan.</value>
+  </data>
+  <data name="ai_concept_valence" xml:space="preserve">
+    <value>Ang mga **Valence electron** ay ang mga electron sa pinakalabas na shell ng isang atom. Sila ang nagtatakda kung paano magre-react ang isang elemento sa iba.</value>
+  </data>
+  <data name="ai_config_is" xml:space="preserve">
+    <value>Ang electron configuration nito ay %1$s.</value>
+  </data>
+  <data name="ai_connector_question_1" xml:space="preserve">
+    <value>Para sagutin ang iyong tanong,</value>
+  </data>
+  <data name="ai_connector_question_2" xml:space="preserve">
+    <value>Naiintindihan ko. Narito ang nahanap ko:</value>
+  </data>
+  <data name="ai_connector_question_3" xml:space="preserve">
+    <value>Tungkol diyan,</value>
+  </data>
+  <data name="ai_connector_why_1" xml:space="preserve">
+    <value>Iyan ay isang magandang follow-up!</value>
+  </data>
+  <data name="ai_connector_why_2" xml:space="preserve">
+    <value>Magandang punto. Hayaan mong ipaliwanag ko pa.</value>
+  </data>
+  <data name="ai_connector_why_3" xml:space="preserve">
+    <value>Pagpapalawak sa sinabi ko lang,</value>
+  </data>
+  <data name="ai_context_lost" xml:space="preserve">
+    <value>Nawala ang konteksto</value>
+  </data>
+  <data name="ai_context_series" xml:space="preserve">
+    <value>Ang %1$s ay %2$s, sa period %3$d.</value>
+  </data>
+  <data name="ai_converted_from" xml:space="preserve">
+    <value>Kinonvert mula sa naitalang halagang %1$s.</value>
+  </data>
+  <data name="ai_count_result" xml:space="preserve">
+    <value>**%1$d** na elemento ang tugma.</value>
+  </data>
+  <data name="ai_coverage_note" xml:space="preserve">
+    <value>Ang %1$s ay naitala para sa %2$d sa %3$d na elemento.</value>
+  </data>
+  <data name="ai_covered_all" xml:space="preserve">
+    <value>Marami na kaming tinalakay tungkol sa **%1$s**!</value>
+  </data>
+  <data name="ai_dataset_english_note" xml:space="preserve">
+    <value>*Ang sangguniang entry na ito ay available lamang sa Ingles.*</value>
+  </data>
+  <data name="ai_decay_effectively_none" xml:space="preserve">
+    <value>Pagkatapos ng %2$s %3$s, halos wala nang natitira sa %1$s.</value>
+  </data>
+  <data name="ai_decay_elapsed" xml:space="preserve">
+    <value>Ang pagbaba mula **%1$s g** hanggang **%2$s g** ng %3$s ay tumatagal ng humigit-kumulang **%4$s %5$s**.</value>
+  </data>
+  <data name="ai_decay_half_lives" xml:space="preserve">
+    <value>Sa panahong iyon, dumaraan ang %1$s sa **%2$s** half-life, at natitira ang mga **%3$s%%** ng sample.</value>
+  </data>
+  <data name="ai_decay_no_half_life" xml:space="preserve">
+    <value>Nakalista ang %1$s, ngunit ang half-life nito ay nakatala bilang "%2$s", kaya hindi ko makalkula ang pagkabulok.</value>
+  </data>
+  <data name="ai_decay_remaining" xml:space="preserve">
+    <value>Humigit-kumulang **%1$s %2$s** ng orihinal na %3$s g ng %4$s ang natitira pagkatapos ng %5$s %6$s.</value>
+  </data>
+  <data name="ai_decay_stable" xml:space="preserve">
+    <value>Matatag ang %1$s — hindi ito nabubulok, kaya walang nawawala sa paglipas ng panahon.</value>
+  </data>
+  <data name="ai_decay_unlisted" xml:space="preserve">
+    <value>Hindi nakalista ang %1$s sa mga isotope ng elementong iyon, kaya wala akong half-life para dito.</value>
+  </data>
+  <data name="ai_decay_working_half_life" xml:space="preserve">
+    <value>Half-life ng %1$s: %2$s</value>
+  </data>
+  <data name="ai_decay_working_header" xml:space="preserve">
+    <value>Solusyon</value>
+  </data>
+  <data name="ai_decay_working_n" xml:space="preserve">
+    <value>n = t / t½ = %1$s → 2⁻ⁿ = %2$s%%</value>
+  </data>
+  <data name="ai_difference_group" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_mass" xml:space="preserve">
+    <value>• **%1$s**: Ang %2$s ay mas mabigat nang malaki.</value>
+  </data>
+  <data name="ai_difference_need_two" xml:space="preserve">
+    <value>Kailangan ko ng dalawang elemento para maipaliwanag ang kanilang mga pagkakaiba!</value>
+  </data>
+  <data name="ai_difference_phase" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_similar" xml:space="preserve">
+    <value>Ang %1$s at %2$s ay medyo magkatulad! Pareho silang %3$s %4$s na mga elemento sa %5$s series.</value>
+  </data>
+  <data name="ai_difference_type" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_dilution_add_solvent" xml:space="preserve">
+    <value>Magdagdag ng **%1$s mL** na solvent.</value>
+  </data>
+  <data name="ai_dilution_result" xml:space="preserve">
+    <value>Ang paglabnaw ng **%1$s mol/L** mula sa **%2$s mL** ay nagbibigay ng **%3$s mol/L** sa **%4$s mL**.</value>
+  </data>
+  <data name="ai_discovered_by" xml:space="preserve">
+    <value>Ang %1$s ay natuklasan ni %2$s noong %3$s.</value>
+  </data>
+  <data name="ai_discovered_in" xml:space="preserve">
+    <value>Ang %1$s ay natuklasan noong %2$s.</value>
+  </data>
+  <data name="ai_elec_mag_header" xml:space="preserve">
+    <value>Mga katangiang Elektrikal at Magnetiko ng %1$s:</value>
+  </data>
+  <data name="ai_elec_mag_properties" xml:space="preserve">
+    <value>Mga elektrikal at magnetikong katangian ng **%1$s**:</value>
+  </data>
+  <data name="ai_element" xml:space="preserve">
+    <value>elemento</value>
+  </data>
+  <data name="ai_element_overview_appearance" xml:space="preserve">
+    <value> Karaniwan itong lumalabas bilang: %1$s.</value>
+  </data>
+  <data name="ai_element_overview_electrons" xml:space="preserve">
+    <value> Mayroon itong %1$s electron na umiikot sa nucleus nito.</value>
+  </data>
+  <data name="ai_element_overview_intro" xml:space="preserve">
+    <value>Ang %1$s %2$s (%3$s) ay isang kamangha-manghang elemento! Ito ay atomic number %4$s at kabilang sa grupong %5$s.</value>
+  </data>
+  <data name="ai_element_overview_isotopes" xml:space="preserve">
+    <value> Ang isang atom ng %1$s ay naglalaman ng %2$s proton, %3$s electron, at karaniwang %4$s neutron.</value>
+  </data>
+  <data name="ai_element_overview_series" xml:space="preserve">
+    <value> Bahagi ito ng seryeng %1$s.</value>
+  </data>
+  <data name="ai_emission_spectrum" xml:space="preserve">
+    <value>Narito ang emission spectrum ng %1$s: ang liwanag na inilalabas ng mga atom nito kapag bumabalik ang mga excited na electron. Nakaimbak ito bilang larawan, kaya maipapakita ko ang pattern ngunit hindi ko mapapangalanan ang bawat linya.</value>
+  </data>
+  <data name="ai_encouragement" xml:space="preserve">
+    <value>Magandang tanong! 🌟</value>
+  </data>
+  <data name="ai_eqn_no_desc" xml:space="preserve">
+    <value>Kasama sa app ang equation na ito bilang visual reference.</value>
+  </data>
+  <data name="ai_equation_balanced" xml:space="preserve">
+    <value>**%1$s → %2$s**</value>
+  </data>
+  <data name="ai_equation_check_header" xml:space="preserve">
+    <value>Pagsusuri ng atomo</value>
+  </data>
+  <data name="ai_equation_no_solution" xml:space="preserve">
+    <value>Walang balanse ang ekwasyong iyan gamit ang buong positibong koepisyente.</value>
+  </data>
+  <data name="ai_equation_one_sided" xml:space="preserve">
+    <value>Hindi mabalanse ang ekwasyong iyan: may elementong nasa isang panig lang, kaya walang koepisyenteng makakaayos nito.</value>
+  </data>
+  <data name="ai_equation_one_sided_named" xml:space="preserve">
+    <value>Hindi mabalanse ang ekwasyong iyan: ang %1$s ay nasa isang panig lang, kaya walang koepisyenteng makakaayos nito.</value>
+  </data>
+  <data name="ai_equation_parse_failed" xml:space="preserve">
+    <value>Hindi ko iyon nabasa bilang ekwasyong kemikal. Subukan ang anyong Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_equation_tally_row" xml:space="preserve">
+    <value>• **%1$s** — %2$d sa kaliwa, %3$d sa kanan</value>
+  </data>
+  <data name="ai_equation_too_large" xml:space="preserve">
+    <value>Kailangan ng ekwasyong iyan ng koepisyenteng masyadong malaki para sa totoong reaksyon. Suriin ang mga pormula.</value>
+  </data>
+  <data name="ai_equation_underdetermined" xml:space="preserve">
+    <value>May higit sa isang malayang balanse ang ekwasyong iyan — parang dalawang reaksyon na isinulat bilang isa. Hatiin mo at babalansehin ko ang bawat isa.</value>
+  </data>
+  <data name="ai_etymology_header" xml:space="preserve">
+    <value>Ang pangalang **%1$s** ay may kawili-wiling pinagmulan:</value>
+  </data>
+  <data name="ai_facts.0" xml:space="preserve">
+    <value>Alam mo ba? Ang Oxygen ang pinakamaraming elemento sa crust ng Earth!</value>
+  </data>
+  <data name="ai_facts.1" xml:space="preserve">
+    <value>Nakakatuwang katotohanan: Ang ginto ay hindi kailanman kinakalawang o nadedemolish. Mananatili itong makintab magpakailanman!</value>
+  </data>
+  <data name="ai_facts.2" xml:space="preserve">
+    <value>Heto ang isang cool na bagay: Ang Hydrogen ang pinakamaraming elemento sa uniberso! 🌌</value>
+  </data>
+  <data name="ai_facts.3" xml:space="preserve">
+    <value>Kahanga-hanga: Ang Carbon ang basehan para sa lahat ng kilalang buhay sa Earth!</value>
+  </data>
+  <data name="ai_facts.4" xml:space="preserve">
+    <value>Interesante: Ang Helium ang tanging elemento na hindi tumitigas sa ilalim ng normal na pressure!</value>
+  </data>
+  <data name="ai_facts.5" xml:space="preserve">
+    <value>Nakakatuwang katotohanan: Ang Mercury ang tanging metal na likido sa room temperature! 💧</value>
+  </data>
+  <data name="ai_facts.6" xml:space="preserve">
+    <value>Alam mo ba? Ang elementong francium ay sobrang radyaktibo na agad itong maglalaho!</value>
+  </data>
+  <data name="ai_facts.7" xml:space="preserve">
+    <value>Cool: Ang brilyante at graphite ay parehong gawa sa purong carbon ngunit may ganap na magkakaibang katangian!</value>
+  </data>
+  <data name="ai_facts.8" xml:space="preserve">
+    <value>Kahanga-hanga: Ang isang onsa ng ginto ay maaaring pukpukin para maging isang sheet na 300 square feet ang laki!</value>
+  </data>
+  <data name="ai_facts.9" xml:space="preserve">
+    <value>Interesante: Ang Neon ay hindi talaga bumubuo ng anumang chemical compounds sa ilalim ng mga normal na kondisyon!</value>
+  </data>
+  <data name="ai_feature_achievements" xml:space="preserve">
+    <value>Subaybayan ang iyong progreso gamit ang **mga tagumpay** at estadistika ng paggamit sa user page.</value>
+  </data>
+  <data name="ai_feature_capabilities" xml:space="preserve">
+    <value>Kaya kong maghanap at maghambing ng mga katangian ng elemento, magbalanse ng ekwasyon, magkuwenta ng molar mass at konsentrasyon, mag-convert ng yunit, at magsagawa ng decay calculation. Magtanong tungkol sa isang elemento, o magsulat ng pormula o ekwasyon.</value>
+  </data>
+  <data name="ai_feature_emission_spectrum" xml:space="preserve">
+    <value>Makikita mo ang **emission spectrum** ng isang elemento sa detail panel nito. Ipinapakita nito ang natatanging pattern ng liwanag na nililikha ng elementong iyon.</value>
+  </data>
+  <data name="ai_feature_flashcards" xml:space="preserve">
+    <value>May ilang **flashcard mini-games** ang app para sa mga simbolo, atomic mass at klasipikasyon, kasama ang level at XP na masusubaybayan.</value>
+  </data>
+  <data name="ai_feature_ideal_gas" xml:space="preserve">
+    <value>Gamitin ang **ideal gas calculator** para makuha ang presyon, volume, mol o temperatura mula sa PV = nRT.</value>
+  </data>
+  <data name="ai_feature_molar_mass" xml:space="preserve">
+    <value>May built-in na **molar mass calculator** para sa molecular weight ng mga kumplikadong compound. Kaya ko rin ito rito — bigyan mo lang ako ng pormula.</value>
+  </data>
+  <data name="ai_feature_nuclide_table" xml:space="preserve">
+    <value>May kumpletong **Table of Nuclides** ang app na nagpapakita ng mga isotope ng lahat ng elemento, may kulay ayon sa uri ng pagkabulok (alpha, beta, at iba pa).</value>
+  </data>
+  <data name="ai_feature_reaction_balancer" xml:space="preserve">
+    <value>Tumutulong ang **chemical reaction balancer** sa pagbalanse ng ekwasyon at pag-save ng paborito. Puwede mo rin akong tanungin dito — isulat mo lang ang tulad ng Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_feature_unit_converter" xml:space="preserve">
+    <value>May **unit converter** ang app para sa temperatura at iba pang siyentipikong yunit. Puwede mo rin akong tanungin, halimbawa "convert 500 K to °C".</value>
+  </data>
+  <data name="ai_field_abundance_crustal_rocks" xml:space="preserve">
+    <value>dami sa mga batong crustal</value>
+  </data>
+  <data name="ai_field_abundance_earth_crust" xml:space="preserve">
+    <value>dami sa balat ng lupa</value>
+  </data>
+  <data name="ai_field_abundance_earth_soils" xml:space="preserve">
+    <value>dami sa lupa</value>
+  </data>
+  <data name="ai_field_abundance_human_body" xml:space="preserve">
+    <value>dami sa katawan ng tao</value>
+  </data>
+  <data name="ai_field_abundance_meteorites" xml:space="preserve">
+    <value>dami sa mga meteorite</value>
+  </data>
+  <data name="ai_field_abundance_sea_water" xml:space="preserve">
+    <value>dami sa tubig-dagat</value>
+  </data>
+  <data name="ai_field_abundance_solar_system" xml:space="preserve">
+    <value>dami sa solar system</value>
+  </data>
+  <data name="ai_field_abundance_sun" xml:space="preserve">
+    <value>dami sa Araw</value>
+  </data>
+  <data name="ai_field_abundance_urban_soils" xml:space="preserve">
+    <value>dami sa lupang urban</value>
+  </data>
+  <data name="ai_field_nfpa_flammability" xml:space="preserve">
+    <value>rating ng pagkamadaling masunog</value>
+  </data>
+  <data name="ai_field_nfpa_health" xml:space="preserve">
+    <value>rating ng kalusugan</value>
+  </data>
+  <data name="ai_field_nfpa_instability" xml:space="preserve">
+    <value>rating ng kawalang-tatag</value>
+  </data>
+  <data name="ai_field_nfpa_special" xml:space="preserve">
+    <value>espesyal na panganib</value>
+  </data>
+  <data name="ai_filter_matched" xml:space="preserve">
+    <value>%1$d na elemento ang tugma:</value>
+  </data>
+  <data name="ai_filter_none" xml:space="preserve">
+    <value>Walang elementong tumutugma sa mga kundisyong iyon.</value>
+  </data>
+  <data name="ai_filter_top" xml:space="preserve">
+    <value>Nangungunang %1$d sa %2$d tugmang elemento:</value>
+  </data>
+  <data name="ai_formula_c6h12o6" xml:space="preserve">
+    <value>Ang C6H12O6 ay Glucose, isang simpleng asukal na nagbibigay ng enerhiya sa mga buhay na bagay. Mayroon itong 6 na Carbon, 12 Hydrogen, at 6 na Oxygen.</value>
+  </data>
+  <data name="ai_formula_ch4" xml:space="preserve">
+    <value>Ang CH4 ay Methane, ang pinakasimpleng alkane at isang malakas na greenhouse gas. Binubuo ito ng isang Carbon at apat na Hydrogen.</value>
+  </data>
+  <data name="ai_formula_co2" xml:space="preserve">
+    <value>Ang CO2 ay Carbon Dioxide. Binubuo ito ng isang Carbon atom at dalawang Oxygen atom.</value>
+  </data>
+  <data name="ai_formula_composition_offer" xml:space="preserve">
+    <value> Gusto mo bang i-break down ko ang elemental composition nito?</value>
+  </data>
+  <data name="ai_formula_consists_of" xml:space="preserve">
+    <value>Binubuo ito ng:</value>
+  </data>
+  <data name="ai_formula_generic" xml:space="preserve">
+    <value>Mukhang chemical formula iyan, pero nag-aaral pa lang ako tungkol sa mga molecule! Itanong mo sa akin ang tungkol sa mga indibidwal na elemento.</value>
+  </data>
+  <data name="ai_formula_h2o" xml:space="preserve">
+    <value>Ang H2O ay Tubig! Binubuo ito ng dalawang Hydrogen atom at isang Oxygen atom.</value>
+  </data>
+  <data name="ai_formula_h2so4" xml:space="preserve">
+    <value>Ang H2SO4 ay Sulfuric Acid, isang napakalakas at importanteng industrial acid. Naglalaman ito ng Hydrogen, Sulfur, at Oxygen.</value>
+  </data>
+  <data name="ai_formula_hcl" xml:space="preserve">
+    <value>Ang HCl ay Hydrochloric Acid, na matatagpuan sa iyong tiyan para tumulong sa pagtunaw ng pagkain!</value>
+  </data>
+  <data name="ai_formula_item" xml:space="preserve">
+    <value>• %1$s × %2$s (%3$s)</value>
+  </data>
+  <data name="ai_formula_mass" xml:space="preserve">
+    <value>Ang molar mass ng **%1$s** ay **%2$s g/mol**.</value>
+  </data>
+  <data name="ai_formula_nacl" xml:space="preserve">
+    <value>Ang NaCl ay Sodium Chloride, na mas kilala bilang asin! Pinagsasama nito ang Sodium at Chlorine.</value>
+  </data>
+  <data name="ai_formula_nh3" xml:space="preserve">
+    <value>NH3 ay Ammonia, madalas gamitin sa mga panlinis. Binubuo ito ng isang Nitrogen at tatlong Hydrogen.</value>
+  </data>
+  <data name="ai_formula_o2" xml:space="preserve">
+    <value>O2 ang oxygen na nilalanghap natin! Ito ay dalawang oxygen atom na magkadikit.</value>
+  </data>
+  <data name="ai_formula_pro_plus" xml:space="preserve">
+    <value>Ang pag-aanalisa ng mga chemical compound tulad ng **%1$s** ay isang **PRO+** feature. Bilang isang %2$s user, matutulungan lang kita sa mga indibidwal na elemento!</value>
+  </data>
+  <data name="ai_formula_recognize" xml:space="preserve">
+    <value>Kinikilala ko ang **%1$s** bilang isang chemical compound na may molar mass na **%2$s**.</value>
+  </data>
+  <data name="ai_free_user" xml:space="preserve">
+    <value>Libre</value>
+  </data>
+  <data name="ai_geo_color" xml:space="preserve">
+    <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
+  </data>
+  <data name="ai_geo_dens" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_hard" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_info" xml:space="preserve">
+    <value>Ang %1$s ay isang %2$s sa %3$s group. Kulay: %4$s. Hardness: %5$s. Density: %6$s. Magnetism: %7$s.</value>
+  </data>
+  <data name="ai_grams_to_moles" xml:space="preserve">
+    <value>**%1$s g** ng %2$s ay **%3$s mol**.</value>
+  </data>
+  <data name="ai_greeting" xml:space="preserve">
+    <value>Kumusta! 👋 Ako ang iyong chemistry buddy. Magtanong sa akin ng kahit ano tungkol sa mga elemento!</value>
+  </data>
+  <data name="ai_group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="ai_hard_header" xml:space="preserve">
+    <value>Mga katangian ng hardness ng %1$s:</value>
+  </data>
+  <data name="ai_help_response" xml:space="preserve">
+    <value>Sinanay ako nang mahigpit sa data na available sa loob ng app na ito! Matutulungan kita sa:
+
+🧪 **Detalyadong Elemento**: Mga katangian, hitsura, at mga katotohanan sa pagtuklas nang direkta mula sa aming JSON database.
+⚖️ **Paghahambing ng Data**: Ihambing ang density, mass, radius, at reactivity sa pagitan ng mga elemento.
+💥 **Reactivity**: Ginagamit ko ang data ng group at period ng app para ipaliwanag kung paano nagre-react ang mga elemento tulad ng Sodium sa Tubig.
+🧬 **Biological/Safety**: Toxicity at mga biological role na matatagpuan sa mga paglalarawan ng elemento.
+⚛️ **Isotopes at Abundance**: Partikular na data mula sa aming nakalaang mga talahanayan ng isotope at abundance.
+📉 **Periodic Trends**: Pagpapaliwanag ng mga pattern tulad ng Electronegativity batay sa istruktura ng talahanayan.
+🔢 **Molar Mass**: tumpak na mga kalkulasyon gamit ang mga atomic weight sa app.
+📝 **Mga Kahulugan**: Mga paliwanag para sa mga term sa chemistry na ginagamit sa buong app.
+
+Magtanong lang at hahanapin ko ang sagot sa mga record ng app! 🌟</value>
+  </data>
+  <data name="ai_higher_than" xml:space="preserve">
+    <value>Ang %1$s ay may mas mataas na %2$s kaysa sa %3$s.</value>
+  </data>
+  <data name="ai_hint" xml:space="preserve">
+    <value>Magtanong ng kahit ano...</value>
+  </data>
+  <data name="ai_history_pro_only" xml:space="preserve">
+    <value>Ang kasaysayan ng chat ay tampok na PRO</value>
+  </data>
+  <data name="ai_history_sign_in" xml:space="preserve">
+    <value>Mag-sign in para tingnan ang kasaysayan ng chat</value>
+  </data>
+  <data name="ai_id_header" xml:space="preserve">
+    <value>Mga identifier para sa %1$s:</value>
+  </data>
+  <data name="ai_identifiers_for" xml:space="preserve">
+    <value>Mga identifier para sa **%1$s**:</value>
+  </data>
+  <data name="ai_identity_result" xml:space="preserve">
+    <value>Batay sa mga value sa app, ang elemento na may value na malapit sa **%1$s** para sa mga katangian nito ay **%2$s** (aktwal: %3$s).</value>
+  </data>
+  <data name="ai_ion_count" xml:space="preserve">
+    <value>Ang %1$s ay may %2$d na (mga) value ng ionization energy na available sa app.</value>
+  </data>
+  <data name="ai_isotope_compare_header" xml:space="preserve">
+    <value>%1$s laban sa %2$s</value>
+  </data>
+  <data name="ai_isotope_compare_row" xml:space="preserve">
+    <value>• **%1$s**: %2$s laban sa %3$s</value>
+  </data>
+  <data name="ai_isotope_decay" xml:space="preserve">
+    <value>(Decay: %1$s)</value>
+  </data>
+  <data name="ai_isotope_decays" xml:space="preserve">
+    <value>• **%1$s** — %2$s, kalahating buhay %3$s</value>
+  </data>
+  <data name="ai_isotope_half_life" xml:space="preserve">
+    <value> Ito ay may half-life na %1$s at nagde-decay sa pamamagitan ng %2$s.</value>
+  </data>
+  <data name="ai_isotope_halflife_only" xml:space="preserve">
+    <value>• **%1$s** — kalahating buhay %2$s</value>
+  </data>
+  <data name="ai_isotope_header" xml:space="preserve">
+    <value>Ayon sa talahanayan ng isotope ng app, narito ang mga pangunahing isotope para sa **%1$s**:</value>
+  </data>
+  <data name="ai_isotope_neutron_diff" xml:space="preserve">
+    <value>Ang %1$s ay may %2$d neutron, ang %3$s ay may %4$d — pagkakaiba ng %5$d.</value>
+  </data>
+  <data name="ai_isotope_same_element" xml:space="preserve">
+    <value>Pareho silang isotope ng %1$s, kaya pareho ang %2$d proton nila at nagkakaiba lamang sa neutron.</value>
+  </data>
+  <data name="ai_isotope_stable" xml:space="preserve">
+    <value>• **%1$s** — stable</value>
+  </data>
+  <data name="ai_isotope_unlisted" xml:space="preserve">
+    <value>hindi nakalista sa talaan ng isotope</value>
+  </data>
+  <data name="ai_isotopes_header" xml:space="preserve">
+    <value>Mga isotope ng %1$s</value>
+  </data>
+  <data name="ai_isotopes_summary" xml:space="preserve">
+    <value>%1$d kilalang isotope, %2$d ang stable.</value>
+  </data>
+  <data name="ai_label_decay" xml:space="preserve">
+    <value>Paraan ng pagkabulok</value>
+  </data>
+  <data name="ai_label_half_life" xml:space="preserve">
+    <value>Kalahating buhay</value>
+  </data>
+  <data name="ai_label_mass_number" xml:space="preserve">
+    <value>Mass number</value>
+  </data>
+  <data name="ai_label_neutrons" xml:space="preserve">
+    <value>Mga neutron</value>
+  </data>
+  <data name="ai_label_protons" xml:space="preserve">
+    <value>Mga proton</value>
+  </data>
+  <data name="ai_lang_switched" xml:space="preserve">
+    <value>Ang wika ng AI ay inilipat sa: %1$s 🌐</value>
+  </data>
+  <data name="ai_limit_reset_badge" xml:space="preserve">
+    <value>Nagre-reset %1$s</value>
+  </data>
+  <data name="ai_limit_unlimited" xml:space="preserve">
+    <value>Walang limitasyon</value>
+  </data>
+  <data name="ai_list_header" xml:space="preserve">
+    <value>Narito ang mga elementong **%1$s**:</value>
+  </data>
+  <data name="ai_list_more" xml:space="preserve">
+    <value>…at %1$d pa.</value>
+  </data>
+  <data name="ai_list_row" xml:space="preserve">
+    <value>• **%1$s** — %2$s</value>
+  </data>
+  <data name="ai_list_row_plain" xml:space="preserve">
+    <value>• **%1$s**</value>
+  </data>
+  <data name="ai_list_spread" xml:space="preserve">
+    <value>Ang mga halaga ay mula %1$s hanggang %2$s.</value>
+  </data>
+  <data name="ai_locked_fields" xml:space="preserve">
+    <value>Ang %1$s ay bahagi ng %2$s. Mag-upgrade para makita ito rito at sa bawat pahina ng elemento.</value>
+  </data>
+  <data name="ai_locked_generic" xml:space="preserve">
+    <value>Ang sagot na iyon ay bahagi ng %1$s. Mag-upgrade para i-unlock ito.</value>
+  </data>
+  <data name="ai_lower_than" xml:space="preserve">
+    <value>Ang %1$s ay may mas mababang %2$s kaysa sa %3$s.</value>
+  </data>
+  <data name="ai_mech_header" xml:space="preserve">
+    <value>%1$s para sa %2$s:</value>
+  </data>
+  <data name="ai_molar_mass_generic" xml:space="preserve">
+    <value>Makakatulong ako sa mga molar mass! Subukang magtanong ng "Ano ang molar mass ng H2O?"</value>
+  </data>
+  <data name="ai_molar_mass_of" xml:space="preserve">
+    <value>Ang molar mass ng %1$s ay %2$s.</value>
+  </data>
+  <data name="ai_molar_mass_pro_plus" xml:space="preserve">
+    <value>Ang pag-calculate ng molar mass para sa mga compound ay isang **PRO+** feature. Bilang isang %1$s user, maaari ka pa ring makakuha ng molar mass para sa mga indibidwal na elemento!</value>
+  </data>
+  <data name="ai_moles_of" xml:space="preserve">
+    <value>Ang **%1$s mol** ng %2$s ay may **%3$s** na atomo.</value>
+  </data>
+  <data name="ai_moles_to_particles" xml:space="preserve">
+    <value>Ang **%1$s mol** ay may **%2$s** na particle.</value>
+  </data>
+  <data name="ai_naturally_occurring" xml:space="preserve">
+    <value>Likas na matatagpuan</value>
+  </data>
+  <data name="ai_neighbour_after" xml:space="preserve">
+    <value>Ang **%1$s** (atomic number %2$d) ay kaagad na sumusunod sa %3$s.</value>
+  </data>
+  <data name="ai_neighbour_before" xml:space="preserve">
+    <value>Ang **%1$s** (atomic number %2$d) ay kaagad na nauuna sa %3$s.</value>
+  </data>
+  <data name="ai_nfpa_flammable_0" xml:space="preserve">
+    <value>Hindi masusunog</value>
+  </data>
+  <data name="ai_nfpa_flammable_1" xml:space="preserve">
+    <value>Dapat painitin muna para masunog</value>
+  </data>
+  <data name="ai_nfpa_flammable_2" xml:space="preserve">
+    <value>Nag-aapoy kapag katamtamang pinainit</value>
+  </data>
+  <data name="ai_nfpa_flammable_3" xml:space="preserve">
+    <value>Nag-aapoy sa normal na temperatura</value>
+  </data>
+  <data name="ai_nfpa_flammable_4" xml:space="preserve">
+    <value>Sobrang daling mag-apoy</value>
+  </data>
+  <data name="ai_nfpa_health_0" xml:space="preserve">
+    <value>Normal na materyal</value>
+  </data>
+  <data name="ai_nfpa_health_1" xml:space="preserve">
+    <value>Bahagyang mapanganib</value>
+  </data>
+  <data name="ai_nfpa_health_2" xml:space="preserve">
+    <value>Mapanganib</value>
+  </data>
+  <data name="ai_nfpa_health_3" xml:space="preserve">
+    <value>Matinding panganib</value>
+  </data>
+  <data name="ai_nfpa_health_4" xml:space="preserve">
+    <value>Nakamamatay</value>
+  </data>
+  <data name="ai_nfpa_instability_0" xml:space="preserve">
+    <value>Stable</value>
+  </data>
+  <data name="ai_nfpa_instability_1" xml:space="preserve">
+    <value>Hindi stable kapag pinainit</value>
+  </data>
+  <data name="ai_nfpa_instability_2" xml:space="preserve">
+    <value>Posibleng marahas na pagbabagong kemikal</value>
+  </data>
+  <data name="ai_nfpa_instability_3" xml:space="preserve">
+    <value>Maaaring pumutok sa malakas na pampasiklab</value>
+  </data>
+  <data name="ai_nfpa_instability_4" xml:space="preserve">
+    <value>Madaling pumutok</value>
+  </data>
+  <data name="ai_nfpa_special_none" xml:space="preserve">
+    <value>Walang naitalang espesyal na panganib</value>
+  </data>
+  <data name="ai_nfpa_special_ox" xml:space="preserve">
+    <value>Oxidiser</value>
+  </data>
+  <data name="ai_nfpa_special_sa" xml:space="preserve">
+    <value>Simpleng asphyxiant</value>
+  </data>
+  <data name="ai_nfpa_special_w" xml:space="preserve">
+    <value>Tumutugon sa tubig</value>
+  </data>
+  <data name="ai_nfpa_unrated" xml:space="preserve">
+    <value>Walang rating</value>
+  </data>
+  <data name="ai_no_abundance_data" xml:space="preserve">
+    <value>Wala akong partikular na numerong halaga ng kasaganaan para sa %1$s, ngunit ang paglalarawan ay nagsasabing: %2$s.</value>
+  </data>
+  <data name="ai_no_bio_data" xml:space="preserve">
+    <value>Wala akong detalyadong data sa biyolohiya para sa %1$s, ngunit ang pamantayang pangkaligtasan ay nagsasabing:</value>
+  </data>
+  <data name="ai_no_data" xml:space="preserve">
+    <value>Hmm, hindi ako makahanap ng impormasyon tungkol diyan. Subukang magtanong tungkol sa isang elemento tulad ng 'oxygen' o 'gold'!</value>
+  </data>
+  <data name="ai_no_data_alternatives" xml:space="preserve">
+    <value>Naitala para sa %1$s: %2$s.</value>
+  </data>
+  <data name="ai_no_data_right_now" xml:space="preserve">
+    <value>Hindi ko iyan masuri sa ngayon.</value>
+  </data>
+  <data name="ai_no_etymology_data" xml:space="preserve">
+    <value>Hindi ako sigurado sa pinagmulan ng pangalan nito, ngunit ito ay natuklasan ni %2$s noong %3$s.</value>
+  </data>
+  <data name="ai_no_isotope_data" xml:space="preserve">
+    <value>Wala akong detalyadong listahan ng mga isotope para sa %1$s sa aking mabilisang data, ngunit makakahanap ka ng komprehensibong listahan sa Talahanayan ng mga Isotope!</value>
+  </data>
+  <data name="ai_no_list_data" xml:space="preserve">
+    <value>Hindi ako nakahanap ng anumang elemento na tumutugma sa mga kraytiryang iyon sa aming database.</value>
+  </data>
+  <data name="ai_no_physical_data" xml:space="preserve">
+    <value>Wala akong detalyadong pisikal na katangian para sa %1$s sa mabilisang data, ngunit maaari mong suriin ang mga detalyadong panel ng katangian!</value>
+  </data>
+  <data name="ai_no_property_data" xml:space="preserve">
+    <value>Paumanhin, wala akong data para sa %2$s ng %1$s sa ngayon.</value>
+  </data>
+  <data name="ai_no_usage_data" xml:space="preserve">
+    <value>Wala akong partikular na listahan ng mga gamit para sa %1$s, ngunit ito ay isang kamangha-manghang elemento! Maaari kang magbasa nang higit pa sa detalyadong paglalarawan.</value>
+  </data>
+  <data name="ai_nuclide_body" xml:space="preserve">
+    <value>• **Mga proton:** %1$d
+• **Mga neutron:** %2$d
+• **Mass number:** %3$d</value>
+  </data>
+  <data name="ai_nuclide_explain" xml:space="preserve">
+    <value>Neutron = mass number − atomic number = %1$d − %2$d = **%3$d**.</value>
+  </data>
+  <data name="ai_nuclide_header" xml:space="preserve">
+    <value>%1$s-%2$d</value>
+  </data>
+  <data name="ai_open_in_app" xml:space="preserve">
+    <value>Buksan ang %1$s</value>
+  </data>
+  <data name="ai_ordinal_suffix_nd" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_rd" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_st" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_th" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_oxidation_neg" xml:space="preserve">
+    <value>• Negatibo: %1$s</value>
+  </data>
+  <data name="ai_oxidation_pos" xml:space="preserve">
+    <value>• Positibo: %1$s</value>
+  </data>
+  <data name="ai_oxidation_states" xml:space="preserve">
+    <value>Ang **%1$s** ay may ilang posibleng oxidation states.</value>
+  </data>
+  <data name="ai_period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="ai_personalized_greeting_fav" xml:space="preserve">
+    <value>Hé! Natatandaan ko na tiningnan mo ang %1$s kamakailan. Gusto mo bang makita ang higit pang mga detalye?</value>
+  </data>
+  <data name="ai_personalized_greeting_interest" xml:space="preserve">
+    <value>Maligayang pagbabalik! Handa nang galugarin ang higit pa tungkol sa %1$s? Maaari nating tingnan muli ang %2$s.</value>
+  </data>
+  <data name="ai_ph_info" xml:space="preserve">
+    <value>%1$s: ang acid sa ibaba ng pH %2$s ay %3$s, ang neutral range na %4$s ay %5$s, at sa itaas ng pH %6$s ito ay %7$s.</value>
+  </data>
+  <data name="ai_ph_info_short" xml:space="preserve">
+    <value>%1$s: ang pH range na %2$s ay %3$s.</value>
+  </data>
+  <data name="ai_phase_gas" xml:space="preserve">
+    <value>Gas</value>
+  </data>
+  <data name="ai_phase_liquid" xml:space="preserve">
+    <value>Liquid</value>
+  </data>
+  <data name="ai_phase_solid" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="ai_physical_header" xml:space="preserve">
+    <value>Batay sa mga pisikal na katangian na nakaimbak sa app para sa **%1$s**:</value>
+  </data>
+  <data name="ai_poi_info" xml:space="preserve">
+    <value>%1$s: Poisson's ratio range na %2$s (%3$s).</value>
+  </data>
+  <data name="ai_pro_tip_hint" xml:space="preserve">
+    <value>Pro tip: Maaari mo rin akong tanungin tungkol sa pinagmulan nito, papel sa biyolohiya, o reaktibidad!</value>
+  </data>
+  <data name="ai_pro_user" xml:space="preserve">
+    <value>PRO</value>
+  </data>
+  <data name="ai_property_is" xml:space="preserve">
+    <value>Ang %2$s ng %1$s ay %3$s.</value>
+  </data>
+  <data name="ai_quiz_atomic" xml:space="preserve">
+    <value>Anong elemento ang may atomic number na **%1$s**?</value>
+  </data>
+  <data name="ai_quiz_correct" xml:space="preserve">
+    <value>✨ **Tama!** Magaling. Ang sagot ay talagang **%1$s**. Handa na para sa isa pang tanong?</value>
+  </data>
+  <data name="ai_quiz_history" xml:space="preserve">
+    <value>Ang elementong ito ay natuklasan ni **%1$s** noong **%2$s**. Mahuhulaan mo ba kung ano ito?</value>
+  </data>
+  <data name="ai_quiz_no_start" xml:space="preserve">
+    <value>Hindi ako makakapagsimula ng quiz ngayon.</value>
+  </data>
+  <data name="ai_quiz_not_active" xml:space="preserve">
+    <value>Wala ako sa quiz mode ngayon.</value>
+  </data>
+  <data name="ai_quiz_start" xml:space="preserve">
+    <value>May iniisip akong elemento. Ang simbolo nito ay **%1$s**. Ano ang pangalan nito?</value>
+  </data>
+  <data name="ai_quiz_wrong" xml:space="preserve">
+    <value>Hindi masyado! Ang sagot ay **%1$s**. Gusto mo bang sumubok muli? Sabihin lang ang 'quiz'!</value>
+  </data>
+  <data name="ai_radioactive_no" xml:space="preserve">
+    <value>Ang %1$s ay itinuturing na matatag at hindi radyaktibo.</value>
+  </data>
+  <data name="ai_radioactive_yes" xml:space="preserve">
+    <value>Ang %1$s ay radyaktibo: %2$s</value>
+  </data>
+  <data name="ai_radius_details" xml:space="preserve">
+    <value>Narito ang mga detalye ng radius para sa **%1$s**:</value>
+  </data>
+  <data name="ai_radius_header" xml:space="preserve">
+    <value>Mga detalye ng radius para sa %1$s:</value>
+  </data>
+  <data name="ai_rank_highest" xml:space="preserve">
+    <value>Ito ang pinakamataas sa %1$d na elementong may naitalang %2$s.</value>
+  </data>
+  <data name="ai_rank_lowest" xml:space="preserve">
+    <value>Ito ang pinakamababa sa %1$d na elementong may naitalang %2$s.</value>
+  </data>
+  <data name="ai_rank_nth" xml:space="preserve">
+    <value>Ito ang **%1$d sa %2$d** na elemento ayon sa %3$s.</value>
+  </data>
+  <data name="ai_rate_limit_reached" xml:space="preserve">
+    <value>Naabot mo na ang iyong pang-araw-araw na limitasyon na %1$d na mga mensahe. Mag-upgrade sa PRO o PRO+ para sa higit pa!</value>
+  </data>
+  <data name="ai_rate_limit_resets" xml:space="preserve">
+    <value>Babalik ang iyong pang-araw-araw na mga mensahe sa %1$s.</value>
+  </data>
+  <data name="ai_reaction_acid" xml:space="preserve">
+    <value>Maraming metal ang nagre-react sa mga asido upang maglabas ng hydrogen gas. Ang reaktibidad ng %1$s ay nakadepende sa posisyon nito sa serye ng aktibidad.</value>
+  </data>
+  <data name="ai_reaction_alkali_halogen" xml:space="preserve">
+    <value>Ang mga ito ay nagre-react nang masigla upang bumuo ng isang **asin** (isang ionic compound). Halimbawa, ang %1$s at %2$s ay maaaring magsama upang lumika ng isang natatanging compound!</value>
+  </data>
+  <data name="ai_reaction_alkali_water" xml:space="preserve">
+    <value>Ang mga alkali metal tulad ng %1$s ay nagre-react nang **marahas** sa tubig, na gumagawa ng hydrogen gas at isang malakas na base. Maaari pa itong sumabog!</value>
+  </data>
+  <data name="ai_reaction_alkaline_earth_water" xml:space="preserve">
+    <value>Ang %1$s ay nagre-react nang masigla sa tubig upang bumuo ng hydrogen gas at ang hydroxide nito.</value>
+  </data>
+  <data name="ai_reaction_complex" xml:space="preserve">
+    <value>Ang mga reaksyon ay maaaring maging kumplikado! Sa pangkalahatan, ang gawi ng %1$s ay nakadepende sa grupo nito (%2$s) at electronegativity.</value>
+  </data>
+  <data name="ai_reaction_generic_elements" xml:space="preserve">
+    <value>Ang reaksyon sa pagitan ng %1$s at %2$s ay nakadepende sa kanilang mga electron configuration. Maaari silang bumuo ng isang compound kung ang isa ay makakapagbigay at ang isa ay makakatanggap ng mga electron!</value>
+  </data>
+  <data name="ai_reaction_generic_water" xml:space="preserve">
+    <value>Wala akong partikular na data para sa reaksyon ng %1$s sa tubig, ngunit maraming metal ang bumubuo ng mga oxide o hydroxide sa paglipas ng panahon.</value>
+  </data>
+  <data name="ai_reaction_magnesium_water" xml:space="preserve">
+    <value>Ang %1$s ay nagre-react nang mabagal sa malamig na tubig ngunit mabilis sa singaw.</value>
+  </data>
+  <data name="ai_reaction_noble_gas" xml:space="preserve">
+    <value>Ang %1$s ay isang noble gas at napaka-stable, bihirang mag-react sa anumang bagay dahil puno ang outer shell nito.</value>
+  </data>
+  <data name="ai_reaction_oxygen" xml:space="preserve">
+    <value>Karamihan sa mga elemento ay nagre-react sa oxygen upang bumuo ng mga oxide. Halimbawa, ang mga metal tulad ng %1$s ay madalas na bumubuo ng isang protektadong layer o kalawang.</value>
+  </data>
+  <data name="ai_reactivity_more" xml:space="preserve">
+    <value>Ang **%1$s** ay karaniwang mas reactive kaysa sa **%2$s** batay sa posisyon nito sa periodic table.</value>
+  </data>
+  <data name="ai_reactivity_need_two" xml:space="preserve">
+    <value>Kailangan ko ng hindi bababa sa dalawang elemento para maihambing ang kanilang reactivity!</value>
+  </data>
+  <data name="ai_reactivity_no_result" xml:space="preserve">
+    <value>Hindi ko matukoy ang pinaka-reactive na elemento.</value>
+  </data>
+  <data name="ai_reactivity_result" xml:space="preserve">
+    <value>Ang pinaka-reactive na %1$s ay **%2$s**.</value>
+  </data>
+  <data name="ai_reactivity_similar" xml:space="preserve">
+    <value>Parehong ang **%1$s** at **%2$s** ay may magkatulad na antas ng reactivity.</value>
+  </data>
+  <data name="ai_recap_is" xml:space="preserve">
+    <value>Bilang pagbubuod, ang %2$s ng %1$s ay %3$s.</value>
+  </data>
+  <data name="ai_related_label" xml:space="preserve">
+    <value>Kaugnay na Impormasyon:</value>
+  </data>
+  <data name="ai_related_offer" xml:space="preserve">
+    <value>Nakahanap ako ng lokal na kaugnay na impormasyon. Itanong ang 'ipakita ang kaugnay' para makita ito.</value>
+  </data>
+  <data name="ai_related_offer_lang" xml:space="preserve">
+    <value>Nakahanap ako ng lokal na kaugnay na impormasyon ngunit wala sa napiling wika. Subukang baguhin ang wika o magtanong pa rin.</value>
+  </data>
+  <data name="ai_rich_overview_advanced" xml:space="preserve">
+    <value>Masusing Datos na Atomiko</value>
+  </data>
+  <data name="ai_rich_overview_applications" xml:space="preserve">
+    <value>Mga Aplikasyon at Gamit</value>
+  </data>
+  <data name="ai_rich_overview_basic_facts" xml:space="preserve">
+    <value>Mga Pangunahing Katotohanan</value>
+  </data>
+  <data name="ai_rich_overview_biological" xml:space="preserve">
+    <value>Papel sa Biyolohiya</value>
+  </data>
+  <data name="ai_rich_overview_compounds" xml:space="preserve">
+    <value>Mga Karaniwang Compound</value>
+  </data>
+  <data name="ai_rich_overview_etymology" xml:space="preserve">
+    <value>Pinagmulan at Kasaysayan</value>
+  </data>
+  <data name="ai_rich_overview_isotopes" xml:space="preserve">
+    <value>Mahahalagang Isotopo</value>
+  </data>
+  <data name="ai_rich_overview_properties" xml:space="preserve">
+    <value>Mga Katangian</value>
+  </data>
+  <data name="ai_rich_overview_safety" xml:space="preserve">
+    <value>Kaligtasan at mga Panganib</value>
+  </data>
+  <data name="ai_rich_overview_where_found" xml:space="preserve">
+    <value>Saan matatagpuan ang %1$s?</value>
+  </data>
+  <data name="ai_runner_up" xml:space="preserve">
+    <value>Susunod ay ang %1$s na %2$s.</value>
+  </data>
+  <data name="ai_safety_caution_flammable" xml:space="preserve">
+    <value>Babala: Ang elementong ito ay sobrang daling mag-apoy!</value>
+  </data>
+  <data name="ai_safety_caution_health" xml:space="preserve">
+    <value>Babala: Ang elementong ito ay lubhang mapanganib sa kalusugan!</value>
+  </data>
+  <data name="ai_safety_flammability" xml:space="preserve">
+    <value>• **Flammability:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_header" xml:space="preserve">
+    <value>Safety profile para sa %1$s (NFPA 704):</value>
+  </data>
+  <data name="ai_safety_health" xml:space="preserve">
+    <value>• **Health:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_instability" xml:space="preserve">
+    <value>• **Instability:** %1$d/4</value>
+  </data>
+  <data name="ai_safety_no_data" xml:space="preserve">
+    <value>Wala akong partikular na mga rating ng panganib ng NFPA para sa %1$s, ngunit laging sundin ang karaniwang mga protocol sa kaligtasan sa laboratoryo.</value>
+  </data>
+  <data name="ai_safety_none_recorded" xml:space="preserve">
+    <value>Walang naitalang NFPA hazard rating para sa %1$s.</value>
+  </data>
+  <data name="ai_safety_radioactive" xml:space="preserve">
+    <value>Ang %1$s ay radioactive (%2$s), na siyang pangunahing alalahanin nito sa kaligtasan. Hawakan nang may matinding pag-iingat!</value>
+  </data>
+  <data name="ai_safety_radioactive_note" xml:space="preserve">
+    <value>Radioactive ang elementong ito.</value>
+  </data>
+  <data name="ai_safety_special" xml:space="preserve">
+    <value>• **Special:** %1$s</value>
+  </data>
+  <data name="ai_same_value" xml:space="preserve">
+    <value>Parehong may parehong %1$s!</value>
+  </data>
+  <data name="ai_series_actinide" xml:space="preserve">
+    <value>Ang mga actinide ay ang 15 elemento na may atomic numbers mula 89 hanggang 103. Lahat sila ay radyaktibo!</value>
+  </data>
+  <data name="ai_series_actinide_label" xml:space="preserve">
+    <value>Actinide</value>
+  </data>
+  <data name="ai_series_alkali" xml:space="preserve">
+    <value>Ang mga alkali metal ay nasa Group 1. Sila ay napaka-reactive at may isang electron sa kanilang outer shell. Halimbawa nito ay Lithium, Sodium, at Potassium.</value>
+  </data>
+  <data name="ai_series_alkali_metal_label" xml:space="preserve">
+    <value>Alkali Metal</value>
+  </data>
+  <data name="ai_series_alkaline_earth_label" xml:space="preserve">
+    <value>Alkaline Earth Metal</value>
+  </data>
+  <data name="ai_series_generic" xml:space="preserve">
+    <value>Pamilyar ako sa seryeng iyan! Mayroon silang natatanging chemical properties. Aling partikular na elemento sa seryeng iyan ang gusto mong malaman?</value>
+  </data>
+  <data name="ai_series_halogen" xml:space="preserve">
+    <value>Ang mga halogen ay nasa Group 17. Sila ay mga nonmetal na napaka-reactive. Fluorine at Chlorine ang pinakasikat!</value>
+  </data>
+  <data name="ai_series_halogen_label" xml:space="preserve">
+    <value>Halogen</value>
+  </data>
+  <data name="ai_series_lanthanide" xml:space="preserve">
+    <value>Ang mga lanthanide ay ang 15 elemento na may atomic numbers mula 57 hanggang 71. Tinatawag din silang 'rare earth elements'.</value>
+  </data>
+  <data name="ai_series_lanthanide_label" xml:space="preserve">
+    <value>Lanthanide</value>
+  </data>
+  <data name="ai_series_metalloid" xml:space="preserve">
+    <value>Ang mga metalloid ay may mga katangian ng parehong metal at nonmetal. Matatagpuan sila sa kahabaan ng 'staircase' ng periodic table.</value>
+  </data>
+  <data name="ai_series_metalloid_label" xml:space="preserve">
+    <value>Metalloid</value>
+  </data>
+  <data name="ai_series_noble_gas" xml:space="preserve">
+    <value>Ang mga noble gas ay nasa Group 18. Sila ay napaka-stable at bihirang mag-react sa ibang elemento dahil puno ang kanilang outer shells.</value>
+  </data>
+  <data name="ai_series_noble_gas_label" xml:space="preserve">
+    <value>Noble Gas</value>
+  </data>
+  <data name="ai_series_nonmetal_label" xml:space="preserve">
+    <value>Nonmetal</value>
+  </data>
+  <data name="ai_series_transition" xml:space="preserve">
+    <value>Ang mga transition metal ay ang mga elemento sa groups 3-12. Sila ay mahusay na conductor at madalas bumubuo ng makukulay na compound.</value>
+  </data>
+  <data name="ai_series_transition_metal_label" xml:space="preserve">
+    <value>Transition Metal</value>
+  </data>
+  <data name="ai_similarity_generic" xml:space="preserve">
+    <value>Ang **%1$s** ay bahagi ng %2$s series. Ang iba pang mga elemento sa seryeng ito ay magkakaroon ng mga kaugnay na katangian!</value>
+  </data>
+  <data name="ai_similarity_no_element" xml:space="preserve">
+    <value>Hindi ako sigurado kung aling elemento ang gusto mong hanapan ng mga pagkakatulad.</value>
+  </data>
+  <data name="ai_similarity_result_footer" xml:space="preserve">
+    <value>.
+
+Nagbabahagi sila ng mga katulad na gawi sa kemikal dahil sa kanilang mga valence electron!</value>
+  </data>
+  <data name="ai_similarity_result_header" xml:space="preserve">
+    <value>Tulad ng **%1$s**, ang mga elementong ito ay mga **%2$ss** din: 
+
+</value>
+  </data>
+  <data name="ai_solution_generic_substance" xml:space="preserve">
+    <value>ang solusyon</value>
+  </data>
+  <data name="ai_solution_mass_needed" xml:space="preserve">
+    <value>Kailangan mo ng **%1$s g** ng %2$s para sa %3$s mL ng %4$s mol/L na solusyon.</value>
+  </data>
+  <data name="ai_solution_molarity" xml:space="preserve">
+    <value>Ang konsentrasyon ng %2$s ay **%1$s mol/L**.</value>
+  </data>
+  <data name="ai_solution_moles" xml:space="preserve">
+    <value>Iyon ay **%1$s mol** ng %2$s.</value>
+  </data>
+  <data name="ai_solution_volume" xml:space="preserve">
+    <value>Kailangan mo ng **%1$s mL** sa **%2$s mol/L**.</value>
+  </data>
+  <data name="ai_solution_working_c1v1" xml:space="preserve">
+    <value>C₁V₁ = C₂V₂ → %1$s × %2$s = %3$s × %4$s</value>
+  </data>
+  <data name="ai_solution_working_header" xml:space="preserve">
+    <value>Solusyon</value>
+  </data>
+  <data name="ai_solution_working_mass" xml:space="preserve">
+    <value>m = n × M → %1$s g = %2$s mol × %3$s g/mol</value>
+  </data>
+  <data name="ai_solution_working_nvc" xml:space="preserve">
+    <value>n = c × V → %1$s mol = %2$s mol/L × %3$s L</value>
+  </data>
+  <data name="ai_source_element_data" xml:space="preserve">
+    <value>%1$s — datos ng elemento (%2$s)</value>
+  </data>
+  <data name="ai_source_table" xml:space="preserve">
+    <value>%1$s — talaan ng %2$s</value>
+  </data>
+  <data name="ai_sources_header" xml:space="preserve">
+    <value>Mga sanggunian</value>
+  </data>
+  <data name="ai_stable_label" xml:space="preserve">
+    <value>Stable</value>
+  </data>
+  <data name="ai_structural_no_results" xml:space="preserve">
+    <value>Wala akong nahanap sa grupo o period na iyon. Tandaan: mayroong 18 groups at 7 periods!</value>
+  </data>
+  <data name="ai_structural_result" xml:space="preserve">
+    <value>Ang mga elemento sa **%1$s %2$s** ay: 
+</value>
+  </data>
+  <data name="ai_structural_specify_number" xml:space="preserve">
+    <value>Mangyaring tukuyin ang isang group o period number!</value>
+  </data>
+  <data name="ai_suggest_element.0" xml:space="preserve">
+    <value>Gamit ng %1$s</value>
+  </data>
+  <data name="ai_suggest_element.1" xml:space="preserve">
+    <value>Atomic mass ng %1$s</value>
+  </data>
+  <data name="ai_suggest_element.2" xml:space="preserve">
+    <value>Delikado ba ang %1$s?</value>
+  </data>
+  <data name="ai_suggest_element.3" xml:space="preserve">
+    <value>Saan matatagpuan ang %1$s?</value>
+  </data>
+  <data name="ai_suggest_element.4" xml:space="preserve">
+    <value>Electron configuration ng %1$s</value>
+  </data>
+  <data name="ai_suggest_element.5" xml:space="preserve">
+    <value>Mga isotope ng %1$s</value>
+  </data>
+  <data name="ai_suggest_general.0" xml:space="preserve">
+    <value>Magkuwento ng kawili-wiling datos</value>
+  </data>
+  <data name="ai_suggest_general.1" xml:space="preserve">
+    <value>Magsimula ng quiz</value>
+  </data>
+  <data name="ai_suggest_general.2" xml:space="preserve">
+    <value>Ano ang alkali metals?</value>
+  </data>
+  <data name="ai_suggest_general.3" xml:space="preserve">
+    <value>Pinakamabigat na elemento?</value>
+  </data>
+  <data name="ai_suggest_tools.0" xml:space="preserve">
+    <value>Balansehin ang Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="ai_suggest_tools.1" xml:space="preserve">
+    <value>I-convert ang 500 K sa °C</value>
+  </data>
+  <data name="ai_suggest_tools.2" xml:space="preserve">
+    <value>Ilang gramo ng NaCl para sa 250 mL ng 0.5 mol/L?</value>
+  </data>
+  <data name="ai_suggest_tools.3" xml:space="preserve">
+    <value>Ilan sa 100 g na carbon-14 ang natitira pagkatapos ng 11460 taon?</value>
+  </data>
+  <data name="ai_suggest_trends.0" xml:space="preserve">
+    <value>Ano ang periodic trends?</value>
+  </data>
+  <data name="ai_suggest_trends.1" xml:space="preserve">
+    <value>Trend ng electronegativity</value>
+  </data>
+  <data name="ai_suggest_trends.2" xml:space="preserve">
+    <value>Trend ng atomic radius</value>
+  </data>
+  <data name="ai_suggest_trends.3" xml:space="preserve">
+    <value>Ionization energy</value>
+  </data>
+  <data name="ai_suggestion_abundance" xml:space="preserve">
+    <value>Dapat ba nating tingnan kung saan ito matatagpuan sa sansinukob?</value>
+  </data>
+  <data name="ai_suggestion_bio" xml:space="preserve">
+    <value>Gusto mo bang malaman ang tungkol sa biological role nito?</value>
+  </data>
+  <data name="ai_suggestion_compare" xml:space="preserve">
+    <value>Gusto mo ba itong ihambing sa isa pang elemento?</value>
+  </data>
+  <data name="ai_suggestion_iso" xml:space="preserve">
+    <value>Maaari ko ring sabihin sa iyo ang tungkol sa mga isotope nito.</value>
+  </data>
+  <data name="ai_suggestion_safety" xml:space="preserve">
+    <value>Mayroon din akong data sa kaligtasan para dito, kung interesado ka.</value>
+  </data>
+  <data name="ai_superlative_among" xml:space="preserve">
+    <value>Sa mga %1$ss, %2$s</value>
+  </data>
+  <data name="ai_superlative_generic" xml:space="preserve">
+    <value>Magandang tanong iyan! Kaya kong hanapin ang mga elementong pinaka-siksik (densest), pinakamabigat, o may pinakamataas na electronegativity. Alin ang gusto mong malaman?</value>
+  </data>
+  <data name="ai_superlative_highest" xml:space="preserve">
+    <value>pinakamataas</value>
+  </data>
+  <data name="ai_superlative_lowest" xml:space="preserve">
+    <value>pinakamababa</value>
+  </data>
+  <data name="ai_superlative_no_calculate" xml:space="preserve">
+    <value>Hindi ko iyan makalkula sa ngayon.</value>
+  </data>
+  <data name="ai_superlative_nth" xml:space="preserve">
+    <value>Ang ika-**%1$d**%2$s %3$s %4$s ay **%5$s**, sa %6$s.</value>
+  </data>
+  <data name="ai_superlative_result" xml:space="preserve">
+    <value>Ang elemento na may pinaka-%1$s %2$s ay **%3$s**, na may halagang %4$s.</value>
+  </data>
+  <data name="ai_synthetic_only" xml:space="preserve">
+    <value>Sintetiko (hindi likas na matatagpuan)</value>
+  </data>
+  <data name="ai_technical_config" xml:space="preserve">
+    <value> Ito ay may electron configuration na %1$s.</value>
+  </data>
+  <data name="ai_technical_mass" xml:space="preserve">
+    <value> Ang eksaktong atomic mass nito ay %1$s.</value>
+  </data>
+  <data name="ai_thermal_header" xml:space="preserve">
+    <value>Mga katangiang thermal ng %1$s:</value>
+  </data>
+  <data name="ai_thermal_properties" xml:space="preserve">
+    <value>Mga thermal na katangian ng **%1$s**:</value>
+  </data>
+  <data name="ai_trend_electronegativity" xml:space="preserve">
+    <value>Ang electronegativity ay karaniwang tumataas mula kaliwa pakanan sa isang period at bumababa pababa sa isang group. Ang Fluorine ang kampeon dito!</value>
+  </data>
+  <data name="ai_trend_general" xml:space="preserve">
+    <value>Ang mga periodic trend ay mga pattern sa mga katangian ng mga elemento! Aling trend ang gusto mong malaman: Atomic Radius, Electronegativity, o Ionization Energy?</value>
+  </data>
+  <data name="ai_trend_ionization" xml:space="preserve">
+    <value>Ang ionization energy ay tumataas sa isang period at bumababa pababa sa isang group. Mas nagiging mahirap kumuha ng electron habang gumagalaw pakanan!</value>
+  </data>
+  <data name="ai_trend_metallic" xml:space="preserve">
+    <value>Ang metallic character ay bumababa sa isang period at tumataas pababa sa isang group. Ang pinaka-metallic na mga elemento ay nasa ibabang kaliwa (tulad ng Francium).</value>
+  </data>
+  <data name="ai_trend_radius" xml:space="preserve">
+    <value>Ang atomic radius ay bumababa sa isang period (kaliwa pakanan) dahil mas hinihila ng nucleus ang mga electron, at tumataas pababa sa isang group habang nagdaragdag ng mas maraming shell.</value>
+  </data>
+  <data name="ai_unit_atoms_per_si" xml:space="preserve">
+    <value>mga atomo bawat 10⁶ atomo ng silikon</value>
+  </data>
+  <data name="ai_unit_bridge_note" xml:space="preserve">
+    <value>Ginamit ang 1 eV = 96.485 kJ/mol — parehong enerhiya, bilang kada partikulo sa halip na kada mol.</value>
+  </data>
+  <data name="ai_unit_converted" xml:space="preserve">
+    <value>Ang **%1$s %2$s** ay **%3$s %4$s**.</value>
+  </data>
+  <data name="ai_unit_mg_per_kg" xml:space="preserve">
+    <value>mg/kg (ppm)</value>
+  </data>
+  <data name="ai_unit_ug_per_l" xml:space="preserve">
+    <value>µg/l</value>
+  </data>
+  <data name="ai_usage_header" xml:space="preserve">
+    <value>Narito ang ilang karaniwang aplikasyon at katotohanan tungkol sa **%1$s**:</value>
+  </data>
+  <data name="ai_valence_alkali" xml:space="preserve">
+    <value>Bilang isang alkali metal, mayroon itong **1 valence electron** sa outer shell nito.</value>
+  </data>
+  <data name="ai_valence_alkaline" xml:space="preserve">
+    <value>Bilang isang alkaline earth metal, mayroon itong **2 valence electron**.</value>
+  </data>
+  <data name="ai_valence_halogen" xml:space="preserve">
+    <value>Bilang isang halogen, mayroon itong **7 valence electron** at sabik na sabik na makakuha ng isa pa!</value>
+  </data>
+  <data name="ai_valence_noble_helium" xml:space="preserve">
+    <value>Ang helium ay may **2 valence electron**, na kumukumpleto sa tanging shell nito.</value>
+  </data>
+  <data name="ai_valence_noble_other" xml:space="preserve">
+    <value>Mayroon itong punong outer shell na may **8 valence electron**, na ginagawa itong napaka-stable.</value>
+  </data>
+  <data name="ai_value_is_range" xml:space="preserve">
+    <value>Ito ay isang saklaw; ang ranking ay gumagamit ng midpoint nito.</value>
+  </data>
+  <data name="ai_value_trace" xml:space="preserve">
+    <value>bahagyang dami</value>
+  </data>
+  <data name="ai_versus" xml:space="preserve">
+    <value>laban sa</value>
+  </data>
+  <data name="all_ai_features" xml:space="preserve">
+    <value>Lahat ng feature ng AI:</value>
+  </data>
+  <data name="all_core_features" xml:space="preserve">
+    <value>All Core Features</value>
+  </data>
+  <data name="alloy_base_aluminium" xml:space="preserve">
+    <value>Aluminyo</value>
+  </data>
+  <data name="alloy_base_copper" xml:space="preserve">
+    <value>Tanso</value>
+  </data>
+  <data name="alloy_base_gold" xml:space="preserve">
+    <value>Ginto</value>
+  </data>
+  <data name="alloy_base_iron" xml:space="preserve">
+    <value>Bakal</value>
+  </data>
+  <data name="alloy_base_mercury" xml:space="preserve">
+    <value>Asoge</value>
+  </data>
+  <data name="alloy_base_nickel" xml:space="preserve">
+    <value>Nikel</value>
+  </data>
+  <data name="alloy_base_silver" xml:space="preserve">
+    <value>Pilak</value>
+  </data>
+  <data name="alloy_base_tin" xml:space="preserve">
+    <value>Lata</value>
+  </data>
+  <data name="alloy_base_titanium" xml:space="preserve">
+    <value>Titanyo</value>
+  </data>
+  <data name="alloy_clear_filter" xml:space="preserve">
+    <value>I-clear ang filter</value>
+  </data>
+  <data name="alo" xml:space="preserve">
+    <value>Talaan ng Haluang Metal</value>
+  </data>
+  <data name="alphabetical" xml:space="preserve">
+    <value>Alpabetikal</value>
+  </data>
+  <data name="analytics_desc" xml:space="preserve">
+    <value>Tulungang mapabuti ang app sa pamamagitan ng pagbabahagi ng hindi nagpapakilalang data ng paggamit</value>
+  </data>
+  <data name="analytics_title" xml:space="preserve">
+    <value>Usage Analytics</value>
+  </data>
+  <data name="and_more_item" xml:space="preserve">
+    <value>- At marami pa</value>
+  </data>
+  <data name="answer_no" xml:space="preserve">
+    <value>Hindi</value>
+  </data>
+  <data name="answer_timeout" xml:space="preserve">
+    <value>Ubos na ang oras</value>
+  </data>
+  <data name="answer_yes" xml:space="preserve">
+    <value>Oo</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>Atomic</value>
+  </data>
+  <data name="appearance" xml:space="preserve">
+    <value>Hitsura</value>
+  </data>
+  <data name="appearance_colon" xml:space="preserve">
+    <value>Hitsura:</value>
+  </data>
+  <data name="appwidget_text" xml:space="preserve">
+    <value>HALIMBAWA</value>
+  </data>
+  <data name="ask_atomic" xml:space="preserve">
+    <value>Magtanong sa Atomic</value>
+  </data>
+  <data name="atomic_mass" xml:space="preserve">
+    <value>Atomic Mass</value>
+  </data>
+  <data name="atomic_mass_colon" xml:space="preserve">
+    <value>Atomic Mass:</value>
+  </data>
+  <data name="atomic_number" xml:space="preserve">
+    <value>Atomic na Numero</value>
+  </data>
+  <data name="atomic_number_label" xml:space="preserve">
+    <value>Atomic Number:</value>
+  </data>
+  <data name="atomic_properties" xml:space="preserve">
+    <value>Mga Katangiang Atomic</value>
+  </data>
+  <data name="atomic_radius_calculated_colon" xml:space="preserve">
+    <value>Atomic Radius (Calculated):</value>
+  </data>
+  <data name="atomic_radius_empirical_colon" xml:space="preserve">
+    <value>Atomic Radius (Empirical):</value>
+  </data>
+  <data name="atomic_weight" xml:space="preserve">
+    <value>Atomic na Timbang</value>
+  </data>
+  <data name="atomic_weight_relative_atomic_mass" xml:space="preserve">
+    <value>Atomic Weight (Relative Atomic Mass):</value>
+  </data>
+  <data name="auto_hide_bottombar" xml:space="preserve">
+    <value>Awtomatikong itago ang Bottombar</value>
+  </data>
+  <data name="auto_hide_bottombar_desc" xml:space="preserve">
+    <value>Pinapatigil ang karaniwang gawi</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Bumalik</value>
+  </data>
+  <data name="bal" xml:space="preserve">
+    <value>Balancer</value>
+  </data>
+  <data name="balance_equation" xml:space="preserve">
+    <value>Balanseng equation:</value>
+  </data>
+  <data name="balance_equation_colon" xml:space="preserve">
+    <value>Balanseng equation:</value>
+  </data>
+  <data name="balancer_text" xml:space="preserve">
+    <value>Balansihin ang iba't ibang reaksiyong kemikal at i-save ang mga paborito para sa susunod na paggamit</value>
+  </data>
+  <data name="balancer_title" xml:space="preserve">
+    <value>Mga Reaksiyong Kemikal</value>
+  </data>
+  <data name="balancer_tool_card_title" xml:space="preserve">
+    <value>Magbalanse ng ekwasyon</value>
+  </data>
+  <data name="balancer_tool_copied" xml:space="preserve">
+    <value>Nakopya ang ekwasyon</value>
+  </data>
+  <data name="balancer_tool_examples" xml:space="preserve">
+    <value>Mga halimbawa</value>
+  </data>
+  <data name="balancer_tool_hint" xml:space="preserve">
+    <value>Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="balancer_tool_note" xml:space="preserve">
+    <value>Maaaring isulat ang arrow bilang -&gt;, =&gt;, = o →. Hindi pinapansin ang state symbols na (s), (l), (g) at (aq).</value>
+  </data>
+  <data name="balancer_tool_prompt" xml:space="preserve">
+    <value>Mag-type ng ekwasyon na may arrow, halimbawa Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="balancer_tool_result" xml:space="preserve">
+    <value>Balanseng ekwasyon</value>
+  </data>
+  <data name="balancer_tool_text" xml:space="preserve">
+    <value>Balansehin ang mga ekwasyong kemikal gamit ang eksaktong buong bilang na koepisyente</value>
+  </data>
+  <data name="balancer_tool_title" xml:space="preserve">
+    <value>Equation Balancer</value>
+  </data>
+  <data name="base_label" xml:space="preserve">
+    <value>"Batayang metal: "</value>
+  </data>
+  <data name="block" xml:space="preserve">
+    <value>Bloke</value>
+  </data>
+  <data name="block_colon" xml:space="preserve">
+    <value>Block:</value>
+  </data>
+  <data name="blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="boiling_point" xml:space="preserve">
+    <value>Punto ng Pag-kulo</value>
+  </data>
+  <data name="boiling_point_celsius" xml:space="preserve">
+    <value>Boiling Point (°C):</value>
+  </data>
+  <data name="boiling_point_colon" xml:space="preserve">
+    <value>Boiling Point:</value>
+  </data>
+  <data name="boiling_point_fahrenheit" xml:space="preserve">
+    <value>Boiling Point (°F):</value>
+  </data>
+  <data name="boiling_point_kelvin" xml:space="preserve">
+    <value>Boiling Point (Kelvin):</value>
+  </data>
+  <data name="bonus_xp" xml:space="preserve">
+    <value>+0% bonus aktibo</value>
+  </data>
+  <data name="brinell_hardness" xml:space="preserve">
+    <value>Brinell Hardness</value>
+  </data>
+  <data name="brinell_hardness_colon" xml:space="preserve">
+    <value>Brinell hardness:</value>
+  </data>
+  <data name="bug" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="bulk_modulus" xml:space="preserve">
+    <value>Bulk modulus</value>
+  </data>
+  <data name="cal" xml:space="preserve">
+    <value>Kalkulador</value>
+  </data>
+  <data name="calc_elements_shown" xml:space="preserve">
+    <value>Ipinapakita rito ang mga kasamang elemento</value>
+  </data>
+  <data name="calc_favorites" xml:space="preserve">
+    <value>Paborito:</value>
+  </data>
+  <data name="calc_molar_mass" xml:space="preserve">
+    <value>Molar Mass:</value>
+  </data>
+  <data name="calc_no_favorites" xml:space="preserve">
+    <value>Wala pang paborito</value>
+  </data>
+  <data name="calc_no_pro_text" xml:space="preserve">
+    <value>Para ma-access at ma-save sa paborito kailangan mo ng PRO-Bersyon</value>
+  </data>
+  <data name="calculations" xml:space="preserve">
+    <value>Mga Kalkulasyon</value>
+  </data>
+  <data name="calculations_stat" xml:space="preserve">
+    <value>Mga Kalkulasyon</value>
+  </data>
+  <data name="calculator_card_title" xml:space="preserve">
+    <value>Kalkulador:</value>
+  </data>
+  <data name="calculator_default_value" xml:space="preserve">
+    <value>0.0 (g/mol)</value>
+  </data>
+  <data name="calculator_formula" xml:space="preserve">
+    <value>Pormula:</value>
+  </data>
+  <data name="calculator_text" xml:space="preserve">
+    <value>Naglalaman ng kalkulador para sa pagkalkula ng molar mass ng iba't ibang compound pati na rin ang pag-save ng paborito</value>
+  </data>
+  <data name="calculator_title" xml:space="preserve">
+    <value>Kalkulador</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Kanselahin</value>
+  </data>
+  <data name="card_order" xml:space="preserve">
+    <value>Pagkakasunod-sunod ng Card</value>
+  </data>
+  <data name="cas_number" xml:space="preserve">
+    <value>Numero ng CAS:</value>
+  </data>
+  <data name="cas_number_colon" xml:space="preserve">
+    <value>CAS Number:</value>
+  </data>
+  <data name="chip_chemistry" xml:space="preserve">
+    <value>Kimika</value>
+  </data>
+  <data name="chip_math" xml:space="preserve">
+    <value>Matematika</value>
+  </data>
+  <data name="chip_minerals" xml:space="preserve">
+    <value>Mineral</value>
+  </data>
+  <data name="chip_physics" xml:space="preserve">
+    <value>Pisika</value>
+  </data>
+  <data name="chip_reactions" xml:space="preserve">
+    <value>Reaksyon</value>
+  </data>
+  <data name="chip_rocks" xml:space="preserve">
+    <value>Bato</value>
+  </data>
+  <data name="chip_soils" xml:space="preserve">
+    <value>Lupa</value>
+  </data>
+  <data name="chip_water" xml:space="preserve">
+    <value>Tubig</value>
+  </data>
+  <data name="clear_cache_title" xml:space="preserve">
+    <value>I-clear ang Cache</value>
+  </data>
+  <data name="clear_filter" xml:space="preserve">
+    <value>I-clear ang Filter</value>
+  </data>
+  <data name="color_label" xml:space="preserve">
+    <value>Kulay: </value>
+  </data>
+  <data name="compare_elements" xml:space="preserve">
+    <value>Ihambing ang mga Elemento</value>
+  </data>
+  <data name="comparison_title_format" xml:space="preserve">
+    <value>%1$s | %2$s</value>
+  </data>
+  <data name="composition_label" xml:space="preserve">
+    <value>"Komposisyon: "</value>
+  </data>
+  <data name="con" xml:space="preserve">
+    <value>Talahanayan ng Mga Konstante</value>
+  </data>
+  <data name="confirm_sign_out" xml:space="preserve">
+    <value>Sigurado ka bang gusto mong mag-sign out?</value>
+  </data>
+  <data name="constants_search" xml:space="preserve">
+    <value>Maghanap ng konstante</value>
+  </data>
+  <data name="constants_table_label" xml:space="preserve">
+    <value>Constants Table:</value>
+  </data>
+  <data name="constants_tite" xml:space="preserve">
+    <value>Talahanayan ng Mga Konstante</value>
+  </data>
+  <data name="correct" xml:space="preserve">
+    <value>Tama</value>
+  </data>
+  <data name="correct_answer" xml:space="preserve">
+    <value>Tamang sagot: %s</value>
+  </data>
+  <data name="covalent_radius_colon" xml:space="preserve">
+    <value>Covalent Radius:</value>
+  </data>
+  <data name="credits_electro_boy_info" xml:space="preserve">
+    <value>Mga pagsasalin para sa Afrikaans</value>
+  </data>
+  <data name="credits_giancarlo_info" xml:space="preserve">
+    <value>Mga pagsasalin para sa Espanyol at Italyano</value>
+  </data>
+  <data name="credits_text" xml:space="preserve">
+    <value>Mga kredito sa mga nag-ambag</value>
+  </data>
+  <data name="credits_title" xml:space="preserve">
+    <value>Mga Kredito</value>
+  </data>
+  <data name="cristal_structure_label" xml:space="preserve">
+    <value>Estruktura ng Kristal: </value>
+  </data>
+  <data name="crystal_structure" xml:space="preserve">
+    <value>Istruktura ng Kristal:</value>
+  </data>
+  <data name="curie_point_colon" xml:space="preserve">
+    <value>Curie Point:</value>
+  </data>
+  <data name="current_version" xml:space="preserve">
+    <value>Kasalukuyang Bersyon</value>
+  </data>
+  <data name="currently_no_favorites" xml:space="preserve">
+    <value>Walang mga paborito sa kasalukuyan</value>
+  </data>
+  <data name="customize_detail_card_order" xml:space="preserve">
+    <value>I-customize ang pagkakasunod ng Detail Cards</value>
+  </data>
+  <data name="customize_units_table" xml:space="preserve">
+    <value>I-customize ang mga yunit sa pangunahing talahanayan</value>
+  </data>
+  <data name="dark" xml:space="preserve">
+    <value>Madilim</value>
+  </data>
+  <data name="data_issue" xml:space="preserve">
+    <value>Isyu sa Data</value>
+  </data>
+  <data name="data_visualisations" xml:space="preserve">
+    <value>Mga visualisasyon ng data:</value>
+  </data>
+  <data name="debye_temperature_low_temperature_limit" xml:space="preserve">
+    <value>Debye Temperature: (mababang temperatura)</value>
+  </data>
+  <data name="debye_temperature_room_temperature" xml:space="preserve">
+    <value>Temperatura ng Debye: (temperatura ng silid)</value>
+  </data>
+  <data name="decay_alpha" xml:space="preserve">
+    <value>Alpha decay (α)</value>
+  </data>
+  <data name="decay_beta_minus" xml:space="preserve">
+    <value>Beta-minus decay (β−)</value>
+  </data>
+  <data name="decay_beta_plus" xml:space="preserve">
+    <value>Beta-plus decay (β+)</value>
+  </data>
+  <data name="decay_electron_capture" xml:space="preserve">
+    <value>Electron capture</value>
+  </data>
+  <data name="decay_info_fab" xml:space="preserve">
+    <value>Impormasyon ng iba't ibang uri ng pagkabulok</value>
+  </data>
+  <data name="decay_neutron_emission" xml:space="preserve">
+    <value>Neutron emission</value>
+  </data>
+  <data name="decay_proton_emission" xml:space="preserve">
+    <value>Proton emission</value>
+  </data>
+  <data name="decay_spontaneous_fission" xml:space="preserve">
+    <value>Spontaneous fission</value>
+  </data>
+  <data name="density" xml:space="preserve">
+    <value>Densidad</value>
+  </data>
+  <data name="density_colon" xml:space="preserve">
+    <value>Density:</value>
+  </data>
+  <data name="density_label" xml:space="preserve">
+    <value>Density: </value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Deskripsyon</value>
+  </data>
+  <data name="description_colon" xml:space="preserve">
+    <value>Paglalarawan:</value>
+  </data>
+  <data name="detail_card_order" xml:space="preserve">
+    <value>Order ng Detail Card</value>
+  </data>
+  <data name="dic" xml:space="preserve">
+    <value>Diksyunaryo</value>
+  </data>
+  <data name="dictionary" xml:space="preserve">
+    <value>Diksiyonaryo</value>
+  </data>
+  <data name="dictionary_search" xml:space="preserve">
+    <value>Maghanap ng Diksiyonaryo Item</value>
+  </data>
+  <data name="dictionary_text" xml:space="preserve">
+    <value>Isang komprehensibong diksyunaryo ng mga terminong kemikal at pisikal</value>
+  </data>
+  <data name="discovered_by" xml:space="preserve">
+    <value>Natuklasan Ni</value>
+  </data>
+  <data name="discovered_by_colon" xml:space="preserve">
+    <value>Natuklasan Ni:</value>
+  </data>
+  <data name="discovery_year" xml:space="preserve">
+    <value>Taon ng Pagkatuklas</value>
+  </data>
+  <data name="display_mode" xml:space="preserve">
+    <value>Paraan ng Pag-display</value>
+  </data>
+  <data name="early_access_features" xml:space="preserve">
+    <value>Maagang access sa mga bagong feature:</value>
+  </data>
+  <data name="easy" xml:space="preserve">
+    <value>Madali</value>
+  </data>
+  <data name="eg_number" xml:space="preserve">
+    <value>Numero ng EG:</value>
+  </data>
+  <data name="eg_number_colon" xml:space="preserve">
+    <value>EG Number:</value>
+  </data>
+  <data name="ele" xml:space="preserve">
+    <value>Electrochemical Series</value>
+  </data>
+  <data name="electrical_resistivity" xml:space="preserve">
+    <value>Resistibidad ng Kuryente</value>
+  </data>
+  <data name="electrical_resistivity_colon" xml:space="preserve">
+    <value>Electrical Resistivity:</value>
+  </data>
+  <data name="electrical_type" xml:space="preserve">
+    <value>Uri ng Elektrikal</value>
+  </data>
+  <data name="electrical_type_colon" xml:space="preserve">
+    <value>Uri ng Kuryente:</value>
+  </data>
+  <data name="electrochemical_series" xml:space="preserve">
+    <value>Electrochemical Series</value>
+  </data>
+  <data name="electrochemical_series_search" xml:space="preserve">
+    <value>Maghanap ng Elemento</value>
+  </data>
+  <data name="electromagnetic_properties" xml:space="preserve">
+    <value>Mga Katangiang Electromagnetic</value>
+  </data>
+  <data name="electron_affinity_colon" xml:space="preserve">
+    <value>Electron Affinity:</value>
+  </data>
+  <data name="electron_configuration_colon" xml:space="preserve">
+    <value>Electron Configuration:</value>
+  </data>
+  <data name="electron_shell_colon" xml:space="preserve">
+    <value>Electron Shell:</value>
+  </data>
+  <data name="electronegativity" xml:space="preserve">
+    <value>Elektronegatibidad</value>
+  </data>
+  <data name="electronegativity_allen_colon" xml:space="preserve">
+    <value>Electronegativity (Allen):</value>
+  </data>
+  <data name="electronegativity_colon" xml:space="preserve">
+    <value>Electronegativity:</value>
+  </data>
+  <data name="element_bulk_modulus" xml:space="preserve">
+    <value>Bulk modulus:</value>
+  </data>
+  <data name="element_description_title" xml:space="preserve">
+    <value>Deskripsyon</value>
+  </data>
+  <data name="element_elastic_modulus" xml:space="preserve">
+    <value>Elastic modulus:</value>
+  </data>
+  <data name="element_electrons" xml:space="preserve">
+    <value>Mga Electron:</value>
+  </data>
+  <data name="element_groups" xml:space="preserve">
+    <value>Mga Grupo ng Elemento</value>
+  </data>
+  <data name="element_info_title" xml:space="preserve">
+    <value>Impormasyon ng Elemento</value>
+  </data>
+  <data name="element_more_title" xml:space="preserve">
+    <value>Karagdagang Katangian</value>
+  </data>
+  <data name="element_name_default" xml:space="preserve">
+    <value>Pangalan ng Elemento (Default)</value>
+  </data>
+  <data name="element_names" xml:space="preserve">
+    <value>Mga Pangalan ng Elemento</value>
+  </data>
+  <data name="element_number" xml:space="preserve">
+    <value>Numero ng Elemento</value>
+  </data>
+  <data name="element_of_the_day" xml:space="preserve">
+    <value>Elemento ng Araw</value>
+  </data>
+  <data name="element_of_the_day_description" xml:space="preserve">
+    <value>Nagpapakita ng ibang elemento bawat araw kasama ang simbolo, pangalan, at paglalarawan nito</value>
+  </data>
+  <data name="element_overview" xml:space="preserve">
+    <value>Pangkalahatang-ideya ng elemento:</value>
+  </data>
+  <data name="element_poisson_ratio" xml:space="preserve">
+    <value>Ratio ni Poisson:</value>
+  </data>
+  <data name="element_shear_modulus" xml:space="preserve">
+    <value>Shear modulus:</value>
+  </data>
+  <data name="element_speed_sound" xml:space="preserve">
+    <value>Bilis ng tunog:</value>
+  </data>
+  <data name="element_symbols" xml:space="preserve">
+    <value>Simbolo ng Elemento</value>
+  </data>
+  <data name="element_young_modulus" xml:space="preserve">
+    <value>Modulus ni Young:</value>
+  </data>
+  <data name="elements_included_will_be_shown_here" xml:space="preserve">
+    <value>Ang mga elemento na kasama ay ipapakita dito</value>
+  </data>
+  <data name="elements_opened" xml:space="preserve">
+    <value>Mga elementong binuksan</value>
+  </data>
+  <data name="emi" xml:space="preserve">
+    <value>Talahanayan ng Emisyon ng Spektrum</value>
+  </data>
+  <data name="emission_spectrum_colon" xml:space="preserve">
+    <value>Emission Spectrum:</value>
+  </data>
+  <data name="emission_spectrum_table" xml:space="preserve">
+    <value>Talahanayan ng emission spectrum:</value>
+  </data>
+  <data name="emission_text" xml:space="preserve">
+    <value>Emisyon ng spektrum para sa mga elemento, na siyang dalas ng electromagnetic radiation na inilalabas dahil sa paglipat ng elektron mula mas mataas patungo sa mas mababang energy state.</value>
+  </data>
+  <data name="emission_title" xml:space="preserve">
+    <value>Talahanayan ng Emisyon ng Spektrum</value>
+  </data>
+  <data name="enable_sync" xml:space="preserve">
+    <value>Paganahin ang Synchronization</value>
+  </data>
+  <data name="enable_sync_desc" xml:space="preserve">
+    <value>Ang pag-synchronize ng progress para sa level, xp, achievements, atbp. ay available para sa mga user ng PRO at PRO+</value>
+  </data>
+  <data name="enable_sync_pro_button" xml:space="preserve">
+    <value>Mag-upgrade</value>
+  </data>
+  <data name="enable_zoom_in_tables" xml:space="preserve">
+    <value>Paganahin ang Zoom sa mga tables</value>
+  </data>
+  <data name="english_name_colon" xml:space="preserve">
+    <value>Pangalan sa Ingles:</value>
+  </data>
+  <data name="enter_new_text" xml:space="preserve">
+    <value>Magpasok ng bagong teksto</value>
+  </data>
+  <data name="eqe" xml:space="preserve">
+    <value>Mga Pormula</value>
+  </data>
+  <data name="equations_search_other" xml:space="preserve">
+    <value>Subukan maghanap ng ibang salita o suriin ang iyong spelling.</value>
+  </data>
+  <data name="exam_best_score" xml:space="preserve">
+    <value>Pinakamataas na iskor: %1$d%%</value>
+  </data>
+  <data name="exam_finished_xp" xml:space="preserve">
+    <value>Tapos na ang pagsusulit: +%1$d XP</value>
+  </data>
+  <data name="exam_locked" xml:space="preserve">
+    <value>Abutin ang level %1$d para ma-unlock</value>
+  </data>
+  <data name="exam_not_taken" xml:space="preserve">
+    <value>Hindi pa nasusubukan</value>
+  </data>
+  <data name="exam_passed" xml:space="preserve">
+    <value>Pasado · pinakamataas na iskor %1$d%%</value>
+  </data>
+  <data name="exam_pro_locked" xml:space="preserve">
+    <value>Kailangan ng PRO+ para sa pagsusulit na ito</value>
+  </data>
+  <data name="exam_results" xml:space="preserve">
+    <value>Resulta ng Pagsusulit</value>
+  </data>
+  <data name="exam_start" xml:space="preserve">
+    <value>Simulan ang pagsusulit</value>
+  </data>
+  <data name="exam_test_subtitle" xml:space="preserve">
+    <value>Lahat mula level %1$d hanggang %2$d, pinaghalo</value>
+  </data>
+  <data name="exam_test_title" xml:space="preserve">
+    <value>Pagsusulit</value>
+  </data>
+  <data name="exit_compare_mode" xml:space="preserve">
+    <value>Lumabas sa Paghahambing</value>
+  </data>
+  <data name="experimental" xml:space="preserve">
+    <value>Experimental</value>
+  </data>
+  <data name="experimental_text" xml:space="preserve">
+    <value>Karagdagang mga setting ng eksperimento</value>
+  </data>
+  <data name="experimental_title" xml:space="preserve">
+    <value>Eksperimental na Mga Setting</value>
+  </data>
+  <data name="favorite_bar" xml:space="preserve">
+    <value>Paboritong Bar</value>
+  </data>
+  <data name="favorite_settings_atomic_properties" xml:space="preserve">
+    <value>Katangiang Atomiko</value>
+  </data>
+  <data name="favorite_settings_electromagnetic" xml:space="preserve">
+    <value>Katangiang Elektromagnetiko</value>
+  </data>
+  <data name="favorite_settings_general" xml:space="preserve">
+    <value>Pangkalahatan</value>
+  </data>
+  <data name="favorite_settings_nuclear" xml:space="preserve">
+    <value>Nukleyar</value>
+  </data>
+  <data name="favorite_settings_temperatures" xml:space="preserve">
+    <value>Temperatura</value>
+  </data>
+  <data name="favorite_settings_thermodynamics" xml:space="preserve">
+    <value>Termodinamika</value>
+  </data>
+  <data name="favorite_settings_title" xml:space="preserve">
+    <value>Paboritong Bar</value>
+  </data>
+  <data name="favorites_colon" xml:space="preserve">
+    <value>Mga Paborito:</value>
+  </data>
+  <data name="feature_check" xml:space="preserve">
+    <value>Kasama ang feature</value>
+  </data>
+  <data name="features" xml:space="preserve">
+    <value>Mga feature:</value>
+  </data>
+  <data name="fifty_lives_in_flashcards" xml:space="preserve">
+    <value>50 na buhay sa Flashcards:</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>I-filter</value>
+  </data>
+  <data name="finished_game_xp" xml:space="preserve">
+    <value>Natapos ang Laro: +%dxp</value>
+  </data>
+  <data name="fire_hazard" xml:space="preserve">
+    <value>Panganib sa apoy:</value>
+  </data>
+  <data name="fla" xml:space="preserve">
+    <value>Mga Flashcard</value>
+  </data>
+  <data name="flashcards_atomic_mass" xml:space="preserve">
+    <value>Atomic Mass</value>
+  </data>
+  <data name="flashcards_chemical_reactions" xml:space="preserve">
+    <value>Mga Reaksiyong Kemikal</value>
+  </data>
+  <data name="flashcards_difficulty" xml:space="preserve">
+    <value>Piliin ang Hirap:</value>
+  </data>
+  <data name="flashcards_difficulty_title" xml:space="preserve">
+    <value>Hirap</value>
+  </data>
+  <data name="flashcards_element_classifications" xml:space="preserve">
+    <value>Klasipikasyon ng Elemento</value>
+  </data>
+  <data name="flashcards_element_symbols" xml:space="preserve">
+    <value>Simbolo ng Elemento</value>
+  </data>
+  <data name="flashcards_free_games" xml:space="preserve">
+    <value>Libreng Laro:</value>
+  </data>
+  <data name="flashcards_game_element_appearance" xml:space="preserve">
+    <value>Hitsura</value>
+  </data>
+  <data name="flashcards_game_element_atomic_mass" xml:space="preserve">
+    <value>Atomic Mass</value>
+  </data>
+  <data name="flashcards_game_element_density" xml:space="preserve">
+    <value>Densidad</value>
+  </data>
+  <data name="flashcards_game_element_groups" xml:space="preserve">
+    <value>Mga Grupo ng Elemento</value>
+  </data>
+  <data name="flashcards_game_element_names" xml:space="preserve">
+    <value>Mga Pangalan ng Elemento</value>
+  </data>
+  <data name="flashcards_game_element_symbols" xml:space="preserve">
+    <value>Simbolo ng Elemento</value>
+  </data>
+  <data name="flashcards_info" xml:space="preserve">
+    <value>Matutunan ang Periodic Table gamit ang "learning-games"</value>
+  </data>
+  <data name="flashcards_level" xml:space="preserve">
+    <value>Antas</value>
+  </data>
+  <data name="flashcards_lives_info" xml:space="preserve">
+    <value>Bawat maling sagot ay magreresulta sa bawas na buhay</value>
+  </data>
+  <data name="flashcards_mixed_questions" xml:space="preserve">
+    <value>Halo-halong Tanong</value>
+  </data>
+  <data name="flashcards_pro_level_0_5" xml:space="preserve">
+    <value>Antas 0-4:</value>
+  </data>
+  <data name="flashcards_pro_level_10_15" xml:space="preserve">
+    <value>Antas 10-14:</value>
+  </data>
+  <data name="flashcards_pro_level_5_10" xml:space="preserve">
+    <value>Antas 5-9:</value>
+  </data>
+  <data name="flashcards_pro_plus_games" xml:space="preserve">
+    <value>PRO+ na Laro:</value>
+  </data>
+  <data name="flashcards_statistics" xml:space="preserve">
+    <value>Istatistika</value>
+  </data>
+  <data name="flashcards_title" xml:space="preserve">
+    <value>Flashcards</value>
+  </data>
+  <data name="flashcards_total_games" xml:space="preserve">
+    <value>Mga Laro</value>
+  </data>
+  <data name="flashcards_total_xp" xml:space="preserve">
+    <value>Kabuuang XP</value>
+  </data>
+  <data name="flashcards_unlimited_lives" xml:space="preserve">
+    <value>Walang limitasyong buhay sa Flashcards:</value>
+  </data>
+  <data name="formula_will_be_displayed_here" xml:space="preserve">
+    <value>Ang formula ay ipapakita dito</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>LIBRE</value>
+  </data>
+  <data name="fusion_heat" xml:space="preserve">
+    <value>Init ng Pagsasanib</value>
+  </data>
+  <data name="fusion_heat_colon" xml:space="preserve">
+    <value>Fusion heat:</value>
+  </data>
+  <data name="game_compare_pair" xml:space="preserve">
+    <value>Harap-harapan</value>
+  </data>
+  <data name="game_extremes_advanced" xml:space="preserve">
+    <value>Advanced na Sukdulan</value>
+  </data>
+  <data name="game_group" xml:space="preserve">
+    <value>Mga Grupo</value>
+  </data>
+  <data name="game_highest" xml:space="preserve">
+    <value>Alin ang Pinakamataas?</value>
+  </data>
+  <data name="game_isotope_decay" xml:space="preserve">
+    <value>Mga Paraan ng Pagkabulok</value>
+  </data>
+  <data name="game_isotope_half_life" xml:space="preserve">
+    <value>Kalahating Buhay</value>
+  </data>
+  <data name="game_isotope_neutrons" xml:space="preserve">
+    <value>Bilang ng Neutron</value>
+  </data>
+  <data name="game_isotope_stability" xml:space="preserve">
+    <value>Matatag na Isotope</value>
+  </data>
+  <data name="game_lowest" xml:space="preserve">
+    <value>Alin ang Pinakamababa?</value>
+  </data>
+  <data name="game_molar_mass" xml:space="preserve">
+    <value>Molar Mass</value>
+  </data>
+  <data name="game_odd_one_out" xml:space="preserve">
+    <value>Alin ang Naiiba?</value>
+  </data>
+  <data name="game_period" xml:space="preserve">
+    <value>Mga Periodo</value>
+  </data>
+  <data name="game_results" xml:space="preserve">
+    <value>Mga Resulta ng Laro</value>
+  </data>
+  <data name="game_valence_electrons" xml:space="preserve">
+    <value>Valence Electrons</value>
+  </data>
+  <data name="gas" xml:space="preserve">
+    <value>Ideal Gas Calculator</value>
+  </data>
+  <data name="geo" xml:space="preserve">
+    <value>Talahanayan ng Heolohiya</value>
+  </data>
+  <data name="geo_clear_filter" xml:space="preserve">
+    <value>I-clear ang Filter</value>
+  </data>
+  <data name="geo_no_results" xml:space="preserve">
+    <value>Walang resulta</value>
+  </data>
+  <data name="geo_search_hint" xml:space="preserve">
+    <value>Maghanap ng Heolohiya Item</value>
+  </data>
+  <data name="geo_try_another_search" xml:space="preserve">
+    <value>Subukan maghanap ng ibang salita o suriin ang iyong spelling.</value>
+  </data>
+  <data name="geology_table" xml:space="preserve">
+    <value>Talahanayan ng heolohiya:</value>
+  </data>
+  <data name="get_pro" xml:space="preserve">
+    <value>Kumuha ng PRO</value>
+  </data>
+  <data name="get_pro_button" xml:space="preserve">
+    <value>Kumuha ng PRO</value>
+  </data>
+  <data name="get_pro_element_text" xml:space="preserve">
+    <value>Kumuha ng PRO-Bersyon upang i-unlock ang karagdagang impormasyon ng mga elemento</value>
+  </data>
+  <data name="get_pro_plus" xml:space="preserve">
+    <value>Kumuha ng PRO+</value>
+  </data>
+  <data name="get_pro_plus_button" xml:space="preserve">
+    <value>Kumuha ng PRO+</value>
+  </data>
+  <data name="get_pro_title" xml:space="preserve">
+    <value>Kunin ang PRO Bersyon</value>
+  </data>
+  <data name="git_text" xml:space="preserve">
+    <value>Open-source GitHub repo ng Atomic</value>
+  </data>
+  <data name="go_online_for_emission" xml:space="preserve">
+    <value>Pumunta online para sa mga linya ng emission</value>
+  </data>
+  <data name="go_online_for_emission_lines" xml:space="preserve">
+    <value>Mag-online para sa emission lines</value>
+  </data>
+  <data name="go_pro_more_features" xml:space="preserve">
+    <value>Go Pro - higit pang features</value>
+  </data>
+  <data name="go_pro_school_start_sale" xml:space="preserve">
+    <value>GO PRO - SIMULA NG PASUKAN SALE</value>
+  </data>
+  <data name="grid_parameters" xml:space="preserve">
+    <value>Mga Parameter ng Grid: (lattice constants)</value>
+  </data>
+  <data name="grid_title" xml:space="preserve">
+    <value>Mga Katangian ng Grid</value>
+  </data>
+  <data name="group_label" xml:space="preserve">
+    <value>Grupo: </value>
+  </data>
+  <data name="hard" xml:space="preserve">
+    <value>Mahirap</value>
+  </data>
+  <data name="hardness_label" xml:space="preserve">
+    <value>Tigas: </value>
+  </data>
+  <data name="hardness_properties" xml:space="preserve">
+    <value>Mga Katangiang Hardness</value>
+  </data>
+  <data name="hardness_properties_requires_pro" xml:space="preserve">
+    <value>Ang mga katangian ng hardness ay nangangailangan ng PRO-version. Kumuha ng PRO upang i-unlock ang mas maraming data at tables:</value>
+  </data>
+  <data name="hazard_diamond" xml:space="preserve">
+    <value>Diyamante ng Panganib</value>
+  </data>
+  <data name="hazard_flammability" xml:space="preserve">
+    <value>Pagkamadaling Masunog</value>
+  </data>
+  <data name="hazard_health" xml:space="preserve">
+    <value>Panganib sa Kalusugan</value>
+  </data>
+  <data name="hazard_instability" xml:space="preserve">
+    <value>Kawalang-tatag</value>
+  </data>
+  <data name="hazard_materials" xml:space="preserve">
+    <value>Mapanganib na materyales:</value>
+  </data>
+  <data name="hazard_title" xml:space="preserve">
+    <value>Panganib ng mga Materyales</value>
+  </data>
+  <data name="hazard_title_requires_pro" xml:space="preserve">
+    <value>Panganib ng mga Materyales ay nangangailangan ng PRO-bersyon. Kumuha ng PRO upang ma-unlock ang mas maraming data at talahanayan:</value>
+  </data>
+  <data name="health_hazard" xml:space="preserve">
+    <value>Panganib sa kalusugan:</value>
+  </data>
+  <data name="highest" xml:space="preserve">
+    <value>pinakamataas</value>
+  </data>
+  <data name="ideal_calculated" xml:space="preserve">
+    <value>Naka-disable</value>
+  </data>
+  <data name="ideal_gas_calculate_field" xml:space="preserve">
+    <value>Kalkulahin:</value>
+  </data>
+  <data name="ideal_gas_calculator_title" xml:space="preserve">
+    <value>Ideal Gas Calculator</value>
+  </data>
+  <data name="ideal_gas_card_title" xml:space="preserve">
+    <value>Ideal Gas Law Calculator (PV=nRT):</value>
+  </data>
+  <data name="ideal_gas_moles" xml:space="preserve">
+    <value>Moles (n):</value>
+  </data>
+  <data name="ideal_gas_moles_hint" xml:space="preserve">
+    <value>Ipasok ang mga mole</value>
+  </data>
+  <data name="ideal_gas_pressure" xml:space="preserve">
+    <value>Pressure (P):</value>
+  </data>
+  <data name="ideal_gas_pressure_hint" xml:space="preserve">
+    <value>Ipasok ang pressure</value>
+  </data>
+  <data name="ideal_gas_result" xml:space="preserve">
+    <value>Resulta:</value>
+  </data>
+  <data name="ideal_gas_temperature" xml:space="preserve">
+    <value>Temperature (T):</value>
+  </data>
+  <data name="ideal_gas_temperature_hint" xml:space="preserve">
+    <value>Ipasok ang temperatura</value>
+  </data>
+  <data name="ideal_gas_text" xml:space="preserve">
+    <value>Kalkulahin ang mga katangian ng ideal gas gamit ang ideal gas law equation na PV=nRT. Piliin kung aling variable ang kakalkulahin at ipasok ang iba pang tatlong value.</value>
+  </data>
+  <data name="ideal_gas_volume" xml:space="preserve">
+    <value>Volume (V):</value>
+  </data>
+  <data name="ideal_gas_volume_hint" xml:space="preserve">
+    <value>Ipasok ang volume</value>
+  </data>
+  <data name="info_text" xml:space="preserve">
+    <value>Bersyon ng app at detalye</value>
+  </data>
+  <data name="info_title" xml:space="preserve">
+    <value>Impormasyon</value>
+  </data>
+  <data name="intro_calculator_description" xml:space="preserve">
+    <value>Kalkulahin ang molar mass ng mga chemical compound nang mabilis at tumpak. Perpekto para sa mga estudyante at propesyonal sa chemistry.</value>
+  </data>
+  <data name="intro_calculator_title" xml:space="preserve">
+    <value>Molar Mass Calculator</value>
+  </data>
+  <data name="intro_finish" xml:space="preserve">
+    <value>Magsimula</value>
+  </data>
+  <data name="intro_flashcards_description" xml:space="preserve">
+    <value>Matutunan ang periodic table gamit ang interactive na flashcards. Subukan ang iyong kaalaman sa mga simbolo ng elemento, atomic mass, at chemical properties.</value>
+  </data>
+  <data name="intro_flashcards_title" xml:space="preserve">
+    <value>Matuto gamit ang Flashcards</value>
+  </data>
+  <data name="intro_image_description" xml:space="preserve">
+    <value>Larawan ng pagpapakilala</value>
+  </data>
+  <data name="intro_next" xml:space="preserve">
+    <value>Susunod</value>
+  </data>
+  <data name="intro_pro_description" xml:space="preserve">
+    <value>Makakuha ng access sa karagdagang data, advanced na tables, enhanced na calculators, at eksklusibong features sa PRO version.</value>
+  </data>
+  <data name="intro_pro_title" xml:space="preserve">
+    <value>I-unlock ang PRO Features</value>
+  </data>
+  <data name="intro_skip" xml:space="preserve">
+    <value>Laktawan</value>
+  </data>
+  <data name="intro_welcome_description" xml:space="preserve">
+    <value>Ang iyong komprehensibong sanggunian sa periodic table na may detalyadong impormasyon ng elemento, interactive na mga tool, at mga feature sa pag-aaral.</value>
+  </data>
+  <data name="intro_welcome_title" xml:space="preserve">
+    <value>Maligayang pagdating sa Atomic</value>
+  </data>
+  <data name="ion" xml:space="preserve">
+    <value>Energies ng Ionization</value>
+  </data>
+  <data name="ion_charge_colon" xml:space="preserve">
+    <value>Ion Charge:</value>
+  </data>
+  <data name="ion_no_results" xml:space="preserve">
+    <value>Walang resulta</value>
+  </data>
+  <data name="ion_try_another_search" xml:space="preserve">
+    <value>Subukan maghanap ng ibang salita o suriin ang iyong spelling.</value>
+  </data>
+  <data name="ionization_energies_colon" xml:space="preserve">
+    <value>Ionization Energies:</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>Mga Isotope</value>
+  </data>
+  <data name="iso_half_life_colon" xml:space="preserve">
+    <value>Half-life:</value>
+  </data>
+  <data name="iso_no_results" xml:space="preserve">
+    <value>Walang resulta</value>
+  </data>
+  <data name="iso_search_hint" xml:space="preserve">
+    <value>Maghanap ng mga Isotopo</value>
+  </data>
+  <data name="iso_try_another_search" xml:space="preserve">
+    <value>Subukan maghanap ng ibang salita o suriin ang iyong spelling.</value>
+  </data>
+  <data name="isotope" xml:space="preserve">
+    <value>Isotope</value>
+  </data>
+  <data name="isotopes_colon" xml:space="preserve">
+    <value>Mga Isotope:</value>
+  </data>
+  <data name="isotopes_table_description" xml:space="preserve">
+    <value>Isang table na may mga isotope para sa iba't ibang elemento pati na rin ang half-time, mass, proton, neutron at nucleons data.</value>
+  </data>
+  <data name="isotopes_title" xml:space="preserve">
+    <value>Mga Isotopo</value>
+  </data>
+  <data name="language_content" xml:space="preserve">
+    <value>Pumili ng Wika</value>
+  </data>
+  <data name="language_title" xml:space="preserve">
+    <value>Mga Wika</value>
+  </data>
+  <data name="learning_games" xml:space="preserve">
+    <value>Mga Larong Pang-edukasyon:</value>
+  </data>
+  <data name="learning_games_nav" xml:space="preserve">
+    <value>Flashcards</value>
+  </data>
+  <data name="leave_game_confirm" xml:space="preserve">
+    <value>Umalis</value>
+  </data>
+  <data name="leave_game_message" xml:space="preserve">
+    <value>Sigurado ka bang aalis sa laro? Mawawalan ka ng %1$d na buhay.</value>
+  </data>
+  <data name="leave_game_stay" xml:space="preserve">
+    <value>Manatili</value>
+  </data>
+  <data name="leave_game_title" xml:space="preserve">
+    <value>Aalis sa laro?</value>
+  </data>
+  <data name="level_0_4" xml:space="preserve">
+    <value>Antas 0–4</value>
+  </data>
+  <data name="level_10_14" xml:space="preserve">
+    <value>Antas 10–14</value>
+  </data>
+  <data name="level_15_19" xml:space="preserve">
+    <value>Antas 15–19</value>
+  </data>
+  <data name="level_20_24" xml:space="preserve">
+    <value>Antas 20–24</value>
+  </data>
+  <data name="level_25_29" xml:space="preserve">
+    <value>Level 25</value>
+  </data>
+  <data name="level_30_34" xml:space="preserve">
+    <value>Level 30</value>
+  </data>
+  <data name="level_5_9" xml:space="preserve">
+    <value>Antas 5–9</value>
+  </data>
+  <data name="level_range_format" xml:space="preserve">
+    <value>Level %1$d</value>
+  </data>
+  <data name="level_up_message" xml:space="preserve">
+    <value>Binabati kita, naabot mo ang level %1$d!</value>
+  </data>
+  <data name="level_up_title" xml:space="preserve">
+    <value>Level Up!</value>
+  </data>
+  <data name="level_x_y" xml:space="preserve">
+    <value>Level X-Y</value>
+  </data>
+  <data name="license_title" xml:space="preserve">
+    <value>Mga Lisensya</value>
+  </data>
+  <data name="licenses_text" xml:space="preserve">
+    <value>Mga lisensya ng mga ginamit na gawa sa Atomic</value>
+  </data>
+  <data name="licenses_title" xml:space="preserve">
+    <value>Mga Lisensya</value>
+  </data>
+  <data name="light" xml:space="preserve">
+    <value>Liwanag</value>
+  </data>
+  <data name="lives_label" xml:space="preserve">
+    <value>Buhay: %s</value>
+  </data>
+  <data name="lives_lost_detail" xml:space="preserve">
+    <value>Nawalang buhay: %1$d (%2$d bawat mali/timeout na sagot)</value>
+  </data>
+  <data name="lives_lost_result.One" xml:space="preserve">
+    <value>Nawalan ng %d buhay</value>
+  </data>
+  <data name="lives_lost_result.Other" xml:space="preserve">
+    <value>Nawalan ng %d na buhay</value>
+  </data>
+  <data name="lives_unlimited" xml:space="preserve">
+    <value>Buhay: ∞</value>
+  </data>
+  <data name="login_for_sync" xml:space="preserve">
+    <value>Mag-login upang paganahin ang sync</value>
+  </data>
+  <data name="login_for_sync_and_more" xml:space="preserve">
+    <value>Mag-login upang i-sync ang data</value>
+  </data>
+  <data name="lowest" xml:space="preserve">
+    <value>pinakamababa</value>
+  </data>
+  <data name="magnetic_type" xml:space="preserve">
+    <value>Uri ng Magnetiko</value>
+  </data>
+  <data name="magnetic_type_colon" xml:space="preserve">
+    <value>Uri ng Magnetiko:</value>
+  </data>
+  <data name="magnetism_label" xml:space="preserve">
+    <value>Magnetismo: </value>
+  </data>
+  <data name="medium" xml:space="preserve">
+    <value>Katamtaman</value>
+  </data>
+  <data name="melting_point" xml:space="preserve">
+    <value>Punto ng Pagkatunaw</value>
+  </data>
+  <data name="melting_point_celsius" xml:space="preserve">
+    <value>Melting Point (°C):</value>
+  </data>
+  <data name="melting_point_colon" xml:space="preserve">
+    <value>Melting Point:</value>
+  </data>
+  <data name="melting_point_fahrenheit" xml:space="preserve">
+    <value>Melting Point (°F):</value>
+  </data>
+  <data name="melting_point_kelvin" xml:space="preserve">
+    <value>Melting Point (Kelvin):</value>
+  </data>
+  <data name="member_already" xml:space="preserve">
+    <value>Ikaw ay PRO member na!</value>
+  </data>
+  <data name="member_btn" xml:space="preserve">
+    <value>Iyong PRO Perks</value>
+  </data>
+  <data name="member_desch" xml:space="preserve">
+    <value>Salamat sa pagsuporta sa pag-unlad ng 'Atomic - Periodic Table'. Sa pahinang ito, makikita ang impormasyon tungkol sa iyong PRO perks habang nadaragdagan pa ang mga PRO na tampok.</value>
+  </data>
+  <data name="member_title" xml:space="preserve">
+    <value>Pahina ng Miyembro PRO</value>
+  </data>
+  <data name="mohs_hardness" xml:space="preserve">
+    <value>Mohs Hardness</value>
+  </data>
+  <data name="mohs_hardness_colon" xml:space="preserve">
+    <value>Mohs hardness:</value>
+  </data>
+  <data name="molar_heat_capacity_colon" xml:space="preserve">
+    <value>Molar Heat Capacity:</value>
+  </data>
+  <data name="molar_mass_value" xml:space="preserve">
+    <value>%1$s g/mol</value>
+  </data>
+  <data name="molar_volume_colon" xml:space="preserve">
+    <value>Molar Volume:</value>
+  </data>
+  <data name="more_information" xml:space="preserve">
+    <value>Higit pang impormasyon:</value>
+  </data>
+  <data name="most_advanced" xml:space="preserve">
+    <value>Pinaka-advanced</value>
+  </data>
+  <data name="most_used" xml:space="preserve">
+    <value>Pinakagamit:</value>
+  </data>
+  <data name="neel_point_colon" xml:space="preserve">
+    <value>Neel Point:</value>
+  </data>
+  <data name="neutron_cross_sectional" xml:space="preserve">
+    <value>Neutron Cross Sectional</value>
+  </data>
+  <data name="neutron_cross_sectional_colon" xml:space="preserve">
+    <value>Neutron Cross Sectional:</value>
+  </data>
+  <data name="neutrons" xml:space="preserve">
+    <value>Mga neutron:</value>
+  </data>
+  <data name="new_label" xml:space="preserve">
+    <value>BAGO</value>
+  </data>
+  <data name="next_life_gain.One" xml:space="preserve">
+    <value>Makakakuha ka ng %d buhay.</value>
+  </data>
+  <data name="next_life_gain.Other" xml:space="preserve">
+    <value>Makakakuha ka ng %d na buhay.</value>
+  </data>
+  <data name="next_life_in_detail" xml:space="preserve">
+    <value>Susunod na buhay sa %1$d minuto at %2$d segundo.
+%3$s</value>
+  </data>
+  <data name="no_image" xml:space="preserve">
+    <value>Walang Larawan</value>
+  </data>
+  <data name="no_questions_title" xml:space="preserve">
+    <value>Walang sapat na data</value>
+  </data>
+  <data name="no_results" xml:space="preserve">
+    <value>Walang Resulta</value>
+  </data>
+  <data name="no_unlocked_games" xml:space="preserve">
+    <value>Walang available na na-unlock na laro!</value>
+  </data>
+  <data name="non_pro" xml:space="preserve">
+    <value>HINDI-PRO</value>
+  </data>
+  <data name="notes_placeholder" xml:space="preserve">
+    <value>Gumawa ng mga tala para sa elemento:</value>
+  </data>
+  <data name="nuc" xml:space="preserve">
+    <value>Talahanayan ng Nuclides</value>
+  </data>
+  <data name="nuclear_properties" xml:space="preserve">
+    <value>Mga Katangiang Nuclear</value>
+  </data>
+  <data name="nucleons" xml:space="preserve">
+    <value>Mga nucleon:</value>
+  </data>
+  <data name="nuclide_table" xml:space="preserve">
+    <value>Talahanayan ng nuclide:</value>
+  </data>
+  <data name="nuclide_table_title" xml:space="preserve">
+    <value>Talahanayan ng Nuclide</value>
+  </data>
+  <data name="offline_mode" xml:space="preserve">
+    <value>Offline na Mode</value>
+  </data>
+  <data name="offline_mode_desc" xml:space="preserve">
+    <value>Hindi maglo-load ng mga larawan</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="open_base_element" xml:space="preserve">
+    <value>Buksan ang batayang elemento</value>
+  </data>
+  <data name="open_table_button" xml:space="preserve">
+    <value>Buksan ang talahanayan</value>
+  </data>
+  <data name="other_settings" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="other_title" xml:space="preserve">
+    <value>Iba pa</value>
+  </data>
+  <data name="out_of_lives_hours" xml:space="preserve">
+    <value>Wala nang buhay! Mas maraming buhay sa %1$d oras, %2$d minuto at %3$d segundo.</value>
+  </data>
+  <data name="out_of_lives_minutes" xml:space="preserve">
+    <value>Wala nang buhay! Mas maraming buhay sa %1$d minuto at %2$d segundo.</value>
+  </data>
+  <data name="overview" xml:space="preserve">
+    <value>Pangkalahatang-ideya</value>
+  </data>
+  <data name="owns_pro_plus" xml:space="preserve">
+    <value>May PRO+</value>
+  </data>
+  <data name="oxidation_states_colon" xml:space="preserve">
+    <value>Oxidation States:</value>
+  </data>
+  <data name="perfect_all_correct_xp" xml:space="preserve">
+    <value>Perpekto (Lahat Tama): +%dxp</value>
+  </data>
+  <data name="personalise_favorite_bar" xml:space="preserve">
+    <value>I-personalize ang paboritong bar</value>
+  </data>
+  <data name="personalization_settings" xml:space="preserve">
+    <value>Pag-personalize</value>
+  </data>
+  <data name="ph_title" xml:space="preserve">
+    <value>pH-Tagapahiwatig</value>
+  </data>
+  <data name="phase_stp" xml:space="preserve">
+    <value>Phase (STP)</value>
+  </data>
+  <data name="phase_stp_colon" xml:space="preserve">
+    <value>Phase (STP):</value>
+  </data>
+  <data name="phi" xml:space="preserve">
+    <value>pH-Tagapahiwatig</value>
+  </data>
+  <data name="poi" xml:space="preserve">
+    <value>Talahanayan ng Ratio ni Poisson</value>
+  </data>
+  <data name="poi_clear_filter" xml:space="preserve">
+    <value>I-clear ang Filter</value>
+  </data>
+  <data name="poi_no_results" xml:space="preserve">
+    <value>Walang resulta</value>
+  </data>
+  <data name="poi_search_hint" xml:space="preserve">
+    <value>Maghanap ng Diksiyonaryo Item</value>
+  </data>
+  <data name="poi_try_another_search" xml:space="preserve">
+    <value>Subukan maghanap ng ibang salita o suriin ang iyong spelling.</value>
+  </data>
+  <data name="poisson_constants_sound_speed" xml:space="preserve">
+    <value>Mga constant ng Poisson, bilis ng tunog:</value>
+  </data>
+  <data name="poisson_ratio_table" xml:space="preserve">
+    <value>Talahanayan ng ratio ng Poisson:</value>
+  </data>
+  <data name="poissons_ratio" xml:space="preserve">
+    <value>Ratio ni Poisson</value>
+  </data>
+  <data name="poissons_ratio_title" xml:space="preserve">
+    <value>Ratio ni Poisson</value>
+  </data>
+  <data name="popup_action_button" xml:space="preserve">
+    <value>Mag-upgrade sa PRO+</value>
+  </data>
+  <data name="popup_content_text" xml:space="preserve">
+    <value>I-upgrade ang 'Atomic - Periodic Table' para ma-unlock ang karagdagang data, talahanayan, at flashcards upang matuto pa tungkol sa periodic table.</value>
+  </data>
+  <data name="popup_secondary_button" xml:space="preserve">
+    <value>Hindi ngayon</value>
+  </data>
+  <data name="popup_title" xml:space="preserve">
+    <value>Mag-upgrade sa PRO+</value>
+  </data>
+  <data name="price_not_available" xml:space="preserve">
+    <value>Hindi available ang presyo</value>
+  </data>
+  <data name="price_placeholder" xml:space="preserve">
+    <value>---</value>
+  </data>
+  <data name="pro_additional_data" xml:space="preserve">
+    <value>Karagdagang Data</value>
+  </data>
+  <data name="pro_additional_data_descr" xml:space="preserve">
+    <value>Karagdagang data gaya ng katigasan (mohs-, vickers-, at brinell hardness) pati na rin ang bilis ng tunog, Poisson Constant, Young's-, Bulk- at Shear modulus atbp. Kasama rin ang impormasyon tungkol sa pagkakakilanlan ng mga mineral.</value>
+  </data>
+  <data name="pro_additional_flashcards" xml:space="preserve">
+    <value>Mga Karagdagang Flashcard at Pag-sync</value>
+  </data>
+  <data name="pro_additional_flashcards_descr" xml:space="preserve">
+    <value>Access sa mga karagdagang flashcard, mas maraming buhay at pag-sync ng iyong pag-unlad</value>
+  </data>
+  <data name="pro_additional_sync" xml:space="preserve">
+    <value>I-sync para sa mga tala at pag-unlad</value>
+  </data>
+  <data name="pro_additional_sync_descr" xml:space="preserve">
+    <value>Paganahin ang pag-sync para sa mga tala at pag-unlad upang gawing mas madali ang iyong pag-aaral sa lahat ng iyong mga device</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>Karagdagang Talahanayan</value>
+  </data>
+  <data name="pro_additional_tables_descr" xml:space="preserve">
+    <value>Karagdagang mga talahanayan kabilang ang nuclide table, Poisson's ratio table, constants table, geology table atbp., na may higit pa sa hinaharap</value>
+  </data>
+  <data name="pro_additional_visualisations" xml:space="preserve">
+    <value>Karagdagang Biswalisasyon</value>
+  </data>
+  <data name="pro_additional_visualisations_descr" xml:space="preserve">
+    <value>Access sa mas maraming biswalisasyon sa pangunahing talahanayan gaya ng Poisson's Ratio, bulk modulus atbp.</value>
+  </data>
+  <data name="pro_already_purchased_check" xml:space="preserve">
+    <value>Suriin ang produkto sa account</value>
+  </data>
+  <data name="pro_already_purchased_title" xml:space="preserve">
+    <value>Nabili na ang Atomic - Periodic Table PRO?</value>
+  </data>
+  <data name="pro_better_ai" xml:space="preserve">
+    <value>Karagdagang Mga Tampok ng AI</value>
+  </data>
+  <data name="pro_better_ai_descr" xml:space="preserve">
+    <value>I-unlock ang lahat ng feature ng AI agent, na may quiz, access sa pro data at marami pang iba</value>
+  </data>
+  <data name="pro_better_calculator" xml:space="preserve">
+    <value>Mas Pinahusay na Kalkulador</value>
+  </data>
+  <data name="pro_better_calculator_descr" xml:space="preserve">
+    <value>Isang mas pinahusay na kalkulador na may kakayahang mag-save ng molar weights ng iba't ibang compound sa pahina ng paborito.</value>
+  </data>
+  <data name="pro_descr" xml:space="preserve">
+    <value>'Atomic - Periodic Table' ay isang libreng open-source na aplikasyon na ginawa ko sa aking libreng oras sa Sweden. Sa pagbili ng PRO-bersyon, tinutulungan mo ang pag-unlad habang nakakatanggap ng karagdagang data at tampok!</value>
+  </data>
+  <data name="pro_features_descr" xml:space="preserve">
+    <value>Tuklasin ang ilan sa maraming tampok ng PRO-Bersyon at kung ano ang kanilang kinabibilangan.</value>
+  </data>
+  <data name="pro_features_table_description" xml:space="preserve">
+    <value>Sa sumusunod na talahanayan ay detalyado ang mga feature na kasama sa mga bersyon na LIBRE, PRO, at PRO+:</value>
+  </data>
+  <data name="pro_features_title" xml:space="preserve">
+    <value>Mga Tampok ng PRO-Bersyon:</value>
+  </data>
+  <data name="pro_get_more_out" xml:space="preserve">
+    <value>Mas maraming makuha mula sa Atomic</value>
+  </data>
+  <data name="pro_plus_badge_text" xml:space="preserve">
+    <value>Pinaka-advanced</value>
+  </data>
+  <data name="pro_plus_rewards" xml:space="preserve">
+    <value>PRO+ Gantimpala: %s</value>
+  </data>
+  <data name="pro_plus_subtitle" xml:space="preserve">
+    <value>I-unlock ang advanced na data at karagdagang flashcards.</value>
+  </data>
+  <data name="pro_plus_user" xml:space="preserve">
+    <value>PRO+ USER</value>
+  </data>
+  <data name="pro_plus_version" xml:space="preserve">
+    <value>PRO+ Version</value>
+  </data>
+  <data name="pro_price_loading" xml:space="preserve">
+    <value>Kinukuha ang presyo...</value>
+  </data>
+  <data name="pro_title" xml:space="preserve">
+    <value>PRO Bersyon</value>
+  </data>
+  <data name="pro_upgrade_to_pro" xml:space="preserve">
+    <value>Mag-upgrade sa PRO</value>
+  </data>
+  <data name="pro_user" xml:space="preserve">
+    <value>PRO USER</value>
+  </data>
+  <data name="pro_user_badge" xml:space="preserve">
+    <value>PRO user</value>
+  </data>
+  <data name="pro_version" xml:space="preserve">
+    <value>PRO Version</value>
+  </data>
+  <data name="properties" xml:space="preserve">
+    <value>Mga Katangian</value>
+  </data>
+  <data name="protons" xml:space="preserve">
+    <value>Mga proton:</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Tanong</value>
+  </data>
+  <data name="question_appearance" xml:space="preserve">
+    <value>Ano ang hitsura ng %s?</value>
+  </data>
+  <data name="question_atomic_mass" xml:space="preserve">
+    <value>Ano ang atomic mass ng %s?</value>
+  </data>
+  <data name="question_atomic_number" xml:space="preserve">
+    <value>Ano ang atomic number ng %s?</value>
+  </data>
+  <data name="question_block" xml:space="preserve">
+    <value>Sa anong block nabibilang ang %s?</value>
+  </data>
+  <data name="question_boiling_point_celsius" xml:space="preserve">
+    <value>Ano ang boiling point (°C) ng %s?</value>
+  </data>
+  <data name="question_boiling_point_fahrenheit" xml:space="preserve">
+    <value>Ano ang boiling point (°F) ng %s?</value>
+  </data>
+  <data name="question_boiling_point_kelvin" xml:space="preserve">
+    <value>Ano ang boiling point (Kelvin) ng %s?</value>
+  </data>
+  <data name="question_brinell_hardness" xml:space="preserve">
+    <value>Ano ang brinell hardness ng %s?</value>
+  </data>
+  <data name="question_crystal_structure" xml:space="preserve">
+    <value>Ano ang crystal structure ng %s?</value>
+  </data>
+  <data name="question_density" xml:space="preserve">
+    <value>Ano ang density ng %s?</value>
+  </data>
+  <data name="question_discovered_by" xml:space="preserve">
+    <value>Sino ang nakatuklas ng %s?</value>
+  </data>
+  <data name="question_discovery_year" xml:space="preserve">
+    <value>Anong taon natuklasan ang %s?</value>
+  </data>
+  <data name="question_earth_crust_abundance" xml:space="preserve">
+    <value>Ano ang abundance ng %s sa earth crust? mg/kg (ppm)</value>
+  </data>
+  <data name="question_earth_soils_abundance" xml:space="preserve">
+    <value>Ano ang abundance ng %s sa earth soils? mg/kg (ppm)</value>
+  </data>
+  <data name="question_electrical_type" xml:space="preserve">
+    <value>Ano ang electrical type ng %s?</value>
+  </data>
+  <data name="question_electronegativity" xml:space="preserve">
+    <value>Ano ang electronegativity ng %s?</value>
+  </data>
+  <data name="question_element_group" xml:space="preserve">
+    <value>Ano ang element group ng %s?</value>
+  </data>
+  <data name="question_element_name" xml:space="preserve">
+    <value>Ano ang pangalan ng %s?</value>
+  </data>
+  <data name="question_element_symbol" xml:space="preserve">
+    <value>Ano ang simbolo ng %s?</value>
+  </data>
+  <data name="question_group_of" xml:space="preserve">
+    <value>Nasa aling grupo ang %1$s?</value>
+  </data>
+  <data name="question_highest_atomic_mass" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na masang atomiko?</value>
+  </data>
+  <data name="question_highest_boiling_point" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na punto ng kumukulo?</value>
+  </data>
+  <data name="question_highest_brinell_hardness" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na tigas na Brinell?</value>
+  </data>
+  <data name="question_highest_bulk_modulus" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na bulk modulus?</value>
+  </data>
+  <data name="question_highest_density" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na densidad?</value>
+  </data>
+  <data name="question_highest_electronegativity" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na electronegativity?</value>
+  </data>
+  <data name="question_highest_fusion_heat" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na init ng pagkatunaw?</value>
+  </data>
+  <data name="question_highest_melting_point" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na punto ng pagkatunaw?</value>
+  </data>
+  <data name="question_highest_mohs_hardness" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na tigas na Mohs?</value>
+  </data>
+  <data name="question_highest_shear_modulus" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na shear modulus?</value>
+  </data>
+  <data name="question_highest_speed_of_sound" xml:space="preserve">
+    <value>Sa alin sa mga ito pinakamabilis maglakbay ang tunog?</value>
+  </data>
+  <data name="question_highest_thermal_conductivity" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na thermal conductivity?</value>
+  </data>
+  <data name="question_highest_vaporization_heat" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na init ng pagsingaw?</value>
+  </data>
+  <data name="question_highest_vickers_hardness" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na tigas na Vickers?</value>
+  </data>
+  <data name="question_highest_young_modulus" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamataas na modulus ni Young?</value>
+  </data>
+  <data name="question_isotope_decay" xml:space="preserve">
+    <value>Paano nabubulok ang %1$s?</value>
+  </data>
+  <data name="question_isotope_longest_half_life" xml:space="preserve">
+    <value>Alin sa mga isotope na ito ang may pinakamahabang kalahating buhay?</value>
+  </data>
+  <data name="question_isotope_neutrons" xml:space="preserve">
+    <value>Ilang neutron mayroon ang %1$s?</value>
+  </data>
+  <data name="question_isotope_shortest_half_life" xml:space="preserve">
+    <value>Alin sa mga isotope na ito ang may pinakamaikling kalahating buhay?</value>
+  </data>
+  <data name="question_isotope_stable" xml:space="preserve">
+    <value>Alin sa mga isotope na ito ang matatag?</value>
+  </data>
+  <data name="question_largest_atomic_radius" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamalaki na atomic radius?</value>
+  </data>
+  <data name="question_largest_molar_volume" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamalaki na molar volume?</value>
+  </data>
+  <data name="question_lowest_atomic_mass" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na masang atomiko?</value>
+  </data>
+  <data name="question_lowest_boiling_point" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na punto ng kumukulo?</value>
+  </data>
+  <data name="question_lowest_brinell_hardness" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na tigas na Brinell?</value>
+  </data>
+  <data name="question_lowest_bulk_modulus" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na bulk modulus?</value>
+  </data>
+  <data name="question_lowest_density" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na densidad?</value>
+  </data>
+  <data name="question_lowest_electronegativity" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na electronegativity?</value>
+  </data>
+  <data name="question_lowest_fusion_heat" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na init ng pagkatunaw?</value>
+  </data>
+  <data name="question_lowest_melting_point" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na punto ng pagkatunaw?</value>
+  </data>
+  <data name="question_lowest_mohs_hardness" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na tigas na Mohs?</value>
+  </data>
+  <data name="question_lowest_shear_modulus" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na shear modulus?</value>
+  </data>
+  <data name="question_lowest_speed_of_sound" xml:space="preserve">
+    <value>Sa alin sa mga ito pinakamabagal maglakbay ang tunog?</value>
+  </data>
+  <data name="question_lowest_thermal_conductivity" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na thermal conductivity?</value>
+  </data>
+  <data name="question_lowest_vaporization_heat" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na init ng pagsingaw?</value>
+  </data>
+  <data name="question_lowest_vickers_hardness" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na tigas na Vickers?</value>
+  </data>
+  <data name="question_lowest_young_modulus" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamababa na modulus ni Young?</value>
+  </data>
+  <data name="question_magnetic_type" xml:space="preserve">
+    <value>Ano ang magnetic type ng %s?</value>
+  </data>
+  <data name="question_melting_point_celsius" xml:space="preserve">
+    <value>Ano ang melting point (°C) ng %s?</value>
+  </data>
+  <data name="question_melting_point_fahrenheit" xml:space="preserve">
+    <value>Ano ang melting point (°F) ng %s?</value>
+  </data>
+  <data name="question_melting_point_kelvin" xml:space="preserve">
+    <value>Ano ang melting point (Kelvin) ng %s?</value>
+  </data>
+  <data name="question_mohs_hardness" xml:space="preserve">
+    <value>Ano ang mohs hardness ng %s?</value>
+  </data>
+  <data name="question_molar_mass" xml:space="preserve">
+    <value>Ano ang molar mass ng %1$s?</value>
+  </data>
+  <data name="question_neutron_cross_sectional" xml:space="preserve">
+    <value>Ano ang neutron cross sectional ng %s?</value>
+  </data>
+  <data name="question_nfpa_diamond" xml:space="preserve">
+    <value>Ano ang NFPA 704 na diyamante ng panganib ng %s? (kalusugan / pagkamadaling masunog / kawalang-tatag)</value>
+  </data>
+  <data name="question_nfpa_flammability" xml:space="preserve">
+    <value>Ano ang NFPA 704 na pagkamadaling masunog ng %s?</value>
+  </data>
+  <data name="question_nfpa_health" xml:space="preserve">
+    <value>Ano ang NFPA 704 na panganib sa kalusugan ng %s?</value>
+  </data>
+  <data name="question_nfpa_instability" xml:space="preserve">
+    <value>Ano ang NFPA 704 na kawalang-tatag ng %s?</value>
+  </data>
+  <data name="question_not_a_series" xml:space="preserve">
+    <value>Alin sa mga ito ang HINDI %1$s?</value>
+  </data>
+  <data name="question_period_of" xml:space="preserve">
+    <value>Nasa aling periodo ang %1$s?</value>
+  </data>
+  <data name="question_phase_stp" xml:space="preserve">
+    <value>Ano ang phase ng %s sa STP?</value>
+  </data>
+  <data name="question_radioactive" xml:space="preserve">
+    <value>Radioactive ba ang %s?</value>
+  </data>
+  <data name="question_smallest_atomic_radius" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamaliit na atomic radius?</value>
+  </data>
+  <data name="question_smallest_molar_volume" xml:space="preserve">
+    <value>Alin sa mga ito ang may pinakamaliit na molar volume?</value>
+  </data>
+  <data name="question_specific_heat_capacity" xml:space="preserve">
+    <value>Ano ang specific heat capacity ng %s?</value>
+  </data>
+  <data name="question_superconducting_point" xml:space="preserve">
+    <value>Ano ang superconducting point ng %s?</value>
+  </data>
+  <data name="question_text" xml:space="preserve">
+    <value>Teksto ng tanong</value>
+  </data>
+  <data name="question_valence_electrons" xml:space="preserve">
+    <value>Ilang valence electron mayroon ang %1$s?</value>
+  </data>
+  <data name="question_vickers_hardness" xml:space="preserve">
+    <value>Ano ang vickers hardness ng %s?</value>
+  </data>
+  <data name="question_xp_detail" xml:space="preserve">
+    <value>XP para sa tanong na ito: +%1$d</value>
+  </data>
+  <data name="questions_correct_xp" xml:space="preserve">
+    <value>Tamang Tanong: +%dxp</value>
+  </data>
+  <data name="quiz_loading" xml:space="preserve">
+    <value>Inihahanda ang mga tanong…</value>
+  </data>
+  <data name="quiz_no_questions" xml:space="preserve">
+    <value>Hindi makabuo ng mga tanong para sa larong ito. Subukan ang iba.</value>
+  </data>
+  <data name="radioactive" xml:space="preserve">
+    <value>Radyaktibo</value>
+  </data>
+  <data name="radioactive_colon" xml:space="preserve">
+    <value>Radioactive:</value>
+  </data>
+  <data name="random_element" xml:space="preserve">
+    <value>Random na Elemento</value>
+  </data>
+  <data name="rate" xml:space="preserve">
+    <value>I-rate</value>
+  </data>
+  <data name="rate_app" xml:space="preserve">
+    <value>I-rate ang App</value>
+  </data>
+  <data name="rate_app_description" xml:space="preserve">
+    <value>Ipakita sa amin kung ano ang iyong iniisip tungkol sa app, sa pamamagitan ng pag-rate nito sa Play Store!</value>
+  </data>
+  <data name="reaction_balancer" xml:space="preserve">
+    <value>Reaction Balancer:</value>
+  </data>
+  <data name="reactivity_hazard" xml:space="preserve">
+    <value>Reaktibidad:</value>
+  </data>
+  <data name="read_more" xml:space="preserve">
+    <value>..higit pa</value>
+  </data>
+  <data name="read_more_widget" xml:space="preserve">
+    <value>Magbasa pa</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>Mga Reaksiyong Kemikal</value>
+  </data>
+  <data name="refractive_index_colon" xml:space="preserve">
+    <value>Refractive Index:</value>
+  </data>
+  <data name="requires_pro" xml:space="preserve">
+    <value>Kailangan ng PRO-Bersyon</value>
+  </data>
+  <data name="requires_pro_plus_until_2026" xml:space="preserve">
+    <value>Nangangailangan ng PRO+ hanggang Jan 1 2026</value>
+  </data>
+  <data name="reward_5pct_title" xml:space="preserve">
+    <value>+5% XP bonus</value>
+  </data>
+  <data name="rewards_available" xml:space="preserve">
+    <value>Mga Gantimpala:</value>
+  </data>
+  <data name="save_calculations" xml:space="preserve">
+    <value>I-save ang mga kalkulasyon:</value>
+  </data>
+  <data name="save_equations" xml:space="preserve">
+    <value>I-save ang mga equation:</value>
+  </data>
+  <data name="save_units" xml:space="preserve">
+    <value>I-save ang mga unit:</value>
+  </data>
+  <data name="score_summary" xml:space="preserve">
+    <value>Puntos: %1$d/%2$d</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Maghanap ng Elemento</value>
+  </data>
+  <data name="search_elements" xml:space="preserve">
+    <value>Maghanap ng mga Elemento</value>
+  </data>
+  <data name="search_for_element" xml:space="preserve">
+    <value>Maghanap ng elemento</value>
+  </data>
+  <data name="searches" xml:space="preserve">
+    <value>Mga Paghahanap</value>
+  </data>
+  <data name="select_element_to_compare" xml:space="preserve">
+    <value>Pumili ng Elemento na Ihahambing</value>
+  </data>
+  <data name="select_theme" xml:space="preserve">
+    <value>Pumili ng Tema</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Mga Setting</value>
+  </data>
+  <data name="settings_favorite_content" xml:space="preserve">
+    <value>I-personalize ang paboritong bar</value>
+  </data>
+  <data name="settings_favorite_title" xml:space="preserve">
+    <value>Paboritong Bar</value>
+  </data>
+  <data name="settings_nav_bar_content" xml:space="preserve">
+    <value>I-disable ang standard na gawi</value>
+  </data>
+  <data name="settings_nav_bar_title" xml:space="preserve">
+    <value>I-auto hide ang bottom bar</value>
+  </data>
+  <data name="settings_offline_content" xml:space="preserve">
+    <value>Hindi maglo-load ng mga larawan</value>
+  </data>
+  <data name="settings_offline_title" xml:space="preserve">
+    <value>Offline na Mode</value>
+  </data>
+  <data name="settings_order_content" xml:space="preserve">
+    <value>I-customize ang pagkakasunod ng Detail Cards</value>
+  </data>
+  <data name="settings_order_title" xml:space="preserve">
+    <value>Order ng Detail Card</value>
+  </data>
+  <data name="settings_themes_content" xml:space="preserve">
+    <value>Pumili ng Tema</value>
+  </data>
+  <data name="settings_themes_title" xml:space="preserve">
+    <value>Mga Tema</value>
+  </data>
+  <data name="settings_title" xml:space="preserve">
+    <value>Mga Setting</value>
+  </data>
+  <data name="settings_unit_content" xml:space="preserve">
+    <value>I-customize ang mga yunit sa pangunahing talahanayan</value>
+  </data>
+  <data name="settings_unit_title" xml:space="preserve">
+    <value>Mga Yunit ng Talahanayan</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>Ibahagi</value>
+  </data>
+  <data name="share_app" xml:space="preserve">
+    <value>Ibahagi ang App</value>
+  </data>
+  <data name="share_app_description" xml:space="preserve">
+    <value>Kung nakakatulong sa iyo ang app, pakiusap ibahagi ito sa iyong mga kaibigan at iba pa!</value>
+  </data>
+  <data name="shear_modulus" xml:space="preserve">
+    <value>Shear modulus</value>
+  </data>
+  <data name="short_voltage" xml:space="preserve">
+    <value> (Volt)</value>
+  </data>
+  <data name="show_atomic_radius_calculated" xml:space="preserve">
+    <value>Ipakita ang Atomic Radius (Kalkulado)</value>
+  </data>
+  <data name="show_atomic_radius_empirical" xml:space="preserve">
+    <value>Ipakita ang Atomic Radius (Empirical)</value>
+  </data>
+  <data name="show_boiling_point" xml:space="preserve">
+    <value>Ipakita ang Punto ng Pag-kulo</value>
+  </data>
+  <data name="show_covalent_radius" xml:space="preserve">
+    <value>Ipakita ang Covalent Radius</value>
+  </data>
+  <data name="show_density" xml:space="preserve">
+    <value>Ipakita ang Densidad</value>
+  </data>
+  <data name="show_electronegativity" xml:space="preserve">
+    <value>Ipakita ang Elektronegati-bidad</value>
+  </data>
+  <data name="show_fusion_heat" xml:space="preserve">
+    <value>Ipakita ang Init ng Pagsasanib</value>
+  </data>
+  <data name="show_if_radioactive" xml:space="preserve">
+    <value>Ipakita kung radyaktibo ang elemento</value>
+  </data>
+  <data name="show_melting_point" xml:space="preserve">
+    <value>Ipakita ang Punto ng Pagkatunaw</value>
+  </data>
+  <data name="show_molar_mass" xml:space="preserve">
+    <value>Ipakita ang Molar Mass</value>
+  </data>
+  <data name="show_resistivity" xml:space="preserve">
+    <value>Ipakita ang Resistibidad</value>
+  </data>
+  <data name="show_specific_heat_capacity" xml:space="preserve">
+    <value>Ipakita ang Tiyak na Kapasidad ng Init</value>
+  </data>
+  <data name="show_stp_phase" xml:space="preserve">
+    <value>Ipakita ang STP Phase</value>
+  </data>
+  <data name="show_van_der_waals_radius" xml:space="preserve">
+    <value>Ipakita ang Van Der Waals Radius</value>
+  </data>
+  <data name="show_vaporization_heat" xml:space="preserve">
+    <value>Ipakita ang Init ng Pag-singaw</value>
+  </data>
+  <data name="sign_in_failed" xml:space="preserve">
+    <value>Nabigo ang pag-sign in</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>Mag-sign out</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>Pumapasok…</value>
+  </data>
+  <data name="sol" xml:space="preserve">
+    <value>Talahanayan ng Kalutasan</value>
+  </data>
+  <data name="solubility_info_c" xml:space="preserve">
+    <value>"S: Malulusaw
+Ss: Bahagyang Malulusaw
+I: Hindi Malulusaw"</value>
+  </data>
+  <data name="solubility_info_t" xml:space="preserve">
+    <value>Tulong sa Kalutasan</value>
+  </data>
+  <data name="solubility_table" xml:space="preserve">
+    <value>Solubility Table</value>
+  </data>
+  <data name="sources_settings_title" xml:space="preserve">
+    <value>Pinagmulan</value>
+  </data>
+  <data name="sources_wwe_title" xml:space="preserve">
+    <value>Inhinyeriya ng Tubig at Wastewater</value>
+  </data>
+  <data name="space_group_name_colon" xml:space="preserve">
+    <value>Pangalan ng Space Group:</value>
+  </data>
+  <data name="space_group_number_colon" xml:space="preserve">
+    <value>Numero ng Space Group:</value>
+  </data>
+  <data name="specific_hazard" xml:space="preserve">
+    <value>Tiyak na panganib:</value>
+  </data>
+  <data name="specific_heat_capacity" xml:space="preserve">
+    <value>Tiyak na Kapasidad ng Init</value>
+  </data>
+  <data name="specific_heat_capacity_colon" xml:space="preserve">
+    <value>Specific Heat Capacity:</value>
+  </data>
+  <data name="spelling" xml:space="preserve">
+    <value>Subukan maghanap ng ibang salita o suriin ang iyong spelling</value>
+  </data>
+  <data name="split_view" xml:space="preserve">
+    <value>Elemento Split View</value>
+  </data>
+  <data name="streak_label" xml:space="preserve">
+    <value>Streak: </value>
+  </data>
+  <data name="streak_notification_body" xml:space="preserve">
+    <value>Maglaro ngayon upang i-save ang iyong %1$d-araw na streak.</value>
+  </data>
+  <data name="streak_notification_title" xml:space="preserve">
+    <value>Panatilihin ang iyong %1$d-araw na streak!</value>
+  </data>
+  <data name="submit_activity_title" xml:space="preserve">
+    <value>Ipasa ang isyu</value>
+  </data>
+  <data name="submit_bug" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="submit_data_i" xml:space="preserve">
+    <value>Isyu sa Data</value>
+  </data>
+  <data name="submit_data_issue" xml:space="preserve">
+    <value>Ipasa ang Isyu sa Data</value>
+  </data>
+  <data name="submit_issue" xml:space="preserve">
+    <value>Isyu</value>
+  </data>
+  <data name="submit_question" xml:space="preserve">
+    <value>Tanong</value>
+  </data>
+  <data name="submit_send" xml:space="preserve">
+    <value>Ipasa ang isyu</value>
+  </data>
+  <data name="submit_text" xml:space="preserve">
+    <value>Iulat ang bug at error sa data</value>
+  </data>
+  <data name="submit_title" xml:space="preserve">
+    <value>Iulat ang Isyu</value>
+  </data>
+  <data name="superconducting_point" xml:space="preserve">
+    <value>Superconducting Point</value>
+  </data>
+  <data name="superconducting_point_colon" xml:space="preserve">
+    <value>Superconducting Point:</value>
+  </data>
+  <data name="sync_available_pro_only" xml:space="preserve">
+    <value>Kumuha ng PRO o PRO+ upang paganahin ang cloud sync</value>
+  </data>
+  <data name="sync_complete" xml:space="preserve">
+    <value>Na-synchronize na ang progress</value>
+  </data>
+  <data name="sync_data" xml:space="preserve">
+    <value>I-sync ang data:</value>
+  </data>
+  <data name="sync_failed" xml:space="preserve">
+    <value>Nabigo ang pag-sync</value>
+  </data>
+  <data name="sync_status" xml:space="preserve">
+    <value>Hindi naka-sync</value>
+  </data>
+  <data name="syncing_progress" xml:space="preserve">
+    <value>Nag-s-synchronize ng progress…</value>
+  </data>
+  <data name="system_default" xml:space="preserve">
+    <value>Default ng Systema</value>
+  </data>
+  <data name="table_alloy" xml:space="preserve">
+    <value>Talaan ng Haluang Metal</value>
+  </data>
+  <data name="table_alloy_text" xml:space="preserve">
+    <value>Isang talaan ng mga karaniwang haluang metal, kung saan sila gawa at kung bakit ginagamit ang mga ito sa halip na ang purong metal</value>
+  </data>
+  <data name="table_constants_text" xml:space="preserve">
+    <value>Isang talahanayan ng karaniwang konstante para sa kalkulasyon kabilang ang matematika, pisika, standard na daloy ng tubig atbp</value>
+  </data>
+  <data name="table_electrochemical" xml:space="preserve">
+    <value>Electrochemical Series</value>
+  </data>
+  <data name="table_electrochemical_text" xml:space="preserve">
+    <value>Isang talahanayan na may electrochemical series, inayos mula (-) hanggang (+) boltahe</value>
+  </data>
+  <data name="table_equations" xml:space="preserve">
+    <value>Mga Pormula</value>
+  </data>
+  <data name="table_equations_text" xml:space="preserve">
+    <value>Isang talahanayan na naglalaman ng mga pormula para sa matematika, pisika at kimika</value>
+  </data>
+  <data name="table_geology" xml:space="preserve">
+    <value>Talahanayan ng Heolohiya</value>
+  </data>
+  <data name="table_geology_text" xml:space="preserve">
+    <value>Isang talahanayan na naglalaman ng impormasyon tungkol sa mineral, bato at lupa</value>
+  </data>
+  <data name="table_ionization" xml:space="preserve">
+    <value>Energies ng Ionization</value>
+  </data>
+  <data name="table_ionization_text" xml:space="preserve">
+    <value>Isang talahanayan ng energies ng ionization ng iba't ibang elemento</value>
+  </data>
+  <data name="table_nuclide" xml:space="preserve">
+    <value>Talahanayan ng Nuclides</value>
+  </data>
+  <data name="table_nuclide_text" xml:space="preserve">
+    <value>Isang two-dimensional na talahanayan ng nuclide, na may kulay para sa uri ng pagkabulok</value>
+  </data>
+  <data name="table_order_text" xml:space="preserve">
+    <value>Tukuyin ang pagkakasunod ng mga talahanayan</value>
+  </data>
+  <data name="table_order_title" xml:space="preserve">
+    <value>Ayusin ang listahan ng talahanayan</value>
+  </data>
+  <data name="table_ph" xml:space="preserve">
+    <value>pH-Tagapahiwatig</value>
+  </data>
+  <data name="table_ph_text" xml:space="preserve">
+    <value>Isang talahanayan ng pH-tagapahiwatig para sa mga kulay sa iba't ibang antas ng asido/alkalina</value>
+  </data>
+  <data name="table_poisson" xml:space="preserve">
+    <value>Talahanayan ng Ratio ni Poisson</value>
+  </data>
+  <data name="table_poisson_text" xml:space="preserve">
+    <value>Isang talahanayan ng Poisson ratio para sa iba't ibang bato, lupa, mineral at iba pang materyales</value>
+  </data>
+  <data name="table_solubility" xml:space="preserve">
+    <value>Talahanayan ng Kalutasan</value>
+  </data>
+  <data name="table_solubility_text" xml:space="preserve">
+    <value>Isang talahanayan na may impormasyon ng kalutasan ng iba't ibang sangkap</value>
+  </data>
+  <data name="table_units" xml:space="preserve">
+    <value>Mga Yunit ng Talahanayan</value>
+  </data>
+  <data name="take_notes_for_element" xml:space="preserve">
+    <value>Gumawa ng mga tala para sa elemento</value>
+  </data>
+  <data name="temperatures" xml:space="preserve">
+    <value>Mga Temperatura</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>Mga Tema</value>
+  </data>
+  <data name="thermal_conductivity_colon" xml:space="preserve">
+    <value>Thermal Conductivity:</value>
+  </data>
+  <data name="thermal_expansion_colon" xml:space="preserve">
+    <value>Thermal Expansion:</value>
+  </data>
+  <data name="thermodynamic_properties" xml:space="preserve">
+    <value>Mga Katangiang Thermodynamic</value>
+  </data>
+  <data name="time_up" xml:space="preserve">
+    <value>Tapos na ang Oras</value>
+  </data>
+  <data name="tool_btn_open" xml:space="preserve">
+    <value>Buksan ang Kasangkapan</value>
+  </data>
+  <data name="tools" xml:space="preserve">
+    <value>Mga Kasangkapan</value>
+  </data>
+  <data name="tools_title" xml:space="preserve">
+    <value>Mga Kasangkapan (hal. kalkulador)</value>
+  </data>
+  <data name="total_xp_stat" xml:space="preserve">
+    <value>Kabuuang XP: %d</value>
+  </data>
+  <data name="total_xp_with_multiplier" xml:space="preserve">
+    <value>Kabuuang XP: %1$d (%2$s ×%3$s)</value>
+  </data>
+  <data name="try_another_search" xml:space="preserve">
+    <value>Subukan maghanap ng ibang salita o suriin ang iyong spelling.</value>
+  </data>
+  <data name="type_label" xml:space="preserve">
+    <value>Uri: </value>
+  </data>
+  <data name="uni" xml:space="preserve">
+    <value>Unit Converter</value>
+  </data>
+  <data name="unit_add_favorite" xml:space="preserve">
+    <value>Idagdag sa mga Paborito:</value>
+  </data>
+  <data name="unit_category" xml:space="preserve">
+    <value>Kategorya:</value>
+  </data>
+  <data name="unit_converter_title" xml:space="preserve">
+    <value>Unit Converter</value>
+  </data>
+  <data name="unit_description" xml:space="preserve">
+    <value>Isang simpleng unit converter para sa maraming gamit</value>
+  </data>
+  <data name="unit_display_formula" xml:space="preserve">
+    <value>Ang formula ay ipapakita dito</value>
+  </data>
+  <data name="unit_enter_value" xml:space="preserve">
+    <value>Halaga</value>
+  </data>
+  <data name="unit_favorites" xml:space="preserve">
+    <value>Mga Paborito:</value>
+  </data>
+  <data name="unit_formula" xml:space="preserve">
+    <value>Formula:</value>
+  </data>
+  <data name="unit_output_value" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="unit_settings_title" xml:space="preserve">
+    <value>Mga Yunit ng Talahanayan</value>
+  </data>
+  <data name="unit_temperature" xml:space="preserve">
+    <value>Temperatura</value>
+  </data>
+  <data name="unit_title" xml:space="preserve">
+    <value>Unit Converter</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>Hindi alam</value>
+  </data>
+  <data name="unlimited_ai_messages" xml:space="preserve">
+    <value>Walang limitasyong mga mensahe ng AI:</value>
+  </data>
+  <data name="unlock_advanced_data_and_additional_flashcards" xml:space="preserve">
+    <value>I-unlock ang advanced data at karagdagang flashcards.</value>
+  </data>
+  <data name="unlock_advanced_data_and_extra_atomic_content" xml:space="preserve">
+    <value>Unlock advanced data and extra Atomic content.</value>
+  </data>
+  <data name="unlock_all_flashcards" xml:space="preserve">
+    <value>I-unlock lahat ng Flashcards at Tampok</value>
+  </data>
+  <data name="upgrade_pro_plus_description" xml:space="preserve">
+    <value>Makakuha ng unlimited na buhay at karagdagang flashcard games gaya ng electronegativity, radioactivity, crystal structure at iba pa!</value>
+  </data>
+  <data name="upgrade_to_pro_plus" xml:space="preserve">
+    <value>Mag-upgrade sa PRO+</value>
+  </data>
+  <data name="usage_statistics" xml:space="preserve">
+    <value>Mga Istatistika sa Paggamit</value>
+  </data>
+  <data name="user_achievements" xml:space="preserve">
+    <value>Mga Nakamit</value>
+  </data>
+  <data name="user_achievements_Text" xml:space="preserve">
+    <value>Subaybayan ang iyong progreso sa pag-aaral ng mga elemento ng mundo gamit ang mga nakamit</value>
+  </data>
+  <data name="user_img" xml:space="preserve">
+    <value>Palitan ang larawan ng profile</value>
+  </data>
+  <data name="user_signed_in_fmt" xml:space="preserve">
+    <value>Naka-sign in bilang %1$s</value>
+  </data>
+  <data name="user_signed_out" xml:space="preserve">
+    <value>Hindi naka-sign in</value>
+  </data>
+  <data name="user_title" xml:space="preserve">
+    <value>Pahina ng Gumagamit</value>
+  </data>
+  <data name="van_der_waals_radius_colon" xml:space="preserve">
+    <value>Van Der Waals Radius:</value>
+  </data>
+  <data name="vaporization_heat" xml:space="preserve">
+    <value>Init ng Pag-singaw</value>
+  </data>
+  <data name="vaporization_heat_colon" xml:space="preserve">
+    <value>Vaporization Heat:</value>
+  </data>
+  <data name="vickers_hardness" xml:space="preserve">
+    <value>Vickers Hardness</value>
+  </data>
+  <data name="vickers_hardness_colon" xml:space="preserve">
+    <value>Vickers hardness:</value>
+  </data>
+  <data name="view_all" xml:space="preserve">
+    <value>Tingnan lahat</value>
+  </data>
+  <data name="view_all_isotopes" xml:space="preserve">
+    <value>Tingnan ang lahat ng Isotope</value>
+  </data>
+  <data name="weight_calculator_title" xml:space="preserve">
+    <value>Kalkulador ng Timbang</value>
+  </data>
+  <data name="widget_description_placeholder" xml:space="preserve">
+    <value>Naglo-load ng impormasyon ng elemento...</value>
+  </data>
+  <data name="win_text" xml:space="preserve">
+    <value>I-download ang app para sa Windows</value>
+  </data>
+  <data name="win_title" xml:space="preserve">
+    <value>Kunin ang Desktop App</value>
+  </data>
+  <data name="work_function_colon" xml:space="preserve">
+    <value>Work Function:</value>
+  </data>
+  <data name="wrong" xml:space="preserve">
+    <value>Mali</value>
+  </data>
+  <data name="xp_bonus" xml:space="preserve">
+    <value>+%d%% bonus xp</value>
+  </data>
+  <data name="xp_bonus_unlocked" xml:space="preserve">
+    <value>5%% XP bonus na-unlock sa level %1$d!</value>
+  </data>
+  <data name="year_discovered" xml:space="preserve">
+    <value>Taon ng Pagkatuklas</value>
+  </data>
+  <data name="year_discovered_colon" xml:space="preserve">
+    <value>Taon ng Pagtuklas:</value>
+  </data>
+  <data name="you_have_full_lives" xml:space="preserve">
+    <value>Puno na ang iyong buhay!</value>
+  </data>
+  <data name="young_bulk_shear_modulus" xml:space="preserve">
+    <value>Young, bulk, at shear modulus:</value>
+  </data>
+  <data name="youngs_modulus" xml:space="preserve">
+    <value>Modulus ni Young</value>
+  </data>
+  <data name="your_answer" xml:space="preserve">
+    <value>Iyong sagot: %s</value>
+  </data>
+</root>

@@ -1,0 +1,3558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dictionary" xml:space="preserve">
+    <value>Ordbok</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nytt</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Tabeller</value>
+  </data>
+  <data name="about_app_name" xml:space="preserve">
+    <value>Atomic - Periodiska systemet</value>
+  </data>
+  <data name="about_title" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="abundance_crustal_rocks" xml:space="preserve">
+    <value>I berg i jordskorpan</value>
+  </data>
+  <data name="abundance_earth_crust" xml:space="preserve">
+    <value>I jordskorpan</value>
+  </data>
+  <data name="abundance_earth_soils" xml:space="preserve">
+    <value>I jordens jord</value>
+  </data>
+  <data name="abundance_sea_water" xml:space="preserve">
+    <value>I havsvatten</value>
+  </data>
+  <data name="abundance_solar_system" xml:space="preserve">
+    <value>I solsystemets atomer</value>
+  </data>
+  <data name="abundance_sun" xml:space="preserve">
+    <value>I solens atomer</value>
+  </data>
+  <data name="abundance_title" xml:space="preserve">
+    <value>Förekomst</value>
+  </data>
+  <data name="abundance_urban_soil" xml:space="preserve">
+    <value>I stadens jord</value>
+  </data>
+  <data name="achievement_reached_prefix" xml:space="preserve">
+    <value>Prestation uppnådd: </value>
+  </data>
+  <data name="activity_alloy_title" xml:space="preserve">
+    <value>Legeringar</value>
+  </data>
+  <data name="activity_equations_title" xml:space="preserve">
+    <value>Formler</value>
+  </data>
+  <data name="activity_formulas_search" xml:space="preserve">
+    <value>Sök efter formler:</value>
+  </data>
+  <data name="activity_geology_mineral" xml:space="preserve">
+    <value>Mineraler</value>
+  </data>
+  <data name="activity_geology_rock" xml:space="preserve">
+    <value>Bergarter</value>
+  </data>
+  <data name="activity_geology_soil" xml:space="preserve">
+    <value>Jordar</value>
+  </data>
+  <data name="activity_geology_title" xml:space="preserve">
+    <value>Geologi</value>
+  </data>
+  <data name="activity_io_title" xml:space="preserve">
+    <value>Joniseringsenergier</value>
+  </data>
+  <data name="activity_ph_acid" xml:space="preserve">
+    <value>Syra</value>
+  </data>
+  <data name="activity_ph_alkaline" xml:space="preserve">
+    <value>Alkalisk</value>
+  </data>
+  <data name="activity_ph_bromothymol_blue" xml:space="preserve">
+    <value>Bromtymolblått</value>
+  </data>
+  <data name="activity_ph_congo_red" xml:space="preserve">
+    <value>Kongorött</value>
+  </data>
+  <data name="activity_ph_methyl_orange" xml:space="preserve">
+    <value>Metylorange</value>
+  </data>
+  <data name="activity_ph_neutral" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="activity_ph_phenolphthalein" xml:space="preserve">
+    <value>Fenolftalein</value>
+  </data>
+  <data name="activity_ph_title" xml:space="preserve">
+    <value>pH-indikatorer</value>
+  </data>
+  <data name="activity_table_title" xml:space="preserve">
+    <value>Tabeller</value>
+  </data>
+  <data name="activity_unit_title" xml:space="preserve">
+    <value>Tabellenheter</value>
+  </data>
+  <data name="add_widget" xml:space="preserve">
+    <value>Lägg till widget</value>
+  </data>
+  <data name="additional_data_item" xml:space="preserve">
+    <value>- Ytterligare data:</value>
+  </data>
+  <data name="additional_flashcards_games" xml:space="preserve">
+    <value>Ytterligare kortspel:</value>
+  </data>
+  <data name="additional_properties_requires_pro" xml:space="preserve">
+    <value>Ytterligare egenskaper kräver PRO-version. Skaffa PRO för att låsa upp mer data och tabeller:</value>
+  </data>
+  <data name="additional_tables_item" xml:space="preserve">
+    <value>- Ytterligare tabeller:</value>
+  </data>
+  <data name="ai_abundance_caption" xml:space="preserve">
+    <value>Logaritmisk skala. Enheterna skiljer sig åt mellan förekomstplatserna och kan inte omvandlas till varandra.</value>
+  </data>
+  <data name="ai_abundance_header" xml:space="preserve">
+    <value>Här är förekomstdatan för **%1$s** från appens databas:</value>
+  </data>
+  <data name="ai_abundance_relative" xml:space="preserve">
+    <value>(i förhållande till H=10¹²)</value>
+  </data>
+  <data name="ai_adv_header" xml:space="preserve">
+    <value>Avancerade egenskaper för %1$s:</value>
+  </data>
+  <data name="ai_aggregate_average" xml:space="preserve">
+    <value>Genomsnittlig %1$s</value>
+  </data>
+  <data name="ai_aggregate_median" xml:space="preserve">
+    <value>Median-%1$s</value>
+  </data>
+  <data name="ai_aggregate_missing_note" xml:space="preserve">
+    <value>%1$d matchade men har inget registrerat värde och är därför uteslutna.</value>
+  </data>
+  <data name="ai_aggregate_over" xml:space="preserve">
+    <value>Beräknat över %1$d av %2$d matchande grundämnen.</value>
+  </data>
+  <data name="ai_aggregate_result" xml:space="preserve">
+    <value>**%1$s**: %2$s</value>
+  </data>
+  <data name="ai_aggregate_spread" xml:space="preserve">
+    <value>Sträcker sig från %1$s (%2$s) till %3$s (%4$s).</value>
+  </data>
+  <data name="ai_aggregate_sum" xml:space="preserve">
+    <value>Totalt %1$s</value>
+  </data>
+  <data name="ai_all_covered" xml:space="preserve">
+    <value>Vi har gått igenom mycket om %1$s! Visste du att? </value>
+  </data>
+  <data name="ai_another_isotope" xml:space="preserve">
+    <value>" En annan isotop är %1$s."</value>
+  </data>
+  <data name="ai_appears_as" xml:space="preserve">
+    <value>%1$s ser ut som: %2$s</value>
+  </data>
+  <data name="ai_aspects_not_compared" xml:space="preserve">
+    <value>Jag kan inte jämföra %1$s utifrån lagrad data — det är ingen registrerad egenskap. Fråga om det för ett enskilt grundämne så kan jag förklara.</value>
+  </data>
+  <data name="ai_avogadro_note" xml:space="preserve">
+    <value>Med Avogadros tal, 6,02214076 × 10²³ per mol.</value>
+  </data>
+  <data name="ai_beta_badge" xml:space="preserve">
+    <value>Beta</value>
+  </data>
+  <data name="ai_bio_role_header" xml:space="preserve">
+    <value>När det gäller dess biologiska roll, här är vad jag hittade om **%1$s**:</value>
+  </data>
+  <data name="ai_block_d" xml:space="preserve">
+    <value>d-blocket innehåller övergångsmetallerna från grupperna 3 till 12.</value>
+  </data>
+  <data name="ai_block_f" xml:space="preserve">
+    <value>f-blocket innehåller lantanid- och aktinidserierna, som vanligtvis visas under huvudtabellen.</value>
+  </data>
+  <data name="ai_block_generic" xml:space="preserve">
+    <value>Jag är inte säker på vilket block du menar. Jag känner till s-, p-, d- och f-blocken!</value>
+  </data>
+  <data name="ai_block_p" xml:space="preserve">
+    <value>p-blocket innehåller grupperna 13 till 18, inklusive alla ickemetaller (utom H och He), halvmetaller och post-övergångsmetaller.</value>
+  </data>
+  <data name="ai_block_s" xml:space="preserve">
+    <value>s-blocket består av de två första grupperna: alkalimetaller, alkaliska jordartsmetaller, plus väte och helium.</value>
+  </data>
+  <data name="ai_card_pro_locked" xml:space="preserve">
+    <value>Lås upp visuella svar</value>
+  </data>
+  <data name="ai_chat_setting" xml:space="preserve">
+    <value>Aktivera AI-chattassistent</value>
+  </data>
+  <data name="ai_chat_setting_description" xml:space="preserve">
+    <value>Låt AI-assistenten svara på frågor om grundämnen</value>
+  </data>
+  <data name="ai_check_isotope_table" xml:space="preserve">
+    <value>%1$s har flera isotoper. Du kan se den detaljerade isotoptabellen för en komplett lista!</value>
+  </data>
+  <data name="ai_common_isotopes" xml:space="preserve">
+    <value>Vanliga isotoper för %1$s är %2$s.</value>
+  </data>
+  <data name="ai_comparative_no" xml:space="preserve">
+    <value>**Nej** — det är omvänt. %1$s (%2$s) slår %3$s (%4$s) på %5$s.</value>
+  </data>
+  <data name="ai_comparative_ratio" xml:space="preserve">
+    <value>%1$s har **%2$s gånger** så hög %5$s som %3$s — %4$s.</value>
+  </data>
+  <data name="ai_comparative_winner" xml:space="preserve">
+    <value>**%1$s.** Dess %5$s är %2$s, mot %4$s för %3$s.</value>
+  </data>
+  <data name="ai_comparative_yes" xml:space="preserve">
+    <value>**Ja.** %1$s (%2$s) slår %3$s (%4$s) på %5$s.</value>
+  </data>
+  <data name="ai_compare_all_same" xml:space="preserve">
+    <value>
+• **%1$s:** Alla är %2$s%3$s.</value>
+  </data>
+  <data name="ai_compare_difference_value" xml:space="preserve">
+    <value>Det är en skillnad på **%1$s%2$s** mellan dem.</value>
+  </data>
+  <data name="ai_compare_mixed_item" xml:space="preserve">
+    <value>%1$s är %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_property_row" xml:space="preserve">
+    <value>• %1$s: %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_the_others" xml:space="preserve">
+    <value>de andra</value>
+  </data>
+  <data name="ai_comparing_title" xml:space="preserve">
+    <value>Jämför %1$s:</value>
+  </data>
+  <data name="ai_comparison_all" xml:space="preserve">
+    <value>"alla "</value>
+  </data>
+  <data name="ai_comparison_and" xml:space="preserve">
+    <value>" och "</value>
+  </data>
+  <data name="ai_comparison_are" xml:space="preserve">
+    <value>" är "</value>
+  </data>
+  <data name="ai_comparison_but" xml:space="preserve">
+    <value>", men "</value>
+  </data>
+  <data name="ai_comparison_is" xml:space="preserve">
+    <value>" är "</value>
+  </data>
+  <data name="ai_comparison_verdict" xml:space="preserve">
+    <value>%1$s har det högre värdet på %2$d av de %3$d jämförda egenskaperna.</value>
+  </data>
+  <data name="ai_comparison_vs" xml:space="preserve">
+    <value>" mot "</value>
+  </data>
+  <data name="ai_comparison_while" xml:space="preserve">
+    <value>", medan "</value>
+  </data>
+  <data name="ai_composition_header" xml:space="preserve">
+    <value>Sammansättning av %1$s</value>
+  </data>
+  <data name="ai_composition_row" xml:space="preserve">
+    <value>• **%1$s** ×%2$d — %3$s g/mol (%4$s%%)</value>
+  </data>
+  <data name="ai_concept_atomic_number" xml:space="preserve">
+    <value>**Atomnumret** är antalet protoner i en atom. Det är det främsta sättet grundämnen sorteras på i det periodiska systemet.</value>
+  </data>
+  <data name="ai_concept_electron" xml:space="preserve">
+    <value>**Elektroner** är negativt laddade partiklar som kretsar kring kärnan. De är involverade i bindningar och elektricitet.</value>
+  </data>
+  <data name="ai_concept_electronegativity" xml:space="preserve">
+    <value>**Elektronegativitet** mäter hur starkt en atom drar till sig elektroner i en kemisk bindning. Fluor är det mest elektronegativa!</value>
+  </data>
+  <data name="ai_concept_generic" xml:space="preserve">
+    <value>Det är ett kärnbegrepp inom kemi! Vilken del av det vill du att jag ska fördjupa mig i? Jag kan berätta om protoner, bindningar, radioaktivitet och mer.</value>
+  </data>
+  <data name="ai_concept_group" xml:space="preserve">
+    <value>En **grupp** är en vertikal kolumn. Grundämnen i en grupp har vanligtvis liknande kemiska egenskaper och samma antal valenselektroner.</value>
+  </data>
+  <data name="ai_concept_ionization" xml:space="preserve">
+    <value>**Joniseringsenergi** är den energi som krävs för att ta bort en elektron från en atom. Den ökar generellt när man rör sig åt höger i det periodiska systemet.</value>
+  </data>
+  <data name="ai_concept_isotope" xml:space="preserve">
+    <value>En **isotop** är en variant av ett grundämne med samma antal protoner men olika antal neutroner. Detta påverkar dess atommassa!</value>
+  </data>
+  <data name="ai_concept_neutron" xml:space="preserve">
+    <value>**Neutroner** är neutrala partiklar i kärnan. De tillför massa och hjälper till att stabilisera kärnan, särskilt i tyngre grundämnen.</value>
+  </data>
+  <data name="ai_concept_orbital" xml:space="preserve">
+    <value>**Orbitaler** är områden i rymden runt en kärna där det är hög sannolikhet att hitta en elektron. De har former som s, p, d och f.</value>
+  </data>
+  <data name="ai_concept_period" xml:space="preserve">
+    <value>En **period** är en horisontell rad i det periodiska systemet. Grundämnen i samma period har samma antal elektronskal.</value>
+  </data>
+  <data name="ai_concept_proton" xml:space="preserve">
+    <value>**Protoner** är positivt laddade partiklar i kärnan. Antalet protoner (atomnummer) definierar vilket grundämne det är!</value>
+  </data>
+  <data name="ai_concept_radioactivity" xml:space="preserve">
+    <value>**Radioaktivitet** är den process genom vilken en instabil atomkärna förlorar energi genom att sända ut strålning. Grundämnen som uran är kända för detta!</value>
+  </data>
+  <data name="ai_concept_shell" xml:space="preserve">
+    <value>Elektroner finns i **skal** (energinivåer) runt kärnan. Konfigurationen avgör grundämnets plats i tabellen.</value>
+  </data>
+  <data name="ai_concept_valence" xml:space="preserve">
+    <value>**Valenselektroner** är elektronerna i atomens yttersta skal. De avgör hur ett grundämne reagerar med andra.</value>
+  </data>
+  <data name="ai_config_is" xml:space="preserve">
+    <value>Dess elektronkonfiguration är %1$s.</value>
+  </data>
+  <data name="ai_connector_question_1" xml:space="preserve">
+    <value>För att svara på din fråga,</value>
+  </data>
+  <data name="ai_connector_question_2" xml:space="preserve">
+    <value>Jag förstår. Här är vad jag hittade:</value>
+  </data>
+  <data name="ai_connector_question_3" xml:space="preserve">
+    <value>Angående det,</value>
+  </data>
+  <data name="ai_connector_why_1" xml:space="preserve">
+    <value>Det är en bra följdfråga!</value>
+  </data>
+  <data name="ai_connector_why_2" xml:space="preserve">
+    <value>Bra poäng. Låt mig förklara ytterligare.</value>
+  </data>
+  <data name="ai_connector_why_3" xml:space="preserve">
+    <value>För att bygga vidare på det jag just sa,</value>
+  </data>
+  <data name="ai_context_lost" xml:space="preserve">
+    <value>Kontext förlorad</value>
+  </data>
+  <data name="ai_context_series" xml:space="preserve">
+    <value>%1$s är %2$s, i period %3$d.</value>
+  </data>
+  <data name="ai_converted_from" xml:space="preserve">
+    <value>Omräknat från det registrerade värdet %1$s.</value>
+  </data>
+  <data name="ai_count_result" xml:space="preserve">
+    <value>**%1$d** grundämnen matchar.</value>
+  </data>
+  <data name="ai_coverage_note" xml:space="preserve">
+    <value>%1$s är registrerat för %2$d av %3$d grundämnen.</value>
+  </data>
+  <data name="ai_covered_all" xml:space="preserve">
+    <value>Vi har gått igenom mycket om **%1$s**!</value>
+  </data>
+  <data name="ai_dataset_english_note" xml:space="preserve">
+    <value>*Den här uppslagsposten finns bara på engelska.*</value>
+  </data>
+  <data name="ai_decay_effectively_none" xml:space="preserve">
+    <value>Efter %2$s %3$s finns i praktiken inget av %1$s kvar.</value>
+  </data>
+  <data name="ai_decay_elapsed" xml:space="preserve">
+    <value>Att gå från **%1$s g** till **%2$s g** %3$s tar ungefär **%4$s %5$s**.</value>
+  </data>
+  <data name="ai_decay_half_lives" xml:space="preserve">
+    <value>Under den tiden genomgår %1$s **%2$s** halveringstider, vilket lämnar ungefär **%3$s%%** av provet.</value>
+  </data>
+  <data name="ai_decay_no_half_life" xml:space="preserve">
+    <value>%1$s finns med, men halveringstiden är angiven som "%2$s", så jag kan inte räkna på sönderfallet.</value>
+  </data>
+  <data name="ai_decay_remaining" xml:space="preserve">
+    <value>Ungefär **%1$s %2$s** av de ursprungliga %3$s g %4$s finns kvar efter %5$s %6$s.</value>
+  </data>
+  <data name="ai_decay_stable" xml:space="preserve">
+    <value>%1$s är stabil — den sönderfaller inte, så inget försvinner med tiden.</value>
+  </data>
+  <data name="ai_decay_unlisted" xml:space="preserve">
+    <value>Appen listar inte %1$s bland grundämnets isotoper, så jag har ingen halveringstid för den.</value>
+  </data>
+  <data name="ai_decay_working_half_life" xml:space="preserve">
+    <value>Halveringstid för %1$s: %2$s</value>
+  </data>
+  <data name="ai_decay_working_header" xml:space="preserve">
+    <value>Uträkning</value>
+  </data>
+  <data name="ai_decay_working_n" xml:space="preserve">
+    <value>n = t / t½ = %1$s → 2⁻ⁿ = %2$s%%</value>
+  </data>
+  <data name="ai_difference_group" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_mass" xml:space="preserve">
+    <value>• **%1$s**: %2$s är betydligt tyngre.</value>
+  </data>
+  <data name="ai_difference_need_two" xml:space="preserve">
+    <value>Jag behöver två grundämnen för att förklara deras skillnader!</value>
+  </data>
+  <data name="ai_difference_phase" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_similar" xml:space="preserve">
+    <value>%1$s och %2$s är ganska lika! De är båda %3$s %4$s-grundämnen i %5$s-serien.</value>
+  </data>
+  <data name="ai_difference_type" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_dilution_add_solvent" xml:space="preserve">
+    <value>Tillsätt **%1$s mL** lösningsmedel.</value>
+  </data>
+  <data name="ai_dilution_result" xml:space="preserve">
+    <value>Att späda **%1$s mol/L** från **%2$s mL** ger **%3$s mol/L** vid **%4$s mL**.</value>
+  </data>
+  <data name="ai_discovered_by" xml:space="preserve">
+    <value>%1$s upptäcktes av %2$s år %3$s.</value>
+  </data>
+  <data name="ai_discovered_in" xml:space="preserve">
+    <value>%1$s upptäcktes år %2$s.</value>
+  </data>
+  <data name="ai_elec_mag_header" xml:space="preserve">
+    <value>Elektriska &amp; magnetiska egenskaper för %1$s:</value>
+  </data>
+  <data name="ai_elec_mag_properties" xml:space="preserve">
+    <value>Elektriska och magnetiska egenskaper för %1$s:</value>
+  </data>
+  <data name="ai_element" xml:space="preserve">
+    <value>grundämne</value>
+  </data>
+  <data name="ai_element_overview_appearance" xml:space="preserve">
+    <value>" Det ser vanligtvis ut som %1$s."</value>
+  </data>
+  <data name="ai_element_overview_electrons" xml:space="preserve">
+    <value>" Det har %1$s elektroner som kretsar kring sin kärna."</value>
+  </data>
+  <data name="ai_element_overview_intro" xml:space="preserve">
+    <value>%1$s %2$s (%3$s) är ett fascinerande grundämne! Det har atomnummer %4$s och tillhör gruppen %5$s.</value>
+  </data>
+  <data name="ai_element_overview_isotopes" xml:space="preserve">
+    <value>" En atom av %1$s innehåller %2$s protoner, %3$s elektroner och vanligtvis %4$s neutroner."</value>
+  </data>
+  <data name="ai_element_overview_series" xml:space="preserve">
+    <value>" Det är en del av %1$s-serien."</value>
+  </data>
+  <data name="ai_emission_spectrum" xml:space="preserve">
+    <value>Här är emissionsspektrumet för %1$s: ljuset som dess atomer sänder ut när exciterade elektroner faller tillbaka. Appen lagrar det som en bild, så jag kan visa mönstret men inte namnge enskilda linjer.</value>
+  </data>
+  <data name="ai_encouragement" xml:space="preserve">
+    <value>Bra fråga! 🌟</value>
+  </data>
+  <data name="ai_eqn_no_desc" xml:space="preserve">
+    <value>Appen innehåller denna ekvation som en visuell referens.</value>
+  </data>
+  <data name="ai_equation_balanced" xml:space="preserve">
+    <value>**%1$s → %2$s**</value>
+  </data>
+  <data name="ai_equation_check_header" xml:space="preserve">
+    <value>Atomkontroll</value>
+  </data>
+  <data name="ai_equation_no_solution" xml:space="preserve">
+    <value>Den ekvationen har ingen balans med hela positiva koefficienter.</value>
+  </data>
+  <data name="ai_equation_one_sided" xml:space="preserve">
+    <value>Den ekvationen går inte att balansera: ett grundämne finns bara på ena sidan, så inga koefficienter kan jämna ut den.</value>
+  </data>
+  <data name="ai_equation_one_sided_named" xml:space="preserve">
+    <value>Den ekvationen går inte att balansera: %1$s finns bara på ena sidan, så inga koefficienter kan jämna ut den.</value>
+  </data>
+  <data name="ai_equation_parse_failed" xml:space="preserve">
+    <value>Jag kunde inte läsa det som en kemisk ekvation. Prova formen Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_equation_tally_row" xml:space="preserve">
+    <value>• **%1$s** — %2$d till vänster, %3$d till höger</value>
+  </data>
+  <data name="ai_equation_too_large" xml:space="preserve">
+    <value>Den ekvationen kräver koefficienter som är för stora för en verklig reaktion. Kontrollera formlerna.</value>
+  </data>
+  <data name="ai_equation_underdetermined" xml:space="preserve">
+    <value>Den ekvationen har mer än en oberoende balans — den läses som två reaktioner skrivna som en. Dela upp den så balanserar jag varje del.</value>
+  </data>
+  <data name="ai_etymology_header" xml:space="preserve">
+    <value>Namnet **%1$s** har ett intressant ursprung:</value>
+  </data>
+  <data name="ai_facts.0" xml:space="preserve">
+    <value>Visste du? Syre är det vanligaste grundämnet i jordskorpan!</value>
+  </data>
+  <data name="ai_facts.1" xml:space="preserve">
+    <value>Kul fakta: Guld rostar eller korroderar aldrig. Det förblir glänsande för alltid!</value>
+  </data>
+  <data name="ai_facts.2" xml:space="preserve">
+    <value>Här är något häftigt: Väte är det vanligaste grundämnet i universum! 🌌</value>
+  </data>
+  <data name="ai_facts.3" xml:space="preserve">
+    <value>Fantastiskt: Kol är basen för allt känt liv på jorden!</value>
+  </data>
+  <data name="ai_facts.4" xml:space="preserve">
+    <value>Intressant: Helium är det enda grundämnet som inte stelnar under normalt tryck!</value>
+  </data>
+  <data name="ai_facts.5" xml:space="preserve">
+    <value>Kul fakta: Kvicksilver är det enda grundämnet som är flytande vid rumstemperatur! 💧</value>
+  </data>
+  <data name="ai_facts.6" xml:space="preserve">
+    <value>Visste du? Grundämnet francium är så radioaktivt att det skulle förångas omedelbart!</value>
+  </data>
+  <data name="ai_facts.7" xml:space="preserve">
+    <value>Häftigt: Diamant och grafit är båda gjorda av rent kol men har helt olika egenskaper!</value>
+  </data>
+  <data name="ai_facts.8" xml:space="preserve">
+    <value>Fantastiskt: Ett enda uns guld kan slås ut till ett ark på 28 kvadratmeter!</value>
+  </data>
+  <data name="ai_facts.9" xml:space="preserve">
+    <value>Intressant: Neon bildar faktiskt inga kemiska föreningar under normala förhållanden!</value>
+  </data>
+  <data name="ai_feature_achievements" xml:space="preserve">
+    <value>Följ dina framsteg med **prestationer** och användningsstatistik på användarsidan.</value>
+  </data>
+  <data name="ai_feature_capabilities" xml:space="preserve">
+    <value>Jag kan slå upp och jämföra ämnesegenskaper, balansera ekvationer, räkna ut molmassor och lösningskoncentrationer, omvandla enheter och göra sönderfallsberäkningar. Fråga om ett grundämne, eller skriv en formel eller ekvation.</value>
+  </data>
+  <data name="ai_feature_emission_spectrum" xml:space="preserve">
+    <value>Du kan se **emissionsspektrumet** för ett grundämne i dess detaljpanel. Det visar det unika ljusmönster som ämnet ger.</value>
+  </data>
+  <data name="ai_feature_flashcards" xml:space="preserve">
+    <value>Appen har flera **flashcard-minispel** för kemiska tecken, atommassor och klassificeringar, med nivå och XP att följa.</value>
+  </data>
+  <data name="ai_feature_ideal_gas" xml:space="preserve">
+    <value>Använd **idealgaskalkylatorn** för att hitta tryck, volym, substansmängd eller temperatur ur PV = nRT.</value>
+  </data>
+  <data name="ai_feature_molar_mass" xml:space="preserve">
+    <value>Det finns en inbyggd **molmassekalkylator** för att räkna ut molekylvikten hos sammansatta föreningar. Jag kan också göra det här — ge mig bara en formel.</value>
+  </data>
+  <data name="ai_feature_nuclide_table" xml:space="preserve">
+    <value>Appen har en omfattande **nuklidkarta** som visar isotoper för alla grundämnen, färgkodade efter sönderfallstyp (alfa, beta och så vidare).</value>
+  </data>
+  <data name="ai_feature_reaction_balancer" xml:space="preserve">
+    <value>**Reaktionsbalanseraren** hjälper dig balansera ekvationer och spara favoriter. Du kan också fråga mig här — skriv till exempel Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_feature_unit_converter" xml:space="preserve">
+    <value>Appen har en **enhetsomvandlare** för temperaturer och andra vetenskapliga enheter. Du kan också bara fråga mig, till exempel "omvandla 500 K till °C".</value>
+  </data>
+  <data name="ai_field_abundance_crustal_rocks" xml:space="preserve">
+    <value>förekomst i berggrund</value>
+  </data>
+  <data name="ai_field_abundance_earth_crust" xml:space="preserve">
+    <value>förekomst i jordskorpan</value>
+  </data>
+  <data name="ai_field_abundance_earth_soils" xml:space="preserve">
+    <value>förekomst i jord</value>
+  </data>
+  <data name="ai_field_abundance_human_body" xml:space="preserve">
+    <value>förekomst i människokroppen</value>
+  </data>
+  <data name="ai_field_abundance_meteorites" xml:space="preserve">
+    <value>förekomst i meteoriter</value>
+  </data>
+  <data name="ai_field_abundance_sea_water" xml:space="preserve">
+    <value>förekomst i havsvatten</value>
+  </data>
+  <data name="ai_field_abundance_solar_system" xml:space="preserve">
+    <value>förekomst i solsystemet</value>
+  </data>
+  <data name="ai_field_abundance_sun" xml:space="preserve">
+    <value>förekomst i solen</value>
+  </data>
+  <data name="ai_field_abundance_urban_soils" xml:space="preserve">
+    <value>förekomst i urban jord</value>
+  </data>
+  <data name="ai_field_nfpa_flammability" xml:space="preserve">
+    <value>brandfarlighetsklassning</value>
+  </data>
+  <data name="ai_field_nfpa_health" xml:space="preserve">
+    <value>hälsoklassning</value>
+  </data>
+  <data name="ai_field_nfpa_instability" xml:space="preserve">
+    <value>instabilitetsklassning</value>
+  </data>
+  <data name="ai_field_nfpa_special" xml:space="preserve">
+    <value>särskild fara</value>
+  </data>
+  <data name="ai_filter_matched" xml:space="preserve">
+    <value>%1$d grundämnen matchar:</value>
+  </data>
+  <data name="ai_filter_none" xml:space="preserve">
+    <value>Inga grundämnen matchar de villkoren.</value>
+  </data>
+  <data name="ai_filter_top" xml:space="preserve">
+    <value>Topp %1$d av %2$d matchande grundämnen:</value>
+  </data>
+  <data name="ai_formula_c6h12o6" xml:space="preserve">
+    <value>C6H12O6 är glukos, ett enkelt socker som ger energi till levande varelser. Det har 6 kol, 12 väte och 6 syre.</value>
+  </data>
+  <data name="ai_formula_ch4" xml:space="preserve">
+    <value>CH4 är metan, den enklaste alkanen och en kraftfull växthusgas. Det är ett kol och fyra väte.</value>
+  </data>
+  <data name="ai_formula_co2" xml:space="preserve">
+    <value>CO2 är koldioxid. Det består av en kolatom och två syreatomer.</value>
+  </data>
+  <data name="ai_formula_composition_offer" xml:space="preserve">
+    <value>" Vill du att jag ska bryta ner dess elementsammansättning?"</value>
+  </data>
+  <data name="ai_formula_consists_of" xml:space="preserve">
+    <value>Den består av:</value>
+  </data>
+  <data name="ai_formula_generic" xml:space="preserve">
+    <value>Jag känner igen att det där ser ut som en kemisk formel, men jag lär mig fortfarande om molekyler! Fråga mig om de enskilda grundämnena.</value>
+  </data>
+  <data name="ai_formula_h2o" xml:space="preserve">
+    <value>H2O är vatten! Det består av två väteatomer och en syreatom.</value>
+  </data>
+  <data name="ai_formula_h2so4" xml:space="preserve">
+    <value>H2SO4 är svavelsyra, en mycket stark och viktig industriell syra. Den innehåller väte, svavel och syre.</value>
+  </data>
+  <data name="ai_formula_hcl" xml:space="preserve">
+    <value>HCl är saltsyra, som faktiskt finns i din mage för att hjälpa till med matsmältningen!</value>
+  </data>
+  <data name="ai_formula_item" xml:space="preserve">
+    <value>• %1$s × %2$s (%3$s)</value>
+  </data>
+  <data name="ai_formula_mass" xml:space="preserve">
+    <value>Molmassan för **%1$s** är **%2$s g/mol**.</value>
+  </data>
+  <data name="ai_formula_nacl" xml:space="preserve">
+    <value>NaCl är natriumklorid, mer känt som bordssalt! Det kombinerar natrium och klor.</value>
+  </data>
+  <data name="ai_formula_nh3" xml:space="preserve">
+    <value>NH3 är ammoniak, används ofta i rengöringsprodukter. Det är ett kväve och tre väte.</value>
+  </data>
+  <data name="ai_formula_o2" xml:space="preserve">
+    <value>O2 är syret vi andas! Det är två syreatomer bundna till varandra.</value>
+  </data>
+  <data name="ai_formula_pro_plus" xml:space="preserve">
+    <value>Att analysera kemiska föreningar som **%1$s** är en **PRO+**-funktion. Som %2$s-användare kan jag bara hjälpa dig med enskilda grundämnen!</value>
+  </data>
+  <data name="ai_formula_recognize" xml:space="preserve">
+    <value>Jag känner igen **%1$s** som en kemisk förening med en molmassa på **%2$s**.</value>
+  </data>
+  <data name="ai_free_user" xml:space="preserve">
+    <value>Gratis</value>
+  </data>
+  <data name="ai_geo_color" xml:space="preserve">
+    <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
+  </data>
+  <data name="ai_geo_dens" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_hard" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_info" xml:space="preserve">
+    <value>%1$s är en %2$s i %3$s-gruppen. Färg: %4$s. Hårdhet: %5$s. Densitet: %6$s. Magnetism: %7$s.</value>
+  </data>
+  <data name="ai_grams_to_moles" xml:space="preserve">
+    <value>**%1$s g** %2$s är **%3$s mol**.</value>
+  </data>
+  <data name="ai_greeting" xml:space="preserve">
+    <value>Hej där! 👋 Jag är din kemikompis. Fråga mig vad som helst om grundämnen!</value>
+  </data>
+  <data name="ai_group" xml:space="preserve">
+    <value>Grupp</value>
+  </data>
+  <data name="ai_hard_header" xml:space="preserve">
+    <value>Hårdhetsegenskaper för %1$s:</value>
+  </data>
+  <data name="ai_help_response" xml:space="preserve">
+    <value>Jag är tränad enbart på den data som finns i denna app! Jag kan hjälpa dig med:
+
+🧪 **Detaljerade grundämnen**: Egenskaper, utseende och upptäcktsfakta direkt från vår JSON-databas.
+⚖️ **Datajämförelser**: Jämför densitet, massa, radie och reaktivitet mellan grundämnen.
+💥 **Reaktivitet**: Jag använder appens grupp- och perioddata för att förklara hur ämnen som natrium reagerar med vatten.
+🧬 **Biologi/Säkerhet**: Toxicitet och biologiska roller som finns i beskrivningarna.
+⚛️ **Isotoper &amp; Förekomst**: Specifik data från våra dedikerade isotop- och förekomsttabeller.
+📉 **Periodiska trender**: Förklaring av mönster som elektronegativitet baserat på tabellens struktur.
+🔢 **Molmassa**: Noggranna beräkningar med atomvikter från appen.
+📝 **Definitioner**: Förklaringar av kemitermer som används i appen.
+
+Fråga bara så hittar jag svaret i appens register! 🌟</value>
+  </data>
+  <data name="ai_higher_than" xml:space="preserve">
+    <value>%1$s har högre %2$s än %3$s.</value>
+  </data>
+  <data name="ai_hint" xml:space="preserve">
+    <value>Fråga mig vad som helst...</value>
+  </data>
+  <data name="ai_history_pro_only" xml:space="preserve">
+    <value>Chatthistorik är en PRO-funktion</value>
+  </data>
+  <data name="ai_history_sign_in" xml:space="preserve">
+    <value>Logga in för att se chatthistoriken</value>
+  </data>
+  <data name="ai_id_header" xml:space="preserve">
+    <value>Identifierare för %1$s:</value>
+  </data>
+  <data name="ai_identifiers_for" xml:space="preserve">
+    <value>Identifierare för %1$s:</value>
+  </data>
+  <data name="ai_identity_result" xml:space="preserve">
+    <value>Utifrån värdena i appen är grundämnet med ett värde nära **%1$s** för sina egenskaper **%2$s** (faktiskt: %3$s).</value>
+  </data>
+  <data name="ai_ion_count" xml:space="preserve">
+    <value>%1$s har %2$d joniseringsenergivärde(n) tillgängliga i appen.</value>
+  </data>
+  <data name="ai_isotope_compare_header" xml:space="preserve">
+    <value>%1$s mot %2$s</value>
+  </data>
+  <data name="ai_isotope_compare_row" xml:space="preserve">
+    <value>• **%1$s**: %2$s mot %3$s</value>
+  </data>
+  <data name="ai_isotope_decay" xml:space="preserve">
+    <value>(Sönderfall: %1$s)</value>
+  </data>
+  <data name="ai_isotope_decays" xml:space="preserve">
+    <value>• **%1$s** — %2$s, halveringstid %3$s</value>
+  </data>
+  <data name="ai_isotope_half_life" xml:space="preserve">
+    <value>" Den har en halveringstid på %1$s och sönderfaller via %2$s."</value>
+  </data>
+  <data name="ai_isotope_halflife_only" xml:space="preserve">
+    <value>• **%1$s** — halveringstid %2$s</value>
+  </data>
+  <data name="ai_isotope_header" xml:space="preserve">
+    <value>Enligt appens isotoptabell, här är de viktigaste isotoperna för **%1$s**:</value>
+  </data>
+  <data name="ai_isotope_neutron_diff" xml:space="preserve">
+    <value>%1$s har %2$d neutroner, %3$s har %4$d — en skillnad på %5$d.</value>
+  </data>
+  <data name="ai_isotope_same_element" xml:space="preserve">
+    <value>Båda är isotoper av %1$s, så de har samma %2$d protoner och skiljer sig bara i neutroner.</value>
+  </data>
+  <data name="ai_isotope_stable" xml:space="preserve">
+    <value>• **%1$s** — stabil</value>
+  </data>
+  <data name="ai_isotope_unlisted" xml:space="preserve">
+    <value>finns inte i isotoptabellen</value>
+  </data>
+  <data name="ai_isotopes_header" xml:space="preserve">
+    <value>Isotoper av %1$s</value>
+  </data>
+  <data name="ai_isotopes_summary" xml:space="preserve">
+    <value>%1$d kända isotoper, varav %2$d är stabila.</value>
+  </data>
+  <data name="ai_label_decay" xml:space="preserve">
+    <value>Sönderfallssätt</value>
+  </data>
+  <data name="ai_label_half_life" xml:space="preserve">
+    <value>Halveringstid</value>
+  </data>
+  <data name="ai_label_mass_number" xml:space="preserve">
+    <value>Masstal</value>
+  </data>
+  <data name="ai_label_neutrons" xml:space="preserve">
+    <value>Neutroner</value>
+  </data>
+  <data name="ai_label_protons" xml:space="preserve">
+    <value>Protoner</value>
+  </data>
+  <data name="ai_lang_switched" xml:space="preserve">
+    <value>AI-språk ändrat till: %1$s 🌐</value>
+  </data>
+  <data name="ai_limit_reset_badge" xml:space="preserve">
+    <value>Nollställs %1$s</value>
+  </data>
+  <data name="ai_limit_unlimited" xml:space="preserve">
+    <value>Obegränsat</value>
+  </data>
+  <data name="ai_list_header" xml:space="preserve">
+    <value>Här är grundämnena i **%1$s**: </value>
+  </data>
+  <data name="ai_list_more" xml:space="preserve">
+    <value>…och %1$d till.</value>
+  </data>
+  <data name="ai_list_row" xml:space="preserve">
+    <value>• **%1$s** — %2$s</value>
+  </data>
+  <data name="ai_list_row_plain" xml:space="preserve">
+    <value>• **%1$s**</value>
+  </data>
+  <data name="ai_list_spread" xml:space="preserve">
+    <value>Värdena går från %1$s ner till %2$s.</value>
+  </data>
+  <data name="ai_locked_fields" xml:space="preserve">
+    <value>%1$s ingår i %2$s. Uppgradera för att se det här, och på varje grundämnessida.</value>
+  </data>
+  <data name="ai_locked_generic" xml:space="preserve">
+    <value>Det svaret ingår i %1$s. Uppgradera för att låsa upp det.</value>
+  </data>
+  <data name="ai_lower_than" xml:space="preserve">
+    <value>%1$s har lägre %2$s än %3$s.</value>
+  </data>
+  <data name="ai_mech_header" xml:space="preserve">
+    <value>%1$s för %2$s:</value>
+  </data>
+  <data name="ai_molar_mass_generic" xml:space="preserve">
+    <value>Jag kan hjälpa till med molmassor! Prova att fråga "Vad är molmassan för H2O?"</value>
+  </data>
+  <data name="ai_molar_mass_of" xml:space="preserve">
+    <value>Molmassan för %1$s är %2$s.</value>
+  </data>
+  <data name="ai_molar_mass_pro_plus" xml:space="preserve">
+    <value>Att beräkna molmassa för föreningar är en **PRO+**-funktion. Som %1$s-användare kan du fortfarande få molmassa för enskilda grundämnen!</value>
+  </data>
+  <data name="ai_moles_of" xml:space="preserve">
+    <value>**%1$s mol** av %2$s innehåller **%3$s** atomer.</value>
+  </data>
+  <data name="ai_moles_to_particles" xml:space="preserve">
+    <value>**%1$s mol** innehåller **%2$s** partiklar.</value>
+  </data>
+  <data name="ai_naturally_occurring" xml:space="preserve">
+    <value>Förekommer naturligt</value>
+  </data>
+  <data name="ai_neighbour_after" xml:space="preserve">
+    <value>**%1$s** (atomnummer %2$d) kommer direkt efter %3$s.</value>
+  </data>
+  <data name="ai_neighbour_before" xml:space="preserve">
+    <value>**%1$s** (atomnummer %2$d) kommer direkt före %3$s.</value>
+  </data>
+  <data name="ai_nfpa_flammable_0" xml:space="preserve">
+    <value>Brinner inte</value>
+  </data>
+  <data name="ai_nfpa_flammable_1" xml:space="preserve">
+    <value>Måste förvärmas för att brinna</value>
+  </data>
+  <data name="ai_nfpa_flammable_2" xml:space="preserve">
+    <value>Antänds vid måttlig uppvärmning</value>
+  </data>
+  <data name="ai_nfpa_flammable_3" xml:space="preserve">
+    <value>Antänds vid normala temperaturer</value>
+  </data>
+  <data name="ai_nfpa_flammable_4" xml:space="preserve">
+    <value>Extremt brandfarligt</value>
+  </data>
+  <data name="ai_nfpa_health_0" xml:space="preserve">
+    <value>Normalt material</value>
+  </data>
+  <data name="ai_nfpa_health_1" xml:space="preserve">
+    <value>Något farligt</value>
+  </data>
+  <data name="ai_nfpa_health_2" xml:space="preserve">
+    <value>Farligt</value>
+  </data>
+  <data name="ai_nfpa_health_3" xml:space="preserve">
+    <value>Extrem fara</value>
+  </data>
+  <data name="ai_nfpa_health_4" xml:space="preserve">
+    <value>Dödligt</value>
+  </data>
+  <data name="ai_nfpa_instability_0" xml:space="preserve">
+    <value>Stabil</value>
+  </data>
+  <data name="ai_nfpa_instability_1" xml:space="preserve">
+    <value>Instabil vid uppvärmning</value>
+  </data>
+  <data name="ai_nfpa_instability_2" xml:space="preserve">
+    <value>Våldsam kemisk förändring möjlig</value>
+  </data>
+  <data name="ai_nfpa_instability_3" xml:space="preserve">
+    <value>Kan detonera med kraftig initiering</value>
+  </data>
+  <data name="ai_nfpa_instability_4" xml:space="preserve">
+    <value>Kan lätt detonera</value>
+  </data>
+  <data name="ai_nfpa_special_none" xml:space="preserve">
+    <value>Ingen särskild fara registrerad</value>
+  </data>
+  <data name="ai_nfpa_special_ox" xml:space="preserve">
+    <value>Oxidationsmedel</value>
+  </data>
+  <data name="ai_nfpa_special_sa" xml:space="preserve">
+    <value>Enkelt kvävande ämne</value>
+  </data>
+  <data name="ai_nfpa_special_w" xml:space="preserve">
+    <value>Reagerar med vatten</value>
+  </data>
+  <data name="ai_nfpa_unrated" xml:space="preserve">
+    <value>Ej klassificerad</value>
+  </data>
+  <data name="ai_no_abundance_data" xml:space="preserve">
+    <value>Jag har inga specifika numeriska förekomstvärden för %1$s, men beskrivningen säger: %2$s.</value>
+  </data>
+  <data name="ai_no_bio_data" xml:space="preserve">
+    <value>Jag har ingen detaljerad biologisk data för %1$s, men standardsäkerhet säger:</value>
+  </data>
+  <data name="ai_no_data" xml:space="preserve">
+    <value>Hmm, jag hittade ingen information om det. Prova att fråga om ett grundämne som 'syre' eller 'guld'!</value>
+  </data>
+  <data name="ai_no_data_alternatives" xml:space="preserve">
+    <value>Registrerat för %1$s: %2$s.</value>
+  </data>
+  <data name="ai_no_data_right_now" xml:space="preserve">
+    <value>Jag kan inte kontrollera det just nu.</value>
+  </data>
+  <data name="ai_no_etymology_data" xml:space="preserve">
+    <value>Jag är inte helt säker på roten till dess namn, men det upptäcktes av %2$s år %3$s.</value>
+  </data>
+  <data name="ai_no_isotope_data" xml:space="preserve">
+    <value>Jag har ingen detaljerad lista över isotoper för %1$s i min snabbvalsdata, men du kan hitta en omfattande lista i isotoptabellen!</value>
+  </data>
+  <data name="ai_no_list_data" xml:space="preserve">
+    <value>Jag hittade inga grundämnen som matchar de kriterierna i vår databas.</value>
+  </data>
+  <data name="ai_no_physical_data" xml:space="preserve">
+    <value>Jag har inga detaljerade fysiska egenskaper för %1$s i snabbvalsdatan, men du kan kolla i de detaljerade egenskapspanelerna!</value>
+  </data>
+  <data name="ai_no_property_data" xml:space="preserve">
+    <value>Tyvärr har jag ingen data för %2$s för %1$s just nu.</value>
+  </data>
+  <data name="ai_no_usage_data" xml:space="preserve">
+    <value>Jag har ingen specifik lista över användningsområden för %1$s, men det är ett fascinerande grundämne! Du kan läsa mer i den detaljerade beskrivningen.</value>
+  </data>
+  <data name="ai_nuclide_body" xml:space="preserve">
+    <value>• **Protoner:** %1$d
+• **Neutroner:** %2$d
+• **Masstal:** %3$d</value>
+  </data>
+  <data name="ai_nuclide_explain" xml:space="preserve">
+    <value>Neutroner = masstal − atomnummer = %1$d − %2$d = **%3$d**.</value>
+  </data>
+  <data name="ai_nuclide_header" xml:space="preserve">
+    <value>%1$s-%2$d</value>
+  </data>
+  <data name="ai_open_in_app" xml:space="preserve">
+    <value>Öppna %1$s</value>
+  </data>
+  <data name="ai_ordinal_suffix_nd" xml:space="preserve">
+    <value>:a</value>
+  </data>
+  <data name="ai_ordinal_suffix_rd" xml:space="preserve">
+    <value>:e</value>
+  </data>
+  <data name="ai_ordinal_suffix_st" xml:space="preserve">
+    <value>:a</value>
+  </data>
+  <data name="ai_ordinal_suffix_th" xml:space="preserve">
+    <value>:e</value>
+  </data>
+  <data name="ai_oxidation_neg" xml:space="preserve">
+    <value>• Negativ: %1$s</value>
+  </data>
+  <data name="ai_oxidation_pos" xml:space="preserve">
+    <value>• Positiv: %1$s</value>
+  </data>
+  <data name="ai_oxidation_states" xml:space="preserve">
+    <value>%1$s har flera möjliga oxidationstal.</value>
+  </data>
+  <data name="ai_period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="ai_personalized_greeting_fav" xml:space="preserve">
+    <value>Hej! Jag minns att du kollade in %1$s nyligen. Vill du se fler detaljer?</value>
+  </data>
+  <data name="ai_personalized_greeting_interest" xml:space="preserve">
+    <value>Välkommen tillbaka! Redo att utforska mer om %1$s? Vi kan titta på %2$s igen.</value>
+  </data>
+  <data name="ai_ph_info" xml:space="preserve">
+    <value>%1$s: syra under pH %2$s är %3$s, neutralt intervall %4$s är %5$s, och över pH %6$s är det %7$s.</value>
+  </data>
+  <data name="ai_ph_info_short" xml:space="preserve">
+    <value>%1$s: pH-intervall %2$s är %3$s.</value>
+  </data>
+  <data name="ai_phase_gas" xml:space="preserve">
+    <value>gasformig</value>
+  </data>
+  <data name="ai_phase_liquid" xml:space="preserve">
+    <value>flytande</value>
+  </data>
+  <data name="ai_phase_solid" xml:space="preserve">
+    <value>fast</value>
+  </data>
+  <data name="ai_physical_header" xml:space="preserve">
+    <value>Baserat på de fysiska egenskaper som lagras i appen för **%1$s**:</value>
+  </data>
+  <data name="ai_poi_info" xml:space="preserve">
+    <value>%1$s: Poissons förhållande intervall %2$s (%3$s).</value>
+  </data>
+  <data name="ai_pro_tip_hint" xml:space="preserve">
+    <value>Proffstips: Du kan också fråga mig om dess ursprung, biologiska roll eller reaktivitet!</value>
+  </data>
+  <data name="ai_pro_user" xml:space="preserve">
+    <value>PRO</value>
+  </data>
+  <data name="ai_property_is" xml:space="preserve">
+    <value>%2$s för %1$s är %3$s.</value>
+  </data>
+  <data name="ai_quiz_atomic" xml:space="preserve">
+    <value>Vilket grundämne har atomnummer **%1$s**?</value>
+  </data>
+  <data name="ai_quiz_correct" xml:space="preserve">
+    <value>✨ **Rätt!** Bra jobbat. Svaret var mycket riktigt **%1$s**. Redo för en till fråga?</value>
+  </data>
+  <data name="ai_quiz_history" xml:space="preserve">
+    <value>Detta grundämne upptäcktes av **%1$s** år **%2$s**. Kan du gissa vilket det är?</value>
+  </data>
+  <data name="ai_quiz_no_start" xml:space="preserve">
+    <value>Jag kan inte starta ett quiz just nu.</value>
+  </data>
+  <data name="ai_quiz_not_active" xml:space="preserve">
+    <value>Jag är inte i quiz-läge just nu.</value>
+  </data>
+  <data name="ai_quiz_start" xml:space="preserve">
+    <value>Jag tänker på ett grundämne. Dess symbol är **%1$s**. Vad heter det?</value>
+  </data>
+  <data name="ai_quiz_wrong" xml:space="preserve">
+    <value>Inte riktigt! Svaret var **%1$s**. Vill du prova en till? Säg bara 'quiz'!</value>
+  </data>
+  <data name="ai_radioactive_no" xml:space="preserve">
+    <value>%1$s anses generellt vara stabilt och inte radioaktivt.</value>
+  </data>
+  <data name="ai_radioactive_yes" xml:space="preserve">
+    <value>%1$s är radioaktivt: %2$s</value>
+  </data>
+  <data name="ai_radius_details" xml:space="preserve">
+    <value>Här är radiedetaljerna för %1$s:</value>
+  </data>
+  <data name="ai_radius_header" xml:space="preserve">
+    <value>Radiedetaljer för %1$s:</value>
+  </data>
+  <data name="ai_rank_highest" xml:space="preserve">
+    <value>Det är det högsta av de %1$d grundämnen som har registrerad %2$s.</value>
+  </data>
+  <data name="ai_rank_lowest" xml:space="preserve">
+    <value>Det är det lägsta av de %1$d grundämnen som har registrerad %2$s.</value>
+  </data>
+  <data name="ai_rank_nth" xml:space="preserve">
+    <value>Det placerar sig som **%1$d av %2$d** grundämnen efter %3$s.</value>
+  </data>
+  <data name="ai_rate_limit_reached" xml:space="preserve">
+    <value>Du har nått din dagliga gräns på %1$d meddelanden. Uppgradera till PRO eller PRO+ för fler!</value>
+  </data>
+  <data name="ai_rate_limit_resets" xml:space="preserve">
+    <value>Dina dagliga meddelanden återkommer %1$s.</value>
+  </data>
+  <data name="ai_reaction_acid" xml:space="preserve">
+    <value>Många metaller reagerar med syror för att frigöra vätgas. %1$s:s reaktivitet beror på dess position i spänningsserien.</value>
+  </data>
+  <data name="ai_reaction_alkali_halogen" xml:space="preserve">
+    <value>Dessa reagerar kraftigt för att bilda ett **salt** (en jonförening). Till exempel kan %1$s och %2$s kombineras för att skapa en unik förening!</value>
+  </data>
+  <data name="ai_reaction_alkali_water" xml:space="preserve">
+    <value>Alkalimetaller som %1$s reagerar **våldsamt** med vatten, vilket bildar vätgas och en stark bas. Det kan till och med explodera!</value>
+  </data>
+  <data name="ai_reaction_alkaline_earth_water" xml:space="preserve">
+    <value>%1$s reagerar kraftigt med vatten för att bilda vätgas och dess hydroxid.</value>
+  </data>
+  <data name="ai_reaction_complex" xml:space="preserve">
+    <value>Reaktioner kan vara komplexa! I allmänhet beror %1$s:s beteende på dess grupp (%2$s) och elektronegativitet.</value>
+  </data>
+  <data name="ai_reaction_generic_elements" xml:space="preserve">
+    <value>Reaktionen mellan %1$s och %2$s beror på deras elektronkonfigurationer. De kan bilda en förening om den ena kan donera och den andra ta emot elektroner!</value>
+  </data>
+  <data name="ai_reaction_generic_water" xml:space="preserve">
+    <value>Jag har ingen specifik data för %1$s:s reaktion med vatten, men många metaller bildar oxider eller hydroxider över tid.</value>
+  </data>
+  <data name="ai_reaction_magnesium_water" xml:space="preserve">
+    <value>%1$s reagerar långsamt med kallt vatten men snabbt med ånga.</value>
+  </data>
+  <data name="ai_reaction_noble_gas" xml:space="preserve">
+    <value>%1$s är en ädelgas och är extremt stabil, reagerar sällan med någonting eftersom den har ett fullt yttersta skal.</value>
+  </data>
+  <data name="ai_reaction_oxygen" xml:space="preserve">
+    <value>De flesta grundämnen reagerar med syre för att bilda oxider. Till exempel bildar metaller som %1$s ofta ett skyddande lager eller rost.</value>
+  </data>
+  <data name="ai_reactivity_more" xml:space="preserve">
+    <value>**%1$s** är generellt mer reaktivt än **%2$s** baserat på dess position i det periodiska systemet.</value>
+  </data>
+  <data name="ai_reactivity_need_two" xml:space="preserve">
+    <value>Jag behöver minst två grundämnen för att jämföra deras reaktivitet!</value>
+  </data>
+  <data name="ai_reactivity_no_result" xml:space="preserve">
+    <value>Jag kunde inte avgöra vilket som är det mest reaktiva grundämnet.</value>
+  </data>
+  <data name="ai_reactivity_result" xml:space="preserve">
+    <value>Det mest reaktiva %1$s är **%2$s**.</value>
+  </data>
+  <data name="ai_reactivity_similar" xml:space="preserve">
+    <value>Både **%1$s** och **%2$s** har liknande reaktivitetsnivåer.</value>
+  </data>
+  <data name="ai_recap_is" xml:space="preserve">
+    <value>Bara för att repetera: %2$s för %1$s är %3$s.</value>
+  </data>
+  <data name="ai_related_label" xml:space="preserve">
+    <value>Relaterad info:</value>
+  </data>
+  <data name="ai_related_offer" xml:space="preserve">
+    <value>Jag hittade lokal relaterad info. Fråga 'visa relaterat' för att se den.</value>
+  </data>
+  <data name="ai_related_offer_lang" xml:space="preserve">
+    <value>Jag hittade lokal relaterad info men inte på ditt valda språk. Prova att byta språk eller fråga ändå.</value>
+  </data>
+  <data name="ai_rich_overview_advanced" xml:space="preserve">
+    <value>Avancerad data</value>
+  </data>
+  <data name="ai_rich_overview_applications" xml:space="preserve">
+    <value>Användningsområden</value>
+  </data>
+  <data name="ai_rich_overview_basic_facts" xml:space="preserve">
+    <value>Grundläggande fakta</value>
+  </data>
+  <data name="ai_rich_overview_biological" xml:space="preserve">
+    <value>Biologisk roll</value>
+  </data>
+  <data name="ai_rich_overview_compounds" xml:space="preserve">
+    <value>Vanliga föreningar</value>
+  </data>
+  <data name="ai_rich_overview_etymology" xml:space="preserve">
+    <value>Ursprung och namn</value>
+  </data>
+  <data name="ai_rich_overview_isotopes" xml:space="preserve">
+    <value>Viktiga isotoper</value>
+  </data>
+  <data name="ai_rich_overview_properties" xml:space="preserve">
+    <value>Egenskaper</value>
+  </data>
+  <data name="ai_rich_overview_safety" xml:space="preserve">
+    <value>Säkerhet och risker</value>
+  </data>
+  <data name="ai_rich_overview_where_found" xml:space="preserve">
+    <value>Var finns %1$s?</value>
+  </data>
+  <data name="ai_runner_up" xml:space="preserve">
+    <value>Näst kommer %1$s med %2$s.</value>
+  </data>
+  <data name="ai_safety_caution_flammable" xml:space="preserve">
+    <value>Varning: Detta grundämne är extremt brandfarligt!</value>
+  </data>
+  <data name="ai_safety_caution_health" xml:space="preserve">
+    <value>Varning: Detta grundämne är mycket hälsofarligt!</value>
+  </data>
+  <data name="ai_safety_flammability" xml:space="preserve">
+    <value>• **Brandfarlighet:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_header" xml:space="preserve">
+    <value>Säkerhetsprofil för %1$s (NFPA 704):</value>
+  </data>
+  <data name="ai_safety_health" xml:space="preserve">
+    <value>• **Hälsa:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_instability" xml:space="preserve">
+    <value>• **Instabilitet:** %1$d/4</value>
+  </data>
+  <data name="ai_safety_no_data" xml:space="preserve">
+    <value>Jag har inga specifika NFPA-riskbetyg för %1$s, men följ alltid standardiserade säkerhetsprotokoll för laboratorier.</value>
+  </data>
+  <data name="ai_safety_none_recorded" xml:space="preserve">
+    <value>Inga NFPA-riskvärden är registrerade för %1$s.</value>
+  </data>
+  <data name="ai_safety_radioactive" xml:space="preserve">
+    <value>%1$s är radioaktivt (%2$s), vilket är dess främsta säkerhetsrisk. Hantera med extrem försiktighet!</value>
+  </data>
+  <data name="ai_safety_radioactive_note" xml:space="preserve">
+    <value>Det här grundämnet är radioaktivt.</value>
+  </data>
+  <data name="ai_safety_special" xml:space="preserve">
+    <value>• **Särskild fara:** %1$s</value>
+  </data>
+  <data name="ai_same_value" xml:space="preserve">
+    <value>Båda har samma %1$s!</value>
+  </data>
+  <data name="ai_series_actinide" xml:space="preserve">
+    <value>Aktinider är de 15 grundämnena med atomnummer 89 till 103. De är alla radioaktiva!</value>
+  </data>
+  <data name="ai_series_actinide_label" xml:space="preserve">
+    <value>aktinid</value>
+  </data>
+  <data name="ai_series_alkali" xml:space="preserve">
+    <value>Alkalimetaller finns i grupp 1. De är mycket reaktiva och har en elektron i sitt yttersta skal. Exempel inkluderar litium, natrium och kalium.</value>
+  </data>
+  <data name="ai_series_alkali_metal_label" xml:space="preserve">
+    <value>alkalimetall</value>
+  </data>
+  <data name="ai_series_alkaline_earth_label" xml:space="preserve">
+    <value>alkalisk jordartsmetall</value>
+  </data>
+  <data name="ai_series_generic" xml:space="preserve">
+    <value>Jag känner till den serien! De har unika kemiska egenskaper. Vilket specifikt grundämne i den serien vill du veta mer om?</value>
+  </data>
+  <data name="ai_series_halogen" xml:space="preserve">
+    <value>Halogener finns i grupp 17. De är mycket reaktiva ickemetaller. Fluor och klor är de mest kända!</value>
+  </data>
+  <data name="ai_series_halogen_label" xml:space="preserve">
+    <value>halogen</value>
+  </data>
+  <data name="ai_series_lanthanide" xml:space="preserve">
+    <value>Lantanider är de 15 grundämnena med atomnummer 57 till 71. De kallas också "sällsynta jordartsmetaller".</value>
+  </data>
+  <data name="ai_series_lanthanide_label" xml:space="preserve">
+    <value>lantanid</value>
+  </data>
+  <data name="ai_series_metalloid" xml:space="preserve">
+    <value>Halvmetaller har egenskaper från både metaller och ickemetaller. De finns längs "trappan" i det periodiska systemet.</value>
+  </data>
+  <data name="ai_series_metalloid_label" xml:space="preserve">
+    <value>halvmetall</value>
+  </data>
+  <data name="ai_series_noble_gas" xml:space="preserve">
+    <value>Ädelgaser finns i grupp 18. De är mycket stabila och reagerar sällan med andra grundämnen eftersom deras yttersta skal är fulla.</value>
+  </data>
+  <data name="ai_series_noble_gas_label" xml:space="preserve">
+    <value>ädelgas</value>
+  </data>
+  <data name="ai_series_nonmetal_label" xml:space="preserve">
+    <value>ickemetall</value>
+  </data>
+  <data name="ai_series_transition" xml:space="preserve">
+    <value>Övergångsmetaller är grundämnena i grupperna 3-12. De är goda ledare och bildar ofta färgglada föreningar.</value>
+  </data>
+  <data name="ai_series_transition_metal_label" xml:space="preserve">
+    <value>övergångsmetall</value>
+  </data>
+  <data name="ai_similarity_generic" xml:space="preserve">
+    <value>**%1$s** är en del av %2$s-serien. Andra grundämnen i denna serie har relaterade egenskaper!</value>
+  </data>
+  <data name="ai_similarity_no_element" xml:space="preserve">
+    <value>Jag är inte säker på vilket grundämne du vill hitta likheter för.</value>
+  </data>
+  <data name="ai_similarity_result_footer" xml:space="preserve">
+    <value>.
+
+De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
+  </data>
+  <data name="ai_similarity_result_header" xml:space="preserve">
+    <value>Liksom **%1$s** är dessa grundämnen också **%2$s**: 
+
+</value>
+  </data>
+  <data name="ai_solution_generic_substance" xml:space="preserve">
+    <value>lösningen</value>
+  </data>
+  <data name="ai_solution_mass_needed" xml:space="preserve">
+    <value>Du behöver **%1$s g** %2$s för %3$s mL av en %4$s mol/L-lösning.</value>
+  </data>
+  <data name="ai_solution_molarity" xml:space="preserve">
+    <value>Koncentrationen av %2$s är **%1$s mol/L**.</value>
+  </data>
+  <data name="ai_solution_moles" xml:space="preserve">
+    <value>Det är **%1$s mol** %2$s.</value>
+  </data>
+  <data name="ai_solution_volume" xml:space="preserve">
+    <value>Du behöver **%1$s mL** vid **%2$s mol/L**.</value>
+  </data>
+  <data name="ai_solution_working_c1v1" xml:space="preserve">
+    <value>C₁V₁ = C₂V₂ → %1$s × %2$s = %3$s × %4$s</value>
+  </data>
+  <data name="ai_solution_working_header" xml:space="preserve">
+    <value>Uträkning</value>
+  </data>
+  <data name="ai_solution_working_mass" xml:space="preserve">
+    <value>m = n × M → %1$s g = %2$s mol × %3$s g/mol</value>
+  </data>
+  <data name="ai_solution_working_nvc" xml:space="preserve">
+    <value>n = c × V → %1$s mol = %2$s mol/L × %3$s L</value>
+  </data>
+  <data name="ai_source_element_data" xml:space="preserve">
+    <value>%1$s — grundämnesdata (%2$s)</value>
+  </data>
+  <data name="ai_source_table" xml:space="preserve">
+    <value>%1$s — %2$s-tabellen</value>
+  </data>
+  <data name="ai_sources_header" xml:space="preserve">
+    <value>Källor</value>
+  </data>
+  <data name="ai_stable_label" xml:space="preserve">
+    <value>Stabil</value>
+  </data>
+  <data name="ai_structural_no_results" xml:space="preserve">
+    <value>Jag hittade inget i den gruppen eller perioden. Kom ihåg: det finns 18 grupper och 7 perioder!</value>
+  </data>
+  <data name="ai_structural_result" xml:space="preserve">
+    <value>Grundämnena i **%1$s %2$s** är: 
+</value>
+  </data>
+  <data name="ai_structural_specify_number" xml:space="preserve">
+    <value>Ange ett grupp- eller periodnummer!</value>
+  </data>
+  <data name="ai_suggest_element.0" xml:space="preserve">
+    <value>Användning av %1$s</value>
+  </data>
+  <data name="ai_suggest_element.1" xml:space="preserve">
+    <value>Atommassa för %1$s</value>
+  </data>
+  <data name="ai_suggest_element.2" xml:space="preserve">
+    <value>Är %1$s farligt?</value>
+  </data>
+  <data name="ai_suggest_element.3" xml:space="preserve">
+    <value>Var finns %1$s?</value>
+  </data>
+  <data name="ai_suggest_element.4" xml:space="preserve">
+    <value>Elektronkonfiguration för %1$s</value>
+  </data>
+  <data name="ai_suggest_element.5" xml:space="preserve">
+    <value>Isotoper av %1$s</value>
+  </data>
+  <data name="ai_suggest_general.0" xml:space="preserve">
+    <value>Berätta en kul fakta</value>
+  </data>
+  <data name="ai_suggest_general.1" xml:space="preserve">
+    <value>Starta en quiz</value>
+  </data>
+  <data name="ai_suggest_general.2" xml:space="preserve">
+    <value>Vilka är alkalimetallerna?</value>
+  </data>
+  <data name="ai_suggest_general.3" xml:space="preserve">
+    <value>Tyngsta grundämnet?</value>
+  </data>
+  <data name="ai_suggest_tools.0" xml:space="preserve">
+    <value>Balansera Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="ai_suggest_tools.1" xml:space="preserve">
+    <value>Omvandla 500 K till °C</value>
+  </data>
+  <data name="ai_suggest_tools.2" xml:space="preserve">
+    <value>Hur många gram NaCl för 250 mL 0,5 mol/L?</value>
+  </data>
+  <data name="ai_suggest_tools.3" xml:space="preserve">
+    <value>Hur mycket av 100 g kol-14 finns kvar efter 11460 år?</value>
+  </data>
+  <data name="ai_suggest_trends.0" xml:space="preserve">
+    <value>Vad är periodiska trender?</value>
+  </data>
+  <data name="ai_suggest_trends.1" xml:space="preserve">
+    <value>Elektronegativitetstrend</value>
+  </data>
+  <data name="ai_suggest_trends.2" xml:space="preserve">
+    <value>Atomradietrend</value>
+  </data>
+  <data name="ai_suggest_trends.3" xml:space="preserve">
+    <value>Joniseringsenergi</value>
+  </data>
+  <data name="ai_suggestion_abundance" xml:space="preserve">
+    <value>Ska vi titta på var det finns i universum?</value>
+  </data>
+  <data name="ai_suggestion_bio" xml:space="preserve">
+    <value>Vill du veta mer om dess biologiska roll?</value>
+  </data>
+  <data name="ai_suggestion_compare" xml:space="preserve">
+    <value>Vill du jämföra det med ett annat grundämne?</value>
+  </data>
+  <data name="ai_suggestion_iso" xml:space="preserve">
+    <value>Jag kan också berätta om dess isotoper.</value>
+  </data>
+  <data name="ai_suggestion_safety" xml:space="preserve">
+    <value>Jag har säkerhetsdata för det också, om du är intresserad.</value>
+  </data>
+  <data name="ai_superlative_among" xml:space="preserve">
+    <value>Bland %1$s, %2$s</value>
+  </data>
+  <data name="ai_superlative_generic" xml:space="preserve">
+    <value>Det är en bra fråga! Jag kan hitta de tätaste, tyngsta eller mest elektronegativa grundämnena. Vilket vill du veta mer om?</value>
+  </data>
+  <data name="ai_superlative_highest" xml:space="preserve">
+    <value>högsta</value>
+  </data>
+  <data name="ai_superlative_lowest" xml:space="preserve">
+    <value>lägsta</value>
+  </data>
+  <data name="ai_superlative_no_calculate" xml:space="preserve">
+    <value>Jag kunde inte beräkna det just nu.</value>
+  </data>
+  <data name="ai_superlative_nth" xml:space="preserve">
+    <value>Det **%1$d**%2$s %3$s %4$s är **%5$s**, med %6$s.</value>
+  </data>
+  <data name="ai_superlative_result" xml:space="preserve">
+    <value>Grundämnet med %1$s %2$s är **%3$s**, med värdet %4$s.</value>
+  </data>
+  <data name="ai_synthetic_only" xml:space="preserve">
+    <value>Syntetiskt (förekommer inte naturligt)</value>
+  </data>
+  <data name="ai_technical_config" xml:space="preserve">
+    <value>" Den har elektronkonfigurationen %1$s."</value>
+  </data>
+  <data name="ai_technical_mass" xml:space="preserve">
+    <value>" Dess exakta atommassa är %1$s."</value>
+  </data>
+  <data name="ai_thermal_header" xml:space="preserve">
+    <value>Termiska egenskaper för %1$s:</value>
+  </data>
+  <data name="ai_thermal_properties" xml:space="preserve">
+    <value>Termiska egenskaper för %1$s:</value>
+  </data>
+  <data name="ai_trend_electronegativity" xml:space="preserve">
+    <value>Elektronegativitet ökar generellt från vänster till höger över en period och minskar neråt i en grupp. Fluor är mästaren här!</value>
+  </data>
+  <data name="ai_trend_general" xml:space="preserve">
+    <value>Periodiska trender är mönster i grundämnenas egenskaper! Vilken trend är du nyfiken på: atomradie, elektronegativitet eller joniseringsenergi?</value>
+  </data>
+  <data name="ai_trend_ionization" xml:space="preserve">
+    <value>Joniseringsenergin ökar över en period och minskar neråt i en grupp. Det blir svårare att dra bort en elektron ju längre till höger du kommer!</value>
+  </data>
+  <data name="ai_trend_metallic" xml:space="preserve">
+    <value>Metallisk karaktär minskar över en period och ökar neråt i en grupp. De mest metalliska grundämnena finns längst ner till vänster (som Francium).</value>
+  </data>
+  <data name="ai_trend_radius" xml:space="preserve">
+    <value>Atomradien minskar över en period (vänster till höger) eftersom kärnan drar till sig elektroner hårdare, och ökar neråt i en grupp då fler skal läggs till.</value>
+  </data>
+  <data name="ai_unit_atoms_per_si" xml:space="preserve">
+    <value>atomer per 10⁶ kiselatomer</value>
+  </data>
+  <data name="ai_unit_bridge_note" xml:space="preserve">
+    <value>Omvandlat med 1 eV = 96,485 kJ/mol — samma energi räknad per partikel i stället för per mol.</value>
+  </data>
+  <data name="ai_unit_converted" xml:space="preserve">
+    <value>**%1$s %2$s** är **%3$s %4$s**.</value>
+  </data>
+  <data name="ai_unit_mg_per_kg" xml:space="preserve">
+    <value>mg/kg (ppm)</value>
+  </data>
+  <data name="ai_unit_ug_per_l" xml:space="preserve">
+    <value>µg/l</value>
+  </data>
+  <data name="ai_usage_header" xml:space="preserve">
+    <value>Här är några vanliga användningsområden och fakta om **%1$s**:</value>
+  </data>
+  <data name="ai_valence_alkali" xml:space="preserve">
+    <value>Som alkalimetall har den **1 valenselektron** i sitt yttersta skal.</value>
+  </data>
+  <data name="ai_valence_alkaline" xml:space="preserve">
+    <value>Som alkalisk jordartsmetall har den **2 valenselektroner**.</value>
+  </data>
+  <data name="ai_valence_halogen" xml:space="preserve">
+    <value>Som halogen har den **7 valenselektroner** och vill mycket gärna ta upp en till!</value>
+  </data>
+  <data name="ai_valence_noble_helium" xml:space="preserve">
+    <value>Helium har **2 valenselektroner**, vilket fyller dess enda skal.</value>
+  </data>
+  <data name="ai_valence_noble_other" xml:space="preserve">
+    <value>Den har ett fullt yttre skal med **8 valenselektroner**, vilket gör den mycket stabil.</value>
+  </data>
+  <data name="ai_value_is_range" xml:space="preserve">
+    <value>Detta är ett intervall; rangordning använder mittpunkten.</value>
+  </data>
+  <data name="ai_value_trace" xml:space="preserve">
+    <value>spårmängd</value>
+  </data>
+  <data name="ai_versus" xml:space="preserve">
+    <value>mot</value>
+  </data>
+  <data name="all_core_features" xml:space="preserve">
+    <value>Alla kärnfunktioner</value>
+  </data>
+  <data name="alloy_base_aluminium" xml:space="preserve">
+    <value>Aluminium</value>
+  </data>
+  <data name="alloy_base_copper" xml:space="preserve">
+    <value>Koppar</value>
+  </data>
+  <data name="alloy_base_gold" xml:space="preserve">
+    <value>Guld</value>
+  </data>
+  <data name="alloy_base_iron" xml:space="preserve">
+    <value>Järn</value>
+  </data>
+  <data name="alloy_base_mercury" xml:space="preserve">
+    <value>Kvicksilver</value>
+  </data>
+  <data name="alloy_base_nickel" xml:space="preserve">
+    <value>Nickel</value>
+  </data>
+  <data name="alloy_base_silver" xml:space="preserve">
+    <value>Silver</value>
+  </data>
+  <data name="alloy_base_tin" xml:space="preserve">
+    <value>Tenn</value>
+  </data>
+  <data name="alloy_base_titanium" xml:space="preserve">
+    <value>Titan</value>
+  </data>
+  <data name="alloy_clear_filter" xml:space="preserve">
+    <value>Rensa filter</value>
+  </data>
+  <data name="alo" xml:space="preserve">
+    <value>Legeringstabell</value>
+  </data>
+  <data name="alphabetical" xml:space="preserve">
+    <value>Alfabetisk</value>
+  </data>
+  <data name="and_more_item" xml:space="preserve">
+    <value>- Och mer</value>
+  </data>
+  <data name="answer_no" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="answer_timeout" xml:space="preserve">
+    <value>Tiden är ute</value>
+  </data>
+  <data name="answer_yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>Atomic</value>
+  </data>
+  <data name="appearance" xml:space="preserve">
+    <value>Utseende</value>
+  </data>
+  <data name="appearance_colon" xml:space="preserve">
+    <value>Utseende:</value>
+  </data>
+  <data name="appwidget_text" xml:space="preserve">
+    <value>EXEMPEL</value>
+  </data>
+  <data name="ask_atomic" xml:space="preserve">
+    <value>Fråga Atomic</value>
+  </data>
+  <data name="atomic_mass" xml:space="preserve">
+    <value>Atommassa</value>
+  </data>
+  <data name="atomic_mass_colon" xml:space="preserve">
+    <value>Atommassa:</value>
+  </data>
+  <data name="atomic_number" xml:space="preserve">
+    <value>Atomnummer</value>
+  </data>
+  <data name="atomic_number_label" xml:space="preserve">
+    <value>Atomnummer:</value>
+  </data>
+  <data name="atomic_properties" xml:space="preserve">
+    <value>Atomära Egenskaper</value>
+  </data>
+  <data name="atomic_radius_calculated_colon" xml:space="preserve">
+    <value>Atomradie (beräknad):</value>
+  </data>
+  <data name="atomic_radius_empirical_colon" xml:space="preserve">
+    <value>Atomradie (empirisk):</value>
+  </data>
+  <data name="atomic_weight" xml:space="preserve">
+    <value>Atommassa</value>
+  </data>
+  <data name="atomic_weight_relative_atomic_mass" xml:space="preserve">
+    <value>Atomvikt (relativ atommassa):</value>
+  </data>
+  <data name="auto_hide_bottombar" xml:space="preserve">
+    <value>Dölj bottombar automatiskt</value>
+  </data>
+  <data name="auto_hide_bottombar_desc" xml:space="preserve">
+    <value>Inaktiverar standardbeteendet</value>
+  </data>
+  <data name="bal" xml:space="preserve">
+    <value>Balanserare</value>
+  </data>
+  <data name="balance_equation" xml:space="preserve">
+    <value>Balansera ekvation:</value>
+  </data>
+  <data name="balance_equation_colon" xml:space="preserve">
+    <value>Balansera ekvation:</value>
+  </data>
+  <data name="balancer_text" xml:space="preserve">
+    <value>Balansera olika kemiska reaktioner och spara favoriter för senare användning</value>
+  </data>
+  <data name="balancer_title" xml:space="preserve">
+    <value>Kemiska reaktioner</value>
+  </data>
+  <data name="balancer_tool_card_title" xml:space="preserve">
+    <value>Balansera en ekvation</value>
+  </data>
+  <data name="balancer_tool_copied" xml:space="preserve">
+    <value>Ekvationen kopierad</value>
+  </data>
+  <data name="balancer_tool_examples" xml:space="preserve">
+    <value>Exempel</value>
+  </data>
+  <data name="balancer_tool_hint" xml:space="preserve">
+    <value>Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="balancer_tool_note" xml:space="preserve">
+    <value>Pilar kan skrivas -&gt;, =&gt;, = eller →. Tillståndsbeteckningar som (s), (l), (g) och (aq) ignoreras.</value>
+  </data>
+  <data name="balancer_tool_prompt" xml:space="preserve">
+    <value>Skriv en ekvation med en pil, till exempel Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="balancer_tool_result" xml:space="preserve">
+    <value>Balanserad ekvation</value>
+  </data>
+  <data name="balancer_tool_text" xml:space="preserve">
+    <value>Balansera kemiska ekvationer med exakta heltalskoefficienter</value>
+  </data>
+  <data name="balancer_tool_title" xml:space="preserve">
+    <value>Ekvationsbalanserare</value>
+  </data>
+  <data name="base_label" xml:space="preserve">
+    <value>"Basmetall: "</value>
+  </data>
+  <data name="block" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="block_colon" xml:space="preserve">
+    <value>Block:</value>
+  </data>
+  <data name="blog" xml:space="preserve">
+    <value>Blogg</value>
+  </data>
+  <data name="boiling_point" xml:space="preserve">
+    <value>Kokpunkt</value>
+  </data>
+  <data name="boiling_point_celsius" xml:space="preserve">
+    <value>Kokpunkt (°C):</value>
+  </data>
+  <data name="boiling_point_colon" xml:space="preserve">
+    <value>Kokpunkt:</value>
+  </data>
+  <data name="boiling_point_fahrenheit" xml:space="preserve">
+    <value>Kokpunkt (°F):</value>
+  </data>
+  <data name="boiling_point_kelvin" xml:space="preserve">
+    <value>Kokpunkt (Kelvin):</value>
+  </data>
+  <data name="bonus_xp" xml:space="preserve">
+    <value>+0% bonus aktiv</value>
+  </data>
+  <data name="brinell_hardness" xml:space="preserve">
+    <value>Brinellhårdhet</value>
+  </data>
+  <data name="brinell_hardness_colon" xml:space="preserve">
+    <value>Brinellhårdhet:</value>
+  </data>
+  <data name="bug" xml:space="preserve">
+    <value>Fel</value>
+  </data>
+  <data name="bulk_modulus" xml:space="preserve">
+    <value>Bulkmodul</value>
+  </data>
+  <data name="cal" xml:space="preserve">
+    <value>Kalkylator</value>
+  </data>
+  <data name="calc_elements_shown" xml:space="preserve">
+    <value>Inkluderade element visas här</value>
+  </data>
+  <data name="calc_favorites" xml:space="preserve">
+    <value>Favoriter:</value>
+  </data>
+  <data name="calc_molar_mass" xml:space="preserve">
+    <value>Molmassa:</value>
+  </data>
+  <data name="calc_no_favorites" xml:space="preserve">
+    <value>Inga favoriter för närvarande</value>
+  </data>
+  <data name="calc_no_pro_text" xml:space="preserve">
+    <value>För att få tillgång till och spara favoriter behöver du PRO-versionen</value>
+  </data>
+  <data name="calculations" xml:space="preserve">
+    <value>Beräkningar</value>
+  </data>
+  <data name="calculations_stat" xml:space="preserve">
+    <value>Beräkningar</value>
+  </data>
+  <data name="calculator_card_title" xml:space="preserve">
+    <value>Kalkylator:</value>
+  </data>
+  <data name="calculator_default_value" xml:space="preserve">
+    <value>0,0 (g/mol)</value>
+  </data>
+  <data name="calculator_formula" xml:space="preserve">
+    <value>Formel:</value>
+  </data>
+  <data name="calculator_text" xml:space="preserve">
+    <value>Innehåller en kalkylator för att beräkna molmassa för olika föreningar samt spara favoriter</value>
+  </data>
+  <data name="calculator_title" xml:space="preserve">
+    <value>Kalkylator</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="card_order" xml:space="preserve">
+    <value>Kortordning</value>
+  </data>
+  <data name="cas_number" xml:space="preserve">
+    <value>CAS-nummer:</value>
+  </data>
+  <data name="cas_number_colon" xml:space="preserve">
+    <value>CAS-nummer:</value>
+  </data>
+  <data name="chip_chemistry" xml:space="preserve">
+    <value>Kemi</value>
+  </data>
+  <data name="chip_math" xml:space="preserve">
+    <value>Matematik</value>
+  </data>
+  <data name="chip_minerals" xml:space="preserve">
+    <value>Mineraler</value>
+  </data>
+  <data name="chip_physics" xml:space="preserve">
+    <value>Fysik</value>
+  </data>
+  <data name="chip_reactions" xml:space="preserve">
+    <value>Reaktioner</value>
+  </data>
+  <data name="chip_rocks" xml:space="preserve">
+    <value>Bergarter</value>
+  </data>
+  <data name="chip_soils" xml:space="preserve">
+    <value>Jordar</value>
+  </data>
+  <data name="chip_water" xml:space="preserve">
+    <value>Vatten</value>
+  </data>
+  <data name="clear_cache_title" xml:space="preserve">
+    <value>Rensa cache</value>
+  </data>
+  <data name="clear_filter" xml:space="preserve">
+    <value>Rensa filter</value>
+  </data>
+  <data name="color_label" xml:space="preserve">
+    <value>Färg: </value>
+  </data>
+  <data name="composition_label" xml:space="preserve">
+    <value>"Sammansättning: "</value>
+  </data>
+  <data name="con" xml:space="preserve">
+    <value>Konstanttabell</value>
+  </data>
+  <data name="confirm_sign_out" xml:space="preserve">
+    <value>Är du säker på att du vill logga ut?</value>
+  </data>
+  <data name="constants_search" xml:space="preserve">
+    <value>Sök efter konstant</value>
+  </data>
+  <data name="constants_table_label" xml:space="preserve">
+    <value>Konstanttabell:</value>
+  </data>
+  <data name="constants_tite" xml:space="preserve">
+    <value>Konstanttabell</value>
+  </data>
+  <data name="correct" xml:space="preserve">
+    <value>Korrekt</value>
+  </data>
+  <data name="correct_answer" xml:space="preserve">
+    <value>Rätt svar: %s</value>
+  </data>
+  <data name="covalent_radius_colon" xml:space="preserve">
+    <value>Kovalent radie:</value>
+  </data>
+  <data name="credits_electro_boy_info" xml:space="preserve">
+    <value>Översättningar för afrikaans</value>
+  </data>
+  <data name="credits_giancarlo_info" xml:space="preserve">
+    <value>Översättningar för spanska och italienska</value>
+  </data>
+  <data name="credits_text" xml:space="preserve">
+    <value>Attribueringar till bidragsgivare</value>
+  </data>
+  <data name="credits_title" xml:space="preserve">
+    <value>Attribueringar</value>
+  </data>
+  <data name="cristal_structure_label" xml:space="preserve">
+    <value>Kristallstruktur: </value>
+  </data>
+  <data name="crystal_structure" xml:space="preserve">
+    <value>Kristallstruktur:</value>
+  </data>
+  <data name="currently_no_favorites" xml:space="preserve">
+    <value>Inga favoriter för närvarande</value>
+  </data>
+  <data name="customize_detail_card_order" xml:space="preserve">
+    <value>Anpassa ordningen på detaljkorten</value>
+  </data>
+  <data name="customize_units_table" xml:space="preserve">
+    <value>Anpassa enheterna i huvudtabellen</value>
+  </data>
+  <data name="dark" xml:space="preserve">
+    <value>Mörkt</value>
+  </data>
+  <data name="data_issue" xml:space="preserve">
+    <value>Datafel</value>
+  </data>
+  <data name="data_visualisations" xml:space="preserve">
+    <value>Datavisualiseringar:</value>
+  </data>
+  <data name="debye_temperature_low_temperature_limit" xml:space="preserve">
+    <value>Debyetemperatur: (låga temperaturer)</value>
+  </data>
+  <data name="debye_temperature_room_temperature" xml:space="preserve">
+    <value>Debyetemperatur: (rumstemperatur)</value>
+  </data>
+  <data name="decay_alpha" xml:space="preserve">
+    <value>Alfasönderfall (α)</value>
+  </data>
+  <data name="decay_beta_minus" xml:space="preserve">
+    <value>Beta-minus-sönderfall (β−)</value>
+  </data>
+  <data name="decay_beta_plus" xml:space="preserve">
+    <value>Beta-plus-sönderfall (β+)</value>
+  </data>
+  <data name="decay_electron_capture" xml:space="preserve">
+    <value>Elektroninfångning</value>
+  </data>
+  <data name="decay_info_fab" xml:space="preserve">
+    <value>Info om olika sönderfallstyper</value>
+  </data>
+  <data name="decay_neutron_emission" xml:space="preserve">
+    <value>Neutronemission</value>
+  </data>
+  <data name="decay_proton_emission" xml:space="preserve">
+    <value>Protonemission</value>
+  </data>
+  <data name="decay_spontaneous_fission" xml:space="preserve">
+    <value>Spontan fission</value>
+  </data>
+  <data name="density" xml:space="preserve">
+    <value>Densitet</value>
+  </data>
+  <data name="density_colon" xml:space="preserve">
+    <value>Densitet:</value>
+  </data>
+  <data name="density_label" xml:space="preserve">
+    <value>Densitet: </value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Beskrivning</value>
+  </data>
+  <data name="description_colon" xml:space="preserve">
+    <value>Beskrivning:</value>
+  </data>
+  <data name="detail_card_order" xml:space="preserve">
+    <value>Detaljkortsordning</value>
+  </data>
+  <data name="dictionary" xml:space="preserve">
+    <value>Ordbok</value>
+  </data>
+  <data name="dictionary_search" xml:space="preserve">
+    <value>Sök efter ordboksobjekt</value>
+  </data>
+  <data name="discovered_by" xml:space="preserve">
+    <value>Upptäckt av</value>
+  </data>
+  <data name="discovered_by_colon" xml:space="preserve">
+    <value>Upptäckt av:</value>
+  </data>
+  <data name="discovery_year" xml:space="preserve">
+    <value>Upptäcktsår</value>
+  </data>
+  <data name="display_mode" xml:space="preserve">
+    <value>Visningsläge</value>
+  </data>
+  <data name="early_access_features" xml:space="preserve">
+    <value>Tidig tillgång till nya funktioner:</value>
+  </data>
+  <data name="easy" xml:space="preserve">
+    <value>Lätt</value>
+  </data>
+  <data name="eg_number" xml:space="preserve">
+    <value>EG-nummer:</value>
+  </data>
+  <data name="eg_number_colon" xml:space="preserve">
+    <value>EG-nummer:</value>
+  </data>
+  <data name="ele" xml:space="preserve">
+    <value>Elektrokemisk serie</value>
+  </data>
+  <data name="electrical_resistivity" xml:space="preserve">
+    <value>Elektrisk resistivitet</value>
+  </data>
+  <data name="electrical_resistivity_colon" xml:space="preserve">
+    <value>Elektrisk resistivitet:</value>
+  </data>
+  <data name="electrical_type" xml:space="preserve">
+    <value>Elektrisk typ</value>
+  </data>
+  <data name="electrical_type_colon" xml:space="preserve">
+    <value>Elektrisk typ:</value>
+  </data>
+  <data name="electrochemical_series" xml:space="preserve">
+    <value>Elektrokemisk serie</value>
+  </data>
+  <data name="electrochemical_series_search" xml:space="preserve">
+    <value>Sök efter grundämne</value>
+  </data>
+  <data name="electromagnetic_properties" xml:space="preserve">
+    <value>Elektromagnetiska Egenskaper</value>
+  </data>
+  <data name="electron_affinity_colon" xml:space="preserve">
+    <value>Elektronaffinitet:</value>
+  </data>
+  <data name="electron_configuration_colon" xml:space="preserve">
+    <value>Elektronkonfiguration:</value>
+  </data>
+  <data name="electron_shell_colon" xml:space="preserve">
+    <value>Elektronskal:</value>
+  </data>
+  <data name="electronegativity" xml:space="preserve">
+    <value>Elektronegativitet</value>
+  </data>
+  <data name="electronegativity_colon" xml:space="preserve">
+    <value>Elektronegativitet:</value>
+  </data>
+  <data name="element_bulk_modulus" xml:space="preserve">
+    <value>Bulkmodul:</value>
+  </data>
+  <data name="element_description_title" xml:space="preserve">
+    <value>Beskrivning</value>
+  </data>
+  <data name="element_elastic_modulus" xml:space="preserve">
+    <value>Elasticitetsmodul:</value>
+  </data>
+  <data name="element_electrons" xml:space="preserve">
+    <value>Elektroner:</value>
+  </data>
+  <data name="element_groups" xml:space="preserve">
+    <value>Elementgrupper</value>
+  </data>
+  <data name="element_info_title" xml:space="preserve">
+    <value>Elementinformation</value>
+  </data>
+  <data name="element_more_title" xml:space="preserve">
+    <value>Ytterligare egenskaper</value>
+  </data>
+  <data name="element_name_default" xml:space="preserve">
+    <value>Elementnamn (Standard)</value>
+  </data>
+  <data name="element_names" xml:space="preserve">
+    <value>Elementnamn</value>
+  </data>
+  <data name="element_number" xml:space="preserve">
+    <value>Elementnummer</value>
+  </data>
+  <data name="element_overview" xml:space="preserve">
+    <value>Elementöversikt:</value>
+  </data>
+  <data name="element_poisson_ratio" xml:space="preserve">
+    <value>Poisson's förhållande:</value>
+  </data>
+  <data name="element_shear_modulus" xml:space="preserve">
+    <value>Skjuvmodul:</value>
+  </data>
+  <data name="element_speed_sound" xml:space="preserve">
+    <value>Ljudhastighet:</value>
+  </data>
+  <data name="element_symbols" xml:space="preserve">
+    <value>Elementsymboler</value>
+  </data>
+  <data name="element_young_modulus" xml:space="preserve">
+    <value>Young's modul:</value>
+  </data>
+  <data name="elements_included_will_be_shown_here" xml:space="preserve">
+    <value>Inkluderade element visas här</value>
+  </data>
+  <data name="elements_opened" xml:space="preserve">
+    <value>Öppnade element</value>
+  </data>
+  <data name="emi" xml:space="preserve">
+    <value>Emissionsspektrumtabell</value>
+  </data>
+  <data name="emission_spectrum_colon" xml:space="preserve">
+    <value>Emissionsspektrum:</value>
+  </data>
+  <data name="emission_spectrum_table" xml:space="preserve">
+    <value>Emissionsspektrumtabell:</value>
+  </data>
+  <data name="emission_text" xml:space="preserve">
+    <value>Emissionsspektrum för grundämnen, vilket är frekvenser av elektromagnetisk strålning som emitteras när elektroner går från högre till lägre energinivå.</value>
+  </data>
+  <data name="emission_title" xml:space="preserve">
+    <value>Emissionsspektrumtabell</value>
+  </data>
+  <data name="enable_sync" xml:space="preserve">
+    <value>Aktivera Synkronisering</value>
+  </data>
+  <data name="enable_sync_desc" xml:space="preserve">
+    <value>Synkronisering av framsteg för nivå, xp, prestationer, etc. är tillgänglig för PRO och PRO+ användare</value>
+  </data>
+  <data name="enable_sync_pro_button" xml:space="preserve">
+    <value>Uppgradera</value>
+  </data>
+  <data name="enable_zoom_in_tables" xml:space="preserve">
+    <value>Aktivera zoom i tabeller</value>
+  </data>
+  <data name="english_name_colon" xml:space="preserve">
+    <value>Engelskt namn:</value>
+  </data>
+  <data name="enter_new_text" xml:space="preserve">
+    <value>Ange ny text</value>
+  </data>
+  <data name="eqe" xml:space="preserve">
+    <value>Formler</value>
+  </data>
+  <data name="equations_search_other" xml:space="preserve">
+    <value>Försök söka på ett annat ord eller kontrollera stavningen.</value>
+  </data>
+  <data name="exam_best_score" xml:space="preserve">
+    <value>Bästa resultat: %1$d %%</value>
+  </data>
+  <data name="exam_finished_xp" xml:space="preserve">
+    <value>Prov klart: +%1$d XP</value>
+  </data>
+  <data name="exam_locked" xml:space="preserve">
+    <value>Nå nivå %1$d för att låsa upp</value>
+  </data>
+  <data name="exam_not_taken" xml:space="preserve">
+    <value>Inte försökt än</value>
+  </data>
+  <data name="exam_passed" xml:space="preserve">
+    <value>Godkänd · bästa resultat %1$d %%</value>
+  </data>
+  <data name="exam_pro_locked" xml:space="preserve">
+    <value>Det här provet kräver PRO+</value>
+  </data>
+  <data name="exam_results" xml:space="preserve">
+    <value>Provresultat</value>
+  </data>
+  <data name="exam_start" xml:space="preserve">
+    <value>Starta prov</value>
+  </data>
+  <data name="exam_test_subtitle" xml:space="preserve">
+    <value>Allt från nivå %1$d till %2$d, blandat</value>
+  </data>
+  <data name="exam_test_title" xml:space="preserve">
+    <value>Prov</value>
+  </data>
+  <data name="experimental" xml:space="preserve">
+    <value>Experimentell</value>
+  </data>
+  <data name="experimental_text" xml:space="preserve">
+    <value>Ytterligare experimentella inställningar</value>
+  </data>
+  <data name="experimental_title" xml:space="preserve">
+    <value>Experimentella inställningar</value>
+  </data>
+  <data name="favorite_bar" xml:space="preserve">
+    <value>Favoritfält</value>
+  </data>
+  <data name="favorite_settings_atomic_properties" xml:space="preserve">
+    <value>Atomära egenskaper</value>
+  </data>
+  <data name="favorite_settings_electromagnetic" xml:space="preserve">
+    <value>Elektromagnetiska egenskaper</value>
+  </data>
+  <data name="favorite_settings_general" xml:space="preserve">
+    <value>Allmänt</value>
+  </data>
+  <data name="favorite_settings_nuclear" xml:space="preserve">
+    <value>Kärnämnen</value>
+  </data>
+  <data name="favorite_settings_temperatures" xml:space="preserve">
+    <value>Temperaturer</value>
+  </data>
+  <data name="favorite_settings_thermodynamics" xml:space="preserve">
+    <value>Termodynamik</value>
+  </data>
+  <data name="favorite_settings_title" xml:space="preserve">
+    <value>Favoritfält</value>
+  </data>
+  <data name="favorites_colon" xml:space="preserve">
+    <value>Favoriter:</value>
+  </data>
+  <data name="features" xml:space="preserve">
+    <value>Funktioner:</value>
+  </data>
+  <data name="fifty_lives_in_flashcards" xml:space="preserve">
+    <value>50 liv i flashcards:</value>
+  </data>
+  <data name="finished_game_xp" xml:space="preserve">
+    <value>Spelet avslutat: +%dxp</value>
+  </data>
+  <data name="fire_hazard" xml:space="preserve">
+    <value>Brandfara:</value>
+  </data>
+  <data name="fla" xml:space="preserve">
+    <value>Flashcards</value>
+  </data>
+  <data name="flashcards_atomic_mass" xml:space="preserve">
+    <value>Atommassa</value>
+  </data>
+  <data name="flashcards_chemical_reactions" xml:space="preserve">
+    <value>Kemiska reaktioner</value>
+  </data>
+  <data name="flashcards_difficulty" xml:space="preserve">
+    <value>Välj svårighetsgrad:</value>
+  </data>
+  <data name="flashcards_difficulty_title" xml:space="preserve">
+    <value>Svårighetsgrad</value>
+  </data>
+  <data name="flashcards_element_classifications" xml:space="preserve">
+    <value>Elementklassificeringar</value>
+  </data>
+  <data name="flashcards_element_symbols" xml:space="preserve">
+    <value>Elementsymboler</value>
+  </data>
+  <data name="flashcards_free_games" xml:space="preserve">
+    <value>Gratis spel:</value>
+  </data>
+  <data name="flashcards_game_element_appearance" xml:space="preserve">
+    <value>Utseende</value>
+  </data>
+  <data name="flashcards_game_element_atomic_mass" xml:space="preserve">
+    <value>Atommassa</value>
+  </data>
+  <data name="flashcards_game_element_density" xml:space="preserve">
+    <value>Densitet</value>
+  </data>
+  <data name="flashcards_game_element_groups" xml:space="preserve">
+    <value>Elementgrupper</value>
+  </data>
+  <data name="flashcards_game_element_names" xml:space="preserve">
+    <value>Elementnamn</value>
+  </data>
+  <data name="flashcards_game_element_symbols" xml:space="preserve">
+    <value>Elementsymboler</value>
+  </data>
+  <data name="flashcards_info" xml:space="preserve">
+    <value>Lär dig periodiska systemet med inbyggda "lärspel"</value>
+  </data>
+  <data name="flashcards_level" xml:space="preserve">
+    <value>Nivå</value>
+  </data>
+  <data name="flashcards_lives_info" xml:space="preserve">
+    <value>Varje felaktigt svar leder till förlust av ett liv</value>
+  </data>
+  <data name="flashcards_mixed_questions" xml:space="preserve">
+    <value>Blandade frågor</value>
+  </data>
+  <data name="flashcards_pro_level_0_5" xml:space="preserve">
+    <value>Nivå 0-4:</value>
+  </data>
+  <data name="flashcards_pro_level_10_15" xml:space="preserve">
+    <value>Nivå 10-14:</value>
+  </data>
+  <data name="flashcards_pro_level_5_10" xml:space="preserve">
+    <value>Nivå 5-9:</value>
+  </data>
+  <data name="flashcards_pro_plus_games" xml:space="preserve">
+    <value>PRO+ spel:</value>
+  </data>
+  <data name="flashcards_statistics" xml:space="preserve">
+    <value>Statistik</value>
+  </data>
+  <data name="flashcards_title" xml:space="preserve">
+    <value>Flashcards</value>
+  </data>
+  <data name="flashcards_total_games" xml:space="preserve">
+    <value>Spel</value>
+  </data>
+  <data name="flashcards_total_xp" xml:space="preserve">
+    <value>Totalt XP</value>
+  </data>
+  <data name="flashcards_unlimited_lives" xml:space="preserve">
+    <value>Obegränsade liv i flashcards:</value>
+  </data>
+  <data name="formula_will_be_displayed_here" xml:space="preserve">
+    <value>Formeln visas här</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>GRATIS</value>
+  </data>
+  <data name="fusion_heat" xml:space="preserve">
+    <value>Smältvärme</value>
+  </data>
+  <data name="fusion_heat_colon" xml:space="preserve">
+    <value>Fusionsvärme:</value>
+  </data>
+  <data name="game_compare_pair" xml:space="preserve">
+    <value>Mot varandra</value>
+  </data>
+  <data name="game_extremes_advanced" xml:space="preserve">
+    <value>Avancerade ytterligheter</value>
+  </data>
+  <data name="game_group" xml:space="preserve">
+    <value>Grupper</value>
+  </data>
+  <data name="game_highest" xml:space="preserve">
+    <value>Vilket är högst?</value>
+  </data>
+  <data name="game_isotope_decay" xml:space="preserve">
+    <value>Sönderfallssätt</value>
+  </data>
+  <data name="game_isotope_half_life" xml:space="preserve">
+    <value>Halveringstid</value>
+  </data>
+  <data name="game_isotope_neutrons" xml:space="preserve">
+    <value>Antal neutroner</value>
+  </data>
+  <data name="game_isotope_stability" xml:space="preserve">
+    <value>Stabila isotoper</value>
+  </data>
+  <data name="game_lowest" xml:space="preserve">
+    <value>Vilket är lägst?</value>
+  </data>
+  <data name="game_molar_mass" xml:space="preserve">
+    <value>Molmassa</value>
+  </data>
+  <data name="game_odd_one_out" xml:space="preserve">
+    <value>Vilket hör inte hit?</value>
+  </data>
+  <data name="game_period" xml:space="preserve">
+    <value>Perioder</value>
+  </data>
+  <data name="game_results" xml:space="preserve">
+    <value>Spelresultat</value>
+  </data>
+  <data name="game_valence_electrons" xml:space="preserve">
+    <value>Valenselektroner</value>
+  </data>
+  <data name="geo" xml:space="preserve">
+    <value>Geologitabell</value>
+  </data>
+  <data name="geo_clear_filter" xml:space="preserve">
+    <value>Rensa filter</value>
+  </data>
+  <data name="geo_no_results" xml:space="preserve">
+    <value>Inga resultat</value>
+  </data>
+  <data name="geo_search_hint" xml:space="preserve">
+    <value>Sök efter geologiobjekt</value>
+  </data>
+  <data name="geo_try_another_search" xml:space="preserve">
+    <value>Försök söka på ett annat ord eller kontrollera stavningen.</value>
+  </data>
+  <data name="geology_table" xml:space="preserve">
+    <value>Geologitabell:</value>
+  </data>
+  <data name="get_pro" xml:space="preserve">
+    <value>Skaffa PRO</value>
+  </data>
+  <data name="get_pro_button" xml:space="preserve">
+    <value>Skaffa PRO</value>
+  </data>
+  <data name="get_pro_element_text" xml:space="preserve">
+    <value>Skaffa PRO-versionen för att låsa upp ytterligare information om elementen</value>
+  </data>
+  <data name="get_pro_plus" xml:space="preserve">
+    <value>Skaffa PRO+</value>
+  </data>
+  <data name="get_pro_plus_button" xml:space="preserve">
+    <value>Skaffa PRO+</value>
+  </data>
+  <data name="get_pro_title" xml:space="preserve">
+    <value>Skaffa PRO-version</value>
+  </data>
+  <data name="git_text" xml:space="preserve">
+    <value>Atomics öppen källkods GitHub-repo</value>
+  </data>
+  <data name="go_online_for_emission" xml:space="preserve">
+    <value>Gå online för emissionslinjer</value>
+  </data>
+  <data name="go_online_for_emission_lines" xml:space="preserve">
+    <value>Gå online för emissionslinjer</value>
+  </data>
+  <data name="go_pro_more_features" xml:space="preserve">
+    <value>Gå Pro - fler funktioner</value>
+  </data>
+  <data name="go_pro_school_start_sale" xml:space="preserve">
+    <value>GÅ PRO - SKOLSTART-REA</value>
+  </data>
+  <data name="grid_parameters" xml:space="preserve">
+    <value>Gitterparametrar: (gitterkonstanter)</value>
+  </data>
+  <data name="grid_title" xml:space="preserve">
+    <value>Gitteregenskaper</value>
+  </data>
+  <data name="group_label" xml:space="preserve">
+    <value>Grupp: </value>
+  </data>
+  <data name="hard" xml:space="preserve">
+    <value>Svår</value>
+  </data>
+  <data name="hardness_label" xml:space="preserve">
+    <value>Hårdhet: </value>
+  </data>
+  <data name="hardness_properties" xml:space="preserve">
+    <value>Hårdhet Egenskaper</value>
+  </data>
+  <data name="hardness_properties_requires_pro" xml:space="preserve">
+    <value>Hårdhetsegenskaper kräver PRO-version. Skaffa PRO för att låsa upp mer data och tabeller:</value>
+  </data>
+  <data name="hazard_diamond" xml:space="preserve">
+    <value>Faroromb</value>
+  </data>
+  <data name="hazard_flammability" xml:space="preserve">
+    <value>Brandfarlighet</value>
+  </data>
+  <data name="hazard_health" xml:space="preserve">
+    <value>Hälsofara</value>
+  </data>
+  <data name="hazard_instability" xml:space="preserve">
+    <value>Instabilitet</value>
+  </data>
+  <data name="hazard_materials" xml:space="preserve">
+    <value>Farliga material:</value>
+  </data>
+  <data name="hazard_title" xml:space="preserve">
+    <value>Materialfara</value>
+  </data>
+  <data name="hazard_title_requires_pro" xml:space="preserve">
+    <value>Materialfara kräver PRO-version. Skaffa PRO för att låsa upp mer data och tabeller:</value>
+  </data>
+  <data name="health_hazard" xml:space="preserve">
+    <value>Hälsorisk:</value>
+  </data>
+  <data name="highest" xml:space="preserve">
+    <value>högsta</value>
+  </data>
+  <data name="info_text" xml:space="preserve">
+    <value>Appversion och detaljer</value>
+  </data>
+  <data name="info_title" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="intro_calculator_description" xml:space="preserve">
+    <value>Beräkna molmassor av kemiska föreningar snabbt och noggrant. Perfekt för kemistuderande och yrkesverksamma.</value>
+  </data>
+  <data name="intro_calculator_title" xml:space="preserve">
+    <value>Molmassa-kalkylator</value>
+  </data>
+  <data name="intro_finish" xml:space="preserve">
+    <value>Kom igång</value>
+  </data>
+  <data name="intro_flashcards_description" xml:space="preserve">
+    <value>Bemästra det periodiska systemet med interaktiva flashkort. Testa din kunskap om elementsymboler, atommassa och kemiska egenskaper.</value>
+  </data>
+  <data name="intro_flashcards_title" xml:space="preserve">
+    <value>Lär dig med Flashkort</value>
+  </data>
+  <data name="intro_image_description" xml:space="preserve">
+    <value>Introduktionsbild</value>
+  </data>
+  <data name="intro_next" xml:space="preserve">
+    <value>Nästa</value>
+  </data>
+  <data name="intro_pro_description" xml:space="preserve">
+    <value>Få tillgång till ytterligare data, avancerade tabeller, förbättrade kalkylatorer och exklusiva funktioner med PRO-versionen.</value>
+  </data>
+  <data name="intro_pro_title" xml:space="preserve">
+    <value>Lås upp PRO-funktioner</value>
+  </data>
+  <data name="intro_skip" xml:space="preserve">
+    <value>Hoppa över</value>
+  </data>
+  <data name="intro_welcome_description" xml:space="preserve">
+    <value>Din omfattande referens för det periodiska systemet med detaljerad elementinformation, interaktiva verktyg och inlärningsfunktioner.</value>
+  </data>
+  <data name="intro_welcome_title" xml:space="preserve">
+    <value>Välkommen till Atomic</value>
+  </data>
+  <data name="ion" xml:space="preserve">
+    <value>Joniseringsenergier</value>
+  </data>
+  <data name="ion_charge_colon" xml:space="preserve">
+    <value>Jonladdning:</value>
+  </data>
+  <data name="ion_no_results" xml:space="preserve">
+    <value>Inga resultat</value>
+  </data>
+  <data name="ion_try_another_search" xml:space="preserve">
+    <value>Försök söka på ett annat ord eller kontrollera stavningen.</value>
+  </data>
+  <data name="ionization_energies_colon" xml:space="preserve">
+    <value>Joniseringsenergier:</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>Isotoper</value>
+  </data>
+  <data name="iso_half_life_colon" xml:space="preserve">
+    <value>Halveringstid:</value>
+  </data>
+  <data name="iso_no_results" xml:space="preserve">
+    <value>Inga resultat</value>
+  </data>
+  <data name="iso_search_hint" xml:space="preserve">
+    <value>Sök efter isotoper</value>
+  </data>
+  <data name="iso_try_another_search" xml:space="preserve">
+    <value>Försök söka på ett annat ord eller kontrollera stavningen.</value>
+  </data>
+  <data name="isotope" xml:space="preserve">
+    <value>Isotop</value>
+  </data>
+  <data name="isotopes_colon" xml:space="preserve">
+    <value>Isotoper:</value>
+  </data>
+  <data name="isotopes_table_description" xml:space="preserve">
+    <value>En tabell med isotoper för olika grundämnen samt halveringstid, massa, proton, neutron och nukleondata.</value>
+  </data>
+  <data name="isotopes_title" xml:space="preserve">
+    <value>Isotoper</value>
+  </data>
+  <data name="language_content" xml:space="preserve">
+    <value>Välj språk</value>
+  </data>
+  <data name="language_title" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="learning_games" xml:space="preserve">
+    <value>Lärspel:</value>
+  </data>
+  <data name="leave_game_confirm" xml:space="preserve">
+    <value>Lämna</value>
+  </data>
+  <data name="leave_game_message" xml:space="preserve">
+    <value>Vill du verkligen lämna spelet? Du förlorar %1$d liv.</value>
+  </data>
+  <data name="leave_game_stay" xml:space="preserve">
+    <value>Stanna</value>
+  </data>
+  <data name="leave_game_title" xml:space="preserve">
+    <value>Lämna spelet?</value>
+  </data>
+  <data name="level_0_4" xml:space="preserve">
+    <value>Nivå 0–4</value>
+  </data>
+  <data name="level_10_14" xml:space="preserve">
+    <value>Nivå 10–14</value>
+  </data>
+  <data name="level_15_19" xml:space="preserve">
+    <value>Nivå 15–19</value>
+  </data>
+  <data name="level_20_24" xml:space="preserve">
+    <value>Nivå 20–24</value>
+  </data>
+  <data name="level_25_29" xml:space="preserve">
+    <value>Nivå 25</value>
+  </data>
+  <data name="level_30_34" xml:space="preserve">
+    <value>Nivå 30</value>
+  </data>
+  <data name="level_5_9" xml:space="preserve">
+    <value>Nivå 5–9</value>
+  </data>
+  <data name="level_range_format" xml:space="preserve">
+    <value>Nivå %1$d</value>
+  </data>
+  <data name="level_up_message" xml:space="preserve">
+    <value>Grattis, du har nått nivå %1$d!</value>
+  </data>
+  <data name="level_up_title" xml:space="preserve">
+    <value>Ny nivå!</value>
+  </data>
+  <data name="level_x_y" xml:space="preserve">
+    <value>Nivå X-Y</value>
+  </data>
+  <data name="license_title" xml:space="preserve">
+    <value>Licenser</value>
+  </data>
+  <data name="licenses_text" xml:space="preserve">
+    <value>Licenser för verk som används av Atomic</value>
+  </data>
+  <data name="licenses_title" xml:space="preserve">
+    <value>Licenser</value>
+  </data>
+  <data name="light" xml:space="preserve">
+    <value>Ljust</value>
+  </data>
+  <data name="lives_label" xml:space="preserve">
+    <value>Liv: %s</value>
+  </data>
+  <data name="lives_lost_detail" xml:space="preserve">
+    <value>Förlorade liv: %1$d (%2$d per fel/timeout-svar)</value>
+  </data>
+  <data name="lives_lost_result.One" xml:space="preserve">
+    <value>Förlorade %d liv</value>
+  </data>
+  <data name="lives_lost_result.Other" xml:space="preserve">
+    <value>Förlorade %d liv</value>
+  </data>
+  <data name="lives_unlimited" xml:space="preserve">
+    <value>Liv: ∞</value>
+  </data>
+  <data name="login_for_sync" xml:space="preserve">
+    <value>Logga in för att aktivera synkronisering</value>
+  </data>
+  <data name="login_for_sync_and_more" xml:space="preserve">
+    <value>Logga in för att synkronisera data</value>
+  </data>
+  <data name="lowest" xml:space="preserve">
+    <value>lägsta</value>
+  </data>
+  <data name="magnetic_type" xml:space="preserve">
+    <value>Magnetisk typ</value>
+  </data>
+  <data name="magnetic_type_colon" xml:space="preserve">
+    <value>Magnetisk typ:</value>
+  </data>
+  <data name="magnetism_label" xml:space="preserve">
+    <value>Magnetism: </value>
+  </data>
+  <data name="medium" xml:space="preserve">
+    <value>Medel</value>
+  </data>
+  <data name="melting_point" xml:space="preserve">
+    <value>Smältpunkt</value>
+  </data>
+  <data name="melting_point_celsius" xml:space="preserve">
+    <value>Smältpunkt (°C):</value>
+  </data>
+  <data name="melting_point_colon" xml:space="preserve">
+    <value>Smältpunkt:</value>
+  </data>
+  <data name="melting_point_fahrenheit" xml:space="preserve">
+    <value>Smältpunkt (°F):</value>
+  </data>
+  <data name="melting_point_kelvin" xml:space="preserve">
+    <value>Smältpunkt (Kelvin):</value>
+  </data>
+  <data name="member_already" xml:space="preserve">
+    <value>Du är PRO-medlem!</value>
+  </data>
+  <data name="member_btn" xml:space="preserve">
+    <value>Dina PRO-förmåner</value>
+  </data>
+  <data name="member_desch" xml:space="preserve">
+    <value>Tack för att du stödjer utvecklingen av 'Atomic - Periodic Table'. På denna sida kommer information om dina PRO-förmåner att vara tillgänglig när fler PRO-funktioner läggs till.</value>
+  </data>
+  <data name="member_title" xml:space="preserve">
+    <value>PRO-medlemssida</value>
+  </data>
+  <data name="mohs_hardness" xml:space="preserve">
+    <value>Mohs hårdhet</value>
+  </data>
+  <data name="mohs_hardness_colon" xml:space="preserve">
+    <value>Mohs hårdhet:</value>
+  </data>
+  <data name="molar_mass_value" xml:space="preserve">
+    <value>%1$s g/mol</value>
+  </data>
+  <data name="more_information" xml:space="preserve">
+    <value>Mer information:</value>
+  </data>
+  <data name="most_advanced" xml:space="preserve">
+    <value>Mest avancerad</value>
+  </data>
+  <data name="most_used" xml:space="preserve">
+    <value>Mest använda:</value>
+  </data>
+  <data name="neutron_cross_sectional" xml:space="preserve">
+    <value>Neutron-tvärsnitt</value>
+  </data>
+  <data name="neutron_cross_sectional_colon" xml:space="preserve">
+    <value>Neutrontvärsnitt:</value>
+  </data>
+  <data name="neutrons" xml:space="preserve">
+    <value>Neutroner:</value>
+  </data>
+  <data name="new_label" xml:space="preserve">
+    <value>NYTT</value>
+  </data>
+  <data name="next_life_gain.One" xml:space="preserve">
+    <value>Du får %d liv.</value>
+  </data>
+  <data name="next_life_gain.Other" xml:space="preserve">
+    <value>Du får %d liv.</value>
+  </data>
+  <data name="next_life_in_detail" xml:space="preserve">
+    <value>Nästa liv om %1$d minuter och %2$d sekunder.
+%3$s</value>
+  </data>
+  <data name="no_image" xml:space="preserve">
+    <value>Ingen bild</value>
+  </data>
+  <data name="no_questions_title" xml:space="preserve">
+    <value>Inte tillräckligt med data</value>
+  </data>
+  <data name="no_results" xml:space="preserve">
+    <value>Inga resultat</value>
+  </data>
+  <data name="no_unlocked_games" xml:space="preserve">
+    <value>Inga upplåsta spel tillgängliga!</value>
+  </data>
+  <data name="non_pro" xml:space="preserve">
+    <value>ICKE-PRO</value>
+  </data>
+  <data name="notes_placeholder" xml:space="preserve">
+    <value>Ta anteckningar för elementet:</value>
+  </data>
+  <data name="nuc" xml:space="preserve">
+    <value>Nuklidtabell</value>
+  </data>
+  <data name="nuclear_properties" xml:space="preserve">
+    <value>Nukleära Egenskaper</value>
+  </data>
+  <data name="nucleons" xml:space="preserve">
+    <value>Nukleoner:</value>
+  </data>
+  <data name="nuclide_table" xml:space="preserve">
+    <value>Nuklidtabell:</value>
+  </data>
+  <data name="nuclide_table_title" xml:space="preserve">
+    <value>Nuklidtabell</value>
+  </data>
+  <data name="offline_mode" xml:space="preserve">
+    <value>Offline-läge</value>
+  </data>
+  <data name="offline_mode_desc" xml:space="preserve">
+    <value>Inaktiverar laddning av bilder</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="open_base_element" xml:space="preserve">
+    <value>Öppna basgrundämnet</value>
+  </data>
+  <data name="open_table_button" xml:space="preserve">
+    <value>Öppna tabell</value>
+  </data>
+  <data name="other_settings" xml:space="preserve">
+    <value>Avancerat</value>
+  </data>
+  <data name="other_title" xml:space="preserve">
+    <value>Övrigt</value>
+  </data>
+  <data name="out_of_lives_hours" xml:space="preserve">
+    <value>Slut på liv! Fler liv om %1$d timmar, %2$d minuter och %3$d sekunder.</value>
+  </data>
+  <data name="out_of_lives_minutes" xml:space="preserve">
+    <value>Slut på liv! Fler liv om %1$d minuter och %2$d sekunder.</value>
+  </data>
+  <data name="overview" xml:space="preserve">
+    <value>Översikt</value>
+  </data>
+  <data name="owns_pro_plus" xml:space="preserve">
+    <value>Äger PRO+</value>
+  </data>
+  <data name="oxidation_states_colon" xml:space="preserve">
+    <value>Oxidationstillstånd:</value>
+  </data>
+  <data name="perfect_all_correct_xp" xml:space="preserve">
+    <value>Perfekt (Allt rätt): +%dxp</value>
+  </data>
+  <data name="personalise_favorite_bar" xml:space="preserve">
+    <value>Anpassa favoritfältet</value>
+  </data>
+  <data name="personalization_settings" xml:space="preserve">
+    <value>Anpassning</value>
+  </data>
+  <data name="ph_title" xml:space="preserve">
+    <value>pH-indikatorer</value>
+  </data>
+  <data name="phase_stp" xml:space="preserve">
+    <value>Fas (STP)</value>
+  </data>
+  <data name="phase_stp_colon" xml:space="preserve">
+    <value>Fas (STP):</value>
+  </data>
+  <data name="phi" xml:space="preserve">
+    <value>pH-indikatorer</value>
+  </data>
+  <data name="poi" xml:space="preserve">
+    <value>Poisson-förhållandetabell</value>
+  </data>
+  <data name="poi_clear_filter" xml:space="preserve">
+    <value>Rensa filter</value>
+  </data>
+  <data name="poi_no_results" xml:space="preserve">
+    <value>Inga resultat</value>
+  </data>
+  <data name="poi_search_hint" xml:space="preserve">
+    <value>Sök efter ordboksobjekt</value>
+  </data>
+  <data name="poi_try_another_search" xml:space="preserve">
+    <value>Försök söka på ett annat ord eller kontrollera stavningen.</value>
+  </data>
+  <data name="poisson_constants_sound_speed" xml:space="preserve">
+    <value>Poissons konstanter, ljudhastighet:</value>
+  </data>
+  <data name="poisson_ratio_table" xml:space="preserve">
+    <value>Poissons kvottabell:</value>
+  </data>
+  <data name="poissons_ratio" xml:space="preserve">
+    <value>Poissons tal</value>
+  </data>
+  <data name="poissons_ratio_title" xml:space="preserve">
+    <value>Poissons förhållande</value>
+  </data>
+  <data name="popup_action_button" xml:space="preserve">
+    <value>Uppgradera till PRO+</value>
+  </data>
+  <data name="popup_content_text" xml:space="preserve">
+    <value>Uppgradera 'Atomic - Periodiska systemet' för att låsa upp ytterligare data, tabeller och flashcards för att lära dig mer om det periodiska systemet.</value>
+  </data>
+  <data name="popup_secondary_button" xml:space="preserve">
+    <value>Inte idag</value>
+  </data>
+  <data name="popup_title" xml:space="preserve">
+    <value>Uppgradera till PRO+</value>
+  </data>
+  <data name="price_placeholder" xml:space="preserve">
+    <value>Pris</value>
+  </data>
+  <data name="pro_additional_data" xml:space="preserve">
+    <value>Ytterligare data</value>
+  </data>
+  <data name="pro_additional_data_descr" xml:space="preserve">
+    <value>Ytterligare data som hårdhetsegenskaper (mohs-, vickers- och brinellhårdhet) samt ljudhastighet, Poissonkonstant, Youngs-, bulk- och skjuvmodul m.m. Även information om identifiering av mineraler.</value>
+  </data>
+  <data name="pro_additional_flashcards" xml:space="preserve">
+    <value>Ytterligare flashcards och synkronisering</value>
+  </data>
+  <data name="pro_additional_flashcards_descr" xml:space="preserve">
+    <value>Tillgång till ytterligare flashcards, fler liv och synkronisering av dina framsteg</value>
+  </data>
+  <data name="pro_additional_sync" xml:space="preserve">
+    <value>Synkronisering för anteckningar och framsteg</value>
+  </data>
+  <data name="pro_additional_sync_descr" xml:space="preserve">
+    <value>Aktivera synkronisering för anteckningar och framsteg för att underlätta dina studier på alla dina enheter</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>Ytterligare tabeller</value>
+  </data>
+  <data name="pro_additional_tables_descr" xml:space="preserve">
+    <value>Ytterligare tabeller inklusive en nuklidtabell, poisson's förhållandetabell, konstanttabell, geologitabell m.m., med fler som kommer i framtiden</value>
+  </data>
+  <data name="pro_additional_visualisations" xml:space="preserve">
+    <value>Fler visualiseringar</value>
+  </data>
+  <data name="pro_additional_visualisations_descr" xml:space="preserve">
+    <value>Få tillgång till fler visualiseringar i huvudtabellen såsom Poisson's förhållande, bulkmodul m.m.</value>
+  </data>
+  <data name="pro_already_purchased_check" xml:space="preserve">
+    <value>Kontrollera produkt på konto</value>
+  </data>
+  <data name="pro_already_purchased_title" xml:space="preserve">
+    <value>Har du redan köpt Atomic - Periodic Table PRO?</value>
+  </data>
+  <data name="pro_better_ai" xml:space="preserve">
+    <value>Fler AI-funktioner</value>
+  </data>
+  <data name="pro_better_ai_descr" xml:space="preserve">
+    <value>Lås upp alla funktioner i AI-assistenten, med quiz, tillgång till PRO-data och mycket mer</value>
+  </data>
+  <data name="pro_better_calculator" xml:space="preserve">
+    <value>Bättre kalkylator</value>
+  </data>
+  <data name="pro_better_calculator_descr" xml:space="preserve">
+    <value>En förbättrad kalkylator med möjlighet att spara molvikter för olika föreningar på favoritsidan.</value>
+  </data>
+  <data name="pro_descr" xml:space="preserve">
+    <value>'Atomic - Periodic Table' är en gratis och öppen källkodsapplikation som jag gjort på min fritid i Sverige. Genom att köpa PRO-versionen hjälper du till att stödja utvecklingen och får tillgång till extra data och funktioner!</value>
+  </data>
+  <data name="pro_features_descr" xml:space="preserve">
+    <value>Utforska några av de många funktionerna i PRO-versionen och vad de inkluderar.</value>
+  </data>
+  <data name="pro_features_table_description" xml:space="preserve">
+    <value>I följande tabell beskrivs de funktioner som ingår i versionerna GRATIS, PRO och PRO+:</value>
+  </data>
+  <data name="pro_features_title" xml:space="preserve">
+    <value>Funktioner i PRO-versionen:</value>
+  </data>
+  <data name="pro_get_more_out" xml:space="preserve">
+    <value>Få ut mer av Atomic</value>
+  </data>
+  <data name="pro_plus_badge_text" xml:space="preserve">
+    <value>Mest avancerad</value>
+  </data>
+  <data name="pro_plus_rewards" xml:space="preserve">
+    <value>PRO+ Belöningar: %s</value>
+  </data>
+  <data name="pro_plus_subtitle" xml:space="preserve">
+    <value>Lås upp avancerad data och ytterligare flashcards.</value>
+  </data>
+  <data name="pro_plus_user" xml:space="preserve">
+    <value>PRO+ ANVÄNDARE</value>
+  </data>
+  <data name="pro_plus_version" xml:space="preserve">
+    <value>PRO+-version</value>
+  </data>
+  <data name="pro_price_loading" xml:space="preserve">
+    <value>hämtar pris...</value>
+  </data>
+  <data name="pro_title" xml:space="preserve">
+    <value>PRO-version</value>
+  </data>
+  <data name="pro_upgrade_to_pro" xml:space="preserve">
+    <value>Uppgradera till PRO</value>
+  </data>
+  <data name="pro_user" xml:space="preserve">
+    <value>PRO ANVÄNDARE</value>
+  </data>
+  <data name="pro_user_badge" xml:space="preserve">
+    <value>PRO-användare</value>
+  </data>
+  <data name="pro_version" xml:space="preserve">
+    <value>PRO-version</value>
+  </data>
+  <data name="properties" xml:space="preserve">
+    <value>Egenskaper</value>
+  </data>
+  <data name="protons" xml:space="preserve">
+    <value>Protoner:</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Fråga</value>
+  </data>
+  <data name="question_appearance" xml:space="preserve">
+    <value>Vad är utseendet på %s?</value>
+  </data>
+  <data name="question_atomic_mass" xml:space="preserve">
+    <value>Vad är atommassan av %s?</value>
+  </data>
+  <data name="question_atomic_number" xml:space="preserve">
+    <value>Vad är atomnumret för %s?</value>
+  </data>
+  <data name="question_block" xml:space="preserve">
+    <value>Vilket block tillhör %s?</value>
+  </data>
+  <data name="question_boiling_point_celsius" xml:space="preserve">
+    <value>Vad är kokpunkten (°C) för %s?</value>
+  </data>
+  <data name="question_boiling_point_fahrenheit" xml:space="preserve">
+    <value>Vad är kokpunkten (°F) för %s?</value>
+  </data>
+  <data name="question_boiling_point_kelvin" xml:space="preserve">
+    <value>Vad är kokpunkten (Kelvin) för %s?</value>
+  </data>
+  <data name="question_brinell_hardness" xml:space="preserve">
+    <value>Vad är Brinellhårdheten för %s?</value>
+  </data>
+  <data name="question_crystal_structure" xml:space="preserve">
+    <value>Vad är kristallstrukturen för %s?</value>
+  </data>
+  <data name="question_density" xml:space="preserve">
+    <value>Vad är densiteten för %s?</value>
+  </data>
+  <data name="question_discovered_by" xml:space="preserve">
+    <value>Vem upptäckte %s?</value>
+  </data>
+  <data name="question_discovery_year" xml:space="preserve">
+    <value>Vilket år upptäcktes %s?</value>
+  </data>
+  <data name="question_earth_crust_abundance" xml:space="preserve">
+    <value>Vad är förekomsten av %s i jordskorpan? mg/kg (ppm)</value>
+  </data>
+  <data name="question_earth_soils_abundance" xml:space="preserve">
+    <value>Vad är förekomsten av %s i jordens jord? mg/kg (ppm)</value>
+  </data>
+  <data name="question_electrical_type" xml:space="preserve">
+    <value>Vad är den elektriska typen av %s?</value>
+  </data>
+  <data name="question_electronegativity" xml:space="preserve">
+    <value>Vad är elektronegativiteten för %s?</value>
+  </data>
+  <data name="question_element_group" xml:space="preserve">
+    <value>Vad är elementgruppen för %s?</value>
+  </data>
+  <data name="question_element_name" xml:space="preserve">
+    <value>Vad är namnet på %s?</value>
+  </data>
+  <data name="question_element_symbol" xml:space="preserve">
+    <value>Vad är symbolen för %s?</value>
+  </data>
+  <data name="question_group_of" xml:space="preserve">
+    <value>I vilken grupp finns %1$s?</value>
+  </data>
+  <data name="question_highest_atomic_mass" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst atommassa?</value>
+  </data>
+  <data name="question_highest_boiling_point" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst kokpunkt?</value>
+  </data>
+  <data name="question_highest_brinell_hardness" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst Brinell-hårdhet?</value>
+  </data>
+  <data name="question_highest_bulk_modulus" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst kompressionsmodul?</value>
+  </data>
+  <data name="question_highest_density" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst densitet?</value>
+  </data>
+  <data name="question_highest_electronegativity" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst elektronegativitet?</value>
+  </data>
+  <data name="question_highest_fusion_heat" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst smältvärme?</value>
+  </data>
+  <data name="question_highest_melting_point" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst smältpunkt?</value>
+  </data>
+  <data name="question_highest_mohs_hardness" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst Mohs-hårdhet?</value>
+  </data>
+  <data name="question_highest_shear_modulus" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst skjuvmodul?</value>
+  </data>
+  <data name="question_highest_speed_of_sound" xml:space="preserve">
+    <value>I vilket av dessa grundämnen färdas ljud snabbast?</value>
+  </data>
+  <data name="question_highest_thermal_conductivity" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst värmeledningsförmåga?</value>
+  </data>
+  <data name="question_highest_vaporization_heat" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst ångbildningsvärme?</value>
+  </data>
+  <data name="question_highest_vickers_hardness" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst Vickers-hårdhet?</value>
+  </data>
+  <data name="question_highest_young_modulus" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har högst elasticitetsmodul?</value>
+  </data>
+  <data name="question_isotope_decay" xml:space="preserve">
+    <value>Hur sönderfaller %1$s?</value>
+  </data>
+  <data name="question_isotope_longest_half_life" xml:space="preserve">
+    <value>Vilken av dessa isotoper har längst halveringstid?</value>
+  </data>
+  <data name="question_isotope_neutrons" xml:space="preserve">
+    <value>Hur många neutroner har %1$s?</value>
+  </data>
+  <data name="question_isotope_shortest_half_life" xml:space="preserve">
+    <value>Vilken av dessa isotoper har kortast halveringstid?</value>
+  </data>
+  <data name="question_isotope_stable" xml:space="preserve">
+    <value>Vilken av dessa isotoper är stabil?</value>
+  </data>
+  <data name="question_largest_atomic_radius" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har störst atomradie?</value>
+  </data>
+  <data name="question_largest_molar_volume" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har störst molvolym?</value>
+  </data>
+  <data name="question_lowest_atomic_mass" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst atommassa?</value>
+  </data>
+  <data name="question_lowest_boiling_point" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst kokpunkt?</value>
+  </data>
+  <data name="question_lowest_brinell_hardness" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst Brinell-hårdhet?</value>
+  </data>
+  <data name="question_lowest_bulk_modulus" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst kompressionsmodul?</value>
+  </data>
+  <data name="question_lowest_density" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst densitet?</value>
+  </data>
+  <data name="question_lowest_electronegativity" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst elektronegativitet?</value>
+  </data>
+  <data name="question_lowest_fusion_heat" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst smältvärme?</value>
+  </data>
+  <data name="question_lowest_melting_point" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst smältpunkt?</value>
+  </data>
+  <data name="question_lowest_mohs_hardness" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst Mohs-hårdhet?</value>
+  </data>
+  <data name="question_lowest_shear_modulus" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst skjuvmodul?</value>
+  </data>
+  <data name="question_lowest_speed_of_sound" xml:space="preserve">
+    <value>I vilket av dessa grundämnen färdas ljud långsammast?</value>
+  </data>
+  <data name="question_lowest_thermal_conductivity" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst värmeledningsförmåga?</value>
+  </data>
+  <data name="question_lowest_vaporization_heat" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst ångbildningsvärme?</value>
+  </data>
+  <data name="question_lowest_vickers_hardness" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst Vickers-hårdhet?</value>
+  </data>
+  <data name="question_lowest_young_modulus" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har lägst elasticitetsmodul?</value>
+  </data>
+  <data name="question_magnetic_type" xml:space="preserve">
+    <value>Vad är den magnetiska typen av %s?</value>
+  </data>
+  <data name="question_melting_point_celsius" xml:space="preserve">
+    <value>Vad är smältpunkten (°C) för %s?</value>
+  </data>
+  <data name="question_melting_point_fahrenheit" xml:space="preserve">
+    <value>Vad är smältpunkten (°F) för %s?</value>
+  </data>
+  <data name="question_melting_point_kelvin" xml:space="preserve">
+    <value>Vad är smältpunkten (Kelvin) för %s?</value>
+  </data>
+  <data name="question_mohs_hardness" xml:space="preserve">
+    <value>Vad är Mohs-hårdheten för %s?</value>
+  </data>
+  <data name="question_molar_mass" xml:space="preserve">
+    <value>Vad är molmassan för %1$s?</value>
+  </data>
+  <data name="question_neutron_cross_sectional" xml:space="preserve">
+    <value>Vad är neutrontvärrsnittet för %s?</value>
+  </data>
+  <data name="question_nfpa_diamond" xml:space="preserve">
+    <value>Vilket NFPA 704-faroromb har %s? (hälsa / brandfarlighet / instabilitet)</value>
+  </data>
+  <data name="question_nfpa_flammability" xml:space="preserve">
+    <value>Vilken NFPA 704-brandfarlighet har %s?</value>
+  </data>
+  <data name="question_nfpa_health" xml:space="preserve">
+    <value>Vilken NFPA 704-hälsofara har %s?</value>
+  </data>
+  <data name="question_nfpa_instability" xml:space="preserve">
+    <value>Vilken NFPA 704-instabilitet har %s?</value>
+  </data>
+  <data name="question_not_a_series" xml:space="preserve">
+    <value>Vilket av dessa är INTE en %1$s?</value>
+  </data>
+  <data name="question_period_of" xml:space="preserve">
+    <value>I vilken period finns %1$s?</value>
+  </data>
+  <data name="question_phase_stp" xml:space="preserve">
+    <value>Vad är fasen för %s vid STP?</value>
+  </data>
+  <data name="question_radioactive" xml:space="preserve">
+    <value>Är %s radioaktivt?</value>
+  </data>
+  <data name="question_smallest_atomic_radius" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har minst atomradie?</value>
+  </data>
+  <data name="question_smallest_molar_volume" xml:space="preserve">
+    <value>Vilket av dessa grundämnen har minst molvolym?</value>
+  </data>
+  <data name="question_specific_heat_capacity" xml:space="preserve">
+    <value>Vad är den specifika värmekapaciteten för %s?</value>
+  </data>
+  <data name="question_superconducting_point" xml:space="preserve">
+    <value>Vad är superledningspunkten för %s?</value>
+  </data>
+  <data name="question_text" xml:space="preserve">
+    <value>Frågetext</value>
+  </data>
+  <data name="question_valence_electrons" xml:space="preserve">
+    <value>Hur många valenselektroner har %1$s?</value>
+  </data>
+  <data name="question_vickers_hardness" xml:space="preserve">
+    <value>Vad är Vickers-hårdheten för %s?</value>
+  </data>
+  <data name="question_xp_detail" xml:space="preserve">
+    <value>XP för den här frågan: +%1$d</value>
+  </data>
+  <data name="questions_correct_xp" xml:space="preserve">
+    <value>Rätta frågor: +%dxp</value>
+  </data>
+  <data name="quiz_loading" xml:space="preserve">
+    <value>Förbereder frågor …</value>
+  </data>
+  <data name="quiz_no_questions" xml:space="preserve">
+    <value>Det gick inte att skapa frågor för det här spelet. Prova ett annat.</value>
+  </data>
+  <data name="radioactive" xml:space="preserve">
+    <value>Radioaktiv</value>
+  </data>
+  <data name="radioactive_colon" xml:space="preserve">
+    <value>Radioaktiv:</value>
+  </data>
+  <data name="random_element" xml:space="preserve">
+    <value>Slumpmässigt element</value>
+  </data>
+  <data name="rate" xml:space="preserve">
+    <value>Betygsätt</value>
+  </data>
+  <data name="rate_app" xml:space="preserve">
+    <value>Betygsätt app</value>
+  </data>
+  <data name="rate_app_description" xml:space="preserve">
+    <value>Låt oss veta vad du tycker om appen genom att betygsätta den på Play Store!</value>
+  </data>
+  <data name="reaction_balancer" xml:space="preserve">
+    <value>Reaktionsbalanserare:</value>
+  </data>
+  <data name="reactivity_hazard" xml:space="preserve">
+    <value>Reaktivitet:</value>
+  </data>
+  <data name="read_more" xml:space="preserve">
+    <value>..mer</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>Kemiska reaktioner</value>
+  </data>
+  <data name="requires_pro" xml:space="preserve">
+    <value>Kräver PRO-version</value>
+  </data>
+  <data name="reward_5pct_title" xml:space="preserve">
+    <value>+5% XP-bonus</value>
+  </data>
+  <data name="rewards_available" xml:space="preserve">
+    <value>Belöningar:</value>
+  </data>
+  <data name="save_calculations" xml:space="preserve">
+    <value>Spara beräkningar:</value>
+  </data>
+  <data name="save_equations" xml:space="preserve">
+    <value>Spara ekvationer:</value>
+  </data>
+  <data name="save_units" xml:space="preserve">
+    <value>Spara enheter:</value>
+  </data>
+  <data name="score_summary" xml:space="preserve">
+    <value>Poäng: %1$d/%2$d</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Sök element</value>
+  </data>
+  <data name="search_elements" xml:space="preserve">
+    <value>Sök efter element</value>
+  </data>
+  <data name="search_for_element" xml:space="preserve">
+    <value>Sök efter element</value>
+  </data>
+  <data name="searches" xml:space="preserve">
+    <value>Sökningar</value>
+  </data>
+  <data name="select_theme" xml:space="preserve">
+    <value>Välj tema</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
+  <data name="settings_favorite_content" xml:space="preserve">
+    <value>Anpassa favoritfältet</value>
+  </data>
+  <data name="settings_favorite_title" xml:space="preserve">
+    <value>Favoritfält</value>
+  </data>
+  <data name="settings_nav_bar_content" xml:space="preserve">
+    <value>Inaktiverar standardbeteendet</value>
+  </data>
+  <data name="settings_nav_bar_title" xml:space="preserve">
+    <value>Dölj bottenmeny automatiskt</value>
+  </data>
+  <data name="settings_offline_content" xml:space="preserve">
+    <value>Inaktiverar inläsning av bilder</value>
+  </data>
+  <data name="settings_offline_title" xml:space="preserve">
+    <value>Offline-läge</value>
+  </data>
+  <data name="settings_order_content" xml:space="preserve">
+    <value>Anpassa ordning på detaljkorten</value>
+  </data>
+  <data name="settings_order_title" xml:space="preserve">
+    <value>Detaljkortsordning</value>
+  </data>
+  <data name="settings_themes_content" xml:space="preserve">
+    <value>Välj tema</value>
+  </data>
+  <data name="settings_themes_title" xml:space="preserve">
+    <value>Teman</value>
+  </data>
+  <data name="settings_title" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
+  <data name="settings_unit_content" xml:space="preserve">
+    <value>Anpassa enheterna i huvudtabellen</value>
+  </data>
+  <data name="settings_unit_title" xml:space="preserve">
+    <value>Tabellenheter</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>Dela</value>
+  </data>
+  <data name="share_app" xml:space="preserve">
+    <value>Dela app</value>
+  </data>
+  <data name="share_app_description" xml:space="preserve">
+    <value>Om du tycker att appen är användbar, dela den med dina vänner och andra!</value>
+  </data>
+  <data name="shear_modulus" xml:space="preserve">
+    <value>Skjuvmodul</value>
+  </data>
+  <data name="short_voltage" xml:space="preserve">
+    <value>Spänning</value>
+  </data>
+  <data name="show_atomic_radius_calculated" xml:space="preserve">
+    <value>Visa atomradie (beräknad)</value>
+  </data>
+  <data name="show_atomic_radius_empirical" xml:space="preserve">
+    <value>Visa atomradie (empirisk)</value>
+  </data>
+  <data name="show_boiling_point" xml:space="preserve">
+    <value>Visa kokpunkt</value>
+  </data>
+  <data name="show_covalent_radius" xml:space="preserve">
+    <value>Visa kovalent radie</value>
+  </data>
+  <data name="show_density" xml:space="preserve">
+    <value>Visa densitet</value>
+  </data>
+  <data name="show_electronegativity" xml:space="preserve">
+    <value>Visa elektronegativitet</value>
+  </data>
+  <data name="show_fusion_heat" xml:space="preserve">
+    <value>Visa smältvärme</value>
+  </data>
+  <data name="show_if_radioactive" xml:space="preserve">
+    <value>Visa om grundämnet är radioaktivt</value>
+  </data>
+  <data name="show_melting_point" xml:space="preserve">
+    <value>Visa smältpunkt</value>
+  </data>
+  <data name="show_molar_mass" xml:space="preserve">
+    <value>Visa molmassa</value>
+  </data>
+  <data name="show_resistivity" xml:space="preserve">
+    <value>Visa resistivitet</value>
+  </data>
+  <data name="show_specific_heat_capacity" xml:space="preserve">
+    <value>Visa specifik värmekapacitet</value>
+  </data>
+  <data name="show_stp_phase" xml:space="preserve">
+    <value>Visa STP-fas</value>
+  </data>
+  <data name="show_van_der_waals_radius" xml:space="preserve">
+    <value>Visa Van Der Waals-radie</value>
+  </data>
+  <data name="show_vaporization_heat" xml:space="preserve">
+    <value>Visa förångningsvärme</value>
+  </data>
+  <data name="sign_in_failed" xml:space="preserve">
+    <value>Inloggning misslyckades</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>Logga ut</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>Loggar in…</value>
+  </data>
+  <data name="sol" xml:space="preserve">
+    <value>Löslighetstabell</value>
+  </data>
+  <data name="solubility_info_c" xml:space="preserve">
+    <value>"S: Löslig
+Ss: Svagt löslig
+I: Olöslig"</value>
+  </data>
+  <data name="solubility_info_t" xml:space="preserve">
+    <value>Löslighetshjälp</value>
+  </data>
+  <data name="solubility_table" xml:space="preserve">
+    <value>Löslighetstabell</value>
+  </data>
+  <data name="sources_settings_title" xml:space="preserve">
+    <value>Källor</value>
+  </data>
+  <data name="sources_wwe_title" xml:space="preserve">
+    <value>Vatten- och avloppsingenjörskonst</value>
+  </data>
+  <data name="specific_hazard" xml:space="preserve">
+    <value>Specifik fara:</value>
+  </data>
+  <data name="specific_heat_capacity" xml:space="preserve">
+    <value>Specifik värmekapacitet</value>
+  </data>
+  <data name="specific_heat_capacity_colon" xml:space="preserve">
+    <value>Specifik värmekapacitet:</value>
+  </data>
+  <data name="spelling" xml:space="preserve">
+    <value>Försök söka på ett annat ord eller kontrollera stavningen</value>
+  </data>
+  <data name="split_view" xml:space="preserve">
+    <value>Delad vy för element</value>
+  </data>
+  <data name="streak_label" xml:space="preserve">
+    <value>Svit: </value>
+  </data>
+  <data name="streak_notification_body" xml:space="preserve">
+    <value>Spela idag för att spara din %1$d-dagars serie.</value>
+  </data>
+  <data name="streak_notification_title" xml:space="preserve">
+    <value>Behåll din %1$d-dagars serie!</value>
+  </data>
+  <data name="submit_activity_title" xml:space="preserve">
+    <value>Skicka felrapport</value>
+  </data>
+  <data name="submit_bug" xml:space="preserve">
+    <value>Fel</value>
+  </data>
+  <data name="submit_data_i" xml:space="preserve">
+    <value>Datafel</value>
+  </data>
+  <data name="submit_data_issue" xml:space="preserve">
+    <value>Skicka datafel</value>
+  </data>
+  <data name="submit_issue" xml:space="preserve">
+    <value>Felrapport</value>
+  </data>
+  <data name="submit_question" xml:space="preserve">
+    <value>Fråga</value>
+  </data>
+  <data name="submit_send" xml:space="preserve">
+    <value>Skicka felrapport</value>
+  </data>
+  <data name="submit_text" xml:space="preserve">
+    <value>Rapportera buggar och datafel</value>
+  </data>
+  <data name="submit_title" xml:space="preserve">
+    <value>Rapportera problem</value>
+  </data>
+  <data name="superconducting_point" xml:space="preserve">
+    <value>Supraledande punkt</value>
+  </data>
+  <data name="superconducting_point_colon" xml:space="preserve">
+    <value>Supraledningspunkt:</value>
+  </data>
+  <data name="sync_available_pro_only" xml:space="preserve">
+    <value>Skaffa PRO eller PRO+ för att aktivera molnsynkronisering</value>
+  </data>
+  <data name="sync_complete" xml:space="preserve">
+    <value>Framsteg synkroniserat</value>
+  </data>
+  <data name="sync_data" xml:space="preserve">
+    <value>Synkronisera data:</value>
+  </data>
+  <data name="sync_failed" xml:space="preserve">
+    <value>Synkronisering misslyckades</value>
+  </data>
+  <data name="sync_status" xml:space="preserve">
+    <value>Ej synkroniserad</value>
+  </data>
+  <data name="syncing_progress" xml:space="preserve">
+    <value>Synkroniserar framsteg…</value>
+  </data>
+  <data name="system_default" xml:space="preserve">
+    <value>Systemstandard</value>
+  </data>
+  <data name="table_alloy" xml:space="preserve">
+    <value>Legeringstabell</value>
+  </data>
+  <data name="table_alloy_text" xml:space="preserve">
+    <value>En tabell med vanliga legeringar, vad de består av och varför de används i stället för den rena metallen</value>
+  </data>
+  <data name="table_constants_text" xml:space="preserve">
+    <value>En tabell som innehåller vanliga konstanter för beräkningar inklusive matematik, fysik, standardvattenflöden m.m.</value>
+  </data>
+  <data name="table_electrochemical" xml:space="preserve">
+    <value>Elektrokemisk serie</value>
+  </data>
+  <data name="table_electrochemical_text" xml:space="preserve">
+    <value>En tabell med en elektrokemisk serie, sorterad från (-) till (+) spänning</value>
+  </data>
+  <data name="table_equations" xml:space="preserve">
+    <value>Formler</value>
+  </data>
+  <data name="table_equations_text" xml:space="preserve">
+    <value>En tabell som innehåller formler för matematik, fysik och kemi</value>
+  </data>
+  <data name="table_geology" xml:space="preserve">
+    <value>Geologitabell</value>
+  </data>
+  <data name="table_geology_text" xml:space="preserve">
+    <value>En tabell med information om mineraler, bergarter och jordar</value>
+  </data>
+  <data name="table_ionization" xml:space="preserve">
+    <value>Joniseringsenergier</value>
+  </data>
+  <data name="table_ionization_text" xml:space="preserve">
+    <value>En tabell med olika grundämnens joniseringsenergier</value>
+  </data>
+  <data name="table_nuclide" xml:space="preserve">
+    <value>Nuklidtabell</value>
+  </data>
+  <data name="table_nuclide_text" xml:space="preserve">
+    <value>En tvådimensionell nuklidtabell, med färg som visar sönderfallstyp</value>
+  </data>
+  <data name="table_order_text" xml:space="preserve">
+    <value>Bestäm ordning för tabeller</value>
+  </data>
+  <data name="table_order_title" xml:space="preserve">
+    <value>Sortera tabellista</value>
+  </data>
+  <data name="table_ph" xml:space="preserve">
+    <value>pH-indikatorer</value>
+  </data>
+  <data name="table_ph_text" xml:space="preserve">
+    <value>En pH-indikatortabell för färger på olika syrabasnivåer</value>
+  </data>
+  <data name="table_poisson" xml:space="preserve">
+    <value>Poisson-förhållandetabell</value>
+  </data>
+  <data name="table_poisson_text" xml:space="preserve">
+    <value>En tabell med Poissons förhållande för olika bergarter, jordar, mineraler och andra material</value>
+  </data>
+  <data name="table_solubility" xml:space="preserve">
+    <value>Löslighetstabell</value>
+  </data>
+  <data name="table_solubility_text" xml:space="preserve">
+    <value>En tabell med information om olika ämnens löslighet</value>
+  </data>
+  <data name="table_units" xml:space="preserve">
+    <value>Tabellenheter</value>
+  </data>
+  <data name="take_notes_for_element" xml:space="preserve">
+    <value>Ta anteckningar för element</value>
+  </data>
+  <data name="temperatures" xml:space="preserve">
+    <value>Temperaturer</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>Teman</value>
+  </data>
+  <data name="thermodynamic_properties" xml:space="preserve">
+    <value>Termodynamiska Egenskaper</value>
+  </data>
+  <data name="time_up" xml:space="preserve">
+    <value>Tiden ute</value>
+  </data>
+  <data name="tool_btn_open" xml:space="preserve">
+    <value>Öppna verktyg</value>
+  </data>
+  <data name="tools" xml:space="preserve">
+    <value>Verktyg</value>
+  </data>
+  <data name="tools_title" xml:space="preserve">
+    <value>Verktyg (t.ex. kalkylator)</value>
+  </data>
+  <data name="total_xp_stat" xml:space="preserve">
+    <value>Total XP: %d</value>
+  </data>
+  <data name="total_xp_with_multiplier" xml:space="preserve">
+    <value>Totalt XP: %1$d (%2$s ×%3$s)</value>
+  </data>
+  <data name="try_another_search" xml:space="preserve">
+    <value>Försök söka på ett annat ord eller kontrollera stavningen.</value>
+  </data>
+  <data name="type_label" xml:space="preserve">
+    <value>Typ: </value>
+  </data>
+  <data name="uni" xml:space="preserve">
+    <value>Enhetsomvandlare</value>
+  </data>
+  <data name="unit_add_favorite" xml:space="preserve">
+    <value>Lägg till i favoriter:</value>
+  </data>
+  <data name="unit_category" xml:space="preserve">
+    <value>Kategori:</value>
+  </data>
+  <data name="unit_converter_title" xml:space="preserve">
+    <value>Enhetsomvandlare</value>
+  </data>
+  <data name="unit_description" xml:space="preserve">
+    <value>En enkel enhetsomvandlare för flera ändamål</value>
+  </data>
+  <data name="unit_display_formula" xml:space="preserve">
+    <value>Formeln visas här</value>
+  </data>
+  <data name="unit_enter_value" xml:space="preserve">
+    <value>Värde</value>
+  </data>
+  <data name="unit_favorites" xml:space="preserve">
+    <value>Favoriter:</value>
+  </data>
+  <data name="unit_formula" xml:space="preserve">
+    <value>Formel:</value>
+  </data>
+  <data name="unit_output_value" xml:space="preserve">
+    <value>Utdata</value>
+  </data>
+  <data name="unit_settings_title" xml:space="preserve">
+    <value>Tabellenheter</value>
+  </data>
+  <data name="unit_temperature" xml:space="preserve">
+    <value>Temperaturer</value>
+  </data>
+  <data name="unit_title" xml:space="preserve">
+    <value>Enhetsomvandlare</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>Okänd</value>
+  </data>
+  <data name="unlock_advanced_data_and_additional_flashcards" xml:space="preserve">
+    <value>Lås upp avancerad data och ytterligare flashcards.</value>
+  </data>
+  <data name="unlock_advanced_data_and_extra_atomic_content" xml:space="preserve">
+    <value>Lås upp avancerad data och extra atomärt innehåll.</value>
+  </data>
+  <data name="unlock_all_flashcards" xml:space="preserve">
+    <value>Lås upp alla Flashcards och funktioner</value>
+  </data>
+  <data name="upgrade_pro_plus_description" xml:space="preserve">
+    <value>Skaffa obegränsat antal liv och ytterligare flashcardspel som elektronegativitet, radioaktivitet, kristallstruktur och mer!</value>
+  </data>
+  <data name="upgrade_to_pro_plus" xml:space="preserve">
+    <value>Uppgradera till PRO+</value>
+  </data>
+  <data name="usage_statistics" xml:space="preserve">
+    <value>Användningsstatistik</value>
+  </data>
+  <data name="user_achievements" xml:space="preserve">
+    <value>Prestationer</value>
+  </data>
+  <data name="user_achievements_Text" xml:space="preserve">
+    <value>Följ dina framsteg i att lära dig världens grundämnen med prestationer</value>
+  </data>
+  <data name="user_img" xml:space="preserve">
+    <value>Byt profilbild</value>
+  </data>
+  <data name="user_signed_in_fmt" xml:space="preserve">
+    <value>Inloggad som %1$s</value>
+  </data>
+  <data name="user_signed_out" xml:space="preserve">
+    <value>Inte inloggad</value>
+  </data>
+  <data name="user_title" xml:space="preserve">
+    <value>Användarsida</value>
+  </data>
+  <data name="van_der_waals_radius_colon" xml:space="preserve">
+    <value>Van Der Waals-radie:</value>
+  </data>
+  <data name="vaporization_heat" xml:space="preserve">
+    <value>Ångbildningsvärme</value>
+  </data>
+  <data name="vaporization_heat_colon" xml:space="preserve">
+    <value>Förångningsvärme:</value>
+  </data>
+  <data name="vickers_hardness" xml:space="preserve">
+    <value>Vickers hårdhet</value>
+  </data>
+  <data name="vickers_hardness_colon" xml:space="preserve">
+    <value>Vickers hårdhet:</value>
+  </data>
+  <data name="view_all_isotopes" xml:space="preserve">
+    <value>Visa alla isotoper</value>
+  </data>
+  <data name="weight_calculator_title" xml:space="preserve">
+    <value>Viktkalkylator</value>
+  </data>
+  <data name="win_text" xml:space="preserve">
+    <value>Ladda ner appen för Windows</value>
+  </data>
+  <data name="win_title" xml:space="preserve">
+    <value>Skaffa Desktop-app</value>
+  </data>
+  <data name="wrong" xml:space="preserve">
+    <value>Fel</value>
+  </data>
+  <data name="xp_bonus" xml:space="preserve">
+    <value>+%d%% bonus XP</value>
+  </data>
+  <data name="xp_bonus_unlocked" xml:space="preserve">
+    <value>5 %% XP-bonus upplåst på nivå %1$d!</value>
+  </data>
+  <data name="year_discovered" xml:space="preserve">
+    <value>Upptäcktsår</value>
+  </data>
+  <data name="year_discovered_colon" xml:space="preserve">
+    <value>Upptäcktsår:</value>
+  </data>
+  <data name="you_have_full_lives" xml:space="preserve">
+    <value>Du har fulla liv!</value>
+  </data>
+  <data name="young_bulk_shear_modulus" xml:space="preserve">
+    <value>Youngs modul, bulkmodul, skjuvmodul:</value>
+  </data>
+  <data name="youngs_modulus" xml:space="preserve">
+    <value>Youngs modul</value>
+  </data>
+  <data name="your_answer" xml:space="preserve">
+    <value>Ditt svar: %s</value>
+  </data>
+</root>

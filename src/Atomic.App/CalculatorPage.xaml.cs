@@ -85,7 +85,7 @@ namespace Atomic.App
                 if (file != null)
                 {
                     using var stream = await file.OpenStreamForReadAsync();
-                    var loaded = await JsonSerializer.DeserializeAsync<List<FavoriteCompound>>(stream);
+                    var loaded = await JsonSerializer.DeserializeAsync(stream, ElementJsonContext.Default.ListFavoriteCompound);
                     if (loaded != null)
                     {
                         Favorites.Clear();
@@ -106,7 +106,7 @@ namespace Atomic.App
             {
                 var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(FavoritesFileName, CreationCollisionOption.ReplaceExisting);
                 using var stream = await file.OpenStreamForWriteAsync();
-                await JsonSerializer.SerializeAsync(stream, Favorites.ToList());
+                await JsonSerializer.SerializeAsync(stream, Favorites.ToList(), ElementJsonContext.Default.ListFavoriteCompound);
             }
             catch (Exception ex)
             {
@@ -230,27 +230,16 @@ namespace Atomic.App
             elementWeights.Clear();
             elementNames.Clear();
 
-            string elementsDir = System.IO.Path.Combine(AppContext.BaseDirectory, "Elements");
-            if (!Directory.Exists(elementsDir))
-            {
-                System.Diagnostics.Debug.WriteLine($"[DEBUG] Elements directory not found: {elementsDir}");
-                return;
-            }
-
-            foreach (var file in Directory.GetFiles(elementsDir, "*.json"))
+            foreach (var key in ElementRepository.Keys())
             {
                 try
                 {
-                    string json = File.ReadAllText(file);
-                    using var doc = JsonDocument.Parse(json);
-                    var root = doc.RootElement;
+                    if (ElementRepository.Raw(key) is not { } elementObj)
+                        continue;
 
-                    // If your JSON is an array, get the first object
-                    var elementObj = root.ValueKind == JsonValueKind.Array ? root[0] : root;
-
-                    string symbol = elementObj.TryGetProperty("short", out var shortProp) ? shortProp.GetString() : null;
-                    string name = elementObj.TryGetProperty("element", out var nameProp) ? nameProp.GetString() : symbol;
-                    string massRaw = elementObj.TryGetProperty("element_atomicmass", out var massProp) ? massProp.GetString() : null;
+                    string symbol = elementObj.Field("short");
+                    string name = elementObj.Field("element") ?? symbol;
+                    string massRaw = elementObj.Field("element_atomicmass");
 
                     // Remove " (u)" and any non-numeric characters
                     string massClean = massRaw?.Split(' ').FirstOrDefault();
@@ -265,7 +254,7 @@ namespace Atomic.App
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"[DEBUG] Error reading {file}: {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"[DEBUG] Error reading element {key}: {ex.Message}");
                 }
             }
         }

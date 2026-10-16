@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json.Nodes;
+using Atomic.App.Services;
 
 namespace Atomic.App
 {
@@ -51,29 +52,23 @@ namespace Atomic.App
 
             if (!string.IsNullOrEmpty(elementName))
             {
-                string jsonFilePath = Path.Combine(AppContext.BaseDirectory, "Elements", $"{elementName.ToLower()}.json");
-                if (File.Exists(jsonFilePath))
+                if (ElementRepository.Raw(elementName) is { } row)
                 {
-                    string jsonContent = File.ReadAllText(jsonFilePath);
-                    var node = JsonNode.Parse(jsonContent)?.AsObject();
-                    if (node != null)
+                    IsotopeDetails.Clear();
+                    int i = 1;
+                    while (row.TryGetProperty($"iso_{i}", out _))
                     {
-                        IsotopeDetails.Clear();
-                        int i = 1;
-                        while (node.ContainsKey($"iso_{i}"))
+                        IsotopeDetails.Add(new IsotopeDetail
                         {
-                            IsotopeDetails.Add(new IsotopeDetail
-                            {
-                                Name = node[$"iso_{i}"]?.ToString(),
-                                Mass = node[$"iso_mass_{i}"]?.ToString(),
-                                DecayType = node[$"decay_type_{i}"]?.ToString(),
-                                HalfLife = node[$"iso_half_{i}"]?.ToString(),
-                                Protons = node[$"iso_Z_{i}"]?.ToString(),
-                                Neutrons = node[$"iso_N_{i}"]?.ToString(),
-                                Nucleons = node[$"iso_A_{i}"]?.ToString()
-                            });
-                            i++;
-                        }
+                            Name = row.Field($"iso_{i}"),
+                            Mass = row.Field($"iso_mass_{i}"),
+                            DecayType = row.Field($"decay_type_{i}"),
+                            HalfLife = row.Field($"iso_half_{i}"),
+                            Protons = row.Field($"iso_Z_{i}"),
+                            Neutrons = row.Field($"iso_N_{i}"),
+                            Nucleons = row.Field($"iso_A_{i}")
+                        });
+                        i++;
                     }
                 }
             }

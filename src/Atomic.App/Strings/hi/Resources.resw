@@ -1,0 +1,3714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dictionary" xml:space="preserve">
+    <value>शब्दकोश</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>नया</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>तालिकाएँ</value>
+  </data>
+  <data name="about_app_name" xml:space="preserve">
+    <value>एटॉमिक - पीरियोडिक टेबल</value>
+  </data>
+  <data name="about_title" xml:space="preserve">
+    <value>परिचय</value>
+  </data>
+  <data name="abundance_crustal_rocks" xml:space="preserve">
+    <value>पर्पटी चट्टानों में</value>
+  </data>
+  <data name="abundance_earth_crust" xml:space="preserve">
+    <value>पृथ्वी की पर्पटी में</value>
+  </data>
+  <data name="abundance_earth_soils" xml:space="preserve">
+    <value>पृथ्वी की मिट्टी में</value>
+  </data>
+  <data name="abundance_human_body" xml:space="preserve">
+    <value>मानव शरीर में</value>
+  </data>
+  <data name="abundance_meteorites" xml:space="preserve">
+    <value>उल्कापिंडों में</value>
+  </data>
+  <data name="abundance_sea_water" xml:space="preserve">
+    <value>समुद्री जल में</value>
+  </data>
+  <data name="abundance_solar_system" xml:space="preserve">
+    <value>सौरमंडल के परमाणुओं में</value>
+  </data>
+  <data name="abundance_sun" xml:space="preserve">
+    <value>सूर्य के परमाणुओं में</value>
+  </data>
+  <data name="abundance_title" xml:space="preserve">
+    <value>प्रचुरता</value>
+  </data>
+  <data name="abundance_urban_soil" xml:space="preserve">
+    <value>शहरी मिट्टी में</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>खाता</value>
+  </data>
+  <data name="achievement_reached_prefix" xml:space="preserve">
+    <value>उपलब्धि प्राप्त: </value>
+  </data>
+  <data name="activity_alloy_title" xml:space="preserve">
+    <value>मिश्रधातुएँ</value>
+  </data>
+  <data name="activity_equations_title" xml:space="preserve">
+    <value>सूत्र</value>
+  </data>
+  <data name="activity_formulas_search" xml:space="preserve">
+    <value>सूत्र खोजें:</value>
+  </data>
+  <data name="activity_geology_mineral" xml:space="preserve">
+    <value>खनिज</value>
+  </data>
+  <data name="activity_geology_rock" xml:space="preserve">
+    <value>चट्टानें</value>
+  </data>
+  <data name="activity_geology_soil" xml:space="preserve">
+    <value>मिट्टियाँ</value>
+  </data>
+  <data name="activity_geology_title" xml:space="preserve">
+    <value>भूविज्ञान</value>
+  </data>
+  <data name="activity_io_title" xml:space="preserve">
+    <value>आयनन ऊर्जा</value>
+  </data>
+  <data name="activity_ph_acid" xml:space="preserve">
+    <value>अम्ल</value>
+  </data>
+  <data name="activity_ph_alkaline" xml:space="preserve">
+    <value>क्षारीय</value>
+  </data>
+  <data name="activity_ph_bromothymol_blue" xml:space="preserve">
+    <value>ब्रोमोथाइमोल ब्लू</value>
+  </data>
+  <data name="activity_ph_congo_red" xml:space="preserve">
+    <value>कोंगो रेड</value>
+  </data>
+  <data name="activity_ph_methyl_orange" xml:space="preserve">
+    <value>मेथिल-ऑरेंज</value>
+  </data>
+  <data name="activity_ph_neutral" xml:space="preserve">
+    <value>न्यूट्रल</value>
+  </data>
+  <data name="activity_ph_phenolphthalein" xml:space="preserve">
+    <value>फिनोल्फ्थलीन</value>
+  </data>
+  <data name="activity_ph_title" xml:space="preserve">
+    <value>pH सूचक</value>
+  </data>
+  <data name="activity_table_title" xml:space="preserve">
+    <value>तालिकाएँ</value>
+  </data>
+  <data name="activity_unit_title" xml:space="preserve">
+    <value>तालिका इकाइयाँ</value>
+  </data>
+  <data name="add_widget" xml:space="preserve">
+    <value>विजेट जोड़ें</value>
+  </data>
+  <data name="additional_ai_messages" xml:space="preserve">
+    <value>बढ़ी हुई AI संदेश सीमा:</value>
+  </data>
+  <data name="additional_data_item" xml:space="preserve">
+    <value>- अतिरिक्त डेटा:</value>
+  </data>
+  <data name="additional_flashcards_games" xml:space="preserve">
+    <value>अतिरिक्त फ्लैशकार्ड खेल:</value>
+  </data>
+  <data name="additional_properties_requires_pro" xml:space="preserve">
+    <value>अतिरिक्त गुणों के लिए PRO संस्करण की आवश्यकता है। अधिक डेटा और तालिकाओं को अनलॉक करने के लिए PRO प्राप्त करें:</value>
+  </data>
+  <data name="additional_tables_item" xml:space="preserve">
+    <value>- अतिरिक्त तालिकाएँ:</value>
+  </data>
+  <data name="ai_abundance_caption" xml:space="preserve">
+    <value>लघुगणकीय पैमाना। इकाईयाँ हर स्रोत के लिए अलग हैं और आपस में परिवर्तित नहीं होतीं।</value>
+  </data>
+  <data name="ai_abundance_header" xml:space="preserve">
+    <value>यहाँ ऐप के डेटाबेस से **%1$s** के लिए प्रचुरता डेटा दिया गया है:</value>
+  </data>
+  <data name="ai_abundance_relative" xml:space="preserve">
+    <value>(H=10¹² के सापेक्ष)</value>
+  </data>
+  <data name="ai_adv_header" xml:space="preserve">
+    <value>%1$s के उन्नत गुण:</value>
+  </data>
+  <data name="ai_aggregate_average" xml:space="preserve">
+    <value>औसत %1$s</value>
+  </data>
+  <data name="ai_aggregate_median" xml:space="preserve">
+    <value>माध्यिका %1$s</value>
+  </data>
+  <data name="ai_aggregate_missing_note" xml:space="preserve">
+    <value>%1$d मेल खाते हैं लेकिन उनका कोई दर्ज मान नहीं है, इसलिए उन्हें छोड़ दिया गया है।</value>
+  </data>
+  <data name="ai_aggregate_over" xml:space="preserve">
+    <value>%2$d मेल खाते तत्वों में से %1$d पर गणना की गई।</value>
+  </data>
+  <data name="ai_aggregate_result" xml:space="preserve">
+    <value>**%1$s**: %2$s</value>
+  </data>
+  <data name="ai_aggregate_spread" xml:space="preserve">
+    <value>%1$s (%2$s) से %3$s (%4$s) तक।</value>
+  </data>
+  <data name="ai_aggregate_sum" xml:space="preserve">
+    <value>कुल %1$s</value>
+  </data>
+  <data name="ai_all_covered" xml:space="preserve">
+    <value>हमने %1$s के बारे में बहुत कुछ कवर किया है! क्या आप जानते हैं?</value>
+  </data>
+  <data name="ai_another_isotope" xml:space="preserve">
+    <value> एक अन्य आइसोटोप %1$s है।</value>
+  </data>
+  <data name="ai_appears_as" xml:space="preserve">
+    <value>%1$s ऐसा दिखता है: %2$s</value>
+  </data>
+  <data name="ai_aspects_not_compared" xml:space="preserve">
+    <value>मैं संग्रहीत डेटा से %1$s की तुलना नहीं कर सकता — यह कोई दर्ज गुण नहीं है। किसी एक तत्व के लिए पूछें और मैं समझा सकता हूँ।</value>
+  </data>
+  <data name="ai_avogadro_note" xml:space="preserve">
+    <value>आवोगाद्रो संख्या का उपयोग करते हुए, प्रति मोल 6.02214076 × 10²³।</value>
+  </data>
+  <data name="ai_beta_badge" xml:space="preserve">
+    <value>बीटा</value>
+  </data>
+  <data name="ai_bio_role_header" xml:space="preserve">
+    <value>इसकी जैविक भूमिका के संबंध में, मुझे **%1$s** के बारे में यह मिला है:</value>
+  </data>
+  <data name="ai_block_d" xml:space="preserve">
+    <value>d-ब्लॉक में समूह 3 से 12 तक की संक्रमण धातुएं होती हैं।</value>
+  </data>
+  <data name="ai_block_f" xml:space="preserve">
+    <value>f-ब्लॉक में लैंथेनाइड और एक्टिनाइड श्रृंखला होती है, जो आमतौर पर मुख्य तालिका के नीचे दिखाई जाती है।</value>
+  </data>
+  <data name="ai_block_generic" xml:space="preserve">
+    <value>मुझे यकीन नहीं है कि आपका मतलब किस ब्लॉक से है। मैं s, p, d और f ब्लॉक के बारे में जानता हूँ!</value>
+  </data>
+  <data name="ai_block_p" xml:space="preserve">
+    <value>p-ब्लॉक में समूह 13 से 18 शामिल हैं, जिनमें सभी अधातुएं (H और He को छोड़कर), उपधातुएं और उत्तर-संक्रमण धातुएं शामिल हैं।</value>
+  </data>
+  <data name="ai_block_s" xml:space="preserve">
+    <value>s-ब्लॉक में पहले दो समूह होते हैं: क्षार धातुएं, क्षारीय मृदा धातुएं, साथ ही हाइड्रोजन और हीलियम।</value>
+  </data>
+  <data name="ai_card_pro_locked" xml:space="preserve">
+    <value>दृश्य उत्तर अनलॉक करें</value>
+  </data>
+  <data name="ai_chat_setting" xml:space="preserve">
+    <value>AI चैट सहायक सक्षम करें</value>
+  </data>
+  <data name="ai_chat_setting_description" xml:space="preserve">
+    <value>तत्वों के बारे में प्रश्नों के उत्तर देने के लिए AI सहायक को अनुमति दें</value>
+  </data>
+  <data name="ai_check_isotope_table" xml:space="preserve">
+    <value>%1$s के विभिन्न आइसोटोप हैं। आप पूरी सूची के लिए विस्तृत आइसोटोप तालिका देख सकते हैं!</value>
+  </data>
+  <data name="ai_common_isotopes" xml:space="preserve">
+    <value>%1$s के सामान्य आइसोटोप में %2$s शामिल हैं।</value>
+  </data>
+  <data name="ai_comparative_no" xml:space="preserve">
+    <value>**नहीं** — यह उल्टा है। %5$s में %1$s (%2$s) %3$s (%4$s) से आगे है।</value>
+  </data>
+  <data name="ai_comparative_ratio" xml:space="preserve">
+    <value>%1$s का %5$s %3$s का **%2$s गुना** है — %4$s।</value>
+  </data>
+  <data name="ai_comparative_winner" xml:space="preserve">
+    <value>**%1$s.** इसका %5$s %2$s है, जबकि %3$s का %4$s है।</value>
+  </data>
+  <data name="ai_comparative_yes" xml:space="preserve">
+    <value>**हाँ।** %5$s में %1$s (%2$s) %3$s (%4$s) से आगे है।</value>
+  </data>
+  <data name="ai_compare_all_same" xml:space="preserve">
+    <value>
+• **%1$s:** सभी %2$s%3$s हैं।</value>
+  </data>
+  <data name="ai_compare_difference_value" xml:space="preserve">
+    <value>उनके बीच **%1$s%2$s** का अंतर है।</value>
+  </data>
+  <data name="ai_compare_mixed_item" xml:space="preserve">
+    <value>%1$s %2$s%3$s है</value>
+  </data>
+  <data name="ai_compare_property_row" xml:space="preserve">
+    <value>• %1$s: %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_the_others" xml:space="preserve">
+    <value>अन्य</value>
+  </data>
+  <data name="ai_comparing_title" xml:space="preserve">
+    <value>%1$s की तुलना:</value>
+  </data>
+  <data name="ai_comparison_all" xml:space="preserve">
+    <value>सभी </value>
+  </data>
+  <data name="ai_comparison_and" xml:space="preserve">
+    <value> और </value>
+  </data>
+  <data name="ai_comparison_are" xml:space="preserve">
+    <value> हैं </value>
+  </data>
+  <data name="ai_comparison_but" xml:space="preserve">
+    <value>, लेकिन </value>
+  </data>
+  <data name="ai_comparison_is" xml:space="preserve">
+    <value> है </value>
+  </data>
+  <data name="ai_comparison_verdict" xml:space="preserve">
+    <value>तुलना की गई %3$d विशेषताओं में से %2$d में %1$s का मान अधिक है।</value>
+  </data>
+  <data name="ai_comparison_vs" xml:space="preserve">
+    <value> बनाम </value>
+  </data>
+  <data name="ai_comparison_while" xml:space="preserve">
+    <value>, जबकि </value>
+  </data>
+  <data name="ai_composition_header" xml:space="preserve">
+    <value>%1$s की संरचना</value>
+  </data>
+  <data name="ai_composition_row" xml:space="preserve">
+    <value>• **%1$s** ×%2$d — %3$s g/mol (%4$s%%)</value>
+  </data>
+  <data name="ai_concept_atomic_number" xml:space="preserve">
+    <value>**परमाणु क्रमांक** एक परमाणु में प्रोटॉन की संख्या है। यह मुख्य तरीका है जिससे तत्वों को आवर्त सारणी में व्यवस्थित किया जाता है।</value>
+  </data>
+  <data name="ai_concept_electron" xml:space="preserve">
+    <value>**इलेक्ट्रॉन** नकारात्मक रूप से चार्ज किए गए कण होते हैं जो नाभिक की परिक्रमा करते हैं। वे बॉन्डिंग और बिजली में शामिल होते हैं।</value>
+  </data>
+  <data name="ai_concept_electronegativity" xml:space="preserve">
+    <value>**इलेक्ट्रोनगेटिविटी** मापती है कि एक परमाणु रासायनिक बंधन में इलेक्ट्रॉनों को अपनी ओर कितनी मजबूती से खींचता है। फ्लोरीन सबसे अधिक इलेक्ट्रोनगेटिव है!</value>
+  </data>
+  <data name="ai_concept_generic" xml:space="preserve">
+    <value>यह रसायन विज्ञान में एक मुख्य अवधारणा है! आप इसके किस भाग के बारे में गहराई से जानना चाहेंगे? मैं प्रोटॉन, बॉन्डिंग, रेडियोधर्मिता और बहुत कुछ के बारे में जानता हूँ।</value>
+  </data>
+  <data name="ai_concept_group" xml:space="preserve">
+    <value>एक **समूह** एक ऊर्ध्वाधर स्तंभ है। एक समूह के तत्वों में आमतौर पर समान रासायनिक गुण और संयोजी इलेक्ट्रॉनों की संख्या समान होती है।</value>
+  </data>
+  <data name="ai_concept_ionization" xml:space="preserve">
+    <value>**आयनन ऊर्जा** एक परमाणु से एक इलेक्ट्रॉन को निकालने के लिए आवश्यक ऊर्जा है। यह आमतौर पर आवर्त सारणी में दाईं ओर बढ़ने पर बढ़ती है।</value>
+  </data>
+  <data name="ai_concept_isotope" xml:space="preserve">
+    <value>एक **आइसोटोप** एक ही प्रोटॉन संख्या वाले तत्व का एक रूप है लेकिन न्यूट्रॉन की संख्या अलग होती है। यह इसके परमाणु द्रव्यमान को प्रभावित करता है!</value>
+  </data>
+  <data name="ai_concept_neutron" xml:space="preserve">
+    <value>**न्यूट्रॉन** नाभिक में तटस्थ कण होते हैं। वे द्रव्यमान जोड़ते हैं और नाभिक को स्थिर करने में मदद करते हैं, विशेष रूप से भारी तत्वों में।</value>
+  </data>
+  <data name="ai_concept_orbital" xml:space="preserve">
+    <value>**कक्षक** अंतरिक्ष में वे क्षेत्र हैं जहाँ इलेक्ट्रॉन मिलने की उच्च संभावना होती है। इनके आकार s, p, d और f जैसे होते हैं।</value>
+  </data>
+  <data name="ai_concept_period" xml:space="preserve">
+    <value>एक **आवर्त** आवर्त सारणी में एक क्षैतिज पंक्ति है। एक ही आवर्त के तत्वों में इलेक्ट्रॉन कोशों की संख्या समान होती है।</value>
+  </data>
+  <data name="ai_concept_proton" xml:space="preserve">
+    <value>**प्रोटॉन** नाभिक में सकारात्मक रूप से चार्ज किए गए कण होते हैं। प्रोटॉन की संख्या (परमाणु क्रमांक) परिभाषित करती है कि वह कौन सा तत्व है!</value>
+  </data>
+  <data name="ai_concept_radioactivity" xml:space="preserve">
+    <value>**रैडियोधर्मिता** वह प्रक्रिया है जिसके द्वारा एक अस्थिर परमाणु नाभिक विकिरण उत्सर्जित करके ऊर्जा खो देता है। यूरेनियम जैसे तत्व इसके लिए प्रसिद्ध हैं!</value>
+  </data>
+  <data name="ai_concept_shell" xml:space="preserve">
+    <value>इलेक्ट्रॉन नाभिक के चारों ओर **कोश** (ऊर्जा स्तर) में रहते हैं। विन्यास तालिका में तत्व की स्थिति निर्धारित करता है।</value>
+  </data>
+  <data name="ai_concept_valence" xml:space="preserve">
+    <value>**संयोजी इलेक्ट्रॉन** परमाणु के सबसे बाहरी कोश के इलेक्ट्रॉन होते हैं। वे निर्धारित करते हैं कि एक तत्व दूसरों के साथ कैसे प्रतिक्रिया करता है।</value>
+  </data>
+  <data name="ai_config_is" xml:space="preserve">
+    <value>इसका इलेक्ट्रॉन विन्यास %1$s है।</value>
+  </data>
+  <data name="ai_connector_question_1" xml:space="preserve">
+    <value>आपके प्रश्न का उत्तर देने के लिए,</value>
+  </data>
+  <data name="ai_connector_question_2" xml:space="preserve">
+    <value>मैं समझ गया। यहाँ मुझे क्या मिला:</value>
+  </data>
+  <data name="ai_connector_question_3" xml:space="preserve">
+    <value>उस संबंध में,</value>
+  </data>
+  <data name="ai_connector_why_1" xml:space="preserve">
+    <value>यह एक बढ़िया फॉलो-अप है!</value>
+  </data>
+  <data name="ai_connector_why_2" xml:space="preserve">
+    <value>अच्छा बिंदु। मुझे और विस्तार से समझाने दें।</value>
+  </data>
+  <data name="ai_connector_why_3" xml:space="preserve">
+    <value>जो मैंने अभी कहा उस पर विस्तार करते हुए,</value>
+  </data>
+  <data name="ai_context_lost" xml:space="preserve">
+    <value>संदर्भ खो गया</value>
+  </data>
+  <data name="ai_context_series" xml:space="preserve">
+    <value>%1$s %2$s है, आवर्त %3$d में।</value>
+  </data>
+  <data name="ai_converted_from" xml:space="preserve">
+    <value>दर्ज मान %1$s से परिवर्तित।</value>
+  </data>
+  <data name="ai_count_result" xml:space="preserve">
+    <value>**%1$d** तत्व मेल खाते हैं।</value>
+  </data>
+  <data name="ai_coverage_note" xml:space="preserve">
+    <value>%3$d तत्वों में से %2$d के लिए %1$s दर्ज है।</value>
+  </data>
+  <data name="ai_covered_all" xml:space="preserve">
+    <value>हमने **%1$s** के बारे में बहुत कुछ कवर किया है!</value>
+  </data>
+  <data name="ai_dataset_english_note" xml:space="preserve">
+    <value>*यह संदर्भ प्रविष्टि केवल अंग्रेज़ी में उपलब्ध है।*</value>
+  </data>
+  <data name="ai_decay_effectively_none" xml:space="preserve">
+    <value>%2$s %3$s के बाद %1$s में व्यावहारिक रूप से कुछ नहीं बचता।</value>
+  </data>
+  <data name="ai_decay_elapsed" xml:space="preserve">
+    <value>%3$s के **%1$s g** से **%2$s g** तक पहुँचने में लगभग **%4$s %5$s** लगते हैं।</value>
+  </data>
+  <data name="ai_decay_half_lives" xml:space="preserve">
+    <value>उस समय में %1$s **%2$s** अर्ध-आयु से गुज़रता है, और नमूने का लगभग **%3$s%%** बचता है।</value>
+  </data>
+  <data name="ai_decay_no_half_life" xml:space="preserve">
+    <value>%1$s सूचीबद्ध है, लेकिन इसकी अर्ध-आयु "%2$s" दर्ज है, इसलिए मैं क्षय की गणना नहीं कर सकता।</value>
+  </data>
+  <data name="ai_decay_remaining" xml:space="preserve">
+    <value>%5$s %6$s के बाद %4$s के मूल %3$s g में से लगभग **%1$s %2$s** बचता है।</value>
+  </data>
+  <data name="ai_decay_stable" xml:space="preserve">
+    <value>%1$s स्थायी है — यह क्षय नहीं करता, इसलिए समय के साथ कुछ भी कम नहीं होता।</value>
+  </data>
+  <data name="ai_decay_unlisted" xml:space="preserve">
+    <value>ऐप उस तत्व के समस्थानिकों में %1$s को सूचीबद्ध नहीं करता, इसलिए मेरे पास इसकी अर्ध-आयु नहीं है।</value>
+  </data>
+  <data name="ai_decay_working_half_life" xml:space="preserve">
+    <value>%1$s की अर्ध-आयु: %2$s</value>
+  </data>
+  <data name="ai_decay_working_header" xml:space="preserve">
+    <value>गणना</value>
+  </data>
+  <data name="ai_decay_working_n" xml:space="preserve">
+    <value>n = t / t½ = %1$s → 2⁻ⁿ = %2$s%%</value>
+  </data>
+  <data name="ai_difference_group" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_mass" xml:space="preserve">
+    <value>• **%1$s**: %2$s काफी भारी है।</value>
+  </data>
+  <data name="ai_difference_need_two" xml:space="preserve">
+    <value>मुझे उनके अंतर को समझाने के लिए दो तत्वों की आवश्यकता है!</value>
+  </data>
+  <data name="ai_difference_phase" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_similar" xml:space="preserve">
+    <value>%1$s और %2$s काफी समान हैं! वे दोनों %5$s श्रृंखला में %3$s %4$s तत्व हैं।</value>
+  </data>
+  <data name="ai_difference_type" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_dilution_add_solvent" xml:space="preserve">
+    <value>**%1$s mL** विलायक मिलाएँ।</value>
+  </data>
+  <data name="ai_dilution_result" xml:space="preserve">
+    <value>**%2$s mL** से **%1$s mol/L** को तनु करने पर **%4$s mL** में **%3$s mol/L** मिलता है।</value>
+  </data>
+  <data name="ai_discovered_by" xml:space="preserve">
+    <value>%1$s की खोज %2$s ने %3$s में की थी।</value>
+  </data>
+  <data name="ai_discovered_in" xml:space="preserve">
+    <value>%1$s की खोज %2$s में हुई थी।</value>
+  </data>
+  <data name="ai_elec_mag_header" xml:space="preserve">
+    <value>Electrical &amp; Magnetic properties of %1$s:</value>
+  </data>
+  <data name="ai_elec_mag_properties" xml:space="preserve">
+    <value>**%1$s** के विद्युत और चुंबकीय गुण:</value>
+  </data>
+  <data name="ai_element" xml:space="preserve">
+    <value>तत्व</value>
+  </data>
+  <data name="ai_element_overview_appearance" xml:space="preserve">
+    <value> यह आमतौर पर %1$s के रूप में दिखता है।</value>
+  </data>
+  <data name="ai_element_overview_electrons" xml:space="preserve">
+    <value> इसके नाभिक के चारों ओर %1$s इलेक्ट्रॉन चक्कर लगाते हैं।</value>
+  </data>
+  <data name="ai_element_overview_intro" xml:space="preserve">
+    <value>¡%1$s %2$s (%3$s) एक दिलचस्प तत्व है! इसका परमाणु क्रमांक %4$s है और यह %5$s समूह से संबंधित है।</value>
+  </data>
+  <data name="ai_element_overview_isotopes" xml:space="preserve">
+    <value> %1$s के एक परमाणु में %2$s प्रोटॉन, %3$s इलेक्ट्रॉन और आमतौर पर %4$s न्यूट्रॉन होते हैं।</value>
+  </data>
+  <data name="ai_element_overview_series" xml:space="preserve">
+    <value> यह %1$s श्रृंखला का हिस्सा है।</value>
+  </data>
+  <data name="ai_emission_spectrum" xml:space="preserve">
+    <value>यह %1$s का उत्सर्जन स्पेक्ट्रम है: वह प्रकाश जो इसके परमाणु तब छोड़ते हैं जब उत्तेजित इलेक्ट्रॉन वापस नीचे गिरते हैं। ऐप इसे एक छवि के रूप में रखता है, इसलिए मैं पैटर्न दिखा सकता हूँ पर अलग-अलग रेखाओं के नाम नहीं बता सकता।</value>
+  </data>
+  <data name="ai_encouragement" xml:space="preserve">
+    <value>अच्छा सवाल! 🌟</value>
+  </data>
+  <data name="ai_eqn_no_desc" xml:space="preserve">
+    <value>ऐप इस समीकरण को एक दृश्य संदर्भ के रूप में शामिल करता है।</value>
+  </data>
+  <data name="ai_equation_balanced" xml:space="preserve">
+    <value>**%1$s → %2$s**</value>
+  </data>
+  <data name="ai_equation_check_header" xml:space="preserve">
+    <value>परमाणु जाँच</value>
+  </data>
+  <data name="ai_equation_no_solution" xml:space="preserve">
+    <value>इस समीकरण का पूर्ण धनात्मक गुणांकों के साथ कोई संतुलन नहीं है।</value>
+  </data>
+  <data name="ai_equation_one_sided" xml:space="preserve">
+    <value>यह समीकरण संतुलित नहीं हो सकता: एक तत्व केवल एक ओर है, इसलिए कोई गुणांक इसे बराबर नहीं कर सकता।</value>
+  </data>
+  <data name="ai_equation_one_sided_named" xml:space="preserve">
+    <value>यह समीकरण संतुलित नहीं हो सकता: %1$s केवल एक ओर है, इसलिए कोई गुणांक इसे बराबर नहीं कर सकता।</value>
+  </data>
+  <data name="ai_equation_parse_failed" xml:space="preserve">
+    <value>मैं इसे रासायनिक समीकरण के रूप में नहीं पढ़ सका। Fe + O2 -&gt; Fe2O3 जैसा रूप आज़माएँ।</value>
+  </data>
+  <data name="ai_equation_tally_row" xml:space="preserve">
+    <value>• **%1$s** — बाईं ओर %2$d, दाईं ओर %3$d</value>
+  </data>
+  <data name="ai_equation_too_large" xml:space="preserve">
+    <value>इस समीकरण के लिए ऐसे गुणांक चाहिए जो किसी वास्तविक अभिक्रिया के लिए बहुत बड़े हैं। सूत्र जाँचें।</value>
+  </data>
+  <data name="ai_equation_underdetermined" xml:space="preserve">
+    <value>इस समीकरण के एक से अधिक स्वतंत्र संतुलन हैं — यह एक में लिखी दो अभिक्रियाओं जैसा है। इसे अलग करें, मैं हर एक को संतुलित कर दूँगा।</value>
+  </data>
+  <data name="ai_etymology_header" xml:space="preserve">
+    <value>**%1$s** नाम की एक दिलचस्प उत्पत्ति है:</value>
+  </data>
+  <data name="ai_facts.0" xml:space="preserve">
+    <value>क्या आप जानते हैं? पृथ्वी की पपड़ी में ऑक्सीजन सबसे प्रचुर मात्रा में पाया जाने वाला तत्व है!</value>
+  </data>
+  <data name="ai_facts.1" xml:space="preserve">
+    <value>मज़ेदार तथ्य: सोना कभी नहीं जंग खाता या खराब नहीं होता। यह हमेशा चमकदार रहता है!</value>
+  </data>
+  <data name="ai_facts.2" xml:space="preserve">
+    <value>यहाँ कुछ शानदार है: हाइड्रोजन ब्रह्मांड में सबसे प्रचुर मात्रा में पाया जाने वाला तत्व है! 🌌</value>
+  </data>
+  <data name="ai_facts.3" xml:space="preserve">
+    <value>अद्भुत: कार्बन पृथ्वी पर सभी ज्ञात जीवन का आधार है!</value>
+  </data>
+  <data name="ai_facts.4" xml:space="preserve">
+    <value>दिलचस्प: हीलियम एकमात्र ऐसा तत्व है जो सामान्य दबाव में ठोस नहीं होता!</value>
+  </data>
+  <data name="ai_facts.5" xml:space="preserve">
+    <value>मज़ेदार तथ्य: पारा एकमात्र ऐसा धातु तत्व है जो कमरे के तापमान पर तरल होता है! 💧</value>
+  </data>
+  <data name="ai_facts.6" xml:space="preserve">
+    <value>क्या आप जानते हैं? फ्रांसियम तत्व इतना रेडियोधर्मी है कि यह तुरंत वाष्पित हो जाएगा!</value>
+  </data>
+  <data name="ai_facts.7" xml:space="preserve">
+    <value>शानदार: हीरा और ग्रेफाइट दोनों शुद्ध कार्बन से बने होते हैं लेकिन उनके गुण पूरी तरह से अलग होते हैं!</value>
+  </data>
+  <data name="ai_facts.8" xml:space="preserve">
+    <value>अद्भुत: सोने के एक औंस को कूटकर 300 वर्ग फुट की चादर बनाई जा सकती है!</value>
+  </data>
+  <data name="ai_facts.9" xml:space="preserve">
+    <value>दिलचस्प: नियॉन वास्तव में सामान्य परिस्थितियों में कोई रासायनिक यौगिक नहीं बनाता है!</value>
+  </data>
+  <data name="ai_feature_achievements" xml:space="preserve">
+    <value>उपयोगकर्ता पृष्ठ पर **उपलब्धियों** और उपयोग आँकड़ों से अपनी प्रगति देखें।</value>
+  </data>
+  <data name="ai_feature_capabilities" xml:space="preserve">
+    <value>मैं तत्वों के गुण देख और तुलना कर सकता हूँ, समीकरण संतुलित कर सकता हूँ, मोलर द्रव्यमान और विलयन सांद्रता निकाल सकता हूँ, इकाइयाँ बदल सकता हूँ, और क्षय गणना कर सकता हूँ। किसी तत्व के बारे में पूछें, या कोई सूत्र या समीकरण लिखें।</value>
+  </data>
+  <data name="ai_feature_emission_spectrum" xml:space="preserve">
+    <value>आप किसी तत्व का **उत्सर्जन स्पेक्ट्रम** उसके विवरण पैनल में देख सकते हैं। यह उस तत्व द्वारा उत्पन्न प्रकाश का अनोखा पैटर्न दिखाता है।</value>
+  </data>
+  <data name="ai_feature_flashcards" xml:space="preserve">
+    <value>ऐप में तत्व प्रतीकों, परमाणु द्रव्यमानों और वर्गीकरणों के लिए कई **फ्लैशकार्ड मिनी-गेम** हैं, जिनमें स्तर और XP भी हैं।</value>
+  </data>
+  <data name="ai_feature_ideal_gas" xml:space="preserve">
+    <value>PV = nRT से दाब, आयतन, मोल या तापमान निकालने के लिए **आदर्श गैस कैलकुलेटर** का उपयोग करें।</value>
+  </data>
+  <data name="ai_feature_molar_mass" xml:space="preserve">
+    <value>जटिल यौगिकों का अणुभार निकालने के लिए एक अंतर्निहित **मोलर द्रव्यमान कैलकुलेटर** है। मैं यहाँ भी कर सकता हूँ — बस सूत्र दीजिए।</value>
+  </data>
+  <data name="ai_feature_nuclide_table" xml:space="preserve">
+    <value>ऐप में एक विस्तृत **न्यूक्लाइड सारणी** है जो सभी तत्वों के समस्थानिक दिखाती है, क्षय प्रकार (अल्फा, बीटा आदि) के अनुसार रंगों में।</value>
+  </data>
+  <data name="ai_feature_reaction_balancer" xml:space="preserve">
+    <value>**रासायनिक अभिक्रिया संतुलक** समीकरण संतुलित करने और पसंदीदा सहेजने में मदद करता है। आप यहाँ भी पूछ सकते हैं — जैसे Fe + O2 -&gt; Fe2O3 लिखें।</value>
+  </data>
+  <data name="ai_feature_unit_converter" xml:space="preserve">
+    <value>ऐप में तापमान और अन्य वैज्ञानिक इकाइयों के लिए एक **इकाई परिवर्तक** है। आप मुझसे भी पूछ सकते हैं, जैसे "500 K को °C में बदलें"।</value>
+  </data>
+  <data name="ai_field_abundance_crustal_rocks" xml:space="preserve">
+    <value>भूपर्पटी की चट्टानों में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_earth_crust" xml:space="preserve">
+    <value>भूपर्पटी में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_earth_soils" xml:space="preserve">
+    <value>मिट्टी में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_human_body" xml:space="preserve">
+    <value>मानव शरीर में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_meteorites" xml:space="preserve">
+    <value>उल्कापिंडों में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_sea_water" xml:space="preserve">
+    <value>समुद्री जल में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_solar_system" xml:space="preserve">
+    <value>सौर मंडल में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_sun" xml:space="preserve">
+    <value>सूर्य में बहुलता</value>
+  </data>
+  <data name="ai_field_abundance_urban_soils" xml:space="preserve">
+    <value>शहरी मिट्टी में बहुलता</value>
+  </data>
+  <data name="ai_field_nfpa_flammability" xml:space="preserve">
+    <value>ज्वलनशीलता रेटिंग</value>
+  </data>
+  <data name="ai_field_nfpa_health" xml:space="preserve">
+    <value>स्वास्थ्य रेटिंग</value>
+  </data>
+  <data name="ai_field_nfpa_instability" xml:space="preserve">
+    <value>अस्थिरता रेटिंग</value>
+  </data>
+  <data name="ai_field_nfpa_special" xml:space="preserve">
+    <value>विशेष खतरा</value>
+  </data>
+  <data name="ai_filter_matched" xml:space="preserve">
+    <value>%1$d तत्व मेल खाते हैं:</value>
+  </data>
+  <data name="ai_filter_none" xml:space="preserve">
+    <value>उन शर्तों से कोई तत्व मेल नहीं खाता।</value>
+  </data>
+  <data name="ai_filter_top" xml:space="preserve">
+    <value>%2$d मेल खाते तत्वों में से शीर्ष %1$d:</value>
+  </data>
+  <data name="ai_formula_c6h12o6" xml:space="preserve">
+    <value>C6H12O6 ग्लूकोज है, एक साधारण शर्करा जो जीवित चीजों को ऊर्जा प्रदान करती है। इसमें 6 कार्बन, 12 हाइड्रोजन और 6 ऑक्सीजन होते हैं।</value>
+  </data>
+  <data name="ai_formula_ch4" xml:space="preserve">
+    <value>CH4 मीथेन है, जो सबसे सरल अल्केन और एक शक्तिशाली ग्रीनहाउस गैस है। इसमें एक कार्बन और चार हाइड्रोजन होते हैं।</value>
+  </data>
+  <data name="ai_formula_co2" xml:space="preserve">
+    <value>CO2 कार्बन डाइऑक्साइड है। यह एक कार्बन परमाणु और दो ऑक्सीजन परमाणुओं से बना है।</value>
+  </data>
+  <data name="ai_formula_composition_offer" xml:space="preserve">
+    <value> क्या आप चाहेंगे कि मैं इसकी तात्विक संरचना को विस्तार से बताऊं?</value>
+  </data>
+  <data name="ai_formula_consists_of" xml:space="preserve">
+    <value>इसमें शामिल हैं:</value>
+  </data>
+  <data name="ai_formula_generic" xml:space="preserve">
+    <value>मैं पहचानता हूँ कि यह एक रासायनिक सूत्र जैसा दिखता है, लेकिन मैं अभी भी अणुओं के बारे में सीख रहा हूँ! मुझसे अलग-अलग तत्वों के बारे में पूछें।</value>
+  </data>
+  <data name="ai_formula_h2o" xml:space="preserve">
+    <value>H2O पानी है! यह दो हाइड्रोजन परमाणुओं और एक ऑक्सीजन परमाणु से बना है।</value>
+  </data>
+  <data name="ai_formula_h2so4" xml:space="preserve">
+    <value>H2SO4 सल्फ्यूरिक एसिड है, जो एक बहुत शक्तिशाली और महत्वपूर्ण औद्योगिक एसिड है। इसमें हाइड्रोजन, सल्फर और ऑक्सीजन होते हैं।</value>
+  </data>
+  <data name="ai_formula_hcl" xml:space="preserve">
+    <value>HCl हाइड्रोक्लोरिक एसिड है, जो वास्तव में आपके पेट में पाचन में मदद करने के लिए पाया जाता है!</value>
+  </data>
+  <data name="ai_formula_item" xml:space="preserve">
+    <value>• %1$s × %2$s (%3$s)</value>
+  </data>
+  <data name="ai_formula_mass" xml:space="preserve">
+    <value>**%1$s** का मोलर द्रव्यमान **%2$s g/mol** है।</value>
+  </data>
+  <data name="ai_formula_nacl" xml:space="preserve">
+    <value>NaCl सोडियम क्लोराइड है, जिसे नमक के नाम से जाना जाता है! यह सोडियम और क्लोरीन को जोड़ता है।</value>
+  </data>
+  <data name="ai_formula_nh3" xml:space="preserve">
+    <value>NH3 अमोनिया है, जिसका उपयोग अक्सर सफाई उत्पादों में किया जाता है। इसमें एक नाइट्रोजन और तीन हाइड्रोजन होते हैं।</value>
+  </data>
+  <data name="ai_formula_o2" xml:space="preserve">
+    <value>O2 वह ऑक्सीजन है जिसमें हम सांस लेते हैं! यह एक साथ जुड़े दो ऑक्सीजन परमाणु हैं।</value>
+  </data>
+  <data name="ai_formula_pro_plus" xml:space="preserve">
+    <value>**%1$s** जैसे रासायनिक यौगिकों का विश्लेषण करना एक **PRO+** सुविधा है। %2$s उपयोगकर्ता के रूप में, मैं केवल व्यक्तिगत तत्वों के साथ आपकी सहायता कर सकता हूँ!</value>
+  </data>
+  <data name="ai_formula_recognize" xml:space="preserve">
+    <value>मैं **%1$s** को **%2$s** के मोलर द्रव्यमान वाले रासायनिक यौगिक के रूप में पहचानता हूँ।</value>
+  </data>
+  <data name="ai_free_user" xml:space="preserve">
+    <value>मुफ़्त</value>
+  </data>
+  <data name="ai_geo_color" xml:space="preserve">
+    <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
+  </data>
+  <data name="ai_geo_dens" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_hard" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_info" xml:space="preserve">
+    <value>%1$s %3$s समूह में एक %2$s है। रंग: %4$s। कठोरता: %5$s। घनत्व: %6$s। चुंबकत्व: %7$s।</value>
+  </data>
+  <data name="ai_grams_to_moles" xml:space="preserve">
+    <value>%2$s का **%1$s g** = **%3$s mol**।</value>
+  </data>
+  <data name="ai_greeting" xml:space="preserve">
+    <value>नमस्ते! 👋 मैं आपका केमिस्ट्री बडी हूँ। तत्वों के बारे में मुझसे कुछ भी पूछें!</value>
+  </data>
+  <data name="ai_group" xml:space="preserve">
+    <value>समूह</value>
+  </data>
+  <data name="ai_hard_header" xml:space="preserve">
+    <value>%1$s के कठोरता गुण:</value>
+  </data>
+  <data name="ai_help_response" xml:space="preserve">
+    <value>मुझे इस ऐप के भीतर उपलब्ध डेटा पर कड़ाई से प्रशिक्षित किया गया है! मैं आपकी मदद कर सकता हूँ:
+
+🧪 **विस्तृत तत्व**: हमारे JSON डेटाबेस से सीधे गुण, दिखावट और खोज तथ्य।
+⚖️ **डेटा तुलना**: तत्वों के बीच घनत्व, द्रव्यमान, त्रिज्या और प्रतिक्रियाशीलता की तुलना करें।
+💥 **प्रतिक्रियाशीलता**: मैं यह समझाने के लिए ऐप के समूह और आवर्त डेटा का उपयोग करता हूँ कि सोडियम जैसे तत्व पानी के साथ कैसे प्रतिक्रिया करते हैं।
+🧬 **जैविक/सुरक्षा**: तत्व विवरण में पाई गई विषाक्तता और जैविक भूमिकाएँ।
+⚛️ **आइसोटोप और प्रचुरता**: हमारे समर्पित आइसोटोप और प्रचुरता तालिकाओं से विशिष्ट डेटा।
+📉 **आवर्त प्रवृत्तियाँ**: तालिका की संरचना के आधार पर इलेक्ट्रोनगेटिविटी जैसे पैटर्न की व्याख्या करना।
+🔢 **मोलर द्रव्यमान**: ऐप में परमाणु भार का उपयोग करके सटीक गणना।
+📝 **परिभाषाएं**: पूरे ऐप में उपयोग किए जाने वाले रसायन विज्ञान के शब्दों के लिए स्पष्टीकरण।
+
+बस पूछें और मुझे ऐप के रिकॉर्ड में उत्तर मिल जाएगा! 🌟</value>
+  </data>
+  <data name="ai_higher_than" xml:space="preserve">
+    <value>%1$s का %2$s, %3$s से अधिक है।</value>
+  </data>
+  <data name="ai_hint" xml:space="preserve">
+    <value>मुझसे कुछ भी पूछें...</value>
+  </data>
+  <data name="ai_history_pro_only" xml:space="preserve">
+    <value>चैट इतिहास एक PRO सुविधा है</value>
+  </data>
+  <data name="ai_history_sign_in" xml:space="preserve">
+    <value>चैट इतिहास देखने के लिए साइन इन करें</value>
+  </data>
+  <data name="ai_id_header" xml:space="preserve">
+    <value>%1$s के लिए पहचानकर्ता:</value>
+  </data>
+  <data name="ai_identifiers_for" xml:space="preserve">
+    <value>**%1$s** के लिए पहचानकर्ता:</value>
+  </data>
+  <data name="ai_identity_result" xml:space="preserve">
+    <value>ऐप में मौजूद मानों के आधार पर, इसके गुणों के लिए **%1$s** के करीब मान वाला तत्व **%2$s** है (वास्तविक: %3$s)।</value>
+  </data>
+  <data name="ai_ion_count" xml:space="preserve">
+    <value>%1$s के पास ऐप में %2$d आयनन ऊर्जा मान उपलब्ध हैं।</value>
+  </data>
+  <data name="ai_isotope_compare_header" xml:space="preserve">
+    <value>%1$s बनाम %2$s</value>
+  </data>
+  <data name="ai_isotope_compare_row" xml:space="preserve">
+    <value>• **%1$s**: %2$s बनाम %3$s</value>
+  </data>
+  <data name="ai_isotope_decay" xml:space="preserve">
+    <value>(क्षय: %1$s)</value>
+  </data>
+  <data name="ai_isotope_decays" xml:space="preserve">
+    <value>• **%1$s** — %2$s, अर्ध आयु %3$s</value>
+  </data>
+  <data name="ai_isotope_half_life" xml:space="preserve">
+    <value> इसकी अर्ध-आयु %1$s है और यह %2$s के माध्यम से क्षय होता है।</value>
+  </data>
+  <data name="ai_isotope_halflife_only" xml:space="preserve">
+    <value>• **%1$s** — अर्ध आयु %2$s</value>
+  </data>
+  <data name="ai_isotope_header" xml:space="preserve">
+    <value>ऐप की आइसोटोप तालिका के अनुसार, यहाँ **%1$s** के प्रमुख आइसोटोप दिए गए हैं:</value>
+  </data>
+  <data name="ai_isotope_neutron_diff" xml:space="preserve">
+    <value>%1$s में %2$d न्यूट्रॉन हैं, %3$s में %4$d — %5$d का अंतर।</value>
+  </data>
+  <data name="ai_isotope_same_element" xml:space="preserve">
+    <value>दोनों %1$s के समस्थानिक हैं, इसलिए उनमें समान %2$d प्रोटॉन हैं और केवल न्यूट्रॉन में अंतर है।</value>
+  </data>
+  <data name="ai_isotope_stable" xml:space="preserve">
+    <value>• **%1$s** — स्थायी</value>
+  </data>
+  <data name="ai_isotope_unlisted" xml:space="preserve">
+    <value>समस्थानिक तालिका में सूचीबद्ध नहीं</value>
+  </data>
+  <data name="ai_isotopes_header" xml:space="preserve">
+    <value>%1$s के समस्थानिक</value>
+  </data>
+  <data name="ai_isotopes_summary" xml:space="preserve">
+    <value>%1$d ज्ञात समस्थानिक, जिनमें %2$d स्थायी हैं।</value>
+  </data>
+  <data name="ai_label_decay" xml:space="preserve">
+    <value>क्षय विधि</value>
+  </data>
+  <data name="ai_label_half_life" xml:space="preserve">
+    <value>अर्ध आयु</value>
+  </data>
+  <data name="ai_label_mass_number" xml:space="preserve">
+    <value>द्रव्यमान संख्या</value>
+  </data>
+  <data name="ai_label_neutrons" xml:space="preserve">
+    <value>न्यूट्रॉन</value>
+  </data>
+  <data name="ai_label_protons" xml:space="preserve">
+    <value>प्रोटॉन</value>
+  </data>
+  <data name="ai_lang_switched" xml:space="preserve">
+    <value>AI भाषा बदलकर यह कर दी गई है: %1$s 🌐</value>
+  </data>
+  <data name="ai_limit_reset_badge" xml:space="preserve">
+    <value>%1$s पर रीसेट</value>
+  </data>
+  <data name="ai_limit_unlimited" xml:space="preserve">
+    <value>असीमित</value>
+  </data>
+  <data name="ai_list_header" xml:space="preserve">
+    <value>यहाँ **%1$s** तत्व हैं:</value>
+  </data>
+  <data name="ai_list_more" xml:space="preserve">
+    <value>…और %1$d अन्य।</value>
+  </data>
+  <data name="ai_list_row" xml:space="preserve">
+    <value>• **%1$s** — %2$s</value>
+  </data>
+  <data name="ai_list_row_plain" xml:space="preserve">
+    <value>• **%1$s**</value>
+  </data>
+  <data name="ai_list_spread" xml:space="preserve">
+    <value>मान %1$s से %2$s तक हैं।</value>
+  </data>
+  <data name="ai_locked_fields" xml:space="preserve">
+    <value>%1$s %2$s का हिस्सा है। इसे यहाँ और हर तत्व पृष्ठ पर देखने के लिए अपग्रेड करें।</value>
+  </data>
+  <data name="ai_locked_generic" xml:space="preserve">
+    <value>वह उत्तर %1$s का हिस्सा है। इसे अनलॉक करने के लिए अपग्रेड करें।</value>
+  </data>
+  <data name="ai_lower_than" xml:space="preserve">
+    <value>%1$s का %2$s, %3$s से कम है।</value>
+  </data>
+  <data name="ai_mech_header" xml:space="preserve">
+    <value>%2$s के लिए %1$s:</value>
+  </data>
+  <data name="ai_molar_mass_generic" xml:space="preserve">
+    <value>मैं मोलर द्रव्यमान में मदद कर सकता हूँ! "H2O का मोलर द्रव्यमान क्या है?" पूछने का प्रयास करें।</value>
+  </data>
+  <data name="ai_molar_mass_of" xml:space="preserve">
+    <value>%1$s का मोलर द्रव्यमान %2$s है।</value>
+  </data>
+  <data name="ai_molar_mass_pro_plus" xml:space="preserve">
+    <value>यौगिकों के लिए मोलर द्रव्यमान की गणना करना एक **PRO+** सुविधा है। %1$s उपयोगकर्ता के रूप में, आप अभी भी व्यक्तिगत तत्वों के लिए मोलर द्रव्यमान प्राप्त कर सकते हैं!</value>
+  </data>
+  <data name="ai_moles_of" xml:space="preserve">
+    <value>%2$s का **%1$s मोल** में **%3$s** परमाणु होते हैं।</value>
+  </data>
+  <data name="ai_moles_to_particles" xml:space="preserve">
+    <value>**%1$s मोल** में **%2$s** कण होते हैं।</value>
+  </data>
+  <data name="ai_naturally_occurring" xml:space="preserve">
+    <value>प्राकृतिक रूप से पाया जाता है</value>
+  </data>
+  <data name="ai_neighbour_after" xml:space="preserve">
+    <value>**%1$s** (परमाणु संख्या %2$d) %3$s के तुरंत बाद आता है।</value>
+  </data>
+  <data name="ai_neighbour_before" xml:space="preserve">
+    <value>**%1$s** (परमाणु संख्या %2$d) %3$s के तुरंत पहले आता है।</value>
+  </data>
+  <data name="ai_nfpa_flammable_0" xml:space="preserve">
+    <value>नहीं जलेगा</value>
+  </data>
+  <data name="ai_nfpa_flammable_1" xml:space="preserve">
+    <value>जलने के लिए पहले से गरम किया जाना चाहिए</value>
+  </data>
+  <data name="ai_nfpa_flammable_2" xml:space="preserve">
+    <value>मध्यम गरम होने पर जल उठता है</value>
+  </data>
+  <data name="ai_nfpa_flammable_3" xml:space="preserve">
+    <value>सामान्य तापमान पर जल उठता है</value>
+  </data>
+  <data name="ai_nfpa_flammable_4" xml:space="preserve">
+    <value>अत्यधिक ज्वलनशील</value>
+  </data>
+  <data name="ai_nfpa_health_0" xml:space="preserve">
+    <value>सामान्य सामग्री</value>
+  </data>
+  <data name="ai_nfpa_health_1" xml:space="preserve">
+    <value>थोड़ा खतरनाक</value>
+  </data>
+  <data name="ai_nfpa_health_2" xml:space="preserve">
+    <value>खतरनाक</value>
+  </data>
+  <data name="ai_nfpa_health_3" xml:space="preserve">
+    <value>अत्यधिक खतरा</value>
+  </data>
+  <data name="ai_nfpa_health_4" xml:space="preserve">
+    <value>घातक</value>
+  </data>
+  <data name="ai_nfpa_instability_0" xml:space="preserve">
+    <value>स्थायी</value>
+  </data>
+  <data name="ai_nfpa_instability_1" xml:space="preserve">
+    <value>गर्म करने पर अस्थिर</value>
+  </data>
+  <data name="ai_nfpa_instability_2" xml:space="preserve">
+    <value>तीव्र रासायनिक परिवर्तन संभव</value>
+  </data>
+  <data name="ai_nfpa_instability_3" xml:space="preserve">
+    <value>प्रबल प्रारंभक से विस्फोट हो सकता है</value>
+  </data>
+  <data name="ai_nfpa_instability_4" xml:space="preserve">
+    <value>आसानी से विस्फोट हो सकता है</value>
+  </data>
+  <data name="ai_nfpa_special_none" xml:space="preserve">
+    <value>कोई विशेष खतरा दर्ज नहीं</value>
+  </data>
+  <data name="ai_nfpa_special_ox" xml:space="preserve">
+    <value>ऑक्सीकारक</value>
+  </data>
+  <data name="ai_nfpa_special_sa" xml:space="preserve">
+    <value>साधारण दमघोंटू</value>
+  </data>
+  <data name="ai_nfpa_special_w" xml:space="preserve">
+    <value>जल से अभिक्रिया करता है</value>
+  </data>
+  <data name="ai_nfpa_unrated" xml:space="preserve">
+    <value>अवर्गीकृत</value>
+  </data>
+  <data name="ai_no_abundance_data" xml:space="preserve">
+    <value>मेरे पास %1$s के लिए विशिष्ट संख्यात्मक प्रचुरता मान नहीं हैं, लेकिन विवरण कहता है: %2$s।</value>
+  </data>
+  <data name="ai_no_bio_data" xml:space="preserve">
+    <value>मेरे पास %1$s के लिए विस्तृत जैविक डेटा नहीं है, लेकिन मानक सुरक्षा कहती है:</value>
+  </data>
+  <data name="ai_no_data" xml:space="preserve">
+    <value>हम्म, मुझे इसके बारे में जानकारी नहीं मिली। 'ऑक्सीजन' या 'गोल्ड' जैसे किसी तत्व के बारे में पूछने का प्रयास करें!</value>
+  </data>
+  <data name="ai_no_data_alternatives" xml:space="preserve">
+    <value>%1$s के लिए दर्ज: %2$s।</value>
+  </data>
+  <data name="ai_no_data_right_now" xml:space="preserve">
+    <value>मैं अभी इसकी जाँच नहीं कर सकता।</value>
+  </data>
+  <data name="ai_no_etymology_data" xml:space="preserve">
+    <value>मुझे इसके नाम की जड़ के बारे में ठीक से पता नहीं है, लेकिन इसकी खोज %2$s ने %3$s में की थी।</value>
+  </data>
+  <data name="ai_no_isotope_data" xml:space="preserve">
+    <value>मेरे पास मेरे त्वरित-पहुंच डेटा में %1$s के लिए आइसोटोप की विस्तृत सूची नहीं है, लेकिन आप आइसोटोप तालिका में एक विस्तृत सूची पा सकते हैं!</value>
+  </data>
+  <data name="ai_no_list_data" xml:space="preserve">
+    <value>मुझे हमारे डेटाबेस में उन मानदंडों से मेल खाने वाला कोई तत्व नहीं मिला।</value>
+  </data>
+  <data name="ai_no_physical_data" xml:space="preserve">
+    <value>मेरे पास त्वरित-पहुंच डेटा में %1$s के लिए विस्तृत भौतिक गुण नहीं हैं, लेकिन आप विस्तृत गुण पैनल देख सकते हैं!</value>
+  </data>
+  <data name="ai_no_property_data" xml:space="preserve">
+    <value>क्षमा करें, मेरे पास अभी %1$s के %2$s का डेटा नहीं है।</value>
+  </data>
+  <data name="ai_no_usage_data" xml:space="preserve">
+    <value>मेरे पास %1$s के उपयोगों की कोई विशिष्ट सूची नहीं है, लेकिन यह एक दिलचस्प तत्व है! आप विस्तृत विवरण में और पढ़ सकते हैं।</value>
+  </data>
+  <data name="ai_nuclide_body" xml:space="preserve">
+    <value>• **प्रोटॉन:** %1$d
+• **न्यूट्रॉन:** %2$d
+• **द्रव्यमान संख्या:** %3$d</value>
+  </data>
+  <data name="ai_nuclide_explain" xml:space="preserve">
+    <value>न्यूट्रॉन = द्रव्यमान संख्या − परमाणु संख्या = %1$d − %2$d = **%3$d**।</value>
+  </data>
+  <data name="ai_nuclide_header" xml:space="preserve">
+    <value>%1$s-%2$d</value>
+  </data>
+  <data name="ai_open_in_app" xml:space="preserve">
+    <value>%1$s खोलें</value>
+  </data>
+  <data name="ai_ordinal_suffix_nd" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_rd" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_st" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_th" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_oxidation_neg" xml:space="preserve">
+    <value>• नकारात्मक: %1$s</value>
+  </data>
+  <data name="ai_oxidation_pos" xml:space="preserve">
+    <value>• सकारात्मक: %1$s</value>
+  </data>
+  <data name="ai_oxidation_states" xml:space="preserve">
+    <value>**%1$s** की कई संभावित ऑक्सीकरण अवस्थाएं हैं।</value>
+  </data>
+  <data name="ai_period" xml:space="preserve">
+    <value>आवर्त</value>
+  </data>
+  <data name="ai_personalized_greeting_fav" xml:space="preserve">
+    <value>नमस्ते! मुझे याद है कि आप हाल ही में %1$s देख रहे थे। क्या आप और विवरण देखना चाहते हैं?</value>
+  </data>
+  <data name="ai_personalized_greeting_interest" xml:space="preserve">
+    <value>वापस स्वागत है! %1$s के बारे में और जानने के लिए तैयार हैं? हम फिर से %2$s को देख सकते हैं।</value>
+  </data>
+  <data name="ai_ph_info" xml:space="preserve">
+    <value>%1$s: pH %2$s से नीचे एसिड %3$s है, न्यूट्रल रेंज %4$s %5$s है, और pH %6$s से ऊपर यह %7$s है।</value>
+  </data>
+  <data name="ai_ph_info_short" xml:space="preserve">
+    <value>%1$s: pH रेंज %2$s %3$s है।</value>
+  </data>
+  <data name="ai_phase_gas" xml:space="preserve">
+    <value>गैस</value>
+  </data>
+  <data name="ai_phase_liquid" xml:space="preserve">
+    <value>तरल</value>
+  </data>
+  <data name="ai_phase_solid" xml:space="preserve">
+    <value>ठोस</value>
+  </data>
+  <data name="ai_physical_header" xml:space="preserve">
+    <value>**%1$s** के लिए ऐप में संग्रहीत भौतिक गुणों के आधार पर:</value>
+  </data>
+  <data name="ai_poi_info" xml:space="preserve">
+    <value>%1$s: प्वासों अनुपात सीमा %2$s (%3$s)।</value>
+  </data>
+  <data name="ai_pro_tip_hint" xml:space="preserve">
+    <value>प्रो टिप: आप मुझसे इसकी उत्पत्ति, जैविक भूमिका या प्रतिक्रियाशीलता के बारे में भी पूछ सकते हैं!</value>
+  </data>
+  <data name="ai_pro_user" xml:space="preserve">
+    <value>PRO</value>
+  </data>
+  <data name="ai_property_is" xml:space="preserve">
+    <value>%1$s का %2$s, %3$s है।</value>
+  </data>
+  <data name="ai_quiz_atomic" xml:space="preserve">
+    <value>किस तत्व का परमाणु क्रमांक **%1$s** है?</value>
+  </data>
+  <data name="ai_quiz_correct" xml:space="preserve">
+    <value>✨ **सही!** बहुत बढ़िया। उत्तर वास्तव में **%1$s** था। अगले प्रश्न के लिए तैयार हैं?</value>
+  </data>
+  <data name="ai_quiz_history" xml:space="preserve">
+    <value>इस तत्व की खोज **%1$s** द्वारा **%2$s** में की गई थी। क्या आप अनुमान लगा सकते हैं कि यह कौन सा है?</value>
+  </data>
+  <data name="ai_quiz_no_start" xml:space="preserve">
+    <value>मैं अभी क्विज़ शुरू नहीं कर सकता।</value>
+  </data>
+  <data name="ai_quiz_not_active" xml:space="preserve">
+    <value>मैं अभी क्विज़ मोड में नहीं हूँ।</value>
+  </data>
+  <data name="ai_quiz_start" xml:space="preserve">
+    <value>मैं एक तत्व के बारे में सोच रहा हूँ। इसका प्रतीक **%1$s** है। इसका नाम क्या है?</value>
+  </data>
+  <data name="ai_quiz_wrong" xml:space="preserve">
+    <value>बिल्कुल नहीं! उत्तर **%1$s** था। क्या आप एक और प्रयास करना चाहते हैं? बस 'quiz' कहें!</value>
+  </data>
+  <data name="ai_radioactive_no" xml:space="preserve">
+    <value>%1$s आम तौर पर स्थिर माना जाता है और रेडियोधर्मी नहीं है।</value>
+  </data>
+  <data name="ai_radioactive_yes" xml:space="preserve">
+    <value>%1$s रेडियोधर्मी है: %2$s</value>
+  </data>
+  <data name="ai_radius_details" xml:space="preserve">
+    <value>यहाँ **%1$s** के लिए त्रिज्या विवरण दिए गए हैं:</value>
+  </data>
+  <data name="ai_radius_header" xml:space="preserve">
+    <value>%1$s के लिए त्रिज्या विवरण:</value>
+  </data>
+  <data name="ai_rank_highest" xml:space="preserve">
+    <value>यह %2$s दर्ज वाले %1$d तत्वों में सबसे अधिक है।</value>
+  </data>
+  <data name="ai_rank_lowest" xml:space="preserve">
+    <value>यह %2$s दर्ज वाले %1$d तत्वों में सबसे कम है।</value>
+  </data>
+  <data name="ai_rank_nth" xml:space="preserve">
+    <value>%3$s के अनुसार यह %2$d तत्वों में **%1$d** स्थान पर है।</value>
+  </data>
+  <data name="ai_rate_limit_reached" xml:space="preserve">
+    <value>आप अपनी %1$d संदेशों की दैनिक सीमा तक पहुँच गए हैं। अधिक के लिए PRO या PRO+ में अपग्रेड करें!</value>
+  </data>
+  <data name="ai_rate_limit_resets" xml:space="preserve">
+    <value>आपके दैनिक संदेश %1$s पर वापस आ जाएंगे।</value>
+  </data>
+  <data name="ai_reaction_acid" xml:space="preserve">
+    <value>कई धातुएं हाइड्रोजन गैस छोड़ने के लिए एसिड के साथ प्रतिक्रिया करती हैं। %1$s की प्रतिक्रियाशीलता गतिविधि श्रृंखला में उसकी स्थिति पर निर्भर करती है।</value>
+  </data>
+  <data name="ai_reaction_alkali_halogen" xml:space="preserve">
+    <value>ये एक **नमक** (एक आयनिक यौगिक) बनाने के लिए जोर से प्रतिक्रिया करते हैं। उदाहरण के लिए, %1$s और %2$s मिलकर एक अनूठा यौगिक बना सकते हैं!</value>
+  </data>
+  <data name="ai_reaction_alkali_water" xml:space="preserve">
+    <value>%1$s जैसी क्षार धातुएं पानी के साथ **हिंसक रूप से** प्रतिक्रिया करती हैं, जिससे हाइड्रोजन गैस और एक मजबूत क्षार बनता है। इसमें विस्फोट भी हो सकता है!</value>
+  </data>
+  <data name="ai_reaction_alkaline_earth_water" xml:space="preserve">
+    <value>%1$s हाइड्रोजन गैस और अपना हाइड्रॉक्साइड बनाने के लिए पानी के साथ जोर से प्रतिक्रिया करता है।</value>
+  </data>
+  <data name="ai_reaction_complex" xml:space="preserve">
+    <value>प्रतिक्रियाएं जटिल हो सकती हैं! सामान्य तौर पर, %1$s का व्यवहार उसके समूह (%2$s) और वैद्युतीय ऋणात्मकता पर निर्भर करता है।</value>
+  </data>
+  <data name="ai_reaction_generic_elements" xml:space="preserve">
+    <value>%1$s और %2$s के बीच की प्रतिक्रिया उनके इलेक्ट्रॉन विन्यास पर निर्भर करती है। वे एक यौगिक बना सकते हैं यदि एक इलेक्ट्रॉन दान कर सके और दूसरा उन्हें स्वीकार कर सके!</value>
+  </data>
+  <data name="ai_reaction_generic_water" xml:space="preserve">
+    <value>मेरे पास पानी के साथ %1$s की प्रतिक्रिया के लिए विशिष्ट डेटा नहीं है, लेकिन कई धातुएं समय के साथ ऑक्साइड या हाइड्रॉक्साइड बनाती हैं।</value>
+  </data>
+  <data name="ai_reaction_magnesium_water" xml:space="preserve">
+    <value>%1$s ठंडे पानी के साथ धीरे-धीरे लेकिन भाप के साथ तेजी से प्रतिक्रिया करता है।</value>
+  </data>
+  <data name="ai_reaction_noble_gas" xml:space="preserve">
+    <value>%1$s एक नोबल गैस है और अत्यंत स्थिर है, शायद ही कभी किसी चीज के साथ प्रतिक्रिया करती है क्योंकि इसका बाहरी कोश भरा होता है।</value>
+  </data>
+  <data name="ai_reaction_oxygen" xml:space="preserve">
+    <value>अधिकांश तत्व ऑक्साइड बनाने के लिए ऑक्सीजन के साथ प्रतिक्रिया करते हैं। उदाहरण के लिए, %1$s जैसी धातुएं अक्सर एक सुरक्षात्मक परत या जंग बनाती हैं।</value>
+  </data>
+  <data name="ai_reactivity_more" xml:space="preserve">
+    <value>आवर्त सारणी में इसकी स्थिति के आधार पर **%1$s** आमतौर पर **%2$s** की तुलना में अधिक प्रतिक्रियाशील है।</value>
+  </data>
+  <data name="ai_reactivity_need_two" xml:space="preserve">
+    <value>मुझे उनकी प्रतिक्रियाशीलता की तुलना करने के लिए कम से कम दो तत्वों की आवश्यकता है!</value>
+  </data>
+  <data name="ai_reactivity_no_result" xml:space="preserve">
+    <value>मैं सबसे प्रतिक्रियाशील तत्व का निर्धारण नहीं कर सका।</value>
+  </data>
+  <data name="ai_reactivity_result" xml:space="preserve">
+    <value>सबसे प्रतिक्रियाशील %1$s **%2$s** है।</value>
+  </data>
+  <data name="ai_reactivity_similar" xml:space="preserve">
+    <value>**%1$s** और **%2$s** दोनों का प्रतिक्रियाशीलता स्तर समान है।</value>
+  </data>
+  <data name="ai_recap_is" xml:space="preserve">
+    <value>संक्षेप में, %1$s का %2$s, %3$s है।</value>
+  </data>
+  <data name="ai_related_label" xml:space="preserve">
+    <value>संबंधित जानकारी:</value>
+  </data>
+  <data name="ai_related_offer" xml:space="preserve">
+    <value>मुझे स्थानीय संबंधित जानकारी मिली है। इसे देखने के लिए 'संबंधित दिखाएं' पूछें।</value>
+  </data>
+  <data name="ai_related_offer_lang" xml:space="preserve">
+    <value>मुझे स्थानीय संबंधित जानकारी मिली है लेकिन आपकी चुनी हुई भाषा में नहीं। भाषा बदलने का प्रयास करें या फिर भी पूछें।</value>
+  </data>
+  <data name="ai_rich_overview_advanced" xml:space="preserve">
+    <value>उन्नत परमाणु डेटा</value>
+  </data>
+  <data name="ai_rich_overview_applications" xml:space="preserve">
+    <value>अनुप्रयोग और उपयोग</value>
+  </data>
+  <data name="ai_rich_overview_basic_facts" xml:space="preserve">
+    <value>बुनियादी तथ्य</value>
+  </data>
+  <data name="ai_rich_overview_biological" xml:space="preserve">
+    <value>जैविक भूमिका</value>
+  </data>
+  <data name="ai_rich_overview_compounds" xml:space="preserve">
+    <value>सामान्य यौगिक</value>
+  </data>
+  <data name="ai_rich_overview_etymology" xml:space="preserve">
+    <value>उत्पत्ति और इतिहास</value>
+  </data>
+  <data name="ai_rich_overview_isotopes" xml:space="preserve">
+    <value>उल्लेखनीय समस्थानिक</value>
+  </data>
+  <data name="ai_rich_overview_properties" xml:space="preserve">
+    <value>गुण</value>
+  </data>
+  <data name="ai_rich_overview_safety" xml:space="preserve">
+    <value>सुरक्षा और खतरे</value>
+  </data>
+  <data name="ai_rich_overview_where_found" xml:space="preserve">
+    <value>%1$s कहाँ पाया जाता है?</value>
+  </data>
+  <data name="ai_runner_up" xml:space="preserve">
+    <value>इसके बाद %1$s है, %2$s पर।</value>
+  </data>
+  <data name="ai_safety_caution_flammable" xml:space="preserve">
+    <value>सावधानी: यह तत्व अत्यधिक ज्वलनशील है!</value>
+  </data>
+  <data name="ai_safety_caution_health" xml:space="preserve">
+    <value>सावधानी: यह तत्व स्वास्थ्य के लिए अत्यधिक खतरनाक है!</value>
+  </data>
+  <data name="ai_safety_flammability" xml:space="preserve">
+    <value>• **ज्वलनशीलता:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_header" xml:space="preserve">
+    <value>%1$s के लिए सुरक्षा प्रोफ़ाइल (NFPA 704):</value>
+  </data>
+  <data name="ai_safety_health" xml:space="preserve">
+    <value>• **स्वास्थ्य:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_instability" xml:space="preserve">
+    <value>• **अस्थिरता:** %1$d/4</value>
+  </data>
+  <data name="ai_safety_no_data" xml:space="preserve">
+    <value>मेरे पास %1$s के लिए विशिष्ट NFPA खतरा रेटिंग नहीं है, लेकिन हमेशा मानक प्रयोगशाला सुरक्षा प्रोटोकॉल का पालन करें।</value>
+  </data>
+  <data name="ai_safety_none_recorded" xml:space="preserve">
+    <value>%1$s के लिए कोई NFPA खतरा रेटिंग दर्ज नहीं है।</value>
+  </data>
+  <data name="ai_safety_radioactive" xml:space="preserve">
+    <value>%1$s रेडियोधर्मी (%2$s) है, जो इसकी प्राथमिक सुरक्षा चिंता है। अत्यधिक सावधानी से संभालें!</value>
+  </data>
+  <data name="ai_safety_radioactive_note" xml:space="preserve">
+    <value>यह तत्व रेडियोधर्मी है।</value>
+  </data>
+  <data name="ai_safety_special" xml:space="preserve">
+    <value>• **विशेष:** %1$s</value>
+  </data>
+  <data name="ai_same_value" xml:space="preserve">
+    <value>दोनों का %1$s समान है!</value>
+  </data>
+  <data name="ai_series_actinide" xml:space="preserve">
+    <value>एक्टिनाइड्स परमाणु क्रमांक 89 से 103 तक के 15 तत्व हैं। वे सभी रेडियोधर्मी हैं!</value>
+  </data>
+  <data name="ai_series_actinide_label" xml:space="preserve">
+    <value>एक्टिनाइड</value>
+  </data>
+  <data name="ai_series_alkali" xml:space="preserve">
+    <value>क्षार धातुएं (Alkali metals) समूह 1 में हैं। वे बहुत प्रतिक्रियाशील होती हैं और उनके बाहरी कोश में एक इलेक्ट्रॉन होता. उदाहरणों में लिथियम, सोडियम और पोटेशियम शामिल हैं।</value>
+  </data>
+  <data name="ai_series_alkali_metal_label" xml:space="preserve">
+    <value>क्षार धातु</value>
+  </data>
+  <data name="ai_series_alkaline_earth_label" xml:space="preserve">
+    <value>क्षारीय मृदा धातु</value>
+  </data>
+  <data name="ai_series_generic" xml:space="preserve">
+    <value>मैं उस श्रृंखला से परिचित हूँ! उनके अद्वितीय रासायनिक गुण हैं। आप उस श्रृंखला के किस विशिष्ट तत्व के बारे में जानना चाहेंगे?</value>
+  </data>
+  <data name="ai_series_halogen" xml:space="preserve">
+    <value>हैलोजन समूह 17 में हैं। वे अत्यधिक प्रतिक्रियाशील अधातुएं हैं। फ्लोरीन और क्लोरीन सबसे प्रसिद्ध हैं!</value>
+  </data>
+  <data name="ai_series_halogen_label" xml:space="preserve">
+    <value>हैलोजन</value>
+  </data>
+  <data name="ai_series_lanthanide" xml:space="preserve">
+    <value>लैंथेनाइड्स परमाणु क्रमांक 57 से 71 तक के 15 तत्व हैं। इन्हें 'दुर्लभ मृदा तत्व' (Rare earth elements) भी कहा जाता है।</value>
+  </data>
+  <data name="ai_series_lanthanide_label" xml:space="preserve">
+    <value>लैंथेनाइड</value>
+  </data>
+  <data name="ai_series_metalloid" xml:space="preserve">
+    <value>उपधातुओं (Metalloids) में धातुओं और अधातुओं दोनों के गुण होते हैं। वे आवर्त सारणी की 'सीढ़ी' के साथ पाए जाते हैं।</value>
+  </data>
+  <data name="ai_series_metalloid_label" xml:space="preserve">
+    <value>उपधातु</value>
+  </data>
+  <data name="ai_series_noble_gas" xml:space="preserve">
+    <value>नोबल गैसें समूह 18 में हैं। वे बहुत स्थिर होती हैं और शायद ही कभी अन्य तत्वों के साथ प्रतिक्रिया करती हैं क्योंकि उनके बाहरी कोश भरे होते हैं।</value>
+  </data>
+  <data name="ai_series_noble_gas_label" xml:space="preserve">
+    <value>नोबल गैस</value>
+  </data>
+  <data name="ai_series_nonmetal_label" xml:space="preserve">
+    <value>अधातु</value>
+  </data>
+  <data name="ai_series_transition" xml:space="preserve">
+    <value>संक्रमण धातुएं (Transition metals) समूह 3-12 के तत्व हैं। वे अच्छे संवाहक होते हैं और अक्सर रंगीन यौगिक बनाते हैं।</value>
+  </data>
+  <data name="ai_series_transition_metal_label" xml:space="preserve">
+    <value>संक्रमण धातु</value>
+  </data>
+  <data name="ai_similarity_generic" xml:space="preserve">
+    <value>**%1$s** %2$s श्रृंखला का हिस्सा है। इस श्रृंखला के अन्य तत्वों में संबंधित गुण होंगे!</value>
+  </data>
+  <data name="ai_similarity_no_element" xml:space="preserve">
+    <value>मुझे यकीन नहीं है कि आप किस तत्व के लिए समानताएं खोजना चाहते हैं।</value>
+  </data>
+  <data name="ai_similarity_result_footer" xml:space="preserve">
+    <value>।
+
+वे अपने संयोजी इलेक्ट्रॉनों के कारण समान रासायनिक व्यवहार साझा करते हैं!</value>
+  </data>
+  <data name="ai_similarity_result_header" xml:space="preserve">
+    <value>**%1$s** की तरह, ये तत्व भी **%2$ss** हैं: 
+
+</value>
+  </data>
+  <data name="ai_solution_generic_substance" xml:space="preserve">
+    <value>विलयन</value>
+  </data>
+  <data name="ai_solution_mass_needed" xml:space="preserve">
+    <value>%3$s mL के %4$s mol/L विलयन के लिए आपको %2$s की **%1$s g** चाहिए।</value>
+  </data>
+  <data name="ai_solution_molarity" xml:space="preserve">
+    <value>%2$s की सांद्रता **%1$s mol/L** है।</value>
+  </data>
+  <data name="ai_solution_moles" xml:space="preserve">
+    <value>वह %2$s के **%1$s mol** हैं।</value>
+  </data>
+  <data name="ai_solution_volume" xml:space="preserve">
+    <value>आपको **%2$s mol/L** पर **%1$s mL** चाहिए।</value>
+  </data>
+  <data name="ai_solution_working_c1v1" xml:space="preserve">
+    <value>C₁V₁ = C₂V₂ → %1$s × %2$s = %3$s × %4$s</value>
+  </data>
+  <data name="ai_solution_working_header" xml:space="preserve">
+    <value>गणना</value>
+  </data>
+  <data name="ai_solution_working_mass" xml:space="preserve">
+    <value>m = n × M → %1$s g = %2$s mol × %3$s g/mol</value>
+  </data>
+  <data name="ai_solution_working_nvc" xml:space="preserve">
+    <value>n = c × V → %1$s mol = %2$s mol/L × %3$s L</value>
+  </data>
+  <data name="ai_source_element_data" xml:space="preserve">
+    <value>%1$s — तत्व डेटा (%2$s)</value>
+  </data>
+  <data name="ai_source_table" xml:space="preserve">
+    <value>%1$s — %2$s तालिका</value>
+  </data>
+  <data name="ai_sources_header" xml:space="preserve">
+    <value>स्रोत</value>
+  </data>
+  <data name="ai_stable_label" xml:space="preserve">
+    <value>स्थायी</value>
+  </data>
+  <data name="ai_structural_no_results" xml:space="preserve">
+    <value>मुझे उस समूह या आवर्त में कुछ भी नहीं मिला। याद रखें: 18 समूह और 7 आवर्त हैं!</value>
+  </data>
+  <data name="ai_structural_result" xml:space="preserve">
+    <value>**%1$s %2$s** में तत्व हैं: 
+</value>
+  </data>
+  <data name="ai_structural_specify_number" xml:space="preserve">
+    <value>कृपया एक समूह या आवर्त संख्या निर्दिष्ट करें!</value>
+  </data>
+  <data name="ai_suggest_element.0" xml:space="preserve">
+    <value>%1$s के उपयोग</value>
+  </data>
+  <data name="ai_suggest_element.1" xml:space="preserve">
+    <value>%1$s का परमाणु द्रव्यमान</value>
+  </data>
+  <data name="ai_suggest_element.2" xml:space="preserve">
+    <value>क्या %1$s खतरनाक है?</value>
+  </data>
+  <data name="ai_suggest_element.3" xml:space="preserve">
+    <value>%1$s कहाँ मिलता है?</value>
+  </data>
+  <data name="ai_suggest_element.4" xml:space="preserve">
+    <value>%1$s का इलेक्ट्रॉन विन्यास</value>
+  </data>
+  <data name="ai_suggest_element.5" xml:space="preserve">
+    <value>%1$s के समस्थानिक</value>
+  </data>
+  <data name="ai_suggest_general.0" xml:space="preserve">
+    <value>कोई रोचक तथ्य बताइए</value>
+  </data>
+  <data name="ai_suggest_general.1" xml:space="preserve">
+    <value>क्विज़ शुरू करें</value>
+  </data>
+  <data name="ai_suggest_general.2" xml:space="preserve">
+    <value>क्षार धातुएँ कौन-सी हैं?</value>
+  </data>
+  <data name="ai_suggest_general.3" xml:space="preserve">
+    <value>सबसे भारी तत्व?</value>
+  </data>
+  <data name="ai_suggest_tools.0" xml:space="preserve">
+    <value>Fe + O2 -&gt; Fe2O3 संतुलित करें</value>
+  </data>
+  <data name="ai_suggest_tools.1" xml:space="preserve">
+    <value>500 K को °C में बदलें</value>
+  </data>
+  <data name="ai_suggest_tools.2" xml:space="preserve">
+    <value>250 mL के 0.5 mol/L के लिए कितने ग्राम NaCl?</value>
+  </data>
+  <data name="ai_suggest_tools.3" xml:space="preserve">
+    <value>11460 साल बाद 100 g कार्बन-14 में से कितना बचता है?</value>
+  </data>
+  <data name="ai_suggest_trends.0" xml:space="preserve">
+    <value>आवर्त प्रवृत्तियाँ क्या हैं?</value>
+  </data>
+  <data name="ai_suggest_trends.1" xml:space="preserve">
+    <value>विद्युत्ऋणात्मकता की प्रवृत्ति</value>
+  </data>
+  <data name="ai_suggest_trends.2" xml:space="preserve">
+    <value>परमाणु त्रिज्या की प्रवृत्ति</value>
+  </data>
+  <data name="ai_suggest_trends.3" xml:space="preserve">
+    <value>आयनन ऊर्जा</value>
+  </data>
+  <data name="ai_suggestion_abundance" xml:space="preserve">
+    <value>क्या हमें यह देखना चाहिए कि यह ब्रह्मांड में कहाँ पाया जाता है?</value>
+  </data>
+  <data name="ai_suggestion_bio" xml:space="preserve">
+    <value>क्या आप इसकी जैविक भूमिका के बारे में जानना चाहेंगे?</value>
+  </data>
+  <data name="ai_suggestion_compare" xml:space="preserve">
+    <value>क्या आप इसकी तुलना किसी अन्य तत्व से करना चाहते हैं?</value>
+  </data>
+  <data name="ai_suggestion_iso" xml:space="preserve">
+    <value>मैं आपको इसके आइसोटोप के बारे में भी बता सकता हूँ।</value>
+  </data>
+  <data name="ai_suggestion_safety" xml:space="preserve">
+    <value>मेरे पास इसके लिए सुरक्षा डेटा भी है, यदि आप रुचि रखते हैं।</value>
+  </data>
+  <data name="ai_superlative_among" xml:space="preserve">
+    <value>%1$ss में से, %2$s</value>
+  </data>
+  <data name="ai_superlative_generic" xml:space="preserve">
+    <value>यह एक बहुत अच्छा सवाल है! मैं सबसे घने, सबसे भारी या सबसे अधिक वैद्युतीय ऋणात्मक तत्वों को ढूंढ सकता हूँ। आप किसे जानना चाहेंगे?</value>
+  </data>
+  <data name="ai_superlative_highest" xml:space="preserve">
+    <value>सर्वाधिक</value>
+  </data>
+  <data name="ai_superlative_lowest" xml:space="preserve">
+    <value>न्यूनतम</value>
+  </data>
+  <data name="ai_superlative_no_calculate" xml:space="preserve">
+    <value>मैं अभी इसकी गणना नहीं कर सका।</value>
+  </data>
+  <data name="ai_superlative_nth" xml:space="preserve">
+    <value>**%1$d**%2$s %3$s %4$s **%5$s** है, %6$s पर।</value>
+  </data>
+  <data name="ai_superlative_result" xml:space="preserve">
+    <value>%1$s %2$s वाला तत्व **%3$s** है, जिसका मान %4$s है।</value>
+  </data>
+  <data name="ai_synthetic_only" xml:space="preserve">
+    <value>संश्लेषित (प्राकृतिक रूप से नहीं पाया जाता)</value>
+  </data>
+  <data name="ai_technical_config" xml:space="preserve">
+    <value> इसका इलेक्ट्रॉन विन्यास %1$s है।</value>
+  </data>
+  <data name="ai_technical_mass" xml:space="preserve">
+    <value> इसका सटीक परमाणु द्रव्यमान %1$s है।</value>
+  </data>
+  <data name="ai_thermal_header" xml:space="preserve">
+    <value>%1$s के तापीय गुण:</value>
+  </data>
+  <data name="ai_thermal_properties" xml:space="preserve">
+    <value>**%1$s** के तापीय गुण:</value>
+  </data>
+  <data name="ai_trend_electronegativity" xml:space="preserve">
+    <value>वैद्युतीय ऋणात्मकता (Electronegativity) आम तौर पर एक आवर्त (Period) में बाएं से दाएं बढ़ती है और एक समूह (Group) में नीचे की ओर घटती है। फ्लोरीन यहाँ का चैंपियन है!</value>
+  </data>
+  <data name="ai_trend_general" xml:space="preserve">
+    <value>आवर्त प्रवृत्तियाँ (Periodic trends) तत्वों के गुणों में एक पैटर्न हैं! आप किस प्रवृत्ति के बारे में जानना चाहते हैं: परमाणु त्रिज्या, वैद्युतीय ऋणात्मकता, या आयनन ऊर्जा?</value>
+  </data>
+  <data name="ai_trend_ionization" xml:space="preserve">
+    <value>आयनन ऊर्जा (Ionization energy) एक आवर्त में बढ़ती है और समूह में नीचे की ओर घटती है। जैसे-जैसे आप दाईं ओर बढ़ते हैं, इलेक्ट्रॉन को बाहर निकालना कठिन होता जाता है!</value>
+  </data>
+  <data name="ai_trend_metallic" xml:space="preserve">
+    <value>धात्विक गुण एक आवर्त में घटता है और समूह में नीचे की ओर बढ़ता है। सबसे धात्विक तत्व नीचे बाईं ओर (जैसे फ्रांसियम) पाए जाते हैं।</value>
+  </data>
+  <data name="ai_trend_radius" xml:space="preserve">
+    <value>परमाणु त्रिज्या एक आवर्त में (बाएं से दाएं) घटती है क्योंकि नाभिक इलेक्ट्रॉनों को अधिक मजबूती से खींचता है, और एक समूह में नीचे की ओर बढ़ती है क्योंकि अधिक कोश (Shells) जुड़ते जाते हैं।</value>
+  </data>
+  <data name="ai_unit_atoms_per_si" xml:space="preserve">
+    <value>प्रति 10⁶ सिलिकॉन परमाणु पर परमाणु</value>
+  </data>
+  <data name="ai_unit_bridge_note" xml:space="preserve">
+    <value>1 eV = 96.485 kJ/mol से परिवर्तित — वही ऊर्जा, प्रति मोल के बजाय प्रति कण गिनी गई।</value>
+  </data>
+  <data name="ai_unit_converted" xml:space="preserve">
+    <value>**%1$s %2$s** बराबर है **%3$s %4$s**।</value>
+  </data>
+  <data name="ai_unit_mg_per_kg" xml:space="preserve">
+    <value>mg/kg (ppm)</value>
+  </data>
+  <data name="ai_unit_ug_per_l" xml:space="preserve">
+    <value>µg/l</value>
+  </data>
+  <data name="ai_usage_header" xml:space="preserve">
+    <value>यहाँ **%1$s** के बारे में कुछ सामान्य अनुप्रयोग और तथ्य दिए गए हैं:</value>
+  </data>
+  <data name="ai_valence_alkali" xml:space="preserve">
+    <value>एक क्षार धातु के रूप में, इसके बाहरी कोश में **1 संयोजी इलेक्ट्रॉन** होता है।</value>
+  </data>
+  <data name="ai_valence_alkaline" xml:space="preserve">
+    <value>एक क्षारीय मृदा धातु के रूप में, इसमें **2 संयोजी इलेक्ट्रॉन** होते हैं।</value>
+  </data>
+  <data name="ai_valence_halogen" xml:space="preserve">
+    <value>एक हैलोजन के रूप में, इसमें **7 संयोजी इलेक्ट्रॉन** होते हैं और यह एक और प्राप्त करने के लिए बहुत उत्सुक रहता है!</value>
+  </data>
+  <data name="ai_valence_noble_helium" xml:space="preserve">
+    <value>हीलियम में **2 संयोजी इलेक्ट्रॉन** होते हैं, जो इसके एकमात्र कोश को पूरा करते हैं।</value>
+  </data>
+  <data name="ai_valence_noble_other" xml:space="preserve">
+    <value>इसमें **8 संयोजी इलेक्ट्रॉनों** का एक पूर्ण बाहरी कोश होता है, जो इसे बहुत स्थिर बनाता है।</value>
+  </data>
+  <data name="ai_value_is_range" xml:space="preserve">
+    <value>यह एक परिसर है; क्रम निर्धारण इसके मध्यबिंदु का उपयोग करता है।</value>
+  </data>
+  <data name="ai_value_trace" xml:space="preserve">
+    <value>अत्यल्प मात्रा</value>
+  </data>
+  <data name="ai_versus" xml:space="preserve">
+    <value>बनाम</value>
+  </data>
+  <data name="all_ai_features" xml:space="preserve">
+    <value>सभी AI सुविधाएँ:</value>
+  </data>
+  <data name="all_core_features" xml:space="preserve">
+    <value>सभी मुख्य सुविधाएँ</value>
+  </data>
+  <data name="alloy_base_aluminium" xml:space="preserve">
+    <value>एल्युमिनियम</value>
+  </data>
+  <data name="alloy_base_copper" xml:space="preserve">
+    <value>तांबा</value>
+  </data>
+  <data name="alloy_base_gold" xml:space="preserve">
+    <value>सोना</value>
+  </data>
+  <data name="alloy_base_iron" xml:space="preserve">
+    <value>लोहा</value>
+  </data>
+  <data name="alloy_base_mercury" xml:space="preserve">
+    <value>पारा</value>
+  </data>
+  <data name="alloy_base_nickel" xml:space="preserve">
+    <value>निकल</value>
+  </data>
+  <data name="alloy_base_silver" xml:space="preserve">
+    <value>चांदी</value>
+  </data>
+  <data name="alloy_base_tin" xml:space="preserve">
+    <value>टिन</value>
+  </data>
+  <data name="alloy_base_titanium" xml:space="preserve">
+    <value>टाइटेनियम</value>
+  </data>
+  <data name="alloy_clear_filter" xml:space="preserve">
+    <value>फ़िल्टर हटाएँ</value>
+  </data>
+  <data name="alo" xml:space="preserve">
+    <value>मिश्रधातु तालिका</value>
+  </data>
+  <data name="alphabetical" xml:space="preserve">
+    <value>वर्णानुक्रम</value>
+  </data>
+  <data name="analytics_desc" xml:space="preserve">
+    <value>गुमनाम उपयोग डेटा साझा करके ऐप को बेहतर बनाने में मदद करें</value>
+  </data>
+  <data name="analytics_title" xml:space="preserve">
+    <value>उपयोग विश्लेषण</value>
+  </data>
+  <data name="and_more_item" xml:space="preserve">
+    <value>- और अधिक</value>
+  </data>
+  <data name="answer_no" xml:space="preserve">
+    <value>नहीं</value>
+  </data>
+  <data name="answer_timeout" xml:space="preserve">
+    <value>समय समाप्त</value>
+  </data>
+  <data name="answer_yes" xml:space="preserve">
+    <value>हाँ</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>एटॉमिक</value>
+  </data>
+  <data name="appearance" xml:space="preserve">
+    <value>दिखावट</value>
+  </data>
+  <data name="appearance_colon" xml:space="preserve">
+    <value>रूप:</value>
+  </data>
+  <data name="appwidget_text" xml:space="preserve">
+    <value>उदाहरण</value>
+  </data>
+  <data name="ask_atomic" xml:space="preserve">
+    <value>एटॉमिक से पूछें</value>
+  </data>
+  <data name="atomic_mass" xml:space="preserve">
+    <value>आणविक द्रव्यमान</value>
+  </data>
+  <data name="atomic_mass_colon" xml:space="preserve">
+    <value>परमाणु द्रव्यमान:</value>
+  </data>
+  <data name="atomic_number" xml:space="preserve">
+    <value>आणविक संख्या</value>
+  </data>
+  <data name="atomic_number_label" xml:space="preserve">
+    <value>परमाणु संख्या:</value>
+  </data>
+  <data name="atomic_properties" xml:space="preserve">
+    <value>परमाणु गुण</value>
+  </data>
+  <data name="atomic_radius_calculated_colon" xml:space="preserve">
+    <value>परमाणु त्रिज्या (गणना):</value>
+  </data>
+  <data name="atomic_radius_empirical_colon" xml:space="preserve">
+    <value>परमाणु त्रिज्या (अनुभवजन्य):</value>
+  </data>
+  <data name="atomic_weight" xml:space="preserve">
+    <value>आणविक भार</value>
+  </data>
+  <data name="atomic_weight_relative_atomic_mass" xml:space="preserve">
+    <value>परमाणु भार (सापेक्ष परमाणु द्रव्यमान):</value>
+  </data>
+  <data name="auto_hide_bottombar" xml:space="preserve">
+    <value>स्वचालित छुपाएं बॉटमबार</value>
+  </data>
+  <data name="auto_hide_bottombar_desc" xml:space="preserve">
+    <value>मानक व्यवहार को अक्षम करता है</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>पीछे</value>
+  </data>
+  <data name="bal" xml:space="preserve">
+    <value>संतुलक</value>
+  </data>
+  <data name="balance_equation" xml:space="preserve">
+    <value>समीकरण संतुलित करें:</value>
+  </data>
+  <data name="balance_equation_colon" xml:space="preserve">
+    <value>समीकरण संतुलित करें:</value>
+  </data>
+  <data name="balancer_text" xml:space="preserve">
+    <value>विभिन्न रासायनिक अभिक्रियाओं को संतुलित करें और बाद में उपयोग के लिए पसंदीदा में सहेजें</value>
+  </data>
+  <data name="balancer_title" xml:space="preserve">
+    <value>रासायनिक अभिक्रियाएँ</value>
+  </data>
+  <data name="balancer_tool_card_title" xml:space="preserve">
+    <value>एक समीकरण संतुलित करें</value>
+  </data>
+  <data name="balancer_tool_copied" xml:space="preserve">
+    <value>समीकरण कॉपी किया गया</value>
+  </data>
+  <data name="balancer_tool_examples" xml:space="preserve">
+    <value>उदाहरण</value>
+  </data>
+  <data name="balancer_tool_hint" xml:space="preserve">
+    <value>Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="balancer_tool_note" xml:space="preserve">
+    <value>तीर -&gt;, =&gt;, = या → के रूप में लिखे जा सकते हैं। (s), (l), (g) और (aq) जैसे अवस्था चिह्न अनदेखे किए जाते हैं।</value>
+  </data>
+  <data name="balancer_tool_prompt" xml:space="preserve">
+    <value>तीर के साथ एक समीकरण लिखें, जैसे Fe + O2 -&gt; Fe2O3।</value>
+  </data>
+  <data name="balancer_tool_result" xml:space="preserve">
+    <value>संतुलित समीकरण</value>
+  </data>
+  <data name="balancer_tool_text" xml:space="preserve">
+    <value>रासायनिक समीकरणों को सटीक पूर्णांक गुणांकों के साथ संतुलित करें</value>
+  </data>
+  <data name="balancer_tool_title" xml:space="preserve">
+    <value>समीकरण संतुलक</value>
+  </data>
+  <data name="base_label" xml:space="preserve">
+    <value>"आधार धातु: "</value>
+  </data>
+  <data name="block" xml:space="preserve">
+    <value>ब्लॉक</value>
+  </data>
+  <data name="block_colon" xml:space="preserve">
+    <value>ब्लॉक:</value>
+  </data>
+  <data name="blog" xml:space="preserve">
+    <value>ब्लॉग</value>
+  </data>
+  <data name="boiling_point" xml:space="preserve">
+    <value>उबाल बिंदु</value>
+  </data>
+  <data name="boiling_point_celsius" xml:space="preserve">
+    <value>क्वथनांक (°C):</value>
+  </data>
+  <data name="boiling_point_colon" xml:space="preserve">
+    <value>क्वथनांक:</value>
+  </data>
+  <data name="boiling_point_fahrenheit" xml:space="preserve">
+    <value>क्वथनांक (°F):</value>
+  </data>
+  <data name="boiling_point_kelvin" xml:space="preserve">
+    <value>क्वथनांक (केल्विन):</value>
+  </data>
+  <data name="bonus_xp" xml:space="preserve">
+    <value>+0% बोनस सक्रिय</value>
+  </data>
+  <data name="brinell_hardness" xml:space="preserve">
+    <value>ब्रिनेल कठोरता</value>
+  </data>
+  <data name="brinell_hardness_colon" xml:space="preserve">
+    <value>ब्रिनेल कठोरता:</value>
+  </data>
+  <data name="bug" xml:space="preserve">
+    <value>बग</value>
+  </data>
+  <data name="bulk_modulus" xml:space="preserve">
+    <value>बल्क मॉड्यूलस</value>
+  </data>
+  <data name="cal" xml:space="preserve">
+    <value>कैलकुलेटर</value>
+  </data>
+  <data name="calc_elements_shown" xml:space="preserve">
+    <value>शामिल तत्व यहाँ दिखाए जाएँगे</value>
+  </data>
+  <data name="calc_favorites" xml:space="preserve">
+    <value>पसंदीदा:</value>
+  </data>
+  <data name="calc_molar_mass" xml:space="preserve">
+    <value>मोलर भार:</value>
+  </data>
+  <data name="calc_no_favorites" xml:space="preserve">
+    <value>फिलहाल कोई पसंदीदा नहीं है</value>
+  </data>
+  <data name="calc_no_pro_text" xml:space="preserve">
+    <value>पसंदीदा में सहेजने और एक्सेस करने के लिए आपको PRO संस्करण प्राप्त करना होगा</value>
+  </data>
+  <data name="calculations" xml:space="preserve">
+    <value>गणना</value>
+  </data>
+  <data name="calculations_stat" xml:space="preserve">
+    <value>गणना</value>
+  </data>
+  <data name="calculator_card_title" xml:space="preserve">
+    <value>कैलकुलेटर:</value>
+  </data>
+  <data name="calculator_default_value" xml:space="preserve">
+    <value>0.0 (g/mol)</value>
+  </data>
+  <data name="calculator_formula" xml:space="preserve">
+    <value>सूत्र:</value>
+  </data>
+  <data name="calculator_text" xml:space="preserve">
+    <value>विभिन्न यौगिकों के मोलर भार की गणना और पसंदीदा में सहेजने के लिए कैलकुलेटर शामिल है</value>
+  </data>
+  <data name="calculator_title" xml:space="preserve">
+    <value>कैलकुलेटर</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="card_order" xml:space="preserve">
+    <value>कार्ड क्रम</value>
+  </data>
+  <data name="cas_number" xml:space="preserve">
+    <value>CAS नंबर:</value>
+  </data>
+  <data name="cas_number_colon" xml:space="preserve">
+    <value>CAS संख्या:</value>
+  </data>
+  <data name="chip_chemistry" xml:space="preserve">
+    <value>रसायन</value>
+  </data>
+  <data name="chip_math" xml:space="preserve">
+    <value>गणित</value>
+  </data>
+  <data name="chip_minerals" xml:space="preserve">
+    <value>खनिज</value>
+  </data>
+  <data name="chip_physics" xml:space="preserve">
+    <value>भौतिकी</value>
+  </data>
+  <data name="chip_reactions" xml:space="preserve">
+    <value>प्रतिक्रियाएँ</value>
+  </data>
+  <data name="chip_rocks" xml:space="preserve">
+    <value>चट्टानें</value>
+  </data>
+  <data name="chip_soils" xml:space="preserve">
+    <value>मिट्टियाँ</value>
+  </data>
+  <data name="chip_water" xml:space="preserve">
+    <value>जल</value>
+  </data>
+  <data name="clear_cache_title" xml:space="preserve">
+    <value>कैश साफ करें</value>
+  </data>
+  <data name="clear_filter" xml:space="preserve">
+    <value>फ़िल्टर हटाएँ</value>
+  </data>
+  <data name="color_label" xml:space="preserve">
+    <value>रंग: </value>
+  </data>
+  <data name="compare_elements" xml:space="preserve">
+    <value>तत्वों की तुलना करें</value>
+  </data>
+  <data name="comparison_title_format" xml:space="preserve">
+    <value>%1$s | %2$s</value>
+  </data>
+  <data name="composition_label" xml:space="preserve">
+    <value>"संघटन: "</value>
+  </data>
+  <data name="con" xml:space="preserve">
+    <value>स्थिरांक तालिका</value>
+  </data>
+  <data name="confirm_sign_out" xml:space="preserve">
+    <value>क्या आप वाकई साइन आउट करना चाहते हैं?</value>
+  </data>
+  <data name="constants_search" xml:space="preserve">
+    <value>स्थिरांक खोजें</value>
+  </data>
+  <data name="constants_table_label" xml:space="preserve">
+    <value>स्थिरांक तालिका:</value>
+  </data>
+  <data name="constants_tite" xml:space="preserve">
+    <value>स्थिरांक तालिका</value>
+  </data>
+  <data name="correct" xml:space="preserve">
+    <value>सही</value>
+  </data>
+  <data name="correct_answer" xml:space="preserve">
+    <value>सही उत्तर: %s</value>
+  </data>
+  <data name="covalent_radius_colon" xml:space="preserve">
+    <value>सहसंयोजक त्रिज्या:</value>
+  </data>
+  <data name="credits_electro_boy_info" xml:space="preserve">
+    <value>अफ्रीकी के लिए अनुवाद</value>
+  </data>
+  <data name="credits_giancarlo_info" xml:space="preserve">
+    <value>स्पेनिश और इतालवी के लिए अनुवाद</value>
+  </data>
+  <data name="credits_text" xml:space="preserve">
+    <value>योगदानकर्ताओं को श्रेय</value>
+  </data>
+  <data name="credits_title" xml:space="preserve">
+    <value>श्रेय</value>
+  </data>
+  <data name="cristal_structure_label" xml:space="preserve">
+    <value>क्रिस्टल संरचना: </value>
+  </data>
+  <data name="crystal_structure" xml:space="preserve">
+    <value>क्रिस्टल संरचना:</value>
+  </data>
+  <data name="curie_point_colon" xml:space="preserve">
+    <value>क्यूरी बिंदु:</value>
+  </data>
+  <data name="current_version" xml:space="preserve">
+    <value>वर्तमान संस्करण</value>
+  </data>
+  <data name="currently_no_favorites" xml:space="preserve">
+    <value>वर्तमान में कोई पसंदीदा नहीं</value>
+  </data>
+  <data name="customize_detail_card_order" xml:space="preserve">
+    <value>विस्तृत कार्ड्स का क्रम अनुकूलित करें</value>
+  </data>
+  <data name="customize_units_table" xml:space="preserve">
+    <value>मुख्य तालिका में इकाइयाँ अनुकूलित करें</value>
+  </data>
+  <data name="dark" xml:space="preserve">
+    <value>गहरा</value>
+  </data>
+  <data name="data_issue" xml:space="preserve">
+    <value>डेटा समस्या</value>
+  </data>
+  <data name="data_visualisations" xml:space="preserve">
+    <value>डेटा विज़ुअलाइज़ेशन:</value>
+  </data>
+  <data name="debye_temperature_low_temperature_limit" xml:space="preserve">
+    <value>डेबाई तापमान: (निम्न ताप सीमा)</value>
+  </data>
+  <data name="debye_temperature_room_temperature" xml:space="preserve">
+    <value>डेबाई तापमान: (कक्ष तापमान)</value>
+  </data>
+  <data name="decay_alpha" xml:space="preserve">
+    <value>अल्फा क्षय (α)</value>
+  </data>
+  <data name="decay_beta_minus" xml:space="preserve">
+    <value>बीटा-माइनस क्षय (β−)</value>
+  </data>
+  <data name="decay_beta_plus" xml:space="preserve">
+    <value>बीटा-प्लस क्षय (β+)</value>
+  </data>
+  <data name="decay_electron_capture" xml:space="preserve">
+    <value>इलेक्ट्रॉन ग्रहण</value>
+  </data>
+  <data name="decay_info_fab" xml:space="preserve">
+    <value>विभिन्न विघटन प्रकारों की जानकारी</value>
+  </data>
+  <data name="decay_neutron_emission" xml:space="preserve">
+    <value>न्यूट्रॉन उत्सर्जन</value>
+  </data>
+  <data name="decay_proton_emission" xml:space="preserve">
+    <value>प्रोटॉन उत्सर्जन</value>
+  </data>
+  <data name="decay_spontaneous_fission" xml:space="preserve">
+    <value>स्वतःस्फूर्त विखंडन</value>
+  </data>
+  <data name="density" xml:space="preserve">
+    <value>घनत्व</value>
+  </data>
+  <data name="density_colon" xml:space="preserve">
+    <value>घनत्व:</value>
+  </data>
+  <data name="density_label" xml:space="preserve">
+    <value>घनत्व: </value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>विवरण</value>
+  </data>
+  <data name="description_colon" xml:space="preserve">
+    <value>विवरण:</value>
+  </data>
+  <data name="detail_card_order" xml:space="preserve">
+    <value>विस्तृत कार्ड क्रम</value>
+  </data>
+  <data name="dic" xml:space="preserve">
+    <value>शब्दकोश</value>
+  </data>
+  <data name="dictionary" xml:space="preserve">
+    <value>शब्दकोश</value>
+  </data>
+  <data name="dictionary_search" xml:space="preserve">
+    <value>शब्दकोश वस्तु खोजें</value>
+  </data>
+  <data name="dictionary_text" xml:space="preserve">
+    <value>रासायनिक और भौतिक शब्दों का एक व्यापक शब्दकोश</value>
+  </data>
+  <data name="discovered_by" xml:space="preserve">
+    <value>द्वारा खोजा गया</value>
+  </data>
+  <data name="discovered_by_colon" xml:space="preserve">
+    <value>खोजकर्ता:</value>
+  </data>
+  <data name="discovery_year" xml:space="preserve">
+    <value>खोज का वर्ष</value>
+  </data>
+  <data name="display_mode" xml:space="preserve">
+    <value>प्रदर्शन मोड</value>
+  </data>
+  <data name="early_access_features" xml:space="preserve">
+    <value>नई सुविधाओं तक शीघ्र पहुंच:</value>
+  </data>
+  <data name="easy" xml:space="preserve">
+    <value>आसान</value>
+  </data>
+  <data name="eg_number" xml:space="preserve">
+    <value>EG नंबर:</value>
+  </data>
+  <data name="eg_number_colon" xml:space="preserve">
+    <value>EG संख्या:</value>
+  </data>
+  <data name="ele" xml:space="preserve">
+    <value>विद्युत रासायनिक श्रेणी</value>
+  </data>
+  <data name="electrical_resistivity" xml:space="preserve">
+    <value>वैद्युत प्रतिरोधकता</value>
+  </data>
+  <data name="electrical_resistivity_colon" xml:space="preserve">
+    <value>विद्युत प्रतिरोधकता:</value>
+  </data>
+  <data name="electrical_type" xml:space="preserve">
+    <value>वैद्युत प्रकार</value>
+  </data>
+  <data name="electrical_type_colon" xml:space="preserve">
+    <value>विद्युत प्रकार:</value>
+  </data>
+  <data name="electrochemical_series" xml:space="preserve">
+    <value>विद्युत रासायनिक श्रेणी</value>
+  </data>
+  <data name="electrochemical_series_search" xml:space="preserve">
+    <value>तत्व खोजें</value>
+  </data>
+  <data name="electromagnetic_properties" xml:space="preserve">
+    <value>विद्युत चुंबकीय गुण</value>
+  </data>
+  <data name="electron_affinity_colon" xml:space="preserve">
+    <value>इलेक्ट्रॉन आत्मीयता:</value>
+  </data>
+  <data name="electron_configuration_colon" xml:space="preserve">
+    <value>इलेक्ट्रॉन विन्यास:</value>
+  </data>
+  <data name="electron_shell_colon" xml:space="preserve">
+    <value>इलेक्ट्रॉन शेल:</value>
+  </data>
+  <data name="electronegativity" xml:space="preserve">
+    <value>इलेक्ट्रोनगेटिविटी</value>
+  </data>
+  <data name="electronegativity_allen_colon" xml:space="preserve">
+    <value>इलेक्ट्रोनगेटिविटी (एलेन):</value>
+  </data>
+  <data name="electronegativity_colon" xml:space="preserve">
+    <value>विद्युत ऋणात्मकता:</value>
+  </data>
+  <data name="element_bulk_modulus" xml:space="preserve">
+    <value>बल्क मॉड्यूलस:</value>
+  </data>
+  <data name="element_description_title" xml:space="preserve">
+    <value>विवरण</value>
+  </data>
+  <data name="element_elastic_modulus" xml:space="preserve">
+    <value>लोच मॉड्यूलस:</value>
+  </data>
+  <data name="element_electrons" xml:space="preserve">
+    <value>इलेक्ट्रॉन:</value>
+  </data>
+  <data name="element_groups" xml:space="preserve">
+    <value>तत्व समूह</value>
+  </data>
+  <data name="element_info_title" xml:space="preserve">
+    <value>तत्व जानकारी</value>
+  </data>
+  <data name="element_more_title" xml:space="preserve">
+    <value>अतिरिक्त गुण</value>
+  </data>
+  <data name="element_name_default" xml:space="preserve">
+    <value>तत्व नाम (डिफ़ॉल्ट)</value>
+  </data>
+  <data name="element_names" xml:space="preserve">
+    <value>तत्व नाम</value>
+  </data>
+  <data name="element_number" xml:space="preserve">
+    <value>तत्व संख्या</value>
+  </data>
+  <data name="element_of_the_day" xml:space="preserve">
+    <value>आज का तत्व</value>
+  </data>
+  <data name="element_of_the_day_description" xml:space="preserve">
+    <value>हर दिन एक अलग तत्व उसके प्रतीक, नाम और विवरण के साथ प्रदर्शित करता है</value>
+  </data>
+  <data name="element_overview" xml:space="preserve">
+    <value>तत्व अवलोकन:</value>
+  </data>
+  <data name="element_poisson_ratio" xml:space="preserve">
+    <value>प्वासों अनुपात:</value>
+  </data>
+  <data name="element_shear_modulus" xml:space="preserve">
+    <value>शीयर मॉड्यूलस:</value>
+  </data>
+  <data name="element_speed_sound" xml:space="preserve">
+    <value>ध्वनि की गति:</value>
+  </data>
+  <data name="element_symbols" xml:space="preserve">
+    <value>तत्व चिह्न</value>
+  </data>
+  <data name="element_young_modulus" xml:space="preserve">
+    <value>यंग्स मॉड्यूलस:</value>
+  </data>
+  <data name="elements_included_will_be_shown_here" xml:space="preserve">
+    <value>शामिल तत्व यहाँ दिखाए जाएंगे</value>
+  </data>
+  <data name="elements_opened" xml:space="preserve">
+    <value>खोले गए तत्व</value>
+  </data>
+  <data name="emi" xml:space="preserve">
+    <value>उत्सर्जन स्पेक्ट्रम तालिका</value>
+  </data>
+  <data name="emission_spectrum_colon" xml:space="preserve">
+    <value>उत्सर्जन स्पेक्ट्रम:</value>
+  </data>
+  <data name="emission_spectrum_table" xml:space="preserve">
+    <value>उत्सर्जन स्पेक्ट्रम तालिका:</value>
+  </data>
+  <data name="emission_text" xml:space="preserve">
+    <value>तत्वों के लिए उत्सर्जन स्पेक्ट्रम, जो इलेक्ट्रॉनों द्वारा उच्च से निम्न ऊर्जा अवस्था में संक्रमण के कारण उत्सर्जित विद्युतचुंबकीय विकिरण की आवृत्तियाँ हैं।</value>
+  </data>
+  <data name="emission_title" xml:space="preserve">
+    <value>उत्सर्जन स्पेक्ट्रम तालिका</value>
+  </data>
+  <data name="enable_sync" xml:space="preserve">
+    <value>सिंक सक्षम करें</value>
+  </data>
+  <data name="enable_sync_desc" xml:space="preserve">
+    <value>स्तर, xp, उपलब्धियों आदि की प्रगति का सिंक PRO और PRO+ उपयोगकर्ताओं के लिए उपलब्ध है</value>
+  </data>
+  <data name="enable_sync_pro_button" xml:space="preserve">
+    <value>अपग्रेड करें</value>
+  </data>
+  <data name="enable_zoom_in_tables" xml:space="preserve">
+    <value>तालिकाओं में ज़ूम सक्षम करें</value>
+  </data>
+  <data name="english_name_colon" xml:space="preserve">
+    <value>अंग्रेजी नाम:</value>
+  </data>
+  <data name="enter_new_text" xml:space="preserve">
+    <value>नया पाठ दर्ज करें</value>
+  </data>
+  <data name="eqe" xml:space="preserve">
+    <value>सूत्र</value>
+  </data>
+  <data name="equations_search_other" xml:space="preserve">
+    <value>कृपया अन्य शब्द खोजें या अपनी वर्तनी जांचें।</value>
+  </data>
+  <data name="exam_best_score" xml:space="preserve">
+    <value>सर्वश्रेष्ठ स्कोर: %1$d%%</value>
+  </data>
+  <data name="exam_finished_xp" xml:space="preserve">
+    <value>परीक्षा पूरी: +%1$d XP</value>
+  </data>
+  <data name="exam_locked" xml:space="preserve">
+    <value>अनलॉक करने के लिए स्तर %1$d तक पहुँचें</value>
+  </data>
+  <data name="exam_not_taken" xml:space="preserve">
+    <value>अभी तक प्रयास नहीं किया</value>
+  </data>
+  <data name="exam_passed" xml:space="preserve">
+    <value>उत्तीर्ण · सर्वश्रेष्ठ स्कोर %1$d%%</value>
+  </data>
+  <data name="exam_pro_locked" xml:space="preserve">
+    <value>इस परीक्षा के लिए PRO+ चाहिए</value>
+  </data>
+  <data name="exam_results" xml:space="preserve">
+    <value>परीक्षा परिणाम</value>
+  </data>
+  <data name="exam_start" xml:space="preserve">
+    <value>परीक्षा शुरू करें</value>
+  </data>
+  <data name="exam_test_subtitle" xml:space="preserve">
+    <value>स्तर %1$d से %2$d तक सब कुछ, मिलाकर</value>
+  </data>
+  <data name="exam_test_title" xml:space="preserve">
+    <value>परीक्षा</value>
+  </data>
+  <data name="exit_compare_mode" xml:space="preserve">
+    <value>तुलना से बाहर निकलें</value>
+  </data>
+  <data name="experimental" xml:space="preserve">
+    <value>प्रायोगिक</value>
+  </data>
+  <data name="experimental_text" xml:space="preserve">
+    <value>अतिरिक्त प्रायोगिक सेटिंग्स</value>
+  </data>
+  <data name="experimental_title" xml:space="preserve">
+    <value>प्रायोगिक सेटिंग्स</value>
+  </data>
+  <data name="favorite_bar" xml:space="preserve">
+    <value>पसंदीदा पट्टी</value>
+  </data>
+  <data name="favorite_settings_atomic_properties" xml:space="preserve">
+    <value>आणविक गुण</value>
+  </data>
+  <data name="favorite_settings_electromagnetic" xml:space="preserve">
+    <value>वैद्युतचुंबकीय गुण</value>
+  </data>
+  <data name="favorite_settings_general" xml:space="preserve">
+    <value>सामान्य</value>
+  </data>
+  <data name="favorite_settings_nuclear" xml:space="preserve">
+    <value>नाभिकीय</value>
+  </data>
+  <data name="favorite_settings_temperatures" xml:space="preserve">
+    <value>तापमान</value>
+  </data>
+  <data name="favorite_settings_thermodynamics" xml:space="preserve">
+    <value>ऊष्मागतिक</value>
+  </data>
+  <data name="favorite_settings_title" xml:space="preserve">
+    <value>पसंदीदा पट्टी</value>
+  </data>
+  <data name="favorites_colon" xml:space="preserve">
+    <value>पसंदीदा:</value>
+  </data>
+  <data name="feature_check" xml:space="preserve">
+    <value>सुविधा शामिल</value>
+  </data>
+  <data name="features" xml:space="preserve">
+    <value>विशेषताएं:</value>
+  </data>
+  <data name="fifty_lives_in_flashcards" xml:space="preserve">
+    <value>फ्लैशकार्ड में 50 जीवन:</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>फ़िल्टर</value>
+  </data>
+  <data name="finished_game_xp" xml:space="preserve">
+    <value>खेल पूर्ण: +%dxp</value>
+  </data>
+  <data name="fire_hazard" xml:space="preserve">
+    <value>आग का खतरा:</value>
+  </data>
+  <data name="fla" xml:space="preserve">
+    <value>फ्लैशकार्ड्स</value>
+  </data>
+  <data name="flashcards_atomic_mass" xml:space="preserve">
+    <value>आणविक द्रव्यमान</value>
+  </data>
+  <data name="flashcards_chemical_reactions" xml:space="preserve">
+    <value>रासायनिक अभिक्रियाएँ</value>
+  </data>
+  <data name="flashcards_difficulty" xml:space="preserve">
+    <value>कठिनाई चुनें:</value>
+  </data>
+  <data name="flashcards_difficulty_title" xml:space="preserve">
+    <value>कठिनाई</value>
+  </data>
+  <data name="flashcards_element_classifications" xml:space="preserve">
+    <value>तत्व वर्गीकरण</value>
+  </data>
+  <data name="flashcards_element_symbols" xml:space="preserve">
+    <value>तत्व चिह्न</value>
+  </data>
+  <data name="flashcards_free_games" xml:space="preserve">
+    <value>मुफ़्त गेम्स:</value>
+  </data>
+  <data name="flashcards_game_element_appearance" xml:space="preserve">
+    <value>दिखावट</value>
+  </data>
+  <data name="flashcards_game_element_atomic_mass" xml:space="preserve">
+    <value>आणविक द्रव्यमान</value>
+  </data>
+  <data name="flashcards_game_element_density" xml:space="preserve">
+    <value>घनत्व</value>
+  </data>
+  <data name="flashcards_game_element_groups" xml:space="preserve">
+    <value>तत्व समूह</value>
+  </data>
+  <data name="flashcards_game_element_names" xml:space="preserve">
+    <value>तत्व नाम</value>
+  </data>
+  <data name="flashcards_game_element_symbols" xml:space="preserve">
+    <value>तत्व चिह्न</value>
+  </data>
+  <data name="flashcards_info" xml:space="preserve">
+    <value>इन-बिल्ट "लर्निंग-गेम्स" के साथ पीरियोडिक टेबल सीखें</value>
+  </data>
+  <data name="flashcards_level" xml:space="preserve">
+    <value>स्तर</value>
+  </data>
+  <data name="flashcards_lives_info" xml:space="preserve">
+    <value>हर गलत उत्तर से एक जीवन कम होगा</value>
+  </data>
+  <data name="flashcards_mixed_questions" xml:space="preserve">
+    <value>मिश्रित प्रश्न</value>
+  </data>
+  <data name="flashcards_pro_level_0_5" xml:space="preserve">
+    <value>स्तर 0-4:</value>
+  </data>
+  <data name="flashcards_pro_level_10_15" xml:space="preserve">
+    <value>स्तर 10-14:</value>
+  </data>
+  <data name="flashcards_pro_level_5_10" xml:space="preserve">
+    <value>स्तर 5-9:</value>
+  </data>
+  <data name="flashcards_pro_plus_games" xml:space="preserve">
+    <value>PRO+ गेम्स:</value>
+  </data>
+  <data name="flashcards_statistics" xml:space="preserve">
+    <value>आँकड़े</value>
+  </data>
+  <data name="flashcards_title" xml:space="preserve">
+    <value>फ्लैशकार्ड्स</value>
+  </data>
+  <data name="flashcards_total_games" xml:space="preserve">
+    <value>खेल</value>
+  </data>
+  <data name="flashcards_total_xp" xml:space="preserve">
+    <value>कुल XP</value>
+  </data>
+  <data name="flashcards_unlimited_lives" xml:space="preserve">
+    <value>फ्लैशकार्ड में असीमित जीवन:</value>
+  </data>
+  <data name="formula_will_be_displayed_here" xml:space="preserve">
+    <value>सूत्र यहाँ प्रदर्शित होगा</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>मुफ़्त</value>
+  </data>
+  <data name="fusion_heat" xml:space="preserve">
+    <value>संलयन ऊष्मा</value>
+  </data>
+  <data name="fusion_heat_colon" xml:space="preserve">
+    <value>संलयन ऊष्मा:</value>
+  </data>
+  <data name="game_compare_pair" xml:space="preserve">
+    <value>आमने-सामने</value>
+  </data>
+  <data name="game_extremes_advanced" xml:space="preserve">
+    <value>उन्नत चरम मान</value>
+  </data>
+  <data name="game_group" xml:space="preserve">
+    <value>समूह</value>
+  </data>
+  <data name="game_highest" xml:space="preserve">
+    <value>सबसे अधिक कौन?</value>
+  </data>
+  <data name="game_isotope_decay" xml:space="preserve">
+    <value>क्षय के प्रकार</value>
+  </data>
+  <data name="game_isotope_half_life" xml:space="preserve">
+    <value>अर्ध-आयु</value>
+  </data>
+  <data name="game_isotope_neutrons" xml:space="preserve">
+    <value>न्यूट्रॉन संख्या</value>
+  </data>
+  <data name="game_isotope_stability" xml:space="preserve">
+    <value>स्थिर समस्थानिक</value>
+  </data>
+  <data name="game_lowest" xml:space="preserve">
+    <value>सबसे कम कौन?</value>
+  </data>
+  <data name="game_molar_mass" xml:space="preserve">
+    <value>मोलर द्रव्यमान</value>
+  </data>
+  <data name="game_odd_one_out" xml:space="preserve">
+    <value>कौन अलग है?</value>
+  </data>
+  <data name="game_period" xml:space="preserve">
+    <value>आवर्त</value>
+  </data>
+  <data name="game_results" xml:space="preserve">
+    <value>खेल परिणाम</value>
+  </data>
+  <data name="game_valence_electrons" xml:space="preserve">
+    <value>संयोजी इलेक्ट्रॉन</value>
+  </data>
+  <data name="gas" xml:space="preserve">
+    <value>आदर्श गैस कैलकुलेटर</value>
+  </data>
+  <data name="geo" xml:space="preserve">
+    <value>भूविज्ञान तालिका</value>
+  </data>
+  <data name="geo_clear_filter" xml:space="preserve">
+    <value>फ़िल्टर हटाएँ</value>
+  </data>
+  <data name="geo_no_results" xml:space="preserve">
+    <value>कोई परिणाम नहीं</value>
+  </data>
+  <data name="geo_search_hint" xml:space="preserve">
+    <value>भूविज्ञान वस्तु खोजें</value>
+  </data>
+  <data name="geo_try_another_search" xml:space="preserve">
+    <value>कृपया अन्य शब्द खोजें या अपनी वर्तनी जांचें।</value>
+  </data>
+  <data name="geology_table" xml:space="preserve">
+    <value>भूविज्ञान तालिका:</value>
+  </data>
+  <data name="get_pro" xml:space="preserve">
+    <value>PRO प्राप्त करें</value>
+  </data>
+  <data name="get_pro_button" xml:space="preserve">
+    <value>PRO प्राप्त करें</value>
+  </data>
+  <data name="get_pro_element_text" xml:space="preserve">
+    <value>Kumuha ng PRO-Bersyon upang i-unlock ang karagdagang impormasyon ng mga elemento</value>
+  </data>
+  <data name="get_pro_plus" xml:space="preserve">
+    <value>PRO+ प्राप्त करें</value>
+  </data>
+  <data name="get_pro_plus_button" xml:space="preserve">
+    <value>PRO+ प्राप्त करें</value>
+  </data>
+  <data name="get_pro_title" xml:space="preserve">
+    <value>PRO संस्करण प्राप्त करें</value>
+  </data>
+  <data name="git_text" xml:space="preserve">
+    <value>एटॉमिक का ओपन-सोर्स गिटहब रिपो</value>
+  </data>
+  <data name="go_online_for_emission" xml:space="preserve">
+    <value>उत्सर्जन रेखाओं के लिए ऑनलाइन जाएं</value>
+  </data>
+  <data name="go_online_for_emission_lines" xml:space="preserve">
+    <value>उत्सर्जन रेखाओं के लिए ऑनलाइन जाएं</value>
+  </data>
+  <data name="go_pro_more_features" xml:space="preserve">
+    <value>Go Pro - अधिक सुविधाएँ</value>
+  </data>
+  <data name="go_pro_school_start_sale" xml:space="preserve">
+    <value>GO PRO - स्कूल शुरू सेल</value>
+  </data>
+  <data name="grid_parameters" xml:space="preserve">
+    <value>ग्रिड पैरामीटर: (लैटिस स्थिरांक)</value>
+  </data>
+  <data name="grid_title" xml:space="preserve">
+    <value>ग्रिड गुण</value>
+  </data>
+  <data name="group_label" xml:space="preserve">
+    <value>समूह: </value>
+  </data>
+  <data name="hard" xml:space="preserve">
+    <value>कठिन</value>
+  </data>
+  <data name="hardness_label" xml:space="preserve">
+    <value>कठोरता: </value>
+  </data>
+  <data name="hardness_properties" xml:space="preserve">
+    <value>कठोरता गुण</value>
+  </data>
+  <data name="hardness_properties_requires_pro" xml:space="preserve">
+    <value>कठोरता गुणों के लिए PRO-संस्करण की आवश्यकता है। अधिक डेटा और तालिकाओं को अनलॉक करने के लिए PRO प्राप्त करें:</value>
+  </data>
+  <data name="hazard_diamond" xml:space="preserve">
+    <value>ख़तरा डायमंड</value>
+  </data>
+  <data name="hazard_flammability" xml:space="preserve">
+    <value>ज्वलनशीलता</value>
+  </data>
+  <data name="hazard_health" xml:space="preserve">
+    <value>स्वास्थ्य ख़तरा</value>
+  </data>
+  <data name="hazard_instability" xml:space="preserve">
+    <value>अस्थिरता</value>
+  </data>
+  <data name="hazard_materials" xml:space="preserve">
+    <value>खतरनाक सामग्री:</value>
+  </data>
+  <data name="hazard_title" xml:space="preserve">
+    <value>सामग्री का खतरा</value>
+  </data>
+  <data name="hazard_title_requires_pro" xml:space="preserve">
+    <value>सामग्री का खतरा PRO संस्करण के लिए आवश्यक है। PRO प्राप्त करें और अधिक डेटा व तालिकाएँ अनलॉक करें:</value>
+  </data>
+  <data name="health_hazard" xml:space="preserve">
+    <value>स्वास्थ्य खतरा:</value>
+  </data>
+  <data name="highest" xml:space="preserve">
+    <value>उच्चतम</value>
+  </data>
+  <data name="ideal_calculated" xml:space="preserve">
+    <value>अक्षम</value>
+  </data>
+  <data name="ideal_gas_calculate_field" xml:space="preserve">
+    <value>गणना करें:</value>
+  </data>
+  <data name="ideal_gas_calculator_title" xml:space="preserve">
+    <value>आदर्श गैस कैलकुलेटर</value>
+  </data>
+  <data name="ideal_gas_card_title" xml:space="preserve">
+    <value>आदर्श गैस नियम कैलकुलेटर (PV=nRT):</value>
+  </data>
+  <data name="ideal_gas_moles" xml:space="preserve">
+    <value>मोल (n):</value>
+  </data>
+  <data name="ideal_gas_moles_hint" xml:space="preserve">
+    <value>मोल दर्ज करें</value>
+  </data>
+  <data name="ideal_gas_pressure" xml:space="preserve">
+    <value>दबाव (P):</value>
+  </data>
+  <data name="ideal_gas_pressure_hint" xml:space="preserve">
+    <value>दबाव दर्ज करें</value>
+  </data>
+  <data name="ideal_gas_result" xml:space="preserve">
+    <value>परिणाम:</value>
+  </data>
+  <data name="ideal_gas_temperature" xml:space="preserve">
+    <value>तापमान (T):</value>
+  </data>
+  <data name="ideal_gas_temperature_hint" xml:space="preserve">
+    <value>तापमान दर्ज करें</value>
+  </data>
+  <data name="ideal_gas_text" xml:space="preserve">
+    <value>आदर्श गैस नियम समीकरण PV=nRT का उपयोग करके आदर्श गैस गुणों की गणना करें। चुनें कि किस चर की गणना करनी है और अन्य तीन मान दर्ज करें।</value>
+  </data>
+  <data name="ideal_gas_volume" xml:space="preserve">
+    <value>आयतन (V):</value>
+  </data>
+  <data name="ideal_gas_volume_hint" xml:space="preserve">
+    <value>आयतन दर्ज करें</value>
+  </data>
+  <data name="info_text" xml:space="preserve">
+    <value>ऐप संस्करण और विवरण</value>
+  </data>
+  <data name="info_title" xml:space="preserve">
+    <value>जानकारी</value>
+  </data>
+  <data name="intro_calculator_description" xml:space="preserve">
+    <value>रासायनिक यौगिकों के मोलर द्रव्यमान की तेजी से और सटीक गणना करें। रसायन विज्ञान के छात्रों और पेशेवरों के लिए एकदम सही।</value>
+  </data>
+  <data name="intro_calculator_title" xml:space="preserve">
+    <value>मोलर द्रव्यमान कैलकुलेटर</value>
+  </data>
+  <data name="intro_finish" xml:space="preserve">
+    <value>शुरू करें</value>
+  </data>
+  <data name="intro_flashcards_description" xml:space="preserve">
+    <value>इंटरैक्टिव फ्लैशकार्ड के साथ आवर्त सारणी में महारत हासिल करें। तत्व प्रतीकों, परमाणु द्रव्यमान और रासायनिक गुणों के अपने ज्ञान का परीक्षण करें।</value>
+  </data>
+  <data name="intro_flashcards_title" xml:space="preserve">
+    <value>फ्लैशकार्ड से सीखें</value>
+  </data>
+  <data name="intro_image_description" xml:space="preserve">
+    <value>परिचय चित्र</value>
+  </data>
+  <data name="intro_next" xml:space="preserve">
+    <value>अगला</value>
+  </data>
+  <data name="intro_pro_description" xml:space="preserve">
+    <value>PRO संस्करण के साथ अतिरिक्त डेटा, उन्नत तालिकाओं, बेहतर कैलकुलेटर और विशेष सुविधाओं तक पहुंच प्राप्त करें।</value>
+  </data>
+  <data name="intro_pro_title" xml:space="preserve">
+    <value>PRO सुविधाएं अनलॉक करें</value>
+  </data>
+  <data name="intro_skip" xml:space="preserve">
+    <value>छोड़ें</value>
+  </data>
+  <data name="intro_welcome_description" xml:space="preserve">
+    <value>विस्तृत तत्व जानकारी, इंटरैक्टिव टूल्स और सीखने की सुविधाओं के साथ आपका व्यापक आवर्त सारणी संदर्भ।</value>
+  </data>
+  <data name="intro_welcome_title" xml:space="preserve">
+    <value>Atomic में आपका स्वागत है</value>
+  </data>
+  <data name="ion" xml:space="preserve">
+    <value>आयनन ऊर्जा</value>
+  </data>
+  <data name="ion_charge_colon" xml:space="preserve">
+    <value>आयन आवेश:</value>
+  </data>
+  <data name="ion_no_results" xml:space="preserve">
+    <value>कोई परिणाम नहीं</value>
+  </data>
+  <data name="ion_try_another_search" xml:space="preserve">
+    <value>कृपया अन्य शब्द खोजें या अपनी वर्तनी जांचें।</value>
+  </data>
+  <data name="ionization_energies_colon" xml:space="preserve">
+    <value>आयनन ऊर्जा:</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>आइसोटोप</value>
+  </data>
+  <data name="iso_half_life_colon" xml:space="preserve">
+    <value>अर्ध-आयु:</value>
+  </data>
+  <data name="iso_no_results" xml:space="preserve">
+    <value>कोई परिणाम नहीं</value>
+  </data>
+  <data name="iso_search_hint" xml:space="preserve">
+    <value>आइसोटोप खोजें</value>
+  </data>
+  <data name="iso_try_another_search" xml:space="preserve">
+    <value>कृपया अन्य शब्द खोजें या अपनी वर्तनी जांचें।</value>
+  </data>
+  <data name="isotope" xml:space="preserve">
+    <value>समस्थानिक</value>
+  </data>
+  <data name="isotopes_colon" xml:space="preserve">
+    <value>समस्थानिक:</value>
+  </data>
+  <data name="isotopes_table_description" xml:space="preserve">
+    <value>विभिन्न तत्वों के समस्थानिकों के साथ-साथ अर्ध-जीवन, द्रव्यमान, प्रोटॉन, न्यूट्रॉन और न्यूक्लिऑन डेटा वाली तालिका।</value>
+  </data>
+  <data name="isotopes_title" xml:space="preserve">
+    <value>आइसोटोप</value>
+  </data>
+  <data name="language_content" xml:space="preserve">
+    <value>भाषा चुनें</value>
+  </data>
+  <data name="language_title" xml:space="preserve">
+    <value>भाषाएँ</value>
+  </data>
+  <data name="learning_games" xml:space="preserve">
+    <value>लर्निंग-गेम्स:</value>
+  </data>
+  <data name="learning_games_nav" xml:space="preserve">
+    <value>फ्लैशकार्ड</value>
+  </data>
+  <data name="leave_game_confirm" xml:space="preserve">
+    <value>छोड़ें</value>
+  </data>
+  <data name="leave_game_message" xml:space="preserve">
+    <value>क्या आप वाकई गेम छोड़ना चाहते हैं? आप %1$d जीवन खो देंगे।</value>
+  </data>
+  <data name="leave_game_stay" xml:space="preserve">
+    <value>रुकें</value>
+  </data>
+  <data name="leave_game_title" xml:space="preserve">
+    <value>गेम छोड़ें?</value>
+  </data>
+  <data name="level_0_4" xml:space="preserve">
+    <value>स्तर 0–4</value>
+  </data>
+  <data name="level_10_14" xml:space="preserve">
+    <value>स्तर 10–14</value>
+  </data>
+  <data name="level_15_19" xml:space="preserve">
+    <value>स्तर 15–19</value>
+  </data>
+  <data name="level_20_24" xml:space="preserve">
+    <value>स्तर 20–24</value>
+  </data>
+  <data name="level_25_29" xml:space="preserve">
+    <value>स्तर 25</value>
+  </data>
+  <data name="level_30_34" xml:space="preserve">
+    <value>स्तर 30</value>
+  </data>
+  <data name="level_5_9" xml:space="preserve">
+    <value>स्तर 5–9</value>
+  </data>
+  <data name="level_range_format" xml:space="preserve">
+    <value>स्तर %1$d</value>
+  </data>
+  <data name="level_up_message" xml:space="preserve">
+    <value>बधाई हो, आप स्तर %1$d पर पहुँच गए!</value>
+  </data>
+  <data name="level_up_title" xml:space="preserve">
+    <value>स्तर बढ़ा!</value>
+  </data>
+  <data name="level_x_y" xml:space="preserve">
+    <value>स्तर X-Y</value>
+  </data>
+  <data name="license_title" xml:space="preserve">
+    <value>लाइसेंस</value>
+  </data>
+  <data name="licenses_text" xml:space="preserve">
+    <value>एटॉमिक द्वारा प्रयुक्त कार्यों के लाइसेंस</value>
+  </data>
+  <data name="licenses_title" xml:space="preserve">
+    <value>लाइसेंस</value>
+  </data>
+  <data name="light" xml:space="preserve">
+    <value>हल्का</value>
+  </data>
+  <data name="lives_label" xml:space="preserve">
+    <value>जीवन: %s</value>
+  </data>
+  <data name="lives_lost_detail" xml:space="preserve">
+    <value>खोए हुए जीवन: %1$d (प्रति गलत/टाइमआउट उत्तर %2$d)</value>
+  </data>
+  <data name="lives_lost_result.One" xml:space="preserve">
+    <value>%d जीवन खोया</value>
+  </data>
+  <data name="lives_lost_result.Other" xml:space="preserve">
+    <value>%d जीवन खोए</value>
+  </data>
+  <data name="lives_unlimited" xml:space="preserve">
+    <value>जीवन: ∞</value>
+  </data>
+  <data name="login_for_sync" xml:space="preserve">
+    <value>सिंक सक्षम करने के लिए लॉगिन करें</value>
+  </data>
+  <data name="login_for_sync_and_more" xml:space="preserve">
+    <value>डेटा सिंक करने के लिए लॉगिन करें</value>
+  </data>
+  <data name="lowest" xml:space="preserve">
+    <value>न्यूनतम</value>
+  </data>
+  <data name="magnetic_type" xml:space="preserve">
+    <value>चुंबकीय प्रकार</value>
+  </data>
+  <data name="magnetic_type_colon" xml:space="preserve">
+    <value>चुंबकीय प्रकार:</value>
+  </data>
+  <data name="magnetism_label" xml:space="preserve">
+    <value>चुंबकत्व: </value>
+  </data>
+  <data name="medium" xml:space="preserve">
+    <value>मध्यम</value>
+  </data>
+  <data name="melting_point" xml:space="preserve">
+    <value>गलनांक</value>
+  </data>
+  <data name="melting_point_celsius" xml:space="preserve">
+    <value>गलनांक (°C):</value>
+  </data>
+  <data name="melting_point_colon" xml:space="preserve">
+    <value>गलनांक:</value>
+  </data>
+  <data name="melting_point_fahrenheit" xml:space="preserve">
+    <value>गलनांक (°F):</value>
+  </data>
+  <data name="melting_point_kelvin" xml:space="preserve">
+    <value>गलनांक (केल्विन):</value>
+  </data>
+  <data name="member_already" xml:space="preserve">
+    <value>आप PRO सदस्य हैं!</value>
+  </data>
+  <data name="member_btn" xml:space="preserve">
+    <value>आपकी PRO विशेषताएँ</value>
+  </data>
+  <data name="member_desch" xml:space="preserve">
+    <value>'एटॉमिक - पीरियोडिक टेबल' के विकास का समर्थन करने के लिए धन्यवाद। इस पृष्ठ पर आपकी PRO सुविधाएँ दिखाई जाएँगी जैसे-जैसे और PRO फीचर्स जुड़ते हैं।</value>
+  </data>
+  <data name="member_title" xml:space="preserve">
+    <value>PRO सदस्य पृष्ठ</value>
+  </data>
+  <data name="mohs_hardness" xml:space="preserve">
+    <value>मोहोस कठोरता</value>
+  </data>
+  <data name="mohs_hardness_colon" xml:space="preserve">
+    <value>मोह्स कठोरता:</value>
+  </data>
+  <data name="molar_heat_capacity_colon" xml:space="preserve">
+    <value>मोलर ऊष्मा धारिता:</value>
+  </data>
+  <data name="molar_mass_value" xml:space="preserve">
+    <value>%1$s g/mol</value>
+  </data>
+  <data name="molar_volume_colon" xml:space="preserve">
+    <value>मोलर आयतन:</value>
+  </data>
+  <data name="more_information" xml:space="preserve">
+    <value>अधिक जानकारी:</value>
+  </data>
+  <data name="most_advanced" xml:space="preserve">
+    <value>सबसे उन्नत</value>
+  </data>
+  <data name="most_used" xml:space="preserve">
+    <value>सबसे अधिक प्रयुक्त:</value>
+  </data>
+  <data name="neel_point_colon" xml:space="preserve">
+    <value>नील बिंदु:</value>
+  </data>
+  <data name="neutron_cross_sectional" xml:space="preserve">
+    <value>न्यूट्रॉन क्रॉस सेक्शन</value>
+  </data>
+  <data name="neutron_cross_sectional_colon" xml:space="preserve">
+    <value>न्यूट्रॉन क्रॉस सेक्शनल:</value>
+  </data>
+  <data name="neutrons" xml:space="preserve">
+    <value>न्यूट्रॉन:</value>
+  </data>
+  <data name="new_label" xml:space="preserve">
+    <value>नया</value>
+  </data>
+  <data name="next_life_gain.One" xml:space="preserve">
+    <value>आपको %d जीवन मिलेगा।</value>
+  </data>
+  <data name="next_life_gain.Other" xml:space="preserve">
+    <value>आपको %d जीवन मिलेंगे।</value>
+  </data>
+  <data name="next_life_in_detail" xml:space="preserve">
+    <value>अगला जीवन %1$d मिनट और %2$d सेकंड में।
+%3$s</value>
+  </data>
+  <data name="no_image" xml:space="preserve">
+    <value>कोई छवि नहीं</value>
+  </data>
+  <data name="no_questions_title" xml:space="preserve">
+    <value>पर्याप्त डेटा नहीं</value>
+  </data>
+  <data name="no_results" xml:space="preserve">
+    <value>कोई परिणाम नहीं</value>
+  </data>
+  <data name="no_unlocked_games" xml:space="preserve">
+    <value>कोई अनलॉक किया गया गेम उपलब्ध नहीं!</value>
+  </data>
+  <data name="non_pro" xml:space="preserve">
+    <value>NON-PRO</value>
+  </data>
+  <data name="notes_placeholder" xml:space="preserve">
+    <value>तत्व के लिए नोट्स लें:</value>
+  </data>
+  <data name="nuc" xml:space="preserve">
+    <value>न्यूक्लाइड तालिका</value>
+  </data>
+  <data name="nuclear_properties" xml:space="preserve">
+    <value>परमाणु गुण</value>
+  </data>
+  <data name="nucleons" xml:space="preserve">
+    <value>न्यूक्लिऑन:</value>
+  </data>
+  <data name="nuclide_table" xml:space="preserve">
+    <value>न्यूक्लाइड तालिका:</value>
+  </data>
+  <data name="nuclide_table_title" xml:space="preserve">
+    <value>न्यूक्लाइड तालिका</value>
+  </data>
+  <data name="offline_mode" xml:space="preserve">
+    <value>ऑफ़लाइन मोड</value>
+  </data>
+  <data name="offline_mode_desc" xml:space="preserve">
+    <value>चित्रों को लोड करना अक्षम करता है</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>ठीक है</value>
+  </data>
+  <data name="open_base_element" xml:space="preserve">
+    <value>आधार तत्व खोलें</value>
+  </data>
+  <data name="open_table_button" xml:space="preserve">
+    <value>तालिका खोलें</value>
+  </data>
+  <data name="other_settings" xml:space="preserve">
+    <value>उन्नत</value>
+  </data>
+  <data name="other_title" xml:space="preserve">
+    <value>अन्य</value>
+  </data>
+  <data name="out_of_lives_hours" xml:space="preserve">
+    <value>जीवन समाप्त! %1$d घंटे, %2$d मिनट और %3$d सेकंड में अधिक जीवन।</value>
+  </data>
+  <data name="out_of_lives_minutes" xml:space="preserve">
+    <value>जीवन समाप्त! %1$d मिनट और %2$d सेकंड में अधिक जीवन।</value>
+  </data>
+  <data name="overview" xml:space="preserve">
+    <value>अवलोकन</value>
+  </data>
+  <data name="owns_pro_plus" xml:space="preserve">
+    <value>PRO+ है</value>
+  </data>
+  <data name="oxidation_states_colon" xml:space="preserve">
+    <value>ऑक्सीकरण अवस्थाएं:</value>
+  </data>
+  <data name="perfect_all_correct_xp" xml:space="preserve">
+    <value>परफेक्ट (सभी सही): +%dxp</value>
+  </data>
+  <data name="personalise_favorite_bar" xml:space="preserve">
+    <value>पसंदीदा पट्टी को वैयक्तिक करें</value>
+  </data>
+  <data name="personalization_settings" xml:space="preserve">
+    <value>व्यक्तिकरण</value>
+  </data>
+  <data name="ph_title" xml:space="preserve">
+    <value>pH-सूचक</value>
+  </data>
+  <data name="phase_stp" xml:space="preserve">
+    <value>अवस्था (STP)</value>
+  </data>
+  <data name="phase_stp_colon" xml:space="preserve">
+    <value>फेज (STP):</value>
+  </data>
+  <data name="phi" xml:space="preserve">
+    <value>pH-सूचक</value>
+  </data>
+  <data name="poi" xml:space="preserve">
+    <value>प्वासों अनुपात तालिका</value>
+  </data>
+  <data name="poi_clear_filter" xml:space="preserve">
+    <value>फ़िल्टर हटाएँ</value>
+  </data>
+  <data name="poi_no_results" xml:space="preserve">
+    <value>कोई परिणाम नहीं</value>
+  </data>
+  <data name="poi_search_hint" xml:space="preserve">
+    <value>शब्दकोश वस्तु खोजें</value>
+  </data>
+  <data name="poi_try_another_search" xml:space="preserve">
+    <value>कृपया अन्य शब्द खोजें या अपनी वर्तनी जांचें।</value>
+  </data>
+  <data name="poisson_constants_sound_speed" xml:space="preserve">
+    <value>पॉइज़न स्थिरांक, ध्वनि गति:</value>
+  </data>
+  <data name="poisson_ratio_table" xml:space="preserve">
+    <value>पॉइज़न अनुपात तालिका:</value>
+  </data>
+  <data name="poissons_ratio" xml:space="preserve">
+    <value>प्वासों अनुपात</value>
+  </data>
+  <data name="poissons_ratio_title" xml:space="preserve">
+    <value>प्वासों अनुपात</value>
+  </data>
+  <data name="popup_action_button" xml:space="preserve">
+    <value>PRO+ में अपग्रेड करें</value>
+  </data>
+  <data name="popup_content_text" xml:space="preserve">
+    <value>'एटॉमिक - पीरियोडिक टेबल' को अपग्रेड करें ताकि अतिरिक्त डेटा, तालिकाएँ और फ्लैशकार्ड्स अनलॉक हों ताकि आप पीरियोडिक टेबल के बारे में अधिक सीख सकें।</value>
+  </data>
+  <data name="popup_secondary_button" xml:space="preserve">
+    <value>आज नहीं</value>
+  </data>
+  <data name="popup_title" xml:space="preserve">
+    <value>PRO+ में अपग्रेड करें</value>
+  </data>
+  <data name="price_not_available" xml:space="preserve">
+    <value>मूल्य उपलब्ध नहीं है</value>
+  </data>
+  <data name="price_placeholder" xml:space="preserve">
+    <value>कीमत</value>
+  </data>
+  <data name="pro_additional_data" xml:space="preserve">
+    <value>अतिरिक्त डेटा</value>
+  </data>
+  <data name="pro_additional_data_descr" xml:space="preserve">
+    <value>अतिरिक्त डेटा जैसे कठोरता गुण (मोहोस-, विकर्स-, ब्रिनेल कठोरता) साथ ही ध्वनि की गति, प्वासों स्थिरांक, यंग्स-, बल्क- व शीयर मॉड्यूलस आदि। साथ ही खनिजों की पहचान संबंधी जानकारी।</value>
+  </data>
+  <data name="pro_additional_flashcards" xml:space="preserve">
+    <value>अतिरिक्त फ्लैशकार्ड और सिंक</value>
+  </data>
+  <data name="pro_additional_flashcards_descr" xml:space="preserve">
+    <value>अतिरिक्त फ्लैशकार्ड, अधिक लाइव्स और आपकी प्रगति के समन्वयन तक पहुंच</value>
+  </data>
+  <data name="pro_additional_sync" xml:space="preserve">
+    <value>नोट्स और प्रगति के लिए सिंक</value>
+  </data>
+  <data name="pro_additional_sync_descr" xml:space="preserve">
+    <value>अपने सभी उपकरणों पर अपने अध्ययन को आसान बनाने के लिए नोट्स और प्रगति के लिए सिंक सक्षम करें</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>अतिरिक्त तालिकाएँ</value>
+  </data>
+  <data name="pro_additional_tables_descr" xml:space="preserve">
+    <value>अतिरिक्त तालिकाएँ जिनमें न्यूक्लाइड तालिका, प्वासों अनुपात तालिका, स्थिरांक तालिका, भूविज्ञान तालिका आदि शामिल हैं, और भविष्य में और भी जोड़ी जाएँगी।</value>
+  </data>
+  <data name="pro_additional_visualisations" xml:space="preserve">
+    <value>अतिरिक्त दृश्यमानता</value>
+  </data>
+  <data name="pro_additional_visualisations_descr" xml:space="preserve">
+    <value>मुख्य तालिका में और अधिक दृश्यमानता जैसे प्वासों अनुपात, बल्क मॉड्यूलस आदि की पहुँच।</value>
+  </data>
+  <data name="pro_already_purchased_check" xml:space="preserve">
+    <value>खाता पर उत्पाद जांचें</value>
+  </data>
+  <data name="pro_already_purchased_title" xml:space="preserve">
+    <value>पहले ही Atomic - Periodic Table PRO खरीदा है?</value>
+  </data>
+  <data name="pro_better_ai" xml:space="preserve">
+    <value>अतिरिक्त AI सुविधाएँ</value>
+  </data>
+  <data name="pro_better_ai_descr" xml:space="preserve">
+    <value>क्विज़, प्रो डेटा तक पहुँच और बहुत कुछ के साथ AI एजेंट की सभी सुविधाओं को अनलॉक करें</value>
+  </data>
+  <data name="pro_better_calculator" xml:space="preserve">
+    <value>बेहतर कैलकुलेटर</value>
+  </data>
+  <data name="pro_better_calculator_descr" xml:space="preserve">
+    <value>एक उन्नत कैलकुलेटर जिसमें विभिन्न यौगिकों के मोलर भार को पसंदीदा पृष्ठ में सहेजने की सुविधा है।</value>
+  </data>
+  <data name="pro_descr" xml:space="preserve">
+    <value>'एटॉमिक - पीरियोडिक टेबल' एक मुफ़्त और ओपन-सोर्स ऐप है जिसे मैंने अपने खाली समय में स्वीडन में बनाया है। PRO संस्करण खरीदने से आप विकास में सहायता करते हैं और साथ ही अतिरिक्त डेटा और सुविधाएँ भी प्राप्त करते हैं!</value>
+  </data>
+  <data name="pro_features_descr" xml:space="preserve">
+    <value>PRO संस्करण की अनेक विशेषताओं और उनमें क्या शामिल है, जानें।</value>
+  </data>
+  <data name="pro_features_table_description" xml:space="preserve">
+    <value>निम्नलिखित तालिका में मुफ़्त, PRO और PRO+ संस्करणों में शामिल सुविधाओं का विवरण दिया गया है:</value>
+  </data>
+  <data name="pro_features_title" xml:space="preserve">
+    <value>PRO संस्करण की विशेषताएँ:</value>
+  </data>
+  <data name="pro_get_more_out" xml:space="preserve">
+    <value>एटॉमिक का अधिक लाभ लें</value>
+  </data>
+  <data name="pro_plus_badge_text" xml:space="preserve">
+    <value>सबसे उन्नत</value>
+  </data>
+  <data name="pro_plus_rewards" xml:space="preserve">
+    <value>PRO+ पुरस्कार: %s</value>
+  </data>
+  <data name="pro_plus_subtitle" xml:space="preserve">
+    <value>उन्नत डेटा और अतिरिक्त फ्लैशकार्ड अनलॉक करें।</value>
+  </data>
+  <data name="pro_plus_user" xml:space="preserve">
+    <value>PRO+ उपयोगकर्ता</value>
+  </data>
+  <data name="pro_plus_version" xml:space="preserve">
+    <value>PRO+ संस्करण</value>
+  </data>
+  <data name="pro_price_loading" xml:space="preserve">
+    <value>मूल्य प्राप्त किया जा रहा है...</value>
+  </data>
+  <data name="pro_title" xml:space="preserve">
+    <value>PRO संस्करण</value>
+  </data>
+  <data name="pro_upgrade_to_pro" xml:space="preserve">
+    <value>PRO में अपग्रेड करें</value>
+  </data>
+  <data name="pro_user" xml:space="preserve">
+    <value>PRO उपयोगकर्ता</value>
+  </data>
+  <data name="pro_user_badge" xml:space="preserve">
+    <value>PRO उपयोगकर्ता</value>
+  </data>
+  <data name="pro_version" xml:space="preserve">
+    <value>PRO संस्करण</value>
+  </data>
+  <data name="properties" xml:space="preserve">
+    <value>गुण</value>
+  </data>
+  <data name="protons" xml:space="preserve">
+    <value>प्रोटॉन:</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>प्रश्न</value>
+  </data>
+  <data name="question_appearance" xml:space="preserve">
+    <value>%s की बनावट क्या है?</value>
+  </data>
+  <data name="question_atomic_mass" xml:space="preserve">
+    <value>%s का परमाणु द्रव्यमान क्या है?</value>
+  </data>
+  <data name="question_atomic_number" xml:space="preserve">
+    <value>%s का परमाणु क्रमांक क्या है?</value>
+  </data>
+  <data name="question_block" xml:space="preserve">
+    <value>%s किस खंड से संबंधित है?</value>
+  </data>
+  <data name="question_boiling_point_celsius" xml:space="preserve">
+    <value>%s का क्वथनांक (°C) क्या है?</value>
+  </data>
+  <data name="question_boiling_point_fahrenheit" xml:space="preserve">
+    <value>%s का क्वथनांक (°F) क्या है?</value>
+  </data>
+  <data name="question_boiling_point_kelvin" xml:space="preserve">
+    <value>%s का क्वथनांक (Kelvin) क्या है?</value>
+  </data>
+  <data name="question_brinell_hardness" xml:space="preserve">
+    <value>%s की ब्रिनेल कठोरता क्या है?</value>
+  </data>
+  <data name="question_crystal_structure" xml:space="preserve">
+    <value>%s की क्रिस्टल संरचना क्या है?</value>
+  </data>
+  <data name="question_density" xml:space="preserve">
+    <value>%s का घनत्व क्या है?</value>
+  </data>
+  <data name="question_discovered_by" xml:space="preserve">
+    <value>%s की खोज किसने की?</value>
+  </data>
+  <data name="question_discovery_year" xml:space="preserve">
+    <value>%s की खोज किस वर्ष हुई थी?</value>
+  </data>
+  <data name="question_earth_crust_abundance" xml:space="preserve">
+    <value>पृथ्वी की पर्पटी में %s की प्रचुरता क्या है? mg/kg (ppm)</value>
+  </data>
+  <data name="question_earth_soils_abundance" xml:space="preserve">
+    <value>पृथ्वी की मिट्टी में %s की प्रचुरता क्या है? mg/kg (ppm)</value>
+  </data>
+  <data name="question_electrical_type" xml:space="preserve">
+    <value>%s का विद्युत प्रकार क्या है?</value>
+  </data>
+  <data name="question_electronegativity" xml:space="preserve">
+    <value>%s की विद्युतऋणात्मकता क्या है?</value>
+  </data>
+  <data name="question_element_group" xml:space="preserve">
+    <value>%s का तत्व समूह क्या है?</value>
+  </data>
+  <data name="question_element_name" xml:space="preserve">
+    <value>%s का नाम क्या है?</value>
+  </data>
+  <data name="question_element_symbol" xml:space="preserve">
+    <value>%s का प्रतीक क्या है?</value>
+  </data>
+  <data name="question_group_of" xml:space="preserve">
+    <value>%1$s किस समूह में है?</value>
+  </data>
+  <data name="question_highest_atomic_mass" xml:space="preserve">
+    <value>इनमें से किसका परमाणु द्रव्यमान सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_boiling_point" xml:space="preserve">
+    <value>इनमें से किसका क्वथनांक सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_brinell_hardness" xml:space="preserve">
+    <value>इनमें से किसका ब्रिनेल कठोरता सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_bulk_modulus" xml:space="preserve">
+    <value>इनमें से किसका आयतन मापांक सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_density" xml:space="preserve">
+    <value>इनमें से किसका घनत्व सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_electronegativity" xml:space="preserve">
+    <value>इनमें से किसका विद्युत ऋणात्मकता सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_fusion_heat" xml:space="preserve">
+    <value>इनमें से किसका संलयन ऊष्मा सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_melting_point" xml:space="preserve">
+    <value>इनमें से किसका गलनांक सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_mohs_hardness" xml:space="preserve">
+    <value>इनमें से किसका मोह्स कठोरता सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_shear_modulus" xml:space="preserve">
+    <value>इनमें से किसका अपरूपण मापांक सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_speed_of_sound" xml:space="preserve">
+    <value>इनमें से किसमें ध्वनि सबसे तेज़ चलती है?</value>
+  </data>
+  <data name="question_highest_thermal_conductivity" xml:space="preserve">
+    <value>इनमें से किसका ऊष्मीय चालकता सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_vaporization_heat" xml:space="preserve">
+    <value>इनमें से किसका वाष्पीकरण ऊष्मा सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_vickers_hardness" xml:space="preserve">
+    <value>इनमें से किसका विकर्स कठोरता सबसे अधिक है?</value>
+  </data>
+  <data name="question_highest_young_modulus" xml:space="preserve">
+    <value>इनमें से किसका यंग मापांक सबसे अधिक है?</value>
+  </data>
+  <data name="question_isotope_decay" xml:space="preserve">
+    <value>%1$s का क्षय कैसे होता है?</value>
+  </data>
+  <data name="question_isotope_longest_half_life" xml:space="preserve">
+    <value>इनमें से किस समस्थानिक की अर्ध-आयु सबसे लंबी है?</value>
+  </data>
+  <data name="question_isotope_neutrons" xml:space="preserve">
+    <value>%1$s में कितने न्यूट्रॉन हैं?</value>
+  </data>
+  <data name="question_isotope_shortest_half_life" xml:space="preserve">
+    <value>इनमें से किस समस्थानिक की अर्ध-आयु सबसे छोटी है?</value>
+  </data>
+  <data name="question_isotope_stable" xml:space="preserve">
+    <value>इनमें से कौन सा समस्थानिक स्थिर है?</value>
+  </data>
+  <data name="question_largest_atomic_radius" xml:space="preserve">
+    <value>इनमें से किसका परमाणु त्रिज्या सबसे अधिक है?</value>
+  </data>
+  <data name="question_largest_molar_volume" xml:space="preserve">
+    <value>इनमें से किसका मोलर आयतन सबसे अधिक है?</value>
+  </data>
+  <data name="question_lowest_atomic_mass" xml:space="preserve">
+    <value>इनमें से किसका परमाणु द्रव्यमान सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_boiling_point" xml:space="preserve">
+    <value>इनमें से किसका क्वथनांक सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_brinell_hardness" xml:space="preserve">
+    <value>इनमें से किसका ब्रिनेल कठोरता सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_bulk_modulus" xml:space="preserve">
+    <value>इनमें से किसका आयतन मापांक सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_density" xml:space="preserve">
+    <value>इनमें से किसका घनत्व सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_electronegativity" xml:space="preserve">
+    <value>इनमें से किसका विद्युत ऋणात्मकता सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_fusion_heat" xml:space="preserve">
+    <value>इनमें से किसका संलयन ऊष्मा सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_melting_point" xml:space="preserve">
+    <value>इनमें से किसका गलनांक सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_mohs_hardness" xml:space="preserve">
+    <value>इनमें से किसका मोह्स कठोरता सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_shear_modulus" xml:space="preserve">
+    <value>इनमें से किसका अपरूपण मापांक सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_speed_of_sound" xml:space="preserve">
+    <value>इनमें से किसमें ध्वनि सबसे धीमी चलती है?</value>
+  </data>
+  <data name="question_lowest_thermal_conductivity" xml:space="preserve">
+    <value>इनमें से किसका ऊष्मीय चालकता सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_vaporization_heat" xml:space="preserve">
+    <value>इनमें से किसका वाष्पीकरण ऊष्मा सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_vickers_hardness" xml:space="preserve">
+    <value>इनमें से किसका विकर्स कठोरता सबसे कम है?</value>
+  </data>
+  <data name="question_lowest_young_modulus" xml:space="preserve">
+    <value>इनमें से किसका यंग मापांक सबसे कम है?</value>
+  </data>
+  <data name="question_magnetic_type" xml:space="preserve">
+    <value>%s का चुंबकीय प्रकार क्या है?</value>
+  </data>
+  <data name="question_melting_point_celsius" xml:space="preserve">
+    <value>%s का गलनांक (°C) क्या है?</value>
+  </data>
+  <data name="question_melting_point_fahrenheit" xml:space="preserve">
+    <value>%s का गलनांक (°F) क्या है?</value>
+  </data>
+  <data name="question_melting_point_kelvin" xml:space="preserve">
+    <value>%s का गलनांक (Kelvin) क्या है?</value>
+  </data>
+  <data name="question_mohs_hardness" xml:space="preserve">
+    <value>%s की मोह्स कठोरता क्या है?</value>
+  </data>
+  <data name="question_molar_mass" xml:space="preserve">
+    <value>%1$s का मोलर द्रव्यमान क्या है?</value>
+  </data>
+  <data name="question_neutron_cross_sectional" xml:space="preserve">
+    <value>%s का न्यूट्रॉन अनुप्रस्थ काट क्या है?</value>
+  </data>
+  <data name="question_nfpa_diamond" xml:space="preserve">
+    <value>%s का NFPA 704 ख़तरा डायमंड क्या है? (स्वास्थ्य / ज्वलनशीलता / अस्थिरता)</value>
+  </data>
+  <data name="question_nfpa_flammability" xml:space="preserve">
+    <value>%s की NFPA 704 ज्वलनशीलता क्या है?</value>
+  </data>
+  <data name="question_nfpa_health" xml:space="preserve">
+    <value>%s का NFPA 704 स्वास्थ्य ख़तरा क्या है?</value>
+  </data>
+  <data name="question_nfpa_instability" xml:space="preserve">
+    <value>%s की NFPA 704 अस्थिरता क्या है?</value>
+  </data>
+  <data name="question_not_a_series" xml:space="preserve">
+    <value>इनमें से कौन %1$s नहीं है?</value>
+  </data>
+  <data name="question_period_of" xml:space="preserve">
+    <value>%1$s किस आवर्त में है?</value>
+  </data>
+  <data name="question_phase_stp" xml:space="preserve">
+    <value>STP पर %s की अवस्था क्या है?</value>
+  </data>
+  <data name="question_radioactive" xml:space="preserve">
+    <value>क्या %s रेडियोधर्मी है?</value>
+  </data>
+  <data name="question_smallest_atomic_radius" xml:space="preserve">
+    <value>इनमें से किसका परमाणु त्रिज्या सबसे कम है?</value>
+  </data>
+  <data name="question_smallest_molar_volume" xml:space="preserve">
+    <value>इनमें से किसका मोलर आयतन सबसे कम है?</value>
+  </data>
+  <data name="question_specific_heat_capacity" xml:space="preserve">
+    <value>%s की विशिष्ट ऊष्मा धारिता क्या है?</value>
+  </data>
+  <data name="question_superconducting_point" xml:space="preserve">
+    <value>%s का अतिचालकता बिंदु क्या है?</value>
+  </data>
+  <data name="question_text" xml:space="preserve">
+    <value>प्रश्न पाठ</value>
+  </data>
+  <data name="question_valence_electrons" xml:space="preserve">
+    <value>%1$s में कितने संयोजी इलेक्ट्रॉन हैं?</value>
+  </data>
+  <data name="question_vickers_hardness" xml:space="preserve">
+    <value>%s की विकर्स कठोरता क्या है?</value>
+  </data>
+  <data name="question_xp_detail" xml:space="preserve">
+    <value>इस प्रश्न के लिए XP: +%1$d</value>
+  </data>
+  <data name="questions_correct_xp" xml:space="preserve">
+    <value>सही प्रश्न: +%dxp</value>
+  </data>
+  <data name="quiz_loading" xml:space="preserve">
+    <value>प्रश्न तैयार किए जा रहे हैं…</value>
+  </data>
+  <data name="quiz_no_questions" xml:space="preserve">
+    <value>इस गेम के लिए प्रश्न नहीं बनाए जा सके। कृपया कोई और चुनें।</value>
+  </data>
+  <data name="radioactive" xml:space="preserve">
+    <value>रेडियोधर्मी</value>
+  </data>
+  <data name="radioactive_colon" xml:space="preserve">
+    <value>रेडियोधर्मी:</value>
+  </data>
+  <data name="random_element" xml:space="preserve">
+    <value>यादृच्छिक तत्व</value>
+  </data>
+  <data name="rate" xml:space="preserve">
+    <value>मूल्यांकन करें</value>
+  </data>
+  <data name="rate_app" xml:space="preserve">
+    <value>ऐप का मूल्यांकन करें</value>
+  </data>
+  <data name="rate_app_description" xml:space="preserve">
+    <value>Play Store पर रेटिंग देकर हमें बताएं कि आपको ऐप के बारे में क्या लगता है!</value>
+  </data>
+  <data name="reaction_balancer" xml:space="preserve">
+    <value>प्रतिक्रिया संतुलक:</value>
+  </data>
+  <data name="reactivity_hazard" xml:space="preserve">
+    <value>प्रतिक्रियाशीलता:</value>
+  </data>
+  <data name="read_more" xml:space="preserve">
+    <value>..और अधिक</value>
+  </data>
+  <data name="read_more_widget" xml:space="preserve">
+    <value>और पढ़ें</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>रासायनिक अभिक्रियाएँ</value>
+  </data>
+  <data name="refractive_index_colon" xml:space="preserve">
+    <value>अपवर्तनांक:</value>
+  </data>
+  <data name="requires_pro" xml:space="preserve">
+    <value>PRO संस्करण आवश्यक</value>
+  </data>
+  <data name="requires_pro_plus_until_2026" xml:space="preserve">
+    <value>1 जनवरी 2026 तक PRO+ की आवश्यकता है</value>
+  </data>
+  <data name="reward_5pct_title" xml:space="preserve">
+    <value>+5% XP बोनस</value>
+  </data>
+  <data name="rewards_available" xml:space="preserve">
+    <value>पुरस्कार:</value>
+  </data>
+  <data name="save_calculations" xml:space="preserve">
+    <value>गणना सहेजें:</value>
+  </data>
+  <data name="save_equations" xml:space="preserve">
+    <value>समीकरण सहेजें:</value>
+  </data>
+  <data name="save_units" xml:space="preserve">
+    <value>इकाइयाँ सहेजें:</value>
+  </data>
+  <data name="score_summary" xml:space="preserve">
+    <value>स्कोर: %1$d/%2$d</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>तत्व खोजें</value>
+  </data>
+  <data name="search_elements" xml:space="preserve">
+    <value>तत्व खोजें</value>
+  </data>
+  <data name="search_for_element" xml:space="preserve">
+    <value>तत्व खोजें</value>
+  </data>
+  <data name="searches" xml:space="preserve">
+    <value>खोजें</value>
+  </data>
+  <data name="select_element_to_compare" xml:space="preserve">
+    <value>तुलना करने के लिए तत्व चुनें</value>
+  </data>
+  <data name="select_theme" xml:space="preserve">
+    <value>थीम चुनें</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>सेटिंग्स</value>
+  </data>
+  <data name="settings_favorite_content" xml:space="preserve">
+    <value>पसंदीदा पट्टी को वैयक्तिक करें</value>
+  </data>
+  <data name="settings_favorite_title" xml:space="preserve">
+    <value>पसंदीदा पट्टी</value>
+  </data>
+  <data name="settings_nav_bar_content" xml:space="preserve">
+    <value>मानक व्यवहार को अक्षम करता है</value>
+  </data>
+  <data name="settings_nav_bar_title" xml:space="preserve">
+    <value>स्वचालित छुपाएं बॉटमबार</value>
+  </data>
+  <data name="settings_offline_content" xml:space="preserve">
+    <value>चित्रों को लोड करना अक्षम करता है</value>
+  </data>
+  <data name="settings_offline_title" xml:space="preserve">
+    <value>ऑफ़लाइन मोड</value>
+  </data>
+  <data name="settings_order_content" xml:space="preserve">
+    <value>विस्तृत कार्ड्स के क्रम को अनुकूलित करें</value>
+  </data>
+  <data name="settings_order_title" xml:space="preserve">
+    <value>विस्तृत कार्ड क्रम</value>
+  </data>
+  <data name="settings_themes_content" xml:space="preserve">
+    <value>थीम चुनें</value>
+  </data>
+  <data name="settings_themes_title" xml:space="preserve">
+    <value>थीम्स</value>
+  </data>
+  <data name="settings_title" xml:space="preserve">
+    <value>सेटिंग्स</value>
+  </data>
+  <data name="settings_unit_content" xml:space="preserve">
+    <value>मुख्य तालिका में इकाइयाँ अनुकूलित करें</value>
+  </data>
+  <data name="settings_unit_title" xml:space="preserve">
+    <value>तालिका इकाइयाँ</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>साझा करें</value>
+  </data>
+  <data name="share_app" xml:space="preserve">
+    <value>ऐप साझा करें</value>
+  </data>
+  <data name="share_app_description" xml:space="preserve">
+    <value>यदि आपको ऐप उपयोगी लगता है, तो कृपया इसे अपने मित्रों और अन्य लोगों के साथ साझा करें!</value>
+  </data>
+  <data name="shear_modulus" xml:space="preserve">
+    <value>शीयर मॉड्यूलस</value>
+  </data>
+  <data name="short_voltage" xml:space="preserve">
+    <value> (वोल्ट)</value>
+  </data>
+  <data name="show_atomic_radius_calculated" xml:space="preserve">
+    <value>आणविक त्रिज्या (गणना की गई) दिखाएँ</value>
+  </data>
+  <data name="show_atomic_radius_empirical" xml:space="preserve">
+    <value>आणविक त्रिज्या (अनुभवजन्य) दिखाएँ</value>
+  </data>
+  <data name="show_boiling_point" xml:space="preserve">
+    <value>उबाल बिंदु दिखाएँ</value>
+  </data>
+  <data name="show_covalent_radius" xml:space="preserve">
+    <value>कोवेलेंट त्रिज्या दिखाएँ</value>
+  </data>
+  <data name="show_density" xml:space="preserve">
+    <value>घनत्व दिखाएँ</value>
+  </data>
+  <data name="show_electronegativity" xml:space="preserve">
+    <value>इलेक्ट्रोनगेटिविटी दिखाएँ</value>
+  </data>
+  <data name="show_fusion_heat" xml:space="preserve">
+    <value>संलयन ऊष्मा दिखाएँ</value>
+  </data>
+  <data name="show_if_radioactive" xml:space="preserve">
+    <value>यदि रेडियोधर्मी तत्व है तो दिखाएँ</value>
+  </data>
+  <data name="show_melting_point" xml:space="preserve">
+    <value>गलनांक दिखाएँ</value>
+  </data>
+  <data name="show_molar_mass" xml:space="preserve">
+    <value>मोलर भार दिखाएँ</value>
+  </data>
+  <data name="show_resistivity" xml:space="preserve">
+    <value>प्रतिरोधकता दिखाएँ</value>
+  </data>
+  <data name="show_specific_heat_capacity" xml:space="preserve">
+    <value>विशिष्ट ऊष्मा धारिता दिखाएँ</value>
+  </data>
+  <data name="show_stp_phase" xml:space="preserve">
+    <value>STP अवस्था दिखाएँ</value>
+  </data>
+  <data name="show_van_der_waals_radius" xml:space="preserve">
+    <value>वान डेर वाल्स त्रिज्या दिखाएँ</value>
+  </data>
+  <data name="show_vaporization_heat" xml:space="preserve">
+    <value>वाष्पीकरण ऊष्मा दिखाएँ</value>
+  </data>
+  <data name="sign_in_failed" xml:space="preserve">
+    <value>साइन इन विफल</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>साइन आउट करें</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>साइन इन हो रहा है…</value>
+  </data>
+  <data name="sol" xml:space="preserve">
+    <value>द्राव्यता तालिका</value>
+  </data>
+  <data name="solubility_info_c" xml:space="preserve">
+    <value>"S: घुलनशील
+Ss: थोड़ा घुलनशील
+I: अघुलनशील"</value>
+  </data>
+  <data name="solubility_info_t" xml:space="preserve">
+    <value>द्राव्यता सहायता</value>
+  </data>
+  <data name="solubility_table" xml:space="preserve">
+    <value>घुलनशीलता तालिका</value>
+  </data>
+  <data name="sources_settings_title" xml:space="preserve">
+    <value>स्रोत</value>
+  </data>
+  <data name="sources_wwe_title" xml:space="preserve">
+    <value>जल एवं अपशिष्ट जल इंजीनियरिंग</value>
+  </data>
+  <data name="space_group_name_colon" xml:space="preserve">
+    <value>स्पेस ग्रुप नाम:</value>
+  </data>
+  <data name="space_group_number_colon" xml:space="preserve">
+    <value>स्पेस ग्रुप नंबर:</value>
+  </data>
+  <data name="specific_hazard" xml:space="preserve">
+    <value>विशिष्ट खतरा:</value>
+  </data>
+  <data name="specific_heat_capacity" xml:space="preserve">
+    <value>विशिष्ट ऊष्मा धारिता</value>
+  </data>
+  <data name="specific_heat_capacity_colon" xml:space="preserve">
+    <value>विशिष्ट ऊष्मा क्षमता:</value>
+  </data>
+  <data name="spelling" xml:space="preserve">
+    <value>कृपया अन्य शब्द खोजें या अपनी वर्तनी जांचें</value>
+  </data>
+  <data name="split_view" xml:space="preserve">
+    <value>तत्व स्प्लिट व्यू</value>
+  </data>
+  <data name="streak_label" xml:space="preserve">
+    <value>स्ट्रीक: </value>
+  </data>
+  <data name="streak_notification_body" xml:space="preserve">
+    <value>अपना %1$d-दिन का सिलसिला बचाने के लिए आज खेलें।</value>
+  </data>
+  <data name="streak_notification_title" xml:space="preserve">
+    <value>अपना %1$d-दिन का सिलसिला बनाए रखें!</value>
+  </data>
+  <data name="submit_activity_title" xml:space="preserve">
+    <value>समस्या सबमिट करें</value>
+  </data>
+  <data name="submit_bug" xml:space="preserve">
+    <value>बग</value>
+  </data>
+  <data name="submit_data_i" xml:space="preserve">
+    <value>डेटा समस्या</value>
+  </data>
+  <data name="submit_data_issue" xml:space="preserve">
+    <value>डेटा समस्या सबमिट करें</value>
+  </data>
+  <data name="submit_issue" xml:space="preserve">
+    <value>समस्या</value>
+  </data>
+  <data name="submit_question" xml:space="preserve">
+    <value>प्रश्न</value>
+  </data>
+  <data name="submit_send" xml:space="preserve">
+    <value>समस्या सबमिट करें</value>
+  </data>
+  <data name="submit_text" xml:space="preserve">
+    <value>बग और डेटा त्रुटियाँ रिपोर्ट करें</value>
+  </data>
+  <data name="submit_title" xml:space="preserve">
+    <value>समस्या रिपोर्ट करें</value>
+  </data>
+  <data name="superconducting_point" xml:space="preserve">
+    <value>सुपरकंडक्टिंग बिंदु</value>
+  </data>
+  <data name="superconducting_point_colon" xml:space="preserve">
+    <value>अतिचालकता बिंदु:</value>
+  </data>
+  <data name="sync_available_pro_only" xml:space="preserve">
+    <value>क्लाउड सिंक सक्षम करने के लिए PRO या PRO+ प्राप्त करें</value>
+  </data>
+  <data name="sync_complete" xml:space="preserve">
+    <value>प्रगति सिंक हो गई</value>
+  </data>
+  <data name="sync_data" xml:space="preserve">
+    <value>डेटा सिंक करें:</value>
+  </data>
+  <data name="sync_failed" xml:space="preserve">
+    <value>सिंक विफल</value>
+  </data>
+  <data name="sync_status" xml:space="preserve">
+    <value>सिंक नहीं किया गया</value>
+  </data>
+  <data name="syncing_progress" xml:space="preserve">
+    <value>प्रगति सिंक हो रही है…</value>
+  </data>
+  <data name="system_default" xml:space="preserve">
+    <value>सिस्टम डिफ़ॉल्ट</value>
+  </data>
+  <data name="table_alloy" xml:space="preserve">
+    <value>मिश्रधातु तालिका</value>
+  </data>
+  <data name="table_alloy_text" xml:space="preserve">
+    <value>सामान्य मिश्रधातुओं की तालिका, वे किससे बनी हैं और शुद्ध धातु के बजाय उनका उपयोग क्यों किया जाता है</value>
+  </data>
+  <data name="table_constants_text" xml:space="preserve">
+    <value>गणना में प्रयुक्त सामान्य स्थिरांक की तालिका जैसे गणित, भौतिकी, मानक जल प्रवाह आदि</value>
+  </data>
+  <data name="table_electrochemical" xml:space="preserve">
+    <value>विद्युत रासायनिक श्रेणी</value>
+  </data>
+  <data name="table_electrochemical_text" xml:space="preserve">
+    <value>एक विद्युत रासायनिक श्रेणी वाली तालिका, (-) से (+) वोल्टेज के क्रम में</value>
+  </data>
+  <data name="table_equations" xml:space="preserve">
+    <value>सूत्र</value>
+  </data>
+  <data name="table_equations_text" xml:space="preserve">
+    <value>गणित, भौतिकी और रसायन के सूत्रों वाली तालिका</value>
+  </data>
+  <data name="table_geology" xml:space="preserve">
+    <value>भूविज्ञान तालिका</value>
+  </data>
+  <data name="table_geology_text" xml:space="preserve">
+    <value>खनिज, चट्टानों और मिट्टियों की जानकारी वाली तालिका</value>
+  </data>
+  <data name="table_ionization" xml:space="preserve">
+    <value>आयनन ऊर्जा</value>
+  </data>
+  <data name="table_ionization_text" xml:space="preserve">
+    <value>विभिन्न तत्वों की आयनन ऊर्जा की तालिका</value>
+  </data>
+  <data name="table_nuclide" xml:space="preserve">
+    <value>न्यूक्लाइड तालिका</value>
+  </data>
+  <data name="table_nuclide_text" xml:space="preserve">
+    <value>विघटन प्रकार के रंग भेद के साथ द्वि-आयामी न्यूक्लाइड तालिका</value>
+  </data>
+  <data name="table_order_text" xml:space="preserve">
+    <value>तालिकाओं का क्रम निर्धारित करें</value>
+  </data>
+  <data name="table_order_title" xml:space="preserve">
+    <value>तालिका सूची क्रम</value>
+  </data>
+  <data name="table_ph" xml:space="preserve">
+    <value>pH-सूचक</value>
+  </data>
+  <data name="table_ph_text" xml:space="preserve">
+    <value>विभिन्न अम्ल/क्षार स्तरों पर रंगों के लिए pH-सूचक तालिका</value>
+  </data>
+  <data name="table_poisson" xml:space="preserve">
+    <value>प्वासों अनुपात तालिका</value>
+  </data>
+  <data name="table_poisson_text" xml:space="preserve">
+    <value>विभिन्न चट्टानों, मिट्टियों, खनिजों आदि के लिए प्वासों अनुपात की तालिका</value>
+  </data>
+  <data name="table_solubility" xml:space="preserve">
+    <value>द्राव्यता तालिका</value>
+  </data>
+  <data name="table_solubility_text" xml:space="preserve">
+    <value>विभिन्न पदार्थों की द्राव्यता की जानकारी वाली तालिका</value>
+  </data>
+  <data name="table_units" xml:space="preserve">
+    <value>तालिका इकाइयाँ</value>
+  </data>
+  <data name="take_notes_for_element" xml:space="preserve">
+    <value>तत्व के लिए नोट्स लें</value>
+  </data>
+  <data name="temperatures" xml:space="preserve">
+    <value>तापमान</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>थीम्स</value>
+  </data>
+  <data name="thermal_conductivity_colon" xml:space="preserve">
+    <value>तापीय चालकता:</value>
+  </data>
+  <data name="thermal_expansion_colon" xml:space="preserve">
+    <value>तापीय विस्तार:</value>
+  </data>
+  <data name="thermodynamic_properties" xml:space="preserve">
+    <value>ऊष्मागतिक गुण</value>
+  </data>
+  <data name="time_up" xml:space="preserve">
+    <value>समय समाप्त</value>
+  </data>
+  <data name="tool_btn_open" xml:space="preserve">
+    <value>उपकरण खोलें</value>
+  </data>
+  <data name="tools" xml:space="preserve">
+    <value>उपकरण</value>
+  </data>
+  <data name="tools_title" xml:space="preserve">
+    <value>उपकरण (जैसे कैलकुलेटर)</value>
+  </data>
+  <data name="total_xp_stat" xml:space="preserve">
+    <value>कुल XP: %d</value>
+  </data>
+  <data name="total_xp_with_multiplier" xml:space="preserve">
+    <value>कुल XP: %1$d (%2$s ×%3$s)</value>
+  </data>
+  <data name="try_another_search" xml:space="preserve">
+    <value>कृपया अन्य शब्द खोजें या अपनी वर्तनी जांचें।</value>
+  </data>
+  <data name="type_label" xml:space="preserve">
+    <value>प्रकार: </value>
+  </data>
+  <data name="uni" xml:space="preserve">
+    <value>इकाई परिवर्तक</value>
+  </data>
+  <data name="unit_add_favorite" xml:space="preserve">
+    <value>पसंदीदा में जोड़ें:</value>
+  </data>
+  <data name="unit_category" xml:space="preserve">
+    <value>श्रेणी:</value>
+  </data>
+  <data name="unit_converter_title" xml:space="preserve">
+    <value>इकाई परिवर्तक</value>
+  </data>
+  <data name="unit_description" xml:space="preserve">
+    <value>कई प्रयोजनों के लिए एक आसान इकाई परिवर्तक</value>
+  </data>
+  <data name="unit_display_formula" xml:space="preserve">
+    <value>सूत्र यहाँ प्रदर्शित होगा</value>
+  </data>
+  <data name="unit_enter_value" xml:space="preserve">
+    <value>मान</value>
+  </data>
+  <data name="unit_favorites" xml:space="preserve">
+    <value>पसंदीदा:</value>
+  </data>
+  <data name="unit_formula" xml:space="preserve">
+    <value>सूत्र:</value>
+  </data>
+  <data name="unit_output_value" xml:space="preserve">
+    <value>आउटपुट</value>
+  </data>
+  <data name="unit_settings_title" xml:space="preserve">
+    <value>तालिका इकाइयाँ</value>
+  </data>
+  <data name="unit_temperature" xml:space="preserve">
+    <value>तापमान</value>
+  </data>
+  <data name="unit_title" xml:space="preserve">
+    <value>इकाई परिवर्तक</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>अज्ञात</value>
+  </data>
+  <data name="unlimited_ai_messages" xml:space="preserve">
+    <value>असीमित AI संदेश:</value>
+  </data>
+  <data name="unlock_advanced_data_and_additional_flashcards" xml:space="preserve">
+    <value>उन्नत डेटा और अतिरिक्त फ्लैशकार्ड अनलॉक करें।</value>
+  </data>
+  <data name="unlock_advanced_data_and_extra_atomic_content" xml:space="preserve">
+    <value>उन्नत डेटा और अतिरिक्त Atomic सामग्री अनलॉक करें।</value>
+  </data>
+  <data name="unlock_all_flashcards" xml:space="preserve">
+    <value>सभी फ्लैशकार्ड्स और सुविधाएँ अनलॉक करें</value>
+  </data>
+  <data name="upgrade_pro_plus_description" xml:space="preserve">
+    <value>असीमित जीवन और अतिरिक्त फ्लैशकार्ड गेम्स पाएं जैसे इलेक्ट्रोनगेटिविटी, रेडियोधर्मिता, क्रिस्टल संरचना, आदि!</value>
+  </data>
+  <data name="upgrade_to_pro_plus" xml:space="preserve">
+    <value>PRO+ में अपग्रेड करें</value>
+  </data>
+  <data name="usage_statistics" xml:space="preserve">
+    <value>उपयोग सांख्यिकी</value>
+  </data>
+  <data name="user_achievements" xml:space="preserve">
+    <value>उपलब्धियाँ</value>
+  </data>
+  <data name="user_achievements_Text" xml:space="preserve">
+    <value>दुनिया के तत्वों को सीखने की प्रगति उपलब्धियों के साथ ट्रैक करें</value>
+  </data>
+  <data name="user_img" xml:space="preserve">
+    <value>प्रोफ़ाइल चित्र बदलें</value>
+  </data>
+  <data name="user_signed_in_fmt" xml:space="preserve">
+    <value>%1$s के रूप में साइन इन किया गया</value>
+  </data>
+  <data name="user_signed_out" xml:space="preserve">
+    <value>साइन इन नहीं किया गया</value>
+  </data>
+  <data name="user_title" xml:space="preserve">
+    <value>यूज़र पेज</value>
+  </data>
+  <data name="van_der_waals_radius_colon" xml:space="preserve">
+    <value>वान डेर वाल्स त्रिज्या:</value>
+  </data>
+  <data name="vaporization_heat" xml:space="preserve">
+    <value>वाष्पीकरण ऊष्मा</value>
+  </data>
+  <data name="vaporization_heat_colon" xml:space="preserve">
+    <value>वाष्पीकरण ऊष्मा:</value>
+  </data>
+  <data name="vickers_hardness" xml:space="preserve">
+    <value>विकर्स कठोरता</value>
+  </data>
+  <data name="vickers_hardness_colon" xml:space="preserve">
+    <value>विकर्स कठोरता:</value>
+  </data>
+  <data name="view_all" xml:space="preserve">
+    <value>सभी देखें</value>
+  </data>
+  <data name="view_all_isotopes" xml:space="preserve">
+    <value>सभी आइसोटोप देखें</value>
+  </data>
+  <data name="weight_calculator_title" xml:space="preserve">
+    <value>भार कैलकुलेटर</value>
+  </data>
+  <data name="widget_description_placeholder" xml:space="preserve">
+    <value>तत्व की जानकारी लोड हो रही है...</value>
+  </data>
+  <data name="win_text" xml:space="preserve">
+    <value>विंडोज़ के लिए ऐप डाउनलोड करें</value>
+  </data>
+  <data name="win_title" xml:space="preserve">
+    <value>डेस्कटॉप ऐप प्राप्त करें</value>
+  </data>
+  <data name="work_function_colon" xml:space="preserve">
+    <value>कार्य फलन:</value>
+  </data>
+  <data name="wrong" xml:space="preserve">
+    <value>गलत</value>
+  </data>
+  <data name="xp_bonus" xml:space="preserve">
+    <value>+%d%% बोनस xp</value>
+  </data>
+  <data name="xp_bonus_unlocked" xml:space="preserve">
+    <value>स्तर %1$d पर 5%% XP बोनस अनलॉक हुआ!</value>
+  </data>
+  <data name="year_discovered" xml:space="preserve">
+    <value>खोज का वर्ष</value>
+  </data>
+  <data name="year_discovered_colon" xml:space="preserve">
+    <value>खोज का वर्ष:</value>
+  </data>
+  <data name="you_have_full_lives" xml:space="preserve">
+    <value>आपके पास पूर्ण जीवन हैं!</value>
+  </data>
+  <data name="young_bulk_shear_modulus" xml:space="preserve">
+    <value>यंग मॉड्यूलस, बल्क मॉड्यूलस, शियर मॉड्यूलस:</value>
+  </data>
+  <data name="youngs_modulus" xml:space="preserve">
+    <value>यंग्स मॉड्यूलस</value>
+  </data>
+  <data name="your_answer" xml:space="preserve">
+    <value>आपका उत्तर: %s</value>
+  </data>
+</root>

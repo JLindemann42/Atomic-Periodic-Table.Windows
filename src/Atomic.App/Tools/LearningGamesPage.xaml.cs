@@ -159,39 +159,12 @@ namespace Atomic.App.Tools
             string group = null, discoveredBy = null, discoveryYear = null;
             try
             {
-                string basePath = AppContext.BaseDirectory;
-                string elementsPath = Path.Combine(basePath, "Elements");
-                string fileName = $"{elementName.ToLowerInvariant()}.json";
-                string filePath = Path.Combine(elementsPath, fileName);
-
-                if (!File.Exists(filePath))
+                if (ElementRepository.Raw(elementName) is not { } root)
                     return (null, null, null);
 
-                using var stream = File.OpenRead(filePath);
-                using var doc = await JsonDocument.ParseAsync(stream);
-                var root = doc.RootElement;
-
-                // Try to get properties at root
-                if (root.TryGetProperty("element_group", out var groupProp))
-                    group = groupProp.GetString();
-                if (root.TryGetProperty("element_discovered_name", out var discoveredByProp))
-                    discoveredBy = discoveredByProp.GetString();
-                if (root.TryGetProperty("element_year", out var yearProp))
-                    discoveryYear = yearProp.GetString();
-
-                // If not found, try nested objects
-                foreach (var property in root.EnumerateObject())
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Object)
-                    {
-                        if (group == null && property.Value.TryGetProperty("element_group", out var groupProp2))
-                            group = groupProp2.GetString();
-                        if (discoveredBy == null && property.Value.TryGetProperty("element_discovered_name", out var discoveredByProp2))
-                            discoveredBy = discoveredByProp2.GetString();
-                        if (discoveryYear == null && property.Value.TryGetProperty("element_year", out var yearProp2))
-                            discoveryYear = yearProp2.GetString();
-                    }
-                }
+                group = root.Field("element_group");
+                discoveredBy = root.Field("element_discovered_name");
+                discoveryYear = root.Field("element_year");
             }
             catch
             {
@@ -202,7 +175,7 @@ namespace Atomic.App.Tools
 
         private async Task<Question> GenerateRandomQuestionAsync(string category)
         {
-            var allElements = Atomic.App.ElementData.Elements;
+            var allElements = ElementRepository.All();
             if (allElements.Count < 4)
                 return null;
 
