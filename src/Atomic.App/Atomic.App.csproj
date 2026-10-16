@@ -1,0 +1,332 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>Atomic.App</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <PublishProfile>win-$(Platform).pubxml</PublishProfile>
+    <UseWinUI>true</UseWinUI>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;deb</Configurations>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="Assets\128x.png" />
+    <Content Remove="Assets\16x.png" />
+    <Content Remove="Assets\24x.png" />
+    <Content Remove="Assets\32x.png" />
+    <Content Remove="Assets\48x.png" />
+    <Content Remove="Assets\512x.png" />
+    <Content Remove="Assets\64x.png" />
+    <Content Remove="Assets\cube.obj" />
+    <Content Remove="Assets\Icon1.ico" />
+    <Content Remove="Assets\no_image_dark.png" />
+    <Content Remove="Assets\no_image_light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\256x.targetsize-16.png" />
+    <None Remove="Assets\256x.targetsize-16_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-24_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-256.png" />
+    <None Remove="Assets\256x.targetsize-256_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-32.png" />
+    <None Remove="Assets\256x.targetsize-32_altform-unplated.png" />
+    <None Remove="Assets\256x.targetsize-48_altform-unplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-16.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-256.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-32.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-48.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <None Remove="IsotopeDetailsPage.xaml" />
+    <None Remove="IsotopePage.xaml" />
+    <None Remove="Tools\FlashCardsPage.xaml" />
+    <None Remove="Tables\FormulasDetailsPage.xaml" />
+    <None Remove="Tables\NuclidePage.xaml" />
+    <None Remove="Tools\LearningGamesPage.xaml" />
+    <None Remove="Tools\UnitConverterPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+	  <Content Include="Equations\e_density.png" />
+	  <Content Include="Equations\e_powereffect.png" />
+	  <Content Include="Equations\e_intensity.png" />
+	  <Content Include="Equations\e_efficiency.png" />
+	  <Content Include="Equations\e_frequency.png" />
+	  <Content Include="Equations\e_angularvelocity.png" />
+	  <Content Include="Equations\e_averagevelocity.png" />
+	  <Content Include="Equations\e_linearmotion.png" />
+	  <Content Include="Equations\e_averageacceleration.png" />
+	  <Content Include="Equations\e_instantvelocity_1.png" />
+	  <Content Include="Equations\e_instantvelocity_2.png" />
+	  <Content Include="Equations\e_instantvelocity_3.png" />
+	  <Content Include="Equations\e_instantvelocity_4.png" />
+	  <Content Include="Equations\e_forcelaw.png" />
+	  <Content Include="Equations\e_friction.png" />
+	  <Content Include="Equations\e_hookeslaw.png" />
+	  <Content Include="Equations\e_lawofgravity.png" />
+	  <Content Include="Equations\e_moment.png" />
+	  <Content Include="Equations\e_impulse.png" />
+	  <Content Include="Equations\e_lawofimpulse.png" />
+	  <Content Include="Equations\e_momentum.png" />
+	  <Content Include="Equations\e_lawofmomentum.png" />
+	  <Content Include="Equations\e_work.png" />
+	  <Content Include="Equations\e_potentialenergy.png" />
+	  <Content Include="Equations\e_kineticenergy.png" />
+	  <Content Include="Equations\e_elasticeergy.png" />
+	  <Content Include="Equations\e_centripetalforce.png" />
+	  <Content Include="Equations\e_centripetalacceleration.png" />
+	  <Content Include="Equations\e_harmonicoscillator1.png" />
+	  <Content Include="Equations\e_harmonicoscillator2.png" />
+	  <Content Include="Equations\e_harmonicoscillator_3.png" />
+	  <Content Include="Equations\e_harmonicoscillator_4.png" />
+	  <Content Include="Equations\e_simplependulum.png" />
+	  <Content Include="Equations\e_massenergy.png" />
+	  <Content Include="Equations\e_thermalenergy.png" />
+	  <Content Include="Equations\e_latentenergyfus.png" />
+	  <Content Include="Equations\e_latentenergyvap.png" />
+	  <Content Include="Equations\e_idealenergy.png" />
+	  <Content Include="Equations\e_pressure.png" />
+	  <Content Include="Equations\e_liquidpressure.png" />
+	  <Content Include="Equations\e_liftforce.png" />
+	  <Content Include="Equations\e_velocityfactor.png" />
+	  <Content Include="Equations\e_lightinterference.png" />
+	  <Content Include="Equations\e_lawofrefraction.png" />
+	  <Content Include="Equations\e_emittance.png" />
+	  <Content Include="Equations\e_stefanboltzmann.png" />
+	  <Content Include="Equations\e_wiens.png" />
+	  <Content Include="Equations\e_coulombs.png" />
+	  <Content Include="Equations\e_current.png" />
+	  <Content Include="Equations\e_electricalvoltage.png" />
+	  <Content Include="Equations\e_ohmslaw.png" />
+	  <Content Include="Equations\e_electricaleffect.png" />
+	  <Content Include="Equations\e_electricalfieldstrenght.png" />
+	  <Content Include="Equations\e_chargeparticle.png" />
+	  <Content Include="Equations\e_seriesresistance.png" />
+	  <Content Include="Equations\e_parallelresistance.png" />
+	  <Content Include="Equations\e_magneticfieldelectricalconduct.png" />
+	  <Content Include="Equations\e_magneticfieldflat.png" />
+	  <Content Include="Equations\e_magneticfieldsolenoid.png" />
+	  <Content Include="Equations\e_powereffectconductor.png" />
+	  <Content Include="Equations\e_powereffectcharged.png" />
+	  <Content Include="Equations\e_inducedvoltagemoving.png" />
+	  <Content Include="Equations\e_inducedvoltagevariable.png" />
+	  <Content Include="Equations\e_transformer.png" />
+	  <Content Include="Equations\e_photonenergy.png" />
+	  <Content Include="Equations\e_photoelectriceffect.png" />
+	  <Content Include="Equations\e_photonmomentum.png" />
+	  <Content Include="Equations\e_matterwave.png" />
+	  <Content Include="Equations\e_hydrogenenergylevels.png" />
+	  <Content Include="Equations\e_lawofdecay.png" />
+	  <Content Include="Equations\e_halflife.png" />
+	  <Content Include="Equations\e_activity1.png" />
+	  <Content Include="Equations\e_activity2.png" />
+	  <Content Include="Equations\e_absorbeddose.png" />
+	  <Content Include="Equations\e_equivalentdose.png" />
+
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Update="Elements\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+
+	<!--
+    Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+    Tools extension to be activated for this project even if the Windows App SDK Nuget
+    package has not yet been restored.
+  -->
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250401001" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atomic.Core\Atomic.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Assets\atomic_icon_transparent.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Tools\FlashCardsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Tables\FormulasDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Tables\GeologyPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Tables\FormulasPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tables\NuclidePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Tables\EmissionDetailsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Tables\PoissonDetailsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tables\IonizationDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BlogPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ElectrochemicalPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="phPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="IsotopeDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="CalculatorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="DictionaryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SolubilityPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="IsotopePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ElementDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PeriodicTablePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Tables\EmissionPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tables\PoissonPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ProPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\128x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\24x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\32x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\48x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\512x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\64x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\no_image_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\no_image_light.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Page Update="Tools\LearningGamesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Tools\UnitConverterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <!--
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+
+  <!-- Publish Properties -->
+  <PropertyGroup>
+    <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+    <PublishReadyToRun Condition="'$(Configuration)'=='deb'">False</PublishReadyToRun>
+    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+    <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)'=='deb'">False</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
+    <ApplicationIcon>Assets\atomic_icon_transparent.ico</ApplicationIcon>
+    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Never</AppxBundle>
+    <AppInstallerUri>C:\Program Files\Atomic</AppInstallerUri>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateThumbprint>31ABC53F3EB518340133B08F9EE04F532665900E</PackageCertificateThumbprint>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <AssemblyName>Atomic - Periodic Table</AssemblyName>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Version>0.1</Version>
+    <Title>Atomic - Periodic Table</Title>
+    <Company>JLINDEMANN</Company>
+    <Authors>JLINDEMANN</Authors>
+    <Description>JLINDEMANNs Periodic Table application for Windows (Atomic - Periodic Table)</Description>
+    <Copyright>JLINDEMANN 2025</Copyright>
+    <PackageProjectUrl>https://jlindemann.se/homepage</PackageProjectUrl>
+    <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Atomic.Core.Tests</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Atomic.Core\Atomic.Core.csproj" />
+  </ItemGroup>
+
+  <!--
+    Element tables and string resources are linked from the app project rather than
+    copied, so the tests always run against exactly what ships. Populated in Phase 1
+    (elements_*.json) and Phase 2 (Resources.resw); the globs are harmless until then.
+  -->
+  <ItemGroup>
+    <Content Include="..\..\src\Atomic.App\Assets\Elements\elements_*.json"
+             Link="assets\%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\src\Atomic.App\Strings\**\Resources.resw"
+             Link="strings\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="corpus\**\*.tsv"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="golden\**\*.tsv"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
