@@ -21,13 +21,13 @@
             <Canvas x:Name="NuclideCanvas" Width="22000" Height="11000" Background="Transparent"/>
         </ScrollViewer>
 
-        <Button x:Name="ShowInfoButton" Content="Show Info" Margin="180,18,18,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ShowInfoPanel" Visibility="Collapsed"/>
+        <Button x:Name="ShowInfoButton" Content="{loc:Str Key=label_show_info}" Margin="180,18,18,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ShowInfoPanel" Visibility="Collapsed"/>
 
         
         <Grid x:Name="NuclideInfoPanel" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefault}" Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="18,18,18,18" CornerRadius="12" Margin="0,18,18,0">
-            <Button x:Name="HideInfoButton" Content="Hide Info" Margin="180,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="HideInfoPanel"/>
+            <Button x:Name="HideInfoButton" Content="{loc:Str Key=label_hide_info}" Margin="180,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="HideInfoPanel"/>
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Nuclide Table Info:"  Margin="0,0,100,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                <TextBlock Text="{loc:Str Key=nuclide_table_info}"  Margin="0,0,100,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                 <TextBlock  Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"><Run Text="Grey: "/><Run Text="{loc:Str Key=ai_stable_label}"/></TextBlock>
                 <TextBlock Text="{loc:Str Key=decay_alpha}" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                 <TextBlock Text="β: Beta decay" Margin="0,0,0,0" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>

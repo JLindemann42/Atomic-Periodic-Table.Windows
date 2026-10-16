@@ -111,7 +111,7 @@
                     <Button Click="NotesClick" Grid.Column="3">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <FontIcon Glyph="&#xE70B;" FontSize="16" Margin="0,0,4,0"/>
-                            <TextBlock Text="Notes" VerticalAlignment="Center"/>
+                            <TextBlock Text="{loc:Str Key=label_notes}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </Grid>
@@ -230,7 +230,7 @@
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1">
 
-                                <TextBlock Text="Most Common Isotope:"
+                                <TextBlock Text="{loc:Str Key=label_most_common_isotope}"
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}" />

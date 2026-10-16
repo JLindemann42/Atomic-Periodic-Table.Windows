@@ -11,6 +11,7 @@ using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI;
 using Atomic.App.Services;
+using Atomic.Core.Localization;
 
 namespace Atomic.App.Tables
 {
@@ -157,7 +158,7 @@ namespace Atomic.App.Tables
                     }
 
                     _filesLoaded++;
-                    LoadingText.Text = $"Loading: {_filesLoaded}/{_totalFiles}";
+                    LoadingText.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.loading_progress, _filesLoaded, _totalFiles);
                 }
             }
             catch (Exception ex)

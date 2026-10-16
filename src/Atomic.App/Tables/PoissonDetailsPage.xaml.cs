@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Storage;
 using Atomic.App.Services;
+using Atomic.Core.Localization;
 
 
 namespace Atomic.App.Tables
@@ -56,8 +57,8 @@ namespace Atomic.App.Tables
             };
 
             //Setup text depending on selected ratio:
-            PoissonTitle.Text = $"Poisson's Ratio for {poissonName}:";
-            PoissonRangeInfo.Text = $"Value Range: {poissonStart} - {poissonEnd}";
+            PoissonTitle.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.poisson_ratio_for, poissonName);
+            PoissonRangeInfo.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.value_range, poissonStart, poissonEnd);
 
         }
 

@@ -68,7 +68,7 @@
                                            Tapped="CompoundFormatted_Tapped"
                                            Visibility="Visible"/>
                                 <TextBox x:Name="CompoundInput"
-                                         PlaceholderText="Enter compound..."
+                                         PlaceholderText="{loc:Str Key=enter_compound}"
                                          FontSize="20"
                                          BorderThickness="0"
                                          Background="Transparent"
@@ -153,8 +153,8 @@
                                                     VerticalAlignment="Center">
                                                     <Button.Flyout>
                                                         <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource AcrylicMenuFlyoutPresenterStyle}">
-                                                            <MenuFlyoutItem Text="Copy" Click="FavoriteCopy_Click" Tag="{x:Bind}" />
-                                                            <MenuFlyoutItem Text="Remove" Click="FavoriteRemove_Click" Tag="{x:Bind}" />
+                                                            <MenuFlyoutItem Text="{loc:Str Key=label_copy}" Click="FavoriteCopy_Click" Tag="{x:Bind}" />
+                                                            <MenuFlyoutItem Text="{loc:Str Key=label_remove}" Click="FavoriteRemove_Click" Tag="{x:Bind}" />
                                                         </MenuFlyout>
                                                     </Button.Flyout>
                                                     <FontIcon Glyph="&#xE70D;" FontSize="16"/>

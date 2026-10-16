@@ -12,6 +12,7 @@ using Windows.Graphics;
 using Windows.Storage;
 using Windows.UI;
 using Atomic.App.Services;
+using Atomic.Core.Localization;
 
 namespace Atomic.App
 {
@@ -200,7 +201,7 @@ namespace Atomic.App
             }
             else
             {
-                sender.Text = "Element not found";
+                sender.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.no_results);
             }
         }
 

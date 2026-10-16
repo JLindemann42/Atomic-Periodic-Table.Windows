@@ -41,8 +41,152 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="chip_electricity" xml:space="preserve">
+    <value>विद्युत</value>
+  </data>
+  <data name="chip_magnetism" xml:space="preserve">
+    <value>चुंबकत्व और प्रेरण</value>
+  </data>
+  <data name="chip_mechanics" xml:space="preserve">
+    <value>यांत्रिकी</value>
+  </data>
+  <data name="chip_nuclear_physics" xml:space="preserve">
+    <value>नाभिकीय भौतिकी</value>
+  </data>
+  <data name="chip_wavelengths" xml:space="preserve">
+    <value>तरंगदैर्ध्य</value>
+  </data>
+  <data name="element_notes_title" xml:space="preserve">
+    <value>%1$s के नोट्स</value>
+  </data>
+  <data name="emission_spectrum_of" xml:space="preserve">
+    <value>%1$s का उत्सर्जन स्पेक्ट्रम:</value>
+  </data>
+  <data name="emission_wavelength_range" xml:space="preserve">
+    <value>तरंगदैर्ध्य परिसर: 380-720 nm</value>
+  </data>
+  <data name="emission_wavelength_vacuum" xml:space="preserve">
+    <value>तरंगदैर्ध्य माध्यम: निर्वात</value>
+  </data>
+  <data name="enter_compound" xml:space="preserve">
+    <value>यौगिक दर्ज करें...</value>
+  </data>
+  <data name="enter_value" xml:space="preserve">
+    <value>मान दर्ज करें</value>
+  </data>
+  <data name="feature_additional_games" xml:space="preserve">
+    <value>अतिरिक्त फ्लैशकार्ड खेल</value>
+  </data>
+  <data name="feature_early_access" xml:space="preserve">
+    <value>नई सुविधाओं तक शीघ्र पहुंच</value>
+  </data>
+  <data name="feature_element_notes" xml:space="preserve">
+    <value>तत्व नोट्स</value>
+  </data>
+  <data name="feature_element_overview" xml:space="preserve">
+    <value>तत्व अवलोकन</value>
+  </data>
+  <data name="feature_hazard_materials" xml:space="preserve">
+    <value>खतरनाक सामग्री</value>
+  </data>
+  <data name="feature_poisson_sound" xml:space="preserve">
+    <value>पॉइज़न स्थिरांक, ध्वनि गति</value>
+  </data>
+  <data name="feature_poisson_table" xml:space="preserve">
+    <value>पॉइज़न अनुपात तालिका</value>
+  </data>
+  <data name="feature_save_calculations" xml:space="preserve">
+    <value>गणना सहेजें</value>
+  </data>
+  <data name="feature_save_unit_converter" xml:space="preserve">
+    <value>यूनिट कन्वर्टर में सहेजें</value>
+  </data>
+  <data name="feature_sixty_lives" xml:space="preserve">
+    <value>फ़्लैशकार्ड में 60 जीवन</value>
+  </data>
+  <data name="feature_unlimited_lives" xml:space="preserve">
+    <value>फ्लैशकार्ड में असीमित जीवन</value>
+  </data>
+  <data name="feature_young_bulk_shear" xml:space="preserve">
+    <value>यंग मॉड्यूलस, बल्क मॉड्यूलस, शियर मॉड्यूलस</value>
+  </data>
+  <data name="flashcards_pro_pitch" xml:space="preserve">
+    <value>'Atomic - Periodic Table' की पूरी क्षमता अनलॉक करें - सभी लर्निंग गेम और असीमित जीवन।</value>
+  </data>
+  <data name="flashcards_quiz_completed" xml:space="preserve">
+    <value>क्विज़ पूरा हुआ</value>
+  </data>
+  <data name="flashcards_start" xml:space="preserve">
+    <value>फ़्लैशकार्ड शुरू करें</value>
+  </data>
+  <data name="info_about" xml:space="preserve">
+    <value>%1$s के बारे में:</value>
+  </data>
+  <data name="ionization_for" xml:space="preserve">
+    <value>%1$s की आयनन ऊर्जाएँ</value>
+  </data>
+  <data name="label_all" xml:space="preserve">
+    <value>सभी</value>
+  </data>
+  <data name="label_categories" xml:space="preserve">
+    <value>श्रेणियाँ</value>
+  </data>
+  <data name="label_copy" xml:space="preserve">
+    <value>कॉपी करें</value>
+  </data>
+  <data name="label_correct_answer" xml:space="preserve">
+    <value>सही उत्तर:</value>
+  </data>
+  <data name="label_detail_view" xml:space="preserve">
+    <value>विस्तृत दृश्य</value>
+  </data>
+  <data name="label_detailed_info" xml:space="preserve">
+    <value>अधिक जानकारी</value>
+  </data>
+  <data name="label_details" xml:space="preserve">
+    <value>विवरण</value>
+  </data>
   <data name="label_electrons" xml:space="preserve">
     <value>इलेक्ट्रॉन</value>
+  </data>
+  <data name="label_features" xml:space="preserve">
+    <value>विशेषताएं</value>
+  </data>
+  <data name="label_hide_info" xml:space="preserve">
+    <value>जानकारी छिपाएं</value>
+  </data>
+  <data name="label_learn_more" xml:space="preserve">
+    <value>और जानें</value>
+  </data>
+  <data name="label_lives" xml:space="preserve">
+    <value>जीवन</value>
+  </data>
+  <data name="label_mass_colon" xml:space="preserve">
+    <value>द्रव्यमान:</value>
+  </data>
+  <data name="label_more_info" xml:space="preserve">
+    <value>अधिक जानकारी</value>
+  </data>
+  <data name="label_most_common_isotope" xml:space="preserve">
+    <value>सबसे सामान्य समस्थानिक:</value>
+  </data>
+  <data name="label_notes" xml:space="preserve">
+    <value>नोट्स</value>
+  </data>
+  <data name="label_purchase" xml:space="preserve">
+    <value>खरीदें</value>
+  </data>
+  <data name="label_remove" xml:space="preserve">
+    <value>हटाएं</value>
+  </data>
+  <data name="label_show_info" xml:space="preserve">
+    <value>जानकारी दिखाएं</value>
+  </data>
+  <data name="label_your_answer" xml:space="preserve">
+    <value>आपका उत्तर:</value>
+  </data>
+  <data name="loading_progress" xml:space="preserve">
+    <value>लोड हो रहा है: %1$s/%2$s</value>
   </data>
   <data name="nav_constants" xml:space="preserve">
     <value>स्थिरांक तालिका</value>
@@ -55,6 +199,66 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>द्राव्यता तालिका</value>
+  </data>
+  <data name="nuclide_table_info" xml:space="preserve">
+    <value>न्यूक्लाइड तालिका के बारे में</value>
+  </data>
+  <data name="ph_bromothymol_desc" xml:space="preserve">
+    <value>इसे ब्रोमोथाइमॉल सल्फोन थैलीन और BTB भी कहते हैं</value>
+  </data>
+  <data name="ph_universal_desc" xml:space="preserve">
+    <value>कई यौगिकों से बना एक विलयन</value>
+  </data>
+  <data name="ph_universal_indicator" xml:space="preserve">
+    <value>सार्वभौमिक सूचक</value>
+  </data>
+  <data name="poisson_ratio_for" xml:space="preserve">
+    <value>%1$s का पॉइसन अनुपात:</value>
+  </data>
+  <data name="pro_additional_features" xml:space="preserve">
+    <value>अतिरिक्त सुविधाएँ</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>अतिरिक्त तालिकाएँ</value>
+  </data>
+  <data name="pro_all_free_features" xml:space="preserve">
+    <value>सभी निःशुल्क सुविधाएँ</value>
+  </data>
+  <data name="pro_all_pro_features" xml:space="preserve">
+    <value>सभी PRO सुविधाएँ</value>
+  </data>
+  <data name="pro_card_free_tagline" xml:space="preserve">
+    <value>बुनियादी पहुँच के लिए उपयुक्त।</value>
+  </data>
+  <data name="pro_card_free_title" xml:space="preserve">
+    <value>निःशुल्क संस्करण</value>
+  </data>
+  <data name="pro_card_pro_tagline" xml:space="preserve">
+    <value>उन्नत डेटा अनलॉक करें।</value>
+  </data>
+  <data name="pro_card_proplus_tagline" xml:space="preserve">
+    <value>उन्नत डेटा और सभी प्लेटफ़ॉर्म पर पहुँच अनलॉक करें।</value>
+  </data>
+  <data name="pro_compare_subtitle" xml:space="preserve">
+    <value>आसानी से देखें कि हर संस्करण में क्या है</value>
+  </data>
+  <data name="pro_compare_title" xml:space="preserve">
+    <value>संस्करणों की सुविधाओं की तुलना करें</value>
+  </data>
+  <data name="pro_flashcards_and_lives" xml:space="preserve">
+    <value>अधिक फ़्लैशकार्ड और जीवन</value>
+  </data>
+  <data name="pro_most_popular" xml:space="preserve">
+    <value>सबसे लोकप्रिय</value>
+  </data>
+  <data name="pro_state_current" xml:space="preserve">
+    <value>वर्तमान संस्करण</value>
+  </data>
+  <data name="pro_state_upgraded" xml:space="preserve">
+    <value>PRO+ में अपग्रेड किया गया</value>
+  </data>
+  <data name="search_placeholder" xml:space="preserve">
+    <value>खोजें...</value>
   </data>
   <data name="settings_android_desc" xml:space="preserve">
     <value>अपने मोबाइल उपकरणों के लिए ऐप डाउनलोड करें और हर जगह सभी डेटा देखें</value>
@@ -92,6 +296,18 @@
   <data name="settings_theme_title" xml:space="preserve">
     <value>थीम्स</value>
   </data>
+  <data name="solubility_decomposed" xml:space="preserve">
+    <value>-: पानी से अपघटित</value>
+  </data>
+  <data name="solubility_insoluble" xml:space="preserve">
+    <value>I: अघुलनशील</value>
+  </data>
+  <data name="solubility_slightly" xml:space="preserve">
+    <value>Ss: थोड़ा घुलनशील</value>
+  </data>
+  <data name="solubility_soluble" xml:space="preserve">
+    <value>S: घुलनशील</value>
+  </data>
   <data name="ultimate_badge" xml:space="preserve">
     <value>सभी प्लेटफ़ॉर्म</value>
   </data>
@@ -108,5 +324,11 @@
   </data>
   <data name="ultimate_description" xml:space="preserve">
     <value>Windows और Android पर PRO+, एक ही बार खरीदें।</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Ultimate अपग्रेड</value>
+  </data>
+  <data name="value_range" xml:space="preserve">
+    <value>मान परिसर: %1$s - %2$s</value>
   </data>
 </root>

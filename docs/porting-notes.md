@@ -540,3 +540,45 @@ Two consequences for the port:
    faster, and it is a precondition for ever adopting AOT. It covers `Element`, the two favourite
    record types and `List<string>`; the trim analyser reported those five call sites and reports
    none now.
+
+### D34 — a price was shown for something already bought
+
+The PRO+ branch of the licence check set the price to `---` and then overwrote it four lines later:
+
+```csharp
+ProPlusPrice.Text = "---";
+...
+// Show full ProPlus price
+if (proPlusProduct != null)
+{
+    ProPlusPrice.Text = proPlusProduct.Price.FormattedPrice;   // undoes it
+}
+```
+
+A PRO+ owner was therefore quoted for PRO+. The rule had been spelled out per branch — three
+branches, four price fields, twelve assignments — so it was possible for one of them to contradict
+itself in the same block.
+
+All four now go through `ApplyPrices`, which asks one question per card: *does the user own this?*
+Free is owned by definition; PRO and PRO+ from their flags; Ultimate from `HasUltimate`. `ShowPrice`
+answers `---` for owned or absent, and the formatted price otherwise. The branches below it set only
+what the **buttons** say.
+
+`ApplyPrices` runs twice, like `ApplyUltimateOffer` and for the same reason (D33): the catalogue
+query completes before the licence check, so on its own it prices the page against the previous
+session's tier.
+
+### D35 — headers built by interpolation cannot be translated where they are written
+
+Six page headers were `$"Info about {name}:"` and its relatives. String interpolation fixes word
+order at the call site, and word order is the first thing a translation moves: Swedish writes
+*"Anteckningar för Väte"* where Hindi puts the element first.
+
+They are resources with positional placeholders now — `%1$s` — filled through
+`IStringProvider.Get(key, args)`, which already runs them through `JavaFormat`. `StringFormatTest`
+checks the placeholder counts agree across all twelve, which is the guard that makes this safe to
+do in languages I cannot proofread.
+
+Left alone deliberately: `-{n} Life/Lives` in the quiz. It needs plural forms, and the plural
+mechanism (`key.One` / `key.Other`) exists only on the Android-sourced side of the pipeline —
+`build_app_resw.py` cannot declare one. Authoring a single form would make English wrong at n=1.

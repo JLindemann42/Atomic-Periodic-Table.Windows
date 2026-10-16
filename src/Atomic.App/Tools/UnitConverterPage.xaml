@@ -75,7 +75,7 @@
                                 <!-- Input Value -->
                                 <StackPanel Grid.Column="0">
                                     <TextBox x:Name="InputValueBox"
-                                             PlaceholderText="Enter value"
+                                             PlaceholderText="{loc:Str Key=enter_value}"
                                              FontSize="30"
                                              Margin="0,0,0,8"
                                              TextChanged="InputValueBox_TextChanged"
@@ -172,8 +172,8 @@
                                                     VerticalAlignment="Center">
                                                     <Button.Flyout>
                                                         <MenuFlyout>
-                                                            <MenuFlyoutItem Text="Copy" Click="FavoriteCopy_Click" Tag="{x:Bind}" />
-                                                            <MenuFlyoutItem Text="Remove" Click="FavoriteRemove_Click" Tag="{x:Bind}" />
+                                                            <MenuFlyoutItem Text="{loc:Str Key=label_copy}" Click="FavoriteCopy_Click" Tag="{x:Bind}" />
+                                                            <MenuFlyoutItem Text="{loc:Str Key=label_remove}" Click="FavoriteRemove_Click" Tag="{x:Bind}" />
                                                         </MenuFlyout>
                                                     </Button.Flyout>
                                                     <FontIcon Glyph="&#xE70D;" FontSize="16"/>
@@ -201,7 +201,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="This feature requires PRO version."
+                                <TextBlock Text="{loc:Str Key=requires_pro}"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     FontSize="18"
                                     FontWeight="Bold"

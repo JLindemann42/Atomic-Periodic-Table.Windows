@@ -300,11 +300,11 @@ CornerRadius="12"
                             <StackPanel Margin="0,0,0,12">
                                 <TextBlock Text="{x:Bind Question}" FontWeight="Bold"/>
                                 <TextBlock>
-                    <Run Text="Your answer: "/>
+                    <Run Text="{loc:Str Key=label_your_answer}"/><Run Text=" "/>
                     <Run Text="{x:Bind PickedAnswer}"/>
                                 </TextBlock>
                                 <TextBlock>
-                    <Run Text="Correct answer: "/>
+                    <Run Text="{loc:Str Key=label_correct_answer}"/><Run Text=" "/>
                     <Run Text="{x:Bind CorrectAnswer}"/>
                                 </TextBlock>
                                 <TextBlock Foreground="{x:Bind WasCorrect, Converter={StaticResource BoolToBrushConverter}}">

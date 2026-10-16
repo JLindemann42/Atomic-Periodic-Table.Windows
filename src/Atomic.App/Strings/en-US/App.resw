@@ -62,11 +62,155 @@
   <data name="chat_thinking" xml:space="preserve">
     <value>Thinking</value>
   </data>
+  <data name="chip_electricity" xml:space="preserve">
+    <value>Electricity</value>
+  </data>
+  <data name="chip_magnetism" xml:space="preserve">
+    <value>Magnetism and Induction</value>
+  </data>
+  <data name="chip_mechanics" xml:space="preserve">
+    <value>Mechanics</value>
+  </data>
+  <data name="chip_nuclear_physics" xml:space="preserve">
+    <value>Nuclear Physics</value>
+  </data>
+  <data name="chip_wavelengths" xml:space="preserve">
+    <value>Wavelengths</value>
+  </data>
+  <data name="element_notes_title" xml:space="preserve">
+    <value>%1$s Notes</value>
+  </data>
+  <data name="emission_spectrum_of" xml:space="preserve">
+    <value>Emission Spectrum of %1$s:</value>
+  </data>
+  <data name="emission_wavelength_range" xml:space="preserve">
+    <value>Wavelength range: 380-720 nm</value>
+  </data>
+  <data name="emission_wavelength_vacuum" xml:space="preserve">
+    <value>Wavelength in: Vacuum</value>
+  </data>
+  <data name="enter_compound" xml:space="preserve">
+    <value>Enter compound...</value>
+  </data>
+  <data name="enter_value" xml:space="preserve">
+    <value>Enter value</value>
+  </data>
+  <data name="feature_additional_games" xml:space="preserve">
+    <value>Additional flashcard games</value>
+  </data>
+  <data name="feature_early_access" xml:space="preserve">
+    <value>Early access to DEV features</value>
+  </data>
+  <data name="feature_element_notes" xml:space="preserve">
+    <value>Element Notes</value>
+  </data>
+  <data name="feature_element_overview" xml:space="preserve">
+    <value>Element Overview</value>
+  </data>
+  <data name="feature_hazard_materials" xml:space="preserve">
+    <value>Hazard of Materials</value>
+  </data>
+  <data name="feature_poisson_sound" xml:space="preserve">
+    <value>Poisson's Constant, Sound of Speed</value>
+  </data>
+  <data name="feature_poisson_table" xml:space="preserve">
+    <value>Poisson's Ratio Table</value>
+  </data>
+  <data name="feature_save_calculations" xml:space="preserve">
+    <value>Save Calculations</value>
+  </data>
+  <data name="feature_save_unit_converter" xml:space="preserve">
+    <value>Save in Unit Converter</value>
+  </data>
+  <data name="feature_sixty_lives" xml:space="preserve">
+    <value>60 lives in flashcards</value>
+  </data>
+  <data name="feature_unlimited_lives" xml:space="preserve">
+    <value>Unlimited lives in flashcards</value>
+  </data>
+  <data name="feature_young_bulk_shear" xml:space="preserve">
+    <value>Young-, Bulk-, Shear Modulus</value>
+  </data>
   <data name="flashcard_level_band" xml:space="preserve">
     <value>Level %1$s - %2$s</value>
   </data>
+  <data name="flashcards_pro_pitch" xml:space="preserve">
+    <value>Unlock the full potential of 'Atomic - Periodic Table' with access to all learning games and unlimited lives.</value>
+  </data>
+  <data name="flashcards_quiz_completed" xml:space="preserve">
+    <value>Quiz Completed</value>
+  </data>
+  <data name="flashcards_start" xml:space="preserve">
+    <value>Start Flashcard</value>
+  </data>
+  <data name="info_about" xml:space="preserve">
+    <value>Info about %1$s:</value>
+  </data>
+  <data name="ionization_for" xml:space="preserve">
+    <value>Ionization Energies for %1$s</value>
+  </data>
+  <data name="label_all" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="label_categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="label_copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="label_correct_answer" xml:space="preserve">
+    <value>Correct answer:</value>
+  </data>
+  <data name="label_detail_view" xml:space="preserve">
+    <value>Detail View</value>
+  </data>
+  <data name="label_detailed_info" xml:space="preserve">
+    <value>Detailed information</value>
+  </data>
+  <data name="label_details" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="label_electrons" xml:space="preserve">
     <value>Electrons</value>
+  </data>
+  <data name="label_features" xml:space="preserve">
+    <value>Feature</value>
+  </data>
+  <data name="label_hide_info" xml:space="preserve">
+    <value>Hide info</value>
+  </data>
+  <data name="label_learn_more" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="label_lives" xml:space="preserve">
+    <value>Lives</value>
+  </data>
+  <data name="label_mass_colon" xml:space="preserve">
+    <value>Mass:</value>
+  </data>
+  <data name="label_more_info" xml:space="preserve">
+    <value>More info</value>
+  </data>
+  <data name="label_most_common_isotope" xml:space="preserve">
+    <value>Most Common Isotope:</value>
+  </data>
+  <data name="label_notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="label_purchase" xml:space="preserve">
+    <value>Purchase</value>
+  </data>
+  <data name="label_remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="label_show_info" xml:space="preserve">
+    <value>Show info</value>
+  </data>
+  <data name="label_your_answer" xml:space="preserve">
+    <value>Your answer:</value>
+  </data>
+  <data name="loading_progress" xml:space="preserve">
+    <value>Loading: %1$s/%2$s</value>
   </data>
   <data name="nav_blog" xml:space="preserve">
     <value>Blog</value>
@@ -119,6 +263,66 @@
   <data name="notif_streak_title" xml:space="preserve">
     <value>Keep your streak</value>
   </data>
+  <data name="nuclide_table_info" xml:space="preserve">
+    <value>Nuclide Table Info</value>
+  </data>
+  <data name="ph_bromothymol_desc" xml:space="preserve">
+    <value>Also known as bromothymol sulfone phthalein and BTB</value>
+  </data>
+  <data name="ph_universal_desc" xml:space="preserve">
+    <value>A solution made of several compounds</value>
+  </data>
+  <data name="ph_universal_indicator" xml:space="preserve">
+    <value>Universal Indicator</value>
+  </data>
+  <data name="poisson_ratio_for" xml:space="preserve">
+    <value>Poisson's Ratio for %1$s:</value>
+  </data>
+  <data name="pro_additional_features" xml:space="preserve">
+    <value>Additional Features</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>Additional Tables</value>
+  </data>
+  <data name="pro_all_free_features" xml:space="preserve">
+    <value>All Free features</value>
+  </data>
+  <data name="pro_all_pro_features" xml:space="preserve">
+    <value>All PRO features</value>
+  </data>
+  <data name="pro_card_free_tagline" xml:space="preserve">
+    <value>Perfect for basic access.</value>
+  </data>
+  <data name="pro_card_free_title" xml:space="preserve">
+    <value>Free Version</value>
+  </data>
+  <data name="pro_card_pro_tagline" xml:space="preserve">
+    <value>Unlock advanced data.</value>
+  </data>
+  <data name="pro_card_proplus_tagline" xml:space="preserve">
+    <value>Unlock advanced data and access to all platforms.</value>
+  </data>
+  <data name="pro_compare_subtitle" xml:space="preserve">
+    <value>Easily compare the different features of different versions</value>
+  </data>
+  <data name="pro_compare_title" xml:space="preserve">
+    <value>Compare features by versions</value>
+  </data>
+  <data name="pro_flashcards_and_lives" xml:space="preserve">
+    <value>Additional flashcards and lives</value>
+  </data>
+  <data name="pro_most_popular" xml:space="preserve">
+    <value>Most popular</value>
+  </data>
+  <data name="pro_state_current" xml:space="preserve">
+    <value>Current Version</value>
+  </data>
+  <data name="pro_state_upgraded" xml:space="preserve">
+    <value>Upgraded to PRO+</value>
+  </data>
+  <data name="search_placeholder" xml:space="preserve">
+    <value>Search...</value>
+  </data>
   <data name="settings_android_desc" xml:space="preserve">
     <value>Download the app for your mobile devices to access all data everywhere</value>
   </data>
@@ -155,6 +359,18 @@
   <data name="settings_theme_title" xml:space="preserve">
     <value>App theme</value>
   </data>
+  <data name="solubility_decomposed" xml:space="preserve">
+    <value>-: Decomposed by water</value>
+  </data>
+  <data name="solubility_insoluble" xml:space="preserve">
+    <value>I: Insoluble</value>
+  </data>
+  <data name="solubility_slightly" xml:space="preserve">
+    <value>Ss: Slightly Soluble</value>
+  </data>
+  <data name="solubility_soluble" xml:space="preserve">
+    <value>S: Soluble</value>
+  </data>
   <data name="ultimate_badge" xml:space="preserve">
     <value>All platforms</value>
   </data>
@@ -171,5 +387,11 @@
   </data>
   <data name="ultimate_description" xml:space="preserve">
     <value>PRO+ on Windows and Android, bought once.</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Ultimate Upgrade</value>
+  </data>
+  <data name="value_range" xml:space="preserve">
+    <value>Value range: %1$s - %2$s</value>
   </data>
 </root>

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json.Nodes;
 using Atomic.App.Services;
+using Atomic.Core.Localization;
 
 
 namespace Atomic.App.Tables
@@ -44,7 +45,7 @@ namespace Atomic.App.Tables
                 return; // or handle gracefully
             }
 
-            IonizationTitle.Text = $"Ionization Energies for {elementName}";
+            IonizationTitle.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.ionization_for, elementName);
 
             if (!string.IsNullOrEmpty(elementName))
             {

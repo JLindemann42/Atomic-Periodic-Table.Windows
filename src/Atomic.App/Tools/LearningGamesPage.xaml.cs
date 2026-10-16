@@ -17,6 +17,7 @@ using Atomic.Core.Ai.Retrieval;
 using Atomic.Core.Ai.Data;
 using Atomic.Core.Progression;
 using Atomic.Core.Quiz;
+using Atomic.Core.Localization;
 namespace Atomic.App.Tools
 {
     public class GameResultItem
@@ -325,13 +326,13 @@ namespace Atomic.App.Tools
             await FadeOut(QuestionCard);
             if (correct)
             {
-                FeedbackTitle.Text = "Correct!";
+                FeedbackTitle.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.correct);
                 FeedbackDetail.Text = $"+{xpGained} XP";
                 FeedbackDetail.Foreground = new SolidColorBrush(Microsoft.UI.Colors.ForestGreen);
             }
             else
             {
-                FeedbackTitle.Text = "Wrong!";
+                FeedbackTitle.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.wrong);
                 FeedbackDetail.Text = $"-{GetLivesLost()} Life{(GetLivesLost() > 1 ? "s" : "")}";
                 FeedbackDetail.Foreground = new SolidColorBrush(Microsoft.UI.Colors.IndianRed);
             }

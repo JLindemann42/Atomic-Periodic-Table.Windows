@@ -21,6 +21,7 @@ namespace Atomic.App
         private StoreProduct proPlusProduct;
         private StoreProduct proUpgradeProduct;
         private StoreProduct ultimateProduct;
+        private StoreProduct ultimateUpgradeProduct;
 
         // Store ids, in one place rather than repeated as literals through the file.
         private const string ProStoreId = "9NMMDNZHJKP4";
@@ -28,14 +29,22 @@ namespace Atomic.App
         private const string ProUpgradeStoreId = "9MTF8DGJ688J";
 
         /// <summary>
-        /// The Ultimate add-on: PRO+ on every platform, bought once.
+        /// The Ultimate add-ons. Partner Center calls them "PRO PLUS ULTIMATE" and
+        /// "PRO PLUS ULTIMATE UPGRADE"; these are their Store ids.
         /// </summary>
         /// <remarks>
-        /// <b>Replace this with the real product id once it exists in Partner Center.</b> Until the
-        /// catalogue returns a product under this id the card stays collapsed, so an unfinished
-        /// listing shows nothing rather than a button that cannot complete a purchase.
+        /// <para>Store ids, like the three above, because that is what keys both the catalogue
+        /// dictionary and <c>AddOnLicenses</c>. The Partner Center product id is a different
+        /// string - it surfaces as <see cref="StoreProduct.InAppOfferToken"/> - and passing one to
+        /// <c>Products.TryGetValue</c> finds nothing at all, which looks exactly like an
+        /// unpublished product.</para>
+        ///
+        /// <para>Two of them because a PRO+ owner upgrades at a reduced price rather than paying
+        /// the full amount again - the same shape as the PRO to PRO+ path handled above.</para>
         /// </remarks>
-        private const string UltimateStoreId = "ULTIMATE-STORE-ID-PENDING";
+        private const string UltimateStoreId = "9P8D5MG71B9X";
+
+        private const string UltimateUpgradeStoreId = "9N69V9JQQL9D";
 
         /// <summary>
         /// Whether the Store answered the catalogue query well enough to be believed about licences.
@@ -49,26 +58,26 @@ namespace Atomic.App
 
         public ObservableCollection<FeatureComparison> FeatureList { get; } = new()
         {
-            new() { Title = "Element Overview", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Favorite Bar", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Element Notes", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Isotopes", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Dictionary", FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Save Calculations", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Save in Unit Converter", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Hardness Properties", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Young-, Bulk-, Shear Modulus", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Poisson's Constant, Sound of Speed", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Hazard of Materials", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Table of Nuclides", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Poisson's Ratio Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Constants Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Geology Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Emission Spectrum Table", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "60 lives in flashcards", FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
-            new() { Title = "Unlimited lives in flashcards", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
-            new() { Title = "Additional flashcard games", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
-            new() { Title = "Early Access to DEV Features", FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_element_overview), FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.favorite_bar), FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_element_notes), FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.iso), FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.Dictionary), FreeCheckmark = "✅", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_save_calculations), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_save_unit_converter), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.hardness_properties), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_young_bulk_shear), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_poisson_sound), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_hazard_materials), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.nuc), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_poisson_table), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.con), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.geo), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.emi), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_sixty_lives), FreeCheckmark = "❌", ProCheckmark = "✅", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_unlimited_lives), FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_additional_games), FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
+            new() { Title = Text(Atomic.Core.Localization.S.feature_early_access), FreeCheckmark = "❌", ProCheckmark = "❌", ProPlusCheckmark = "✅" },
         };
 
         public ProPage()
@@ -82,6 +91,17 @@ namespace Atomic.App
 
             _ = InitializeStoreAndLicensesAsync();
         }
+
+        /// <summary>
+        /// One translated string, in the app's current language.
+        /// </summary>
+        /// <remarks>
+        /// Static so the feature-comparison list can use it from its field initialiser. That list
+        /// is built once per page instance, which is why a language change rebuilds the frame -
+        /// see NavigationService.
+        /// </remarks>
+        private static string Text(string key) =>
+            ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current)).Get(key);
 
         public static bool IsProUser => SettingsStore.IsProUser;
 
@@ -134,14 +154,14 @@ namespace Atomic.App
             // knows this app, which is the only thing the licence check needs from here.
             storeAnswered = addOns.Products.ContainsKey(ProStoreId)
                             || addOns.Products.ContainsKey(ProPlusStoreId)
-                            || addOns.Products.ContainsKey(ProUpgradeStoreId);
+                            || addOns.Products.ContainsKey(ProUpgradeStoreId)
+                            || addOns.Products.ContainsKey(UltimateStoreId);
 
             // Load Pro
             if (addOns.Products.TryGetValue(ProStoreId, out var pro))
             {
                 proProduct = pro;
                 Pro.Text = pro.Title;
-                ProPrice.Text = pro.Price.FormattedPrice;
             }
             else
             {
@@ -153,7 +173,6 @@ namespace Atomic.App
             {
                 proPlusProduct = proPlus;
                 ProPlus.Text = proPlus.Title;
-                ProPlusPrice.Text = proPlus.Price.FormattedPrice;
             }
             else
             {
@@ -170,17 +189,82 @@ namespace Atomic.App
                 ShowError("Missing PRO Upgrade", "Store item 'Pro Upgrade Version' was not found.");
             }
 
-            // Ultimate. Absence is not an error the way the other three are - the product may
-            // simply not be published yet - so it hides the card instead of reporting a fault.
-            if (addOns.Products.TryGetValue(UltimateStoreId, out var ultimate))
-            {
-                var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+            addOns.Products.TryGetValue(UltimateStoreId, out ultimateProduct);
+            addOns.Products.TryGetValue(UltimateUpgradeStoreId, out ultimateUpgradeProduct);
 
-                ultimateProduct = ultimate;
-                UltimatePrice.Text = ultimate.Price.FormattedPrice;
-                BuyUltimateButton.Content = strings.Get(Atomic.Core.Localization.S.ultimate_buy);
-                BuyUltimateButton.IsEnabled = true;
-            }
+            ApplyPrices();
+            ApplyUltimateOffer();
+        }
+
+        /// <summary>
+        /// Which Ultimate product to sell, and what the card says about it.
+        /// </summary>
+        /// <remarks>
+        /// <para>Run twice: once when the catalogue arrives, and again after the licence check,
+        /// because the choice depends on whether the user already owns PRO+. The catalogue query
+        /// completes first, so on its own it decides using whatever the last session stored - which
+        /// offered the full price to a PRO+ owner whose entitlement had only just been confirmed.</para>
+        ///
+        /// <para>Absence is not an error the way a missing PRO listing is: the card simply keeps
+        /// saying "coming soon".</para>
+        /// </remarks>
+        /// <summary>Shown in place of a price for something the user already owns.</summary>
+        private const string NoPrice = "---";
+
+        /// <summary>
+        /// A price, or nothing to pay.
+        /// </summary>
+        /// <remarks>
+        /// A price on a card for something already bought reads as an invitation to buy it twice.
+        /// The rule was previously spelled out per branch, and the PRO+ branch set "---" and then
+        /// overwrote it with the full price four lines later - so a PRO+ owner was quoted for PRO+.
+        /// </remarks>
+        private static void ShowPrice(TextBlock target, StoreProduct product, bool owned) =>
+            target.Text = owned || product is null ? NoPrice : product.Price.FormattedPrice;
+
+        /// <summary>
+        /// Every price on the page, from what is owned and what is for sale.
+        /// </summary>
+        /// <remarks>
+        /// Run when the catalogue arrives and again after the licence check, for the reason in
+        /// <see cref="ApplyUltimateOffer"/>: the catalogue completes first, so on its own it prices
+        /// the page against the previous session's tier.
+        /// </remarks>
+        private void ApplyPrices()
+        {
+            // Free is owned by definition.
+            FreePrice.Text = NoPrice;
+
+            ShowPrice(ProPrice, proProduct, SettingsStore.IsProUser);
+
+            // A PRO owner buys the upgrade rather than the full product, so that is the price to
+            // show them - and neither, once they hold PRO+.
+            var proPlusOffer = SettingsStore.IsProUser && proUpgradeProduct is not null
+                ? proUpgradeProduct
+                : proPlusProduct;
+
+            ShowPrice(ProPlusPrice, proPlusOffer, SettingsStore.IsProPlusUser);
+        }
+
+        private void ApplyUltimateOffer()
+        {
+            var offer = SettingsStore.IsProPlusUser && ultimateUpgradeProduct is not null
+                ? ultimateUpgradeProduct
+                : ultimateProduct;
+
+            if (offer is null) return;
+
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+
+            // Name the offer. A reduced upgrade price beside a card headed "Ultimate" is a number
+            // with nothing to attach it to, and the PRO+ card above relabels itself the same way.
+            Ultimate.Text = offer.StoreId == UltimateUpgradeStoreId
+                ? strings.Get(Atomic.Core.Localization.S.ultimate_upgrade_title)
+                : "Ultimate";
+
+            ShowPrice(UltimatePrice, offer, SettingsStore.HasUltimate);
+            BuyUltimateButton.Content = strings.Get(Atomic.Core.Localization.S.ultimate_buy);
+            BuyUltimateButton.IsEnabled = !SettingsStore.HasUltimate;
         }
 
         private async Task CheckUserLicensesAsync()
@@ -192,7 +276,11 @@ namespace Atomic.App
                 bool hasProUpgrade = appLicense.AddOnLicenses.TryGetValue(ProUpgradeStoreId + "/0010", out var upgradeLicense) && upgradeLicense.IsActive;
                 bool hasPro = appLicense.AddOnLicenses.TryGetValue(ProStoreId + "/0010", out var proLicense) && proLicense.IsActive;
                 bool hasProPlus = appLicense.AddOnLicenses.TryGetValue(ProPlusStoreId + "/0010", out var proPlusLicense) && proPlusLicense.IsActive;
-                bool hasUltimate = appLicense.AddOnLicenses.TryGetValue(UltimateStoreId + "/0010", out var ultimateLicense) && ultimateLicense.IsActive;
+                // Either product grants it - the upgrade and the outright purchase are two ways
+                // to own the same thing.
+                bool hasUltimateOutright = appLicense.AddOnLicenses.TryGetValue(UltimateStoreId + "/0010", out var ultimateLicense) && ultimateLicense.IsActive;
+                bool hasUltimateUpgrade = appLicense.AddOnLicenses.TryGetValue(UltimateUpgradeStoreId + "/0010", out var ultimateUpgradeLicence) && ultimateUpgradeLicence.IsActive;
+                bool hasUltimate = hasUltimateOutright || hasUltimateUpgrade;
 
                 if (hasUltimate) SettingsStore.HasUltimate = true;
 
@@ -221,67 +309,51 @@ namespace Atomic.App
 
                 DispatcherQueue.TryEnqueue(() =>
                 {
+                    // Now that the tier is known, the offer may have changed from the full
+                    // product to the reduced upgrade.
+                    ApplyUltimateOffer();
+
                     if (SettingsStore.HasUltimate)
                     {
                         BuyUltimateButton.IsEnabled = false;
                         BuyUltimateButton.Content = EntitlementRules.UltimateBadge;
                     }
 
+                    // Prices in one place, from ownership - see ApplyPrices. The branches below
+                    // set only what the buttons say.
+                    ApplyPrices();
+
                     if (isProPlusUser)
                     {
                         BuyProPlusButton.IsEnabled = false;
-                        BuyProPlusButton.Content = "Upgraded to PRO+";
-                        ProPrice.Text = "---";
+                        BuyProPlusButton.Content = Text(Atomic.Core.Localization.S.pro_state_upgraded);
 
                         BuyProButton.IsEnabled = false;
-                        BuyProButton.Content = "Has PRO+ Version";
-                        ProPlusPrice.Text = "---";
+                        BuyProButton.Content = Text(Atomic.Core.Localization.S.pro_plus_version);
 
-                        FreeButton.Content = "Has PRO+ Version";
-                        FreePrice.Text = "---";
-
-                        // Show full ProPlus price
-                        if (proPlusProduct != null)
-                        {
-                            ProPlusPrice.Text = proPlusProduct.Price.FormattedPrice;
-                        }
+                        FreeButton.Content = Text(Atomic.Core.Localization.S.pro_plus_version);
                     }
                     else if (isProUser)
                     {
                         BuyProButton.IsEnabled = false;
-                        BuyProButton.Content = "Current Version";
-                        ProPrice.Text = "---";
+                        BuyProButton.Content = Text(Atomic.Core.Localization.S.pro_state_current);
 
-                        FreeButton.Content = "Has PRO Version";
-                        FreePrice.Text = "---";
+                        FreeButton.Content = Text(Atomic.Core.Localization.S.pro_title);
 
                         BuyProPlusButton.IsEnabled = true;
 
-                        // Show upgrade price if available
+                        // A PRO owner is being sold the upgrade, so the card says so.
                         if (proUpgradeProduct != null)
-                        {
-                            ProPlusPrice.Text = proUpgradeProduct.Price.FormattedPrice;
-                            ProPlus.Text = "PRO+ Upgrade";
-                        }
-                        else if (proPlusProduct != null)
-                        {
-                            // fallback to full price if upgrade product missing
-                            ProPlusPrice.Text = proPlusProduct.Price.FormattedPrice;
-                        }
+                            ProPlus.Text = Text(Atomic.Core.Localization.S.popup_action_button);
                     }
                     else
                     {
                         BuyProButton.IsEnabled = true;
-                        BuyProButton.Content = "Buy Pro";
+                        BuyProButton.Content = Text(Atomic.Core.Localization.S.get_pro);
 
                         BuyProPlusButton.IsEnabled = true;
 
-                        FreeButton.Content = "Free Version";
-
-                        if (proPlusProduct != null)
-                        {
-                            ProPlusPrice.Text = proPlusProduct.Price.FormattedPrice;
-                        }
+                        FreeButton.Content = Text(Atomic.Core.Localization.S.pro_card_free_title);
                     }
                 });
             }
@@ -311,7 +383,12 @@ namespace Atomic.App
 
         private async void BuyUltimate_Click(object sender, RoutedEventArgs e)
         {
-            await PurchaseStoreItem(ultimateProduct, "Ultimate");
+            // PRO+ owners get the reduced upgrade, matching how PRO owners reach PRO+.
+            var item = SettingsStore.IsProPlusUser && ultimateUpgradeProduct is not null
+                ? ultimateUpgradeProduct
+                : ultimateProduct;
+
+            await PurchaseStoreItem(item, "Ultimate");
         }
 
         private async Task PurchaseStoreItem(StoreProduct item, string label)
@@ -339,7 +416,10 @@ namespace Atomic.App
                     // Ultimate is recorded separately as well as granting PRO+, because that flag
                     // is what the account document carries to the other platforms - the tier alone
                     // would tell the phone only that this machine has PRO+, not that it may too.
-                    if (item.StoreId == UltimateStoreId)
+                    var boughtUltimate =
+                        item.StoreId == UltimateStoreId || item.StoreId == UltimateUpgradeStoreId;
+
+                    if (boughtUltimate)
                     {
                         SettingsStore.HasUltimate = true;
                         SettingsStore.IsProPlusUser = true;
@@ -347,22 +427,22 @@ namespace Atomic.App
                     }
 
                     if (item.StoreId == ProPlusStoreId || item.StoreId == ProUpgradeStoreId
-                        || item.StoreId == UltimateStoreId)
+                        || boughtUltimate)
                     {
                         SettingsStore.IsProPlusUser = true;
 
                         BuyProPlusButton.IsEnabled = false;
-                        BuyProPlusButton.Content = "Upgraded to PRO+";
+                        BuyProPlusButton.Content = Text(Atomic.Core.Localization.S.pro_state_upgraded);
 
                         BuyProButton.IsEnabled = false;
-                        BuyProButton.Content = "Has PRO+ Version";
-                        FreeButton.Content = "Has PRO+ Version";
+                        BuyProButton.Content = Text(Atomic.Core.Localization.S.pro_plus_version);
+                        FreeButton.Content = Text(Atomic.Core.Localization.S.pro_plus_version);
                     }
                     else
                     {
                         BuyProButton.IsEnabled = false;
-                        BuyProButton.Content = "Current Version";
-                        FreeButton.Content = "Has PRO Version";
+                        BuyProButton.Content = Text(Atomic.Core.Localization.S.pro_state_current);
+                        FreeButton.Content = Text(Atomic.Core.Localization.S.pro_title);
                     }
 
                     AppNotificationManager.Default.Show(

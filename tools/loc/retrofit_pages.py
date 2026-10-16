@@ -150,6 +150,7 @@ def main() -> int:
             where = ", ".join(sorted(set(files))[:3])
             print(f'    "{text[:56]}"  ({where})')
 
+    report_missing_namespace()
     report_code_behind()
 
     if not args.write:
@@ -196,6 +197,34 @@ def report_code_behind() -> None:
         print(f"    {name}  ({len(rows)})")
         for row in rows:
             print(f"        {row}")
+
+
+def report_missing_namespace() -> int:
+    """
+    Name every page that uses {loc:Str ...} without declaring the namespace.
+
+    The XAML compiler's answer to this is `XamlCompiler.exe ... exited with code 1` and nothing
+    else - no file, no line, no message. Two pages picked it up when literals were swapped by hand
+    rather than by this tool, and finding them cost more than the swap did. One grep here is worth
+    it.
+    """
+    offenders = [
+        page.relative_to(APP)
+        for page in sorted(APP.rglob("*.xaml"))
+        if "obj" not in page.parts and "bin" not in page.parts
+        and "loc:Str" in (text := page.read_text(encoding="utf-8", errors="replace"))
+        and "xmlns:loc=" not in text
+    ]
+
+    if not offenders:
+        return 0
+
+    print("")
+    print(f"{len(offenders)} page(s) use loc:Str without xmlns:loc - the XAML compiler will fail")
+    print("with no message at all until this is fixed:")
+    for page in offenders:
+        print(f"    {page}")
+    return len(offenders)
 
 
 if __name__ == "__main__":

@@ -36,17 +36,17 @@
         </Grid.RowDefinitions>
         <Border MaxWidth="1800">
             <StackPanel x:Name="EquationToolBar" Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,12" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <DropDownButton Content="Categories">
+                <DropDownButton Content="{loc:Str Key=label_categories}">
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
+                            <MenuFlyoutItem Text="{loc:Str Key=label_all}" Click="OnClearFilterSelected" />
                             <MenuFlyoutItem Text="{loc:Str Key=favorite_settings_general}" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Mechanics" Click="OnDisplayModeSelected" />
+                            <MenuFlyoutItem Text="{loc:Str Key=chip_mechanics}" Click="OnDisplayModeSelected" />
                             <MenuFlyoutItem Text="{loc:Str Key=favorite_settings_thermodynamics}" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Wavelengths" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Electricity" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Magnetism and Induction" Click="OnDisplayModeSelected" />
-                            <MenuFlyoutItem Text="Nuclear Physics" Click="OnDisplayModeSelected" />
+                            <MenuFlyoutItem Text="{loc:Str Key=chip_wavelengths}" Click="OnDisplayModeSelected" />
+                            <MenuFlyoutItem Text="{loc:Str Key=chip_electricity}" Click="OnDisplayModeSelected" />
+                            <MenuFlyoutItem Text="{loc:Str Key=chip_magnetism}" Click="OnDisplayModeSelected" />
+                            <MenuFlyoutItem Text="{loc:Str Key=chip_nuclear_physics}" Click="OnDisplayModeSelected" />
 
                         </MenuFlyout>
                     </DropDownButton.Flyout>
@@ -55,7 +55,7 @@
 
                 <TextBox x:Name="SearchBox"
                      Margin="12,0,0,0"
-                     PlaceholderText="Search Constants..."
+                     PlaceholderText="{loc:Str Key=search_placeholder}"
                      Width="240"
                      TextChanged="SearchBox_TextChanged"/>
             </StackPanel>
@@ -145,7 +145,7 @@
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
-                                    <TextBlock Text="Details"
+                                    <TextBlock Text="{loc:Str Key=label_details}"
                                                FontSize="12"
                                                Margin="0,0,12,0.5"
                                                VerticalAlignment="Center"

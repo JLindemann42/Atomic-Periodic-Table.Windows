@@ -87,7 +87,7 @@
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2" HorizontalAlignment="Center">
                                                     <TextBlock x:Name="TotalGamesPlayedTextBlock_single" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="Quiz Completed" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="{loc:Str Key=flashcards_quiz_completed}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                                 </StackPanel>
                                             </Grid>
                                         </StackPanel>
@@ -107,7 +107,7 @@
                                             <Border Width="900"/>
                                             <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                                 <FontIcon Glyph="&#xEB51;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                                <TextBlock Text="Lives" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                                <TextBlock Text="{loc:Str Key=label_lives}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                             </StackPanel>
                                             <Grid Margin="0,16,0,0">
                                                 <Grid.ColumnDefinitions>
@@ -142,7 +142,7 @@
                                                 <TextBlock Text="{loc:Str Key=get_pro_plus}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                             </StackPanel>
                                             <StackPanel>
-                                                <TextBlock Text="Unlock the full potential of 'Atomic - Periodic Table' with access to all learning games and unlimited lives."
+                                                <TextBlock Text="{loc:Str Key=flashcards_pro_pitch}"
                                                         FontWeight="Normal"
                                                         Margin="4,4,20,4"
                                                         TextWrapping="Wrap"
@@ -263,7 +263,7 @@
                                                                                             Tag="{x:Bind Key}"
                                                                                             Click="CategoryButton_Click"
                                                                                             IsEnabled="{x:Bind IsUnlocked}">
-                                                                                        <TextBlock Text="Start Flashcard >" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                                                        <TextBlock Text="{loc:Str Key=flashcards_start}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                                                                     </Button>
                                                                                 </StackPanel>
                                                                             </Grid>
@@ -357,7 +357,7 @@
                                             </StackPanel>
                                             <StackPanel Grid.Column="2" HorizontalAlignment="Center">
                                                 <TextBlock x:Name="TotalGamesPlayedTextBlock" Text="0" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Center"/>
-                                                <TextBlock Text="Quiz Completed" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{loc:Str Key=flashcards_quiz_completed}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
                                             </StackPanel>
                                         </Grid>
                                     </StackPanel>
@@ -377,7 +377,7 @@
                                         <Border Width="900"/>
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                             <FontIcon Glyph="&#xEB51;" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
-                                            <TextBlock Text="Lives" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                                            <TextBlock Text="{loc:Str Key=label_lives}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                         </StackPanel>
                                         <Grid Margin="0,16,0,0">
                                             <Grid.ColumnDefinitions>
@@ -412,7 +412,7 @@
                                             <TextBlock Text="{loc:Str Key=get_pro_plus}" FontWeight="SemiBold" FontSize="18" Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
                                         </StackPanel>
                                         <StackPanel>
-                                            <TextBlock Text="Unlock the full potential of 'Atomic - Periodic Table' with access to all learning games and unlimited lives."
+                                            <TextBlock Text="{loc:Str Key=flashcards_pro_pitch}"
                                                        FontWeight="Normal"
                                                        Margin="4,4,20,4"
                                                        TextWrapping="Wrap"
@@ -533,7 +533,7 @@
                                                                                         Tag="{x:Bind Key}"
                                                                                         Click="CategoryButton_Click"
                                                                                         IsEnabled="{x:Bind IsUnlocked}">
-                                                                                    <TextBlock Text="Start Flashcard >" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                                                    <TextBlock Text="{loc:Str Key=flashcards_start}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                                                                 </Button>
                                                                             </StackPanel>
                                                                         </Grid>

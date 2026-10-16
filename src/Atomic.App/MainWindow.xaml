@@ -75,7 +75,7 @@
             -->
 
             <NavigationView.PaneCustomContent>
-                <HyperlinkButton x:Name="PaneHyperlink" Content="More info" Margin="12,0" Visibility="Collapsed" />
+                <HyperlinkButton x:Name="PaneHyperlink" Content="{loc:Str Key=label_more_info}" Margin="12,0" Visibility="Collapsed" />
             </NavigationView.PaneCustomContent>
 
             <NavigationView.AutoSuggestBox>

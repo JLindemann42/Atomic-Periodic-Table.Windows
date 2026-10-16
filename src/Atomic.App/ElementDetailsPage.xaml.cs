@@ -387,7 +387,7 @@ namespace Atomic.App
             if (Element == null)
                 return;
 
-            NotesDialog.Title = $"{Element.OriginalName} Notes";
+            NotesDialog.Title = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.element_notes_title, Element.OriginalName);
             NotesTextBox.Text = SettingsStore.GetElementNotes(Element.AtomicNumber);
 
             var result = await NotesDialog.ShowAsync();
@@ -486,9 +486,9 @@ namespace Atomic.App
                         }
                         else
                         {
-                            MohsHardness.Text = "Requires PRO-Version";
-                            VickersHardness.Text = "Requires PRO-Version";
-                            BrinellHardness.Text = "Requires PRO-Version";
+                            MohsHardness.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            VickersHardness.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            BrinellHardness.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
                         }
 
                         if (SettingsStore.HasAnyPro)
@@ -512,11 +512,11 @@ namespace Atomic.App
                         }
                         else
                         {
-                            SoundOfSpeed.Text = "Requires PRO-Version";
-                            PoissonConstant.Text = "Requires PRO-Version";
-                            BulkModulus.Text = "Requires PRO-Version";
-                            YoungModulus.Text = "Requires PRO-Version";
-                            ShearModulus.Text = "Requires PRO-Version";
+                            SoundOfSpeed.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            PoissonConstant.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            BulkModulus.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            YoungModulus.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            ShearModulus.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
                         }
 
                         EarthCrustAbundance.Text = elementData.EarthCrust + " mg/kg (ppm)";
@@ -543,10 +543,10 @@ namespace Atomic.App
                         }
                         else
                         {
-                            HealthHazard.Text = "Requires PRO-Version";
-                            FireHazard.Text = "Requires PRO-Version";
-                            Reactivity.Text = "Requires PRO-Version";
-                            SpecificHazard.Text = "Requires PRO-Version";
+                            HealthHazard.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            FireHazard.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            Reactivity.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
+                            SpecificHazard.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
                         }
 
                         CASNumber.Text = elementData.CASNumber;

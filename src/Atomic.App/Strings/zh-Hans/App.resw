@@ -41,8 +41,152 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="chip_electricity" xml:space="preserve">
+    <value>电学</value>
+  </data>
+  <data name="chip_magnetism" xml:space="preserve">
+    <value>磁学与感应</value>
+  </data>
+  <data name="chip_mechanics" xml:space="preserve">
+    <value>力学</value>
+  </data>
+  <data name="chip_nuclear_physics" xml:space="preserve">
+    <value>核物理</value>
+  </data>
+  <data name="chip_wavelengths" xml:space="preserve">
+    <value>波长</value>
+  </data>
+  <data name="element_notes_title" xml:space="preserve">
+    <value>%1$s 笔记</value>
+  </data>
+  <data name="emission_spectrum_of" xml:space="preserve">
+    <value>%1$s 的发射光谱：</value>
+  </data>
+  <data name="emission_wavelength_range" xml:space="preserve">
+    <value>波长范围：380-720 nm</value>
+  </data>
+  <data name="emission_wavelength_vacuum" xml:space="preserve">
+    <value>波长介质：真空</value>
+  </data>
+  <data name="enter_compound" xml:space="preserve">
+    <value>输入化合物...</value>
+  </data>
+  <data name="enter_value" xml:space="preserve">
+    <value>输入数值</value>
+  </data>
+  <data name="feature_additional_games" xml:space="preserve">
+    <value>额外闪卡游戏</value>
+  </data>
+  <data name="feature_early_access" xml:space="preserve">
+    <value>提前访问新功能</value>
+  </data>
+  <data name="feature_element_notes" xml:space="preserve">
+    <value>元素笔记</value>
+  </data>
+  <data name="feature_element_overview" xml:space="preserve">
+    <value>元素概览</value>
+  </data>
+  <data name="feature_hazard_materials" xml:space="preserve">
+    <value>危险材料</value>
+  </data>
+  <data name="feature_poisson_sound" xml:space="preserve">
+    <value>泊松常数，声速</value>
+  </data>
+  <data name="feature_poisson_table" xml:space="preserve">
+    <value>泊松比表</value>
+  </data>
+  <data name="feature_save_calculations" xml:space="preserve">
+    <value>保存计算</value>
+  </data>
+  <data name="feature_save_unit_converter" xml:space="preserve">
+    <value>在单位换算器中保存</value>
+  </data>
+  <data name="feature_sixty_lives" xml:space="preserve">
+    <value>闪卡中 60 点生命值</value>
+  </data>
+  <data name="feature_unlimited_lives" xml:space="preserve">
+    <value>闪卡无限生命</value>
+  </data>
+  <data name="feature_young_bulk_shear" xml:space="preserve">
+    <value>杨氏模量、体积模量、剪切模量</value>
+  </data>
+  <data name="flashcards_pro_pitch" xml:space="preserve">
+    <value>解锁 'Atomic - Periodic Table' 的全部功能：所有学习游戏与无限生命值。</value>
+  </data>
+  <data name="flashcards_quiz_completed" xml:space="preserve">
+    <value>测验完成</value>
+  </data>
+  <data name="flashcards_start" xml:space="preserve">
+    <value>开始闪卡</value>
+  </data>
+  <data name="info_about" xml:space="preserve">
+    <value>关于 %1$s：</value>
+  </data>
+  <data name="ionization_for" xml:space="preserve">
+    <value>%1$s 的电离能</value>
+  </data>
+  <data name="label_all" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="label_categories" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="label_copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="label_correct_answer" xml:space="preserve">
+    <value>正确答案：</value>
+  </data>
+  <data name="label_detail_view" xml:space="preserve">
+    <value>详细视图</value>
+  </data>
+  <data name="label_detailed_info" xml:space="preserve">
+    <value>更多信息</value>
+  </data>
+  <data name="label_details" xml:space="preserve">
+    <value>详情</value>
+  </data>
   <data name="label_electrons" xml:space="preserve">
-    <value>电子：</value>
+    <value>电子</value>
+  </data>
+  <data name="label_features" xml:space="preserve">
+    <value>功能</value>
+  </data>
+  <data name="label_hide_info" xml:space="preserve">
+    <value>隐藏信息</value>
+  </data>
+  <data name="label_learn_more" xml:space="preserve">
+    <value>了解更多</value>
+  </data>
+  <data name="label_lives" xml:space="preserve">
+    <value>生命值</value>
+  </data>
+  <data name="label_mass_colon" xml:space="preserve">
+    <value>质量：</value>
+  </data>
+  <data name="label_more_info" xml:space="preserve">
+    <value>更多信息</value>
+  </data>
+  <data name="label_most_common_isotope" xml:space="preserve">
+    <value>最常见同位素：</value>
+  </data>
+  <data name="label_notes" xml:space="preserve">
+    <value>笔记</value>
+  </data>
+  <data name="label_purchase" xml:space="preserve">
+    <value>购买</value>
+  </data>
+  <data name="label_remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="label_show_info" xml:space="preserve">
+    <value>显示信息</value>
+  </data>
+  <data name="label_your_answer" xml:space="preserve">
+    <value>你的答案：</value>
+  </data>
+  <data name="loading_progress" xml:space="preserve">
+    <value>加载中：%1$s/%2$s</value>
   </data>
   <data name="nav_constants" xml:space="preserve">
     <value>常数表</value>
@@ -55,6 +199,66 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>溶解度表</value>
+  </data>
+  <data name="nuclide_table_info" xml:space="preserve">
+    <value>核素表说明</value>
+  </data>
+  <data name="ph_bromothymol_desc" xml:space="preserve">
+    <value>又称溴百里酚磺酞（BTB）</value>
+  </data>
+  <data name="ph_universal_desc" xml:space="preserve">
+    <value>由多种化合物组成的溶液</value>
+  </data>
+  <data name="ph_universal_indicator" xml:space="preserve">
+    <value>万能指示剂</value>
+  </data>
+  <data name="poisson_ratio_for" xml:space="preserve">
+    <value>%1$s 的泊松比：</value>
+  </data>
+  <data name="pro_additional_features" xml:space="preserve">
+    <value>更多功能</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>额外表格</value>
+  </data>
+  <data name="pro_all_free_features" xml:space="preserve">
+    <value>全部免费功能</value>
+  </data>
+  <data name="pro_all_pro_features" xml:space="preserve">
+    <value>全部 PRO 功能</value>
+  </data>
+  <data name="pro_card_free_tagline" xml:space="preserve">
+    <value>适合基本使用。</value>
+  </data>
+  <data name="pro_card_free_title" xml:space="preserve">
+    <value>免费版</value>
+  </data>
+  <data name="pro_card_pro_tagline" xml:space="preserve">
+    <value>解锁进阶数据。</value>
+  </data>
+  <data name="pro_card_proplus_tagline" xml:space="preserve">
+    <value>解锁进阶数据，并在所有平台上使用。</value>
+  </data>
+  <data name="pro_compare_subtitle" xml:space="preserve">
+    <value>轻松比较各版本的功能差异</value>
+  </data>
+  <data name="pro_compare_title" xml:space="preserve">
+    <value>按版本比较功能</value>
+  </data>
+  <data name="pro_flashcards_and_lives" xml:space="preserve">
+    <value>更多闪卡与生命值</value>
+  </data>
+  <data name="pro_most_popular" xml:space="preserve">
+    <value>最受欢迎</value>
+  </data>
+  <data name="pro_state_current" xml:space="preserve">
+    <value>当前版本</value>
+  </data>
+  <data name="pro_state_upgraded" xml:space="preserve">
+    <value>已升级到 PRO+</value>
+  </data>
+  <data name="search_placeholder" xml:space="preserve">
+    <value>搜索...</value>
   </data>
   <data name="settings_android_desc" xml:space="preserve">
     <value>在移动设备上下载应用，随时随地查看全部数据</value>
@@ -92,6 +296,18 @@
   <data name="settings_theme_title" xml:space="preserve">
     <value>主题</value>
   </data>
+  <data name="solubility_decomposed" xml:space="preserve">
+    <value>-：遇水分解</value>
+  </data>
+  <data name="solubility_insoluble" xml:space="preserve">
+    <value>I：不溶</value>
+  </data>
+  <data name="solubility_slightly" xml:space="preserve">
+    <value>Ss：微溶</value>
+  </data>
+  <data name="solubility_soluble" xml:space="preserve">
+    <value>S：可溶</value>
+  </data>
   <data name="ultimate_badge" xml:space="preserve">
     <value>全部平台</value>
   </data>
@@ -108,5 +324,11 @@
   </data>
   <data name="ultimate_description" xml:space="preserve">
     <value>在 Windows 和 Android 上享有 PRO+，一次购买。</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Ultimate 升级</value>
+  </data>
+  <data name="value_range" xml:space="preserve">
+    <value>取值范围：%1$s - %2$s</value>
   </data>
 </root>

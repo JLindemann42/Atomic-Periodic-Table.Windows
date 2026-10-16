@@ -38,10 +38,10 @@
 
             <Border MaxWidth="1800">
                 <StackPanel x:Name="GeologyToolBar" Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,12" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <DropDownButton Content="Categories">
+                    <DropDownButton Content="{loc:Str Key=label_categories}">
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
+                                <MenuFlyoutItem Text="{loc:Str Key=label_all}" Click="OnClearFilterSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=activity_geology_mineral}" Click="OnDisplayModeSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=chip_rocks}" Click="OnDisplayModeSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=chip_soils}" Click="OnDisplayModeSelected" />
@@ -52,7 +52,7 @@
 
                     <TextBox x:Name="SearchBox"
                      Margin="12,0,0,0"
-                     PlaceholderText="Search Constants..."
+                     PlaceholderText="{loc:Str Key=search_placeholder}"
                      Width="240"
                      TextChanged="SearchBox_TextChanged"/>
                 </StackPanel>
@@ -134,7 +134,7 @@
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
-                                        <TextBlock Text="Details"
+                                        <TextBlock Text="{loc:Str Key=label_details}"
                                                FontSize="12"
                                                Margin="0,0,12,0.5"
                                                VerticalAlignment="Center"

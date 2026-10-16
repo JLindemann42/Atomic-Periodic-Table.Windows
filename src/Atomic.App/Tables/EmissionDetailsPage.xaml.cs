@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using Atomic.Core.Localization;
 
 
 namespace Atomic.App.Tables
@@ -22,7 +23,7 @@ namespace Atomic.App.Tables
 
             if (e.Parameter is Emission selectedEmission)
             {
-                EmissionTitle.Text = $"Emission Spectrum of {selectedEmission.Name}:";
+                EmissionTitle.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.emission_spectrum_of, selectedEmission.Name);
                 EmissionImage.Source = new BitmapImage(new Uri(selectedEmission.EmissionImageUrl));
             }
 

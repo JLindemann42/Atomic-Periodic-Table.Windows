@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using Atomic.Core.Localization;
 
 
 namespace Atomic.App.Tables
@@ -30,7 +31,7 @@ namespace Atomic.App.Tables
 
             if (e.Parameter is Equation selectedEquation)
             {
-                FormulasTitle.Text = $"Info about {selectedEquation.Name}:";
+                FormulasTitle.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.info_about, selectedEquation.Name);
                 EquationImage.Source = new BitmapImage(new Uri($"ms-appx:///Equations/{selectedEquation.Image}.png"));
                 FormulasDetails.Text = selectedEquation.Description;
             }

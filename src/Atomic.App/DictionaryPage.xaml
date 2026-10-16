@@ -11,10 +11,10 @@
     <Grid Background="Transparent" VerticalAlignment="Top">
         <!-- Top Section for DropDownButton -->
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="54,12,0,0" Grid.Row="0" MaxWidth="1742">
-            <DropDownButton Content="Categories">
+            <DropDownButton Content="{loc:Str Key=label_categories}">
                 <DropDownButton.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
+                        <MenuFlyoutItem Text="{loc:Str Key=label_all}" Click="OnClearFilterSelected" />
                         <MenuFlyoutItem Text="{loc:Str Key=chip_chemistry}" Click="OnDisplayModeSelected" />
                         <MenuFlyoutItem Text="{loc:Str Key=chip_physics}" Click="OnDisplayModeSelected" />
                         <MenuFlyoutItem Text="{loc:Str Key=chip_reactions}" Click="OnDisplayModeSelected" />
@@ -24,7 +24,7 @@
             </DropDownButton>
             <TextBox x:Name="SearchBox"
                      Margin="12,0,0,0"
-                     PlaceholderText="Search dictionary..."
+                     PlaceholderText="{loc:Str Key=search_placeholder}"
                      Width="240"            
                      TextChanged="OnSearchBoxTextChanged"/>
         </StackPanel>
@@ -77,7 +77,7 @@
                     Height="48"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Stretch"/>
-                                    <HyperlinkButton Content="Learn more"
+                                    <HyperlinkButton Content="{loc:Str Key=label_learn_more}"
                              NavigateUri="{x:Bind Url}"
                              HorizontalAlignment="Right"
                              VerticalAlignment="Bottom"

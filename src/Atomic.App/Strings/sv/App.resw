@@ -41,8 +41,152 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="chip_electricity" xml:space="preserve">
+    <value>Elektricitet</value>
+  </data>
+  <data name="chip_magnetism" xml:space="preserve">
+    <value>Magnetism och induktion</value>
+  </data>
+  <data name="chip_mechanics" xml:space="preserve">
+    <value>Mekanik</value>
+  </data>
+  <data name="chip_nuclear_physics" xml:space="preserve">
+    <value>Kärnfysik</value>
+  </data>
+  <data name="chip_wavelengths" xml:space="preserve">
+    <value>Våglängder</value>
+  </data>
+  <data name="element_notes_title" xml:space="preserve">
+    <value>Anteckningar för %1$s</value>
+  </data>
+  <data name="emission_spectrum_of" xml:space="preserve">
+    <value>Emissionsspektrum för %1$s:</value>
+  </data>
+  <data name="emission_wavelength_range" xml:space="preserve">
+    <value>Våglängdsområde: 380-720 nm</value>
+  </data>
+  <data name="emission_wavelength_vacuum" xml:space="preserve">
+    <value>Våglängd i: Vakuum</value>
+  </data>
+  <data name="enter_compound" xml:space="preserve">
+    <value>Ange förening...</value>
+  </data>
+  <data name="enter_value" xml:space="preserve">
+    <value>Ange värde</value>
+  </data>
+  <data name="feature_additional_games" xml:space="preserve">
+    <value>Ytterligare kortspel</value>
+  </data>
+  <data name="feature_early_access" xml:space="preserve">
+    <value>Tidig tillgång till nya funktioner</value>
+  </data>
+  <data name="feature_element_notes" xml:space="preserve">
+    <value>Elementanteckningar</value>
+  </data>
+  <data name="feature_element_overview" xml:space="preserve">
+    <value>Elementöversikt</value>
+  </data>
+  <data name="feature_hazard_materials" xml:space="preserve">
+    <value>Farliga material</value>
+  </data>
+  <data name="feature_poisson_sound" xml:space="preserve">
+    <value>Poissons konstanter, ljudhastighet</value>
+  </data>
+  <data name="feature_poisson_table" xml:space="preserve">
+    <value>Poissons kvottabell</value>
+  </data>
+  <data name="feature_save_calculations" xml:space="preserve">
+    <value>Spara beräkningar</value>
+  </data>
+  <data name="feature_save_unit_converter" xml:space="preserve">
+    <value>Spara i enhetsomvandlaren</value>
+  </data>
+  <data name="feature_sixty_lives" xml:space="preserve">
+    <value>60 liv i flashcards</value>
+  </data>
+  <data name="feature_unlimited_lives" xml:space="preserve">
+    <value>Obegränsade liv i flashcards</value>
+  </data>
+  <data name="feature_young_bulk_shear" xml:space="preserve">
+    <value>Youngs modul, bulkmodul, skjuvmodul</value>
+  </data>
+  <data name="flashcards_pro_pitch" xml:space="preserve">
+    <value>Lås upp allt i 'Atomic - Periodiska systemet' med tillgång till alla lärspel och obegränsat med liv.</value>
+  </data>
+  <data name="flashcards_quiz_completed" xml:space="preserve">
+    <value>Quiz slutfört</value>
+  </data>
+  <data name="flashcards_start" xml:space="preserve">
+    <value>Starta flashcard</value>
+  </data>
+  <data name="info_about" xml:space="preserve">
+    <value>Om %1$s:</value>
+  </data>
+  <data name="ionization_for" xml:space="preserve">
+    <value>Joniseringsenergier för %1$s</value>
+  </data>
+  <data name="label_all" xml:space="preserve">
+    <value>Alla</value>
+  </data>
+  <data name="label_categories" xml:space="preserve">
+    <value>Kategorier</value>
+  </data>
+  <data name="label_copy" xml:space="preserve">
+    <value>Kopiera</value>
+  </data>
+  <data name="label_correct_answer" xml:space="preserve">
+    <value>Rätt svar:</value>
+  </data>
+  <data name="label_detail_view" xml:space="preserve">
+    <value>Detaljvy</value>
+  </data>
+  <data name="label_detailed_info" xml:space="preserve">
+    <value>Mer information</value>
+  </data>
+  <data name="label_details" xml:space="preserve">
+    <value>Detaljer</value>
+  </data>
   <data name="label_electrons" xml:space="preserve">
     <value>Elektroner</value>
+  </data>
+  <data name="label_features" xml:space="preserve">
+    <value>Funktioner</value>
+  </data>
+  <data name="label_hide_info" xml:space="preserve">
+    <value>Dölj info</value>
+  </data>
+  <data name="label_learn_more" xml:space="preserve">
+    <value>Läs mer</value>
+  </data>
+  <data name="label_lives" xml:space="preserve">
+    <value>Liv</value>
+  </data>
+  <data name="label_mass_colon" xml:space="preserve">
+    <value>Massa:</value>
+  </data>
+  <data name="label_more_info" xml:space="preserve">
+    <value>Mer information</value>
+  </data>
+  <data name="label_most_common_isotope" xml:space="preserve">
+    <value>Vanligaste isotopen:</value>
+  </data>
+  <data name="label_notes" xml:space="preserve">
+    <value>Anteckningar</value>
+  </data>
+  <data name="label_purchase" xml:space="preserve">
+    <value>Köp</value>
+  </data>
+  <data name="label_remove" xml:space="preserve">
+    <value>Ta bort</value>
+  </data>
+  <data name="label_show_info" xml:space="preserve">
+    <value>Visa info</value>
+  </data>
+  <data name="label_your_answer" xml:space="preserve">
+    <value>Ditt svar:</value>
+  </data>
+  <data name="loading_progress" xml:space="preserve">
+    <value>Laddar: %1$s/%2$s</value>
   </data>
   <data name="nav_constants" xml:space="preserve">
     <value>Konstanttabell</value>
@@ -55,6 +199,66 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>Löslighetstabell</value>
+  </data>
+  <data name="nuclide_table_info" xml:space="preserve">
+    <value>Om nuklidtabellen</value>
+  </data>
+  <data name="ph_bromothymol_desc" xml:space="preserve">
+    <value>Kallas även bromtymolsulfonftalein och BTB</value>
+  </data>
+  <data name="ph_universal_desc" xml:space="preserve">
+    <value>En lösning av flera föreningar</value>
+  </data>
+  <data name="ph_universal_indicator" xml:space="preserve">
+    <value>Universalindikator</value>
+  </data>
+  <data name="poisson_ratio_for" xml:space="preserve">
+    <value>Poissons tal för %1$s:</value>
+  </data>
+  <data name="pro_additional_features" xml:space="preserve">
+    <value>Fler funktioner</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>Ytterligare tabeller</value>
+  </data>
+  <data name="pro_all_free_features" xml:space="preserve">
+    <value>Alla gratisfunktioner</value>
+  </data>
+  <data name="pro_all_pro_features" xml:space="preserve">
+    <value>Alla PRO-funktioner</value>
+  </data>
+  <data name="pro_card_free_tagline" xml:space="preserve">
+    <value>Perfekt för grundläggande åtkomst.</value>
+  </data>
+  <data name="pro_card_free_title" xml:space="preserve">
+    <value>Gratisversion</value>
+  </data>
+  <data name="pro_card_pro_tagline" xml:space="preserve">
+    <value>Lås upp avancerade data.</value>
+  </data>
+  <data name="pro_card_proplus_tagline" xml:space="preserve">
+    <value>Lås upp avancerade data och åtkomst på alla plattformar.</value>
+  </data>
+  <data name="pro_compare_subtitle" xml:space="preserve">
+    <value>Jämför enkelt vad de olika versionerna innehåller</value>
+  </data>
+  <data name="pro_compare_title" xml:space="preserve">
+    <value>Jämför funktioner mellan versioner</value>
+  </data>
+  <data name="pro_flashcards_and_lives" xml:space="preserve">
+    <value>Fler flashcards och liv</value>
+  </data>
+  <data name="pro_most_popular" xml:space="preserve">
+    <value>Mest populär</value>
+  </data>
+  <data name="pro_state_current" xml:space="preserve">
+    <value>Nuvarande version</value>
+  </data>
+  <data name="pro_state_upgraded" xml:space="preserve">
+    <value>Uppgraderad till PRO+</value>
+  </data>
+  <data name="search_placeholder" xml:space="preserve">
+    <value>Sök...</value>
   </data>
   <data name="settings_android_desc" xml:space="preserve">
     <value>Ladda ner appen till dina mobila enheter för att nå all data överallt</value>
@@ -92,6 +296,18 @@
   <data name="settings_theme_title" xml:space="preserve">
     <value>Teman</value>
   </data>
+  <data name="solubility_decomposed" xml:space="preserve">
+    <value>-: Sönderdelas av vatten</value>
+  </data>
+  <data name="solubility_insoluble" xml:space="preserve">
+    <value>I: Olöslig</value>
+  </data>
+  <data name="solubility_slightly" xml:space="preserve">
+    <value>Ss: Svagt löslig</value>
+  </data>
+  <data name="solubility_soluble" xml:space="preserve">
+    <value>S: Löslig</value>
+  </data>
   <data name="ultimate_badge" xml:space="preserve">
     <value>Alla plattformar</value>
   </data>
@@ -108,5 +324,11 @@
   </data>
   <data name="ultimate_description" xml:space="preserve">
     <value>PRO+ på Windows och Android, köpt en gång.</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Ultimate-uppgradering</value>
+  </data>
+  <data name="value_range" xml:space="preserve">
+    <value>Värdeintervall: %1$s - %2$s</value>
   </data>
 </root>

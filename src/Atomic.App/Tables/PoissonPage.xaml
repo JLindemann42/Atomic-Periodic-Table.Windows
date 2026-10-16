@@ -37,10 +37,10 @@
         </Grid.RowDefinitions>
             <Border MaxWidth="1800">
                 <StackPanel x:Name="PoissonToolBar" Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,12" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <DropDownButton Content="Categories">
+                    <DropDownButton Content="{loc:Str Key=label_categories}">
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Text="All" Click="OnClearFilterSelected" />
+                                <MenuFlyoutItem Text="{loc:Str Key=label_all}" Click="OnClearFilterSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=activity_geology_rock}" Click="OnDisplayModeSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=activity_geology_soil}" Click="OnDisplayModeSelected" />
                                 <MenuFlyoutItem Text="{loc:Str Key=activity_geology_mineral}" Click="OnDisplayModeSelected" />
@@ -51,7 +51,7 @@
 
                     <TextBox x:Name="SearchBox"
                      Margin="12,0,0,0"
-                     PlaceholderText="Search Poisson's Ratios..."
+                     PlaceholderText="{loc:Str Key=search_placeholder}"
                      Width="240"
                      TextChanged="SearchBox_TextChanged"/>
                 </StackPanel>
@@ -159,7 +159,7 @@
         </Grid>
         <!-- Message and Button if user does NOT have PRO -->
         <StackPanel x:Name="NoProContent" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="This feature requires PRO version."
+            <TextBlock Text="{loc:Str Key=requires_pro}"
                        FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
             <Button Content="{loc:Str Key=get_pro_title}"
                     Click="OpenProPage_Click"

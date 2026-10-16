@@ -2,6 +2,7 @@
     x:Class="Atomic.App.IsotopePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="using:Atomic.App.Localization"
     xmlns:local="using:Atomic.App"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -37,7 +38,7 @@
         <!-- Search Box -->
         <Border MaxWidth="1800">
             <TextBox x:Name="SearchBox"
-                PlaceholderText="Search Isotopes..."
+                PlaceholderText="{loc:Str Key=search_placeholder}"
                 Margin="2,0,0,12"
                 TextChanged="SearchBox_TextChanged"
                 Width="300"

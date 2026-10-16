@@ -24,6 +24,7 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="56,12,56,0">
+
             <Grid MinWidth="600" MaxWidth="1748" Margin="0,12">  
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -45,13 +46,13 @@
                         </Border.Shadow>
 
                         <StackPanel>
-                            <TextBlock Text="Free Version" FontSize="20" FontWeight="Bold" Margin="0,12,0,10"/>
-                            <TextBlock Text="Perfect for basic access." FontSize="14" Margin="0,0,0,10"/>
+                            <TextBlock Text="{loc:Str Key=pro_card_free_title}" FontSize="20" FontWeight="Bold" Margin="0,12,0,10"/>
+                            <TextBlock Text="{loc:Str Key=pro_card_free_tagline}" FontSize="14" Margin="0,0,0,10"/>
                             <TextBlock x:Name="FreePrice" Text="{loc:Str Key=ai_free_user}" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
                             <Button x:Name="FreeButton" Content="{loc:Str Key=current_version}" Style="{StaticResource AccentButtonStyle}" Margin="0,15,0,10" HorizontalAlignment="Stretch" IsEnabled="False"/>
-                            <TextBlock Text="• Element Overview" />
-                            <TextBlock Text="• Isotopes" />
-                            <TextBlock Text="• Dictionary" />
+                            <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=feature_element_overview}"/></TextBlock>
+                            <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=iso}"/></TextBlock>
+                            <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=Dictionary}"/></TextBlock>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -78,12 +79,12 @@
                     Padding="20">
                                 <StackPanel>
                                     <TextBlock x:Name="Pro" Text="{loc:Str Key=pro_title}" FontSize="20" FontWeight="Bold" Margin="0,12,0,10"/>
-                                    <TextBlock Text="Unlock advanced data." FontSize="14" Margin="0,0,0,10"/>
+                                    <TextBlock Text="{loc:Str Key=pro_card_pro_tagline}" FontSize="14" Margin="0,0,0,10"/>
                                     <TextBlock x:Name="ProPrice" Text="---" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
-                                    <Button x:Name="BuyProButton" Content="Purchase" Margin="0,15,0,10" Style="{StaticResource AccentButtonStyle}" Click="BuyProVersion_Click" HorizontalAlignment="Stretch"/>
-                                    <TextBlock Text="• All Free features" />
-                                    <TextBlock Text="• Additional Tables" />
-                                    <TextBlock Text="• Additional Features" />
+                                    <Button x:Name="BuyProButton" Content="{loc:Str Key=label_purchase}" Margin="0,15,0,10" Style="{StaticResource AccentButtonStyle}" Click="BuyProVersion_Click" HorizontalAlignment="Stretch"/>
+                                    <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=pro_all_free_features}"/></TextBlock>
+                                    <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=pro_additional_tables}"/></TextBlock>
+                                    <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=pro_additional_features}"/></TextBlock>
                                 </StackPanel>
                             </Border>
                         </Border>
@@ -95,7 +96,7 @@
                 Margin="12"
                 Padding="8,4"
                 CornerRadius="10">
-                            <TextBlock Text="Most popular"
+                            <TextBlock Text="{loc:Str Key=pro_most_popular}"
                        Foreground="White"
                        FontSize="12"
                        FontWeight="Bold"
@@ -122,12 +123,12 @@
 
                             <StackPanel>
                                 <TextBlock x:Name="ProPlus" Text="{loc:Str Key=pro_plus_version}" FontSize="20" FontWeight="Bold" Margin="0,12,0,10"/>
-                                <TextBlock Text="Unlock advanced data and access to all platforms." FontSize="14" Margin="0,0,0,10"/>
+                                <TextBlock Text="{loc:Str Key=pro_card_proplus_tagline}" FontSize="14" Margin="0,0,0,10"/>
                                 <TextBlock x:Name="ProPlusPrice" Text="---" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
-                                <Button x:Name="BuyProPlusButton" Content="Purchase" Margin="0,15,0,10" Style="{StaticResource AccentButtonStyle}" Click="BuyProPlusVersion_Click" HorizontalAlignment="Stretch"/>
-                                <TextBlock Text="• All PRO features" />
-                                <TextBlock Text="• Additional flashcards and lives" />
-                                <TextBlock Text="• Early access to DEV features" />
+                                <Button x:Name="BuyProPlusButton" Content="{loc:Str Key=label_purchase}" Margin="0,15,0,10" Style="{StaticResource AccentButtonStyle}" Click="BuyProPlusVersion_Click" HorizontalAlignment="Stretch"/>
+                                <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=pro_all_pro_features}"/></TextBlock>
+                                <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=pro_flashcards_and_lives}"/></TextBlock>
+                                <TextBlock ><Run Text="• "/><Run Text="{loc:Str Key=feature_early_access}"/></TextBlock>
    
                             </StackPanel>
                         </Border>
@@ -223,13 +224,13 @@
                 <StackPanel>
 
                     <!-- Title -->
-                    <TextBlock Text="Compare features by versions"
+                    <TextBlock Text="{loc:Str Key=pro_compare_title}"
                FontSize="20"
                FontWeight="Bold"
                Margin="20,20,0,0"
                HorizontalAlignment="Left"
                Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="Easily compare the different features of different versions" FontWeight="Normal" FontSize="14" HorizontalAlignment="Left" Margin="20,10,0,10"/>
+                    <TextBlock Text="{loc:Str Key=pro_compare_subtitle}" FontWeight="Normal" FontSize="14" HorizontalAlignment="Left" Margin="20,10,0,10"/>
 
                     <!-- Header Row -->
                     <Grid Grid.ColumnSpan="3" Margin="0,0,0,10">
@@ -239,7 +240,7 @@
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Feature" Grid.Column="0" FontWeight="SemiBold" Margin="20,0,0,0"/>
+                        <TextBlock Text="{loc:Str Key=label_features}" Grid.Column="0" FontWeight="SemiBold" Margin="20,0,0,0"/>
                         <TextBlock Text="{loc:Str Key=ai_free_user}" Grid.Column="1" TextAlignment="Center" FontWeight="SemiBold"/>
                         <TextBlock Text="{loc:Str Key=ai_pro_user}" Grid.Column="2" TextAlignment="Center" FontWeight="SemiBold"/>
                         <TextBlock Text="PRO+" Grid.Column="3" TextAlignment="Center" FontWeight="SemiBold"/>

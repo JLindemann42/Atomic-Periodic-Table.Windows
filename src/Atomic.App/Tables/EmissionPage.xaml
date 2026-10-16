@@ -39,7 +39,7 @@
             <!-- Search Box -->
             <Border MaxWidth="1800" x:Name="EmissionToolBar">
                 <TextBox x:Name="SearchBox"
-                     PlaceholderText="Search Emission Spectrums..."
+                     PlaceholderText="{loc:Str Key=search_placeholder}"
                      Margin="0,0,0,12"
                      TextChanged="SearchBox_TextChanged"
                      Width="300"
@@ -126,7 +126,7 @@
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
-                                        <TextBlock Text="Detail View"
+                                        <TextBlock Text="{loc:Str Key=label_detail_view}"
                                                FontSize="12"
                                                Margin="0,0,12,0.5"
                                                VerticalAlignment="Center"

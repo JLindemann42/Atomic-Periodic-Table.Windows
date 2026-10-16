@@ -41,8 +41,152 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="chip_electricity" xml:space="preserve">
+    <value>Elettricità</value>
+  </data>
+  <data name="chip_magnetism" xml:space="preserve">
+    <value>Magnetismo e induzione</value>
+  </data>
+  <data name="chip_mechanics" xml:space="preserve">
+    <value>Meccanica</value>
+  </data>
+  <data name="chip_nuclear_physics" xml:space="preserve">
+    <value>Fisica nucleare</value>
+  </data>
+  <data name="chip_wavelengths" xml:space="preserve">
+    <value>Lunghezze d'onda</value>
+  </data>
+  <data name="element_notes_title" xml:space="preserve">
+    <value>Note su %1$s</value>
+  </data>
+  <data name="emission_spectrum_of" xml:space="preserve">
+    <value>Spettro di emissione di %1$s:</value>
+  </data>
+  <data name="emission_wavelength_range" xml:space="preserve">
+    <value>Intervallo di lunghezze d'onda: 380-720 nm</value>
+  </data>
+  <data name="emission_wavelength_vacuum" xml:space="preserve">
+    <value>Lunghezza d'onda in: vuoto</value>
+  </data>
+  <data name="enter_compound" xml:space="preserve">
+    <value>Inserisci un composto...</value>
+  </data>
+  <data name="enter_value" xml:space="preserve">
+    <value>Inserisci un valore</value>
+  </data>
+  <data name="feature_additional_games" xml:space="preserve">
+    <value>Giochi di flashcard aggiuntivi</value>
+  </data>
+  <data name="feature_early_access" xml:space="preserve">
+    <value>Accesso anticipato a nuove funzionalità</value>
+  </data>
+  <data name="feature_element_notes" xml:space="preserve">
+    <value>Note sull'elemento</value>
+  </data>
+  <data name="feature_element_overview" xml:space="preserve">
+    <value>Panoramica elementi</value>
+  </data>
+  <data name="feature_hazard_materials" xml:space="preserve">
+    <value>Materiali pericolosi</value>
+  </data>
+  <data name="feature_poisson_sound" xml:space="preserve">
+    <value>Costanti di Poisson, velocità del suono</value>
+  </data>
+  <data name="feature_poisson_table" xml:space="preserve">
+    <value>Tabella rapporto di Poisson</value>
+  </data>
+  <data name="feature_save_calculations" xml:space="preserve">
+    <value>Salva calcoli</value>
+  </data>
+  <data name="feature_save_unit_converter" xml:space="preserve">
+    <value>Salva nel convertitore di unità</value>
+  </data>
+  <data name="feature_sixty_lives" xml:space="preserve">
+    <value>60 vite nelle flashcard</value>
+  </data>
+  <data name="feature_unlimited_lives" xml:space="preserve">
+    <value>Vite illimitate nelle flashcard</value>
+  </data>
+  <data name="feature_young_bulk_shear" xml:space="preserve">
+    <value>Modulo di Young, di compressione e di taglio</value>
+  </data>
+  <data name="flashcards_pro_pitch" xml:space="preserve">
+    <value>Sfrutta al massimo 'Atomic - Periodic Table' con tutti i giochi didattici e vite illimitate.</value>
+  </data>
+  <data name="flashcards_quiz_completed" xml:space="preserve">
+    <value>Quiz completato</value>
+  </data>
+  <data name="flashcards_start" xml:space="preserve">
+    <value>Inizia le flashcard</value>
+  </data>
+  <data name="info_about" xml:space="preserve">
+    <value>Informazioni su %1$s:</value>
+  </data>
+  <data name="ionization_for" xml:space="preserve">
+    <value>Energie di ionizzazione di %1$s</value>
+  </data>
+  <data name="label_all" xml:space="preserve">
+    <value>Tutti</value>
+  </data>
+  <data name="label_categories" xml:space="preserve">
+    <value>Categorie</value>
+  </data>
+  <data name="label_copy" xml:space="preserve">
+    <value>Copia</value>
+  </data>
+  <data name="label_correct_answer" xml:space="preserve">
+    <value>Risposta corretta:</value>
+  </data>
+  <data name="label_detail_view" xml:space="preserve">
+    <value>Vista dettagliata</value>
+  </data>
+  <data name="label_detailed_info" xml:space="preserve">
+    <value>Ulteriori informazioni</value>
+  </data>
+  <data name="label_details" xml:space="preserve">
+    <value>Dettagli</value>
+  </data>
   <data name="label_electrons" xml:space="preserve">
     <value>Elettroni</value>
+  </data>
+  <data name="label_features" xml:space="preserve">
+    <value>Caratteristiche</value>
+  </data>
+  <data name="label_hide_info" xml:space="preserve">
+    <value>Nascondi info</value>
+  </data>
+  <data name="label_learn_more" xml:space="preserve">
+    <value>Scopri di più</value>
+  </data>
+  <data name="label_lives" xml:space="preserve">
+    <value>Vite</value>
+  </data>
+  <data name="label_mass_colon" xml:space="preserve">
+    <value>Massa:</value>
+  </data>
+  <data name="label_more_info" xml:space="preserve">
+    <value>Altre info</value>
+  </data>
+  <data name="label_most_common_isotope" xml:space="preserve">
+    <value>Isotopo più comune:</value>
+  </data>
+  <data name="label_notes" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="label_purchase" xml:space="preserve">
+    <value>Acquista</value>
+  </data>
+  <data name="label_remove" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="label_show_info" xml:space="preserve">
+    <value>Mostra info</value>
+  </data>
+  <data name="label_your_answer" xml:space="preserve">
+    <value>La tua risposta:</value>
+  </data>
+  <data name="loading_progress" xml:space="preserve">
+    <value>Caricamento: %1$s/%2$s</value>
   </data>
   <data name="nav_constants" xml:space="preserve">
     <value>Tabella delle costanti</value>
@@ -55,6 +199,66 @@
   </data>
   <data name="nav_solubility" xml:space="preserve">
     <value>Tabella di solubilità</value>
+  </data>
+  <data name="nuclide_table_info" xml:space="preserve">
+    <value>Informazioni sulla tabella dei nuclidi</value>
+  </data>
+  <data name="ph_bromothymol_desc" xml:space="preserve">
+    <value>Noto anche come bromotimolsolfonftaleina e BTB</value>
+  </data>
+  <data name="ph_universal_desc" xml:space="preserve">
+    <value>Una soluzione di più composti</value>
+  </data>
+  <data name="ph_universal_indicator" xml:space="preserve">
+    <value>Indicatore universale</value>
+  </data>
+  <data name="poisson_ratio_for" xml:space="preserve">
+    <value>Coefficiente di Poisson di %1$s:</value>
+  </data>
+  <data name="pro_additional_features" xml:space="preserve">
+    <value>Funzioni aggiuntive</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>Tabelle aggiuntive</value>
+  </data>
+  <data name="pro_all_free_features" xml:space="preserve">
+    <value>Tutte le funzioni gratuite</value>
+  </data>
+  <data name="pro_all_pro_features" xml:space="preserve">
+    <value>Tutte le funzioni PRO</value>
+  </data>
+  <data name="pro_card_free_tagline" xml:space="preserve">
+    <value>Perfetto per l'accesso di base.</value>
+  </data>
+  <data name="pro_card_free_title" xml:space="preserve">
+    <value>Versione gratuita</value>
+  </data>
+  <data name="pro_card_pro_tagline" xml:space="preserve">
+    <value>Sblocca dati avanzati.</value>
+  </data>
+  <data name="pro_card_proplus_tagline" xml:space="preserve">
+    <value>Sblocca dati avanzati e l'accesso su tutte le piattaforme.</value>
+  </data>
+  <data name="pro_compare_subtitle" xml:space="preserve">
+    <value>Confronta facilmente cosa offre ogni versione</value>
+  </data>
+  <data name="pro_compare_title" xml:space="preserve">
+    <value>Confronta le funzioni per versione</value>
+  </data>
+  <data name="pro_flashcards_and_lives" xml:space="preserve">
+    <value>Più flashcard e vite</value>
+  </data>
+  <data name="pro_most_popular" xml:space="preserve">
+    <value>Il più popolare</value>
+  </data>
+  <data name="pro_state_current" xml:space="preserve">
+    <value>Versione attuale</value>
+  </data>
+  <data name="pro_state_upgraded" xml:space="preserve">
+    <value>Aggiornato a PRO+</value>
+  </data>
+  <data name="search_placeholder" xml:space="preserve">
+    <value>Cerca...</value>
   </data>
   <data name="settings_android_desc" xml:space="preserve">
     <value>Scarica l'app sui tuoi dispositivi mobili per accedere a tutti i dati ovunque</value>
@@ -92,6 +296,18 @@
   <data name="settings_theme_title" xml:space="preserve">
     <value>Temi</value>
   </data>
+  <data name="solubility_decomposed" xml:space="preserve">
+    <value>-: Decomposto dall'acqua</value>
+  </data>
+  <data name="solubility_insoluble" xml:space="preserve">
+    <value>I: Insolubile</value>
+  </data>
+  <data name="solubility_slightly" xml:space="preserve">
+    <value>Ss: Leggermente solubile</value>
+  </data>
+  <data name="solubility_soluble" xml:space="preserve">
+    <value>S: Solubile</value>
+  </data>
   <data name="ultimate_badge" xml:space="preserve">
     <value>Tutte le piattaforme</value>
   </data>
@@ -108,5 +324,11 @@
   </data>
   <data name="ultimate_description" xml:space="preserve">
     <value>PRO+ su Windows e Android, con un solo acquisto.</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Upgrade a Ultimate</value>
+  </data>
+  <data name="value_range" xml:space="preserve">
+    <value>Intervallo di valori: %1$s - %2$s</value>
   </data>
 </root>
