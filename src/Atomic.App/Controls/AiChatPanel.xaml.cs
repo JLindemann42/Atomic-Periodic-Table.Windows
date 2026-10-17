@@ -31,14 +31,15 @@ namespace Atomic.App.Controls
     /// </summary>
     public sealed partial class AiChatPanel : UserControl
     {
-        /// <summary>Sheet height as a fraction of the window, before the user drags it.</summary>
+        /// <summary>Default height for AI Chat pa nel.</summary>
         private const double DefaultHeightFraction = 0.6;
 
-        /// <summary>The tallest it can be dragged, so the scrim is always visibly behind it.</summary>
+        /// <summary>The tallest AI Chat panel can be dragged</summary>
         private const double MaxHeightFraction = 0.9;
 
+        /// <summary>Minimum height for AI Chat panel, to make sure content is visible.</summary>
         private const double MinSheetHeight = 260;
-        private static readonly TimeSpan SlideDuration = TimeSpan.FromMilliseconds(200);
+        private static readonly TimeSpan SlideDuration = TimeSpan.FromMilliseconds(150);
 
         private double _sheetHeight;
         private bool _isOpen;
