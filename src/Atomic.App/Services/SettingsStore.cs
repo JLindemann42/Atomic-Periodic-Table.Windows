@@ -38,7 +38,6 @@ namespace Atomic.App.Services
 
             /// <summary>Ultimate: PRO+ on every platform, bought once. See ProPage.</summary>
             public const string HasUltimate = "HasUltimate";
-            public const string UseMockStore = "UseMockStore";
 
             /// <summary>The phone's tier, as last reported by the account document. Read-only here.</summary>
             public const string AndroidTier = "AndroidTier";
@@ -141,13 +140,6 @@ namespace Atomic.App.Services
         {
             get => Get(Keys.IsProPlusUser, false);
             set => Set(Keys.IsProPlusUser, value);
-        }
-
-        /// <summary>Developer-only toggle to simulate Store responses when running unpackaged.</summary>
-        public static bool UseMockStore
-        {
-            get => Get(Keys.UseMockStore, false);
-            set => Set(Keys.UseMockStore, value);
         }
 
         /// <summary>

@@ -55,7 +55,6 @@ namespace Atomic.App.Navigation
             new() { Tag = "FlashcardsPage",    PageType = typeof(FlashCardsPage),    TitleKey = "flashcards_title",     Group = NavGroup.Tools, Glyph = "" },
             new() { Tag = "EquationBalancerPage", PageType = typeof(EquationBalancerPage), TitleKey = "balancer_tool_title",      Group = NavGroup.Tools, Symbol = Microsoft.UI.Xaml.Controls.Symbol.Sync },
             new() { Tag = "IdealGasPage",         PageType = typeof(IdealGasPage),         TitleKey = "ideal_gas_calculator_title", Group = NavGroup.Tools, Symbol = Microsoft.UI.Xaml.Controls.Symbol.Repair },
-            new() { Tag = "DeveloperPage",        PageType = typeof(Atomic.App.Tools.DeveloperPage), TitleKey = "developer_title", Group = NavGroup.Tools, Symbol = Microsoft.UI.Xaml.Controls.Symbol.Setting },
 
             // Hidden: the WebView2 host currently points at a placeholder URL.
             new() { Tag = "BlogPage", PageType = typeof(BlogPage), TitleKey = "nav_blog", Symbol = Microsoft.UI.Xaml.Controls.Symbol.Globe },

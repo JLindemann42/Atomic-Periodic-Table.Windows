@@ -113,15 +113,15 @@ namespace Atomic.App
             // Only run once
             this.Loaded -= ProPage_Loaded;
 
-            // Developer-mode shortcut: either set environment variable ATOMIC_USE_MOCK_STORE=1
-            // or toggle the setting in Developer -> Tools to enable a mock Store experience when
-            // running unpackaged for debugging.
+            // Developer-mode shortcut: set ATOMIC_USE_MOCK_STORE=1 to get a mock Store when
+            // running unpackaged for debugging. There is no in-app toggle - the Developer page
+            // that offered one has been removed.
             try
             {
                 var env = System.Environment.GetEnvironmentVariable("ATOMIC_USE_MOCK_STORE");
-                useMockStore = string.Equals(env, "1", StringComparison.OrdinalIgnoreCase) || SettingsStore.UseMockStore;
+                useMockStore = string.Equals(env, "1", StringComparison.OrdinalIgnoreCase);
             }
-            catch { useMockStore = SettingsStore.UseMockStore; }
+            catch { useMockStore = false; }
 
             if (useMockStore)
             {
