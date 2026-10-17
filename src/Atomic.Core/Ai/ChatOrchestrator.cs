@@ -163,6 +163,12 @@ namespace Atomic.Core.Ai
             // must_defer.tsv requires the engine to decline all three; this is what answers them.
             if (Overview(message, strings, language) is { } overview) return overview;
 
+            // ---- "What happens when sodium reacts with water" -------------------------------
+            if (Reactions(message, strings) is { } reaction) return reaction;
+
+            // ---- "Which element is similar to gold" -----------------------------------------
+            if (Similarity(message, strings) is { } similar) return similar;
+
             // ---- Answers that live in the element's prose, not in a field --------------------
             // Usage, biological role and etymology. must_defer.tsv requires the engine to decline
             // these; declining is only right if something picks them up, and this is it.
@@ -205,6 +211,67 @@ namespace Atomic.Core.Ai
                 _retrieval.Localized(State.ActiveLanguage)?.Name(e.Key) is { Length: > 0 } localized
                     ? localized
                     : char.ToUpperInvariant(e.Key[0]) + e.Key[1..];
+        }
+
+        /// <summary>
+        /// What an element does when it meets water, oxygen, an acid, or another element.
+        /// </summary>
+        private ChatReply? Reactions(string message, IStringProvider strings)
+        {
+            var normalized = TextMatching.NormalizeForLookup(message);
+            if (!ElementReactions.Asks(normalized)) return null;
+
+            // Two at most: a reaction is between a pair, and the third name in a sentence is
+            // usually the product rather than a reactant.
+            var named = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 2);
+
+            // In the order the question names them, so "sodium and chlorine" is not answered
+            // back as "Chlorine and Sodium" - the resolver orders by score, not by position.
+            var records = named
+                .OrderBy(m => normalized.IndexOf(
+                    TextMatching.NormalizeForLookup(m.Matched), StringComparison.Ordinal))
+                .Select(m => _store.Element(m.Key))
+                .Where(e => e is not null)
+                .Select(e => e!)
+                .ToList();
+
+            // "What does it react with" after discussing an element is about that element.
+            if (records.Count == 0 && State.FocusElement is { } focus && _store.Element(focus) is { } inFocus)
+                records.Add(inFocus);
+
+            var text = ElementReactions.Answer(records, normalized, strings, e => Display(e, e.Key));
+            if (text is null) return null;
+
+            State.FocusElement = records[0].Key;
+            Profile.Track(records[0].Key);
+
+            return new ChatReply(text, ReplySource.Personality, [], null, Suggestions(strings, null));
+        }
+
+        /// <summary>
+        /// What an element resembles - the elements sharing its group.
+        /// </summary>
+        private ChatReply? Similarity(string message, IStringProvider strings)
+        {
+            var normalized = TextMatching.NormalizeForLookup(message);
+            if (!ElementSimilarity.Asks(normalized)) return null;
+
+            var named = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 1);
+            var key = named.Count > 0 ? named[0].Key : State.FocusElement;
+
+            // No element named and none in focus: say so rather than guessing one.
+            var target = key is null ? null : _store.Element(key);
+
+            var text = ElementSimilarity.Answer(
+                target, _store.Elements, strings, e => Display(e, e.Key));
+
+            if (target is not null)
+            {
+                State.FocusElement = target.Key;
+                Profile.Track(target.Key);
+            }
+
+            return new ChatReply(text, ReplySource.Personality, [], null, Suggestions(strings, null));
         }
 
         /// <summary>
