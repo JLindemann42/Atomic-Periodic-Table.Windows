@@ -172,6 +172,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250401001" />
   </ItemGroup>
@@ -347,7 +348,8 @@
     <AppxBundle>Never</AppxBundle>
     <AppInstallerUri>C:\Program Files\Atomic</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateThumbprint>31ABC53F3EB518340133B08F9EE04F532665900E</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>C50A1A3EE1E6474A1F1B9F94E8B52115D41A9085</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>Atomic_PeriodicTable_TemporaryKey.pfx</PackageCertificateKeyFile>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <AssemblyName>Atomic - Periodic Table</AssemblyName>
     <PlatformTarget>AnyCPU</PlatformTarget>
