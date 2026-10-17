@@ -15,7 +15,8 @@ namespace Atomic.App
 {
     public sealed partial class ProPage : Page
     {
-        private StoreContext storeContext = StoreContext.GetDefault();
+        private StoreContext? storeContext;
+        private bool useMockStore = false;
 
         private StoreProduct proProduct;
         private StoreProduct proPlusProduct;
@@ -84,12 +85,101 @@ namespace Atomic.App
         {
             this.InitializeComponent();
 
-            var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
-            InitializeWithWindow.Initialize(storeContext, hwnd);
-
+            // Defer native/Store initialization until the page is loaded. Calling into
+            // WinRT/native APIs too early during XAML activation can cause native
+            // interop failures (SEHException). Initialize on Loaded and log any
+            // exceptions so the app doesn't crash the process.
             ProGradientStoryboard.Begin();
 
-            _ = InitializeStoreAndLicensesAsync();
+            this.Loaded += ProPage_Loaded;
+        }
+
+        private static bool IsPackaged()
+        {
+            try
+            {
+                // Accessing Package.Current throws when no package identity is present.
+                var _ = global::Windows.ApplicationModel.Package.Current;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private async void ProPage_Loaded(object? sender, RoutedEventArgs e)
+        {
+            // Only run once
+            this.Loaded -= ProPage_Loaded;
+
+            // Developer-mode shortcut: either set environment variable ATOMIC_USE_MOCK_STORE=1
+            // or toggle the setting in Developer -> Tools to enable a mock Store experience when
+            // running unpackaged for debugging.
+            try
+            {
+                var env = System.Environment.GetEnvironmentVariable("ATOMIC_USE_MOCK_STORE");
+                useMockStore = string.Equals(env, "1", StringComparison.OrdinalIgnoreCase) || SettingsStore.UseMockStore;
+            }
+            catch { useMockStore = SettingsStore.UseMockStore; }
+
+            if (useMockStore)
+            {
+                EnableDeveloperMockStore();
+                return;
+            }
+
+            try
+            {
+                // If the app is packaged we can initialize StoreContext and native interop.
+                if (IsPackaged())
+                {
+                    try
+                    {
+                        storeContext = StoreContext.GetDefault();
+                    }
+                    catch (Exception ex)
+                    {
+                        Utils.ReportExtendedError(ex);
+                        storeContext = null;
+                    }
+
+                    if (App.MainWindow is null)
+                    {
+                        Utils.ReportExtendedError(new InvalidOperationException("App.MainWindow is null when initializing native window interop."));
+                    }
+                    else
+                    {
+                        var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
+                        if (hwnd == System.IntPtr.Zero)
+                        {
+                            Utils.ReportExtendedError(new InvalidOperationException("Failed to get window handle (IntPtr.Zero) for App.MainWindow."));
+                        }
+                        else if (storeContext is not null)
+                        {
+                            InitializeWithWindow.Initialize(storeContext, hwnd);
+                        }
+                    }
+                }
+                else
+                {
+                    Utils.ReportExtendedError(new InvalidOperationException("App is not running with a package identity; Store APIs are unavailable."));
+                    storeContext = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.ReportExtendedError(ex);
+            }
+
+            try
+            {
+                await InitializeStoreAndLicensesAsync();
+            }
+            catch (Exception ex)
+            {
+                Utils.ReportExtendedError(ex);
+            }
         }
 
         /// <summary>
@@ -134,15 +224,41 @@ namespace Atomic.App
         {
             ApplyUltimateStrings();
 
+            // If StoreContext is not available (unpackaged app or initialization failure),
+            // skip store calls and show default UI state.
+            if (storeContext is null)
+            {
+                storeAnswered = false;
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    ApplyPrices();
+                    ApplyUltimateOffer();
+                });
+                return;
+            }
+
             await GetProProductsAsync();
             await CheckUserLicensesAsync();
         }
 
         private async Task GetProProductsAsync()
         {
+            if (storeContext is null)
+                return;
 
             string[] filterList = new[] { "Durable" };
-            StoreProductQueryResult addOns = await storeContext.GetAssociatedStoreProductsAsync(filterList);
+            StoreProductQueryResult addOns;
+            try
+            {
+                addOns = await storeContext.GetAssociatedStoreProductsAsync(filterList);
+            }
+            catch (System.Exception ex)
+            {
+                // Capture native/interop failures (SEHException or similar) and report them
+                // so they don't terminate the process unhandled. Fail gracefully.
+                Utils.ReportExtendedError(ex);
+                return;
+            }
 
             if (addOns.ExtendedError != null)
             {
@@ -194,6 +310,29 @@ namespace Atomic.App
 
             ApplyPrices();
             ApplyUltimateOffer();
+        }
+
+        private void EnableDeveloperMockStore()
+        {
+            // Provide a lightweight, local-only substitute for Store behaviour during
+            // unpackaged development. This keeps the UI interactive without calling
+            // into WinRT Store APIs which require package identity.
+            storeAnswered = true;
+
+            // Set sample titles
+            Pro.Text = "Pro (Dev)";
+            ProPlus.Text = "Pro+ (Dev)";
+
+            // Default to free user; change as needed at runtime via developer switch.
+            SettingsStore.IsProUser = false;
+            SettingsStore.IsProPlusUser = false;
+
+            // Update UI
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                ApplyPrices();
+                ApplyUltimateOffer();
+            });
         }
 
         /// <summary>
@@ -271,6 +410,9 @@ namespace Atomic.App
         {
             try
             {
+                if (storeContext is null)
+                    return;
+
                 var appLicense = await storeContext.GetAppLicenseAsync();
 
                 bool hasProUpgrade = appLicense.AddOnLicenses.TryGetValue(ProUpgradeStoreId + "/0010", out var upgradeLicense) && upgradeLicense.IsActive;
@@ -482,15 +624,36 @@ namespace Atomic.App
 
             public static void ReportExtendedError(Exception extendedError)
             {
-                string message = extendedError.HResult == IAP_E_UNEXPECTED
-                    ? "Not properly configured"
-                    : $"ExtendedError: {extendedError.Message}";
+                int hresult = extendedError.HResult;
+                string summary = extendedError.Message;
+                string typeName = extendedError.GetType().FullName ?? "Exception";
 
-                AppNotificationManager.Default.Show(
-                    new AppNotificationBuilder()
-                        .AddText("Error")
-                        .AddText(message)
-                        .BuildNotification());
+                string message = hresult == IAP_E_UNEXPECTED
+                    ? "Not properly configured"
+                    : $"{typeName} (0x{hresult:X8}): {summary}";
+
+                // Include brief stack trace in debug output for diagnostics
+                System.Diagnostics.Debug.WriteLine($"ReportExtendedError: {message}\n{extendedError.StackTrace}");
+
+                // A reporter that throws turns a handled error into a crash. Toast registration
+                // is deliberately non-fatal - NotificationScheduler.Register swallows its own
+                // failure on an unpackaged run - so Show() can throw an SEHException from native
+                // code. Called as it is from inside catch blocks in an async void handler, that
+                // escaped everything and took the process with it: opening the PRO page reported
+                // "External component has thrown an exception".
+                try
+                {
+                    AppNotificationManager.Default.Show(
+                        new AppNotificationBuilder()
+                            .AddText("Error")
+                            .AddText(message)
+                            .BuildNotification());
+                }
+                catch (Exception notificationFailure)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"ReportExtendedError: no notification: {notificationFailure.Message}");
+                }
             }
         }
     }

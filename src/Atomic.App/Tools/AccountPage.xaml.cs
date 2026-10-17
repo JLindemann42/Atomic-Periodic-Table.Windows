@@ -37,13 +37,22 @@ namespace Atomic.App.Tools
             ApplyStrings();
         }
 
+        /// <remarks>
+        /// <para><c>async void</c> because it overrides a framework handler: an exception from any
+        /// await below has nowhere to go and takes the process with it. This signs in, reads the
+        /// credential vault and talks to Firestore, so failure is ordinary - a laptop in flight
+        /// mode is enough - and the page must still open.</para>
+        /// </remarks>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            LoadAchievements();
-            LoadStatistics();
-            await RefreshAsync();
-            await LoadAvatarAsync();
+
+            try
+            {
+                LoadAchievements();
+                LoadStatistics();
+                await RefreshAsync();
+                await LoadAvatarAsync();
 
             // Opening this page is the one moment the user is definitely looking at their sync
             // state, so it is worth being current rather than up to five minutes old.
@@ -52,6 +61,12 @@ namespace Atomic.App.Tools
                 LoadAchievements();
                 LoadStatistics();
                 await RefreshAsync();
+            }
+            }
+            catch (Exception ex)
+            {
+                // The page is already rendered; what failed is the refresh behind it.
+                System.Diagnostics.Debug.WriteLine($"AccountPage.OnNavigatedTo: {ex}");
             }
         }
 

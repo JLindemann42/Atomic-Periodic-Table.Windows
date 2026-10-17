@@ -82,7 +82,17 @@ namespace Atomic.App.Tools
                     category = categoryName;
                     break;
             }
-            await SetupGameAsync();
+            // async void: an exception from the setup below would have nowhere to go. Building a
+            // game reads the element table and the generators, so a failure is possible and must
+            // not take the process down with it.
+            try
+            {
+                await SetupGameAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LearningGamesPage.OnNavigatedTo: {ex}");
+            }
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
