@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -188,7 +188,8 @@ namespace Atomic.Core.Ai.Nlu
                     evidence.Add($"inherited {previousSet.Count} elements");
                 }
                 else if ((fieldIds.Count > 0 || ContinuesTheThread(normalized)) &&
-                         state.FocusElement is { } focus)
+                         state.FocusElement is { } focus &&
+                         !AsksForADefinition(normalized))
                 {
                     elementKeys = [focus];
                     evidence.Add($"inherited element {focus}");
@@ -1119,6 +1120,45 @@ namespace Atomic.Core.Ai.Nlu
         /// produces a cited answer to a question nobody asked. When no retriever is wired the check
         /// cannot run and the old length-only behaviour stands.</para>
         /// </summary>
+        /// <summary>
+        /// Whether this is a definitional question about a term the dictionary knows - "what is
+        /// electronegativity" rather than "what is its electronegativity".
+        /// </summary>
+        /// <remarks>
+        /// <para>Such a question names no element, so inheriting the one in focus turns it into a
+        /// property lookup and answers something nobody asked: after discussing gold, "what is
+        /// electronegativity" came back "Gold's Electronegativity is 2.54". The corpus pins it as
+        /// a DATASET_LOOKUP (ds-dict-1), and the dictionary path is guarded by <c>!hasElement</c>,
+        /// so the inherited element is exactly what shuts it out.</para>
+        ///
+        /// <para>An anaphor excludes it: "what is <i>its</i> density" is about the element in
+        /// focus and must keep inheriting. Likewise a frame with no dictionary topic behind it -
+        /// there is nothing better to fall through to.</para>
+        /// </remarks>
+        private bool AsksForADefinition(string normalized)
+        {
+            // "What is its density" is about the element in focus, not about the word.
+            if (Lexicon.ANAPHORS.Any(a => TextMatching.ContainsWord(normalized, a))) return false;
+
+            // A definition question opens with an interrogative; a follow-up opens with a
+            // connective ("and the melting point?") or is a bare noun phrase. The interrogatives
+            // are taken from DEFINITION_FRAMES rather than written out again, so the twelve
+            // languages stay in one place - the frames themselves are too specific to match on,
+            // since they carry an article ("what is a") and the bare "what is" is not among them.
+            var opener = TextMatching.SplitQueryTokens(normalized).FirstOrDefault();
+            if (string.IsNullOrEmpty(opener)) return false;
+
+            var interrogative = Lexicon.DEFINITION_FRAMES
+                .Select(f => TextMatching.SplitQueryTokens(f).FirstOrDefault())
+                .Any(w => !string.IsNullOrEmpty(w) && string.Equals(w, opener, StringComparison.Ordinal));
+            if (!interrogative) return false;
+
+            // And the thing asked about has an entry of its own. Without a better answer to fall
+            // through to, inheriting the element in focus is still the best available.
+            return _datasets.InDataset(DatasetIndex.Datasets.Dictionary)
+                .Any(r => TextMatching.ContainsWord(normalized, TextMatching.NormalizeForLookup(r.Title)));
+        }
+
         private bool ContinuesTheThread(string normalized)
         {
             // An explicit anaphor settles it. The unknown-word test exists to catch a turn that

@@ -159,6 +159,15 @@ namespace Atomic.Core.Ai
             // real answer; leaving it to the greeting responder would decline it.
             if (Reactivity(message, strings) is { } reactivity) return reactivity;
 
+            // ---- "Gold", "tell me about gold", "element 79" ----------------------------------
+            // must_defer.tsv requires the engine to decline all three; this is what answers them.
+            if (Overview(message, strings, language) is { } overview) return overview;
+
+            // ---- Answers that live in the element's prose, not in a field --------------------
+            // Usage, biological role and etymology. must_defer.tsv requires the engine to decline
+            // these; declining is only right if something picks them up, and this is it.
+            if (Narrative(message, strings, language) is { } narrative) return narrative;
+
             // ---- Everything with no grounded answer -----------------------------------------
             return Personality(message, strings, language);
         }
@@ -197,6 +206,113 @@ namespace Atomic.Core.Ai
                     ? localized
                     : char.ToUpperInvariant(e.Key[0]) + e.Key[1..];
         }
+
+        /// <summary>
+        /// An element named with nothing asked about it.
+        ///
+        /// <para>Also resolves "element 79" by atomic number, which Android does inside
+        /// <c>findElementKeyByQuery</c>: a bare number is an element reference when the query says
+        /// "element" or "atomic number", or is short enough to be nothing else.</para>
+        /// </summary>
+        private ChatReply? Overview(string message, IStringProvider strings, string language)
+        {
+            var normalized = TextMatching.NormalizeForLookup(message);
+
+            // A question that asks something specific is not a request for an overview; it has
+            // already been through the engine and been declined for its own reasons.
+            if (ElementNarrative.Detect(normalized) is not null) return null;
+
+            // The resolver already reads "element 79" as gold, so there is no separate numeric
+            // path to maintain here.
+            var named = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 2);
+            if (named.Count != 1) return null;            // none, or a comparison the engine owns
+
+            var key = named[0].Key;
+
+            // Only when the element is essentially the whole question. "Gold" and "tell me about
+            // gold" qualify; a real question that happens to name gold does not, and would have
+            // been answered by the engine anyway.
+            if (!ReadsAsAnOpening(normalized, named[0].Matched)) return null;
+
+            if (_store.Element(key) is not { } element) return null;
+
+            var text = ElementOverview.Of(element, Display(element, key), language, strings);
+            if (text is null) return null;
+
+            State.FocusElement = key;
+            Profile.Track(key);
+
+            return new ChatReply(text, ReplySource.Personality, [], null, Suggestions(strings, null));
+        }
+
+        /// <summary>
+        /// Whether the element name is effectively the whole message - the shape that means
+        /// "tell me about this" rather than a question with an element in it.
+        /// </summary>
+        private static bool ReadsAsAnOpening(string normalized, string surface)
+        {
+            var withoutElement = normalized
+                .Replace(TextMatching.NormalizeForLookup(surface), " ", StringComparison.Ordinal);
+
+            return TextMatching.SplitQueryTokens(withoutElement)
+                .Count(t => t.Trim().Length > 0 && !OpeningFrames.Contains(t, StringComparer.Ordinal)) == 0;
+        }
+
+        /// <summary>Words that carry no question of their own - "tell me about <i>gold</i>".</summary>
+        /// <remarks>
+        /// "Element" is here so that "element 79" reads as an opening: the resolver already maps
+        /// the number to gold, leaving the bare word behind, and without it the overview declined
+        /// the very query it exists to answer.
+        /// </remarks>
+        private static readonly string[] OpeningFrames =
+        [
+            "tell", "me", "about", "what", "is", "a", "an", "the", "info", "information", "on",
+            "element", "grundamne", "amne", "elemento", "elemente", "element79",
+            "beratta", "om", "vad", "ar", "erzahl", "mir", "uber", "was", "ist", "parle", "moi", "de",
+            "que", "es", "cuentame", "sobre", "dimmi", "cosa", "conte", "me", "fale",
+        ];
+
+        /// <summary>
+        /// What an element is used for, what it does in the body, where its name comes from.
+        ///
+        /// <para>Read out of the element's own description, because no stored field holds any of
+        /// it. The element comes from the question, or from the one already in focus - "what is it
+        /// used for" after asking about gold is about gold.</para>
+        /// </summary>
+        private ChatReply? Narrative(string message, IStringProvider strings, string language)
+        {
+            var normalized = TextMatching.NormalizeForLookup(message);
+            if (ElementNarrative.Detect(normalized) is not { } topic) return null;
+
+            var named = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 1);
+            var key = named.Count > 0 ? named[0].Key : State.FocusElement;
+            if (key is null) return null;
+
+            if (_store.Element(key) is not { } element) return null;
+
+            var text = ElementNarrative.Answer(
+                topic,
+                (element.Value("description") as Atomic.Core.Ai.Data.FieldValue.Text)?.Raw,
+                Display(element, key),
+                language,
+                strings,
+                (element.Value("element_discovered_name") as Atomic.Core.Ai.Data.FieldValue.Text)?.Raw,
+                (element.Value("element_year") as Atomic.Core.Ai.Data.FieldValue.Text)?.Raw);
+
+            if (text is null) return null;
+
+            // The element is now what the conversation is about, as it would be after any answer.
+            State.FocusElement = key;
+            Profile.Track(key);
+
+            return new ChatReply(text, ReplySource.Personality, [], null, Suggestions(strings, null));
+        }
+
+        /// <summary>An element's name in the reader's language.</summary>
+        private string Display(ElementRecord element, string key) =>
+            _retrieval.Localized(State.ActiveLanguage)?.Name(key) is { Length: > 0 } localized
+                ? localized
+                : char.ToUpperInvariant(key[0]) + key[1..];
 
         /// <summary>
         /// A greeting, a thank-you, a fun fact, an answer about the app itself, or an honest
