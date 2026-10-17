@@ -497,6 +497,15 @@ namespace Atomic.Core.Ai.Retrieval
             foreach (var word in words)
             {
                 if (word.Length < 4) continue;
+
+                // A continuation is not a typo. "More" is one edit from the French name for
+                // boron, "bore", and "sure" is one from the Swedish for oxygen, "syre" - so a
+                // bare "more" after a question about iron answered with boron's melting point,
+                // inheriting the field, and moved the conversation to boron for good. These words
+                // arrive constantly and name nothing, which is the worst possible thing to guess
+                // about. An exact "bore" still resolves; it never reaches this last resort.
+                if (Atomic.Core.Text.FuzzyMatch.IsAffirmative(word)) continue;
+
                 var threshold = word.Length > 6 ? 2 : 1;
                 foreach (var alias in _byLengthDescending)
                 {

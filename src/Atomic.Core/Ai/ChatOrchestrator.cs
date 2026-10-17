@@ -418,10 +418,28 @@ namespace Atomic.Core.Ai
         private ChatReply? MoreInfo(string message, IStringProvider strings, string language)
         {
             var normalized = TextMatching.NormalizeForLookup(message);
-            if (!ElementMoreInfo.Asks(normalized)) return null;
 
-            var named = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 1);
-            var key = named.Count > 0 ? named[0].Key : State.FocusElement;
+            // "Yes" continues a tour that has already started, which is the other way into this
+            // on Android. The requirement that something has been said already is theirs too, and
+            // it is what stops a bare "sure" volunteering a fact about nothing in particular.
+            var goOn = FuzzyMatch.IsAffirmative(message) && State.SharedFieldIds.Count > 0;
+
+            if (!ElementMoreInfo.Asks(normalized) && !goOn) return null;
+
+            // An affirmative is never an element, so it is not resolved as one. "Sure" is close
+            // enough to "sulfur" for the fuzzy resolver to take it, which moved the tour to a
+            // different element on the strength of the user saying yes.
+            string? key;
+            if (goOn)
+            {
+                key = State.FocusElement;
+            }
+            else
+            {
+                var named = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 1);
+                key = named.Count > 0 ? named[0].Key : State.FocusElement;
+            }
+
             if (key is null) return null;
 
             if (_store.Element(key) is not { } element) return null;

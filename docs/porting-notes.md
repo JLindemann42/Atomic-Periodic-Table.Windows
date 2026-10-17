@@ -758,3 +758,38 @@ Isotopes heading as its label, which is right for parsing — it is how "isotope
 field — and wrong in a sentence, where it read **"Gold's Isotopes is 118"**. Gold has 118 neutrons
 and one stable isotope, so the sentence named the wrong quantity. The field now carries a
 `SentenceLabelKey`, which is what that property exists for.
+
+### D47 — "yes" continues, and two defects that made it answer about the wrong element
+
+`isAffirmative` is Android's second route into `provideNewInformation`: a bare "yes", "sure",
+"more" or "next" carries on the tour, guarded by `sharedProperties.isNotEmpty()` so it only fires
+once one has started. `FuzzyMatch.IsAffirmative` was ported here with its tests and then called by
+nothing — the dead-code-with-tests shape that reads as coverage. It is wired up now, with
+Android's guard.
+
+Building it surfaced two defects that were already shipping, both of which answered confidently
+about an element the user never mentioned.
+
+**A continuation was read as an element name.** `EntityResolver.FuzzyMatch` is the last resort for
+a short query that matched nothing exactly, and tolerates one edit. "More" is one edit from the
+French name for boron, *bore*; "sure" is one from the Swedish for oxygen, *syre*. So:
+
+    > what is the melting point of iron
+      Iron's Melting Point is 1811 (K).
+    > more
+      Boron's Melting Point is 2349 (K).
+
+— and the conversation stayed on boron from then on. These words arrive constantly and name
+nothing, which makes them the worst possible thing to guess about, so they are now skipped by the
+fuzzy stage. An exact "bore" never reaches it and still resolves.
+
+**A continuation that supplied nothing replayed the previous question.** With that fixed, "more"
+inherited the element from focus *and* the field from the last turn, rebuilt the previous question
+exactly, and answered it word for word. Slot inheritance is for a follow-up that supplies one new
+slot; a query supplying none is not a follow-up. Field inheritance is now skipped when the query
+contributed no field, no unit and no operator evidence. The corpus is what defines "contributed":
+"and in fahrenheit" supplies a unit and "which is more common" a comparator, and both must still
+inherit — the first two attempts at this guard failed those rows, which is what the conversation
+files are for.
+
+Both were reachable in the shipped app before any of this work, and both are live on Android.

@@ -174,6 +174,87 @@ namespace Atomic.Core.Tests.Ai
             Assert.Contains("79", reply.Text, StringComparison.Ordinal);
         }
 
+        /// <summary>
+        /// "Yes" carries on, once there is something to carry on from.
+        /// </summary>
+        /// <remarks>
+        /// Android's second route into the same handler. <c>FuzzyMatch.IsAffirmative</c> was
+        /// ported with its tests and then called by nothing, so a chip tap or a "sure" was
+        /// declined.
+        /// </remarks>
+        [Theory]
+        [InlineData("yes")]
+        [InlineData("sure")]
+        [InlineData("ok")]
+        public void AnAffirmativeContinuesTheTour(string reply)
+        {
+            var chat = Chat(seed: 9);
+            chat.Ask("gold");
+            chat.Ask("tell me more");
+
+            var before = chat.State.SharedFieldIds.Count;
+            var answer = chat.Ask(reply);
+
+            Assert.NotEqual(NoData, answer.Text);
+            Assert.Equal(before + 1, chat.State.SharedFieldIds.Count);
+        }
+
+        /// <summary>
+        /// But not before one has started - a bare "yes" with nothing said yet has nothing to
+        /// continue, and answering it with a fact about a random element is worse than declining.
+        /// </summary>
+        [Fact]
+        public void AnAffirmativeOutOfNowhereIsNotATour()
+        {
+            var chat = Chat(seed: 10);
+
+            Assert.Equal(NoData, chat.Ask("yes").Text);
+        }
+
+        /// <summary>
+        /// A continuation is never read as the name of an element.
+        /// </summary>
+        /// <remarks>
+        /// The resolver tolerates a typo of one edit on a short word, and "more" is one edit from
+        /// the French name for boron, "bore". So "the melting point of iron" followed by "more"
+        /// answered with <b>boron's</b> melting point - inheriting the field, sounding entirely
+        /// confident - and left the conversation on boron. "Sure" is one edit from the Swedish
+        /// for oxygen, "syre".
+        /// </remarks>
+        [Theory]
+        [InlineData("more")]
+        [InlineData("sure")]
+        public void AContinuationIsNotMistakenForAnElement(string reply)
+        {
+            var chat = Chat(seed: 11);
+            chat.Ask("what is the melting point of iron");
+
+            chat.Ask(reply);
+
+            Assert.Equal("iron", chat.State.FocusElement);
+        }
+
+        /// <summary>
+        /// A continuation that supplies no slot of its own is not the previous question again.
+        /// </summary>
+        /// <remarks>
+        /// With the element inherited from focus and the field inherited from the last turn,
+        /// "more" rebuilt the previous question exactly and answered it word for word. One slot
+        /// has to be the user's own for there to be a new question. "And in fahrenheit" supplies
+        /// a unit, so it still inherits both and still works.
+        /// </remarks>
+        [Fact]
+        public void ABareContinuationDoesNotReplayTheLastAnswer()
+        {
+            var chat = Chat(seed: 12);
+            var first = chat.Ask("what is the melting point of iron").Text;
+
+            var second = chat.Ask("more").Text;
+
+            Assert.NotEqual(first, second);
+            Assert.Equal("iron", chat.State.FocusElement);
+        }
+
         /// <summary>Switching element starts a new tour; what was said about gold does not apply.</summary>
         [Fact]
         public void TheTourIsPerElement()

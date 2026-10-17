@@ -166,6 +166,10 @@ namespace Atomic.Core.Ai.Nlu
                 // a request for that family, not a continuation of whatever came before.
                 NamesOnlyAFamily(normalized, operators, elementMatches.Count > 0);
 
+            // Set when a continuation supplied no slot of its own, so the field is not inherited
+            // on top of the element. See below.
+            var contributedNothing = false;
+
             if (elementKeys.Count == 0 && !rangesOverTable)
             {
                 // Inherit the subject whenever the turn reads as a continuation, not only when a
@@ -193,6 +197,17 @@ namespace Atomic.Core.Ai.Nlu
                 {
                     elementKeys = [focus];
                     evidence.Add($"inherited element {focus}");
+
+                    // Nothing in this query was its own: no element, no field, nothing to range
+                    // over. Remember that, because inheriting the field as well would rebuild the
+                    // previous question exactly and answer it again.
+                    // A unit counts: "and in fahrenheit" names neither element nor field, but it
+                    // is a real question about the same value on a different scale.
+                    contributedNothing = fieldIds.Count == 0 &&
+                                         !operators.HasOperatorEvidence &&
+                                         operators.Ordinal is null &&
+                                         operators.RankOrdinal is null &&
+                                         !operators.IsListQuestion;
                 }
             }
 
@@ -217,7 +232,11 @@ namespace Atomic.Core.Ai.Nlu
                               operators.SuperlativeDescending is not null ||
                               operators.Aggregation != Aggregation.None);
 
-            if (fieldIds.Count == 0 && state.LastFieldIds.Count > 0 && elliptical)
+            // A continuation that supplied neither slot is not a follow-up question - it is the
+            // previous question over again. Inheriting both gave "more" after "the melting point
+            // of iron" iron's melting point a second time, word for word. One slot has to be the
+            // user's own for there to be a new question at all.
+            if (fieldIds.Count == 0 && state.LastFieldIds.Count > 0 && elliptical && !contributedNothing)
             {
                 fieldIds = state.LastFieldIds.ToList();
                 evidence.Add($"inherited field {fieldIds[0]}");
