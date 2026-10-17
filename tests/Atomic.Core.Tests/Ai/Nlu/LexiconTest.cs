@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -50,7 +50,7 @@ namespace Atomic.Core.Tests.Ai.Nlu
         }
 
         /// <summary>
-        /// 2,867 entries in Lexicon.kt, 2,848 here. The nineteen missing are duplicate keys in four
+        /// 2,879 entries in Lexicon.kt, 2,860 here. The nineteen missing are duplicate keys in four
         /// maps - SERIES_WORDS has "noble gas" twice, COMPARATIVE_ADJECTIVES has "tyngre" twice -
         /// and every one maps to the same value, so collapsing them is exactly what Kotlin's mapOf
         /// does. The generator reports them on every run; if a future duplicate ever maps to a
@@ -58,7 +58,7 @@ namespace Atomic.Core.Tests.Ai.Nlu
         /// </summary>
         [Fact]
         public void TotalEntryCountMatchesTheSourceLessItsDuplicateKeys() =>
-            Assert.Equal(2848, AllVocabularies().Sum(v => v.Keys.Count()));
+            Assert.Equal(2860, AllVocabularies().Sum(v => v.Keys.Count()));
 
         /// <summary>
         /// The invariant the whole file rests on. Entries are matched against text that has already

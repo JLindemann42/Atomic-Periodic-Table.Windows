@@ -29,6 +29,11 @@ namespace Atomic.Core.Ai
             "preguntas", "pregunta", "juego", "domanda", "quesito", "interrogazione",
             "frage", "prufung", "testa mig", "interroger", "questionnaire", "concours",
             "questao", "desafio", "testar", "fraga", "सवाल", "امتحان", "vrae", "vraag", "toetsie",
+
+            // The word each language's own "Start a quiz" chip uses. Four of the twelve had no
+            // entry that could ever match it, so tapping the chip was declined in Spanish,
+            // Hindi, Urdu and Afrikaans.
+            "cuestionario", "क्विज़", "کوئز", "vasvra",
         ];
 
         /// <summary>

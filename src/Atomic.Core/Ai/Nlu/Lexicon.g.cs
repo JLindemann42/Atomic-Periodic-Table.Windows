@@ -687,6 +687,20 @@ public static class Lexicon
             ["onde se encontra"] = FieldCategory.Abundance,
             ["dove si trova"] = FieldCategory.Abundance,
             ["丰度"] = FieldCategory.Abundance,
+            // The phrasing each language's own "Where is %1$s found?" suggestion chip uses. Six of
+            // the twelve had no entry that could match it, so tapping the chip was declined in
+            // Portuguese, Hindi, Urdu, Chinese, Afrikaans and Filipino. Portuguese puts the element
+            // between "onde" and the participle, so the participle carries it.
+            ["encontrado"] = FieldCategory.Abundance,
+            ["encontrada"] = FieldCategory.Abundance,
+            ["कहाँ मिलता"] = FieldCategory.Abundance,
+            ["कहां मिलता"] = FieldCategory.Abundance,
+            ["کہاں پایا"] = FieldCategory.Abundance,
+            ["在哪里找到"] = FieldCategory.Abundance,
+            ["哪里找到"] = FieldCategory.Abundance,
+            ["waar kom"] = FieldCategory.Abundance,
+            ["saan matatagpuan"] = FieldCategory.Abundance,
+            ["matatagpuan"] = FieldCategory.Abundance,
             ["propiedades termicas"] = FieldCategory.Thermo,
             ["proprieta termiche"] = FieldCategory.Thermo,
             ["propriedades termicas"] = FieldCategory.Thermo,
@@ -716,7 +730,10 @@ public static class Lexicon
         "isotopi", "tempo di dimezzamento", "decadimento",
         "isotopos", "meia-vida", "decaimento",
         "isotoop", "halfleeftyd", "isotopo", "kalahating buhay",
-        "समस्थानिक", "अर्ध आयु", "آاइسوٹوپ", "نصف زندگی",
+        "समस्थानिक", "अर्ध आयु",
+        // The word Urdu's own "Isotopes of %1$s" chip uses; the list had only the
+        // transliteration, so the chip named something the planner could not find.
+        "ہم جا", "ہم جاء", "آاइسوٹوپ", "نصف زندگی",
         "同位素", "半衰期", "衰变",
         // "How long does plutonium 239 last" is a half-life question that never says "half-life".
         // The frame is what carries it; the query resolved no field and was declined outright.

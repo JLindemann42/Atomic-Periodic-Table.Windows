@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
@@ -217,11 +217,24 @@ namespace Atomic.Core.Ai.Data
         public static LocalizedView? Overlay(IElementSource source, string language)
         {
             if (Overlays.TryGetValue(language, out var cached)) return cached;
-            var table = source.Load(language);
+
+            // The element tables are keyed by the bare language - elements_pt.json,
+            // elements_zh.json - while the app speaks in full tags, pt-BR and zh-Hans. Without
+            // this the load simply failed and the caller fell back to English, so Portuguese and
+            // Chinese answers carried English element names and lost every localized
+            // description. Silent, because a missing overlay is a legitimate state.
+            var table = source.Load(language) ?? LoadBaseLanguage(source, language);
             if (table is null) return null;
             var view = BuildOverlay(language, table);
             Overlays[language] = view;
             return view;
+        }
+
+        /// <summary>The table for the bare language of a regional tag: pt-BR to pt.</summary>
+        private static ElementTable? LoadBaseLanguage(IElementSource source, string language)
+        {
+            var dash = language.IndexOf('-', StringComparison.Ordinal);
+            return dash > 0 ? source.Load(language[..dash]) : null;
         }
 
         /// <summary>Drop all cached state. Used by tests and by a language-data change.</summary>

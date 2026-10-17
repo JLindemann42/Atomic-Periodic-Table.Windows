@@ -245,6 +245,14 @@ public static class FieldAliases
         ("गलनांक", "melting_point"), ("نقطہ پگھلاؤ", "melting_point"),
         ("क्वथनांक", "boiling_point"),
         ("समस्थानिक", "isotopes"),
+        // The Urdu field labels and the Urdu suggestion chips were translated by different
+        // hands and do not share a vocabulary: the labels transliterate English ("ایٹمی ماس",
+        // "آئسوٹوپس") while the chips use native Urdu ("جوہری کمیت", "ہم جا"). Aliases come
+        // from the labels, so the app's own chips named fields it could not resolve, and a
+        // user writing ordinary Urdu got nothing. Both spellings are accepted rather than
+        // either translation being overruled.
+        ("جوہری کمیت", "atomic_mass"),
+        ("ہم جا", "isotopes"), ("ہم جاء", "isotopes"),
         ("farg", "appearance"), ("ser ut", "appearance"), ("utseende", "appearance"),
         ("aussehen", "appearance"), ("farbe", "appearance"), ("color", "appearance"),
         ("fas", "phase"), ("elektrisk typ", "electrical_type"),

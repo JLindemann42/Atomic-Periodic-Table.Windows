@@ -36,13 +36,16 @@ namespace Atomic.Core.Ai
 
         private static readonly string[] UsageWords =
         [
-            "use", "used", "application", "where to find", "function", "utility", "industry", "medicine",
-            "anvands", "nytta", "funktion", "verwendung", "nutzen", "industrie", "medizin",
-            "utilisation", "usage", "medecine",
-            "uso", "utilidad", "industria", "medicina",
-            "impiego", "utilidade", "industria",
-            "उपयोग", "प्रयोग", "काम", "istimal",
-            "用途", "应用", "使用", "yongtu", "yingyong", "shiyong", "gebruik", "gamit", "paggamit",
+            "use", "uses", "used", "application", "applications", "where to find", "function",
+            "utility", "industry", "medicine",
+            "anvands", "anvandning", "anvandningar", "nytta", "funktion",
+            "verwendung", "verwendungen", "nutzen", "industrie", "medizin",
+            "utilisation", "utilisations", "usage", "usages", "medecine",
+            "uso", "usos", "utilidad", "industria", "medicina",
+            "usi", "impiego", "impieghi", "utilidade", "utilizacao", "utilizacoes",
+            "उपयोग", "प्रयोग", "काम", "istimal", "استعمال", "استعمالات",
+            "用途", "应用", "使用", "yongtu", "yingyong", "shiyong",
+            "gebruik", "gebruike", "gamit", "paggamit", "mga gamit",
         ];
 
         private static readonly string[] BiologicalWords =
@@ -134,7 +137,14 @@ namespace Atomic.Core.Ai
 
             if (Has(q, BiologicalWords)) return Topic.Biological;
             if (Has(q, EtymologyWords) && Mentions(q, AsksWhyOrWhere)) return Topic.Etymology;
-            if (Has(q, UsageWords) && Mentions(q, AsksWhatOrHow)) return Topic.Usage;
+
+            // A heading reads as a request without a question word: "Uses of gold",
+            // "Verwendung von Gold", "%1$s के उपयोग". The app offers exactly that as a
+            // suggestion chip in all twelve languages, and every one of them was declined - the
+            // question-word gate exists to stop "gold is useful" being claimed, and a statement
+            // does not open with the word.
+            if (Has(q, UsageWords) && (Mentions(q, AsksWhatOrHow) || OpensWith(q, UsageWords)))
+                return Topic.Usage;
 
             return null;
         }
@@ -150,6 +160,30 @@ namespace Atomic.Core.Ai
         /// </remarks>
         private static bool Has(string query, IReadOnlyList<string> words) =>
             words.Any(w => TextMatching.ContainsWord(query, w));
+
+        /// <summary>
+        /// Whether the query leads with one of <paramref name="words"/> - the heading shape,
+        /// which asks for something without asking a question.
+        /// </summary>
+        /// <remarks>
+        /// Hindi and Urdu put the possessor first ("%1$s के उपयोग"), so the word trails the
+        /// element rather than opening the query. Those two are covered by the last token as well.
+        /// </remarks>
+        private static bool OpensWith(string query, IReadOnlyList<string> words)
+        {
+            var tokens = TextMatching.SplitQueryTokens(query)
+                .Where(t => t.Trim().Length > 0).ToList();
+
+            if (tokens.Count == 0) return false;
+
+            // Chinese writes no spaces, so "金 的用途" is two tokens and the word is inside one
+            // of them; the whole-query ends-with covers that, where token equality cannot.
+            return words.Any(w =>
+                string.Equals(tokens[0], w, StringComparison.Ordinal) ||
+                string.Equals(tokens[^1], w, StringComparison.Ordinal) ||
+                query.StartsWith(w, StringComparison.Ordinal) ||
+                query.EndsWith(w, StringComparison.Ordinal));
+        }
 
         private static bool Mentions(string query, IReadOnlyList<string> words) =>
             words.Any(w => query.Contains(w, StringComparison.Ordinal));

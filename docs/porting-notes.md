@@ -793,3 +793,48 @@ inherit — the first two attempts at this guard failed those rows, which is wha
 files are for.
 
 Both were reachable in the shipped app before any of this work, and both are live on Android.
+
+### D48 — the AI in twelve languages, measured against the app's own suggestion chips
+
+The agent was built for twelve languages and tested in roughly two. `must_defer.tsv` has 56
+English rows and 31 Swedish; Italian, Hindi, Filipino, Afrikaans and Urdu have **one each**. So
+every handler's keyword list was effectively unverified in two thirds of the languages it claims.
+
+The suggestion chips are a better yardstick, and the right one. They are shipped, professionally
+translated into all twelve, and the app puts them in front of the user as things to tap — a
+decline is a dead end the user was invited into. Fourteen chips times twelve languages is 168
+queries. **27 were declined.** `SuggestedQuestionsTest` now asserts all 168.
+
+What the 27 were:
+
+**"Uses of %1$s" failed in all twelve, English included.** Three separate causes in one chip.
+The topic needed a question word, so the heading form the chip itself uses was rejected — it now
+also fires when the query opens or ends with the usage word, which "gold is useful" does not.
+The words were base forms where the chips use inflected ones: `use` against "Uses", `uso` against
+"Usos", `gebruik` against "Gebruike", `utilisation` against "Utilisations". And the Urdu entry was
+a romanisation, `istimal`, where the string is `استعمال` — which could never match, because
+normalisation deliberately leaves Arabic script alone. Romanised entries for non-Latin scripts are
+dead weight throughout these lists.
+
+**"Where is %1$s found?" failed in six.** The category vocabulary had the phrasing for the six
+languages someone had tried. Portuguese puts the element between "onde" and the participle, so a
+contiguous phrase cannot match it and the participle carries it instead.
+
+**Quiz and fact chips failed in four each** — Spanish says "cuestionario", Afrikaans "vasvra",
+German "Fakt" where only "Faktum" was listed, French "anecdote".
+
+**Portuguese and Chinese lost every localized element name.** The tables ship as
+`elements_pt.json` and `elements_zh.json`; the app speaks `pt-BR` and `zh-Hans`. The load simply
+failed and the caller fell back to English, so those two languages answered with English element
+names and no localized description — silently, because a missing overlay is a legitimate state.
+A regional tag now falls back to its bare language.
+
+**Urdu named fields it could not resolve.** The labels and the suggestion chips were translated by
+different hands and do not share a vocabulary: the labels transliterate English (`ایٹمی ماس`,
+`آئسوٹوپس`) while the chips use native Urdu (`جوہری کمیت`, `ہم جا`). Aliases are built from the
+labels, so the app's own chips named fields it could not find, and a user writing ordinary Urdu
+got nothing. Both spellings are accepted rather than either translation being overruled.
+
+The lexicon and alias changes were made in Android's `Lexicon.kt` and `FieldResolver.kt` and
+regenerated with `kt2cs_lexicon.py`, because the C# is generated and says so. The generator was
+checked first: re-running it before any edit reproduced the committed file byte for byte.

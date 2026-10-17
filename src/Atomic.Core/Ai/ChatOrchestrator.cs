@@ -744,6 +744,11 @@ namespace Atomic.Core.Ai
             "curiosita", "interessante", "fatti", "curiosidade", "curiosidades", "fatos",
             "तथ्य", "क्या आप जानते हैं", "दिलचस्प",
             "事实", "你知道吗", "有趣", "shishi", "haqiqat", "feit", "katotohanan",
+
+            // The word each language's own "Tell me a fun fact" chip uses. German says "Fakt"
+            // where only "Faktum" was listed, French "anecdote", Urdu "دلچسپ" where only a
+            // romanisation was listed, and Filipino "kawili-wiling".
+            "fakt", "anecdote", "دلچسپ", "kawili-wili", "kawili-wiling",
         ];
 
         /// <summary>The shipped fact array - ai_facts.0 through .9.</summary>
