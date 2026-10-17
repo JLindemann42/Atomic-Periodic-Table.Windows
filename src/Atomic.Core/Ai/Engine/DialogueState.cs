@@ -35,6 +35,17 @@ namespace Atomic.Core.Ai.Engine
 
         public string ActiveLanguage { get; set; } = "en";
 
+        /// <summary>
+        /// The element a quiz question is waiting on, lower-cased, or null when no question is
+        /// outstanding.
+        /// </summary>
+        /// <remarks>
+        /// A quiz spans turns - ask, then judge the reply - so it has to live with the rest of
+        /// what the conversation remembers rather than in the handler. It is part of the state a
+        /// host persists, so a quiz survives the panel being closed and reopened.
+        /// </remarks>
+        public string? PendingQuizAnswer { get; set; }
+
         /// <summary>Record what an answer covered so the next turn can refer back to it.</summary>
         public void NoteAnswer(QueryPlan plan, IReadOnlyList<string> resultKeys)
         {

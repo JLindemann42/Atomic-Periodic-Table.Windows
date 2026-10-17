@@ -141,6 +141,11 @@ namespace Atomic.Core.Ai
             var strings = _stringsFor(language);
             var engine = EngineFor(language);
 
+            // ---- A quiz question already on the table --------------------------------------
+            // Before the engine: the expected reply is an element name, and the engine would
+            // answer it as a lookup rather than marking it right or wrong.
+            if (Quiz(message, strings) is { } quiz) return quiz;
+
             // ---- The engine, first ----------------------------------------------------------
             if (engine.Answer(message, State) is { } answered)
             {
@@ -211,6 +216,56 @@ namespace Atomic.Core.Ai
                 _retrieval.Localized(State.ActiveLanguage)?.Name(e.Key) is { Length: > 0 } localized
                     ? localized
                     : char.ToUpperInvariant(e.Key[0]) + e.Key[1..];
+        }
+
+        /// <summary>
+        /// Ask a quiz question, or judge the answer to the one outstanding.
+        /// </summary>
+        private ChatReply? Quiz(string message, IStringProvider strings)
+        {
+            var normalized = TextMatching.NormalizeForLookup(message);
+            var pending = State.PendingQuizAnswer;
+
+            // A short reply while a question is open is the answer to it - but only if it names
+            // an element, or says the answer outright.
+            //
+            // Android judges any reply of four words or fewer, which means an unrelated request
+            // is consumed as a wrong guess: with a question open, "tell me more" came back "Not
+            // quite! The answer was Vanadium". Requiring an element keeps every real guess,
+            // including a misspelling the resolver still matches, and lets anything else through
+            // to the handler it was meant for.
+            if (ElementQuiz.LooksLikeAnAnswer(normalized, pending) && !ElementQuiz.Asks(normalized))
+            {
+                var guess = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 1);
+                var namesTheAnswer = normalized.Contains(pending!, StringComparison.OrdinalIgnoreCase);
+
+                if (guess.Count == 0 && !namesTheAnswer) return null;
+
+                var answer = _store.Element(pending!);
+
+                var verdict = ElementQuiz.Judge(
+                    normalized,
+                    pending!,
+                    guess.Count > 0 ? guess[0].Key : null,
+                    answer is null ? pending! : Display(answer, pending!),
+                    strings);
+
+                State.PendingQuizAnswer = null;
+                return new ChatReply(verdict, ReplySource.Personality, [], null, Suggestions(strings, null));
+            }
+
+            if (!ElementQuiz.Asks(normalized)) return null;
+
+            if (ElementQuiz.Ask(_store.Elements, _random, strings, e => Display(e, e.Key)) is not { } question)
+                return new ChatReply(strings.Get(S.ai_quiz_no_start), ReplySource.Personality, [],
+                                     null, Suggestions(strings, null));
+
+            State.PendingQuizAnswer = question.About.Key;
+
+            // Deliberately not set as the focus: the user is being asked to name this element, and
+            // putting it in focus would let the next question answer itself.
+            return new ChatReply(question.Text, ReplySource.Personality, [], null,
+                                 Suggestions(strings, null));
         }
 
         /// <summary>
