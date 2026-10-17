@@ -26,6 +26,43 @@ namespace Atomic.Core.Tests.Ai
                 Service.Retriever(language),
                 entitlements);
 
+        /// <summary>
+        /// A field answered by name, with no question to parse.
+        /// </summary>
+        [Fact]
+        public void AFieldCanBeAnsweredDirectly()
+        {
+            var answer = Engine().FieldAnswerFor("gold", "density");
+
+            Assert.NotNull(answer);
+            Assert.Contains("19.3", answer!.Text, StringComparison.Ordinal);
+        }
+
+        /// <summary>A field the element has no value for is not answered at all.</summary>
+        [Fact]
+        public void AnAbsentFieldIsNotAnswered()
+        {
+            Assert.Null(Engine().FieldAnswerFor("gold", "curie_point"));
+        }
+
+        /// <summary>
+        /// The common neutron count is named as neutrons.
+        /// </summary>
+        /// <remarks>
+        /// Its label is the Isotopes heading, which is what makes "isotopes" resolve to this
+        /// field and is right for parsing. Rendered into a sentence it read "Gold's Isotopes is
+        /// 118", which names a different quantity - gold has 118 neutrons and 1 stable isotope.
+        /// </remarks>
+        [Fact]
+        public void TheCommonNeutronCountIsNotCalledIsotopes()
+        {
+            var answer = Engine().FieldAnswerFor("gold", "common_neutrons");
+
+            Assert.NotNull(answer);
+            Assert.Contains("Neutrons", answer!.Text, StringComparison.Ordinal);
+            Assert.DoesNotContain("Isotopes is", answer.Text, StringComparison.Ordinal);
+        }
+
         // ---- The decline contract ------------------------------------------------------------
 
         /// <summary>

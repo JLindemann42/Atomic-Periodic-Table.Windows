@@ -719,3 +719,42 @@ nothing: it looks like coverage.
 
 It changes no user-visible behaviour, so it is not an AI-parity item. If Windows telemetry is
 wanted, the missing piece is an analytics backend, and the struct is a half-hour once that exists.
+
+### D46 — "tell me more", and three things wrong with the list it draws from
+
+`provideNewInformation` walks an element one property at a time so that repeating "tell me more"
+keeps teaching. It is ported, but the list of twenty-two properties it picks from needed work.
+
+**The thermal conductivity entry is dead.** Android asks for `element_thermal_conductivity`. No
+element carries that key — it is `thermal_conductivity`, populated for 94 of the 118. So on
+Android the candidate is always empty, and the empty value sends it round again. Nobody has ever
+been told an element's thermal conductivity by "tell me more". Fixed here; the key is read through
+`FieldRegistry.ByJsonKey`, and `EveryCandidatePropertyIsPopulatedForSomeElement` fails if another
+candidate ever goes the same way.
+
+**Two facts at a time is unreachable.** `numToProvide` is 2 when `isTechnicalPreferred()`, which is
+`technicalScore > 0.7f`. `technicalScore` starts at 0.5 and is only ever written by
+`trackPropertyInterest`, which has no callers — the same dead-learning-path finding as the
+interest profile. It is always one fact, on both platforms now, and deliberately.
+
+**What has been said is remembered by field id, not by label.** Android keys its `sharedProperties`
+set on the localized label, so a thread that starts in English and continues in Swedish forgets
+everything: "Densitet" is not "Density". The agent supports switching language mid-thread, so this
+is reachable. Windows keys on the field id, and resets per element.
+
+Two further departures. The candidates are filtered to the ones the element has a value for before
+anything is chosen — Android chooses first, checks after, and recurses on a miss, so an element
+missing eight of the twenty-two can recurse eight deep to say one sentence. And the sentence is
+rendered by the engine (`AiEngine.FieldAnswerFor`) rather than composed here, which is what makes
+the PRO fields on the list — Young's modulus and Poisson's ratio — show a free user the upgrade
+notice instead of the value.
+
+Android's four pacing rules are kept: a boiling point invites the melting point, a melting point
+the boiling point or the density, protons the neutrons or the electrons, atomic mass the density
+or the crustal abundance. They are most of the difference between a tour and a shuffle.
+
+One defect surfaced by reading the output rather than by a test: `common_neutrons` borrows the
+Isotopes heading as its label, which is right for parsing — it is how "isotopes" resolves to the
+field — and wrong in a sentence, where it read **"Gold's Isotopes is 118"**. Gold has 118 neutrons
+and one stable isotope, so the sentence named the wrong quantity. The field now carries a
+`SentenceLabelKey`, which is what that property exists for.

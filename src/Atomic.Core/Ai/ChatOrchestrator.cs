@@ -164,6 +164,11 @@ namespace Atomic.Core.Ai
             // real answer; leaving it to the greeting responder would decline it.
             if (Reactivity(message, strings) is { } reactivity) return reactivity;
 
+            // ---- "Tell me more" --------------------------------------------------------------
+            // Before the overview, as on Android: "tell me more about gold" names an element, and
+            // the overview would answer it by repeating the opening the user has just read.
+            if (MoreInfo(message, strings, language) is { } more) return more;
+
             // ---- "Gold", "tell me about gold", "element 79" ----------------------------------
             // must_defer.tsv requires the engine to decline all three; this is what answers them.
             if (Overview(message, strings, language) is { } overview) return overview;
@@ -364,6 +369,11 @@ namespace Atomic.Core.Ai
             State.FocusElement = key;
             Profile.Track(key);
 
+            // The overview states the atomic mass, so "tell me more" must not offer it as news.
+            // Android seeds its equivalent set with the labels the overview used, for the same
+            // reason.
+            State.NoteShared(key, ["atomic_mass"]);
+
             return new ChatReply(text, ReplySource.Personality, [], null, Suggestions(strings, null));
         }
 
@@ -393,6 +403,59 @@ namespace Atomic.Core.Ai
             "beratta", "om", "vad", "ar", "erzahl", "mir", "uber", "was", "ist", "parle", "moi", "de",
             "que", "es", "cuentame", "sobre", "dimmi", "cosa", "conte", "me", "fale",
         ];
+
+        /// <summary>
+        /// "Tell me more" - the next thing about the element in focus that has not been said.
+        ///
+        /// <para>The element comes from the message, or from the conversation. With neither there
+        /// is nothing to say more <i>about</i>, so this declines rather than picking an element at
+        /// random - a confident fact about something the user never mentioned reads as a non
+        /// sequitur.</para>
+        ///
+        /// <para>The fact itself is rendered by the engine, so it arrives with the units, the
+        /// citation and the entitlement gate of an ordinary question.</para>
+        /// </summary>
+        private ChatReply? MoreInfo(string message, IStringProvider strings, string language)
+        {
+            var normalized = TextMatching.NormalizeForLookup(message);
+            if (!ElementMoreInfo.Asks(normalized)) return null;
+
+            var named = _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 1);
+            var key = named.Count > 0 ? named[0].Key : State.FocusElement;
+            if (key is null) return null;
+
+            if (_store.Element(key) is not { } element) return null;
+
+            var candidates = ElementMoreInfo.CandidatesFor(element);
+            var next = ElementMoreInfo.Next(
+                candidates,
+                id => State.HasShared(key, id),
+                State.SharedFieldIds.LastOrDefault(),
+                _random);
+
+            // Everything this element has to offer has been said. Say so, rather than starting
+            // over - repeating the density as though it were new is worse than admitting the tour
+            // is finished.
+            if (next is null)
+            {
+                var done = strings.Get(S.ai_covered_all, Display(element, key));
+                if (Fact(strings) is { } extra) done = done + "\n\n" + extra;
+
+                return new ChatReply(
+                    strings.Get(S.ai_encouragement) + " " + done,
+                    ReplySource.Personality, [], null, Suggestions(strings, null));
+            }
+
+            if (EngineFor(language).FieldAnswerFor(key, next) is not { } answer) return null;
+
+            State.FocusElement = key;
+            State.NoteShared(key, [next]);
+            Profile.Track(key);
+
+            return new ChatReply(
+                answer.Text, ReplySource.Engine, answer.Actions, answer.Card,
+                Suggestions(strings, null));
+        }
 
         /// <summary>
         /// What an element is used for, what it does in the body, where its name comes from.

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
@@ -232,7 +232,10 @@ namespace Atomic.Core.Ai.Data
             // ---- Nuclear --------------------------------------------------------------------
             Spec("radioactive", "radioactive", FieldKind.Enum, FieldCategory.Nuclear, S.radioactive_colon),
             Spec("neutron_cross_section", "neutron_cross_sectional", FieldKind.Numeric, FieldCategory.Nuclear, S.neutron_cross_sectional_colon, Dimension.Area, "b", deepLink: DeepLinkTarget.Nuclide),
-            Spec("common_neutrons", "element_neutron_common", FieldKind.Numeric, FieldCategory.Nuclear, S.isotopes_colon, deepLink: DeepLinkTarget.Nuclide),
+            // The label is the Isotopes heading, which is what makes "isotopes" resolve to this
+            // field; as a sentence it read "Gold's Isotopes is 118", naming a different quantity
+            // entirely - 118 is gold's common neutron count, and it has one stable isotope.
+            Spec("common_neutrons", "element_neutron_common", FieldKind.Numeric, FieldCategory.Nuclear, S.isotopes_colon, deepLink: DeepLinkTarget.Nuclide, sentenceLabelKey: S.ai_label_neutrons),
 
             // ---- Abundance ------------------------------------------------------------------
             // Every abundance label is a table heading phrased as a prepositional phrase - "In the
@@ -301,9 +304,11 @@ namespace Atomic.Core.Ai.Data
             bool allowsRange = false,
             bool localized = false,
             bool higherIsMore = true,
-            Tier tier = Tier.Free) =>
+            Tier tier = Tier.Free,
+            string? sentenceLabelKey = null) =>
             new(id, [jsonKey], kind, category, labelKey, dimension, canonicalUnit,
-                deepLink, allowsRange, localized, higherIsMore, Tier: tier);
+                deepLink, allowsRange, localized, higherIsMore,
+                SentenceLabelKey: sentenceLabelKey, Tier: tier);
 
         /// <summary>Temperature fields that ship all three scales, so a unit request needs no conversion.</summary>
         private static FieldSpec MultiUnit(string id, IReadOnlyList<string> jsonKeys, string labelKey) =>

@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,6 +47,45 @@ namespace Atomic.Core.Ai.Engine
         /// </remarks>
         public string? PendingQuizAnswer { get; set; }
 
+        /// <summary>
+        /// Fields already covered for <see cref="FocusElement"/>, oldest first, so "tell me more"
+        /// says something new each time.
+        /// </summary>
+        /// <remarks>
+        /// <para>Per element: it is reset when the conversation turns to a different one, because
+        /// what has been said about gold says nothing about iron.</para>
+        /// <para>Keyed by <b>field id</b>, where Android keys by the localized label. That makes
+        /// the set survive a mid-thread language switch, which the agent explicitly supports - ask
+        /// in English, follow up in Swedish, and Android starts repeating itself because
+        /// "Densitet" is not "Density".</para>
+        /// </remarks>
+        public IReadOnlyList<string> SharedFieldIds => _shared;
+
+        private readonly List<string> _shared = [];
+        private string? _sharedFor;
+
+        /// <summary>Record that <paramref name="fieldIds"/> have now been said about an element.</summary>
+        public void NoteShared(string? elementKey, IReadOnlyList<string> fieldIds)
+        {
+            if (elementKey is null) return;
+
+            if (!string.Equals(elementKey, _sharedFor, StringComparison.OrdinalIgnoreCase))
+            {
+                _shared.Clear();
+                _sharedFor = elementKey;
+            }
+
+            foreach (var id in fieldIds)
+            {
+                if (!_shared.Contains(id, StringComparer.Ordinal)) _shared.Add(id);
+            }
+        }
+
+        /// <summary>Whether a field has already been covered for this element.</summary>
+        public bool HasShared(string elementKey, string fieldId) =>
+            string.Equals(elementKey, _sharedFor, StringComparison.OrdinalIgnoreCase)
+            && _shared.Contains(fieldId, StringComparer.Ordinal);
+
         /// <summary>Record what an answer covered so the next turn can refer back to it.</summary>
         public void NoteAnswer(QueryPlan plan, IReadOnlyList<string> resultKeys)
         {
@@ -57,6 +97,11 @@ namespace Atomic.Core.Ai.Engine
 
             LastResultKeys = resultKeys;
             FocusElement = resultKeys[0];
+
+            // Only for a question about one element. A comparison or a filter list names a field
+            // for several at once, and marking it "said about" the first of thirty would make
+            // "tell me more" skip the very fields it should still be offering.
+            if (plan.ElementKeys.Count == 1) NoteShared(FocusElement, plan.FieldIds);
 
             // Reversed, so that after the loop the first result sits at the front.
             for (var i = resultKeys.Count - 1; i >= 0; i--)
@@ -109,6 +154,9 @@ namespace Atomic.Core.Ai.Engine
             LastPlan = null;
             LastResultKeys = [];
             LastTargetUnit = null;
+            PendingQuizAnswer = null;
+            _shared.Clear();
+            _sharedFor = null;
         }
 
         private const int MaxRecent = 4;

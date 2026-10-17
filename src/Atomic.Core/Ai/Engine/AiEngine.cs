@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Atomic.Core.Ai.Cards;
@@ -168,6 +168,33 @@ namespace Atomic.Core.Ai.Engine
                 intent,
                 Entities: [new EntityRef.Element(elementKey)],
                 Limit: intent == Intent.Isotopes ? DefaultIsotopes : 1,
+                Confidence: 1.0);
+
+            var result = _executor.Execute(plan);
+            if (result is null) return null;
+
+            LastPlan = plan;
+            return _composer.Compose(result, plan);
+        }
+
+        /// <summary>
+        /// One named field of one element, with no question to parse.
+        ///
+        /// <para>Used by "tell me more", which chooses the field itself and needs the answer
+        /// rendered exactly as a real lookup would render it - same units, same citation, same
+        /// entitlement gate. Composing that sentence by hand instead would be a second renderer to
+        /// keep in step, and it would quietly hand out the PRO-gated fields, two of which
+        /// (Young's modulus and Poisson's ratio) are on the list it picks from.</para>
+        /// </summary>
+        public ComposedAnswer? FieldAnswerFor(string elementKey, string fieldId)
+        {
+            if (_store.Element(elementKey) is not { } element) return null;
+            if (element.Value(fieldId).IsMissing) return null;
+
+            var plan = new QueryPlan(
+                Intent.PropertyLookup,
+                Entities: [new EntityRef.Element(elementKey)],
+                FieldIds: [fieldId],
                 Confidence: 1.0);
 
             var result = _executor.Execute(plan);
