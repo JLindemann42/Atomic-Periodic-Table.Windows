@@ -204,7 +204,15 @@ namespace Atomic.Core.Ai.Nlu
             // A follow-up that ranges over the set rather than over one element inherits the field
             // too: "is that the highest" after listing metals by density has no element and no
             // field of its own, and every part of it comes from the turn before.
+            // A query that names an element *and* states a predicate about it is not elliptical:
+            // it omits nothing. "Is gold a metal" has a subject and a complement, and inheriting
+            // the previous field answered it about Discovered By - the field left over from a
+            // question about radium. A follow-up that carries a filter but no element ("what
+            // about the noble gases") is still elliptical and still inherits.
+            var statesItsOwnPredicate = elementKeys.Count > 0 && operators.SubsetFilters.Count > 0;
+
             var elliptical = ContinuesTheThread(normalized) &&
+                             !statesItsOwnPredicate &&
                              (elementKeys.Count > 0 ||
                               operators.SuperlativeDescending is not null ||
                               operators.Aggregation != Aggregation.None);
@@ -1155,8 +1163,26 @@ namespace Atomic.Core.Ai.Nlu
 
             // And the thing asked about has an entry of its own. Without a better answer to fall
             // through to, inheriting the element in focus is still the best available.
-            return _datasets.InDataset(DatasetIndex.Datasets.Dictionary)
-                .Any(r => TextMatching.ContainsWord(normalized, TextMatching.NormalizeForLookup(r.Title)));
+            return _datasets.InDataset(DatasetIndex.Datasets.Dictionary).Any(r => NamesEntry(normalized, r.Title));
+        }
+
+        /// <summary>Whether the query names this dictionary entry.</summary>
+        /// <remarks>
+        /// The topic entries are titled "Periodic trend: ionization energy", so a question about
+        /// periodic trends matches no title whole. The part before the colon is the topic, and it
+        /// is matched as a substring rather than a word because the question asks about it in the
+        /// plural - "periodic trends" against "periodic trend".
+        /// </remarks>
+        private static bool NamesEntry(string normalized, string title)
+        {
+            var full = TextMatching.NormalizeForLookup(title);
+            if (TextMatching.ContainsWord(normalized, full)) return true;
+
+            var colon = full.IndexOf(':', StringComparison.Ordinal);
+            if (colon <= 0) return false;
+
+            var topic = full[..colon].Trim();
+            return topic.Length > 0 && normalized.Contains(topic, StringComparison.Ordinal);
         }
 
         private bool ContinuesTheThread(string normalized)
