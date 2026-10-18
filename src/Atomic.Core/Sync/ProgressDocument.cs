@@ -30,7 +30,13 @@ namespace Atomic.Core.Sync
         public const string Achievements = "achievements";
         public const string Statistics = "statistics";
         public const string Notes = "notes";
-        public const string Chats = "chats";
+
+        // Deliberately absent: "chats". Android's ChatHistoryManager owns that array and stores it
+        // as a list of conversation maps; Android's own ProgressSyncManager leaves it alone for that
+        // reason. This class used to read it as a list of strings - so every Android conversation
+        // read as nothing - and then wrote the empty merge back with "chats" in the update mask,
+        // which replaced the user's chat history with [] on every Windows sync. Chat history has its
+        // own document code, ChatHistoryDocument, and its own PATCH that masks "chats" alone.
         public const string LastUpdated = "lastUpdated";
 
         /// <summary>
@@ -56,7 +62,7 @@ namespace Atomic.Core.Sync
         /// </summary>
         public static readonly IReadOnlyList<string> FieldPaths =
         [
-            Xp, Level, Streak, StreakLastPlay, Achievements, Statistics, Notes, Chats, LastUpdated,
+            Xp, Level, Streak, StreakLastPlay, Achievements, Statistics, Notes, LastUpdated,
 
             // Nested paths, not the bare "entitlements" map. Masking the whole map would delete
             // entitlements.android on every Windows sync - the same co-ownership rule the mask
@@ -94,8 +100,6 @@ namespace Atomic.Core.Sync
                         e => e.Key,
                         e => (JsonNode)FirestoreValue.Integer(e.Value),
                         StringComparer.Ordinal)),
-
-                [Chats] = FirestoreValue.Array(snapshot.Chats.Select(FirestoreValue.String)),
 
                 // Only the two sub-fields this platform owns are written. The android entry is
                 // read and carried in the snapshot but never sent back, which is what keeps a
@@ -149,12 +153,6 @@ namespace Atomic.Core.Sync
                     .Select(e => (e.Key, Value: FirestoreValue.ReadInteger(e.Value)))
                     .Where(e => e.Value is not null)
                     .ToDictionary(e => e.Key, e => (int)e.Value!.Value, StringComparer.Ordinal),
-
-                Chats = FirestoreValue.ReadArray(Field(Chats))
-                    .Select(FirestoreValue.ReadString)
-                    .Where(c => !string.IsNullOrWhiteSpace(c))
-                    .Select(c => c!)
-                    .ToList(),
 
                 WindowsTier = FirestoreValue.ReadString(Entitlement("windows")),
                 AndroidTier = FirestoreValue.ReadString(Entitlement("android")),

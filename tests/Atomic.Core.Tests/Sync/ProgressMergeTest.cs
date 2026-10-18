@@ -13,7 +13,7 @@ namespace Atomic.Core.Tests.Sync
             int xp = 0, int streak = 0, string? lastPlay = null,
             IReadOnlyList<AchievementProgress>? achievements = null,
             IReadOnlyDictionary<string, int>? statistics = null,
-            string? notes = null, IReadOnlyList<string>? chats = null) =>
+            string? notes = null) =>
             new()
             {
                 Xp = xp,
@@ -22,7 +22,6 @@ namespace Atomic.Core.Tests.Sync
                 Achievements = achievements ?? [],
                 Statistics = statistics ?? new Dictionary<string, int>(StringComparer.Ordinal),
                 Notes = notes,
-                Chats = chats ?? [],
             };
 
         // ---- The property that makes this safe to run on every launch ---------------------------
@@ -76,13 +75,13 @@ namespace Atomic.Core.Tests.Sync
                 xp: 4000, streak: 6, lastPlay: "2026-08-13",
                 achievements: [new("a", 3, 10), new("b", 9, 10)],
                 statistics: new Dictionary<string, int> { ["games"] = 12 },
-                notes: "<X>local</X>", chats: ["one", "two"]);
+                notes: "<X>local</X>");
 
             var cloud = Snapshot(
                 xp: 9000, streak: 4, lastPlay: "2026-08-14",
                 achievements: [new("a", 7, 10), new("c", 1, 5)],
                 statistics: new Dictionary<string, int> { ["games"] = 30, ["wins"] = 4 },
-                notes: "<X>a longer cloud note</X>", chats: ["two", "three"]);
+                notes: "<X>a longer cloud note</X>");
 
             var forward = ProgressMerge.Merge(local, cloud);
             var backward = ProgressMerge.Merge(cloud, local);
@@ -103,16 +102,15 @@ namespace Atomic.Core.Tests.Sync
         public void MergingIsIdempotent()
         {
             var local = Snapshot(xp: 4000, streak: 6, lastPlay: "2026-08-13",
-                achievements: [new("a", 3, 10)], chats: ["one"]);
+                achievements: [new("a", 3, 10)]);
             var cloud = Snapshot(xp: 9000, streak: 4, lastPlay: "2026-08-14",
-                achievements: [new("a", 7, 10)], chats: ["two"]);
+                achievements: [new("a", 7, 10)]);
 
             var once = ProgressMerge.Merge(local, cloud);
             var twice = ProgressMerge.Merge(once, once);
 
             Assert.Equal(once.Xp, twice.Xp);
             Assert.Equal(once.Achievements, twice.Achievements);
-            Assert.Equal(once.Chats, twice.Chats);
         }
 
         // ---- The awkward pairs the plan names ---------------------------------------------------
@@ -123,7 +121,7 @@ namespace Atomic.Core.Tests.Sync
             var local = Snapshot(xp: 5000, streak: 9, lastPlay: "2026-08-14",
                 achievements: [new("a", 4, 10)],
                 statistics: new Dictionary<string, int> { ["games"] = 7 },
-                notes: "<X>mine</X>", chats: ["one"]);
+                notes: "<X>mine</X>");
 
             var merged = ProgressMerge.Merge(local, ProgressSnapshot.Empty);
 
@@ -131,7 +129,6 @@ namespace Atomic.Core.Tests.Sync
             Assert.Equal(9, merged.Streak);
             Assert.Equal("2026-08-14", merged.StreakLastPlay);
             Assert.Equal("<X>mine</X>", merged.Notes);
-            Assert.Equal(["one"], merged.Chats);
             Assert.Equal(4, merged.Achievements.Single().Progress);
         }
 
@@ -236,44 +233,6 @@ namespace Atomic.Core.Tests.Sync
                 ProgressMerge.Merge(Snapshot(lastPlay: "not-a-date"), Snapshot(lastPlay: "2026-08-14")).StreakLastPlay);
             Assert.Equal("2026-08-14",
                 ProgressMerge.Merge(Snapshot(lastPlay: "2026-08-14"), Snapshot(lastPlay: "zzzz-99-99")).StreakLastPlay);
-        }
-
-        // ---- Chats ------------------------------------------------------------------------------
-
-        [Fact]
-        public void ChatsAreUnionedLocalFirstAndCapped()
-        {
-            var local = Snapshot(chats: Enumerable.Range(0, 15).Select(i => $"local{i}").ToList());
-            var cloud = Snapshot(chats: Enumerable.Range(0, 15).Select(i => $"cloud{i}").ToList());
-
-            var merged = ProgressMerge.Merge(local, cloud);
-
-            Assert.Equal(ProgressMerge.MaxChats, merged.Chats.Count);
-            Assert.Equal("local0", merged.Chats[0]);
-            Assert.Contains("cloud0", merged.Chats);
-        }
-
-        /// <summary>
-        /// A thread synced down and back would otherwise appear twice and eat two of twenty slots.
-        /// </summary>
-        [Fact]
-        public void ARoundTrippedChatIsNotDuplicated()
-        {
-            var merged = ProgressMerge.Merge(
-                Snapshot(chats: ["shared", "mine"]),
-                Snapshot(chats: ["shared", "theirs"]));
-
-            Assert.Equal(["shared", "mine", "theirs"], merged.Chats);
-        }
-
-        [Fact]
-        public void BlankChatsAreDropped()
-        {
-            var merged = ProgressMerge.Merge(
-                Snapshot(chats: ["real", "", "   "]),
-                Snapshot(chats: [""]));
-
-            Assert.Equal(["real"], merged.Chats);
         }
 
         // ---- Notes ------------------------------------------------------------------------------

@@ -39,7 +39,6 @@ namespace Atomic.Core.Sync
         IReadOnlyList<AchievementProgress>? Achievements = null,
         IReadOnlyDictionary<string, int>? Statistics = null,
         string? Notes = null,
-        IReadOnlyList<string>? Chats = null,
         string? WindowsTier = null,
         string? AndroidTier = null,
         bool Ultimate = false)
@@ -49,7 +48,6 @@ namespace Atomic.Core.Sync
         public IReadOnlyDictionary<string, int> Statistics { get; init; } =
             Statistics ?? new Dictionary<string, int>(StringComparer.Ordinal);
 
-        public IReadOnlyList<string> Chats { get; init; } = Chats ?? [];
 
         public static readonly ProgressSnapshot Empty = new();
     }
@@ -69,12 +67,6 @@ namespace Atomic.Core.Sync
     /// </summary>
     public static class ProgressMerge
     {
-        /// <summary>
-        /// How many chat threads are kept. Matches Android, so neither platform can push a list the
-        /// other would truncate on read.
-        /// </summary>
-        public const int MaxChats = 20;
-
         public static ProgressSnapshot Merge(ProgressSnapshot local, ProgressSnapshot cloud) =>
             new()
             {
@@ -90,7 +82,6 @@ namespace Atomic.Core.Sync
                 Achievements = MergeAchievements(local.Achievements, cloud.Achievements),
                 Statistics = MergeStatistics(local.Statistics, cloud.Statistics),
                 Notes = LongerNotes(local.Notes, cloud.Notes),
-                Chats = MergeChats(local.Chats, cloud.Chats),
 
                 // Each platform is the authority on its own tier, so the local value wins for
                 // Windows and the cloud value is simply carried for Android. Taking a maximum
@@ -192,21 +183,5 @@ namespace Atomic.Core.Sync
             if (string.IsNullOrEmpty(cloud)) return local;
             return cloud.Length > local.Length ? cloud : local;
         }
-
-        /// <summary>
-        /// The union, newest first, capped.
-        /// </summary>
-        /// <remarks>
-        /// Local threads lead, because they are the ones the user was just looking at. Duplicates
-        /// are dropped by exact content: a thread synced down and back would otherwise appear
-        /// twice and consume two of the twenty slots.
-        /// </remarks>
-        private static IReadOnlyList<string> MergeChats(
-            IReadOnlyList<string> local, IReadOnlyList<string> cloud) =>
-            local.Concat(cloud)
-                .Where(c => !string.IsNullOrWhiteSpace(c))
-                .Distinct(StringComparer.Ordinal)
-                .Take(MaxChats)
-                .ToList();
     }
 }

@@ -149,7 +149,6 @@ namespace Atomic.Core.Tests.Sync
                 // survived a real round trip however cleanly it round-tripped here.
                 Achievements = [new("7", 1, 1), new("6", 12, 50)],
                 Statistics = new Dictionary<string, int> { ["1"] = 40, ["2"] = 22 },
-                Chats = ["thread one", "thread two"],
             };
 
             var document = JsonNode.Parse(ProgressDocument.ToDocument(original, Now).ToJsonString());
@@ -161,7 +160,6 @@ namespace Atomic.Core.Tests.Sync
             Assert.Equal(original.StreakLastPlay, read.StreakLastPlay);
             Assert.Equal(original.Notes, read.Notes);
             Assert.Equal(original.Achievements, read.Achievements);
-            Assert.Equal(original.Chats, read.Chats);
             Assert.Equal(
                 original.Statistics.OrderBy(e => e.Key),
                 read.Statistics.OrderBy(e => e.Key));
@@ -238,6 +236,41 @@ namespace Atomic.Core.Tests.Sync
         }
 
         [Fact]
+        public void ProgressSyncNeverTouchesChatHistory()
+        {
+            // The regression this pins: the progress PATCH masked "chats" while writing a list of
+            // strings in a shape Android's conversation maps never match, so every Windows sync
+            // replaced the user's Android chat history with an empty array. Chat history is not
+            // progress's to write - neither in the mask, nor in the body.
+            Assert.DoesNotContain("chats", ProgressDocument.FieldPaths);
+            Assert.DoesNotContain("chats", ProgressDocument.UpdateMaskQuery(), StringComparison.Ordinal);
+
+            var body = ProgressDocument.ToDocument(ProgressSnapshot.Empty, Now);
+            Assert.Null(body["fields"]?["chats"]);
+        }
+
+        /// <summary>
+        /// A document holding Android's real chat history - a list of conversation maps - reads
+        /// without error, and nothing about it leaks into progress.
+        /// </summary>
+        [Fact]
+        public void AndroidShapedChatsDoNotDisturbProgress()
+        {
+            var document = JsonNode.Parse("""
+                {"fields":{
+                  "xp":{"integerValue":"120"},
+                  "chats":{"arrayValue":{"values":[{"mapValue":{"fields":{
+                    "id":{"stringValue":"abc"},
+                    "title":{"stringValue":"What is gold?"},
+                    "timestamp":{"integerValue":"1760000000000"},
+                    "language":{"stringValue":"en"},
+                    "messages":{"arrayValue":{"values":[]}}}}}]}}}}
+                """);
+
+            Assert.Equal(120, ProgressDocument.FromDocument(document).Xp);
+        }
+
+        [Fact]
         public void AnEmptyOrMalformedDocumentReadsAsDefaults()
         {
             foreach (var document in new[]
@@ -254,7 +287,6 @@ namespace Atomic.Core.Tests.Sync
                 Assert.Null(read.StreakLastPlay);
                 Assert.Empty(read.Achievements);
                 Assert.Empty(read.Statistics);
-                Assert.Empty(read.Chats);
             }
         }
 
