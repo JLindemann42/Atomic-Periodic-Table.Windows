@@ -297,6 +297,7 @@ namespace Atomic.App.Controls
             if (_sheetWidth <= 0) _sheetWidth = DefaultSheetWidth;
 
             Sheet.Width = Clamp(_sheetWidth, available);
+            PositionGrip();
         }
 
         /// <summary>
@@ -349,19 +350,90 @@ namespace Atomic.App.Controls
         /// </summary>
         private void Sheet_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            PositionGrip();
+
             if (_isOpen && IsDocked && e.NewSize.Width != e.PreviousSize.Width)
                 LayoutChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        private void Grip_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        /// <summary>
+        /// The empty strip between the page card and a docked panel, in device-independent pixels.
+        /// MainWindow gives the panel's column this much more than the panel needs.
+        /// </summary>
+        public const double DockedGap = 6;
+
+        /// <summary>The handle is the gap plus a couple of pixels either side, to be easier to hit.</summary>
+        private const double GripWidth = 10;
+
+        private bool _dragging;
+        private double _dragStartX;
+        private double _dragStartWidth;
+
+        /// <summary>
+        /// Centre the handle on the gap: its right edge sits just inside the sheet's left edge, by
+        /// half of what the handle has over the gap's own width. Margin rather than a layout
+        /// column, because the sheet is slid in by a composition translation that layout cannot
+        /// see - and the handle is deliberately not part of that slide.
+        /// </summary>
+        private void PositionGrip()
         {
-            var available = WindowWidth();
-            // Dragging left (negative delta) makes the drawer wider, which is why this subtracts.
-            Sheet.Width = Clamp(Sheet.ActualWidth - e.Delta.Translation.X, available);
+            var width = double.IsNaN(Sheet.Width) ? Sheet.ActualWidth : Sheet.Width;
+            var overhang = (GripWidth - DockedGap) / 2;
+
+            Grip.Margin = new Thickness(0, 0, Math.Max(0, width - overhang), 0);
+        }
+
+        // Dragging uses pointer capture and window coordinates, not manipulation events. The
+        // handle moves as the panel widens, and manipulation deltas are measured against the
+        // element: with the element sliding under the pointer each delta is partly its own
+        // movement, which makes the drag lag or jitter. The window's coordinates do not move.
+
+        private void Grip_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (!Grip.CapturePointer(e.Pointer)) return;
+
+            _dragging = true;
+            _dragStartX = e.GetCurrentPoint(null).Position.X;
+            _dragStartWidth = Sheet.ActualWidth;
+            GripLine.Opacity = 1;
+            e.Handled = true;
+        }
+
+        private void Grip_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            if (!_dragging) return;
+
+            // Dragging left makes the panel wider, which is why the movement is subtracted.
+            var x = e.GetCurrentPoint(null).Position.X;
+            Sheet.Width = Clamp(_dragStartWidth - (x - _dragStartX), WindowWidth());
 
             // The drag is the user's preference. Remembering it from the width the panel happens
             // to have would make a full-width compact panel the new default once the window grew.
             _sheetWidth = Sheet.Width;
+            PositionGrip();
+            e.Handled = true;
+        }
+
+        private void Grip_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (!_dragging) return;
+
+            // Still over the handle after letting go? Keep the line, so it does not vanish under a
+            // pointer that has not moved - Entered will not fire again.
+            var p = e.GetCurrentPoint(Grip).Position;
+            var over = p.X >= 0 && p.X <= Grip.ActualWidth && p.Y >= 0 && p.Y <= Grip.ActualHeight;
+
+            _dragging = false;
+            Grip.ReleasePointerCaptures();
+            if (!over) EndHover();
+        }
+
+        private void Grip_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        {
+            if (!_dragging) return;
+
+            _dragging = false;
+            EndHover();
         }
 
         private void Grip_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -372,6 +444,13 @@ namespace Atomic.App.Controls
         }
 
         private void Grip_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            // Leaving while dragging is normal - the panel is moving under the pointer. The end of
+            // the drag puts things back.
+            if (!_dragging) EndHover();
+        }
+
+        private void EndHover()
         {
             ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(
                 Microsoft.UI.Input.InputSystemCursorShape.Arrow);

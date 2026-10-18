@@ -208,13 +208,6 @@ namespace Atomic.App
             }
         }
 
-        /// <summary>
-        /// The room, in device-independent pixels, left between the page and a docked Ask Atomic
-        /// panel. Empty on purpose: the window's Mica shows through it, so the two read as separate
-        /// cards on one surface rather than as one surface with a seam.
-        /// </summary>
-        private const double ChatPanelGap = 6;
-
         /// <summary>The NavigationView's content card, found on first use. See <see cref="PageCard"/>.</summary>
         private Grid? _pageCard;
 
@@ -226,7 +219,7 @@ namespace Atomic.App
         {
             var docked = ChatPanel.DockedWidth;
 
-            ChatColumn.Width = new GridLength(docked > 0 ? docked + ChatPanelGap : 0);
+            ChatColumn.Width = new GridLength(docked > 0 ? docked + Atomic.App.Controls.AiChatPanel.DockedGap : 0);
 
             if (PageCard() is not { } card) return;
 
