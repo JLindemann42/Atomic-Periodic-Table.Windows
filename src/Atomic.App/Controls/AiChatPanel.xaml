@@ -132,17 +132,16 @@
             The drawer. A Border on the right edge, full height below the title bar, slid in by a
             composition translation - see the code-behind for why not a Storyboard.
 
-            Transparent, with the acrylic as a layer of its own beneath the content. Docked beside
-            the page - the window gives it a column - it shows the window's Mica, the same surface
-            as the navigation pane. Floating over the page, in a window too small to share, it
-            shows the acrylic layer, which blurs the page behind it. AiChatPanel.ApplyMode chooses.
+            Itself transparent: the surface is one of two layers beneath the content, and
+            AiChatPanel.ApplyMode shows one. Docked, in a column of its own, it is the same
+            surface as the page beside it. Floating over the page, in a window too small to share,
+            it is acrylic, which blurs the page behind it. The divider is on the layers, not here,
+            so it follows whichever is showing.
         -->
         <Border x:Name="Sheet"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
                 Background="Transparent"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="1,0,0,0"
                 SizeChanged="Sheet_SizeChanged">
             <Grid x:Name="SheetLayout">
                 <Grid.RowDefinitions>
@@ -152,12 +151,30 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!-- Only while floating over the page; collapsed when docked. See ApplyMode. -->
+                <!--
+                    Docked: the page's own surface. These are the NavigationView's content-area
+                    resources - the layer fill, the card stroke as a divider on the top and left, the
+                    8px corner at the top-left - so it matches the page beside it exactly, in either
+                    theme, without restating a colour. Over the window's Mica the layer fill is the
+                    off-white of the periodic table's card.
+                -->
+                <Border x:Name="DockedLayer"
+                        Grid.RowSpan="4"
+                        IsHitTestVisible="False"
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1,1,0,0"
+                        CornerRadius="8,0,0,0" />
+
+                <!-- Floating over the page: acrylic, the same divider and corner. -->
                 <Border x:Name="AcrylicLayer"
                         Grid.RowSpan="4"
                         IsHitTestVisible="False"
-                        CornerRadius="8,0,0,0"
-                        Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}" />
+                        Visibility="Collapsed"
+                        Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1,1,0,0"
+                        CornerRadius="8,0,0,0" />
 
                 <!-- Header -->
                 <Grid Grid.Row="0" Padding="16,12,12,8" ColumnSpacing="8">
@@ -299,9 +316,11 @@
                 </Grid>
 
                 <!--
-                    Resize handle on the left edge. Windows users expect a resizable surface, and a
-                    drawer that cannot widen is the wrong shape for an answer with a working section.
-                    Eight pixels wide, over the content's 16px gutter rather than beside it.
+                    Resize handle on the left edge: eight pixels wide, over the content's 16px
+                    gutter rather than beside it, with the resize cursor on hover. Deliberately not
+                    drawn - a permanent handle read as a control on a surface that is otherwise
+                    quiet. A short line appears under the pointer so the edge can be found, and is
+                    gone again when it leaves.
                 -->
                 <Border x:Name="Grip"
                         Grid.RowSpan="4"
@@ -312,9 +331,13 @@
                         ManipulationDelta="Grip_ManipulationDelta"
                         PointerEntered="Grip_PointerEntered"
                         PointerExited="Grip_PointerExited">
-                    <Rectangle Width="3" Height="36"
-                               RadiusX="1.5" RadiusY="1.5"
+                    <Rectangle x:Name="GripLine"
+                               Width="2" Height="40"
+                               RadiusX="1" RadiusY="1"
+                               Opacity="0"
                                VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="1,0,0,0"
                                Fill="{ThemeResource ControlStrongFillColorDefaultBrush}" />
                 </Border>
             </Grid>

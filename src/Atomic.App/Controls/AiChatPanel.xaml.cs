@@ -319,15 +319,19 @@ namespace Atomic.App.Controls
         }
 
         /// <summary>
-        /// Show the acrylic only when the panel floats over the page.
+        /// Choose the surface: the page's own when docked, acrylic when floating over it.
         ///
-        /// <para>Acrylic blurs what is behind it. Docked there is nothing behind but the window's
-        /// Mica, so acrylic would be a flat tint standing out from the navigation pane on the other
-        /// side; transparent lets the Mica through, which is what Edge's sidebar does. Overlaid it
-        /// is the other way round, and the blur is what keeps the answer legible over the page.</para>
+        /// <para>Docked, the panel is part of the window's layout, a second card beside the first,
+        /// and should be indistinguishable from it - the same fill, divider and corner. Acrylic
+        /// there would blur nothing but the window's Mica and stand out as a flat patch. Floating,
+        /// the page is behind the panel, and the blur is what keeps the answer legible over it.</para>
         /// </summary>
-        private void ApplyMode() =>
-            AcrylicLayer.Visibility = IsDocked ? Visibility.Collapsed : Visibility.Visible;
+        private void ApplyMode()
+        {
+            var docked = IsDocked;
+            DockedLayer.Visibility = docked ? Visibility.Visible : Visibility.Collapsed;
+            AcrylicLayer.Visibility = docked ? Visibility.Collapsed : Visibility.Visible;
+        }
 
         /// <summary>
         /// The window's width. Not <c>ActualWidth</c>: docked in a column of its own, this control
@@ -360,13 +364,19 @@ namespace Atomic.App.Controls
             _sheetWidth = Sheet.Width;
         }
 
-        private void Grip_PointerEntered(object sender, PointerRoutedEventArgs e) =>
+        private void Grip_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
             ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(
                 Microsoft.UI.Input.InputSystemCursorShape.SizeWestEast);
+            GripLine.Opacity = 1;
+        }
 
-        private void Grip_PointerExited(object sender, PointerRoutedEventArgs e) =>
+        private void Grip_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
             ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(
                 Microsoft.UI.Input.InputSystemCursorShape.Arrow);
+            GripLine.Opacity = 0;
+        }
 
         // ---- Input ------------------------------------------------------------------------------
 
