@@ -29,10 +29,22 @@
             <!-- Main content -->
         </Grid.RowDefinitions>
 
+        <!--
+            The second column is the room the Ask Atomic panel takes while it is open and docked,
+            and nothing otherwise - MainWindow sets its width from the panel. The page narrows to
+            fit and stays fully visible, as with Copilot in Edge. In a window too small to share
+            the column stays at zero and the panel floats over the page instead.
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition x:Name="ChatColumn" Width="0" />
+        </Grid.ColumnDefinitions>
+
 
         <!-- Title Bar -->
         <Grid x:Name="AppTitleBar"  
               Grid.Row="0"
+              Grid.ColumnSpan="2"
               Height="32" >
             <!-- Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}" -->
               
@@ -113,16 +125,16 @@
         <!--
             Ask Atomic.
 
-            Over the content, below the title bar, on the right. It floats rather than docks
-            because its background is acrylic, and acrylic blurs what is behind it: docked beside
-            the page there is nothing behind it to blur and it renders as a flat tint. The panel
-            takes input only where it draws, so the page stays usable around it.
+            Spans both columns and draws on the right, so the same element is the docked sidebar
+            (over the column the window has given it) or the floating panel (over the page, with no
+            column). It takes input only where it draws, so the page stays usable around it.
 
             One panel reachable from every page, mirroring Android where a single controller served
             both hosts. Holding it here rather than per page is also what keeps the BM25 index
             warm across navigation; see ChatSession.
         -->
         <controls:AiChatPanel x:Name="ChatPanel"
-                              Grid.Row="1" />
+                              Grid.Row="1"
+                              Grid.ColumnSpan="2" />
     </Grid>
 </Window>

@@ -27,8 +27,10 @@ namespace Atomic.App.Controls
     /// warm; see <see cref="ChatSession"/>.</para>
     ///
     /// <para>WinUI has no side drawer, so this is a <c>Border</c> pinned to the right edge of a grid
-    /// that overlays the page. Overlaid rather than docked because its background is acrylic,
-    /// which has to have something behind it to blur.</para>
+    /// that spans the window, in one of two modes. <b>Docked</b>, as Edge's Copilot is: the window
+    /// gives it a column of its own and the page narrows to fit, still fully visible. <b>Overlay</b>,
+    /// when the window is too small to share: it floats over the page, which the user closes the
+    /// panel to see again. See <see cref="IsDocked"/>.</para>
     /// </summary>
     public sealed partial class AiChatPanel : UserControl
     {
@@ -49,9 +51,23 @@ namespace Atomic.App.Controls
 
         private const double MaxSheetWidth = 640;
 
+        /// <summary>
+        /// The least the page is left with while the panel is docked. Below this a periodic table
+        /// stops being one: the navigation pane has already gone compact at 860px, and 680 is what
+        /// the table, or a chart page, needs beside a 48px rail to stay legible.
+        /// </summary>
+        private const double MinDockedContentWidth = 680;
+
+        /// <summary>
+        /// Under this the panel takes the whole window. At 560px a 320px drawer leaves a strip of
+        /// page too narrow to read or aim at, and an almost-covered page is worse than a covered one.
+        /// </summary>
+        private const double CompactWindowWidth = 560;
+
         private static readonly TimeSpan SlideDuration = TimeSpan.FromMilliseconds(150);
 
         private double _sheetWidth;
+        private double _windowWidth;
         private bool _isOpen;
 
         public AiChatPanel()
@@ -71,6 +87,41 @@ namespace Atomic.App.Controls
         public ChatSession Session { get; }
 
         public bool IsOpen => _isOpen;
+
+        /// <summary>
+        /// Raised when the room the panel needs beside the page changes: opened, closed, resized,
+        /// or the window crossed the line between docked and overlay. The window answers by giving
+        /// the panel's column that width, or none.
+        /// </summary>
+        public event EventHandler? LayoutChanged;
+
+        /// <summary>
+        /// Whether the window is wide enough to share with the page.
+        ///
+        /// <para>Decided by the window alone, not by the panel's current width, so dragging the
+        /// panel wider cannot flip it into overlay half way through the drag. Docked, the drag is
+        /// held back instead, to leave the page <see cref="MinDockedContentWidth"/>.</para>
+        /// </summary>
+        public bool IsDocked => WindowWidth() >= MinDockedContentWidth + MinSheetWidth;
+
+        /// <summary>
+        /// The column width the window should give the panel: its own width while open and docked,
+        /// and nothing otherwise - an overlay takes no room from the page.
+        /// </summary>
+        public double DockedWidth => _isOpen && IsDocked && !double.IsNaN(Sheet.Width) ? Sheet.Width : 0;
+
+        /// <summary>
+        /// The window was resized. Given the width rather than read from <c>XamlRoot</c>, because
+        /// the window's own event is the one that is current when it fires.
+        /// </summary>
+        public void NotifyWindowSize(double width)
+        {
+            _windowWidth = width;
+
+            if (_isOpen) SizeSheet();
+            ApplyMode();
+            LayoutChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         /// <summary>
         /// Raised whenever the panel opens or closes, however it happened.
@@ -137,8 +188,10 @@ namespace Atomic.App.Controls
 
             Visibility = Visibility.Visible;
             SizeSheet();
+            ApplyMode();
             Animate(open: true);
             UpdateEmptyState();
+            LayoutChanged?.Invoke(this, EventArgs.Empty);
             OpenChanged?.Invoke(this, true);
 
             // Focus after the slide starts, not before: moving focus into a collapsed element is
@@ -181,6 +234,7 @@ namespace Atomic.App.Controls
             _isOpen = false;
 
             Animate(open: false);
+            LayoutChanged?.Invoke(this, EventArgs.Empty);
             OpenChanged?.Invoke(this, false);
         }
 
@@ -205,7 +259,7 @@ namespace Atomic.App.Controls
             ElementCompositionPreview.SetIsTranslationEnabled(Sheet, true);
 
             var slide = compositor.CreateScalarKeyFrameAnimation();
-            slide.InsertKeyFrame(1f, open ? 0f : (float)Math.Max(_sheetWidth, MinSheetWidth));
+            slide.InsertKeyFrame(1f, open ? 0f : (float)Math.Max(Sheet.ActualWidth, MinSheetWidth));
             slide.Duration = SlideDuration;
 
             if (!open)
@@ -246,30 +300,64 @@ namespace Atomic.App.Controls
         }
 
         /// <summary>
-        /// Kept inside the window as well as inside the limits: a narrow window cannot hold a
-        /// 320px drawer plus anything worth seeing beside it, and the minimum yields to that.
+        /// The width the panel may have, for a window of this width.
+        ///
+        /// <para>Docked, the ceiling is whatever leaves the page its minimum, so the panel and the
+        /// page can never be asked for more room than the window has. Overlay, it is a share of the
+        /// window, as before. Under <see cref="CompactWindowWidth"/> it is all of it.</para>
         /// </summary>
         private static double Clamp(double width, double available)
         {
-            var max = Math.Min(MaxSheetWidth, available * MaxWidthFraction);
-            return Math.Clamp(width, Math.Min(MinSheetWidth, available), Math.Max(MinSheetWidth, max));
+            if (available < CompactWindowWidth) return available;
+
+            var docked = available >= MinDockedContentWidth + MinSheetWidth;
+            var max = docked
+                ? Math.Min(MaxSheetWidth, available - MinDockedContentWidth)
+                : Math.Min(MaxSheetWidth, available * MaxWidthFraction);
+
+            return Math.Clamp(width, MinSheetWidth, Math.Max(MinSheetWidth, max));
         }
+
+        /// <summary>
+        /// Show the acrylic only when the panel floats over the page.
+        ///
+        /// <para>Acrylic blurs what is behind it. Docked there is nothing behind but the window's
+        /// Mica, so acrylic would be a flat tint standing out from the navigation pane on the other
+        /// side; transparent lets the Mica through, which is what Edge's sidebar does. Overlaid it
+        /// is the other way round, and the blur is what keeps the answer legible over the page.</para>
+        /// </summary>
+        private void ApplyMode() =>
+            AcrylicLayer.Visibility = IsDocked ? Visibility.Collapsed : Visibility.Visible;
 
         /// <summary>
         /// The window's width. Not <c>ActualWidth</c>: docked in a column of its own, this control
         /// is exactly as wide as the drawer, so measuring against it would clamp the drawer to
         /// itself.
         /// </summary>
-        private double WindowWidth() => XamlRoot is { } root && root.Size.Width > 0 ? root.Size.Width : 1200;
+        private double WindowWidth() =>
+            _windowWidth > 0 ? _windowWidth
+            : XamlRoot is { } root && root.Size.Width > 0 ? root.Size.Width
+            : 1200;
 
-        private void Sheet_SizeChanged(object sender, SizeChangedEventArgs e) =>
-            _sheetWidth = e.NewSize.Width;
+        /// <summary>
+        /// The page follows the panel's width as it is dragged. Only a change in width: the height
+        /// changes with the window and says nothing about how much room the page has.
+        /// </summary>
+        private void Sheet_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (_isOpen && IsDocked && e.NewSize.Width != e.PreviousSize.Width)
+                LayoutChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         private void Grip_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var available = WindowWidth();
             // Dragging left (negative delta) makes the drawer wider, which is why this subtracts.
             Sheet.Width = Clamp(Sheet.ActualWidth - e.Delta.Translation.X, available);
+
+            // The drag is the user's preference. Remembering it from the width the panel happens
+            // to have would make a full-width compact panel the new default once the window grew.
+            _sheetWidth = Sheet.Width;
         }
 
         private void Grip_PointerEntered(object sender, PointerRoutedEventArgs e) =>

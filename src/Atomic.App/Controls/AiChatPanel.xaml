@@ -132,22 +132,17 @@
             The drawer. A Border on the right edge, full height below the title bar, slid in by a
             composition translation - see the code-behind for why not a Storyboard.
 
-            Acrylic, the system's default for a surface that floats over content. It blurs and
-            tints whatever is behind it, which is what keeps the answer text readable over a
-            periodic table: the page is there, but softened into colour. That only works because
-            the drawer overlays the page. Docked beside it there is nothing behind to blur, and
-            acrylic degrades to a flat tint - which is why this is not a column of its own.
-
-            The brush falls back to a solid colour when the window is inactive, as acrylic always
-            does; nothing here depends on the blur for legibility.
+            Transparent, with the acrylic as a layer of its own beneath the content. Docked beside
+            the page - the window gives it a column - it shows the window's Mica, the same surface
+            as the navigation pane. Floating over the page, in a window too small to share, it
+            shows the acrylic layer, which blurs the page behind it. AiChatPanel.ApplyMode chooses.
         -->
         <Border x:Name="Sheet"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
-                Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                Background="Transparent"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="1,1,0,0"
-                CornerRadius="8,0,0,0"
+                BorderThickness="1,0,0,0"
                 SizeChanged="Sheet_SizeChanged">
             <Grid x:Name="SheetLayout">
                 <Grid.RowDefinitions>
@@ -156,6 +151,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+
+                <!-- Only while floating over the page; collapsed when docked. See ApplyMode. -->
+                <Border x:Name="AcrylicLayer"
+                        Grid.RowSpan="4"
+                        IsHitTestVisible="False"
+                        CornerRadius="8,0,0,0"
+                        Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}" />
 
                 <!-- Header -->
                 <Grid Grid.Row="0" Padding="16,12,12,8" ColumnSpacing="8">

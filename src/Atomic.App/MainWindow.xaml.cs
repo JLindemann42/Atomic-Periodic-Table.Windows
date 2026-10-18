@@ -57,6 +57,10 @@ namespace Atomic.App
             // than being toggled alongside it.
             ChatPanel.OpenChanged += (_, open) =>
                 AskAtomicButton.Visibility = open ? Visibility.Collapsed : Visibility.Visible;
+
+            // The page makes room for the panel when there is room to make, and not otherwise.
+            ChatPanel.LayoutChanged += (_, _) =>
+                ChatColumn.Width = new GridLength(ChatPanel.DockedWidth);
             var askAtomic = ResourceStringProvider
                 .For(AppLanguage.BaseCode(AppLanguage.Current))
                 .Get(Atomic.Core.Localization.S.ask_atomic);
@@ -210,6 +214,8 @@ namespace Atomic.App
             nvSample.PaneDisplayMode = e.Size.Width < 860
                 ? NavigationViewPaneDisplayMode.LeftCompact
                 : NavigationViewPaneDisplayMode.Left;
+
+            ChatPanel.NotifyWindowSize(e.Size.Width);
         }
 
         private void RootGrid_ActualThemeChanged(FrameworkElement sender, object args)
