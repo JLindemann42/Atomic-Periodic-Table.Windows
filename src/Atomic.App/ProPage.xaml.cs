@@ -458,7 +458,9 @@ namespace Atomic.App
                     if (SettingsStore.HasUltimate)
                     {
                         BuyUltimateButton.IsEnabled = false;
-                        BuyUltimateButton.Content = EntitlementRules.UltimateBadge;
+                        BuyUltimateButton.Content = ResourceStringProvider
+                            .For(AppLanguage.BaseCode(AppLanguage.Current))
+                            .Get(Atomic.Core.Localization.S.ultimate_owned);
                     }
 
                     // Prices in one place, from ownership - see ApplyPrices. The branches below

@@ -1039,6 +1039,10 @@ DECLARATIONS: dict[str, tuple[str, str | None, str]] = {
     "chat_history":         ("Chat history", None, "history sidebar title and its button"),
     "chat_history_empty":   ("No conversations yet", None, "history sidebar with nothing saved"),
 
+    # The account page's licences card, for a phone whose tier no sync has read yet. Shown instead
+    # of "free", which would claim the phone owns nothing when all we know is that we have not heard.
+    "account_tier_unknown": ("Not synced yet", None, "licences card, phone tier unknown"),
+
     # Flashcard level bands. Android draws its boxes with the range baked into a layout string per
     # box; the Windows screen renders them from FlashcardCatalog, so it needs one format instead.
     #

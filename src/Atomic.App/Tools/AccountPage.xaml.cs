@@ -47,6 +47,11 @@ namespace Atomic.App.Tools
         {
             base.OnNavigatedTo(e);
 
+            // Subscribed only while shown, so the static event does not keep a page alive after it
+            // has been navigated away from. Removed first in case the page is shown twice.
+            SettingsStore.LicenceChanged -= OnLicenceChanged;
+            SettingsStore.LicenceChanged += OnLicenceChanged;
+
             try
             {
                 LoadAchievements();
@@ -87,14 +92,14 @@ namespace Atomic.App.Tools
             // Both platforms, when both are known: the point of naming them is being able to see
             // "Windows PRO+" and "Android PRO" at once, which is the question a shared account
             // makes it possible to ask and impossible to answer from a bare tier.
-            var windows = SettingsStore.HasUltimate
-                ? EntitlementRules.UltimateBadge
-                : EntitlementRules.BadgeFor(
-                    EntitlementRules.WindowsPlatform, SettingsStore.Entitlement.Tier);
+            var windows = EntitlementRules.Summary(SettingsStore.HasUltimate, SettingsStore.Entitlement.Tier);
 
-            var android = EntitlementRules.BadgeFor(
-                EntitlementRules.AndroidPlatform,
-                EntitlementRules.FromWire(SettingsStore.AndroidTier));
+            // Ultimate already says "both platforms"; a second badge for the phone would repeat it.
+            var android = SettingsStore.HasUltimate
+                ? null
+                : EntitlementRules.BadgeFor(
+                    EntitlementRules.AndroidPlatform,
+                    EntitlementRules.FromWire(SettingsStore.AndroidTier));
 
             ProBadgeText.Text = windows ?? string.Empty;
             AndroidBadgeText.Text = android ?? string.Empty;
@@ -104,6 +109,67 @@ namespace Atomic.App.Tools
             UidLabel.Text = "Firebase user id";
 
             ProBadge.Visibility = windows is null ? Visibility.Collapsed : Visibility.Visible;
+
+            ApplyLicences(strings);
+        }
+
+        /// <summary>
+        /// The licences card: each platform's tier, Ultimate, and the offer when it is not owned.
+        /// </summary>
+        /// <remarks>
+        /// <para>An Ultimate owner sees "PRO+ Ultimate" on both platforms - that is what they bought,
+        /// and the PRO+ it grants on each is a consequence, not a second purchase.</para>
+        ///
+        /// <para>The phone's tier is what it last wrote to the account document. Until a sync has
+        /// read one, it is shown as not known rather than as free - a phone that has not synced yet
+        /// is not a phone that owns nothing.</para>
+        ///
+        /// <para>The offer is the upgrade when PRO+ is already owned on either platform, and the full
+        /// product otherwise, matching the two products the PRO page sells.</para>
+        /// </remarks>
+        private void ApplyLicences(IStringProvider strings)
+        {
+            var ultimate = SettingsStore.HasUltimate;
+            var windows = SettingsStore.Entitlement.Tier;
+            var androidWire = SettingsStore.AndroidTier;
+            var android = EntitlementRules.FromWire(androidWire);
+
+            WindowsTierText.Text = ultimate
+                ? EntitlementRules.UltimateProductName
+                : EntitlementRules.TierName(windows) ?? strings.Get(S.free);
+
+            AndroidTierText.Text = ultimate
+                ? EntitlementRules.UltimateProductName
+                : string.IsNullOrEmpty(androidWire)
+                    ? strings.Get(S.account_tier_unknown)
+                    : EntitlementRules.TierName(android) ?? strings.Get(S.free);
+
+            UltimateStatusText.Text = ultimate ? strings.Get(S.ultimate_owned) : string.Empty;
+            UltimateLabel.Visibility = ultimate ? Visibility.Visible : Visibility.Collapsed;
+            UltimateStatusText.Visibility = UltimateLabel.Visibility;
+
+            UltimateOffer.Visibility = ultimate ? Visibility.Collapsed : Visibility.Visible;
+            UltimateOfferText.Text = strings.Get(S.ultimate_description);
+            UltimateOfferButton.Content = strings.Get(
+                windows == EntitlementTier.ProPlus || android == EntitlementTier.ProPlus
+                    ? S.ultimate_upgrade_title
+                    : S.ultimate_buy);
+        }
+
+        private void UltimateOffer_Click(object sender, RoutedEventArgs e) =>
+            Frame.Navigate(typeof(Atomic.App.ProPage));
+
+        /// <summary>
+        /// A licence changed while this page was open - typically Ultimate or the phone's tier
+        /// arriving with a sync. Raised from the sync's thread, hence the dispatch.
+        /// </summary>
+        private void OnLicenceChanged(object? sender, EventArgs e) =>
+            DispatcherQueue.TryEnqueue(ApplyStrings);
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            SettingsStore.LicenceChanged -= OnLicenceChanged;
         }
 
         private void LoadAchievements()
@@ -200,8 +266,8 @@ namespace Atomic.App.Tools
 
             StatusText.Text = signedIn
                 ? (name.Length > 0 ? "Signed in as " + name + ". " : "Signed in. ")
-                  + "Progress, achievements, streak and element notes sync with your phone "
-                  + "automatically - there is nothing to switch on."
+                  + "Progress, achievements, streak, element notes, chat history and licences sync "
+                  + "with your phone automatically - there is nothing to switch on."
                 : "Sign in with Google to sync progress, achievements, streak and element notes "
                   + "with the Android app.";
 

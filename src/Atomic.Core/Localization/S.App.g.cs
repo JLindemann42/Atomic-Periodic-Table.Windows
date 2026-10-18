@@ -10,6 +10,7 @@ namespace Atomic.Core.Localization;
 
 public static partial class S
 {
+    public const string account_tier_unknown = "account_tier_unknown";
     public const string alloy_base_metal = "alloy_base_metal";
     public const string alloy_composition = "alloy_composition";
     public const string alloy_search = "alloy_search";

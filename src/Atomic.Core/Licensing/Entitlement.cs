@@ -143,6 +143,31 @@ namespace Atomic.Core.Licensing
         public const string UltimateBadge = "Ultimate";
 
         /// <summary>
+        /// The product's full name, as Android writes it (<c>ultimate_version</c>, untranslated):
+        /// what an Ultimate owner is told they own.
+        /// </summary>
+        public const string UltimateProductName = "PRO+ Ultimate";
+
+        /// <summary>
+        /// The one-badge summary of what the user owns: "PRO+ Ultimate" when they have it, otherwise
+        /// this platform's tier - "Windows PRO+" - or null when free.
+        /// </summary>
+        /// <remarks>
+        /// Ultimate first. It grants PRO+ here, so an Ultimate owner's Windows tier is PRO+ too - and
+        /// labelling them "Windows PRO+" names a purchase they never made while hiding the one they did.
+        /// </remarks>
+        public static string? Summary(bool ultimate, EntitlementTier windowsTier) =>
+            ultimate ? UltimateProductName : BadgeFor(WindowsPlatform, windowsTier);
+
+        /// <summary>A tier as a product name: "PRO", "PRO+", or null for free.</summary>
+        public static string? TierName(EntitlementTier tier) => tier switch
+        {
+            EntitlementTier.ProPlus => "PRO+",
+            EntitlementTier.Pro => "PRO",
+            _ => null,
+        };
+
+        /// <summary>
         /// Raise an entitlement to PRO+ when Ultimate has been bought on any platform.
         /// </summary>
         /// <remarks>

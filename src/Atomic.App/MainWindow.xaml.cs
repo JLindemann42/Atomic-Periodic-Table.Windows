@@ -68,19 +68,28 @@ namespace Atomic.App
             // reader announces "button" and nothing else.
             Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(AskAtomicButton, askAtomic);
 
-            // Named by platform: "PRO Member" could not say whether the tier came from this
-            // machine's Store or the phone's, and with Ultimate in the mix that distinction is
-            // the difference between one purchase and two.
-            var badge = SettingsStore.HasUltimate
-                ? Atomic.Core.Licensing.EntitlementRules.UltimateBadge
-                : Atomic.Core.Licensing.EntitlementRules.BadgeFor(
-                    Atomic.Core.Licensing.EntitlementRules.WindowsPlatform,
-                    SettingsStore.Entitlement.Tier);
+            ApplyProLabel();
 
-            if (badge is not null)
-            {
-                Navigation.SetProLabel(badge);
-            }
+            // A licence can change while the window is open - bought on the PRO page, or Ultimate
+            // arriving from the phone by sync - and the label must follow it then, not at the next
+            // launch. The event can come from the sync timer's thread.
+            SettingsStore.LicenceChanged += (_, _) => DispatcherQueue.TryEnqueue(ApplyProLabel);
+        }
+
+        /// <summary>
+        /// Name what the user owns on the PRO entry: "PRO+ Ultimate", or this platform's tier.
+        /// </summary>
+        /// <remarks>
+        /// Named by platform: "PRO Member" could not say whether the tier came from this machine's
+        /// Store or the phone's. And Ultimate before any platform tier, because it grants PRO+ here
+        /// too - labelling its owner "Windows PRO+" names a purchase they never made.
+        /// </remarks>
+        private void ApplyProLabel()
+        {
+            var badge = Atomic.Core.Licensing.EntitlementRules.Summary(
+                SettingsStore.HasUltimate, SettingsStore.Entitlement.Tier);
+
+            if (badge is not null) Navigation.SetProLabel(badge);
         }
 
         private void SetWindowIcon()

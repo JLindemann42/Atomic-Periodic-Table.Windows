@@ -130,16 +130,38 @@ namespace Atomic.App.Services
 
         // -- entitlements ----------------------------------------------------------------------
 
+        /// <summary>
+        /// Raised when anything a licence display depends on changes: either tier flag, Ultimate, or
+        /// the tier the phone last reported.
+        /// </summary>
+        /// <remarks>
+        /// The labels that show a licence are computed once when they are built, and a licence can
+        /// change without the user doing anything on that screen - a purchase on the PRO page, or
+        /// Ultimate arriving from the phone through a sync. Without this the footer kept saying
+        /// "Windows PRO+" to someone who now owned Ultimate, until the app was restarted.
+        /// <para><b>May be raised off the UI thread</b>: sync runs on a timer. Handlers marshal.</para>
+        /// </remarks>
+        public static event System.EventHandler? LicenceChanged;
+
+        private static void SetLicence<T>(string key, T value)
+        {
+            var before = Get(key, default(T)!);
+            Set(key, value);
+
+            if (!System.Collections.Generic.EqualityComparer<T>.Default.Equals(before, value))
+                LicenceChanged?.Invoke(null, System.EventArgs.Empty);
+        }
+
         public static bool IsProUser
         {
             get => Get(Keys.IsProUser, false);
-            set => Set(Keys.IsProUser, value);
+            set => SetLicence(Keys.IsProUser, value);
         }
 
         public static bool IsProPlusUser
         {
             get => Get(Keys.IsProPlusUser, false);
-            set => Set(Keys.IsProPlusUser, value);
+            set => SetLicence(Keys.IsProPlusUser, value);
         }
 
         /// <summary>
@@ -160,7 +182,7 @@ namespace Atomic.App.Services
         public static bool HasUltimate
         {
             get => Get(Keys.HasUltimate, false);
-            set => Set(Keys.HasUltimate, value);
+            set => SetLicence(Keys.HasUltimate, value);
         }
 
         /// <summary>
@@ -174,7 +196,7 @@ namespace Atomic.App.Services
         public static string AndroidTier
         {
             get => Get(Keys.AndroidTier, string.Empty);
-            set => Set(Keys.AndroidTier, value);
+            set => SetLicence(Keys.AndroidTier, value);
         }
 
         /// <summary>The entitlement this machine's store has granted, as one value.</summary>

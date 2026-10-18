@@ -190,5 +190,31 @@ namespace Atomic.Core.Tests.Licensing
 
             Assert.Equal(stored, twice);
         }
-    }
+    
+        // ---- The summary badge ----------------------------------------------------------------
+
+        /// <summary>An Ultimate owner is told they own Ultimate, not "Windows PRO+".</summary>
+        [Theory]
+        [InlineData(EntitlementTier.Free)]
+        [InlineData(EntitlementTier.Pro)]
+        [InlineData(EntitlementTier.ProPlus)]
+        public void UltimateIsNamedWhateverTheWindowsTierSays(EntitlementTier windows) =>
+            Assert.Equal("PRO+ Ultimate", EntitlementRules.Summary(ultimate: true, windows));
+
+        [Fact]
+        public void WithoutUltimateThePlatformTierIsNamed()
+        {
+            Assert.Equal("Windows PRO+", EntitlementRules.Summary(ultimate: false, EntitlementTier.ProPlus));
+            Assert.Equal("Windows PRO", EntitlementRules.Summary(ultimate: false, EntitlementTier.Pro));
+            Assert.Null(EntitlementRules.Summary(ultimate: false, EntitlementTier.Free));
+        }
+
+        [Fact]
+        public void TiersAreNamedAsProducts()
+        {
+            Assert.Equal("PRO+", EntitlementRules.TierName(EntitlementTier.ProPlus));
+            Assert.Equal("PRO", EntitlementRules.TierName(EntitlementTier.Pro));
+            Assert.Null(EntitlementRules.TierName(EntitlementTier.Free));
+        }
+}
 }
