@@ -69,6 +69,24 @@ namespace Atomic.App.Services
             private set => Set(ref _suggestions, value);
         }
 
+        /// <summary>
+        /// What to offer before anything has been asked: the general questions and the tool
+        /// examples, all of them.
+        ///
+        /// <para>The orchestrator offers three after an answer, which is right under a thread but
+        /// thin for a first visit - the user has seen nothing yet and these are the only hint of
+        /// what the assistant does. They are shipped and translated in every language, and read
+        /// each time rather than cached, because the UI language can change while the app runs.</para>
+        /// </summary>
+        public IReadOnlyList<string> Starters
+        {
+            get
+            {
+                var strings = Strings();
+                return [.. strings.Array("ai_suggest_general"), .. strings.Array("ai_suggest_tools")];
+            }
+        }
+
         /// <summary>True when the engine could not be built at all - no element data.</summary>
         public bool Unavailable { get; private set; }
 

@@ -341,13 +341,7 @@ namespace Atomic.App.Controls
 
         private void Session_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ChatSession.Suggestions))
-            {
-                SuggestionList.ItemsSource = Session.Suggestions;
-                SuggestionList.Visibility = Session.Suggestions.Count > 0
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
-            }
+            if (e.PropertyName == nameof(ChatSession.Suggestions)) UpdateSuggestions();
 
             if (e.PropertyName == nameof(ChatSession.IsBusy)) UpdateSendEnabled();
         }
@@ -366,6 +360,47 @@ namespace Atomic.App.Controls
             var empty = Session.Messages.Count == 0;
             EmptyState.Visibility = empty ? Visibility.Visible : Visibility.Collapsed;
             MessageList.Visibility = empty ? Visibility.Collapsed : Visibility.Visible;
+
+            UpdateSuggestions();
+        }
+
+        /// <summary>
+        /// The example questions: the latest answer's follow-ups if it offered any, otherwise the
+        /// starters while the thread is empty.
+        /// </summary>
+        /// <remarks>
+        /// Driven from here as well as from the session's property change, because the starters
+        /// depend on the thread being empty rather than on anything the session raises: opening
+        /// the panel, starting a new chat and a restore all change which set is right without
+        /// touching <see cref="ChatSession.Suggestions"/>. While a question is in flight the
+        /// thread is no longer empty and the follow-ups are not in yet, so the strip is hidden
+        /// rather than offering starters for a question already asked.
+        /// </remarks>
+        private void UpdateSuggestions()
+        {
+            var items = Session.Suggestions.Count > 0
+                ? Session.Suggestions
+                : Session.Messages.Count == 0 ? Session.Starters : Session.Suggestions;
+
+            SuggestionList.ItemsSource = items;
+            SuggestionScroller.Visibility = items.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            // A new set starts from the left; keeping the old offset would open on the middle of it.
+            SuggestionScroller.ChangeView(0, null, null, disableAnimation: true);
+        }
+
+        /// <summary>
+        /// A mouse wheel scrolls the strip sideways. Left alone it does nothing here - the strip
+        /// only scrolls horizontally, and a wheel reports vertical movement - so on a desktop with
+        /// no touchpad the chips past the edge would be unreachable without dragging the bar.
+        /// </summary>
+        private void Suggestions_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+            var delta = e.GetCurrentPoint(SuggestionScroller).Properties.MouseWheelDelta;
+            if (delta == 0) return;
+
+            SuggestionScroller.ChangeView(SuggestionScroller.HorizontalOffset - delta, null, null, disableAnimation: false);
+            e.Handled = true;
         }
 
         /// <summary>

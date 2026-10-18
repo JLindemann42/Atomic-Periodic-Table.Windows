@@ -232,36 +232,52 @@
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
 
                 <!--
-                    Suggestion chips for the most recent answer only.
+                    Example questions: before the first question, the starters; afterwards, the
+                    follow-ups to the latest answer.
 
-                    Stacked and full width rather than wrapped. Each one is a whole question - "How
-                    much of 100 g of carbon-14 is left after 11460 years?" - and in a drawer this
-                    narrow a wrap panel gave a long one its natural width, which ran off the edge.
-                    The text wraps inside the button, left-aligned, so a two-line question reads as
-                    one block instead of a centred ragged one.
+                    A horizontal strip rather than a stack. Each one is a whole question - "How much
+                    of 100 g of carbon-14 is left after 11460 years?" - so a stack of them took a
+                    third of a drawer this narrow, and wrapping them ran the long ones off the edge.
+                    Here each chip is capped at a width and wraps inside it, and the strip scrolls.
+
+                    The 16px gutter is padding on the items, not margin on the scroller, so the
+                    first chip starts inset and the last one scrolls out under the edge rather than
+                    stopping short of it. The bottom padding leaves room for the scroll bar to
+                    overlay without sitting on the text.
                 -->
-                <ItemsControl x:Name="SuggestionList"
+                <ScrollViewer x:Name="SuggestionScroller"
                               Grid.Row="2"
-                              Padding="16,8,16,12">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Spacing="6" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Tag="{Binding}"
-                                    Click="Suggestion_Click"
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalContentAlignment="Left"
-                                    Padding="12,8">
-                                <TextBlock Text="{Binding}"
-                                           FontSize="12"
-                                           TextWrapping="Wrap" />
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                              HorizontalScrollMode="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollMode="Disabled"
+                              VerticalScrollBarVisibility="Disabled"
+                              PointerWheelChanged="Suggestions_PointerWheelChanged">
+                    <ItemsControl x:Name="SuggestionList"
+                                  Padding="16,8,16,14">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="8" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Tag="{Binding}"
+                                        Click="Suggestion_Click"
+                                        VerticalAlignment="Stretch"
+                                        HorizontalContentAlignment="Left"
+                                        VerticalContentAlignment="Center"
+                                        MinWidth="120"
+                                        MaxWidth="230"
+                                        Padding="12,8"
+                                        CornerRadius="8">
+                                    <TextBlock Text="{Binding}"
+                                               FontSize="12"
+                                               TextWrapping="Wrap" />
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
 
                 <!-- Composer -->
                 <Grid Grid.Row="3" Padding="16,4,16,16" ColumnSpacing="8">
