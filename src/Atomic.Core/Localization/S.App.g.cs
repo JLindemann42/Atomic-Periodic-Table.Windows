@@ -14,6 +14,8 @@ public static partial class S
     public const string alloy_composition = "alloy_composition";
     public const string alloy_search = "alloy_search";
     public const string chat_close = "chat_close";
+    public const string chat_history = "chat_history";
+    public const string chat_history_empty = "chat_history_empty";
     public const string chat_new = "chat_new";
     public const string chat_send = "chat_send";
     public const string chat_thinking = "chat_thinking";

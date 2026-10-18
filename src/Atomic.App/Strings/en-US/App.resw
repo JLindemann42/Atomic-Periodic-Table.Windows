@@ -53,6 +53,12 @@
   <data name="chat_close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="chat_history" xml:space="preserve">
+    <value>Chat history</value>
+  </data>
+  <data name="chat_history_empty" xml:space="preserve">
+    <value>No conversations yet</value>
+  </data>
   <data name="chat_new" xml:space="preserve">
     <value>New conversation</value>
   </data>

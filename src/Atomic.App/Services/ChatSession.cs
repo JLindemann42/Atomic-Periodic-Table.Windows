@@ -12,6 +12,7 @@ using Atomic.Core.Ai.Compose;
 using Atomic.Core.Ai.Engine;
 using Atomic.Core.Ai.Retrieval;
 using Atomic.Core.Localization;
+using Atomic.Core.Sync;
 
 namespace Atomic.App.Services
 {
@@ -90,6 +91,138 @@ namespace Atomic.App.Services
         /// <summary>True when the engine could not be built at all - no element data.</summary>
         public bool Unavailable { get; private set; }
 
+        // ---- Conversations -----------------------------------------------------------------------
+
+        private List<StoredChatSession> _history = [];
+        private bool _historyLoaded;
+        private bool _restored;
+        private bool _isSyncingHistory;
+
+        /// <summary>
+        /// The conversation on screen, once it has something in it. Null for a new chat until its first
+        /// answer, so an empty chat never becomes an entry in the history.
+        /// </summary>
+        private StoredChatSession? _current;
+
+        /// <summary>The saved conversations, newest first - this device's and, once synced, the phone's.</summary>
+        public IReadOnlyList<StoredChatSession> History => _history;
+
+        /// <summary>The conversation on screen, or null for a new chat that has not been answered yet.</summary>
+        public StoredChatSession? Current => _current;
+
+        /// <summary>Raised when <see cref="History"/> changes: a save, or a sync that brought something in.</summary>
+        public event EventHandler? HistoryChanged;
+
+        /// <summary>True while the history is being synced with the phone.</summary>
+        public bool IsSyncingHistory
+        {
+            get => _isSyncingHistory;
+            private set => Set(ref _isSyncingHistory, value);
+        }
+
+        /// <summary>
+        /// Put a saved conversation on screen.
+        /// </summary>
+        /// <remarks>
+        /// <para>The dialogue state starts fresh, as it does after a restart and for the same reason:
+        /// a follow-up resolved against a focus element from another day reads as the assistant
+        /// changing the subject. The conversation's language is carried, as Android carries it, so
+        /// the next answer continues in the language the conversation was in.</para>
+        ///
+        /// <para>Taken by reference, not by id: a conversation another client saved without an id
+        /// still has to be openable.</para>
+        /// </remarks>
+        public void OpenConversation(StoredChatSession conversation)
+        {
+            if (IsBusy) return;
+
+            _restored = true;
+            _current = conversation;
+
+            Messages.Clear();
+            foreach (var message in conversation.Messages) Messages.Add(message);
+            Suggestions = [];
+
+            if (Orchestrator() is { } orchestrator)
+            {
+                orchestrator.Reset();
+                orchestrator.State.ActiveLanguage = conversation.Language;
+            }
+        }
+
+        /// <summary>
+        /// Bring the history up to date with the phone's, and save the result here.
+        /// </summary>
+        /// <remarks>
+        /// A failed or skipped sync leaves the history as it was: see <see cref="ChatHistorySync"/>
+        /// on why that must never be read as an empty cloud.
+        /// </remarks>
+        public async Task SyncHistoryAsync()
+        {
+            await LoadHistoryAsync().ConfigureAwait(true);
+            if (!ChatHistorySync.CanSync) return;
+
+            IsSyncingHistory = true;
+            try
+            {
+                var merged = await ChatHistorySync.SyncAsync(_history).ConfigureAwait(true);
+                if (merged is null) return;
+
+                // The on-screen conversation is re-pointed at its merged copy, so the next save
+                // updates it rather than adding it a second time.
+                var currentId = _current?.Id;
+                _history = merged;
+                if (!string.IsNullOrEmpty(currentId))
+                    _current = _history.FirstOrDefault(s => s.Id == currentId) ?? _current;
+
+                await ChatHistoryStore.SaveAsync(_history).ConfigureAwait(true);
+                HistoryChanged?.Invoke(this, EventArgs.Empty);
+            }
+            finally
+            {
+                IsSyncingHistory = false;
+            }
+        }
+
+        private async Task LoadHistoryAsync()
+        {
+            if (_historyLoaded) return;
+
+            _history = await ChatHistoryStore.LoadAsync().ConfigureAwait(true);
+            _historyLoaded = true;
+        }
+
+        /// <summary>
+        /// Save the conversation on screen into the history, then share it.
+        /// </summary>
+        /// <remarks>
+        /// Title and timestamp are rewritten on every save, as Android rewrites them, with Android's
+        /// title rule - two rules would leave the title changing with whichever device saved last.
+        /// </remarks>
+        private async Task SaveConversationAsync()
+        {
+            var messages = Messages.Where(m => m.Role != ChatRole.Thinking).ToList();
+            if (messages.Count == 0) return;
+
+            await LoadHistoryAsync().ConfigureAwait(true);
+
+            _current ??= new StoredChatSession();
+            _current.Title = ChatHistoryDocument.Title(messages.FirstOrDefault(m => m.IsUser)?.Text);
+            _current.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            _current.Language = _orchestrator?.State.ActiveLanguage ?? AppLanguage.BaseCode(AppLanguage.Current);
+            _current.Messages = messages;
+
+            _history.Remove(_current);
+            _history.Insert(0, _current);
+            if (_history.Count > ChatHistoryDocument.MaxSessions)
+                _history.RemoveRange(ChatHistoryDocument.MaxSessions, _history.Count - ChatHistoryDocument.MaxSessions);
+
+            await ChatHistoryStore.SaveAsync(_history).ConfigureAwait(true);
+            HistoryChanged?.Invoke(this, EventArgs.Empty);
+
+            await SyncHistoryAsync().ConfigureAwait(true);
+        }
+
         /// <summary>
         /// Ask a question and append both turns.
         /// </summary>
@@ -152,21 +285,30 @@ namespace Atomic.App.Services
                 _gate.Release();
             }
 
-            // After the gate, so a slow disk cannot hold up the next question. Fire-and-forget is
-            // right here: losing the last turn to a failed write is a far smaller cost than making
-            // the user wait on one, and the next turn rewrites the whole thread anyway.
-            _ = ChatHistoryStore.SaveAsync(Messages);
+            // After the gate, so a slow disk or a slow network cannot hold up the next question.
+            // Fire-and-forget is right here: losing the last turn to a failed write is a far smaller
+            // cost than making the user wait on one, and the next turn rewrites the conversation anyway.
+            _ = SaveConversationAsync();
 
             if (_orchestrator is { } chat) _ = InterestProfileStore.SaveAsync(chat.Profile);
         }
 
-        /// <summary>Clear the thread and the dialogue state, keeping the warm index.</summary>
+        /// <summary>
+        /// Start a new conversation, keeping the warm index.
+        /// </summary>
+        /// <remarks>
+        /// The conversation that was on screen stays in the history - it was saved after its last
+        /// answer. This used to delete the saved thread, which was right when there was only one and
+        /// would now throw away a conversation the user may want back.
+        /// </remarks>
         public void Reset()
         {
+            _restored = true;
+            _current = null;
+
             Messages.Clear();
             Suggestions = [];
             _orchestrator?.Reset();
-            _ = ChatHistoryStore.ClearAsync();
         }
 
         /// <summary>
@@ -179,10 +321,22 @@ namespace Atomic.App.Services
         /// </summary>
         public async Task RestoreAsync()
         {
-            if (Messages.Count > 0) return;
+            // Once per run. After a new chat, reopening the panel must show that new chat, not bring
+            // back the last conversation the user just chose to leave.
+            if (_restored || Messages.Count > 0) return;
+            _restored = true;
 
-            foreach (var message in await ChatHistoryStore.LoadAsync().ConfigureAwait(true))
-                Messages.Add(message);
+            await LoadHistoryAsync().ConfigureAwait(true);
+
+            if (_history.FirstOrDefault() is { } latest)
+            {
+                _current = latest;
+                foreach (var message in latest.Messages) Messages.Add(message);
+            }
+
+            // In the background: the phone's conversations should be there by the time the user
+            // opens the history, without making the panel wait for the network to open.
+            _ = SyncHistoryAsync();
 
             // The greeting for a returning user depends on this, and the panel greets before the
             // first question is asked - so it has to be loaded here rather than lazily.

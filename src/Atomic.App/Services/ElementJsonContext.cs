@@ -32,6 +32,8 @@ namespace Atomic.App.Services
     // stays a flat record and a message written by an older build still deserializes.
     [JsonSerializable(typeof(Dictionary<string, int>))]
     [JsonSerializable(typeof(List<ChatMessage>))]
+    // The saved conversations. The single thread above is still read once, to migrate it.
+    [JsonSerializable(typeof(List<StoredChatSession>))]
     internal sealed partial class ElementJsonContext : JsonSerializerContext
     {
     }

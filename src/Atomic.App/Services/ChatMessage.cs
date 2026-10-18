@@ -55,6 +55,14 @@ namespace Atomic.App.Services
             Cards = cards;
         }
 
+        /// <summary>
+        /// The message's id. Android gives every message one, and a conversation synced between the
+        /// two keeps them, which is what lets a Windows rewrite of the conversation carry each
+        /// message's fields from the phone across. A thread saved by an earlier build has none and is
+        /// given fresh ones on load, which is harmless: nothing has been shared under the old ones.
+        /// </summary>
+        public string Id { get; init; } = Guid.NewGuid().ToString();
+
         public ChatRole Role { get; init; }
 
         public string Text { get; init; } = string.Empty;

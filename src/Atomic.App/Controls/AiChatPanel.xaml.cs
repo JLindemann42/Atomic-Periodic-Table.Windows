@@ -78,6 +78,10 @@ namespace Atomic.App.Controls
             Session.PropertyChanged += Session_PropertyChanged;
             Session.LimitChanged += (_, _) => ApplyLimitBadge();
             Session.Messages.CollectionChanged += Messages_Changed;
+            Session.HistoryChanged += (_, _) =>
+            {
+                if (HistoryPane.Visibility == Visibility.Visible) RefreshHistory();
+            };
 
             ApplyStrings();
             Loaded += OnLoaded;
@@ -150,6 +154,8 @@ namespace Atomic.App.Controls
             Set(SendButton, strings.Get(S.chat_send));
             Set(CloseButton, strings.Get(S.chat_close));
             Set(NewChatButton, strings.Get(S.chat_new));
+            Set(HistoryButton, strings.Get(S.chat_history));
+            HistoryTitle.Text = strings.Get(S.chat_history);
 
             ApplyLimitBadge();
 
@@ -232,6 +238,9 @@ namespace Atomic.App.Controls
         {
             if (!_isOpen) return;
             _isOpen = false;
+
+            // Reopened, the panel shows the conversation, not a history list left open last time.
+            HistoryPane.Visibility = Visibility.Collapsed;
 
             Animate(open: false);
             LayoutChanged?.Invoke(this, EventArgs.Empty);
@@ -471,7 +480,10 @@ namespace Atomic.App.Controls
             if (e.Key == VirtualKey.Escape)
             {
                 e.Handled = true;
-                Close();
+
+                // The sidebar first: Escape backs out one layer at a time, as everywhere else.
+                if (HistoryPane.Visibility == Visibility.Visible) HideHistory();
+                else Close();
             }
         }
 
@@ -506,8 +518,82 @@ namespace Atomic.App.Controls
                 Navigation?.Follow(action);
         }
 
+        // ---- History ----------------------------------------------------------------------------
+
+        private void History_Click(object sender, RoutedEventArgs e)
+        {
+            if (HistoryPane.Visibility == Visibility.Visible) HideHistory();
+            else ShowHistory();
+        }
+
+        private void ShowHistory()
+        {
+            HistoryPane.Visibility = Visibility.Visible;
+            RefreshHistory();
+
+            // What is saved here shows at once; the phone's conversations follow when the sync lands.
+            _ = RefreshAfterSyncAsync();
+        }
+
+        private void HideHistory() => HistoryPane.Visibility = Visibility.Collapsed;
+
+        private async System.Threading.Tasks.Task RefreshAfterSyncAsync()
+        {
+            try
+            {
+                await Session.SyncHistoryAsync();
+            }
+            catch (Exception)
+            {
+                // A sync that cannot run leaves the list as it is; it must not take the panel down.
+            }
+
+            if (HistoryPane.Visibility == Visibility.Visible) RefreshHistory();
+        }
+
+        /// <summary>
+        /// Fill the sidebar: the conversations, or why there are none.
+        /// </summary>
+        /// <remarks>
+        /// Gated as Android gates it - signed in, then PRO or PRO+ - and with Android's own messages
+        /// for each, which are already translated into every language the app ships.
+        /// </remarks>
+        private void RefreshHistory()
+        {
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+
+            string? message = null;
+            if (!CloudSync.IsSignedIn) message = strings.Get(S.ai_history_sign_in);
+            else if (!SettingsStore.HasAnyPro) message = strings.Get(S.ai_history_pro_only);
+
+            var items = message is null ? Session.History.ToList() : [];
+            if (message is null && items.Count == 0) message = strings.Get(S.chat_history_empty);
+
+            HistoryList.ItemsSource = items;
+            HistoryList.Visibility = items.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            HistoryMessage.Text = message ?? string.Empty;
+            HistoryMessage.Visibility = message is null ? Visibility.Collapsed : Visibility.Visible;
+
+            HistorySyncing.Visibility = Session.IsSyncingHistory ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void HistoryList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is not StoredChatSession conversation) return;
+
+            Session.OpenConversation(conversation);
+            HideHistory();
+            UpdateEmptyState();
+            ScrollToEnd();
+            Input.Focus(FocusState.Programmatic);
+        }
+
+        private void HistoryScrim_Tapped(object sender, TappedRoutedEventArgs e) => HideHistory();
+
         private void NewChat_Click(object sender, RoutedEventArgs e)
         {
+            HideHistory();
             Session.Reset();
             UpdateEmptyState();
             Input.Focus(FocusState.Programmatic);
@@ -522,6 +608,9 @@ namespace Atomic.App.Controls
             if (e.PropertyName == nameof(ChatSession.Suggestions)) UpdateSuggestions();
 
             if (e.PropertyName == nameof(ChatSession.IsBusy)) UpdateSendEnabled();
+
+            if (e.PropertyName == nameof(ChatSession.IsSyncingHistory))
+                HistorySyncing.Visibility = Session.IsSyncingHistory ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void Messages_Changed(object? sender, object e)

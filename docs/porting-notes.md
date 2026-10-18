@@ -951,3 +951,43 @@ within 2× differ from the reference by less than a factor of two. Four stable-f
 483 lines change per file in the twelve tables on top of D49's 57, and a second run changes
 nothing. The tool must run on the tables as committed, not after a partial pass, because the copy
 detection needs to see the copies.
+
+### D51 — chat history shared with Android, and the sync that was erasing it
+
+**Windows progress sync erased the user's Android chat history.** Android stores `users/{uid}.chats`
+as a list of conversation maps - `id`, `title`, `timestamp` (epoch ms), `language`, `messages`, each
+message `id`, `text`, `isFromUser`, `timestamp` - written by `ChatHistoryManager`, and its
+`ProgressSyncManager` leaves the field alone. The Windows port put `chats` into progress, as a list of
+strings. Android's maps read as nothing, the merge was empty, and the PATCH named `chats` in its update
+mask and wrote `[]`. It ran at sign-in, at launch and every five minutes. The tests passed because they
+round-tripped strings: they asserted the wrong shape. Fixed in `ab601d8` by taking chats out of progress
+entirely, as Android does; two tests now pin that the progress PATCH never names or writes them.
+
+The single local thread had the same misreading behind it: `ChatHistoryStore` kept twenty *messages*
+and said that matched Android's cap, which is twenty *conversations*.
+
+**The history now has its own path.** `ChatHistoryDocument` (Core, pure, tested) reads and writes
+Android's shape and merges the two sides; `ChatHistorySync` does the round trip with a PATCH that masks
+`chats` alone; `ChatHistoryStore` keeps the conversations locally and migrates the old single thread
+into the first one. The merge matches conversations by id, the newer save wins, ties go to the longer
+one, and the list is newest first and capped at twenty, as Android trims.
+
+Three rules keep a Windows write from taking anything away from the phone:
+
+- A conversation read from the cloud keeps its original Firestore value, and a Windows write - even of
+  a conversation Windows has added messages to - starts from that value and overwrites only the fields
+  it knows. A field Android adds later survives, on the conversation and on each message.
+- A conversation with no id cannot be matched, so it is carried as it is rather than dropped.
+- A sync that fails returns nothing and the local list is kept. A failure is never read as an empty
+  cloud, which is exactly the mistake that erased the history before.
+
+Windows' source buttons and chart card ride along as `actions` and `cards` on its own messages. Android
+ignores both and preserves them when it rewrites the array, so a conversation keeps them on the way
+back. The title is Android's rule exactly - the first user message, cut to 37 characters and an
+ellipsis past 40 - because both platforms rewrite it on every save.
+
+Gated as Android gates it: signed in, then PRO or PRO+, with Android's own translated messages for
+each. The sidebar's two new labels are English-only, since Android hardcodes its history screen.
+
+Not handled, as on Android: two devices continuing the same conversation at once - the later save wins
+and the other's new messages are lost - and deleting a conversation, which neither platform offers.

@@ -1033,6 +1033,12 @@ DECLARATIONS: dict[str, tuple[str, str | None, str]] = {
     "chat_new":             ("New conversation", None, "icon button; Android has no string"),
     "chat_thinking":        ("Thinking", None, "read aloud while the engine runs"),
 
+    # The history sidebar. English-only on purpose: Android hardcodes its history screen in English
+    # ("No history found..."), so there is no translation to borrow, and its two gate messages -
+    # ai_history_sign_in, ai_history_pro_only - are already translated and used as they are.
+    "chat_history":         ("Chat history", None, "history sidebar title and its button"),
+    "chat_history_empty":   ("No conversations yet", None, "history sidebar with nothing saved"),
+
     # Flashcard level bands. Android draws its boxes with the range baked into a layout string per
     # box; the Windows screen renders them from FlashcardCatalog, so it needs one format instead.
     #

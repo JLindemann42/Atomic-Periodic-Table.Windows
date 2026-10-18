@@ -329,6 +329,41 @@ namespace Atomic.App.Services
             _numberToCode = toCode;
         }
 
+        // ---- For other owners of the document -------------------------------------------------
+
+        /// <summary>
+        /// The user's whole document, for a caller that owns a different part of it than progress.
+        /// </summary>
+        /// <returns>The document, or null when there is none yet - a first sign-in.</returns>
+        /// <exception cref="InvalidOperationException">Not signed in, or the request was refused.</exception>
+        public static async Task<JsonNode?> ReadDocumentAsync()
+        {
+            var session = await CurrentSessionAsync().ConfigureAwait(true)
+                          ?? throw new InvalidOperationException("Not signed in.");
+
+            return await GetAsync(session).ConfigureAwait(true);
+        }
+
+        /// <summary>
+        /// Write the fields <paramref name="updateMaskQuery"/> names, and only those.
+        /// </summary>
+        /// <remarks>
+        /// The mask is required. A PATCH without one replaces the whole document, which this document
+        /// co-owned with Android must never have done to it - so an empty mask is refused here rather
+        /// than sent.
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">Not signed in, no mask, or the request was refused.</exception>
+        public static async Task WriteFieldsAsync(JsonObject body, string updateMaskQuery)
+        {
+            if (!updateMaskQuery.Contains("updateMask.fieldPaths=", StringComparison.Ordinal))
+                throw new InvalidOperationException("Refusing a PATCH without an update mask.");
+
+            var session = await CurrentSessionAsync().ConfigureAwait(true)
+                          ?? throw new InvalidOperationException("Not signed in.");
+
+            await PatchBodyAsync(session, body, updateMaskQuery).ConfigureAwait(true);
+        }
+
         // ---- Transport -------------------------------------------------------------------------
 
         private static string DocumentUrl(string uid) =>
@@ -371,10 +406,15 @@ namespace Atomic.App.Services
         /// exhaustive list of what this build owns, and a test asserts it matches exactly what is
         /// written.</para>
         /// </remarks>
-        private static async Task PatchAsync(FirebaseSession session, ProgressSnapshot snapshot)
+        private static Task PatchAsync(FirebaseSession session, ProgressSnapshot snapshot) =>
+            PatchBodyAsync(
+                session,
+                ProgressDocument.ToDocument(snapshot, DateTimeOffset.UtcNow),
+                ProgressDocument.UpdateMaskQuery());
+
+        private static async Task PatchBodyAsync(FirebaseSession session, JsonObject body, string updateMaskQuery)
         {
-            var url = DocumentUrl(session.Uid) + ProgressDocument.UpdateMaskQuery();
-            var body = ProgressDocument.ToDocument(snapshot, DateTimeOffset.UtcNow);
+            var url = DocumentUrl(session.Uid) + updateMaskQuery;
 
             using var request = new HttpRequestMessage(HttpMethod.Patch, url)
             {
