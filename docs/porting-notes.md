@@ -872,11 +872,14 @@ Not changed, deliberately: Ca-48 and Kr-78 are `---`, and both have an *observed
 value in the second tier when it is plainly wrong. 57 lines change in each of the twelve files,
 and a second run changes nothing.
 
-**Still wrong, and not fixed here.** The pasted column left real half-lives on the neighbours:
-Ho-166 reads 81.6 h (it is 26.8 h), Er-169 reads 3.1 min (it is 9.4 days), and so on across
-holmium and erbium. Those are half-life values and need a source, not a reference table of which
-nuclides are stable. Separately, 703 isotope names use `103-Sb` order against `Sb-103` elsewhere,
-and `3.0\uFFFD10^6 y` shows a literal replacement character where `×` was lost.
+**Not fixed here, fixed in D50.** The pasted column left wrong half-lives on the neighbours:
+Ho-166 read 81.6 h (it is 26.8 h) and Er-169 read 3.1 min (it is 9.4 days). Those need a source,
+not a table of which nuclides are stable. Separately, 703 isotope names use `103-Sb` order against
+`Sb-103` elsewhere.
+
+*Correction:* an earlier version of this note said some half-lives contain a literal replacement
+character where `×` was lost. They do not. Every `×` in these strings is a valid U+00D7; the
+replacement character was the console this was read on failing to render it.
 
 **A second bug, found by printing the result.** `Isotope.MassNumber` was read from `iso_mass_N`,
 the atomic *mass* (196.966568), and `IntOf` keeps only digits: gold's mass number was 196966568.
@@ -884,3 +887,67 @@ The isotope chart builds its axis and its stable band from it, so both were wron
 `i.Nucleons == n || i.MassNumber == n` in `QueryExecutor` is a workaround for exactly this. It
 reads `iso_A_N` now, rounding the mass only when a slot has none. Android's `IsotopeParser.kt`
 has the same line.
+
+### D50 — the half-lives themselves
+
+D49 decided which isotopes are stable and said what it left behind. This is the rest, and it
+turned out not to be a pasted-column problem but a data-quality one: **402 of 3,239 half-lives
+were off by more than a factor of two**, across about thirty elements.
+
+The reference is the NUBASE-derived isotope table in the `mendeleev` package (MIT), read out of
+the wheel by `tools/data/fix_half_lives.py` so nothing opaque is committed. It carries
+uncertainties and discovery years, and it is better than memory: At-215 is 37±3 µs and Mg-35
+11.3±0.6 ms, where older tables, and this author, remembered 0.1 ms and 70 ms. The tool's parser
+was checked against the app's own `IsotopeParser` on all 3,239 slots before being trusted, with
+no mismatches.
+
+**What the defects were.**
+
+*Placeholder ramps.* Lead 181-201 were twenty-one isotopes at `0.1 ms`; Pb-198 is 2.4 *hours*,
+off by eight orders of magnitude. Osmium 163-185 climbed `1.2 s, 1.5 s, 2.0 s ... 12 s` in steps of
+half a second. Nobody measures that; someone counted.
+
+*The pasted column*, now measured: nine `(mass number, value)` pairs repeated across dysprosium,
+holmium and erbium, `144.4 d` at A=159 through `5 s` at A=176. Most sit inside a factor of two of
+the truth, so size cannot find them, which is why D49 left them.
+
+*Values that parse to nothing.* `2.5×102^-21 (s)` (a stray `2` in `10²`) for He-9 and He-10, and
+`0.178.3 (s)` for Li-9. The app shows no half-life at all for these.
+
+*Gaps with a measurement.* 47 slots said `---` where one exists, including the ones D49 blanked
+because they were wrongly marked stable, and six radioactive isotopes it left as `N/A`: Hf-175
+(70 d), Tl-197 to Tl-200 (2.8 to 26 h), Re-187 (4.2×10¹⁰ y). Calcium-48 is here too: D49 left it
+at `---` rather than call it stable, and its observed decay (5.6×10¹⁹ y) is the honest value.
+
+**The rules**, each limited to a slot the data is demonstrably wrong about:
+
+| rule | | slots |
+|---|---|---|
+| disagrees | more than 2× from the reference | 402 |
+| missing | `---` where a measurement exists | 47 |
+| pasted | same value at the same mass number in 2+ elements, >10% off | 22 |
+| ramp | four consecutive masses in equal steps, >10% off | 4 |
+| unreadable | parses to nothing | 3 |
+| copied | same value in 3+ elements, nothing to check against | 5 |
+
+Inside 2× is left alone: Fe-46 at 9 ms against 13 ms is two evaluations, not an error, and
+overwriting it would swap one valid literature value for another. 14 of the 22 *pasted* slots are
+outside dysprosium, holmium and erbium (cerium, cobalt, iodine, lutetium, mercury, praseodymium,
+strontium, xenon), where an identical value at one mass number in two elements, wrong against the
+reference, is the same fingerprint. *copied* and *ramp* with no reference value become `---`:
+with nothing to check them against, a counted sequence is not data, and a blank is honest.
+
+Two of the rules were added because the structural tests caught what the first design missed.
+The pair rule exists because Dy-170 and Ho-170 both read `1.6 min`, both wrong and both inside 2×,
+and the original "three or more" test stopped firing once D49 had turned Er-170 into `Stable`.
+The ramp rule exists because osmium 168-171 (`3.5, 4.0, 4.5, 5.0 s`) survived the first pass.
+
+**Left alone, and counted.** 212 slots have a value and the reference has none, so they cannot be
+checked; none of them forms a ramp, a repeated run, or a cross-element copy. About 290 values
+within 2× differ from the reference by less than a factor of two. Four stable-flagged isotopes
+(Xe-136, Nd-150, Os-184, Os-186) have an observed decay in NUBASE at 10¹³ to 10²¹ years; the data's
+`Observationally Stable` stands.
+
+483 lines change per file in the twelve tables on top of D49's 57, and a second run changes
+nothing. The tool must run on the tables as committed, not after a partial pass, because the copy
+detection needs to see the copies.
