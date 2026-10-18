@@ -59,8 +59,7 @@ namespace Atomic.App
                 AskAtomicButton.Visibility = open ? Visibility.Collapsed : Visibility.Visible;
 
             // The page makes room for the panel when there is room to make, and not otherwise.
-            ChatPanel.LayoutChanged += (_, _) =>
-                ChatColumn.Width = new GridLength(ChatPanel.DockedWidth);
+            ChatPanel.LayoutChanged += (_, _) => ApplyChatLayout();
             var askAtomic = ResourceStringProvider
                 .For(AppLanguage.BaseCode(AppLanguage.Current))
                 .Get(Atomic.Core.Localization.S.ask_atomic);
@@ -207,6 +206,71 @@ namespace Atomic.App
             {
                 sender.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.no_results);
             }
+        }
+
+        /// <summary>
+        /// The room, in device-independent pixels, left between the page and a docked Ask Atomic
+        /// panel. Empty on purpose: the window's Mica shows through it, so the two read as separate
+        /// cards on one surface rather than as one surface with a seam.
+        /// </summary>
+        private const double ChatPanelGap = 6;
+
+        /// <summary>The NavigationView's content card, found on first use. See <see cref="PageCard"/>.</summary>
+        private Grid? _pageCard;
+
+        /// <summary>
+        /// Give the panel its column - its width plus the gap - and round the page's far corner
+        /// while it is there.
+        /// </summary>
+        private void ApplyChatLayout()
+        {
+            var docked = ChatPanel.DockedWidth;
+
+            ChatColumn.Width = new GridLength(docked > 0 ? docked + ChatPanelGap : 0);
+
+            if (PageCard() is not { } card) return;
+
+            if (docked > 0)
+            {
+                // The card is rounded on its top-left only, because on its own it runs to the
+                // window's edge on the right. Beside a panel it has an edge there too, and a
+                // square corner next to a rounded one looks like a mistake. The border follows the
+                // corner round: without a right edge the stroke would simply stop where the curve
+                // starts.
+                card.CornerRadius = new CornerRadius(8, 8, 0, 0);
+                card.BorderThickness = new Thickness(1, 1, 1, 0);
+            }
+            else
+            {
+                // Back to whatever the NavigationView's template says, not to a copy of it.
+                card.ClearValue(Grid.CornerRadiusProperty);
+                card.ClearValue(Grid.BorderThicknessProperty);
+            }
+        }
+
+        /// <summary>
+        /// The card the page is drawn on: the NavigationView's <c>ContentGrid</c>.
+        ///
+        /// <para>Found by walking <i>up</i> from the page frame, not down from the NavigationView.
+        /// The name <c>ContentGrid</c> is also used inside the template of every navigation item, so
+        /// a search from above can land on a menu entry instead; the nearest one above the frame
+        /// can only be the card the frame sits in. Not cached when it is not found yet - the
+        /// template is applied on load, and the first call can come before that.</para>
+        /// </summary>
+        private Grid? PageCard()
+        {
+            if (_pageCard is not null) return _pageCard;
+
+            DependencyObject? node = contentFrame;
+            while (node is not null)
+            {
+                if (node is Grid { Name: "ContentGrid" } grid)
+                    return _pageCard = grid;
+
+                node = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetParent(node);
+            }
+
+            return null;
         }
 
         private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs e)
