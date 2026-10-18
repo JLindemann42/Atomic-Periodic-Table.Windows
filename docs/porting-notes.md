@@ -838,3 +838,49 @@ got nothing. Both spellings are accepted rather than either translation being ov
 The lexicon and alias changes were made in Android's `Lexicon.kt` and `FieldResolver.kt` and
 regenerated with `kt2cs_lexicon.py`, because the C# is generated and says so. The generator was
 checked first: re-running it before any edit reproduced the committed file byte for byte.
+
+### D49 — which isotopes the tables call stable
+
+The AI told users gold has "40 known isotopes, 0 of them stable". Au-197 is the only isotope gold
+has and it is all of natural gold. 37 elements reported no stable isotope; 26 is the right number.
+
+The cause is not one defect but three, none visible to a parser, found by reading the isotope
+block against the table of stable nuclides rather than by trusting the marker.
+
+**Stable written as `N/A`, for atomic numbers 70-82 only.** Ytterbium through lead use `N/A` where
+every other element uses `Stable`, which is a batch of data entry rather than a convention. But
+`N/A` is not a stable marker: the same block holds Hf-175 (70 days), Tl-197 to Tl-200 (hours) and
+Re-187 (4×10¹⁰ years), radioactive with a half-life nobody filled in. Reading every `N/A` as
+stable would have been wrong in seven places, so each slot is decided from the nuclide. 31 of the
+37 `N/A` are stable; the other six stay as they were.
+
+**Stable isotopes carrying an isomer's half-life.** Ir-191 and Ir-193 held 4.94 d and 10.53 d —
+Ir-193m is 10.53 days — so iridium had no stable isotope. Ytterbium's 168-172 all held "1.5 min",
+and Gd-160, Os-184, Er-166/167/168/170 similar. Xe-124 held 4.18 days and Os-186 12.5 seconds;
+both really decay, so slowly (10¹⁵ to 10²² years) that the data's own `Observationally Stable`
+label is the honest one.
+
+**Radioactive isotopes marked stable.** Dysprosium's half-life column was pasted over holmium and
+erbium: the same values appear at the same mass numbers in all three (144.4 d at A=159, 81.6 h at
+A=166, 8.7 min at A=168). Holmium listed six stable isotopes and has one; erbium listed eight and
+has six, only two of them among the eight. The false ones are now `---` — "no data" — rather
+than a half-life from memory.
+
+Not changed, deliberately: Ca-48 and Kr-78 are `---`, and both have an *observed* decay
+(10¹⁹ and 10²¹ years). Promoting them would claim more than anyone has measured.
+`tools/data/fix_stable_isotopes.py` carries the reference table in two tiers and only replaces a
+value in the second tier when it is plainly wrong. 57 lines change in each of the twelve files,
+and a second run changes nothing.
+
+**Still wrong, and not fixed here.** The pasted column left real half-lives on the neighbours:
+Ho-166 reads 81.6 h (it is 26.8 h), Er-169 reads 3.1 min (it is 9.4 days), and so on across
+holmium and erbium. Those are half-life values and need a source, not a reference table of which
+nuclides are stable. Separately, 703 isotope names use `103-Sb` order against `Sb-103` elsewhere,
+and `3.0\uFFFD10^6 y` shows a literal replacement character where `×` was lost.
+
+**A second bug, found by printing the result.** `Isotope.MassNumber` was read from `iso_mass_N`,
+the atomic *mass* (196.966568), and `IntOf` keeps only digits: gold's mass number was 196966568.
+The isotope chart builds its axis and its stable band from it, so both were wrong; the
+`i.Nucleons == n || i.MassNumber == n` in `QueryExecutor` is a workaround for exactly this. It
+reads `iso_A_N` now, rounding the mass only when a slot has none. Android's `IsotopeParser.kt`
+has the same line.

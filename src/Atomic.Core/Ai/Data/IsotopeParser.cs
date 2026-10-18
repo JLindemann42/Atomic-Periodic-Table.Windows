@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -94,7 +94,11 @@ namespace Atomic.Core.Ai.Data
 
                 isotopes.Add(new Isotope(
                     Name: name,
-                    MassNumber: IntOf(row, $"iso_mass_{slot}"),
+                    // iso_A is the mass number. iso_mass is the atomic *mass*, 196.966568 for
+                    // gold, and IntOf strips everything but digits - so reading that field made
+                    // gold's mass number 196966568, and the isotope chart's axis ran to nine
+                    // digits. Rounding the mass is the fallback for a slot with no iso_A.
+                    MassNumber: IntOf(row, $"iso_A_{slot}") ?? RoundedMass(row, $"iso_mass_{slot}"),
                     DecayType: decay is not null && !ValueParser.IsNullToken(decay) ? decay : null,
                     HalfLifeSeconds: HalfLifeSeconds(halfRaw),
                     HalfLifeDisplay: halfRaw,
@@ -192,6 +196,17 @@ namespace Atomic.Core.Ai.Data
 
         private static string? Str(ElementRow row, string key) =>
             row.TryGetValue(key, out var v) ? v?.ToString()?.Trim() : null;
+
+        private static int? RoundedMass(ElementRow row, string key)
+        {
+            var s = Str(row, key);
+            if (s is null || ValueParser.IsNullToken(s)) return null;
+
+            return double.TryParse(
+                       s, NumberStyles.Float, CultureInfo.InvariantCulture, out var mass) && mass > 0
+                ? (int)Math.Round(mass, MidpointRounding.AwayFromZero)
+                : null;
+        }
 
         private static int? IntOf(ElementRow row, string key)
         {
