@@ -50,7 +50,11 @@ namespace Atomic.App.Controls
             foreach (var child in Children)
             {
                 child.Measure(childConstraint);
-                var size = child.DesiredSize;
+
+                // A child never takes more than a line. Text that cannot wrap reports its natural
+                // width however little room it was offered, and a chip that runs off the edge is
+                // clipped, not wrapped.
+                var size = new Size(Math.Min(child.DesiredSize.Width, lineWidth), child.DesiredSize.Height);
 
                 if (x > 0 && x + size.Width > lineWidth)
                 {
@@ -78,7 +82,7 @@ namespace Atomic.App.Controls
 
             foreach (var child in Children)
             {
-                var size = child.DesiredSize;
+                var size = new Size(Math.Min(child.DesiredSize.Width, finalSize.Width), child.DesiredSize.Height);
 
                 if (x > 0 && x + size.Width > finalSize.Width)
                 {

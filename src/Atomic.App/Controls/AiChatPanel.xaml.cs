@@ -26,22 +26,31 @@ namespace Atomic.App.Controls
     /// served both hosts. Holding it here rather than per page is also what keeps the BM25 index
     /// warm; see <see cref="ChatSession"/>.</para>
     ///
-    /// <para>WinUI has no bottom sheet, so this is a <c>Border</c> pinned to the bottom of a grid
-    /// with a scrim behind it.</para>
+    /// <para>WinUI has no side drawer, so this is a <c>Border</c> pinned to the right edge of a
+    /// grid with a scrim behind it.</para>
     /// </summary>
     public sealed partial class AiChatPanel : UserControl
     {
-        /// <summary>Default height for AI Chat pa nel.</summary>
-        private const double DefaultHeightFraction = 0.6;
+        /// <summary>
+        /// How wide the drawer opens. Narrow on purpose: it sits beside the page rather than over
+        /// it, and a periodic table or a chart should stay readable while the answer is on screen.
+        /// </summary>
+        private const double DefaultSheetWidth = 380;
 
-        /// <summary>The tallest AI Chat panel can be dragged</summary>
-        private const double MaxHeightFraction = 0.9;
+        /// <summary>
+        /// The narrowest it can be dragged. Below this a bubble is a few words wide and a suggestion
+        /// chip wraps to four lines.
+        /// </summary>
+        private const double MinSheetWidth = 320;
 
-        /// <summary>Minimum height for AI Chat panel, to make sure content is visible.</summary>
-        private const double MinSheetHeight = 260;
+        /// <summary>The widest it can be dragged, as a share of the window, and in absolute terms.</summary>
+        private const double MaxWidthFraction = 0.6;
+
+        private const double MaxSheetWidth = 640;
+
         private static readonly TimeSpan SlideDuration = TimeSpan.FromMilliseconds(150);
 
-        private double _sheetHeight;
+        private double _sheetWidth;
         private bool _isOpen;
 
         public AiChatPanel()
@@ -180,7 +189,7 @@ namespace Atomic.App.Controls
         }
 
         /// <summary>
-        /// Slide the sheet and fade the scrim.
+        /// Slide the drawer in from the right and fade the scrim.
         ///
         /// <para>Composition rather than a <c>Storyboard</c>: translating a <c>Border</c> through
         /// <c>RenderTransform</c> animates on the UI thread, and this sheet is animating at exactly
@@ -195,9 +204,9 @@ namespace Atomic.App.Controls
             ElementCompositionPreview.SetIsTranslationEnabled(Sheet, true);
 
             var slide = compositor.CreateScalarKeyFrameAnimation();
-            slide.InsertKeyFrame(1f, open ? 0f : (float)Math.Max(_sheetHeight, MinSheetHeight));
+            slide.InsertKeyFrame(1f, open ? 0f : (float)Math.Max(_sheetWidth, MinSheetWidth));
             slide.Duration = SlideDuration;
-            visual.StartAnimation("Translation.Y", slide);
+            visual.StartAnimation("Translation.X", slide);
 
             var scrim = ElementCompositionPreview.GetElementVisual(Scrim);
             var fade = compositor.CreateScalarKeyFrameAnimation();
@@ -227,35 +236,42 @@ namespace Atomic.App.Controls
             // Start off-screen so the first Open() slides in rather than appearing.
             ElementCompositionPreview.SetIsTranslationEnabled(Sheet, true);
             var visual = ElementCompositionPreview.GetElementVisual(Sheet);
-            if (!_isOpen) visual.Properties.InsertVector3("Translation", new Vector3(0, 2000, 0));
+            if (!_isOpen) visual.Properties.InsertVector3("Translation", new Vector3(2000, 0, 0));
         }
 
         // ---- Sizing -----------------------------------------------------------------------------
 
         private void SizeSheet()
         {
-            var available = ActualHeight > 0 ? ActualHeight : 800;
-            if (_sheetHeight <= 0) _sheetHeight = available * DefaultHeightFraction;
+            var available = ActualWidth > 0 ? ActualWidth : 1200;
+            if (_sheetWidth <= 0) _sheetWidth = DefaultSheetWidth;
 
-            Sheet.Height = Clamp(_sheetHeight, available);
+            Sheet.Width = Clamp(_sheetWidth, available);
         }
 
-        private double Clamp(double height, double available) =>
-            Math.Clamp(height, MinSheetHeight, Math.Max(MinSheetHeight, available * MaxHeightFraction));
+        /// <summary>
+        /// Kept inside the window as well as inside the limits: a narrow window cannot hold a
+        /// 320px drawer plus anything worth seeing beside it, and the minimum yields to that.
+        /// </summary>
+        private static double Clamp(double width, double available)
+        {
+            var max = Math.Min(MaxSheetWidth, available * MaxWidthFraction);
+            return Math.Clamp(width, Math.Min(MinSheetWidth, available), Math.Max(MinSheetWidth, max));
+        }
 
         private void Sheet_SizeChanged(object sender, SizeChangedEventArgs e) =>
-            _sheetHeight = e.NewSize.Height;
+            _sheetWidth = e.NewSize.Width;
 
         private void Grip_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var available = ActualHeight > 0 ? ActualHeight : 800;
-            // Dragging up (negative delta) makes the sheet taller, which is why this subtracts.
-            Sheet.Height = Clamp(Sheet.ActualHeight - e.Delta.Translation.Y, available);
+            var available = ActualWidth > 0 ? ActualWidth : 1200;
+            // Dragging left (negative delta) makes the drawer wider, which is why this subtracts.
+            Sheet.Width = Clamp(Sheet.ActualWidth - e.Delta.Translation.X, available);
         }
 
         private void Grip_PointerEntered(object sender, PointerRoutedEventArgs e) =>
             ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(
-                Microsoft.UI.Input.InputSystemCursorShape.SizeNorthSouth);
+                Microsoft.UI.Input.InputSystemCursorShape.SizeWestEast);
 
         private void Grip_PointerExited(object sender, PointerRoutedEventArgs e) =>
             ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(
