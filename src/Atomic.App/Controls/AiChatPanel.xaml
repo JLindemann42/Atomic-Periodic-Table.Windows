@@ -12,6 +12,25 @@
     IsTabStop="False">
 
     <UserControl.Resources>
+      <ResourceDictionary>
+        <ResourceDictionary.ThemeDictionaries>
+            <!--
+                The fade's transparent end. A gradient from Transparent would pass through a dark
+                grey on the way to a light colour, because the stops are not interpolated as
+                premultiplied. The transparent end has to be the solid end's own colour at zero
+                alpha, and a theme resource cannot carry an alpha of its own - hence one per theme,
+                matching SolidBackgroundFillColorBase (#F3F3F3 light, #202020 dark).
+            -->
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="ChipFadeClear">#00F3F3F3</Color>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Dark">
+                <Color x:Key="ChipFadeClear">#00202020</Color>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="HighContrast">
+                <Color x:Key="ChipFadeClear">#00000000</Color>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
 
         <!--
             Bubbles.
@@ -125,37 +144,26 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
+      </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
         <!--
-            Scrim. Tapping it dismisses, matching every other modal surface in the app; its opacity
-            is animated rather than its Visibility so the sheet does not appear to snap.
-        -->
-        <Rectangle x:Name="Scrim"
-                   Fill="{ThemeResource SmokeFillColorDefaultBrush}"
-                   Opacity="0"
-                   Tapped="Scrim_Tapped" />
+            The drawer. A Border on the right edge of the window's second column, full height below
+            the title bar, slid in by a composition translation - see the code-behind for why not a
+            Storyboard.
 
-        <!--
-            The drawer. A Border pinned to the right edge, full height below the 32px title bar,
-            and slid in by a composition translation - see the code-behind for why not a
-            Storyboard. The top margin is the title bar's height: the window extends its content
-            into the title bar, so without it the header buttons sit under the system caption
-            buttons.
-
-            Background is opaque, not LayerFillColorDefaultBrush. That brush is semi-transparent by
-            design, and over a Mica window the page behind shows straight through the answer text -
-            unreadable, and worse the longer the answer is.
+            Background is transparent, which is the point: it shows the window's Mica, the same
+            surface as the navigation pane on the other side. That only works because the drawer is
+            docked beside the page. Laid over it, a transparent drawer would show the page's text
+            through the answer, and an opaque one is not Mica.
         -->
         <Border x:Name="Sheet"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
-                Margin="0,32,0,0"
-                Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+                Background="Transparent"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="1,1,0,0"
-                CornerRadius="8,0,0,0"
+                BorderThickness="1,0,0,0"
                 SizeChanged="Sheet_SizeChanged">
             <Grid x:Name="SheetLayout">
                 <Grid.RowDefinitions>
@@ -235,49 +243,71 @@
                     Example questions: before the first question, the starters; afterwards, the
                     follow-ups to the latest answer.
 
-                    A horizontal strip rather than a stack. Each one is a whole question - "How much
-                    of 100 g of carbon-14 is left after 11460 years?" - so a stack of them took a
-                    third of a drawer this narrow, and wrapping them ran the long ones off the edge.
-                    Here each chip is capped at a width and wraps inside it, and the strip scrolls.
+                    A horizontal strip of small single-line chips. Each is a whole question, so one
+                    that does not fit is trimmed with an ellipsis and carries the full text in its
+                    tooltip; clicking sends the whole thing either way.
 
-                    The 16px gutter is padding on the items, not margin on the scroller, so the
-                    first chip starts inset and the last one scrolls out under the edge rather than
-                    stopping short of it. The bottom padding leaves room for the scroll bar to
-                    overlay without sitting on the text.
+                    The 16px gutter is padding on the items, not margin on the scroller: the first
+                    chip starts level with the input below it, and the last one scrolls out under the
+                    edge instead of stopping short of it. 16 is the thread's and the composer's
+                    gutter, so the three line up.
                 -->
+                <Grid x:Name="SuggestionStrip" Grid.Row="2">
                 <ScrollViewer x:Name="SuggestionScroller"
-                              Grid.Row="2"
+                              ViewChanged="Suggestions_ViewChanged"
+                              SizeChanged="Suggestions_SizeChanged"
                               HorizontalScrollMode="Auto"
-                              HorizontalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Hidden"
                               VerticalScrollMode="Disabled"
                               VerticalScrollBarVisibility="Disabled"
                               PointerWheelChanged="Suggestions_PointerWheelChanged">
                     <ItemsControl x:Name="SuggestionList"
-                                  Padding="16,8,16,14">
+                                  SizeChanged="Suggestions_SizeChanged">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" Spacing="8" />
+                                <StackPanel Orientation="Horizontal" Spacing="6" Padding="16,6,16,10" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Button Tag="{Binding}"
                                         Click="Suggestion_Click"
-                                        VerticalAlignment="Stretch"
-                                        HorizontalContentAlignment="Left"
-                                        VerticalContentAlignment="Center"
-                                        MinWidth="120"
-                                        MaxWidth="230"
-                                        Padding="12,8"
-                                        CornerRadius="8">
+                                        MinHeight="0"
+                                        MaxWidth="220"
+                                        Padding="10,4"
+                                        ToolTipService.ToolTip="{Binding}">
                                     <TextBlock Text="{Binding}"
                                                FontSize="12"
-                                               TextWrapping="Wrap" />
+                                               TextTrimming="CharacterEllipsis"
+                                               TextWrapping="NoWrap" />
                                 </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
+
+                <!--
+                    The fade at the right edge, shown only while there is more to scroll to - on a
+                    strip that fits, it would grey out the last chip for nothing. It does not take
+                    input, so the chips under it stay clickable.
+
+                    A gradient to the theme's base colour, not a true alpha mask: Mica is tinted by
+                    the wallpaper and no fixed colour matches it exactly, so on some wallpapers the
+                    last 40px is very slightly off the surface around it.
+                -->
+                <Rectangle x:Name="SuggestionFade"
+                           Width="40"
+                           HorizontalAlignment="Right"
+                           IsHitTestVisible="False"
+                           Visibility="Collapsed">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="{ThemeResource ChipFadeClear}" Offset="0" />
+                            <GradientStop Color="{ThemeResource SolidBackgroundFillColorBase}" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                </Grid>
 
                 <!-- Composer -->
                 <Grid Grid.Row="3" Padding="16,4,16,16" ColumnSpacing="8">

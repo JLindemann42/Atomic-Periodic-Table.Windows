@@ -26,8 +26,9 @@ namespace Atomic.App.Controls
     /// served both hosts. Holding it here rather than per page is also what keeps the BM25 index
     /// warm; see <see cref="ChatSession"/>.</para>
     ///
-    /// <para>WinUI has no side drawer, so this is a <c>Border</c> pinned to the right edge of a
-    /// grid with a scrim behind it.</para>
+    /// <para>WinUI has no side drawer, so this is a <c>Border</c> in a column of its own beside the
+    /// page. Docked rather than overlaid so that its background can be the window's Mica; the page
+    /// narrows to make room.</para>
     /// </summary>
     public sealed partial class AiChatPanel : UserControl
     {
@@ -189,7 +190,7 @@ namespace Atomic.App.Controls
         }
 
         /// <summary>
-        /// Slide the drawer in from the right and fade the scrim.
+        /// Slide the drawer in from the right.
         ///
         /// <para>Composition rather than a <c>Storyboard</c>: translating a <c>Border</c> through
         /// <c>RenderTransform</c> animates on the UI thread, and this sheet is animating at exactly
@@ -206,28 +207,23 @@ namespace Atomic.App.Controls
             var slide = compositor.CreateScalarKeyFrameAnimation();
             slide.InsertKeyFrame(1f, open ? 0f : (float)Math.Max(_sheetWidth, MinSheetWidth));
             slide.Duration = SlideDuration;
-            visual.StartAnimation("Translation.X", slide);
-
-            var scrim = ElementCompositionPreview.GetElementVisual(Scrim);
-            var fade = compositor.CreateScalarKeyFrameAnimation();
-            fade.InsertKeyFrame(1f, open ? 1f : 0f);
-            fade.Duration = SlideDuration;
 
             if (!open)
             {
-                // Collapse only once the slide has finished, or the sheet vanishes instead of
-                // leaving. A batch is the only way to learn that from a composition animation.
+                // Collapse only once the slide has finished, or the drawer vanishes instead of
+                // leaving. A batch is the only way to learn that from a composition animation, and
+                // it has to be open before the animation starts to include it.
                 var batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
+                visual.StartAnimation("Translation.X", slide);
                 batch.Completed += (_, _) =>
                 {
                     if (!_isOpen) Visibility = Visibility.Collapsed;
                 };
-                scrim.StartAnimation("Opacity", fade);
                 batch.End();
             }
             else
             {
-                scrim.StartAnimation("Opacity", fade);
+                visual.StartAnimation("Translation.X", slide);
             }
         }
 
@@ -243,7 +239,7 @@ namespace Atomic.App.Controls
 
         private void SizeSheet()
         {
-            var available = ActualWidth > 0 ? ActualWidth : 1200;
+            var available = WindowWidth();
             if (_sheetWidth <= 0) _sheetWidth = DefaultSheetWidth;
 
             Sheet.Width = Clamp(_sheetWidth, available);
@@ -259,12 +255,19 @@ namespace Atomic.App.Controls
             return Math.Clamp(width, Math.Min(MinSheetWidth, available), Math.Max(MinSheetWidth, max));
         }
 
+        /// <summary>
+        /// The window's width. Not <c>ActualWidth</c>: docked in a column of its own, this control
+        /// is exactly as wide as the drawer, so measuring against it would clamp the drawer to
+        /// itself.
+        /// </summary>
+        private double WindowWidth() => XamlRoot is { } root && root.Size.Width > 0 ? root.Size.Width : 1200;
+
         private void Sheet_SizeChanged(object sender, SizeChangedEventArgs e) =>
             _sheetWidth = e.NewSize.Width;
 
         private void Grip_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var available = ActualWidth > 0 ? ActualWidth : 1200;
+            var available = WindowWidth();
             // Dragging left (negative delta) makes the drawer wider, which is why this subtracts.
             Sheet.Width = Clamp(Sheet.ActualWidth - e.Delta.Translation.X, available);
         }
@@ -335,8 +338,6 @@ namespace Atomic.App.Controls
 
         private void Close_Click(object sender, RoutedEventArgs e) => Close();
 
-        private void Scrim_Tapped(object sender, TappedRoutedEventArgs e) => Close();
-
         // ---- Binding glue -----------------------------------------------------------------------
 
         private void Session_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -383,11 +384,24 @@ namespace Atomic.App.Controls
                 : Session.Messages.Count == 0 ? Session.Starters : Session.Suggestions;
 
             SuggestionList.ItemsSource = items;
-            SuggestionScroller.Visibility = items.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            SuggestionStrip.Visibility = items.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
 
             // A new set starts from the left; keeping the old offset would open on the middle of it.
             SuggestionScroller.ChangeView(0, null, null, disableAnimation: true);
         }
+
+        private void Suggestions_ViewChanged(object? sender, ScrollViewerViewChangedEventArgs e) => UpdateFade();
+
+        private void Suggestions_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateFade();
+
+        /// <summary>
+        /// Show the right-edge fade only while some of the strip is still out of view.
+        /// </summary>
+        private void UpdateFade() =>
+            SuggestionFade.Visibility =
+                SuggestionScroller.ScrollableWidth - SuggestionScroller.HorizontalOffset > 1
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
 
         /// <summary>
         /// A mouse wheel scrolls the strip sideways. Left alone it does nothing here - the strip
