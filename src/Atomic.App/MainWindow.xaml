@@ -29,20 +29,10 @@
             <!-- Main content -->
         </Grid.RowDefinitions>
 
-        <!--
-            The second column is the Ask Atomic panel. Auto, so it takes no room while the panel is
-            collapsed and exactly the panel's width when it is open - the page narrows to make room
-            rather than sitting under it. See the panel itself for why.
-        -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
 
         <!-- Title Bar -->
         <Grid x:Name="AppTitleBar"  
               Grid.Row="0"
-              Grid.ColumnSpan="2"
               Height="32" >
             <!-- Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}" -->
               
@@ -123,17 +113,16 @@
         <!--
             Ask Atomic.
 
-            Docked in the second column, below the title bar, rather than laid over the page. Mica
-            is a window backdrop: it only shows where nothing opaque is on top, so a drawer that
-            overlays the page can either be opaque or show the page's text through the answer.
-            Beside the page it sits on the same Mica as the navigation pane, and the page narrows.
+            Over the content, below the title bar, on the right. It floats rather than docks
+            because its background is acrylic, and acrylic blurs what is behind it: docked beside
+            the page there is nothing behind it to blur and it renders as a flat tint. The panel
+            takes input only where it draws, so the page stays usable around it.
 
             One panel reachable from every page, mirroring Android where a single controller served
             both hosts. Holding it here rather than per page is also what keeps the BM25 index
             warm across navigation; see ChatSession.
         -->
         <controls:AiChatPanel x:Name="ChatPanel"
-                              Grid.Row="1"
-                              Grid.Column="1" />
+                              Grid.Row="1" />
     </Grid>
 </Window>

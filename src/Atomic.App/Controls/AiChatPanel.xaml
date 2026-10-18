@@ -12,25 +12,6 @@
     IsTabStop="False">
 
     <UserControl.Resources>
-      <ResourceDictionary>
-        <ResourceDictionary.ThemeDictionaries>
-            <!--
-                The fade's transparent end. A gradient from Transparent would pass through a dark
-                grey on the way to a light colour, because the stops are not interpolated as
-                premultiplied. The transparent end has to be the solid end's own colour at zero
-                alpha, and a theme resource cannot carry an alpha of its own - hence one per theme,
-                matching SolidBackgroundFillColorBase (#F3F3F3 light, #202020 dark).
-            -->
-            <ResourceDictionary x:Key="Light">
-                <Color x:Key="ChipFadeClear">#00F3F3F3</Color>
-            </ResourceDictionary>
-            <ResourceDictionary x:Key="Dark">
-                <Color x:Key="ChipFadeClear">#00202020</Color>
-            </ResourceDictionary>
-            <ResourceDictionary x:Key="HighContrast">
-                <Color x:Key="ChipFadeClear">#00000000</Color>
-            </ResourceDictionary>
-        </ResourceDictionary.ThemeDictionaries>
 
         <!--
             Bubbles.
@@ -144,26 +125,29 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-      </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
         <!--
-            The drawer. A Border on the right edge of the window's second column, full height below
-            the title bar, slid in by a composition translation - see the code-behind for why not a
-            Storyboard.
+            The drawer. A Border on the right edge, full height below the title bar, slid in by a
+            composition translation - see the code-behind for why not a Storyboard.
 
-            Background is transparent, which is the point: it shows the window's Mica, the same
-            surface as the navigation pane on the other side. That only works because the drawer is
-            docked beside the page. Laid over it, a transparent drawer would show the page's text
-            through the answer, and an opaque one is not Mica.
+            Acrylic, the system's default for a surface that floats over content. It blurs and
+            tints whatever is behind it, which is what keeps the answer text readable over a
+            periodic table: the page is there, but softened into colour. That only works because
+            the drawer overlays the page. Docked beside it there is nothing behind to blur, and
+            acrylic degrades to a flat tint - which is why this is not a column of its own.
+
+            The brush falls back to a solid colour when the window is inactive, as acrylic always
+            does; nothing here depends on the blur for legibility.
         -->
         <Border x:Name="Sheet"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
-                Background="Transparent"
+                Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="1,0,0,0"
+                BorderThickness="1,1,0,0"
+                CornerRadius="8,0,0,0"
                 SizeChanged="Sheet_SizeChanged">
             <Grid x:Name="SheetLayout">
                 <Grid.RowDefinitions>
@@ -251,6 +235,10 @@
                     chip starts level with the input below it, and the last one scrolls out under the
                     edge instead of stopping short of it. 16 is the thread's and the composer's
                     gutter, so the three line up.
+
+                    The right edge fades by lowering the opacity of the chips that reach it, in the
+                    code-behind. A gradient laid over the strip would have to be the colour of what
+                    is behind, and behind is a blur of the page.
                 -->
                 <Grid x:Name="SuggestionStrip" Grid.Row="2">
                 <ScrollViewer x:Name="SuggestionScroller"
@@ -285,28 +273,6 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-
-                <!--
-                    The fade at the right edge, shown only while there is more to scroll to - on a
-                    strip that fits, it would grey out the last chip for nothing. It does not take
-                    input, so the chips under it stay clickable.
-
-                    A gradient to the theme's base colour, not a true alpha mask: Mica is tinted by
-                    the wallpaper and no fixed colour matches it exactly, so on some wallpapers the
-                    last 40px is very slightly off the surface around it.
-                -->
-                <Rectangle x:Name="SuggestionFade"
-                           Width="40"
-                           HorizontalAlignment="Right"
-                           IsHitTestVisible="False"
-                           Visibility="Collapsed">
-                    <Rectangle.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                            <GradientStop Color="{ThemeResource ChipFadeClear}" Offset="0" />
-                            <GradientStop Color="{ThemeResource SolidBackgroundFillColorBase}" Offset="1" />
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
                 </Grid>
 
                 <!-- Composer -->

@@ -26,9 +26,9 @@ namespace Atomic.App.Controls
     /// served both hosts. Holding it here rather than per page is also what keeps the BM25 index
     /// warm; see <see cref="ChatSession"/>.</para>
     ///
-    /// <para>WinUI has no side drawer, so this is a <c>Border</c> in a column of its own beside the
-    /// page. Docked rather than overlaid so that its background can be the window's Mica; the page
-    /// narrows to make room.</para>
+    /// <para>WinUI has no side drawer, so this is a <c>Border</c> pinned to the right edge of a grid
+    /// that overlays the page. Overlaid rather than docked because its background is acrylic,
+    /// which has to have something behind it to blur.</para>
     /// </summary>
     public sealed partial class AiChatPanel : UserControl
     {
@@ -388,20 +388,56 @@ namespace Atomic.App.Controls
 
             // A new set starts from the left; keeping the old offset would open on the middle of it.
             SuggestionScroller.ChangeView(0, null, null, disableAnimation: true);
+
+            // After layout, when the new chips have widths to measure.
+            DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, UpdateChipFade);
         }
 
-        private void Suggestions_ViewChanged(object? sender, ScrollViewerViewChangedEventArgs e) => UpdateFade();
+        private void Suggestions_ViewChanged(object? sender, ScrollViewerViewChangedEventArgs e) => UpdateChipFade();
 
-        private void Suggestions_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateFade();
+        private void Suggestions_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateChipFade();
+
+        /// <summary>How far in from the right edge a chip starts to fade.</summary>
+        private const double ChipFadeZone = 56;
 
         /// <summary>
-        /// Show the right-edge fade only while some of the strip is still out of view.
+        /// Fade the chips that reach the strip's right edge, so it reads as continuing rather than
+        /// ending.
+        ///
+        /// <para>Per chip, not per pixel. The drawer's background is acrylic, a blur of the page,
+        /// so there is no colour a gradient could fade to; lowering the opacity of the chips
+        /// themselves works over anything. The cost is that a chip fades as a unit rather than
+        /// smoothly along its length.</para>
+        ///
+        /// <para>Only while there is more to scroll to. At the end of the strip the last chip is
+        /// simply the last chip, and fading it would suggest something after it.</para>
         /// </summary>
-        private void UpdateFade() =>
-            SuggestionFade.Visibility =
-                SuggestionScroller.ScrollableWidth - SuggestionScroller.HorizontalOffset > 1
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
+        private void UpdateChipFade()
+        {
+            if (SuggestionList.ItemsPanelRoot is not Panel panel) return;
+
+            var viewport = SuggestionScroller.ViewportWidth;
+            var moreToTheRight = SuggestionScroller.ScrollableWidth - SuggestionScroller.HorizontalOffset > 1;
+            var fadeStart = viewport - ChipFadeZone;
+
+            foreach (var child in panel.Children)
+            {
+                if (child is not FrameworkElement chip) continue;
+
+                if (!moreToTheRight || viewport <= 0 || chip.ActualWidth <= 0)
+                {
+                    chip.Opacity = 1;
+                    continue;
+                }
+
+                var right = chip.TransformToVisual(SuggestionScroller)
+                    .TransformPoint(new Point(chip.ActualWidth, 0)).X;
+
+                chip.Opacity = right <= fadeStart
+                    ? 1
+                    : Math.Clamp(1 - (right - fadeStart) / (chip.ActualWidth + ChipFadeZone), 0.15, 1);
+            }
+        }
 
         /// <summary>
         /// A mouse wheel scrolls the strip sideways. Left alone it does nothing here - the strip
