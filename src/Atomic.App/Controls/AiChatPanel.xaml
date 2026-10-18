@@ -14,11 +14,14 @@
     <UserControl.Resources>
 
         <!--
-            Bubbles.
+            Only what the user types is a bubble. The assistant's answers are plain text across the
+            width of the thread, as Copilot's are: an answer is a document - headings, lists, a
+            sources section, a chart - and a card around it makes a long one look like a very large
+            chat message. The bubble is what tells the two voices apart, so only one of them has it.
 
-            Each is a Border + a TextBlock carrying controls:MarkdownText.Source. Text stays in a
-            plain TextBlock so wrapping, selection and theme brushes all come for free; the attached
-            property only fills its Inlines.
+            Text stays in a plain TextBlock carrying controls:MarkdownText.Source, so wrapping,
+            selection and theme brushes all come for free; the attached property only fills its
+            Inlines.
         -->
         <DataTemplate x:Key="UserTemplate" x:DataType="services:ChatMessage">
             <Grid Margin="32,4,0,4" HorizontalAlignment="Right">
@@ -34,12 +37,8 @@
         </DataTemplate>
 
         <DataTemplate x:Key="AssistantTemplate" x:DataType="services:ChatMessage">
-            <Grid Margin="0,4,32,4" HorizontalAlignment="Left">
-                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        CornerRadius="12,12,12,4"
-                        Padding="12,8">
+            <Grid Margin="0,8,0,8" HorizontalAlignment="Stretch">
+                <Border Padding="0,4">
                     <StackPanel Spacing="8">
                         <TextBlock controls:MarkdownText.Source="{x:Bind Text}"
                                    IsTextSelectionEnabled="True"
@@ -100,13 +99,9 @@
             and that is long enough to need saying something.
         -->
         <DataTemplate x:Key="ThinkingTemplate" x:DataType="services:ChatMessage">
-            <Border Margin="0,4,32,4"
+            <Border Margin="0,8,0,8"
                     HorizontalAlignment="Left"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="12,12,12,4"
-                    Padding="14,10">
+                    Padding="0,6">
                 <controls:ThinkingDots />
             </Border>
         </DataTemplate>
