@@ -238,7 +238,20 @@
                           IsItemClickEnabled="False"
                           Padding="16,0,16,8"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <!--
+                        Each new message rises in from just below and fades in. Not staggered, so a
+                        reopened conversation arrives as one piece rather than as a cascade. A
+                        reposition transition lets the rest of the thread slide rather than jump when
+                        something is added above the end.
+                    -->
+                    <ListView.ItemContainerTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition FromVerticalOffset="24" IsStaggeringEnabled="False" />
+                            <RepositionThemeTransition />
+                        </TransitionCollection>
+                    </ListView.ItemContainerTransitions>
+                </ListView>
 
                 <!-- Empty state, shown in place of the thread before the first question. -->
                 <TextBlock x:Name="EmptyState"

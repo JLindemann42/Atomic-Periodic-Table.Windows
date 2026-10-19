@@ -231,6 +231,12 @@ namespace Atomic.App.Services
         /// to the shared <see cref="DialogueState"/>, and the second answer would inherit a focus
         /// element from a turn that had not finished resolving.
         /// </remarks>
+        /// <summary>How long the question has the stage to itself before the thinking dots join it.</summary>
+        private static readonly TimeSpan QuestionBeat = TimeSpan.FromMilliseconds(180);
+
+        /// <summary>The shortest time from sending to the answer appearing. See <see cref="AskAsync"/>.</summary>
+        private static readonly TimeSpan MinimumThinking = TimeSpan.FromMilliseconds(650);
+
         public async Task AskAsync(string question)
         {
             if (string.IsNullOrWhiteSpace(question)) return;
@@ -242,11 +248,19 @@ namespace Atomic.App.Services
                 Suggestions = [];
                 Messages.Add(ChatMessage.FromUser(question.Trim()));
 
+                // The question lands on its own before anything else moves. The engine answers in
+                // well under 50 ms, so without this the question, the thinking dots and the answer
+                // all arrived in the same frame or two and animated in together - the reply seemed
+                // to appear before the question had.
+                var sent = System.Diagnostics.Stopwatch.StartNew();
+                await Task.Delay(QuestionBeat).ConfigureAwait(true);
+
                 // The allowance, before any work is done. The question stays in the thread: the
                 // user asked it, and hiding it would make the refusal look like it answered
                 // nothing in particular.
                 if (!AiChatLimiter.CanSend())
                 {
+                    await Task.Delay(QuestionBeat).ConfigureAwait(true);
                     Messages.Add(new ChatMessage(
                         ChatRole.Assistant, AiChatLimiter.ReachedMessage(Strings())));
                     LimitChanged?.Invoke(this, EventArgs.Empty);
@@ -261,21 +275,32 @@ namespace Atomic.App.Services
 
                 var reply = await Task.Run(() => Ask(question.Trim())).ConfigureAwait(true);
 
-                Messages.Remove(thinking);
+                // The dots stay long enough to be read as the assistant working. The answer was
+                // computed while they showed, so this is pacing, not waiting: a slow first question
+                // that builds the index is not made any slower by it.
+                var left = MinimumThinking - sent.Elapsed;
+                if (left > TimeSpan.Zero) await Task.Delay(left).ConfigureAwait(true);
+
+                // In the dots' place, rather than removing them and adding the answer after: the
+                // answer rises in where the dots were, instead of the dots vanishing and the list
+                // jumping before anything new appears.
+                var answer = reply is null
+                    ? new ChatMessage(ChatRole.Assistant, Strings().Get(S.ai_no_data_right_now))
+                    : new ChatMessage(
+                        ChatRole.Assistant,
+                        reply.Text,
+                        ChatActionCodec.Encode(reply.Actions),
+                        ChatCardCodec.Encode(reply.Card));
+
+                var at = Messages.IndexOf(thinking);
+                if (at >= 0) Messages[at] = answer;
+                else Messages.Add(answer);
 
                 if (reply is null)
                 {
                     Unavailable = true;
-                    Messages.Add(new ChatMessage(
-                        ChatRole.Assistant, Strings().Get(S.ai_no_data_right_now)));
                     return;
                 }
-
-                Messages.Add(new ChatMessage(
-                    ChatRole.Assistant,
-                    reply.Text,
-                    ChatActionCodec.Encode(reply.Actions),
-                    ChatCardCodec.Encode(reply.Card)));
 
                 Suggestions = reply.Suggestions;
             }
