@@ -258,6 +258,23 @@ namespace Atomic.Core.Ai
             InActiveLanguage(Split(description), language, fallBackToEnglish);
 
         /// <summary>
+        /// Whether one sentence of a description is about <paramref name="topic"/> - for the rich
+        /// overview, which sorts the description's sentences into its sections with the same
+        /// vocabulary this class answers questions with.
+        /// </summary>
+        public static bool IsAbout(Topic topic, string sentence)
+        {
+            var q = TextMatching.NormalizeForLookup(sentence);
+            return topic switch
+            {
+                Topic.Usage => Has(q, UsageWords),
+                Topic.Biological => Has(q, BiologicalWords),
+                Topic.Etymology => Has(q, EtymologyWords),
+                _ => false,
+            };
+        }
+
+        /// <summary>
         /// The sentences of a language's description that were actually translated.
         /// </summary>
         /// <remarks>
@@ -271,13 +288,34 @@ namespace Atomic.Core.Ai
         /// </remarks>
         public static List<string> TranslatedSentences(string? localized, string? english, string language)
         {
-            if (string.Equals(language, "en", StringComparison.OrdinalIgnoreCase)) return Split(english);
+            if (string.Equals(language, "en", StringComparison.OrdinalIgnoreCase)) return SplitWhole(english);
 
-            var copies = new HashSet<string>(Split(english), StringComparer.Ordinal);
-            return Split(localized)
+            var copies = new HashSet<string>(SplitWhole(english), StringComparer.Ordinal);
+            return SplitWhole(localized)
                 .Where(s => !copies.Contains(s) && !LooksEnglish(s))
                 .ToList();
         }
+
+        /// <summary>
+        /// Sentences with their own punctuation kept, for text that is shown as written.
+        /// </summary>
+        /// <remarks>
+        /// <see cref="Split"/> breaks at every full stop and drops it, which is fine for matching
+        /// words but cut "half-lives range between 159,200 years and 4.5 billion years" at "4.", and
+        /// never split Chinese at all - it ends sentences with "。", so a whole paragraph became one
+        /// sentence and then gained a Latin full stop. This breaks only at a terminator followed by a
+        /// space, or after a full-width one, and leaves each sentence its own ending.
+        /// </remarks>
+        private static List<string> SplitWhole(string? description) =>
+            string.IsNullOrWhiteSpace(description)
+                ? []
+                : WholeSentence.Split(description.Trim())
+                    .Select(s => s.Trim())
+                    .Where(s => s.Length > 0)
+                    .ToList();
+
+        private static readonly System.Text.RegularExpressions.Regex WholeSentence =
+            Atomic.Core.Text.JavaRegex.Compile(@"(?<=[.!?])\s+|(?<=[\u3002\uFF01\uFF1F])");
 
         /// <summary>A value, or the shipped word for "unknown" - never a blank or a sentinel.</summary>
         private static string Known(string? value, IStringProvider strings) =>

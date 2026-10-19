@@ -363,8 +363,11 @@ namespace Atomic.Core.Ai
 
             if (_store.Element(key) is not { } element) return null;
 
+            // "Tell me everything about gold" asks for every section; anything else gets a selection,
+            // varied by the orchestrator's random so a second "gold" is not the same reply.
             var text = ElementOverview.Of(
-                element, Display(element, key), language, strings, _retrieval.Localized(language));
+                element, Display(element, key), language, strings, _retrieval.Localized(language),
+                new OverviewOptions(ElementOverview.AsksForEverything(normalized), _random, _entitlements()));
             if (text is null) return null;
 
             State.FocusElement = key;
@@ -388,7 +391,9 @@ namespace Atomic.Core.Ai
                 .Replace(TextMatching.NormalizeForLookup(surface), " ", StringComparison.Ordinal);
 
             return TextMatching.SplitQueryTokens(withoutElement)
-                .Count(t => t.Trim().Length > 0 && !OpeningFrames.Contains(t, StringComparer.Ordinal)) == 0;
+                .Count(t => t.Trim().Length > 0
+                            && !OpeningFrames.Contains(t, StringComparer.Ordinal)
+                            && !ElementOverview.IsFullWord(t)) == 0;
         }
 
         /// <summary>Words that carry no question of their own - "tell me about <i>gold</i>".</summary>
