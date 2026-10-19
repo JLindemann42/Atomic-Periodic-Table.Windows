@@ -220,6 +220,10 @@ namespace Atomic.App
         /// <summary>The NavigationView's content card, found on first use. See <see cref="PageCard"/>.</summary>
         private Grid? _pageCard;
 
+        /// <summary>The card's own corner and border, read when it is found, to put back on close.</summary>
+        private CornerRadius _pageCardCorner;
+        private Thickness _pageCardBorder;
+
         /// <summary>
         /// Give the panel its column - its width plus the gap - and round the page's far corner
         /// while it is there.
@@ -244,9 +248,12 @@ namespace Atomic.App
             }
             else
             {
-                // Back to whatever the NavigationView's template says, not to a copy of it.
-                card.ClearValue(Grid.CornerRadiusProperty);
-                card.ClearValue(Grid.BorderThicknessProperty);
+                // Back to what the template gave it. Not ClearValue: a property set on an element
+                // inside a template is that element's local value, so clearing it did not fall back to
+                // the template - it removed the template's 8px corner and 1px border, and closing the
+                // panel left the page card square and unoutlined.
+                card.CornerRadius = _pageCardCorner;
+                card.BorderThickness = _pageCardBorder;
             }
         }
 
@@ -267,7 +274,12 @@ namespace Atomic.App
             while (node is not null)
             {
                 if (node is Grid { Name: "ContentGrid" } grid)
+                {
+                    // Read before anything here changes them - this runs before the first change.
+                    _pageCardCorner = grid.CornerRadius;
+                    _pageCardBorder = grid.BorderThickness;
                     return _pageCard = grid;
+                }
 
                 node = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetParent(node);
             }
