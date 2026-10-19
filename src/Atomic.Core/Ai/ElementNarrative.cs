@@ -205,7 +205,7 @@ namespace Atomic.Core.Ai
             string? discoveredBy = null,
             string? year = null)
         {
-            var sentences = InActiveLanguage(Split(description), language);
+            var sentences = InActiveLanguage(Split(description), language, fallBackToEnglish: true);
 
             var wanted = topic switch
             {
@@ -250,8 +250,34 @@ namespace Atomic.Core.Ai
         /// The description's sentences in the chat's language. Shared with
         /// <see cref="ElementOverview"/> so both use one definition of "this sentence is English".
         /// </summary>
-        public static List<string> SentencesFor(string? description, string language) =>
-            InActiveLanguage(Split(description), language);
+        /// <param name="fallBackToEnglish">
+        /// Whether to keep English sentences when nothing else is left. Right for an answer whose prose
+        /// is the answer ("what is gold used for"); wrong for one that already answered without it.
+        /// </param>
+        public static List<string> SentencesFor(string? description, string language, bool fallBackToEnglish = true) =>
+            InActiveLanguage(Split(description), language, fallBackToEnglish);
+
+        /// <summary>
+        /// The sentences of a language's description that were actually translated.
+        /// </summary>
+        /// <remarks>
+        /// <para>An untranslated sentence in a language file is not merely English - it is a verbatim
+        /// copy of the English description's sentence. So it is recognised by comparison, exactly,
+        /// rather than by counting English words: "In a pure form, it is a bright, slightly reddish
+        /// yellow, dense, soft, malleable, and ductile metal" has only three of them and passed the word
+        /// test in every language whose file had kept it. The word test still runs after, for English
+        /// that was edited rather than copied.</para>
+        /// <para>Nothing falls back to English. For English itself the English description is returned.</para>
+        /// </remarks>
+        public static List<string> TranslatedSentences(string? localized, string? english, string language)
+        {
+            if (string.Equals(language, "en", StringComparison.OrdinalIgnoreCase)) return Split(english);
+
+            var copies = new HashSet<string>(Split(english), StringComparer.Ordinal);
+            return Split(localized)
+                .Where(s => !copies.Contains(s) && !LooksEnglish(s))
+                .ToList();
+        }
 
         /// <summary>A value, or the shipped word for "unknown" - never a blank or a sentinel.</summary>
         private static string Known(string? value, IStringProvider strings) =>
@@ -271,12 +297,12 @@ namespace Atomic.Core.Ai
         /// Drop English sentences when the chat is not in English - but only if something is left,
         /// because a half-translated description is still better than no answer.
         /// </summary>
-        private static List<string> InActiveLanguage(List<string> sentences, string language)
+        private static List<string> InActiveLanguage(List<string> sentences, string language, bool fallBackToEnglish)
         {
             if (string.Equals(language, "en", StringComparison.OrdinalIgnoreCase)) return sentences;
 
             var translated = sentences.Where(s => !LooksEnglish(s)).ToList();
-            return translated.Count > 0 ? translated : sentences;
+            return translated.Count > 0 || !fallBackToEnglish ? translated : sentences;
         }
 
         private static bool LooksEnglish(string sentence)

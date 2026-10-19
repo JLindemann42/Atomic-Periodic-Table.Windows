@@ -363,7 +363,8 @@ namespace Atomic.Core.Ai
 
             if (_store.Element(key) is not { } element) return null;
 
-            var text = ElementOverview.Of(element, Display(element, key), language, strings);
+            var text = ElementOverview.Of(
+                element, Display(element, key), language, strings, _retrieval.Localized(language));
             if (text is null) return null;
 
             State.FocusElement = key;

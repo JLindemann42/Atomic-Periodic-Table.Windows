@@ -94,5 +94,52 @@ namespace Atomic.Core.Tests.Ai
             Assert.NotEqual(Strings("sv").Get(S.ai_no_data), reply.Text);
             Assert.Contains("Au", reply.Text, StringComparison.Ordinal);
         }
+
+        // ---- In the reader's language ------------------------------------------------------------
+        //
+        // The overview was parsed from the English record, so in every other language it said
+        // "solid" and quoted the English description, though the language files hold both
+        // translated. Found by asking the same questions in all twelve languages.
+
+        private static string Overview(string language) =>
+            Chat(language).Ask(Service.Localized(language)!.Name("gold")!).Text;
+
+        /// <summary>The phase is the language's own word for it.</summary>
+        [Theory]
+        [InlineData("sv", "Fast")]
+        [InlineData("de", "Fest")]
+        [InlineData("fil", "Solido")]
+        public void ThePhaseIsInTheReadersLanguage(string language, string phase)
+        {
+            var text = Overview(language);
+
+            Assert.Contains(phase, text, StringComparison.Ordinal);
+            // The whole value, so "Solido" is not mistaken for "solid".
+            Assert.DoesNotContain("**: solid\n", text + "\n", StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// A sentence the language file left untranslated is a verbatim copy of the English one, and
+        /// is dropped - in Swedish, where only part of the description is translated, and in Hindi,
+        /// where none of it is. The facts answer the question on their own.
+        /// </summary>
+        [Theory]
+        [InlineData("sv")]
+        [InlineData("hi")]
+        public void NoUntranslatedSentenceIsQuoted(string language) =>
+            Assert.DoesNotContain("In a pure form", Overview(language), StringComparison.Ordinal);
+
+        /// <summary>English keeps its description; the filter is only for other languages.</summary>
+        [Fact]
+        public void EnglishKeepsItsDescription() =>
+            Assert.Contains("bright, slightly", Overview("en"), StringComparison.Ordinal);
+
+        /// <summary>
+        /// Chinese labels end in a full-width colon, which the ASCII strip missed, so every fact
+        /// printed with two colons.
+        /// </summary>
+        [Fact]
+        public void ChineseLabelsHaveOneColon() =>
+            Assert.DoesNotContain("：**:", Overview("zh-Hans"), StringComparison.Ordinal);
     }
 }

@@ -29,15 +29,28 @@ namespace Atomic.Core.Ai
         private const int MaxSentences = 3;
 
         /// <summary>The overview, or null when the element has nothing to say.</summary>
+        /// <param name="localized">
+        /// The language's own text for the element. The record is parsed once from English, which is
+        /// right for every measured value and wrong for prose: reading the phase and the description
+        /// off it gave every language "solid" and an English paragraph, though the language files hold
+        /// "Fast", "固体" and a translated description.
+        /// </param>
         public static string? Of(
-            ElementRecord element, string displayName, string language, IStringProvider strings)
+            ElementRecord element, string displayName, string language, IStringProvider strings,
+            LocalizedView? localized = null)
         {
+            var key = element.Key;
             var facts = new StringBuilder();
 
             void Fact(string labelKey, string? value)
             {
                 if (string.IsNullOrWhiteSpace(value) || value == "---") return;
-                var label = strings.Get(labelKey).Replace(":", string.Empty, StringComparison.Ordinal).Trim();
+                // Both colons: the labels are authored with their separator attached, and Chinese
+                // writes a full-width one, which survived the ASCII strip and printed "原子序数：:".
+                var label = strings.Get(labelKey)
+                    .Replace(":", string.Empty, StringComparison.Ordinal)
+                    .Replace("\uFF1A", string.Empty, StringComparison.Ordinal)
+                    .Trim();
                 facts.Append("• **").Append(label).Append("**: ").Append(value.Trim()).Append('\n');
             }
 
@@ -47,7 +60,7 @@ namespace Atomic.Core.Ai
             Fact(S.atomic_number_label, element.AtomicNumber.ToString(CultureInfo.InvariantCulture));
             Fact(S.element_symbols, element.Symbol);
             Fact(S.atomic_mass_colon, Show(element.Value("atomic_mass")));
-            Fact(S.phase_stp_colon, element.Phase);
+            Fact(S.phase_stp_colon, localized?.Text(key, "phase") ?? element.Phase);
             Fact(S.type_label, Show(element.Value("element_type")));
 
             if (facts.Length == 0) return null;
@@ -56,8 +69,12 @@ namespace Atomic.Core.Ai
             text.Append("### ").Append(strings.Get(S.ai_rich_overview_basic_facts, displayName)).Append("\n\n");
             text.Append(facts.ToString().TrimEnd());
 
+            // The language's own description, and no English fallback: the facts above already answer,
+            // so a paragraph in the wrong language adds nothing but the wrong language. Where the data
+            // has no translation - Hindi's descriptions are still English - the overview is the facts.
+            var english = Show(element.Value("description"));
             var prose = ElementNarrative
-                .SentencesFor(Show(element.Value("description")), language)
+                .TranslatedSentences(localized?.Text(key, "description") ?? english, english, language)
                 .Take(MaxSentences)
                 .ToList();
 
