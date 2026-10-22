@@ -185,6 +185,10 @@ publish/
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
 *.pubxml
+# ...except the app's three per-platform profiles. Atomic.App.csproj selects win-$(Platform).pubxml
+# and they carry the runtime identifier a Release build needs (NETSDK1094 without it). Ignored, they
+# lived only on one disk and were lost with it. They hold no credentials.
+!src/Atomic.App/Properties/PublishProfiles/win-*.pubxml
 *.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
