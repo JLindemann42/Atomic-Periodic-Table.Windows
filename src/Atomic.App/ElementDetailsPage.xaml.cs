@@ -108,11 +108,10 @@ namespace Atomic.App
         }
 
         /// <summary>
-        /// Fill the two charts this page shares with the chat cards.
+        /// Fill the electron shell diagram this page shares with the chat cards.
         ///
-        /// <para>Both draw from the same reducers, so the figure a user sees here is the figure the
-        /// assistant shows - which is the point of putting them in one place. A chart with no data
-        /// is collapsed rather than left as an empty box.</para>
+        /// <para>It draws from the same parser, so the shells a user sees here are the shells the
+        /// assistant shows. With no data it is collapsed rather than left as an empty box.</para>
         /// </summary>
         private void PopulateCharts(Element element)
         {
@@ -124,8 +123,6 @@ namespace Atomic.App
             {
                 ShellInfo.Visibility = Visibility.Collapsed;
                 ShellChart.Visibility = Visibility.Collapsed;
-                AbundanceChart.Visibility = Visibility.Collapsed;
-                AbundanceBorder.Visibility = Visibility.Collapsed;
                 return;
             }
 
@@ -154,28 +151,6 @@ namespace Atomic.App
             {
                 ShellInfo.Visibility = Visibility.Collapsed;
                 ShellChart.Visibility = Visibility.Collapsed;
-            }
-
-            var strings = Services.ResourceStringProvider.For(
-                Services.AppLanguage.BaseCode(Services.AppLanguage.Current));
-
-            if (Atomic.Core.Ai.Cards.AbundanceReducer.Of(record, strings) is { } profile)
-            {
-                AbundanceBorder.Visibility = Visibility.Visible;
-                AbundanceChart.Visibility = Visibility.Visible;
-                AbundanceChart.SetProfile(profile);
-
-                // The same grouping the chart draws. One source for both means a row can no longer
-                // claim a unit the bar beside it disagrees with.
-                AbundanceRows.ItemsSource = profile.Groups;
-            }
-            else
-            {
-                // No reservoir has a figure for this element - most of the synthetic ones. An empty
-                // card headed "Abundance" is worse than no card.
-                AbundanceBorder.Visibility = Visibility.Collapsed;
-                AbundanceChart.Visibility = Visibility.Collapsed;
-                AbundanceRows.ItemsSource = null;
             }
         }
 
@@ -597,9 +572,6 @@ namespace Atomic.App
                             YoungModulus.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
                             ShearModulus.Text = Services.ResourceStringProvider.For(Services.AppLanguage.BaseCode(Services.AppLanguage.Current)).Get(S.requires_pro);
                         }
-
-                        // Abundance rows come from the reducer, in PopulateCharts - the units are
-                        // FieldRegistry's, not literals repeated here.
 
                         if (SettingsStore.HasAnyPro)
                         {
