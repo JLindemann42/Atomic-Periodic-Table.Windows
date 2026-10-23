@@ -443,10 +443,10 @@
                             <TextBlock x:Name="IonCharge" Text="{Binding IonCharge}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
                             <TextBlock Text="{loc:Str Key=ionization_energies_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
-                            <Grid>
+                            <StackPanel Spacing="8">
                                 <TextBlock x:Name="IonizationEnergies" Text="{Binding IonizationEnergies}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" HorizontalAlignment="Left"/>
-                                <Button Content="{loc:Str Key=table_ionization}" Click="IonizationClick" HorizontalAlignment="Right"/>
-                            </Grid>
+                                <Button Content="{loc:Str Key=table_ionization}" Click="IonizationClick" HorizontalAlignment="Left"/>
+                            </StackPanel>
 
                         
                             <TextBlock Text="{loc:Str Key=atomic_radius_empirical_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>

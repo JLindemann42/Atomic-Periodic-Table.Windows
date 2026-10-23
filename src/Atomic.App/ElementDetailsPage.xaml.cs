@@ -89,6 +89,7 @@ namespace Atomic.App
                 Grid.SetColumn(ShellChart, 1);
                 Grid.SetRow(ShellChart, 0);
                 Grid.SetColumnSpan(ShellChart, 1);
+                ShellChart.HorizontalAlignment = HorizontalAlignment.Right;
                 Grid.SetColumnSpan(AtomicList, 1);
                 Grid.SetRow(AtomicList, 0);
                 Grid.SetRowSpan(AtomicList, 2);
@@ -99,6 +100,7 @@ namespace Atomic.App
                 Grid.SetColumn(ShellChart, 0);
                 Grid.SetRow(ShellChart, 0);
                 Grid.SetColumnSpan(ShellChart, 2);
+                ShellChart.HorizontalAlignment = HorizontalAlignment.Left;
                 Grid.SetColumnSpan(AtomicList, 2);
                 Grid.SetRow(AtomicList, 1);
                 Grid.SetRowSpan(AtomicList, 1);
