@@ -86,9 +86,9 @@ namespace Atomic.App
 
             if (wide)
             {
-                Grid.SetColumn(ShellPanel, 1);
-                Grid.SetRow(ShellPanel, 0);
-                Grid.SetColumnSpan(ShellPanel, 1);
+                Grid.SetColumn(ShellChart, 1);
+                Grid.SetRow(ShellChart, 0);
+                Grid.SetColumnSpan(ShellChart, 1);
                 Grid.SetColumnSpan(AtomicList, 1);
                 Grid.SetRow(AtomicList, 0);
                 Grid.SetRowSpan(AtomicList, 2);
@@ -96,9 +96,9 @@ namespace Atomic.App
             else
             {
                 // Stacked: the diagram first, then the list under it, each the card's full width.
-                Grid.SetColumn(ShellPanel, 0);
-                Grid.SetRow(ShellPanel, 0);
-                Grid.SetColumnSpan(ShellPanel, 2);
+                Grid.SetColumn(ShellChart, 0);
+                Grid.SetRow(ShellChart, 0);
+                Grid.SetColumnSpan(ShellChart, 2);
                 Grid.SetColumnSpan(AtomicList, 2);
                 Grid.SetRow(AtomicList, 1);
                 Grid.SetRowSpan(AtomicList, 1);
@@ -120,7 +120,8 @@ namespace Atomic.App
 
             if (record is null)
             {
-                ShellPanel.Visibility = Visibility.Collapsed;
+                ShellInfo.Visibility = Visibility.Collapsed;
+                ShellChart.Visibility = Visibility.Collapsed;
                 AbundanceChart.Visibility = Visibility.Collapsed;
                 AbundanceBorder.Visibility = Visibility.Collapsed;
                 return;
@@ -130,7 +131,8 @@ namespace Atomic.App
             var counts = Atomic.Core.Ai.Cards.ElectronShells.Parse(shells);
             if (counts.Count > 0)
             {
-                ShellPanel.Visibility = Visibility.Visible;
+                ShellInfo.Visibility = Visibility.Visible;
+                ShellChart.Visibility = Visibility.Visible;
                 ShellChart.SetShells(shells, record.Symbol);
 
                 // K, L, M ... are the shells' names; the number after each is how many electrons it holds.
@@ -148,7 +150,8 @@ namespace Atomic.App
             }
             else
             {
-                ShellPanel.Visibility = Visibility.Collapsed;
+                ShellInfo.Visibility = Visibility.Collapsed;
+                ShellChart.Visibility = Visibility.Collapsed;
             }
 
             var strings = Services.ResourceStringProvider.For(
