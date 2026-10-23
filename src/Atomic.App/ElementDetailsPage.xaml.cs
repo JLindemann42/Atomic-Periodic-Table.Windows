@@ -106,7 +106,12 @@ namespace Atomic.App
                 ShellChart.SetShells(shells, record.Symbol);
 
                 // K, L, M ... are the shells' names; the number after each is how many electrons it holds.
-                ShellLabels.Text = string.Join("\n", counts.Select((n, i) => "KLMNOPQR"[i] + n.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+                // Every shell is listed, the empty ones as 0, so the eight always read as a set.
+                const string names = "KLMNOPQR";
+                var lines = names.Select((name, i) =>
+                    name + (i < counts.Count ? counts[i] : 0).ToString(System.Globalization.CultureInfo.InvariantCulture)).ToList();
+                ShellLabelsInner.Text = string.Join("\n", lines.Take(4));
+                ShellLabelsOuter.Text = string.Join("\n", lines.Skip(4));
             }
             else
             {
