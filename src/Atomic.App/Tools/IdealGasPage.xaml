@@ -3,148 +3,242 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Atomic.App.Tools"
+    xmlns:loc="using:Atomic.App.Localization"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <!--
+            One value field, as the molar mass calculator draws its input: a 48px rounded field on the
+            secondary card fill, the text box borderless inside it, the unit picker inside it on the
+            right rather than floating beside it.
+        -->
+        <Style x:Key="ValueField" TargetType="Grid">
+            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="MinHeight" Value="48"/>
+        </Style>
+        <Style x:Key="ValueBox" TargetType="TextBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="16,0,8,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="UnitBox" TargetType="ComboBox">
+            <Setter Property="MinWidth" Value="96"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <!--
+        Laid out as the molar mass calculator is, so the three tools read as one family: the same
+        page margins and gap, 24px cards, a bold title, 48px rounded inputs, the result beside an
+        icon with its save star, and saved items as rounded cards with a menu.
+    -->
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid HorizontalAlignment="Center" MaxWidth="1856" Margin="0,24,0,24" Padding="56,0,36,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid MaxWidth="1854" Margin="0,32,0,12" Padding="54,0,24,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="24"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Calculator -->
-            <Grid Grid.Column="0" VerticalAlignment="Top"
-                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                  BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                  Padding="16" CornerRadius="8" Margin="0,0,8,16">
-                <StackPanel Spacing="12">
-                    <TextBlock x:Name="CardTitle" FontSize="14" FontWeight="SemiBold"/>
+            <Border Grid.Column="0"
+                    VerticalAlignment="Top"
+                    MaxWidth="900"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    CornerRadius="24"
+                    Padding="18,16,18,18">
+                <StackPanel Spacing="16">
+                    <TextBlock x:Name="CardTitle" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
 
-                    <Grid ColumnSpacing="8">
+                    <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="SolveForLabel" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="SolveForBox" Grid.Column="1" HorizontalAlignment="Stretch"
+                        <ComboBox x:Name="SolveForBox" Grid.Column="1"
+                                  HorizontalAlignment="Stretch"
+                                  MinHeight="48" CornerRadius="16"
                                   SelectionChanged="SolveFor_SelectionChanged"/>
                     </Grid>
 
                     <!-- P, V, n, T. The one being solved for is disabled and dimmed. -->
-                    <Grid x:Name="PressureRow" ColumnSpacing="8">
+                    <Grid x:Name="PressureRow" ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="PressureLabel" VerticalAlignment="Center"/>
-                        <TextBox x:Name="PressureBox" Grid.Column="1" TextChanged="Input_TextChanged"/>
-                        <ComboBox x:Name="PressureUnit" Grid.Column="2" HorizontalAlignment="Stretch"
-                                  SelectionChanged="Unit_SelectionChanged"/>
+                        <Grid Grid.Column="1" Style="{StaticResource ValueField}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PressureBox" Style="{StaticResource ValueBox}" TextChanged="Input_TextChanged"/>
+                            <ComboBox x:Name="PressureUnit" Grid.Column="1" Style="{StaticResource UnitBox}"
+                                      SelectionChanged="Unit_SelectionChanged"/>
+                        </Grid>
                     </Grid>
 
-                    <Grid x:Name="VolumeRow" ColumnSpacing="8">
+                    <Grid x:Name="VolumeRow" ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="VolumeLabel" VerticalAlignment="Center"/>
-                        <TextBox x:Name="VolumeBox" Grid.Column="1" TextChanged="Input_TextChanged"/>
-                        <ComboBox x:Name="VolumeUnit" Grid.Column="2" HorizontalAlignment="Stretch"
-                                  SelectionChanged="Unit_SelectionChanged"/>
+                        <Grid Grid.Column="1" Style="{StaticResource ValueField}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="VolumeBox" Style="{StaticResource ValueBox}" TextChanged="Input_TextChanged"/>
+                            <ComboBox x:Name="VolumeUnit" Grid.Column="1" Style="{StaticResource UnitBox}"
+                                      SelectionChanged="Unit_SelectionChanged"/>
+                        </Grid>
                     </Grid>
 
-                    <Grid x:Name="MolesRow" ColumnSpacing="8">
+                    <Grid x:Name="MolesRow" ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="MolesLabel" VerticalAlignment="Center"/>
-                        <TextBox x:Name="MolesBox" Grid.Column="1" TextChanged="Input_TextChanged"/>
-                        <TextBlock Grid.Column="2" Text="mol" VerticalAlignment="Center"
-                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                        <Grid Grid.Column="1" Style="{StaticResource ValueField}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="MolesBox" Style="{StaticResource ValueBox}" TextChanged="Input_TextChanged"/>
+                            <!-- Moles have one unit; it stands where the picker would, so the fields line up. -->
+                            <TextBlock Grid.Column="1" Text="mol" MinWidth="96" Margin="0,0,18,0"
+                                       VerticalAlignment="Center" TextAlignment="Right"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                        </Grid>
                     </Grid>
 
-                    <Grid x:Name="TemperatureRow" ColumnSpacing="8">
+                    <Grid x:Name="TemperatureRow" ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="TemperatureLabel" VerticalAlignment="Center"/>
-                        <TextBox x:Name="TemperatureBox" Grid.Column="1" TextChanged="Input_TextChanged"/>
-                        <ComboBox x:Name="TemperatureUnit" Grid.Column="2" HorizontalAlignment="Stretch"
-                                  SelectionChanged="Unit_SelectionChanged"/>
+                        <Grid Grid.Column="1" Style="{StaticResource ValueField}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TemperatureBox" Style="{StaticResource ValueBox}" TextChanged="Input_TextChanged"/>
+                            <ComboBox x:Name="TemperatureUnit" Grid.Column="1" Style="{StaticResource UnitBox}"
+                                      SelectionChanged="Unit_SelectionChanged"/>
+                        </Grid>
                     </Grid>
 
-                    <Grid ColumnSpacing="8" Margin="0,8,0,0">
+                    <!-- The result, beside an icon as the calculator shows its molar mass. -->
+                    <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140"/>
-                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="48"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="ResultLabel" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                        <TextBlock x:Name="ResultText" Grid.Column="1" FontSize="18" VerticalAlignment="Center"
+                        <FontIcon Grid.Column="1" Glyph="&#xE7C3;" FontSize="18" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="ResultText" Grid.Column="2"
+                                   FontSize="16" FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   TextWrapping="Wrap"
                                    IsTextSelectionEnabled="True"/>
-                        <Button x:Name="SaveButton" Grid.Column="2" Click="SaveFavorite_Click"
-                                ToolTipService.ToolTip="Save">
-                            <FontIcon Glyph="&#xE734;" FontSize="14"/>
+                        <Button x:Name="SaveButton" Grid.Column="3"
+                                Width="40" Height="40"
+                                Background="Transparent" BorderThickness="0"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Click="SaveFavorite_Click" ToolTipService.ToolTip="Save">
+                            <FontIcon Glyph="&#xE734;" FontSize="20"/>
                         </Button>
                     </Grid>
 
-                    <TextBlock x:Name="NoteText" FontSize="12" TextWrapping="Wrap" Margin="0,8,0,0"
+                    <TextBlock x:Name="NoteText" FontSize="12" TextWrapping="Wrap"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                 </StackPanel>
-            </Grid>
+            </Border>
 
             <!-- Favourites -->
-            <Grid Grid.Column="1" VerticalAlignment="Top"
-                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                  BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                  Padding="16" CornerRadius="8" Margin="8,0,0,16">
-                <StackPanel Spacing="12">
-                    <TextBlock x:Name="FavoritesTitle" FontSize="14" FontWeight="SemiBold"/>
+            <Border Grid.Column="2"
+                    VerticalAlignment="Top"
+                    MaxWidth="900"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    CornerRadius="24"
+                    Padding="18,16,18,18">
+                <StackPanel Spacing="16">
+                    <TextBlock x:Name="FavoritesTitle" FontWeight="Bold" FontSize="16" Margin="0,0,0,4"/>
 
-                    <StackPanel x:Name="ProGate" Spacing="12" Visibility="Collapsed"
+                    <StackPanel x:Name="ProGate" Visibility="Collapsed"
                                 HorizontalAlignment="Center" Margin="0,24,0,24">
-                        <TextBlock x:Name="ProGateText" FontSize="16" FontWeight="SemiBold"
-                                   HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                        <TextBlock x:Name="ProGateText"
+                                   FontSize="18" FontWeight="Bold"
+                                   Margin="0,0,0,20"
+                                   HorizontalAlignment="Center"
+                                   TextWrapping="Wrap" TextAlignment="Center"/>
                         <Button x:Name="ProGateButton" Click="OpenProPage_Click"
-                                HorizontalAlignment="Center" Style="{ThemeResource AccentButtonStyle}"/>
+                                Width="200"
+                                HorizontalAlignment="Center"
+                                Style="{ThemeResource AccentButtonStyle}"/>
                     </StackPanel>
 
                     <ItemsControl x:Name="FavoritesList">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="local:SavedIdealGas">
-                                <Grid Margin="0,0,0,8" Padding="10" CornerRadius="6"
-                                      Background="{ThemeResource SubtleFillColorSecondaryBrush}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel>
-                                        <TextBlock Text="{x:Bind Summary}" FontSize="14" TextWrapping="Wrap"/>
-                                        <TextBlock Text="{x:Bind Result}" FontSize="12" FontWeight="SemiBold"
-                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                    </StackPanel>
-                                    <Button Grid.Column="1" Click="RemoveFavorite_Click" Tag="{x:Bind Summary}"
-                                            Background="Transparent" BorderThickness="0"
-                                            ToolTipService.ToolTip="Remove">
-                                        <FontIcon Glyph="&#xE74D;" FontSize="14"/>
-                                    </Button>
-                                </Grid>
+                                <Border CornerRadius="16"
+                                        BorderThickness="1"
+                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                        Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                        Margin="0,0,0,12"
+                                        Padding="18,12,18,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="40"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Bind Result}" FontWeight="Bold" FontSize="18"
+                                                       TextWrapping="Wrap"/>
+                                            <TextBlock Text="{x:Bind Summary}" FontSize="14" TextWrapping="Wrap"
+                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </StackPanel>
+                                        <Button Grid.Column="1"
+                                                Width="40" Height="40"
+                                                Background="Transparent" BorderThickness="0"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <Button.Flyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Text="{loc:Str Key=label_remove}"
+                                                                    Click="RemoveFavorite_Click" Tag="{x:Bind Summary}"/>
+                                                </MenuFlyout>
+                                            </Button.Flyout>
+                                            <FontIcon Glyph="&#xE70D;" FontSize="16"/>
+                                        </Button>
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-            </Grid>
+            </Border>
         </Grid>
     </ScrollViewer>
 </Page>

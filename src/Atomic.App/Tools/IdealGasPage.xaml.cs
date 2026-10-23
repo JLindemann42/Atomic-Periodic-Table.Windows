@@ -326,7 +326,7 @@ namespace Atomic.App.Tools
 
         private async void RemoveFavorite_Click(object sender, RoutedEventArgs e)
         {
-            if ((sender as Button)?.Tag is not string summary) return;
+            if ((sender as FrameworkElement)?.Tag is not string summary) return;
 
             var existing = _favorites.FirstOrDefault(f => f.Summary == summary);
             if (existing is null) return;

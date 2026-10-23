@@ -16,6 +16,9 @@ namespace Atomic.App.Tools
     /// <summary>One row of the atom-check proof, already rendered.</summary>
     public sealed class TallyRow
     {
+        /// <summary>The element, shown in a circle as the calculator lists its elements.</summary>
+        public string Symbol { get; set; } = string.Empty;
+
         public string Text { get; set; } = string.Empty;
     }
 
@@ -106,7 +109,8 @@ namespace Atomic.App.Tools
             {
                 var chip = new Button
                 {
-                    Content = new TextBlock { Text = example, FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("Consolas") },
+                    // The page's own font, as the calculator uses, rather than Consolas.
+                    Content = new TextBlock { Text = example },
                     CornerRadius = new CornerRadius(14),
                     Padding = new Thickness(12, 6, 12, 6),
                     Tag = example,
@@ -189,6 +193,7 @@ namespace Atomic.App.Tools
             {
                 _tally.Add(new TallyRow
                 {
+                    Symbol = t.Symbol,
                     Text = Plain(_strings.Get(S.ai_equation_tally_row, t.Symbol, t.Left, t.Right)),
                 });
             }
@@ -283,7 +288,7 @@ namespace Atomic.App.Tools
 
         private async void RemoveFavorite_Click(object sender, RoutedEventArgs e)
         {
-            if ((sender as Button)?.Tag is not string input) return;
+            if ((sender as FrameworkElement)?.Tag is not string input) return;
 
             var existing = _favorites.FirstOrDefault(f => f.Input == input);
             if (existing is null) return;
@@ -295,7 +300,7 @@ namespace Atomic.App.Tools
 
         private void CopyFavorite_Click(object sender, RoutedEventArgs e)
         {
-            if ((sender as Button)?.Tag is not string balanced) return;
+            if ((sender as FrameworkElement)?.Tag is not string balanced) return;
 
             var package = new DataPackage();
             package.SetText(balanced);
