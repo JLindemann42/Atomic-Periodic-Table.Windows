@@ -28,6 +28,16 @@ using Atomic.App.Services;
 
 namespace Atomic.App
 {
+    /// <summary>One reservoir's abundance as the details page lists it.</summary>
+    /// <param name="Label">The reservoir, e.g. "Earth's crust".</param>
+    /// <param name="Display">The figure as authored.</param>
+    /// <param name="Unit">The figure's unit; empty when it has none.</param>
+    public sealed record AbundanceEntry(string Label, string Display, string Unit)
+    {
+        /// <summary>The unit with its separating space, or nothing at all when there is no unit.</summary>
+        public string UnitSuffix => string.IsNullOrWhiteSpace(Unit) ? string.Empty : " " + Unit.Trim();
+    }
+
     public sealed partial class ElementDetailsPage : Page
     {
         private bool IsDarkMode()
@@ -162,8 +172,10 @@ namespace Atomic.App
             {
                 AbundanceBorder.Visibility = Visibility.Visible;
 
-                // Rows only, no graph on this page; the chat card draws the chart from the same profile.
-                AbundanceRows.ItemsSource = profile.Groups;
+                // Entries only, no graph on this page; the chat card draws the chart from the same profile.
+                AbundanceRows.ItemsSource = profile.Groups
+                    .SelectMany(g => g.Bars.Select(b => new AbundanceEntry(b.Label, b.Display, g.UnitLabel)))
+                    .ToList();
             }
             else
             {
