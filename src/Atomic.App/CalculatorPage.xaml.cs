@@ -21,6 +21,7 @@ using StringDoubleMap = System.Collections.Generic.Dictionary<string, double>;
 using StringElementMap = System.Collections.Generic.Dictionary<string, (double count, double weight, string name)>;
 using StringStringMap = System.Collections.Generic.Dictionary<string, string>;
 using Atomic.App.Services;
+using Atomic.Core.Sync;
 
 namespace Atomic.App
 {
@@ -29,7 +30,6 @@ namespace Atomic.App
         private readonly StringDoubleMap elementWeights = new(StringComparer.OrdinalIgnoreCase);
         private readonly StringStringMap elementNames = new(StringComparer.OrdinalIgnoreCase);
         public ObservableCollection<FavoriteCompound> Favorites { get; } = new();
-        private const string FavoritesFileName = "favorites.json";
         private static readonly Regex CompoundRegex = new(@"^(\d+)?(.*)$", RegexOptions.Compiled);
 
         public CalculatorPage()
@@ -57,7 +57,13 @@ namespace Atomic.App
 
             SetCardsGridLayout(this.ActualWidth);
 
-            _ = LoadFavoritesAsync();
+            Loaded += async (_, _) =>
+            {
+                FavoritesStore.Changed += Favorites_Changed;
+                await LoadFavoritesAsync();
+                _ = FavoritesSync.SyncAsync();
+            };
+            Unloaded += (_, _) => FavoritesStore.Changed -= Favorites_Changed;
         }
 
         private void CalculatorPage_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -77,41 +83,19 @@ namespace Atomic.App
             FormatFormulaWithSubscripts(fav.Formula, formulaTextBlock.Inlines);
         }
 
-        private async Task LoadFavoritesAsync()
+        private async Task LoadFavoritesAsync() => ShowFavorites(await FavoritesStore.LoadCompoundsAsync());
+
+        private void ShowFavorites(IEnumerable<FavoriteCompound> saved)
         {
-            try
-            {
-                var file = await ApplicationData.Current.LocalFolder.TryGetItemAsync(FavoritesFileName) as StorageFile;
-                if (file != null)
-                {
-                    using var stream = await file.OpenStreamForReadAsync();
-                    var loaded = await JsonSerializer.DeserializeAsync(stream, ElementJsonContext.Default.ListFavoriteCompound);
-                    if (loaded != null)
-                    {
-                        Favorites.Clear();
-                        foreach (var fav in loaded)
-                            Favorites.Add(fav);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"[ERROR] Loading favorites: {ex}");
-            }
+            Favorites.Clear();
+            foreach (var fav in saved)
+                Favorites.Add(fav);
         }
 
-        private async Task SaveFavoritesAsync()
+        /// <summary>A sync brought changes from another device. Raised on any thread.</summary>
+        private void Favorites_Changed(object? sender, FavoriteKind kind)
         {
-            try
-            {
-                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(FavoritesFileName, CreationCollisionOption.ReplaceExisting);
-                using var stream = await file.OpenStreamForWriteAsync();
-                await JsonSerializer.SerializeAsync(stream, Favorites.ToList(), ElementJsonContext.Default.ListFavoriteCompound);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"[ERROR] Saving favorites: {ex}");
-            }
+            if (kind == FavoriteKind.Compound) DispatcherQueue.TryEnqueue(async () => await LoadFavoritesAsync());
         }
 
         private async void AddFavorite_Click(object sender, RoutedEventArgs e)
@@ -136,8 +120,8 @@ namespace Atomic.App
 
             if (!Favorites.Any(f => f.Formula == formula && Math.Abs(f.MolarMass - molarMass) < 0.00001))
             {
-                Favorites.Add(new FavoriteCompound { Formula = formula, MolarMass = molarMass });
-                await SaveFavoritesAsync();
+                ShowFavorites(await FavoritesStore.SaveCompoundAsync(
+                    new FavoriteCompound { Formula = formula, MolarMass = molarMass }));
             }
         }
 
@@ -145,8 +129,7 @@ namespace Atomic.App
         {
             if (sender is MenuFlyoutItem { Tag: FavoriteCompound fav })
             {
-                Favorites.Remove(fav);
-                await SaveFavoritesAsync();
+                ShowFavorites(await FavoritesStore.RemoveCompoundAsync(fav.Formula));
             }
         }
 
@@ -518,5 +501,8 @@ namespace Atomic.App
         public string Formula { get; set; }
         public double MolarMass { get; set; }
         public string MolarMassDisplay => $"{MolarMass:0.#####} (g/mol)";
+
+        /// <summary>Epoch milliseconds of the save, which decides it against a removal on another device.</summary>
+        public long SavedAt { get; set; }
     }
 }

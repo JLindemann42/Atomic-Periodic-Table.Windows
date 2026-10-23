@@ -991,3 +991,24 @@ each. The sidebar's two new labels are English-only, since Android hardcodes its
 
 Not handled, as on Android: two devices continuing the same conversation at once - the later save wins
 and the other's new messages are lost - and deleting a conversation, which neither platform offers.
+
+### D52 — the tools' favourites sync, in a format Android does not have yet
+
+The calculator's compounds, the equation balancer's equations and the ideal gas calculator's results
+sync for PRO users through `users/{uid}.favorites`, as three arrays - `compounds` (`formula`,
+`molarMass`), `equations` (`input`, `balanced`) and `idealGas` (`summary`, `result`) - each item
+carrying `updatedAt` (epoch ms) and `deleted`. Android keeps all three on the device only, as
+delimited StringSets, so this is defined here first; Android can adopt it by mapping its strings onto
+the fields. Until then it syncs Windows to Windows.
+
+Unlike chat history, favourites can be removed, so a union merge would bring a removed item straight
+back from the other device. A removal is kept as a `deleted` record with its time, and per item the
+newer change wins. Removal records expire after 180 days; a device offline for longer than that can
+bring an item back. The PATCH masks `favorites.compounds`, `favorites.equations` and
+`favorites.idealGas` only, and unknown fields on an item are carried through.
+
+Locally, the pages no longer write their on-screen list back - a sync landing between a page's load
+and its next save would be overwritten. `FavoritesStore` does each save and removal as a
+read-modify-write under one lock, shared with the sync's merge, and records removals in
+`favorites_removed.json`. Items saved before this carry no time and are stamped on first load in list
+order. The calculator's favourites moved off its code-behind onto the same store, keyed by formula.

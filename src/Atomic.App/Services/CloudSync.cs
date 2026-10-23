@@ -115,6 +115,9 @@ namespace Atomic.App.Services
 
                 var outcome = await SyncAsync().ConfigureAwait(true);
                 Synced?.Invoke(null, outcome);
+
+                // The tools' saved items ride the same timer; they own their own part of the document.
+                _ = FavoritesSync.SyncAsync();
                 return outcome;
             }
             finally

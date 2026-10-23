@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Atomic.App.Services;
+using Atomic.Core.Sync;
 using Atomic.Core.Ai.Data;
 using Atomic.Core.Localization;
 using Microsoft.UI.Xaml;
@@ -27,6 +28,9 @@ namespace Atomic.App.Tools
     {
         public string Input { get; set; } = string.Empty;
         public string Balanced { get; set; } = string.Empty;
+
+        /// <summary>Epoch milliseconds of the save, which decides it against a removal on another device.</summary>
+        public long SavedAt { get; set; }
     }
 
     /// <summary>
@@ -79,7 +83,13 @@ namespace Atomic.App.Tools
             BuildExamples();
             ApplyProGate();
 
-            Loaded += async (_, _) => await LoadFavoritesAsync();
+            Loaded += async (_, _) =>
+            {
+                FavoritesStore.Changed += Favorites_Changed;
+                await LoadFavoritesAsync();
+                _ = FavoritesSync.SyncAsync();
+            };
+            Unloaded += (_, _) => FavoritesStore.Changed -= Favorites_Changed;
         }
 
         private void ApplyStrings()
@@ -260,12 +270,21 @@ namespace Atomic.App.Tools
 
         // -- favourites ----------------------------------------------------------------------
 
-        private async System.Threading.Tasks.Task LoadFavoritesAsync()
+        private async System.Threading.Tasks.Task LoadFavoritesAsync() =>
+            ShowFavorites(await FavoritesStore.LoadEquationsAsync());
+
+        private void ShowFavorites(IEnumerable<SavedEquation> saved)
         {
             _favorites.Clear();
-            foreach (var saved in await FavoritesStore.LoadEquationsAsync())
-                _favorites.Add(saved);
+            foreach (var item in saved)
+                _favorites.Add(item);
             UpdateFavoritesEmptyState();
+        }
+
+        /// <summary>A sync brought changes from another device. Raised on any thread.</summary>
+        private void Favorites_Changed(object? sender, FavoriteKind kind)
+        {
+            if (kind == FavoriteKind.Equation) DispatcherQueue.TryEnqueue(async () => await LoadFavoritesAsync());
         }
 
         private void UpdateFavoritesEmptyState() =>
@@ -278,24 +297,15 @@ namespace Atomic.App.Tools
             if (string.IsNullOrEmpty(input) || _lastBalanced is null) return;
 
             // Re-saving replaces the row rather than adding a second one for the same input.
-            var existing = _favorites.FirstOrDefault(f => f.Input == input);
-            if (existing is not null) _favorites.Remove(existing);
-
-            _favorites.Insert(0, new SavedEquation { Input = input, Balanced = _lastBalanced });
-            UpdateFavoritesEmptyState();
-            await FavoritesStore.SaveEquationsAsync(_favorites);
+            ShowFavorites(await FavoritesStore.SaveEquationAsync(
+                new SavedEquation { Input = input, Balanced = _lastBalanced }));
         }
 
         private async void RemoveFavorite_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement)?.Tag is not string input) return;
 
-            var existing = _favorites.FirstOrDefault(f => f.Input == input);
-            if (existing is null) return;
-
-            _favorites.Remove(existing);
-            UpdateFavoritesEmptyState();
-            await FavoritesStore.SaveEquationsAsync(_favorites);
+            ShowFavorites(await FavoritesStore.RemoveEquationAsync(input));
         }
 
         private void CopyFavorite_Click(object sender, RoutedEventArgs e)

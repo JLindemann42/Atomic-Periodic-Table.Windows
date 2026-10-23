@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using Atomic.App.Services;
+using Atomic.Core.Sync;
 using Atomic.Core.Ai.Data;
 using Atomic.Core.Localization;
 using Microsoft.UI.Xaml;
@@ -17,6 +18,9 @@ namespace Atomic.App.Tools
     {
         public string Summary { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
+
+        /// <summary>Epoch milliseconds of the save, which decides it against a removal on another device.</summary>
+        public long SavedAt { get; set; }
     }
 
     /// <summary>
@@ -65,7 +69,13 @@ namespace Atomic.App.Tools
             _initialising = false;
             ApplySolveFor();
 
-            Loaded += async (_, _) => await LoadFavoritesAsync();
+            Loaded += async (_, _) =>
+            {
+                FavoritesStore.Changed += Favorites_Changed;
+                await LoadFavoritesAsync();
+                _ = FavoritesSync.SyncAsync();
+            };
+            Unloaded += (_, _) => FavoritesStore.Changed -= Favorites_Changed;
         }
 
         private void ApplyStrings()
@@ -290,11 +300,20 @@ namespace Atomic.App.Tools
 
         // -- favourites ----------------------------------------------------------------------
 
-        private async System.Threading.Tasks.Task LoadFavoritesAsync()
+        private async System.Threading.Tasks.Task LoadFavoritesAsync() =>
+            ShowFavorites(await FavoritesStore.LoadIdealGasAsync());
+
+        private void ShowFavorites(IEnumerable<SavedIdealGas> saved)
         {
             _favorites.Clear();
-            foreach (var saved in await FavoritesStore.LoadIdealGasAsync())
-                _favorites.Add(saved);
+            foreach (var item in saved)
+                _favorites.Add(item);
+        }
+
+        /// <summary>A sync brought changes from another device. Raised on any thread.</summary>
+        private void Favorites_Changed(object? sender, FavoriteKind kind)
+        {
+            if (kind == FavoriteKind.IdealGas) DispatcherQueue.TryEnqueue(async () => await LoadFavoritesAsync());
         }
 
         private async void SaveFavorite_Click(object sender, RoutedEventArgs e)
@@ -311,11 +330,7 @@ namespace Atomic.App.Tools
             var summary = string.Join(", ", parts);
             if (summary.Length == 0) return;
 
-            var existing = _favorites.FirstOrDefault(f => f.Summary == summary);
-            if (existing is not null) _favorites.Remove(existing);
-
-            _favorites.Insert(0, new SavedIdealGas { Summary = summary, Result = result });
-            await FavoritesStore.SaveIdealGasAsync(_favorites);
+            ShowFavorites(await FavoritesStore.SaveIdealGasAsync(new SavedIdealGas { Summary = summary, Result = result }));
 
             void Add(TextBox box, string unit, string symbol)
             {
@@ -328,11 +343,7 @@ namespace Atomic.App.Tools
         {
             if ((sender as FrameworkElement)?.Tag is not string summary) return;
 
-            var existing = _favorites.FirstOrDefault(f => f.Summary == summary);
-            if (existing is null) return;
-
-            _favorites.Remove(existing);
-            await FavoritesStore.SaveIdealGasAsync(_favorites);
+            ShowFavorites(await FavoritesStore.RemoveIdealGasAsync(summary));
         }
 
         private void OpenProPage_Click(object sender, RoutedEventArgs e) =>

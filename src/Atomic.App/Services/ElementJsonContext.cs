@@ -28,6 +28,8 @@ namespace Atomic.App.Services
     [JsonSerializable(typeof(List<string>))]
     [JsonSerializable(typeof(List<SavedEquation>))]
     [JsonSerializable(typeof(List<SavedIdealGas>))]
+    // What was removed, so the removal can reach the other devices.
+    [JsonSerializable(typeof(List<RemovedFavorite>))]
     // The chat thread. Its Actions and Cards are codec strings rather than nested objects, so this
     // stays a flat record and a message written by an older build still deserializes.
     [JsonSerializable(typeof(Dictionary<string, int>))]
