@@ -92,21 +92,25 @@ namespace Atomic.App
 
             if (record is null)
             {
-                ShellChart.Visibility = Visibility.Collapsed;
+                ShellRow.Visibility = Visibility.Collapsed;
                 AbundanceChart.Visibility = Visibility.Collapsed;
                 AbundanceBorder.Visibility = Visibility.Collapsed;
                 return;
             }
 
             var shells = (record.Value("electron_shells") as Atomic.Core.Ai.Data.FieldValue.Text)?.Raw;
-            if (Atomic.Core.Ai.Cards.ElectronShells.Parse(shells).Count > 0)
+            var counts = Atomic.Core.Ai.Cards.ElectronShells.Parse(shells);
+            if (counts.Count > 0)
             {
-                ShellChart.Visibility = Visibility.Visible;
+                ShellRow.Visibility = Visibility.Visible;
                 ShellChart.SetShells(shells, record.Symbol);
+
+                // K, L, M ... are the shells' names; the number after each is how many electrons it holds.
+                ShellLabels.Text = string.Join("\n", counts.Select((n, i) => "KLMNOPQR"[i] + n.ToString(System.Globalization.CultureInfo.InvariantCulture)));
             }
             else
             {
-                ShellChart.Visibility = Visibility.Collapsed;
+                ShellRow.Visibility = Visibility.Collapsed;
             }
 
             var strings = Services.ResourceStringProvider.For(
