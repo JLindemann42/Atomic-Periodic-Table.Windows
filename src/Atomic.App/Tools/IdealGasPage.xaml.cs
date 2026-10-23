@@ -89,6 +89,7 @@ namespace Atomic.App.Tools
             ResultLabel.Text = _strings.Get(S.ideal_gas_result);
             NoteText.Text = _strings.Get(S.ideal_gas_text);
             FavoritesTitle.Text = _strings.Get(S.favorites_colon);
+            FavoritesEmpty.Text = _strings.Get(S.ideal_gas_favorites_text);
             ProGateText.Text = _strings.Get(S.requires_pro);
             ProGateButton.Content = _strings.Get(S.get_pro_title);
 
@@ -308,6 +309,7 @@ namespace Atomic.App.Tools
             _favorites.Clear();
             foreach (var item in saved)
                 _favorites.Add(item);
+            UpdateFavoritesEmptyState();
         }
 
         /// <summary>A sync brought changes from another device. Raised on any thread.</summary>
@@ -315,6 +317,10 @@ namespace Atomic.App.Tools
         {
             if (kind == FavoriteKind.IdealGas) DispatcherQueue.TryEnqueue(async () => await LoadFavoritesAsync());
         }
+
+        private void UpdateFavoritesEmptyState() =>
+            FavoritesEmpty.Visibility =
+                SettingsStore.HasAnyPro && _favorites.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
         private async void SaveFavorite_Click(object sender, RoutedEventArgs e)
         {

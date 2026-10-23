@@ -1043,6 +1043,13 @@ DECLARATIONS: dict[str, tuple[str, str | None, str]] = {
     # of "free", which would claim the phone owns nothing when all we know is that we have not heard.
     "account_tier_unknown": ("Not synced yet", None, "licences card, phone tier unknown"),
 
+    # An empty favourites card, worded as the balancer's (Android's balancer_text) and the
+    # calculator's (Android's calculator_text) are. Android has no such text for these two tools.
+    "ideal_gas_favorites_text": ("Solve ideal gas problems and save favorites for later use", None,
+                                 "ideal gas calculator, empty favourites"),
+    "unit_favorites_text":      ("Convert between units and save favorites for later use", None,
+                                 "unit converter, empty favourites"),
+
     # Flashcard level bands. Android draws its boxes with the range baked into a layout string per
     # box; the Windows screen renders them from FlashcardCatalog, so it needs one format instead.
     #

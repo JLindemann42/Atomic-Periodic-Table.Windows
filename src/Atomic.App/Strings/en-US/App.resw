@@ -152,6 +152,9 @@
   <data name="flashcards_start" xml:space="preserve">
     <value>Start Flashcard</value>
   </data>
+  <data name="ideal_gas_favorites_text" xml:space="preserve">
+    <value>Solve ideal gas problems and save favorites for later use</value>
+  </data>
   <data name="info_about" xml:space="preserve">
     <value>Info about %1$s:</value>
   </data>
@@ -399,6 +402,9 @@
   </data>
   <data name="ultimate_upgrade_title" xml:space="preserve">
     <value>Ultimate Upgrade</value>
+  </data>
+  <data name="unit_favorites_text" xml:space="preserve">
+    <value>Convert between units and save favorites for later use</value>
   </data>
   <data name="value_range" xml:space="preserve">
     <value>Value range: %1$s - %2$s</value>

@@ -47,6 +47,7 @@ public static partial class S
     public const string flashcards_pro_pitch = "flashcards_pro_pitch";
     public const string flashcards_quiz_completed = "flashcards_quiz_completed";
     public const string flashcards_start = "flashcards_start";
+    public const string ideal_gas_favorites_text = "ideal_gas_favorites_text";
     public const string info_about = "info_about";
     public const string ionization_for = "ionization_for";
     public const string label_all = "label_all";
@@ -124,5 +125,6 @@ public static partial class S
     public const string solubility_soluble = "solubility_soluble";
     public const string ultimate_badge = "ultimate_badge";
     public const string ultimate_bullets = "ultimate_bullets";
+    public const string unit_favorites_text = "unit_favorites_text";
     public const string value_range = "value_range";
 }

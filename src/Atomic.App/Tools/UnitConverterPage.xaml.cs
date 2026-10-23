@@ -86,6 +86,10 @@ namespace Atomic.App.Tools
         {
             this.InitializeComponent();
 
+            // Every path that adds or removes a favourite goes through the collection.
+            Favorites.CollectionChanged += (_, _) => UpdateFavoritesEmptyState();
+            UpdateFavoritesEmptyState();
+
             foreach (var cat in unitCategories.Keys)
                 Categories.Add(cat);
 
@@ -110,6 +114,11 @@ namespace Atomic.App.Tools
                 FavoritesAcrylicOverlay.Visibility = Visibility.Visible;
             }
         }
+
+        /// <summary>The empty card's text, for a PRO user with nothing saved; a free user sees the PRO overlay.</summary>
+        private void UpdateFavoritesEmptyState() =>
+            FavoritesEmpty.Visibility =
+                SettingsStore.HasAnyPro && Favorites.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
         private void UnitConverterPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {

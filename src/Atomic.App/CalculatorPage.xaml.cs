@@ -36,6 +36,10 @@ namespace Atomic.App
         {
             this.InitializeComponent();
 
+            // Every path that adds or removes a favourite goes through the collection.
+            Favorites.CollectionChanged += (_, _) => UpdateFavoritesEmptyState();
+            UpdateFavoritesEmptyState();
+
             // Check PRO or Not:
             if (SettingsStore.HasAnyPro)
             {
@@ -65,6 +69,11 @@ namespace Atomic.App
             };
             Unloaded += (_, _) => FavoritesStore.Changed -= Favorites_Changed;
         }
+
+        /// <summary>The empty card's text, for a PRO user with nothing saved; a free user sees the PRO overlay.</summary>
+        private void UpdateFavoritesEmptyState() =>
+            FavoritesEmpty.Visibility =
+                SettingsStore.HasAnyPro && Favorites.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
         private void CalculatorPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {

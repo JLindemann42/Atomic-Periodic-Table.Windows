@@ -200,6 +200,10 @@
                                 Style="{ThemeResource AccentButtonStyle}"/>
                     </StackPanel>
 
+                    <TextBlock x:Name="FavoritesEmpty" FontSize="14" TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Visibility="Collapsed"/>
+
                     <ItemsControl x:Name="FavoritesList">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="local:SavedIdealGas">
