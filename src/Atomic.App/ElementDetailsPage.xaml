@@ -346,111 +346,120 @@
                 </Border>
 
                 <!-- Atomic Properties Card -->
-                <Border x:Name="AtomicPropertiesBorder" Opacity="0"
+                <Border x:Name="AtomicPropertiesBorder" Opacity="0" SizeChanged="AtomicPropertiesBorder_SizeChanged"
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
                     <StackPanel>
                         <TextBlock Text="{loc:Str Key=atomic_properties}" FontSize="20" FontWeight="SemiBold" />
 
-                        <!-- The same chart the chat card draws; see Controls/Charts. -->
-                        <Grid x:Name="ShellRow" Margin="0,8,0,0" ColumnSpacing="16">
+                        <!--
+                            The shell diagram sits beside the property list rather than above it, so the
+                            card has no empty band at its right. A narrow card stacks them instead; see
+                            AtomicPropertiesBorder_SizeChanged.
+                        -->
+                        <Grid x:Name="AtomicLayout" Margin="0,8,0,0" ColumnSpacing="24">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel x:Name="ShellPanel" Grid.Column="1" Spacing="8">
                                 <TextBlock Text="{loc:Str Key=electron_shell_colon}" FontSize="14" FontWeight="SemiBold" IsTextSelectionEnabled="True"/>
-                                <!-- Eight shells as two short columns, so the list is as tall as the diagram needs. -->
-                                <StackPanel Orientation="Horizontal" Spacing="32" Margin="0,4,0,0">
-                                    <TextBlock x:Name="ShellLabelsInner" FontSize="14" LineHeight="22" IsTextSelectionEnabled="True"/>
-                                    <TextBlock x:Name="ShellLabelsOuter" FontSize="14" LineHeight="22" IsTextSelectionEnabled="True"/>
+                                <!-- K, L, M ... on one line, each with its electron count. -->
+                                <StackPanel x:Name="ShellLabels" Orientation="Horizontal" Spacing="14"/>
+                                <!-- The same chart the chat card draws; see Controls/Charts. -->
+                                <charts:ElectronShellChart x:Name="ShellChart"
+                                                           Width="176" Height="176"
+                                                           HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <StackPanel x:Name="AtomicList" Grid.Column="0" Grid.RowSpan="2">
+                            <TextBlock Text="{loc:Str Key=oxidation_states_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                        
+                            <StackPanel Orientation="Vertical" Spacing="12" HorizontalAlignment="Left" Margin="0,12,0,4">
+                                <!-- First Row -->
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up1b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up1"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up2b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up2" />
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up3b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up3"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up4b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up4" />
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up5b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up5"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up6b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up6"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <!-- Second Row -->
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d1b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d1"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d2b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d2" />
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d3b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d3"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d4b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d4" />
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d5b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d5"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d6b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d6"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d7b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d7"/>
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d8b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d8" />
+                                    </Border>
+                                    <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d9b">
+                                        <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d9"/>
+                                    </Border>
                                 </StackPanel>
                             </StackPanel>
-                            <charts:ElectronShellChart x:Name="ShellChart" Grid.Column="1"
-                                                       Width="176" Height="176"
-                                                       HorizontalAlignment="Right" />
-                        </Grid>
 
-                        <TextBlock Text="{loc:Str Key=oxidation_states_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
-                        
-                        <StackPanel Orientation="Vertical" Spacing="12" HorizontalAlignment="Left" Margin="0,12,0,4">
-                            <!-- First Row -->
-                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up1b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up1"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up2b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up2" />
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up3b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up3"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up4b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up4" />
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up5b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up5"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="up6b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="up6"/>
-                                </Border>
-                            </StackPanel>
+                            <TextBlock Text="{loc:Str Key=electron_configuration_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
+                            <TextBlock x:Name="ElectronConfiguration" Text="{Binding ElectronConfiguration}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                            <!-- Second Row -->
-                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d1b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d1"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d2b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d2" />
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d3b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d3"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d4b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d4" />
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d5b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d5"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d6b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d6"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d7b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d7"/>
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d8b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d8" />
-                                </Border>
-                                <Border Background="LightGray" Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="d9b">
-                                    <TextBlock Text="-" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:Name="d9"/>
-                                </Border>
-                            </StackPanel>
-                        </StackPanel>
+                            <TextBlock Text="{loc:Str Key=ion_charge_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="IonCharge" Text="{Binding IonCharge}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="{loc:Str Key=electron_configuration_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True" />
-                        <TextBlock x:Name="ElectronConfiguration" Text="{Binding ElectronConfiguration}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
-
-                        <TextBlock Text="{loc:Str Key=ion_charge_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
-                        <TextBlock x:Name="IonCharge" Text="{Binding IonCharge}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
-
-                        <TextBlock Text="{loc:Str Key=ionization_energies_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
-                        <Grid>
-                            <TextBlock x:Name="IonizationEnergies" Text="{Binding IonizationEnergies}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" HorizontalAlignment="Left"/>
-                            <Button Content="{loc:Str Key=table_ionization}" Click="IonizationClick" HorizontalAlignment="Right"/>
-                        </Grid>
+                            <TextBlock Text="{loc:Str Key=ionization_energies_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                            <Grid>
+                                <TextBlock x:Name="IonizationEnergies" Text="{Binding IonizationEnergies}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True" HorizontalAlignment="Left"/>
+                                <Button Content="{loc:Str Key=table_ionization}" Click="IonizationClick" HorizontalAlignment="Right"/>
+                            </Grid>
 
                         
-                        <TextBlock Text="{loc:Str Key=atomic_radius_empirical_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
-                        <TextBlock x:Name="AtomicRadiusEmpirical" Text="{Binding AtomicRadiusEmpirical}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text="{loc:Str Key=atomic_radius_empirical_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="AtomicRadiusEmpirical" Text="{Binding AtomicRadiusEmpirical}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="{loc:Str Key=atomic_radius_calculated_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
-                        <TextBlock x:Name="AtomicRadiusCalculated" Text="{Binding AtomicRadiusCalculated}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text="{loc:Str Key=atomic_radius_calculated_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="AtomicRadiusCalculated" Text="{Binding AtomicRadiusCalculated}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="{loc:Str Key=covalent_radius_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
-                        <TextBlock x:Name="CovalentRadius" Text="{Binding CovalentRadius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text="{loc:Str Key=covalent_radius_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="CovalentRadius" Text="{Binding CovalentRadius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
 
-                        <TextBlock Text="{loc:Str Key=van_der_waals_radius_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
-                        <TextBlock x:Name="VanDerWallsRadius" Text="{Binding VanDerWallsRadius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            <TextBlock Text="{loc:Str Key=van_der_waals_radius_colon}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
+                            <TextBlock x:Name="VanDerWallsRadius" Text="{Binding VanDerWallsRadius}" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </Border>
 

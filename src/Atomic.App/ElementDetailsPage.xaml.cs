@@ -77,6 +77,34 @@ namespace Atomic.App
             slideStoryboard.Begin();
         }
 
+        /// <summary>Below this the card is too narrow for the list and the diagram side by side.</summary>
+        private const double SideBySideWidth = 760;
+
+        private void AtomicPropertiesBorder_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var wide = e.NewSize.Width >= SideBySideWidth;
+
+            if (wide)
+            {
+                Grid.SetColumn(ShellPanel, 1);
+                Grid.SetRow(ShellPanel, 0);
+                Grid.SetColumnSpan(ShellPanel, 1);
+                Grid.SetColumnSpan(AtomicList, 1);
+                Grid.SetRow(AtomicList, 0);
+                Grid.SetRowSpan(AtomicList, 2);
+            }
+            else
+            {
+                // Stacked: the diagram first, then the list under it, each the card's full width.
+                Grid.SetColumn(ShellPanel, 0);
+                Grid.SetRow(ShellPanel, 0);
+                Grid.SetColumnSpan(ShellPanel, 2);
+                Grid.SetColumnSpan(AtomicList, 2);
+                Grid.SetRow(AtomicList, 1);
+                Grid.SetRowSpan(AtomicList, 1);
+            }
+        }
+
         /// <summary>
         /// Fill the two charts this page shares with the chat cards.
         ///
@@ -92,7 +120,7 @@ namespace Atomic.App
 
             if (record is null)
             {
-                ShellRow.Visibility = Visibility.Collapsed;
+                ShellPanel.Visibility = Visibility.Collapsed;
                 AbundanceChart.Visibility = Visibility.Collapsed;
                 AbundanceBorder.Visibility = Visibility.Collapsed;
                 return;
@@ -102,20 +130,25 @@ namespace Atomic.App
             var counts = Atomic.Core.Ai.Cards.ElectronShells.Parse(shells);
             if (counts.Count > 0)
             {
-                ShellRow.Visibility = Visibility.Visible;
+                ShellPanel.Visibility = Visibility.Visible;
                 ShellChart.SetShells(shells, record.Symbol);
 
                 // K, L, M ... are the shells' names; the number after each is how many electrons it holds.
                 // Every shell is listed, the empty ones as 0, so the eight always read as a set.
-                const string names = "KLMNOPQR";
-                var lines = names.Select((name, i) =>
-                    name + (i < counts.Count ? counts[i] : 0).ToString(System.Globalization.CultureInfo.InvariantCulture)).ToList();
-                ShellLabelsInner.Text = string.Join("\n", lines.Take(4));
-                ShellLabelsOuter.Text = string.Join("\n", lines.Skip(4));
+                ShellLabels.Children.Clear();
+                for (var i = 0; i < "KLMNOPQR".Length; i++)
+                {
+                    ShellLabels.Children.Add(new TextBlock
+                    {
+                        Text = "KLMNOPQR"[i] + (i < counts.Count ? counts[i] : 0).ToString(System.Globalization.CultureInfo.InvariantCulture),
+                        FontSize = 14,
+                        IsTextSelectionEnabled = true,
+                    });
+                }
             }
             else
             {
-                ShellRow.Visibility = Visibility.Collapsed;
+                ShellPanel.Visibility = Visibility.Collapsed;
             }
 
             var strings = Services.ResourceStringProvider.For(
