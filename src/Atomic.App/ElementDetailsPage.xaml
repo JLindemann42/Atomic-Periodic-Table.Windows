@@ -7,6 +7,7 @@
     xmlns:conv="using:Atomic.App.Converters"
     xmlns:models="using:Atomic.App.Models"  
     xmlns:charts="using:Atomic.App.Controls.Charts"
+    xmlns:cards="using:Atomic.Core.Ai.Cards"
    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
    mc:Ignorable="d">
@@ -75,6 +76,8 @@
             <DoubleAnimation Storyboard.TargetName="HardnessBorder" Storyboard.TargetProperty="Opacity"
                              From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
             <DoubleAnimation Storyboard.TargetName="AdditionalBorder" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
+            <DoubleAnimation Storyboard.TargetName="AbundanceBorder" Storyboard.TargetProperty="Opacity"
                              From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
             <DoubleAnimation Storyboard.TargetName="GridBorder" Storyboard.TargetProperty="Opacity"
                              From="0" To="1" Duration="0:0:0.2" BeginTime="0:0:0.6"/>
@@ -560,6 +563,55 @@
 
                         <TextBlock Text="{loc:Str Key=element_shear_modulus}" FontSize="14" FontWeight="SemiBold" Margin="0,12,0,4" IsTextSelectionEnabled="True"/>
                         <TextBlock x:Name="ShearModulus" FontSize="14" TextWrapping="Wrap" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Abundance Card -->
+                <Border x:Name="AbundanceBorder" Opacity="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Padding="16" CornerRadius="8" Margin="0,12,0,0" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" HorizontalAlignment="Stretch" MinWidth="450" MaxWidth="1800">
+                    <StackPanel>
+                        <TextBlock Text="{loc:Str Key=abundance_title}" FontSize="20" FontWeight="SemiBold" />
+
+                        <!--
+                            One row per reservoir, grouped by unit, straight from the profile the
+                            abundance reducer computes. Seven hand-written rows used to name their
+                            own units as literals, which is how sea water came to be labelled mg/kg
+                            and crustal rocks µg/l - each other's units. There is nothing here left
+                            to disagree with the data.
+                        -->
+                        <ItemsControl x:Name="AbundanceRows" Margin="0,4,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="cards:AbundanceGroup">
+                                    <StackPanel Margin="0,14,0,0">
+                                        <!-- The unit heads its group, so no row repeats it. -->
+                                        <TextBlock Text="{x:Bind UnitLabel}"
+                                                   FontSize="12" FontWeight="SemiBold"
+                                                   TextWrapping="Wrap"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   IsTextSelectionEnabled="True" />
+                                        <ItemsControl ItemsSource="{x:Bind Bars}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="cards:AbundanceBar">
+                                                    <Grid Margin="0,6,0,0" ColumnSpacing="16">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{x:Bind Label}" FontSize="14"
+                                                                   TextWrapping="Wrap"
+                                                                   IsTextSelectionEnabled="True" />
+                                                        <TextBlock Grid.Column="1" Text="{x:Bind Display}"
+                                                                   FontSize="14" FontWeight="SemiBold"
+                                                                   HorizontalAlignment="Right"
+                                                                   IsTextSelectionEnabled="True" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </Border>
 
