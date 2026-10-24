@@ -71,7 +71,7 @@ namespace Atomic.App.Services
             c => c.Formula ?? string.Empty,
             c => c.MolarMass.ToString("R", CultureInfo.InvariantCulture),
             c => c.SavedAt, (c, at) => c.SavedAt = at,
-            s => double.TryParse(s.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out var mass)
+            s => LeadingNumber(s.Value) is { } mass
                 ? new FavoriteCompound { Formula = s.Key, MolarMass = mass, SavedAt = s.UpdatedAt }
                 : null,
             NewestFirst: false);
@@ -267,6 +267,20 @@ namespace Atomic.App.Services
         }
 
         private static long Now() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+        private static readonly System.Text.RegularExpressions.Regex LeadingNumberPattern = new(
+            @"^\s*[-+]?[0-9]+(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?",
+            System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
+        /// <summary>
+        /// The molar mass at the start of a shared value. Both apps write the bare number, but Android
+        /// shows its masses as "18.015 (g/mol)", and one written that way should still be read.
+        /// </summary>
+        private static double? LeadingNumber(string value) =>
+            LeadingNumberPattern.Match(value) is { Success: true } match &&
+            double.TryParse(match.Value.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out var number)
+                ? number
+                : null;
 
         private static async Task<List<T>> ReadAsync<T>(
             string fileName, JsonTypeInfo<List<T>> typeInfo)

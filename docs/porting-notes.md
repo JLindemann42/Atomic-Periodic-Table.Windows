@@ -997,9 +997,14 @@ and the other's new messages are lost - and deleting a conversation, which neith
 The calculator's compounds, the equation balancer's equations and the ideal gas calculator's results
 sync for PRO users through `users/{uid}.favorites`, as three arrays - `compounds` (`formula`,
 `molarMass`), `equations` (`input`, `balanced`) and `idealGas` (`summary`, `result`) - each item
-carrying `updatedAt` (epoch ms) and `deleted`. Android keeps all three on the device only, as
-delimited StringSets, so this is defined here first; Android can adopt it by mapping its strings onto
-the fields. Until then it syncs Windows to Windows.
+carrying `updatedAt` (epoch ms) and `deleted`. Defined here first; Android now implements the same
+format and merge (`sync/FavoritesDocument.kt`, `FavoritesStore.kt`, `FavoritesSyncManager.kt`), keeping
+its delimited StringSets as the local lists and a sidecar of save/removal times beside them. Either
+platform's existing favourites are stamped on first sight and added to the cloud by the merge, never
+replacing what is there. `molarMass` is the bare number on the wire; Android's "18.015 (g/mol)" is
+stripped on the way up and restored on the way down, and Windows reads a leading number either way.
+The ideal gas summaries are formatted differently on the two platforms ("P = 1 atm" here, "P=1 atm" on
+Android), so the same calculation saved on both shows as two entries.
 
 Unlike chat history, favourites can be removed, so a union merge would bring a removed item straight
 back from the other device. A removal is kept as a `deleted` record with its time, and per item the
