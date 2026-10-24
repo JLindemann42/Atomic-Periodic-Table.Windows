@@ -338,10 +338,13 @@ namespace Atomic.App.Tools
 
             ShowFavorites(await FavoritesStore.SaveIdealGasAsync(new SavedIdealGas { Summary = summary, Result = result }));
 
+            // "P=1 atm, V=22.4 L, T=273 K", exactly as Android writes it, because the summary is what
+            // identifies a saved calculation when it syncs: the same inputs saved on both platforms
+            // must come out as the same text to be the same favourite.
             void Add(TextBox box, string unit, string symbol)
             {
                 if (box.IsEnabled && !string.IsNullOrWhiteSpace(box.Text))
-                    parts.Add($"{symbol} = {box.Text.Trim()} {unit}");
+                    parts.Add($"{symbol}={box.Text.Trim()} {unit}");
             }
         }
 

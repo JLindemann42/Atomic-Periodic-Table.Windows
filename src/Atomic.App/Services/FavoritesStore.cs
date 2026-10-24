@@ -182,6 +182,10 @@ namespace Atomic.App.Services
             await Lock.WaitAsync().ConfigureAwait(true);
             try
             {
+                // Loading the ideal gas list first lets any old-format summaries be rewritten, and their
+                // removal records written, before those records are read below.
+                await LoadAsync(IdealGas).ConfigureAwait(true);
+
                 var removed = await ReadAsync(RemovedFile, ElementJsonContext.Default.ListRemovedFavorite).ConfigureAwait(true);
                 var result = new Dictionary<FavoriteKind, IReadOnlyList<SyncedFavorite>>();
                 var changed = new List<FavoriteKind>();
@@ -254,6 +258,7 @@ namespace Atomic.App.Services
         private static async Task<List<T>> LoadAsync<T>(Tool<T> list) where T : class
         {
             var items = await ReadAsync(list.File, list.TypeInfo).ConfigureAwait(true);
+            if (items is List<SavedIdealGas> gases) await RewriteOldSummariesAsync(gases).ConfigureAwait(true);
             if (items.All(i => list.SavedAt(i) != 0)) return items;
 
             var now = Now();
@@ -267,6 +272,46 @@ namespace Atomic.App.Services
         }
 
         private static long Now() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+        private static readonly System.Text.RegularExpressions.Regex OldSummarySymbol = new(
+            @"(?<=^|, )([PVnT]) = ", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
+        /// <summary>
+        /// Rewrite ideal gas summaries saved as "P = 1 atm" to Android's "P=1 atm", so a calculation
+        /// saved on both platforms is one favourite. The old text is recorded as removed, so a copy
+        /// of it already synced is taken out of the cloud instead of standing beside the new one.
+        /// Caller holds the lock.
+        /// </summary>
+        private static async Task RewriteOldSummariesAsync(List<SavedIdealGas> gases)
+        {
+            var renamed = new List<string>();
+            foreach (var gas in gases)
+            {
+                var rewritten = OldSummarySymbol.Replace(gas.Summary, "$1=");
+                if (rewritten == gas.Summary) continue;
+                renamed.Add(gas.Summary);
+                gas.Summary = rewritten;
+            }
+            if (renamed.Count == 0) return;
+
+            // Two old entries can now read the same; keep the newer.
+            var deduped = gases
+                .GroupBy(g => g.Summary, StringComparer.Ordinal)
+                .Select(g => g.OrderByDescending(x => x.SavedAt).First())
+                .ToList();
+            gases.Clear();
+            gases.AddRange(deduped);
+            await WriteAsync(IdealGasFile, gases, ElementJsonContext.Default.ListSavedIdealGas).ConfigureAwait(true);
+
+            var removed = await ReadAsync(RemovedFile, ElementJsonContext.Default.ListRemovedFavorite).ConfigureAwait(true);
+            var now = Now();
+            foreach (var old in renamed)
+            {
+                removed.RemoveAll(r => r.Kind == FavoriteKind.IdealGas && r.Key == old);
+                removed.Add(new RemovedFavorite { Kind = FavoriteKind.IdealGas, Key = old, RemovedAt = now });
+            }
+            await WriteAsync(RemovedFile, removed, ElementJsonContext.Default.ListRemovedFavorite).ConfigureAwait(true);
+        }
 
         private static readonly System.Text.RegularExpressions.Regex LeadingNumberPattern = new(
             @"^\s*[-+]?[0-9]+(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?",
