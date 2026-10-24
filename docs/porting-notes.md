@@ -1013,6 +1013,16 @@ newer change wins. Removal records expire after 180 days; a device offline for l
 bring an item back. The PATCH masks `favorites.compounds`, `favorites.equations` and
 `favorites.idealGas` only, and unknown fields on an item are carried through.
 
+The unit converter is the fourth list, `unitConversions`: `category`, `fromUnit`, `toUnit`, and
+`inputValue` and `convertedValue` as numbers. It has no single key field; each platform builds its own
+key from the four identifying parts (`FavoritesDocument.UnitConversionKey`), only ever compared against
+keys the same platform built, so "1" here and "1.0" on Android never meet. Category and unit names are
+the English names both apps already use.
+
+Sync, and every favourites list, is for any paid tier: PRO, PRO+ or Ultimate. `HasAnyPro` (and
+Android's `EntitlementManager.hasAnyPro`) now count Ultimate directly, and Android's calculator and
+unit converter, which read the PRO purchase alone, use it too.
+
 Locally, the pages no longer write their on-screen list back - a sync landing between a page's load
 and its next save would be overwritten. `FavoritesStore` does each save and removal as a
 read-modify-write under one lock, shared with the sync's merge, and records removals in

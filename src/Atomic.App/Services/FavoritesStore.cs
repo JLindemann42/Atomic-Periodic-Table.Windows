@@ -47,6 +47,7 @@ namespace Atomic.App.Services
         private const string CompoundsFile = "favorites.json";
         private const string EquationsFile = "equation_favorites.json";
         private const string IdealGasFile = "ideal_gas_favorites.json";
+        private const string UnitConversionsFile = "unit_favorites.json";
         private const string RemovedFile = "favorites_removed.json";
 
         private static readonly SemaphoreSlim Lock = new(1, 1);
@@ -90,6 +91,29 @@ namespace Atomic.App.Services
             s => new SavedIdealGas { Summary = s.Key, Result = s.Value, SavedAt = s.UpdatedAt },
             NewestFirst: true);
 
+        private static readonly Tool<UnitConversionFavorite> UnitConversions = new(
+            FavoriteKind.UnitConversion, UnitConversionsFile, ElementJsonContext.Default.ListUnitConversionFavorite,
+            KeyOf,
+            u => FavoritesDocument.Number(u.ConvertedValue),
+            u => u.SavedAt, (u, at) => u.SavedAt = at,
+            s => FavoritesDocument.ParseUnitConversionKey(s.Key) is { } parts &&
+                 double.TryParse(s.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out var converted)
+                ? new UnitConversionFavorite
+                {
+                    Category = parts.Category,
+                    FromUnit = parts.FromUnit,
+                    ToUnit = parts.ToUnit,
+                    InputValue = parts.InputValue,
+                    ConvertedValue = converted,
+                    SavedAt = s.UpdatedAt,
+                }
+                : null,
+            NewestFirst: false);
+
+        /// <summary>What identifies a saved conversion: its category, units and input.</summary>
+        public static string KeyOf(UnitConversionFavorite u) =>
+            FavoritesDocument.UnitConversionKey(u.Category ?? string.Empty, u.FromUnit ?? string.Empty, u.ToUnit ?? string.Empty, u.InputValue);
+
         /// <summary>Raised after a sync changed what is saved here, so an open page can reload. Any thread.</summary>
         public static event EventHandler<FavoriteKind>? Changed;
 
@@ -98,14 +122,18 @@ namespace Atomic.App.Services
         public static Task<List<FavoriteCompound>> LoadCompoundsAsync() => LoadLockedAsync(Compounds);
         public static Task<List<SavedEquation>> LoadEquationsAsync() => LoadLockedAsync(Equations);
         public static Task<List<SavedIdealGas>> LoadIdealGasAsync() => LoadLockedAsync(IdealGas);
+        public static Task<List<UnitConversionFavorite>> LoadUnitConversionsAsync() => LoadLockedAsync(UnitConversions);
 
         public static Task<List<FavoriteCompound>> SaveCompoundAsync(FavoriteCompound item) => SaveAsync(Compounds, item);
         public static Task<List<SavedEquation>> SaveEquationAsync(SavedEquation item) => SaveAsync(Equations, item);
         public static Task<List<SavedIdealGas>> SaveIdealGasAsync(SavedIdealGas item) => SaveAsync(IdealGas, item);
+        public static Task<List<UnitConversionFavorite>> SaveUnitConversionAsync(UnitConversionFavorite item) => SaveAsync(UnitConversions, item);
 
         public static Task<List<FavoriteCompound>> RemoveCompoundAsync(string formula) => RemoveAsync(Compounds, formula);
         public static Task<List<SavedEquation>> RemoveEquationAsync(string input) => RemoveAsync(Equations, input);
         public static Task<List<SavedIdealGas>> RemoveIdealGasAsync(string summary) => RemoveAsync(IdealGas, summary);
+        public static Task<List<UnitConversionFavorite>> RemoveUnitConversionAsync(UnitConversionFavorite item) =>
+            RemoveAsync(UnitConversions, KeyOf(item));
 
         private static async Task<List<T>> LoadLockedAsync<T>(Tool<T> list) where T : class
         {
@@ -195,6 +223,7 @@ namespace Atomic.App.Services
                     await MergeOneAsync(Compounds, removed, merge).ConfigureAwait(true),
                     await MergeOneAsync(Equations, removed, merge).ConfigureAwait(true),
                     await MergeOneAsync(IdealGas, removed, merge).ConfigureAwait(true),
+                    await MergeOneAsync(UnitConversions, removed, merge).ConfigureAwait(true),
                 })
                 {
                     result[kind] = merged;

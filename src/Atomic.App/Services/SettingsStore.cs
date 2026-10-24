@@ -168,8 +168,11 @@ namespace Atomic.App.Services
         /// True for either paid tier. PRO+ implies PRO, so gates that accept "any paid tier"
         /// should use this rather than testing <see cref="IsProUser"/> alone - a PRO+ purchase
         /// does not necessarily set the PRO flag.
+        ///
+        /// <para>Ultimate counts too. It grants PRO+, but it can arrive from the account document on
+        /// a path that records Ultimate alone, and a paid gate must not hide behind that.</para>
         /// </summary>
-        public static bool HasAnyPro => IsProUser || IsProPlusUser;
+        public static bool HasAnyPro => IsProUser || IsProPlusUser || HasUltimate;
 
         /// <summary>
         /// Ultimate, the one product that crosses stores.

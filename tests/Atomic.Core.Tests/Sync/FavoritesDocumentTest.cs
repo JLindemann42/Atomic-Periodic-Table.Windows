@@ -45,6 +45,15 @@ namespace Atomic.Core.Tests.Sync
                     "updatedAt":{"integerValue":"1759000000000"},
                     "deleted":{"booleanValue":true}}}}
                 ]}},
+                "unitConversions":{"arrayValue":{"values":[
+                  {"mapValue":{"fields":{
+                    "category":{"stringValue":"Length"},
+                    "fromUnit":{"stringValue":"Kilometer"},
+                    "toUnit":{"stringValue":"Meter"},
+                    "inputValue":{"integerValue":"2"},
+                    "convertedValue":{"doubleValue":2000.0},
+                    "updatedAt":{"integerValue":"1759000000000"}}}}
+                ]}},
                 "units":{"arrayValue":{"values":[{"stringValue":"km"}]}}
               }}}}}
             """;
@@ -71,7 +80,7 @@ namespace Atomic.Core.Tests.Sync
             var empty = FavoritesDocument.FromDocument(JsonNode.Parse("""{"fields":{}}"""));
 
             Assert.All(empty.Values, Assert.Empty);
-            Assert.Equal(3, empty.Count);
+            Assert.Equal(4, empty.Count);
         }
 
         [Fact]
@@ -85,14 +94,47 @@ namespace Atomic.Core.Tests.Sync
 
         /// <summary>The write names its three lists, so "units" - and "xp" - are left alone by Firestore.</summary>
         [Fact]
-        public void TheMaskNamesOnlyTheThreeLists()
+        public void TheMaskNamesOnlyTheFourLists()
         {
             Assert.Equal(
-                "?updateMask.fieldPaths=favorites.compounds&updateMask.fieldPaths=favorites.equations&updateMask.fieldPaths=favorites.idealGas",
+                "?updateMask.fieldPaths=favorites.compounds&updateMask.fieldPaths=favorites.equations" +
+                "&updateMask.fieldPaths=favorites.idealGas&updateMask.fieldPaths=favorites.unitConversions",
                 FavoritesDocument.UpdateMaskQuery());
 
             var favorites = FirestoreValue.ReadMap(FavoritesDocument.ToDocument(Cloud())["fields"]!["favorites"]);
-            Assert.Equal(["compounds", "equations", "idealGas"], favorites.Keys.Order(StringComparer.Ordinal));
+            Assert.Equal(["compounds", "equations", "idealGas", "unitConversions"], favorites.Keys.Order(StringComparer.Ordinal));
+        }
+
+        /// <summary>
+        /// A unit conversion is four fields and two numbers on the wire. Firestore hands a whole
+        /// number back as an integer, which must read the same as the double it was written as.
+        /// </summary>
+        [Fact]
+        public void AUnitConversionReadsItsFieldsAndNumbers()
+        {
+            var conversion = Cloud()[FavoriteKind.UnitConversion].Single();
+
+            Assert.Equal(FavoritesDocument.UnitConversionKey("Length", "Kilometer", "Meter", 2.0), conversion.Key);
+            Assert.Equal("2000", conversion.Value);
+            Assert.Equal(("Length", "Kilometer", "Meter", 2.0), FavoritesDocument.ParseUnitConversionKey(conversion.Key));
+        }
+
+        [Fact]
+        public void AUnitConversionIsWrittenAsFieldsWithNumbers()
+        {
+            var item = new SyncedFavorite(FavoritesDocument.UnitConversionKey("Mass", "Gram", "Kilogram", 1500), "1.5", 7);
+            var written = FavoritesDocument.ToDocument(new Dictionary<FavoriteKind, IReadOnlyList<SyncedFavorite>>
+            {
+                [FavoriteKind.UnitConversion] = [item],
+            });
+
+            var fields = FirestoreValue.ReadMap(FirestoreValue.ReadArray(
+                FirestoreValue.ReadMap(written["fields"]!["favorites"])["unitConversions"]).Single());
+
+            Assert.Equal("Gram", FirestoreValue.ReadString(fields["fromUnit"]));
+            Assert.Equal(1500.0, fields["inputValue"]!["doubleValue"]!.GetValue<double>());
+            Assert.Equal(1.5, fields["convertedValue"]!["doubleValue"]!.GetValue<double>());
+            Assert.Equal(item with { Raw = null }, FavoritesDocument.FromDocument(written)[FavoriteKind.UnitConversion].Single() with { Raw = null });
         }
 
         [Fact]

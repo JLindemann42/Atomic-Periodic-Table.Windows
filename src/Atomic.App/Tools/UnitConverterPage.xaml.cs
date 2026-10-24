@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.ApplicationModel.DataTransfer;
 using Atomic.App.Services;
+using Atomic.Core.Sync;
 
 namespace Atomic.App.Tools
 {
@@ -99,7 +100,13 @@ namespace Atomic.App.Tools
             this.SizeChanged += UnitConverterPage_SizeChanged;
             SetCardsGridLayout(this.ActualWidth);
 
-            _ = LoadFavoritesAsync();
+            Loaded += async (_, _) =>
+            {
+                FavoritesStore.Changed += Favorites_Changed;
+                await LoadFavoritesAsync();
+                _ = FavoritesSync.SyncAsync();
+            };
+            Unloaded += (_, _) => FavoritesStore.Changed -= Favorites_Changed;
 
             // Initial state for favorite button
             UpdateFavoriteButtonState();
@@ -300,48 +307,27 @@ namespace Atomic.App.Tools
                     InputValue = value,
                     ConvertedValue = converted // <-- Store the converted value
                 };
-                Favorites.Add(favorite);
-                await SaveFavoritesAsync();
-                UpdateFavoriteButtonState();
+                ShowFavorites(await FavoritesStore.SaveUnitConversionAsync(favorite));
             }
         }
 
-        private async Task LoadFavoritesAsync()
+        // Favourites live in FavoritesStore, in the same unit_favorites.json as before, and sync for
+        // PRO, PRO+ and Ultimate users.
+
+        private async Task LoadFavoritesAsync() => ShowFavorites(await FavoritesStore.LoadUnitConversionsAsync());
+
+        private void ShowFavorites(IEnumerable<UnitConversionFavorite> saved)
         {
-            try
-            {
-                var file = await ApplicationData.Current.LocalFolder.TryGetItemAsync(FavoritesFileName) as StorageFile;
-                if (file != null)
-                {
-                    using var stream = await file.OpenStreamForReadAsync();
-                    var loaded = await JsonSerializer.DeserializeAsync(stream, ElementJsonContext.Default.ListUnitConversionFavorite);
-                    if (loaded != null)
-                    {
-                        Favorites.Clear();
-                        foreach (var fav in loaded)
-                            Favorites.Add(fav);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"[ERROR] Loading favorites: {ex}");
-            }
+            Favorites.Clear();
+            foreach (var fav in saved)
+                Favorites.Add(fav);
             UpdateFavoriteButtonState();
         }
 
-        private async Task SaveFavoritesAsync()
+        /// <summary>A sync brought changes from another device. Raised on any thread.</summary>
+        private void Favorites_Changed(object? sender, FavoriteKind kind)
         {
-            try
-            {
-                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(FavoritesFileName, CreationCollisionOption.ReplaceExisting);
-                using var stream = await file.OpenStreamForWriteAsync();
-                await JsonSerializer.SerializeAsync(stream, Favorites.ToList(), ElementJsonContext.Default.ListUnitConversionFavorite);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"[ERROR] Saving favorites: {ex}");
-            }
+            if (kind == FavoriteKind.UnitConversion) DispatcherQueue.TryEnqueue(async () => await LoadFavoritesAsync());
         }
 
         public class UnitDefinition
@@ -359,9 +345,7 @@ namespace Atomic.App.Tools
         {
             if (sender is MenuFlyoutItem { Tag: UnitConversionFavorite fav })
             {
-                Favorites.Remove(fav);
-                await SaveFavoritesAsync();
-                UpdateFavoriteButtonState();
+                ShowFavorites(await FavoritesStore.RemoveUnitConversionAsync(fav));
             }
         }
 
@@ -414,6 +398,9 @@ namespace Atomic.App.Tools
         public string FromUnit { get; set; }
         public string ToUnit { get; set; }
         public double InputValue { get; set; }
-        public double ConvertedValue { get; set; } // <-- Add this
+        public double ConvertedValue { get; set; }
+
+        /// <summary>Epoch milliseconds of the save, which decides it against a removal on another device.</summary>
+        public long SavedAt { get; set; }
     }
 }

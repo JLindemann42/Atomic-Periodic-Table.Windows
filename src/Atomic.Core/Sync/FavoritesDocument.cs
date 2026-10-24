@@ -6,7 +6,7 @@ using System.Text.Json.Nodes;
 
 namespace Atomic.Core.Sync
 {
-    /// <summary>The three tools whose saved items sync.</summary>
+    /// <summary>The four tools whose saved items sync.</summary>
     public enum FavoriteKind
     {
         /// <summary>The molar mass calculator: a formula and its molar mass.</summary>
@@ -17,6 +17,12 @@ namespace Atomic.Core.Sync
 
         /// <summary>The ideal gas calculator: the inputs and the result.</summary>
         IdealGas,
+
+        /// <summary>
+        /// The unit converter: a category, two units and an input, and what it converted to. Stored
+        /// as separate fields, with the two values as numbers; see <see cref="FavoritesDocument.UnitConversionKey"/>.
+        /// </summary>
+        UnitConversion,
     }
 
     /// <summary>
@@ -33,8 +39,8 @@ namespace Atomic.Core.Sync
     }
 
     /// <summary>
-    /// <c>users/{uid}.favorites</c>: the calculator's, equation balancer's and ideal gas calculator's saved
-    /// items, synced for PRO users.
+    /// <c>users/{uid}.favorites</c>: the calculator's, equation balancer's, ideal gas calculator's and
+    /// unit converter's saved items, synced for PRO, PRO+ and Ultimate users.
     ///
     /// <para><b>Defined here first.</b> Android keeps these on the device only, as delimited strings in
     /// SharedPreferences ("formula:mass"), which break on a value that contains the delimiter. The shared
@@ -47,7 +53,7 @@ namespace Atomic.Core.Sync
     /// it happened, and per item the newer of the two sides wins: removing beats an older save, and saving
     /// again beats an older removal. Removal records expire after <see cref="TombstoneLifetime"/>.</para>
     ///
-    /// <para>The write masks the three nested paths and nothing else, so another field under
+    /// <para>The write masks the four nested paths and nothing else, so another field under
     /// <c>favorites</c> - Android adding its unit converter's list, say - survives a Windows sync. Pure, like
     /// the other merges, because this is a place where a bug deletes a user's data on their other
     /// device.</para>
@@ -65,16 +71,48 @@ namespace Atomic.Core.Sync
         /// </summary>
         public static readonly TimeSpan TombstoneLifetime = TimeSpan.FromDays(180);
 
-        private static readonly FavoriteKind[] Kinds = [FavoriteKind.Compound, FavoriteKind.Equation, FavoriteKind.IdealGas];
+        private static readonly FavoriteKind[] Kinds =
+            [FavoriteKind.Compound, FavoriteKind.Equation, FavoriteKind.IdealGas, FavoriteKind.UnitConversion];
 
-        /// <summary>The wire names: the array under <c>favorites</c>, and the item's two fields.</summary>
+        /// <summary>
+        /// The wire names: the array under <c>favorites</c>, and the item's two fields. A unit
+        /// conversion has no single key field; it is read and written by <see cref="ReadUnitConversion"/>
+        /// and <see cref="WriteUnitConversion"/>.
+        /// </summary>
         private static (string Array, string KeyField, string ValueField) Wire(FavoriteKind kind) => kind switch
         {
             FavoriteKind.Compound => ("compounds", "formula", "molarMass"),
             FavoriteKind.Equation => ("equations", "input", "balanced"),
             FavoriteKind.IdealGas => ("idealGas", "summary", "result"),
+            FavoriteKind.UnitConversion => ("unitConversions", "", ""),
             _ => throw new ArgumentOutOfRangeException(nameof(kind), kind, null),
         };
+
+        private const string Separator = "\u001F";
+
+        /// <summary>
+        /// A unit conversion's key: what identifies it, as both apps' converters decide "already
+        /// saved" - the category, the two units and the input value.
+        /// </summary>
+        /// <remarks>
+        /// Only ever compared on this platform, against keys this platform built - so the number's
+        /// text needs to be stable here, not identical to Android's ("1" here, "1.0" there).
+        /// </remarks>
+        public static string UnitConversionKey(string category, string fromUnit, string toUnit, double inputValue) =>
+            string.Join(Separator, category, fromUnit, toUnit, Number(inputValue));
+
+        /// <summary>The four parts of <see cref="UnitConversionKey"/>, or null for a key that is not one.</summary>
+        public static (string Category, string FromUnit, string ToUnit, double InputValue)? ParseUnitConversionKey(string key)
+        {
+            var parts = key.Split(Separator);
+            return parts.Length == 4 &&
+                   double.TryParse(parts[3], NumberStyles.Float, CultureInfo.InvariantCulture, out var input)
+                ? (parts[0], parts[1], parts[2], input)
+                : null;
+        }
+
+        /// <summary>A number as text, round-trippable and culture-free.</summary>
+        public static string Number(double value) => value.ToString("R", CultureInfo.InvariantCulture);
 
         /// <summary>The only paths a favourites PATCH may touch.</summary>
         public static readonly IReadOnlyList<string> FieldPaths =
@@ -99,7 +137,7 @@ namespace Atomic.Core.Sync
                     : [];
 
                 result[kind] = values
-                    .Select(v => Read(v, keyField, valueField))
+                    .Select(v => kind == FavoriteKind.UnitConversion ? ReadUnitConversion(v) : Read(v, keyField, valueField))
                     .OfType<SyncedFavorite>()
                     .ToList();
             }
@@ -121,12 +159,40 @@ namespace Atomic.Core.Sync
             };
         }
 
+        /// <summary>
+        /// A unit conversion. One whose input is missing gets an empty key, so the merge carries it
+        /// untouched rather than dropping something another build wrote.
+        /// </summary>
+        private static SyncedFavorite? ReadUnitConversion(JsonNode? value)
+        {
+            var map = FirestoreValue.ReadMap(value);
+            if (map.Count == 0) return null;
+
+            var input = FirestoreValue.ReadDouble(Get(map, "inputValue"));
+            var converted = FirestoreValue.ReadDouble(Get(map, "convertedValue"));
+
+            return new SyncedFavorite(
+                input is { } i
+                    ? UnitConversionKey(
+                        FirestoreValue.ReadString(Get(map, "category")) ?? string.Empty,
+                        FirestoreValue.ReadString(Get(map, "fromUnit")) ?? string.Empty,
+                        FirestoreValue.ReadString(Get(map, "toUnit")) ?? string.Empty,
+                        i)
+                    : string.Empty,
+                converted is { } c ? Number(c) : string.Empty,
+                FirestoreValue.ReadInteger(Get(map, "updatedAt")) ?? 0,
+                FirestoreValue.ReadBoolean(Get(map, "deleted")) ?? false)
+            {
+                Raw = value?.DeepClone(),
+            };
+        }
+
         private static JsonNode? Get(IReadOnlyDictionary<string, JsonNode?> map, string key) =>
             map.TryGetValue(key, out var value) ? value : null;
 
         // ---- Writing ---------------------------------------------------------------------------------
 
-        /// <summary>The PATCH body: <c>favorites</c> with the three arrays, and nothing else.</summary>
+        /// <summary>The PATCH body: <c>favorites</c> with the four arrays, and nothing else.</summary>
         public static JsonObject ToDocument(IReadOnlyDictionary<FavoriteKind, IReadOnlyList<SyncedFavorite>> all)
         {
             var arrays = new Dictionary<string, JsonNode>(StringComparer.Ordinal);
@@ -134,7 +200,8 @@ namespace Atomic.Core.Sync
             {
                 var (array, keyField, valueField) = Wire(kind);
                 var items = all.TryGetValue(kind, out var list) ? list : [];
-                arrays[array] = FirestoreValue.Array(items.Select(i => Value(i, keyField, valueField)));
+                arrays[array] = FirestoreValue.Array(items.Select(i =>
+                    kind == FavoriteKind.UnitConversion ? WriteUnitConversion(i) : Value(i, keyField, valueField)));
             }
 
             return FirestoreValue.Document(new Dictionary<string, JsonNode>(StringComparer.Ordinal)
@@ -153,6 +220,31 @@ namespace Atomic.Core.Sync
 
             fields[keyField] = FirestoreValue.String(item.Key);
             fields[valueField] = FirestoreValue.String(item.Value);
+            fields["updatedAt"] = FirestoreValue.Integer(item.UpdatedAt);
+            fields["deleted"] = FirestoreValue.Boolean(item.Deleted);
+
+            return FirestoreValue.Map(fields);
+        }
+
+        private static JsonNode WriteUnitConversion(SyncedFavorite item)
+        {
+            var fields = new Dictionary<string, JsonNode>(StringComparer.Ordinal);
+            foreach (var (key, value) in FirestoreValue.ReadMap(item.Raw))
+            {
+                if (value is not null) fields[key] = value.DeepClone();
+            }
+
+            // A keyless item came from the cloud as it is; its fields are already in Raw.
+            if (ParseUnitConversionKey(item.Key) is { } parts)
+            {
+                fields["category"] = FirestoreValue.String(parts.Category);
+                fields["fromUnit"] = FirestoreValue.String(parts.FromUnit);
+                fields["toUnit"] = FirestoreValue.String(parts.ToUnit);
+                fields["inputValue"] = FirestoreValue.Double(parts.InputValue);
+            }
+            if (double.TryParse(item.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out var converted))
+                fields["convertedValue"] = FirestoreValue.Double(converted);
+
             fields["updatedAt"] = FirestoreValue.Integer(item.UpdatedAt);
             fields["deleted"] = FirestoreValue.Boolean(item.Deleted);
 
