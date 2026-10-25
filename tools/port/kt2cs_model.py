@@ -253,6 +253,17 @@ def parse_rows(source: pathlib.Path, kotlin_type: str, arity: int) -> list[list[
             if text[probe.i] == '"':
                 probe.skip_string()
                 continue
+            # A commented-out row is not a row. Without this, DictionaryModel.kt's
+            # `//dictionary.add(Dictionary("category", "headingText", ...))` template line shipped
+            # as a real dictionary entry on Windows (porting notes, D56).
+            if text.startswith("//", probe.i):
+                end = text.find("\n", probe.i)
+                probe.i = len(text) if end < 0 else end + 1
+                continue
+            if text.startswith("/*", probe.i):
+                end = text.find("*/", probe.i + 2)
+                probe.i = len(text) if end < 0 else end + 2
+                continue
             if text.startswith(marker, probe.i):
                 before = text[probe.i - 1] if probe.i else " "
                 if not (before.isalnum() or before == "_"):

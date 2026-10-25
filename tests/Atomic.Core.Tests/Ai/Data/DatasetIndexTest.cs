@@ -24,7 +24,7 @@ namespace Atomic.Core.Tests.Ai.Data
         }
 
         [Theory]
-        [InlineData(DatasetIndex.Datasets.Dictionary, 151)]
+        [InlineData(DatasetIndex.Datasets.Dictionary, 150)]
         [InlineData(DatasetIndex.Datasets.Equation, 77)]
         [InlineData(DatasetIndex.Datasets.Constant, 58)]
         [InlineData(DatasetIndex.Datasets.Poisson, 52)]

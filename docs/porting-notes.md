@@ -1152,3 +1152,39 @@ rows, so each gets one `<no rows held out of this file>` case — theory data ma
 the scoreboard skips them. CI runs the held-out split on release tags and manual runs only.
 
 Android does the same with `-Pcorpus.split=heldout`. Both platforms pass all 520 at the freeze.
+
+### D56 — canonical dataset keys, content assertions, and what they found
+
+Roadmap 0.6. Corpus rows asserted the intent only, so a dataset question passed whichever row it was
+answered from. Three changes, each on both platforms:
+
+**One key per row.** `DatasetIndex.CanonicalKeys` gives every reference-table row
+`dataset/slug-of-title` — `#2` for a repeated title, `category/name` for units — the same rule as
+Android's `canonicalKeys`. Android's Kotlin regenerates `shared/golden/dataset_keys.tsv` and both
+apps' `DatasetKeyGoldenTest` compare against it, in order. The two Basalt rows (D11) are now
+`poisson/basalt` and `poisson/basalt#2` on both. `DatasetRow.Id` is unchanged.
+
+**Corpus format 2.** A file declaring `# corpus-format: 2` may use `expect_row`, `expect_value` and
+`known_failure`; both parsers reject unknown columns and unknown formats. A known failure that fails
+passes, and one that passes fails, so the mark comes off when the fix lands.
+
+**What the golden file found.**
+
+- *The generator converted a commented-out row.* `kt2cs_model.py` scanned `//` comments, so
+  `DictionaryModel.kt`'s disabled template line `Dictionary("category", "headingText", ...)` shipped
+  on Windows as a real dictionary entry - 151 rows to Android's 150. The scanner now skips `//` and
+  `/* */` comments; regenerating removed exactly that row.
+- *The electrode series never reached Android.* D10 records it flowing Windows → Android, but
+  Android still had 18 couples to Windows' 33. Android's `SeriesModel.kt` now has the same 33 in the
+  same order, so its electrode table gains fifteen elements, including both halogens.
+- *Two data defects, recorded for roadmap 0.8, not changed here:* copper is listed at -0.159 V on
+  both platforms, where Cu²⁺/Cu is about +0.34 V (+0.153 V is Cu²⁺/Cu⁺); and the list is not
+  strictly most-negative-first (erbium, -3.0, sits above lithium, -3.04).
+
+**What the content assertions found.** 10 of the 36 `datasets.tsv` questions are answered from the
+wrong row, identically on both platforms: the electron's mass from the Pauli exclusion principle, the
+speed of light from refractive index, the gas constant from the ideal gas law, quartz from its
+Poisson ratio rather than the mineral, Swedish and Spanish "what is electronegativity" from the
+periodic-trend entry where English gets the definition. Four have no right row in any table - a
+covalent bond, the Nernst equation, basalt's composition, the sulfate ion - so those rows now expect
+a decline. All ten are `known_failure` until retrieval can abstain (roadmap 1.1).

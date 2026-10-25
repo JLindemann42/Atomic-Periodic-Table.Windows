@@ -249,6 +249,7 @@ namespace Atomic.Core.Tests.Corpus
 
             var totalEvaluated = 0;
             var totalPassed = 0;
+            var totalKnown = 0;
             var report = new List<string>();
 
             foreach (var file in QuestionCorpus.Files)
@@ -260,6 +261,7 @@ namespace Atomic.Core.Tests.Corpus
 
                 var failures = new List<string>();
                 var evaluated = 0;
+                var known = 0;
 
                 foreach (var session in sessions)
                 {
@@ -270,24 +272,35 @@ namespace Atomic.Core.Tests.Corpus
                     {
                         evaluated++;
                         var problem = Describe(corpusCase, state);
-                        if (problem is not null) failures.Add($"{corpusCase.Where} {problem}");
+                        if (corpusCase.KnownFailure is { } why)
+                        {
+                            if (problem is null) failures.Add($"{corpusCase.Where} now passes; remove its known_failure ({why})");
+                            else known++;
+                        }
+                        else if (problem is not null)
+                        {
+                            failures.Add($"{corpusCase.Where} {problem}");
+                        }
                     }
                 }
 
-                var passed = evaluated - failures.Count;
+                var passed = evaluated - failures.Count - known;
                 totalEvaluated += evaluated;
                 totalPassed += passed;
+                totalKnown += known;
 
-                report.Add(Line(file, passed, evaluated));
+                report.Add(Line(file, passed, evaluated) + (known > 0 ? $", {known} known failures" : string.Empty));
                 foreach (var failure in failures) report.Add("    " + failure);
             }
 
             foreach (var line in report) _output.WriteLine(line);
             _output.WriteLine(Line("TOTAL", totalPassed, totalEvaluated));
 
+            _output.WriteLine($"known failures: {totalKnown}");
+
             Assert.True(
-                totalPassed == totalEvaluated,
-                $"corpus: {totalEvaluated - totalPassed} of {totalEvaluated} rows failed\n" +
+                totalPassed + totalKnown == totalEvaluated,
+                $"corpus: {totalEvaluated - totalPassed - totalKnown} of {totalEvaluated} rows failed\n" +
                 string.Join("\n", report));
         }
 
@@ -349,6 +362,17 @@ namespace Atomic.Core.Tests.Corpus
             foreach (var corpusCase in session)
             {
                 var problem = Describe(corpusCase, state);
+
+                // A known failure (corpus format 2) is expected to fail today: failing is a pass
+                // here, and passing is a failure, so the mark comes off the moment the fix lands.
+                // It ends the thread either way, as a real failure would.
+                if (corpusCase.KnownFailure is { } why)
+                {
+                    if (problem is null)
+                        Assert.Fail($"{corpusCase.Where} now passes; remove its known_failure ({why})");
+                    return;
+                }
+
                 if (problem is null) continue;
 
                 // A thread stops at its first bad hop on purpose: every turn after it inherits a
@@ -467,8 +491,34 @@ namespace Atomic.Core.Tests.Corpus
                 }
             }
 
+            // Content, not only routing (roadmap 0.6): which row, which number.
+            if (corpusCase.ExpectRow is { } expectedRow)
+            {
+                if (result is not ExecutionResult.Dataset dataset)
+                    return $"'{corpusCase.Query}' should answer from {expectedRow}, but produced {result.GetType().Name}";
+                if (!string.Equals(dataset.Row.Key, expectedRow, StringComparison.Ordinal))
+                    return $"'{corpusCase.Query}' answered from {dataset.Row.Key}, expected {expectedRow}";
+            }
+
+            if (corpusCase.ExpectValue is { } expectedValue)
+            {
+                if (ValueOf(result) is not { } actual)
+                    return $"'{corpusCase.Query}' should carry the value {expectedValue}, but {result.GetType().Name} has none";
+                if (Math.Abs(actual - expectedValue) > Math.Max(Math.Abs(expectedValue) * 1e-3, 1e-12))
+                    return $"'{corpusCase.Query}' carries {actual}, expected {expectedValue}";
+            }
+
             return null;
         }
+
+        /// <summary>The one number an answer stands on, for <c>expect_value</c>.</summary>
+        private static double? ValueOf(ExecutionResult result) => result switch
+        {
+            ExecutionResult.Property p => p.Quantity?.Value,
+            ExecutionResult.Dataset d => d.Row.NumericValue,
+            ExecutionResult.Aggregate a => a.Value,
+            _ => null,
+        };
 
         /// <summary>
         /// Whether an enum member is the one the corpus names.

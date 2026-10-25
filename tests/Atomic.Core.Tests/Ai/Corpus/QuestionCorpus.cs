@@ -34,7 +34,10 @@ namespace Atomic.Core.Tests.Corpus
         bool MustDefer,
         string Notes,
         string SourceFile,
-        int Line)
+        int Line,
+        string? ExpectRow = null,
+        double? ExpectValue = null,
+        string? KnownFailure = null)
     {
         /// <summary>How a failure identifies itself, so a report line is enough to find the row.</summary>
         public string Where => $"{SourceFile}:{Line.ToString(System.Globalization.CultureInfo.InvariantCulture)} [{Id}]";
@@ -175,15 +178,44 @@ namespace Atomic.Core.Tests.Corpus
         /// rather than a silent skip: a corpus that quietly drops rows would report a pass rate over
         /// a set nobody knows the size of.</para>
         /// </summary>
+        /// <summary>
+        /// The columns each corpus format allows (roadmap 0.6), the same rules as Android's harness.
+        /// A file declares its format with a <c># corpus-format: N</c> comment before the header;
+        /// none means 1. A column outside the declared set is an error, so a misspelt
+        /// <c>expect_rows</c> cannot pass by being ignored, and an unknown format is an error rather
+        /// than a partial read.
+        /// </summary>
+        private static readonly IReadOnlyDictionary<int, HashSet<string>> FormatColumns = BuildFormats();
+
+        private static IReadOnlyDictionary<int, HashSet<string>> BuildFormats()
+        {
+            string[] v1 =
+            [
+                "id", "session", "turn", "lang", "query", "expect_intent", "expect_fields",
+                "expect_card", "must_defer", "notes",
+            ];
+            return new Dictionary<int, HashSet<string>>
+            {
+                [1] = new(v1, StringComparer.Ordinal),
+                [2] = new(v1.Concat(["expect_row", "expect_value", "known_failure"]), StringComparer.Ordinal),
+            };
+        }
+
+        private static readonly System.Text.RegularExpressions.Regex FormatLine =
+            new(@"^#\s*corpus-format:\s*(\d+)\s*$", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
         private static IReadOnlyList<CorpusCase> Parse(string name, string text)
         {
             var cases = new List<CorpusCase>();
             string[]? header = null;
+            var format = 1;
             var lines = text.Split('\n');
 
             for (var index = 0; index < lines.Length; index++)
             {
                 var line = lines[index].TrimEnd('\r', '\n');
+                if (header is null && FormatLine.Match(line.Trim()) is { Success: true } declared)
+                    format = int.Parse(declared.Groups[1].Value, System.Globalization.CultureInfo.InvariantCulture);
                 if (string.IsNullOrWhiteSpace(line) || line.StartsWith('#')) continue;
 
                 var columns = line.Split('\t');
@@ -193,6 +225,13 @@ namespace Atomic.Core.Tests.Corpus
                     if (!string.Equals(header[0], "id", StringComparison.Ordinal))
                         throw new InvalidDataException(
                             $"{name}.tsv:{index + 1} first column must be 'id', got '{columns[0]}'");
+                    if (!FormatColumns.TryGetValue(format, out var allowed))
+                        throw new InvalidDataException(
+                            $"{name}.tsv declares corpus-format {format}, which this harness does not know");
+                    var unknown = header.Where(h => !allowed.Contains(h)).ToList();
+                    if (unknown.Count > 0)
+                        throw new InvalidDataException(
+                            $"{name}.tsv: columns [{string.Join(", ", unknown)}] are not in corpus-format {format}");
                     continue;
                 }
 
@@ -229,7 +268,15 @@ namespace Atomic.Core.Tests.Corpus
                     MustDefer: Affirmative.Contains(Value(row, "must_defer").ToLowerInvariant()),
                     Notes: Value(row, "notes"),
                     SourceFile: name + ".tsv",
-                    Line: index + 1));
+                    Line: index + 1,
+                    ExpectRow: Value(row, "expect_row") is { Length: > 0 } er ? er : null,
+                    ExpectValue: Value(row, "expect_value") is { Length: > 0 } ev
+                        ? double.TryParse(ev, System.Globalization.NumberStyles.Float,
+                              System.Globalization.CultureInfo.InvariantCulture, out var v)
+                            ? v
+                            : throw new InvalidDataException($"{name}.tsv:{index + 1} [{id}] expect_value '{ev}' is not a number")
+                        : null,
+                    KnownFailure: Value(row, "known_failure") is { Length: > 0 } kf ? kf : null));
             }
 
             return cases;

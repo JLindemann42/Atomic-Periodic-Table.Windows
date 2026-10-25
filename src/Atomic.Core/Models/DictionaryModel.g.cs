@@ -18,7 +18,7 @@ public sealed record Dictionary(
 
 public static class DictionaryModel
 {
-    /// <summary>All 151 rows, in Android's authoring order.</summary>
+    /// <summary>All 150 rows, in Android's authoring order.</summary>
     public static readonly IReadOnlyList<Dictionary> All =
     [
         new("chemistry, physics", "Density", "The density (more precisely, the volumetric mass density; also known as specific mass), of a substance is its mass per unit volume. The symbol most often used for density is ρ (the lower case Greek letter rho), although the Latin letter D can also be used. Mathematically, density is defined as mass divided by volume", "https://en.wikipedia.org/wiki/Density"),
@@ -171,6 +171,5 @@ public static class DictionaryModel
         new("chemistry, physics", "Periodic trend: ionization energy", "Ionization energy increases across a period because the nuclear charge rises while the outer electrons stay in the same shell, so they are held more tightly and are harder to remove. It decreases down a group because the outermost electron is further from the nucleus and better shielded. Noble gases sit at the peaks and alkali metals in the troughs.", "https://en.wikipedia.org/wiki/Ionization_energy"),
         new("chemistry, physics", "Periodic trend: electronegativity", "Electronegativity increases across a period and decreases down a group, for the same reasons as ionization energy: a higher nuclear charge over an unchanged shell pulls bonding electrons harder, while extra shells weaken the pull. Fluorine is the most electronegative element because it combines a high nuclear charge with a very small radius, so a bonding pair is held extremely close to its nucleus. The noble gases are excluded as they rarely bond.", "https://en.wikipedia.org/wiki/Electronegativity"),
         new("chemistry, reactions", "Periodic trend: reactivity", "For metals, reactivity increases down a group: the outer electron is further out and more easily lost, so caesium reacts far more violently with water than lithium. For non-metals the opposite holds, with reactivity increasing up a group, because a smaller atom attracts an extra electron more strongly. Fluorine is therefore the most reactive non-metal, and the noble gases are the least reactive of all.", "https://en.wikipedia.org/wiki/Reactivity_series"),
-        new("category", "headingText", "contentText", "wikiLink"),
     ];
 }

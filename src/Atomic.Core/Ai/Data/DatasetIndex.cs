@@ -26,7 +26,8 @@ namespace Atomic.Core.Ai.Data
         DeepLinkTarget DeepLink,
         double? NumericValue = null,
         string? Unit = null,
-        string? Link = null);
+        string? Link = null,
+        string Key = "");
 
     /// <summary>
     /// Every non-element dataset in the app, in one searchable index.
@@ -40,6 +41,7 @@ namespace Atomic.Core.Ai.Data
     {
         public DatasetIndex(IReadOnlyList<DatasetRow> rows)
         {
+            rows = CanonicalKeys(rows);
             Rows = rows;
             ByDataset = rows
                 .GroupBy(r => r.Dataset, StringComparer.Ordinal)
@@ -56,6 +58,57 @@ namespace Atomic.Core.Ai.Data
         public DatasetRow? Row(string dataset, string id) =>
             InDataset(dataset).FirstOrDefault(
                 r => string.Equals(r.Id, id, StringComparison.OrdinalIgnoreCase));
+
+        /// <summary>A row by its canonical key, e.g. <c>poisson/basalt</c>.</summary>
+        public DatasetRow? ByKey(string key) =>
+            Rows.FirstOrDefault(r => string.Equals(r.Key, key, StringComparison.Ordinal));
+
+        /// <summary>
+        /// Give every row a canonical key: <c>dataset/slug-of-title</c>, with <c>#2</c>, <c>#3</c>...
+        /// for a title repeated within a dataset, in source order (roadmap 0.6).
+        ///
+        /// <para>The same rule as Android's <c>DatasetIndex.canonicalKeys</c>, and both are pinned
+        /// by <c>shared/golden/dataset_keys.tsv</c>, so a corpus row's <c>expect_row</c> means the
+        /// same row on both platforms. The two used to differ: Android keyed rows by name alone, so
+        /// the second Basalt was uncitable, while <see cref="DatasetRow.Id"/> here carries the range
+        /// (D11). <c>#</c> rather than <c>-</c>, because titles end in numbers of their own -
+        /// <c>Mg^2+</c> is <c>solubility/mg-2</c>. Units are keyed on <c>category/name</c>, since
+        /// unit names repeat across categories.</para>
+        /// </summary>
+        public static IReadOnlyList<DatasetRow> CanonicalKeys(IReadOnlyList<DatasetRow> rows)
+        {
+            var seen = new Dictionary<string, int>(StringComparer.Ordinal);
+            var keyed = new List<DatasetRow>(rows.Count);
+            foreach (var row in rows)
+            {
+                var natural = row.Dataset == Datasets.Unit ? row.Id : row.Title;
+                var key = row.Dataset + "/" + Slug(natural);
+                var n = seen.TryGetValue(key, out var count) ? count + 1 : 1;
+                seen[key] = n;
+                keyed.Add(row with { Key = n == 1 ? key : key + "#" + n.ToString(CultureInfo.InvariantCulture) });
+            }
+            return keyed;
+        }
+
+        /// <summary>
+        /// Lowercase ASCII words joined by hyphens, compatibility-decomposed first so "₂" is "2" and
+        /// "é" is "e". Matches Android's <c>DatasetIndex.slug</c>.
+        /// </summary>
+        public static string Slug(string text)
+        {
+            var decomposed = text.Normalize(NormalizationForm.FormKD);
+            var sb = new StringBuilder(decomposed.Length);
+            foreach (var c in decomposed)
+            {
+                var category = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (category is UnicodeCategory.NonSpacingMark or UnicodeCategory.SpacingCombiningMark
+                    or UnicodeCategory.EnclosingMark) continue;
+                sb.Append(c);
+            }
+            var lowered = sb.ToString().ToLowerInvariant();
+            var slug = System.Text.RegularExpressions.Regex.Replace(lowered, "[^a-z0-9]+", "-").Trim('-');
+            return slug.Length == 0 ? "row" : slug;
+        }
 
         /// <summary>
         /// The dataset ids. Nested rather than sitting on <see cref="DatasetIndex"/> directly
