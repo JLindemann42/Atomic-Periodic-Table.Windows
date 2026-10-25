@@ -49,6 +49,30 @@ jobs:
           name: test-results
           path: TestResults/
 
+  # The held-out fifth of the corpus (roadmap 0.5): scored at release - a tag - or on demand, never
+  # on an ordinary push, so day-to-day work is not tuned against it.
+  heldout-corpus:
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Held-out data is checked out
+        shell: bash
+        run: test -f shared/heldout/must_defer.tsv
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Held-out corpus
+        env:
+          CORPUS_SPLIT: heldout
+        run: dotnet test tests/Atomic.Core.Tests/Atomic.Core.Tests.csproj --filter "FullyQualifiedName~Corpus" --logger trx --results-directory TestResults
+
   generated-code:
     runs-on: ubuntu-latest
     timeout-minutes: 10

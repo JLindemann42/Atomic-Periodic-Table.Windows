@@ -1138,3 +1138,17 @@ the generated files are current.
 
 **Working with it.** Change data in the submodule, push it, then bump `shared` in both apps in the
 same sitting. A fresh clone needs `--recurse-submodules`, or `git submodule update --init`.
+
+### D55 — the held-out split
+
+Roadmap 0.5. All rows passing on both platforms meant the corpus no longer separated good changes
+from bad ones, so 520 of the 2,799 rows (18.6%) were frozen into `shared/heldout/` by
+`shared/tools/split_heldout.py`: whole sessions, chosen by crc32 of their ids, from every file but
+`regressions` and `reported`, which are real defects and stay in the everyday gate.
+
+`CORPUS_SPLIT` selects the rows: `dev` (the default, `corpus/`), `heldout`, or `all`. The test
+project copies both folders into the output. In the held-out split the two defect files have no
+rows, so each gets one `<no rows held out of this file>` case — theory data may not be empty — and
+the scoreboard skips them. CI runs the held-out split on release tags and manual runs only.
+
+Android does the same with `-Pcorpus.split=heldout`. Both platforms pass all 520 at the freeze.

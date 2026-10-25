@@ -36,6 +36,10 @@
     <Content Include="..\..\shared\corpus\**\*.tsv"
              Link="corpus\%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
+    <!-- The held-out fifth (roadmap 0.5), run when CORPUS_SPLIT is heldout or all. -->
+    <Content Include="..\..\shared\heldout\**\*.tsv"
+             Link="heldout\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
     <!--
       The page markup, so a test can check that every {loc:Str Key=...} names a real resource.
       Linked rather than copied for the same reason the .resw files are: the test must see

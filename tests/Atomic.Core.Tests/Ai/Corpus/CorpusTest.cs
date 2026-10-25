@@ -254,6 +254,8 @@ namespace Atomic.Core.Tests.Corpus
             foreach (var file in QuestionCorpus.Files)
             {
                 var sessions = QuestionCorpus.Sessions(file);
+                // The defect files are never held out, so the held-out split has nothing for them.
+                if (sessions.Count == 0 && QuestionCorpus.Selected == QuestionCorpus.Split.HeldOut) continue;
                 Assert.True(sessions.Count > 0, $"corpus file {file}.tsv is empty or missing");
 
                 var failures = new List<string>();
@@ -320,10 +322,15 @@ namespace Atomic.Core.Tests.Corpus
             foreach (var session in QuestionCorpus.Sessions(file))
                 data.Add(QuestionCorpus.KeyOf(session));
 
+            // regressions and reported are never held out, and theory data may not be empty.
+            if (data.Count == 0 && QuestionCorpus.Selected == QuestionCorpus.Split.HeldOut)
+                data.Add(NoneHeldOut);
+
             return data;
         }
 
         private const string MissingCorpus = "<corpus not reachable>";
+        private const string NoneHeldOut = "<no rows held out of this file>";
 
         private void RunUnit(string file, string key)
         {
@@ -333,6 +340,7 @@ namespace Atomic.Core.Tests.Corpus
             // by the csproj, so unreachable means broken - and a silently skipped 3,162-row gate is
             // precisely the vacuous pass this whole file exists to prevent.
             Assert.False(key == MissingCorpus, "corpus not reachable under " + AppContext.BaseDirectory);
+            if (key == NoneHeldOut) return;
             Assert.True(CorpusHarness.Available, "element tables or .resw strings not reachable");
 
             var session = QuestionCorpus.Session(file, key);

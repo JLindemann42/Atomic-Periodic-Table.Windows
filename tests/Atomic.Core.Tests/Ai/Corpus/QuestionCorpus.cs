@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -43,11 +44,50 @@ namespace Atomic.Core.Tests.Corpus
     /// Loads the tab-separated question corpus.
     ///
     /// <para>TSV rather than JSON because a flat table is something a non-developer can extend by
-    /// the hundred rows without touching code, and because it keeps the corpus identical to the file
-    /// Android drives - this is the same 3,162 rows, byte for byte.</para>
+    /// the hundred rows without touching code, and because one set of files serves both apps: they
+    /// come from the shared-data submodule, which Android runs too (D54).</para>
     /// </summary>
     public static class QuestionCorpus
     {
+        /// <summary>
+        /// Which rows run (roadmap 0.5). About a fifth of the corpus is frozen into
+        /// <c>shared/heldout</c> and scored at release only, so a change tuned against the corpus can
+        /// still be measured on questions nobody tuned against.
+        /// </summary>
+        public enum Split
+        {
+            /// <summary>The everyday gate: <c>corpus/</c>.</summary>
+            Dev,
+
+            /// <summary>The frozen fifth: <c>heldout/</c>.</summary>
+            HeldOut,
+
+            /// <summary>Both.</summary>
+            All,
+        }
+
+        /// <summary>
+        /// The split this run selects, from the <c>CORPUS_SPLIT</c> environment variable:
+        /// <c>dev</c> (the default), <c>heldout</c> or <c>all</c>.
+        /// </summary>
+        public static readonly Split Selected =
+            (Environment.GetEnvironmentVariable("CORPUS_SPLIT") ?? "").Trim().ToLowerInvariant() switch
+            {
+                "" or "dev" => Split.Dev,
+                "heldout" => Split.HeldOut,
+                "all" => Split.All,
+                var other => throw new InvalidOperationException(
+                    $"CORPUS_SPLIT must be dev, heldout or all, not '{other}'"),
+            };
+
+        private static IReadOnlyList<string> Folders(Split split) => split switch
+        {
+            Split.Dev => ["corpus"],
+            Split.HeldOut => ["heldout"],
+            Split.All => ["corpus", "heldout"],
+            _ => throw new UnreachableException(),
+        };
+
         /// <summary>Every corpus file, in the order a report should list them.</summary>
         public static readonly IReadOnlyList<string> Files =
         [
@@ -60,33 +100,41 @@ namespace Atomic.Core.Tests.Corpus
             "conversations_deep", "conversations_repair",
         ];
 
-        private static readonly string Root = Path.Combine(AppContext.BaseDirectory, "corpus");
+        private static readonly Dictionary<(string Folder, string Name), IReadOnlyList<CorpusCase>> Cache = new();
 
-        private static readonly Dictionary<string, IReadOnlyList<CorpusCase>> Cache =
-            new(StringComparer.Ordinal);
+        /// <summary>
+        /// True when the selected split is reachable at all. A false here makes every row vacuous.
+        /// Checks must_defer, which every split has; the defect files are never held out.
+        /// </summary>
+        public static bool Available => Folders(Selected).All(
+            f => File.Exists(Path.Combine(AppContext.BaseDirectory, f, "must_defer.tsv")));
 
-        /// <summary>True when the corpus is reachable at all. A false here makes every row vacuous.</summary>
-        public static bool Available => File.Exists(Path.Combine(Root, "regressions.tsv"));
+        /// <summary>
+        /// Parsed cases for one file, in the selected split unless another is given - a test about
+        /// the corpus itself rather than the engine passes <see cref="Split.All"/>.
+        /// </summary>
+        public static IReadOnlyList<CorpusCase> Cases(string name, Split? split = null) =>
+            Folders(split ?? Selected).SelectMany(folder => Read(folder, name)).ToList();
 
-        /// <summary>Parsed cases for one file.</summary>
-        public static IReadOnlyList<CorpusCase> Cases(string name)
+        private static IReadOnlyList<CorpusCase> Read(string folder, string name)
         {
             lock (Cache)
             {
-                if (Cache.TryGetValue(name, out var cached)) return cached;
+                if (Cache.TryGetValue((folder, name), out var cached)) return cached;
 
-                var path = Path.Combine(Root, name + ".tsv");
+                var path = Path.Combine(AppContext.BaseDirectory, folder, name + ".tsv");
                 var parsed = File.Exists(path)
                     ? Parse(name, File.ReadAllText(path))
                     : [];
 
-                Cache[name] = parsed;
+                Cache[(folder, name)] = parsed;
                 return parsed;
             }
         }
 
-        /// <summary>Every case in the corpus, across every file.</summary>
-        public static IReadOnlyList<CorpusCase> AllCases() => Files.SelectMany(Cases).ToList();
+        /// <summary>Every case across every file, in the selected split unless another is given.</summary>
+        public static IReadOnlyList<CorpusCase> AllCases(Split? split = null) =>
+            Files.SelectMany(f => Cases(f, split)).ToList();
 
         /// <summary>
         /// Cases grouped into replay order.
