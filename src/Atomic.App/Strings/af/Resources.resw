@@ -89,6 +89,24 @@
   <data name="account" xml:space="preserve">
     <value>Rekening</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>Rekening-ID</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>Rekening-ID gekopieer</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>Dit moet ooreenstem met die ID wat in die Windows-toepassing gewys word. As dit verskil, sinkroniseer die twee toestelle met aparte rekeninge.</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>Nie aangemeld nie</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>Nog nie gesinkroniseer nie</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>Rekening</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>Prestasie bereik: </value>
   </data>
@@ -1188,6 +1206,27 @@ Vra net en ek sal die antwoord in die toepassing se rekords vind! 🌟</value>
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>Albei het dieselfde %1$s!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>Stuur hierdie vraag</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>Jou vraag word na die ontwikkelaar gestuur sodat dit in 'n toekomstige weergawe beantwoord kan word.
+
+Gestuur: die vraag soos jy dit getik het, die app se taal en weergawe, en waarom dit nie beantwoord kon word nie.
+Nie gestuur nie: jou naam, rekening, toestel of die res van hierdie gesprek.</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>Stuur</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>Die vraag kon nie gestuur word nie. Gaan jou verbinding na en probeer weer.</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>Dankie – jou vraag is gestuur.</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>Stuur die vraag?</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>Aktinoiede is die 15 elemente met atoomgetalle 89 tot 103. Hulle is almal radioaktief!</value>
@@ -2502,6 +2541,12 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   <data name="language_title" xml:space="preserve">
     <value>Tale</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>Laaste gesinkroniseer</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>Nooit</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>Leer-speletjies:</value>
   </data>
@@ -3566,6 +3611,24 @@ I: Onoplosbaar"</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>Tipe: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>Jy besit reeds PRO+ Ultimate op hierdie rekening.</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Kry PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Kom binnekort</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>Ontsluit PRO+ op Android en Windows met 'n enkele aankoop. Maak seker jou aantekeninge, prestasies en vordering is op alle toestelle by jou!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>Besit PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Gradeer op na Ultimate</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>Eenheidsomskakelaar</value>

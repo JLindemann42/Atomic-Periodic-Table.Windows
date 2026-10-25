@@ -369,3 +369,4 @@ FodyWeavers.xsd# The Firebase OAuth client secret. It genuinely ships inside the
 # prefix and reports it to Google, which revokes the credential. So it is supplied at build time
 # and never committed. See Services/FirebaseSecrets.cs.
 firebase.client_secret
+firebase.analytics

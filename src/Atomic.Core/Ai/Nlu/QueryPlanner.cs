@@ -97,14 +97,14 @@ namespace Atomic.Core.Ai.Nlu
             // density" still has a real question in it.
             if (fieldMatches.Count == 0 &&
                 Lexicon.NARRATIVE_INTENTS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
-                return Decline(rawQuery);
+                return Decline(rawQuery, DeclineReason.Narrative);
 
             // Etymology declines even with a field in hand, because the field is the *subject* of
             // the question rather than the thing being asked for: "where does that symbol come
             // from" resolves `symbol`, and answering it with a value - tin's nine abundance
             // reservoirs, as reported - mistakes what the sentence is about.
             if (Lexicon.ETYMOLOGY_INTENTS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
-                return Decline(rawQuery);
+                return Decline(rawQuery, DeclineReason.Etymology);
 
             // ---- Explanations ----------------------------------------------------------------
             // "Why does atomic radius increase down a group" and "what is a halogen" want prose,
@@ -829,7 +829,7 @@ namespace Atomic.Core.Ai.Nlu
             if (DatasetPlan(rawQuery, normalized, elementKeys, fieldIds, evidence) is { } dataset)
                 return dataset;
 
-            return Decline(rawQuery);
+            return Decline(rawQuery, DeclineReason.NoMatch);
         }
 
         /// <summary>
@@ -849,12 +849,13 @@ namespace Atomic.Core.Ai.Nlu
                     w => TextMatching.ContainsWord(normalized, w) ||
                          (w.Contains(' ', StringComparison.Ordinal) &&
                           normalized.Contains(w, StringComparison.Ordinal))))
-                return Decline(rawQuery);
+                return Decline(rawQuery, DeclineReason.Conversational);
 
             // An element number past 118 has a definite answer - there is no such element - and the
             // worst thing to do is guess. Declining lets the personality layer say so; answering
             // from retrieval produced "Electron mass" for "tell me about element 119".
-            if (_entities.OutOfRangeElementNumber(rawQuery) is not null) return Decline(rawQuery);
+            if (_entities.OutOfRangeElementNumber(rawQuery) is not null)
+                return Decline(rawQuery, DeclineReason.NoSuchElement);
 
             // ---- Concepts with no backing field ----------------------------------------------
             // "समान" is Hindi for "similar" and also the first word of "समान समूह" - "the same
@@ -894,7 +895,8 @@ namespace Atomic.Core.Ai.Nlu
                 // either is asking.
                 var comparableAspect = _fields.ResolveAll(rawQuery, limit: 3).Count > 0;
                 var severalElements = _entities.ResolveAll(rawQuery, limit: 3).Count >= 2;
-                if (!comparableAspect || !severalElements) return Decline(rawQuery);
+                if (!comparableAspect || !severalElements)
+                    return Decline(rawQuery, DeclineReason.UnbackedConcept);
             }
 
             // ---- "How many elements are there" -----------------------------------------------
@@ -1051,7 +1053,7 @@ namespace Atomic.Core.Ai.Nlu
             // number answering a question they did not ask: "why does radius decrease left to
             // right, despite adding electrons" came back "Potassium's Electrons is 19". Saying
             // nothing is a far better answer than saying that.
-            if (row is null) return isWhy || isMechanism ? Decline(rawQuery) : null;
+            if (row is null) return isWhy || isMechanism ? Decline(rawQuery, DeclineReason.UnexplainedWhy) : null;
 
             return new QueryPlan(
                 Intent.DatasetLookup,
@@ -1308,9 +1310,9 @@ namespace Atomic.Core.Ai.Nlu
                 ? fieldId
                 : null;
 
-        /// <summary>A plan the caller should fall through on.</summary>
-        private static QueryPlan Decline(string rawQuery) =>
-            new(Intent.Unknown, Confidence: 0.0, RawQuery: rawQuery);
+        /// <summary>A plan the caller should fall through on, and why.</summary>
+        private static QueryPlan Decline(string rawQuery, DeclineReason reason) =>
+            new(Intent.Unknown, Confidence: 0.0, RawQuery: rawQuery, Declined: reason);
 
         private static readonly Regex Whitespace = JavaRegex.Compile(@"\s+");
 

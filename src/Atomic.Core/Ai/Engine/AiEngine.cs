@@ -66,6 +66,12 @@ namespace Atomic.Core.Ai.Engine
         public QueryPlan? LastPlan { get; private set; }
 
         /// <summary>
+        /// Why the most recent <see cref="Answer"/> returned null, or null when it answered.
+        /// Telemetry only: a reason, never the question (roadmap 0.7).
+        /// </summary>
+        public DeclineReason? LastDecline { get; private set; }
+
+        /// <summary>
         /// Answer a question, or return null to defer.
         /// </summary>
         /// <param name="state">
@@ -74,7 +80,8 @@ namespace Atomic.Core.Ai.Engine
         public ComposedAnswer? Answer(string query, DialogueState state)
         {
             LastPlan = null;
-            if (string.IsNullOrWhiteSpace(query)) return null;
+            LastDecline = null;
+            if (string.IsNullOrWhiteSpace(query)) return Declined(DeclineReason.NoMatch);
 
             // A question that asks two things is tried first. The whole query often plans to
             // something - "the density of gold and how does it compare to lead" plans as a
@@ -83,17 +90,24 @@ namespace Atomic.Core.Ai.Engine
             if (CompoundAnswer(query, state) is { } compound) return compound;
 
             var plan = _planner.Plan(query, state);
-            if (plan.Intent == Intent.Unknown || plan.Confidence < _planner.Threshold) return null;
+            if (plan.Intent == Intent.Unknown) return Declined(plan.Declined ?? DeclineReason.NoMatch);
+            if (plan.Confidence < _planner.Threshold) return Declined(DeclineReason.LowConfidence);
 
             var result = _executor.Execute(plan);
-            if (result is null) return null;
+            if (result is null) return Declined(DeclineReason.NoResult);
 
             var composed = _composer.Compose(result, plan);
-            if (string.IsNullOrWhiteSpace(composed.Text)) return null;
+            if (string.IsNullOrWhiteSpace(composed.Text)) return Declined(DeclineReason.NoResult);
 
             state.NoteAnswer(plan, ResultKeys(result));
             LastPlan = plan;
             return composed;
+        }
+
+        private ComposedAnswer? Declined(DeclineReason reason)
+        {
+            LastDecline = reason;
+            return null;
         }
 
         /// <summary>

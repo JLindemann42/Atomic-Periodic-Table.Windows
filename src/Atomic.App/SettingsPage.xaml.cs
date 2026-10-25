@@ -23,6 +23,11 @@ namespace Atomic.App
             updateThemeComboBox();
             updateUnitComboBox();
             UpdateLanguageComboBox();
+            AnalyticsToggle.IsOn = Analytics.IsEnabled;
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(
+                AnalyticsToggle,
+                ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current))
+                    .Get(Atomic.Core.Localization.S.analytics_title));
             _isInitializing = false;
         }
 
@@ -158,6 +163,12 @@ namespace Atomic.App
                 (Application.Current as App)?.ApplyAppTheme(selectedTheme);
             }
         }
+        private void AnalyticsToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (_isInitializing) return;
+            Analytics.IsEnabled = AnalyticsToggle.IsOn;
+        }
+
         private void UnitComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_isInitializing)

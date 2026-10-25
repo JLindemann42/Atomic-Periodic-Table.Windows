@@ -89,6 +89,24 @@
   <data name="account" xml:space="preserve">
     <value>账户</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>账户 ID</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>账户 ID 已复制</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>它必须与 Windows 应用中显示的 ID 一致。如果不同，说明两台设备正在同步到不同的账户。</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>未登录</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>尚未同步</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>账户</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>达成成就：</value>
   </data>
@@ -1188,6 +1206,27 @@
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>两者的 %1$s 相同！</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>发送这个问题</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>你的问题将发送给开发者，以便在未来的版本中得到解答。
+
+会发送：你输入的问题原文、应用的语言和版本，以及无法回答的原因。
+不会发送：你的姓名、账户、设备或本次聊天的其余内容。</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>无法发送问题。请检查网络连接后重试。</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>谢谢——你的问题已发送。</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>发送这个问题？</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>锕系元素是原子序数为 89 到 103 的 15 种元素。它们都具有放射性！</value>
@@ -2502,6 +2541,12 @@
   <data name="language_title" xml:space="preserve">
     <value>语言</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>上次同步</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>从未</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>学习游戏：</value>
   </data>
@@ -3560,6 +3605,24 @@ I：不溶"</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>类型：</value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>您已在此账户上拥有 PRO+ Ultimate。</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>获取 PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>即将推出</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>只需一次购买，即可在 Android 和 Windows 上解锁 PRO+。让您的笔记、成就和进度在所有设备上与您同在！</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>已拥有 PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>升级到 Ultimate</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>单位转换器</value>

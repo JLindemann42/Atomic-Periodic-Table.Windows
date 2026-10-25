@@ -175,6 +175,65 @@ namespace Atomic.Core.Ai.Engine
     }
 
     /// <summary>
+    /// Why the engine said no, reported with each declined turn (roadmap 0.7).
+    ///
+    /// <para>A decline used to look the same in the data whatever caused it, so the only way to
+    /// learn what goes unanswered was a user's screenshot. These say which door the question hit -
+    /// never what it said. The planner sets the first seven; <see cref="AiEngine"/> adds the last
+    /// two.</para>
+    /// </summary>
+    public enum DeclineReason
+    {
+        /// <summary>A greeting, thanks or small talk: the personality layer's to answer.</summary>
+        Conversational,
+
+        /// <summary>"Element 119": a definite no, better said than guessed.</summary>
+        NoSuchElement,
+
+        /// <summary>Names a concept no field holds, such as reactivity, without a property to compare.</summary>
+        UnbackedConcept,
+
+        /// <summary>Asks what an element is used for or does in the body: prose, not a field.</summary>
+        Narrative,
+
+        /// <summary>Asks where a name comes from.</summary>
+        Etymology,
+
+        /// <summary>A "why" with no dictionary entry to explain it.</summary>
+        UnexplainedWhy,
+
+        /// <summary>Nothing in the question matched a field, an element, an operator or a dataset row.</summary>
+        NoMatch,
+
+        /// <summary>A plan was formed but fell below the planner's confidence threshold.</summary>
+        LowConfidence,
+
+        /// <summary>Planned confidently, but executing it produced nothing to say.</summary>
+        NoResult,
+    }
+
+    public static class DeclineReasonExtensions
+    {
+        /// <summary>
+        /// The name analytics and the <c>unanswered_questions</c> collection use: Android's enum
+        /// name in lower case, so both platforms' reports group together - <c>no_such_element</c>.
+        /// </summary>
+        public static string WireName(this DeclineReason reason) => reason switch
+        {
+            DeclineReason.Conversational => "conversational",
+            DeclineReason.NoSuchElement => "no_such_element",
+            DeclineReason.UnbackedConcept => "unbacked_concept",
+            DeclineReason.Narrative => "narrative",
+            DeclineReason.Etymology => "etymology",
+            DeclineReason.UnexplainedWhy => "unexplained_why",
+            DeclineReason.NoMatch => "no_match",
+            DeclineReason.LowConfidence => "low_confidence",
+            DeclineReason.NoResult => "no_result",
+            _ => throw new UnreachableException($"unhandled decline reason {reason}"),
+        };
+    }
+
+    /// <summary>
     /// A natural-language question turned into something executable.
     ///
     /// <para>This is what makes multi-hop answers possible: "which transition metals melt above
@@ -191,6 +250,7 @@ namespace Atomic.Core.Ai.Engine
     /// </param>
     /// <param name="Confidence">0..1; below the planner's threshold the caller should not use this plan.</param>
     /// <param name="Evidence">Human-readable reasons the planner chose this, for debugging and tests.</param>
+    /// <param name="Declined">Why the planner declined, on an <see cref="Intent.Unknown"/> plan.</param>
     public sealed record QueryPlan(
         Intent Intent,
         IReadOnlyList<EntityRef>? Entities = null,
@@ -205,7 +265,8 @@ namespace Atomic.Core.Ai.Engine
         string? Literal = null,
         double Confidence = 0.0,
         string RawQuery = "",
-        IReadOnlyList<string>? Evidence = null)
+        IReadOnlyList<string>? Evidence = null,
+        DeclineReason? Declined = null)
     {
         // Kotlin defaults these to emptyList(); C# cannot put a collection in a default parameter,
         // so they are normalised on read. Callers still write `new QueryPlan(Intent.Unknown)`.

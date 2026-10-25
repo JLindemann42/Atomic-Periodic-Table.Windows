@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
@@ -514,8 +515,60 @@ namespace Atomic.App.Controls
 
         private void Action_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button { Tag: ChatAction action })
+            if (sender is not Button { Tag: ChatAction action }) return;
+
+            if (action.Target == Atomic.Core.Ai.Data.DeepLinkTarget.ReportQuestion)
+                _ = ConfirmSendQuestionAsync(action);
+            else
                 Navigation?.Follow(action);
+        }
+
+        /// <summary>
+        /// Ask before sending a declined question to the developer (roadmap 0.7). The FAQ promises
+        /// that nothing typed in the chat leaves the device; this is the one exception, so it is per
+        /// question, the dialog says exactly what goes and what does not, and closing it sends
+        /// nothing.
+        /// </summary>
+        private async System.Threading.Tasks.Task ConfirmSendQuestionAsync(ChatAction action)
+        {
+            if (!action.Args.TryGetValue("q", out var question) || string.IsNullOrWhiteSpace(question)) return;
+
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+            var dialog = new ContentDialog
+            {
+                Title = strings.Get(S.ai_send_question_title),
+                Content = new TextBlock
+                {
+                    Text = strings.Get(S.ai_send_question_body) + "\n\n\u201C" + question + "\u201D",
+                    TextWrapping = TextWrapping.Wrap,
+                    IsTextSelectionEnabled = true,
+                },
+                PrimaryButtonText = strings.Get(S.ai_send_question_confirm),
+                CloseButtonText = strings.Get(S.cancel),
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = XamlRoot,
+            };
+            if (await dialog.ShowAsync() != ContentDialogResult.Primary) return;
+
+            var sent = await UnansweredQuestions.SendAsync(
+                question,
+                action.Args.GetValueOrDefault("lang") ?? AppLanguage.BaseCode(AppLanguage.Current),
+                action.Args.GetValueOrDefault("reason"));
+
+            await new ContentDialog
+            {
+                Content = strings.Get(sent ? S.ai_send_question_sent : S.ai_send_question_failed),
+                CloseButtonText = strings.Get(S.ok),
+                XamlRoot = XamlRoot,
+            }.ShowAsync();
+
+            if (!sent) return;
+
+            Analytics.Log(
+                Atomic.Core.Ai.AiTurnStats.QuestionSentEvent,
+                ("host", ChatSession.AnalyticsHost),
+                ("decline_reason", action.Args.GetValueOrDefault("reason")));
+            Session.RemoveReportAction(action);
         }
 
         // ---- History ----------------------------------------------------------------------------

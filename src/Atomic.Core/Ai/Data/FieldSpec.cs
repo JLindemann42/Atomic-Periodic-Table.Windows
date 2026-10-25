@@ -69,6 +69,12 @@ namespace Atomic.Core.Ai.Data
 
         /// <summary>The PRO page, for an answer withheld behind the paywall.</summary>
         ProPage,
+
+        /// <summary>
+        /// Offer to send a declined question to the developer (roadmap 0.7). Handled by the chat
+        /// panel, which asks first; args carry the question, its language and the decline reason.
+        /// </summary>
+        ReportQuestion,
     }
 
     /// <summary>

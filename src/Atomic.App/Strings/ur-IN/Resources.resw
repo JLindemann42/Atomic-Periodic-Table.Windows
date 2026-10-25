@@ -80,6 +80,24 @@
   <data name="abundance_urban_soil" xml:space="preserve">
     <value>شہری مٹی میں</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>اکاؤنٹ آئی ڈی</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>اکاؤنٹ آئی ڈی کاپی ہو گئی</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>یہ ونڈوز ایپ میں دکھائی گئی آئی ڈی سے مماثل ہونی چاہیے۔ اگر مختلف ہو تو دونوں آلات الگ اکاؤنٹس سے ہم آہنگ ہو رہے ہیں۔</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>سائن اِن نہیں ہے</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>ابھی تک ہم آہنگ نہیں ہوا</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>اکاؤنٹ</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>کامیابی حاصل: </value>
   </data>
@@ -1176,6 +1194,27 @@
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>دونوں کا %1$s برابر ہے!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>یہ سوال بھیجیں</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>آپ کا سوال ڈویلپر کو بھیجا جائے گا تاکہ آئندہ ورژن میں اس کا جواب دیا جا سکے۔
+
+بھیجا جاتا ہے: آپ کا سوال جیسا آپ نے لکھا، ایپ کی زبان اور ورژن، اور جواب نہ دے سکنے کی وجہ۔
+نہیں بھیجا جاتا: آپ کا نام، اکاؤنٹ، ڈیوائس یا اس چیٹ کا باقی حصہ۔</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>بھیجیں</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>سوال نہیں بھیجا جا سکا۔ اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں۔</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>شکریہ – آپ کا سوال بھیج دیا گیا۔</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>سوال بھیجیں؟</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>ایکٹینائڈز ایٹمی نمبر 89 سے 103 تک کے 15 عناصر ہیں۔ وہ تمام تابکار ہیں!</value>
@@ -2391,6 +2430,12 @@
   <data name="language_title" xml:space="preserve">
     <value>زبانیں</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>آخری بار ہم آہنگ کیا گیا</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>کبھی نہیں</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>لرننگ گیمز:</value>
   </data>
@@ -3416,6 +3461,24 @@ I: غیر حل پذیر"</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>قسم: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>اس اکاؤنٹ پر آپ کے پاس پہلے سے PRO+ Ultimate موجود ہے۔</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>PRO+ Ultimate حاصل کریں</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>جلد آ رہا ہے</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>ایک ہی خریداری سے اینڈرائیڈ اور ونڈوز پر PRO+ اَن لاک کریں۔ یقینی بنائیں کہ آپ کے نوٹس، کامیابیاں اور پیش رفت تمام آلات پر آپ کے ساتھ ہوں!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>PRO+ Ultimate کے مالک</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Ultimate پر اپ گریڈ کریں</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>یونٹ کنورٹر</value>

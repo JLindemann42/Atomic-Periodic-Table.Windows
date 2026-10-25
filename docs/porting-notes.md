@@ -741,6 +741,8 @@ nothing: it looks like coverage.
 It changes no user-visible behaviour, so it is not an AI-parity item. If Windows telemetry is
 wanted, the missing piece is an analytics backend, and the struct is a half-hour once that exists.
 
+**Superseded by D57** (roadmap 0.7): the backend now exists and the struct is ported.
+
 ### D46 — "tell me more", and three things wrong with the list it draws from
 
 `provideNewInformation` walks an element one property at a time so that repeating "tell me more"
@@ -1188,3 +1190,40 @@ Poisson ratio rather than the mineral, Swedish and Spanish "what is electronegat
 periodic-trend entry where English gets the definition. Four have no right row in any table - a
 covalent bond, the Nernst equation, basalt's composition, the sulfate ion - so those rows now expect
 a decline. All ten are `known_failure` until retrieval can abstain (roadmap 1.1).
+
+### D57 — what goes unanswered: decline reasons, the send-question chip, and Windows analytics
+
+Roadmap 0.7, on both platforms in the same change.
+
+**Why a decline happened.** `QueryPlan.Declined` carries a `DeclineReason` from each of the
+planner's seven decline sites (`Conversational`, `NoSuchElement`, `UnbackedConcept`, `Narrative`,
+`Etymology`, `UnexplainedWhy`, `NoMatch`); `AiEngine.LastDecline` adds `LowConfidence` and
+`NoResult`, and `ChatReply.DeclineReason` carries it to the panel. On the wire it is Android's enum
+name in lower case (`WireName()`), so `no_such_element` means the same in both reports.
+
+**Send this question.** Every declined reply gets a `DeepLinkTarget.ReportQuestion` chip. It is not
+a place - `ChatDeepLinks` has no route for it - and the panel intercepts it: a dialog says exactly
+what is sent and what is not, and only **Send** writes to Firestore. The collection is
+`unanswered_questions`, create-only, shared with Android, with six fields: `text` (at most 500
+characters), `language`, `reason`, `appVersion`, `platform`, `createdAt`. No uid. Windows writes it
+unauthenticated through `:commit`, because a plain create cannot ask for the server time and the
+rule requires `createdAt == request.time`; `UnansweredQuestionDocument` builds the body and is
+tested for exactly those fields. The security rule is in Android's
+`docs/development/persistence-and-sync.md`. Once sent, the chip is removed from its message and the
+thread re-saved, so it cannot go twice. The question is stripped of the three codec delimiters
+before it rides in the chip's args, on both platforms.
+
+**Windows analytics (D45, resolved).** `AiTurnStats` is ported to `Atomic.Core.Ai`, with Android's
+event and parameter names and Android's enum spellings (`PROPERTY_LOOKUP`, `NFPA_DIAMOND`), and
+`ChatSession` logs `ai_response` for every turn, `ai_rate_limited` with the daily limit, and the
+panel logs `ai_question_sent` with the reason but never the text. The sink is GA4's Measurement
+Protocol (`Analytics`, `MeasurementProtocol`): the measurement id and API secret come from
+`firebase.analytics` beside the executable, which is git-ignored like `firebase.client_secret`;
+without it nothing is sent. The client id is a random per-install GUID. Settings has Android's
+"Usage Analytics" switch, on by default as there.
+
+**Strings.** The six `ai_send_question*` strings came across with `strings_xml_to_resw.py`, which
+also picked up nine Android strings not yet synced (the `account_*` and `last_synced*` keys and
+`ultimate_already_owned_account`) and Android's new `ultimate_description` wording; App.resw
+shadows that one, so Windows' text is unchanged. `account_tier_unknown` moved from `S.App.g.cs` to
+`S.g.cs` as a result, which `build_app_resw.py` handles.

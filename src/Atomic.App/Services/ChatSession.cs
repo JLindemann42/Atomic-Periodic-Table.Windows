@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Atomic.Core.Ai;
 using Atomic.Core.Ai.Cards;
 using Atomic.Core.Ai.Compose;
+using Atomic.Core.Ai.Data;
 using Atomic.Core.Ai.Engine;
 using Atomic.Core.Ai.Retrieval;
 using Atomic.Core.Localization;
@@ -264,6 +265,10 @@ namespace Atomic.App.Services
                     Messages.Add(new ChatMessage(
                         ChatRole.Assistant, AiChatLimiter.ReachedMessage(Strings())));
                     LimitChanged?.Invoke(this, EventArgs.Empty);
+                    LogTurn(new AiTurnStats(
+                        AiTurnStats.Paths.RateLimited, ActiveLanguage(),
+                        QueryChars: question.Trim().Length, QueryWords: AiTurnStats.Words(question)));
+                    Analytics.Log(AiTurnStats.RateLimitedEvent, ("daily_limit", AiChatLimiter.DailyLimit));
                     return;
                 }
 
@@ -273,7 +278,10 @@ namespace Atomic.App.Services
                 var thinking = ChatMessage.Thinking();
                 Messages.Add(thinking);
 
+                var languageBefore = _orchestrator?.State.ActiveLanguage;
+                var answering = System.Diagnostics.Stopwatch.StartNew();
                 var reply = await Task.Run(() => Ask(question.Trim())).ConfigureAwait(true);
+                var latencyMs = answering.ElapsedMilliseconds;
 
                 // The dots stay long enough to be read as the assistant working. The answer was
                 // computed while they showed, so this is pacing, not waiting: a slow first question
@@ -289,7 +297,7 @@ namespace Atomic.App.Services
                     : new ChatMessage(
                         ChatRole.Assistant,
                         reply.Text,
-                        ChatActionCodec.Encode(reply.Actions),
+                        ChatActionCodec.Encode([.. reply.Actions, .. ReportAction(reply, question)]),
                         ChatCardCodec.Encode(reply.Card));
 
                 var at = Messages.IndexOf(thinking);
@@ -299,10 +307,20 @@ namespace Atomic.App.Services
                 if (reply is null)
                 {
                     Unavailable = true;
+                    LogTurn(new AiTurnStats(
+                        AiTurnStats.Paths.ContextLost, ActiveLanguage(),
+                        QueryChars: question.Trim().Length, QueryWords: AiTurnStats.Words(question),
+                        LatencyMs: latencyMs));
                     return;
                 }
 
                 Suggestions = reply.Suggestions;
+                LogTurn(AiTurnStats.From(
+                    reply, question, ActiveLanguage(),
+                    languageSwitched: languageBefore is not null && languageBefore != ActiveLanguage(),
+                    elementResolved: _orchestrator?.State.FocusElement is not null,
+                    actionCount: answer.DecodedActions.Count,
+                    latencyMs));
             }
             finally
             {
@@ -406,6 +424,68 @@ namespace Atomic.App.Services
 
         private static IStringProvider Strings() =>
             ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+
+        /// <summary>Where the analytics events say they came from; Android names its hosting screen.</summary>
+        public const string AnalyticsHost = "chat_panel";
+
+        private string ActiveLanguage() =>
+            _orchestrator?.State.ActiveLanguage ?? AppLanguage.BaseCode(AppLanguage.Current);
+
+        /// <summary>The shape of the turn, never the question (D45, roadmap 0.7).</summary>
+        private static void LogTurn(AiTurnStats stats) =>
+            Analytics.Log(AiTurnStats.ResponseEvent, stats.Parameters(AnalyticsHost));
+
+        /// <summary>
+        /// On a decline, a chip that offers to send the question to the developer (roadmap 0.7).
+        /// Tapping it only opens a dialog saying what would be sent; nothing leaves the device
+        /// unless the user confirms there.
+        /// </summary>
+        private IEnumerable<ChatAction> ReportAction(ChatReply reply, string question)
+        {
+            if (reply.Source != ReplySource.Declined || string.IsNullOrWhiteSpace(question)) yield break;
+
+            var language = ActiveLanguage();
+            yield return new ChatAction(
+                ResourceStringProvider.For(language).Get(S.ai_send_question),
+                DeepLinkTarget.ReportQuestion,
+                new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["q"] = UnansweredQuestions.Clean(question),
+                    ["lang"] = language,
+                    ["reason"] = reply.DeclineReason?.WireName() ?? "unknown",
+                });
+        }
+
+        /// <summary>
+        /// Take the send chip off its message once the question has gone, so it cannot go twice.
+        /// Saved, so a restored thread does not offer it again either.
+        /// </summary>
+        public void RemoveReportAction(ChatAction sent)
+        {
+            for (var i = 0; i < Messages.Count; i++)
+            {
+                var message = Messages[i];
+                var actions = message.DecodedActions;
+                if (!actions.Any(a => IsSame(a, sent))) continue;
+
+                Messages[i] = new ChatMessage(
+                    message.Role, message.Text,
+                    ChatActionCodec.Encode(actions.Where(a => !IsSame(a, sent)).ToList()),
+                    message.Cards)
+                {
+                    Id = message.Id,
+                    Timestamp = message.Timestamp,
+                };
+                _ = SaveConversationAsync();
+                return;
+            }
+
+            // Records compare dictionaries by reference, so a decoded copy never equals the chip
+            // that was tapped; the question is what identifies it.
+            static bool IsSame(ChatAction a, ChatAction b) =>
+                a.Target == DeepLinkTarget.ReportQuestion && b.Target == DeepLinkTarget.ReportQuestion &&
+                a.Args.GetValueOrDefault("q") == b.Args.GetValueOrDefault("q");
+        }
 
         private void Set<T>(ref T field, T value, [CallerMemberName] string? name = null)
         {

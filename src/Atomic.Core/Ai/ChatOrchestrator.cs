@@ -31,13 +31,15 @@ namespace Atomic.Core.Ai
 
     /// <summary>One turn's reply.</summary>
     /// <param name="Suggestions">Chips offered under the reply, to make the next question discoverable.</param>
+    /// <param name="DeclineReason">On a <see cref="ReplySource.Declined"/> reply, why the engine said no.</param>
     public sealed record ChatReply(
         string Text,
         ReplySource Source,
         IReadOnlyList<ChatAction> Actions,
         ChatCard? Card = null,
         IReadOnlyList<string>? Suggestions = null,
-        QueryPlan? Plan = null)
+        QueryPlan? Plan = null,
+        DeclineReason? DeclineReason = null)
     {
         public IReadOnlyList<ChatAction> Actions { get; init; } = Actions;
 
@@ -129,7 +131,7 @@ namespace Atomic.Core.Ai
         /// </summary>
         public ChatReply Ask(string message)
         {
-            if (string.IsNullOrWhiteSpace(message)) return Decline("en");
+            if (string.IsNullOrWhiteSpace(message)) return Decline("en", DeclineReason.NoMatch);
 
             // Per-message, not per-session. A thread can switch language mid-way and each turn is
             // answered in the language it was asked in - which is why the engine is keyed by
@@ -185,7 +187,7 @@ namespace Atomic.Core.Ai
             if (Narrative(message, strings, language) is { } narrative) return narrative;
 
             // ---- Everything with no grounded answer -----------------------------------------
-            return Personality(message, strings, language);
+            return Personality(message, strings, language, engine.LastDecline);
         }
 
         /// <summary>
@@ -533,7 +535,8 @@ namespace Atomic.Core.Ai
         /// branch is reachable only because the one above it did not match, so a question matching
         /// two is answered the same way on both platforms.</para>
         /// </summary>
-        private ChatReply Personality(string message, IStringProvider strings, string language)
+        private ChatReply Personality(
+            string message, IStringProvider strings, string language, DeclineReason? engineDecline)
         {
             var normalized = TextMatching.NormalizeForLookup(message);
 
@@ -563,7 +566,7 @@ namespace Atomic.Core.Ai
                     strings.Get(feature), ReplySource.Personality, [], null,
                     Suggestions(strings, null));
 
-            return Decline(language);
+            return Decline(language, engineDecline ?? DeclineReason.NoMatch);
         }
 
         /// <summary>
@@ -607,12 +610,12 @@ namespace Atomic.Core.Ai
         /// <para>Still carries the suggestion chips, so a decline is a dead end for one turn rather
         /// than for the conversation.</para>
         /// </summary>
-        private ChatReply Decline(string language)
+        private ChatReply Decline(string language, DeclineReason reason)
         {
             var strings = _stringsFor(language);
             return new ChatReply(
                 strings.Get(S.ai_no_data), ReplySource.Declined, [], null,
-                Suggestions(strings, null));
+                Suggestions(strings, null), DeclineReason: reason);
         }
 
         /// <summary>

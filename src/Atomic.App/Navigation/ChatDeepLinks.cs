@@ -55,6 +55,7 @@ namespace Atomic.App.Navigation
 
                 // ResendQuery is not a place. No citation in the port produces it - it exists in the
                 // enum for a chip that re-asks a question, which the panel handles itself.
+                // ReportQuestion is not a place either: the panel asks, then sends the question.
             };
 
         /// <summary>Whether this action leads anywhere.</summary>

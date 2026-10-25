@@ -89,6 +89,24 @@
   <data name="account" xml:space="preserve">
     <value>खाता</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>खाता ID</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>खाता ID कॉपी किया गया</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>यह Windows ऐप में दिखाई गई ID से मेल खानी चाहिए। अगर यह अलग है, तो दोनों डिवाइस अलग-अलग खातों में सिंक हो रहे हैं।</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>साइन इन नहीं किया गया</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>अभी तक सिंक नहीं हुआ</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>खाता</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>उपलब्धि प्राप्त: </value>
   </data>
@@ -1188,6 +1206,27 @@
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>दोनों का %1$s समान है!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>यह प्रश्न भेजें</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>आपका प्रश्न डेवलपर को भेजा जाएगा ताकि भविष्य के संस्करण में उसका उत्तर दिया जा सके।
+
+भेजा जाता है: आपका प्रश्न जैसा आपने लिखा, ऐप की भाषा और संस्करण, और उत्तर न दे पाने का कारण।
+नहीं भेजा जाता: आपका नाम, खाता, डिवाइस या इस चैट का बाकी हिस्सा।</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>भेजें</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>प्रश्न नहीं भेजा जा सका। अपना कनेक्शन जाँचें और फिर से कोशिश करें।</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>धन्यवाद – आपका प्रश्न भेज दिया गया।</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>प्रश्न भेजें?</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>एक्टिनाइड्स परमाणु क्रमांक 89 से 103 तक के 15 तत्व हैं। वे सभी रेडियोधर्मी हैं!</value>
@@ -2502,6 +2541,12 @@
   <data name="language_title" xml:space="preserve">
     <value>भाषाएँ</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>पिछली बार सिंक किया गया</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>कभी नहीं</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>लर्निंग-गेम्स:</value>
   </data>
@@ -3566,6 +3611,24 @@ I: अघुलनशील"</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>प्रकार: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>इस खाते पर आपके पास पहले से PRO+ Ultimate है।</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>PRO+ Ultimate पाएँ</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>जल्द आ रहा है</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>एक ही खरीद से Android और Windows पर PRO+ अनलॉक करें। सुनिश्चित करें कि आपके नोट्स, उपलब्धियाँ और प्रगति सभी डिवाइस पर आपके साथ रहें!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>PRO+ Ultimate के मालिक</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Ultimate में अपग्रेड करें</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>इकाई परिवर्तक</value>

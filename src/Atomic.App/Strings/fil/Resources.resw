@@ -89,6 +89,24 @@
   <data name="account" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>Account ID</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>Nakopya ang Account ID</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>Dapat itong tumugma sa ID na ipinapakita sa Windows app. Kung iba ito, magkahiwalay na account ang sini-sync ng dalawang device.</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>Hindi naka-sign in</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>Hindi pa naka-sync</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>Account</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>Nakamit ang Achievement: </value>
   </data>
@@ -1188,6 +1206,27 @@ Magtanong lang at hahanapin ko ang sagot sa mga record ng app! 🌟</value>
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>Parehong may parehong %1$s!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>Ipadala ang tanong na ito</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>Ipapadala ang tanong mo sa developer para masagot ito sa susunod na bersyon.
+
+Ipinapadala: ang tanong ayon sa pagkaka-type mo, ang wika at bersyon ng app, at kung bakit hindi ito nasagot.
+Hindi ipinapadala: ang pangalan mo, account, device, o ang iba pang bahagi ng chat na ito.</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>Ipadala</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>Hindi maipadala ang tanong. Tingnan ang iyong koneksyon at subukang muli.</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>Salamat – naipadala na ang tanong mo.</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>Ipadala ang tanong?</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>Ang mga actinide ay ang 15 elemento na may atomic numbers mula 89 hanggang 103. Lahat sila ay radyaktibo!</value>
@@ -2502,6 +2541,12 @@ Nagbabahagi sila ng mga katulad na gawi sa kemikal dahil sa kanilang mga valence
   <data name="language_title" xml:space="preserve">
     <value>Mga Wika</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>Huling na-sync</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>Hindi pa</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>Mga Larong Pang-edukasyon:</value>
   </data>
@@ -3566,6 +3611,24 @@ I: Hindi Malulusaw"</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>Uri: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>Mayroon ka nang PRO+ Ultimate sa account na ito.</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Kunin ang PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Malapit na</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>I-unlock ang PRO+ sa Android at Windows sa isang bayad lang. Siguraduhing kasama mo ang iyong mga tala, nakamit, at progress sa lahat ng device!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>May-ari ng PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>I-upgrade sa Ultimate</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>Unit Converter</value>

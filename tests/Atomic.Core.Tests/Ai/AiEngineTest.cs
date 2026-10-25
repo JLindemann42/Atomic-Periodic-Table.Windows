@@ -90,6 +90,63 @@ namespace Atomic.Core.Tests.Ai
             Assert.Null(engine.LastPlan);
         }
 
+        // ---- Why it declined (roadmap 0.7) ----------------------------------------------------
+        // The decline reason is what the console groups unanswered questions by. Like the plan,
+        // nothing else reads it, so these are the tripwire for it going quiet.
+
+        [Fact]
+        public void AnAnswerLeavesNoDeclineReason()
+        {
+            var engine = Engine();
+            Assert.NotNull(engine.Answer("what is the density of gold", new DialogueState()));
+            Assert.Null(engine.LastDecline);
+        }
+
+        [Theory]
+        [InlineData("tell me about element 119", DeclineReason.NoSuchElement)]
+        [InlineData("quiz me", DeclineReason.Conversational)]
+        [InlineData("why does radius decrease left to right, despite adding electrons", DeclineReason.UnexplainedWhy)]
+        public void ADeclineSaysWhy(string query, DeclineReason reason)
+        {
+            var engine = Engine();
+            Assert.Null(engine.Answer(query, new DialogueState()));
+            Assert.Equal(reason, engine.LastDecline);
+        }
+
+        [Theory]
+        [InlineData("please tell me a story about my weekend")]
+        [InlineData("")]
+        [InlineData("asdf qwerty")]
+        public void EveryDeclineHasAReason(string query)
+        {
+            var engine = Engine();
+            Assert.Null(engine.Answer(query, new DialogueState()));
+            Assert.NotNull(engine.LastDecline);
+        }
+
+        [Fact]
+        public void AnAnswerClearsTheReasonFromThePreviousTurn()
+        {
+            var engine = Engine();
+            Assert.Null(engine.Answer("tell me about element 119", new DialogueState()));
+            Assert.NotNull(engine.LastDecline);
+            Assert.NotNull(engine.Answer("what is the density of gold", new DialogueState()));
+            Assert.Null(engine.LastDecline);
+        }
+
+        [Fact]
+        public void EveryReasonHasAndroidsWireName()
+        {
+            // Both platforms write the same collection and the same analytics parameter, so the
+            // names must be Android's enum names in lower case.
+            foreach (var reason in Enum.GetValues<DeclineReason>())
+            {
+                var expected = string.Concat(reason.ToString().Select(
+                    (c, i) => i > 0 && char.IsUpper(c) ? "_" + char.ToLowerInvariant(c) : char.ToLowerInvariant(c).ToString()));
+                Assert.Equal(expected, reason.WireName());
+            }
+        }
+
         // ---- What it adds that a keyword router could not express ----------------------------
 
         [Fact]
@@ -409,6 +466,25 @@ namespace Atomic.Core.Tests.Ai
 
             Assert.Equal(ReplySource.Declined, reply.Source);
             Assert.NotEmpty(reply.Text);
+        }
+
+        [Fact]
+        public void ADeclinedReplyCarriesItsReason()
+        {
+            Assert.NotNull(Chat().Ask("write me a poem about the sea").DeclineReason);
+            Assert.Equal(DeclineReason.NoSuchElement, Chat().Ask("tell me about element 119").DeclineReason);
+            Assert.Equal(DeclineReason.NoMatch, Chat().Ask("").DeclineReason);
+        }
+
+        [Theory]
+        [InlineData("what is the density of gold")]
+        [InlineData("hello")]
+        [InlineData("what can you do")]
+        public void OnlyADeclinedReplyCarriesAReason(string message)
+        {
+            var reply = Chat().Ask(message);
+            Assert.NotEqual(ReplySource.Declined, reply.Source);
+            Assert.Null(reply.DeclineReason);
         }
 
         /// <summary>

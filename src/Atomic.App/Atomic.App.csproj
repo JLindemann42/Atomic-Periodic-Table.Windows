@@ -373,5 +373,13 @@
   <ItemGroup Condition="Exists('firebase.client_secret')">
     <Content Include="firebase.client_secret" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+  <!--
+    The GA4 Measurement Protocol id and API secret, two lines: measurement_id=G-... and
+    api_secret=.... Same arrangement as the client secret: absent, analytics sends nothing. See
+    Services/Analytics.cs.
+  -->
+  <ItemGroup Condition="Exists('firebase.analytics')">
+    <Content Include="firebase.analytics" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 
 </Project>

@@ -89,6 +89,24 @@
   <data name="account" xml:space="preserve">
     <value>Cuenta</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>ID de cuenta</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>ID de cuenta copiado</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>Debe coincidir con el ID que aparece en la app de Windows. Si es distinto, los dos dispositivos se sincronizan con cuentas separadas.</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>Sesión no iniciada</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>Aún sin sincronizar</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>Cuenta</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>Logro alcanzado: </value>
   </data>
@@ -1188,6 +1206,27 @@
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>¡Ambos tienen el mismo %1$s!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>Enviar esta pregunta</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>Tu pregunta se enviará al desarrollador para que pueda responderse en una versión futura.
+
+Se envía: la pregunta tal como la escribiste, el idioma y la versión de la app, y por qué no se pudo responder.
+No se envía: tu nombre, tu cuenta, tu dispositivo ni el resto de esta conversación.</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>No se pudo enviar la pregunta. Revisa tu conexión e inténtalo de nuevo.</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>Gracias: tu pregunta se envió.</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>¿Enviar la pregunta?</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>Los actínidos son los 15 elementos con números atómicos del 89 al 103. ¡Todos son radiactivos!</value>
@@ -2502,6 +2541,12 @@
   <data name="language_title" xml:space="preserve">
     <value>Idiomas</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>Última sincronización</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>Nunca</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>Juegos de aprendizaje:</value>
   </data>
@@ -3566,6 +3611,24 @@ I: Insoluble"</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>Tipo: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>Ya tienes PRO+ Ultimate en esta cuenta.</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Obtener PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Próximamente</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>Desbloquea PRO+ en Android y Windows con una sola compra. ¡Asegúrate de que tus notas, logros y progreso te acompañen en todos tus dispositivos!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>Posee PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Mejorar a Ultimate</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>Convertidor de unidades</value>

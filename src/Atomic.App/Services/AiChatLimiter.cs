@@ -33,6 +33,9 @@ namespace Atomic.App.Services
         /// <summary>Messages already sent today.</summary>
         public static int UsedToday(DateTimeOffset now) => SettingsStore.Get(TodayKey(now), 0);
 
+        /// <summary>Today's allowance for the user's tier, for the rate-limited event.</summary>
+        public static int DailyLimit => RateLimit.DailyLimit(Tier);
+
         /// <summary>Whether another message may be sent right now.</summary>
         public static bool CanSend() => RateLimit.CanSend(Tier, UsedToday(DateTimeOffset.Now));
 

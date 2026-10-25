@@ -89,6 +89,24 @@
   <data name="account" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>ID account</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>ID account copiato</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>Deve corrispondere all'ID mostrato nell'app Windows. Se è diverso, i due dispositivi si sincronizzano con account separati.</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>Non connesso</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>Non ancora sincronizzato</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>Account</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>Obiettivo raggiunto: </value>
   </data>
@@ -1188,6 +1206,27 @@ Chiedi pure e troverò la risposta nei registri dell'app! 🌟</value>
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>Entrambi hanno lo stesso valore per %1$s!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>Invia questa domanda</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>La domanda verrà inviata allo sviluppatore perché possa ricevere risposta in una versione futura.
+
+Viene inviato: la domanda così come l'hai scritta, la lingua e la versione dell'app e il motivo per cui non è stato possibile rispondere.
+Non viene inviato: il tuo nome, l'account, il dispositivo o il resto della chat.</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>Invia</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>Impossibile inviare la domanda. Controlla la connessione e riprova.</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>Grazie, la domanda è stata inviata.</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>Inviare la domanda?</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>Gli attinidi sono i 15 elementi con numero atomico da 89 a 103. Sono tutti radioattivi!</value>
@@ -2502,6 +2541,12 @@ Condividono comportamenti chimici simili grazie ai loro elettroni di valenza!</v
   <data name="language_title" xml:space="preserve">
     <value>Lingue</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>Ultima sincronizzazione</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>Mai</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>Giochi di apprendimento:</value>
   </data>
@@ -3566,6 +3611,24 @@ I: Insolubile"</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>Tipo: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>Possiedi già PRO+ Ultimate su questo account.</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Ottieni PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Prossimamente</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>Sblocca PRO+ su Android e Windows con un unico acquisto. Assicurati che note, obiettivi e progressi siano con te su tutti i dispositivi!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>Possiede PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Passa a Ultimate</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>Convertitore di unità</value>

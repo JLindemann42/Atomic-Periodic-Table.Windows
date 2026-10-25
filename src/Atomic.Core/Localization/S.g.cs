@@ -26,6 +26,12 @@ public static partial class S
     public const string abundance_title = "abundance_title";
     public const string abundance_urban_soil = "abundance_urban_soil";
     public const string account = "account";
+    public const string account_id = "account_id";
+    public const string account_id_copied = "account_id_copied";
+    public const string account_id_hint = "account_id_hint";
+    public const string account_id_signed_out = "account_id_signed_out";
+    public const string account_tier_unknown = "account_tier_unknown";
+    public const string account_title = "account_title";
     public const string achievement_reached_prefix = "achievement_reached_prefix";
     public const string activity_alloy_title = "activity_alloy_title";
     public const string activity_equations_title = "activity_equations_title";
@@ -388,6 +394,12 @@ public static partial class S
     public const string ai_safety_radioactive_note = "ai_safety_radioactive_note";
     public const string ai_safety_special = "ai_safety_special";
     public const string ai_same_value = "ai_same_value";
+    public const string ai_send_question = "ai_send_question";
+    public const string ai_send_question_body = "ai_send_question_body";
+    public const string ai_send_question_confirm = "ai_send_question_confirm";
+    public const string ai_send_question_failed = "ai_send_question_failed";
+    public const string ai_send_question_sent = "ai_send_question_sent";
+    public const string ai_send_question_title = "ai_send_question_title";
     public const string ai_series_actinide = "ai_series_actinide";
     public const string ai_series_actinide_label = "ai_series_actinide_label";
     public const string ai_series_alkali = "ai_series_alkali";
@@ -825,6 +837,8 @@ public static partial class S
     public const string isotopes_title = "isotopes_title";
     public const string language_content = "language_content";
     public const string language_title = "language_title";
+    public const string last_synced = "last_synced";
+    public const string last_synced_never = "last_synced_never";
     public const string learning_games = "learning_games";
     public const string learning_games_nav = "learning_games_nav";
     public const string leave_game_confirm = "leave_game_confirm";
@@ -1187,6 +1201,7 @@ public static partial class S
     public const string total_xp_with_multiplier = "total_xp_with_multiplier";
     public const string try_another_search = "try_another_search";
     public const string type_label = "type_label";
+    public const string ultimate_already_owned_account = "ultimate_already_owned_account";
     public const string ultimate_buy = "ultimate_buy";
     public const string ultimate_coming_soon = "ultimate_coming_soon";
     public const string ultimate_description = "ultimate_description";

@@ -80,6 +80,24 @@
   <data name="abundance_urban_soil" xml:space="preserve">
     <value>In Stadtboden</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>Konto-ID</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>Konto-ID kopiert</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>Diese ID muss mit der in der Windows-App angezeigten ID übereinstimmen. Weicht sie ab, synchronisieren die beiden Geräte mit getrennten Konten.</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>Nicht angemeldet</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>Noch nicht synchronisiert</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>Konto</value>
+  </data>
   <data name="achievement_reached_prefix" xml:space="preserve">
     <value>Erfolg erreicht: </value>
   </data>
@@ -1176,6 +1194,27 @@ Frag einfach und ich finde die Antwort in den Aufzeichnungen der App! 🌟</valu
   </data>
   <data name="ai_same_value" xml:space="preserve">
     <value>Beide haben den gleichen Wert für %1$s!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>Diese Frage senden</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>Deine Frage wird an den Entwickler gesendet, damit sie in einer künftigen Version beantwortet werden kann.
+
+Gesendet: die Frage, wie du sie eingegeben hast, Sprache und Version der App und warum sie nicht beantwortet werden konnte.
+Nicht gesendet: dein Name, Konto, Gerät oder der Rest dieses Chats.</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>Die Frage konnte nicht gesendet werden. Prüfe die Verbindung und versuche es erneut.</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>Danke – deine Frage wurde gesendet.</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>Frage senden?</value>
   </data>
   <data name="ai_series_actinide" xml:space="preserve">
     <value>Actinoide sind die 15 Elemente mit den Ordnungszahlen 89 bis 103. Sie sind alle radioaktiv!</value>
@@ -2394,6 +2433,12 @@ Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!
   <data name="language_title" xml:space="preserve">
     <value>Sprachen</value>
   </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>Zuletzt synchronisiert</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>Nie</value>
+  </data>
   <data name="learning_games" xml:space="preserve">
     <value>Lernspiele:</value>
   </data>
@@ -3419,6 +3464,24 @@ I: Unlöslich</value>
   </data>
   <data name="type_label" xml:space="preserve">
     <value>Typ: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>Sie besitzen PRO+ Ultimate bereits auf diesem Konto.</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>PRO+ Ultimate holen</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Demnächst verfügbar</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>Schalten Sie PRO+ auf Android und Windows mit einem einzigen Kauf frei. So haben Sie Ihre Notizen, Erfolge und Ihren Fortschritt auf allen Geräten dabei!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>Besitzt PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Auf Ultimate upgraden</value>
   </data>
   <data name="uni" xml:space="preserve">
     <value>Einheitenumrechner</value>
