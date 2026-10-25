@@ -27,13 +27,18 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import os
 import pathlib
 import re
 import sys
 
 HERE = pathlib.Path(__file__).resolve()
 WIN_REPO = HERE.parents[2]
-AND_MODEL = WIN_REPO.parents[1] / "Atomic-Periodic-Table.Android" / "app" / "src" / "main" / \
+# The Android checkout these convert from. A sibling folder by default, as on the development
+# machine; CI checks Android out elsewhere and says where with ANDROID_REPO (roadmap 0.4).
+ANDROID_REPO = (pathlib.Path(os.environ["ANDROID_REPO"]) if os.environ.get("ANDROID_REPO")
+                else WIN_REPO.parents[1] / "Atomic-Periodic-Table.Android")
+AND_MODEL = ANDROID_REPO / "app" / "src" / "main" / \
     "java" / "com" / "jlindemann" / "science" / "model"
 OUT_DIR = WIN_REPO / "src" / "Atomic.Core" / "Models"
 
