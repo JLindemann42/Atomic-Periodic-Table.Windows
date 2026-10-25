@@ -353,7 +353,7 @@
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <AssemblyName>Atomic - Periodic Table</AssemblyName>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Version>0.1</Version>
+    <Version>5.1.30.0</Version>
     <Title>Atomic - Periodic Table</Title>
     <Company>JLINDEMANN</Company>
     <Authors>JLINDEMANN</Authors>
