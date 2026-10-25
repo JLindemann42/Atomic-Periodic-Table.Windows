@@ -91,6 +91,14 @@ into `Ai/Data/ReactivityScale.cs`.
 
 **Also skipped:** `AILearningManager.kt` (SharedPreferences interest telemetry).
 
+**Resolved the other way** (roadmap 0.2): Android now runs this design too. `ChatOrchestrator.cs`
+and its handlers were ported back to Kotlin as `ai/chat/` (platform-free, JVM-tested), with
+`ai/AiChatAgent.kt` as the Android adapter for rate limits, strings and telemetry.
+`AIAgentManager.kt`, `MolarMassCalculator.kt`, `AILearningManager.kt` and
+`LocalKnowledgeManager.kt` are deleted. The corpus stays at 2,793 of 2,793 on Android, and every
+suggestion chip in all twelve languages is answered there as well (`SuggestionChipTest`). D53 lists
+what the port back found.
+
 ### D2 — format specifiers are not converted
 
 `%1$s` and friends are kept verbatim in `.resw` and interpreted at runtime by `JavaFormat`,
@@ -1053,3 +1061,42 @@ and its next save would be overwritten. `FavoritesStore` does each save and remo
 read-modify-write under one lock, shared with the sync's merge, and records removals in
 `favorites_removed.json`. Items saved before this carry no time and are stamped on first load in list
 order. The calculator's favourites moved off its code-behind onto the same store, keyed by formula.
+
+### D53 — found while porting the orchestrator back to Android
+
+Porting `ChatOrchestrator` and its handlers to Kotlin (roadmap 0.2) meant reading every field they
+read, and four of those reads are wrong here. Android has the corrected versions; Windows still
+needs them.
+
+**Three handlers read JSON keys as field ids.** `ElementRecord.Value` is keyed by field id, and
+`element_discovered_name` and `element_year` are the JSON keys of `discovered_by` and
+`year_discovered`. So `Value` returns `Missing` for both, always:
+
+- `ElementQuiz.Ask` filters its history candidates on them, so the history question is never asked
+  — one of the three quiz shapes is dead.
+- `ChatOrchestrator.Narrative` passes them to the etymology fallback, so it always says the
+  discoverer and year are unknown.
+- `ElementOverview.Of` lists a type from `element_type`, which is neither a field id nor a key any
+  element has, so that line never appears.
+
+Android reads `discovered_by` and `year_discovered` (the year is numeric, so it is read through the
+quantity's display) and drops the type line.
+
+**A test that passes because the code it guards is dead.** `ElementQuizTest.AHistoryQuestionNeverHasBlanks`
+asserts the question does not contain `** in **`, but `ai_quiz_history` is
+`by **%1$s** in **%2$s**`, so every filled question contains it. It passes only because no history
+question is ever asked. Android checks for an empty value (`****`, `** **`) instead.
+
+**An English "or" is French.** Found on a device, not by the corpus: "which is more reactive, sodium
+or potassium" was answered in French, and the panel badge switched with it. French "or" is gold, and
+`EntityResolver.DetectLanguage` counts any name claimed by one language alone, so the English word
+"or" is a vote for French and outweighs nothing else. `Matches` already refuses a foreign name
+shorter than `MinForeignName` for exactly this word; `Score` did not. Android's `score` now skips
+short names from a language other than the active one, pinned by
+`ChatOrchestratorTest.anEnglishOrIsNotFrench`; the same three lines belong in `Score` here.
+
+**Two planner rules exist only here.** `QueryPlanner.cs` has `AsksForADefinition` (a concept
+question such as "what is electronegativity" does not inherit the element in focus) and
+`statesItsOwnPredicate` ("is gold a metal" does not inherit the last field), and neither is in this
+register or in Android's `QueryPlanner.kt`. Both are behaviour, so both belong in Kotlin first with
+corpus rows; until then `ContextBleedTest`'s two cases for them are Windows-only.
