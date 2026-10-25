@@ -177,7 +177,7 @@ namespace Atomic.Core.Ai.Retrieval
                 if (!_aliases.TryGetValue(folded, out var matches) &&
                     !_aliases.TryGetValue(word, out matches)) continue;
 
-                Score(matches, scores);
+                Score(matches, scores, active);
             }
 
             // Nothing matched token-by-token, so fall back to scanning the whole query. The scripts
@@ -188,7 +188,7 @@ namespace Atomic.Core.Ai.Retrieval
                 foreach (var (surface, matches) in _aliases)
                 {
                     if (!TextMatching.ContainsToken(lower, normalized, surface)) continue;
-                    Score(matches, scores);
+                    Score(matches, scores, active);
                 }
             }
 
@@ -229,15 +229,24 @@ namespace Atomic.Core.Ai.Retrieval
         /// English on "gold" and English was then discarded on purpose. Scoring distinctiveness
         /// instead keeps the "guld" case working - Swedish alone claims it - and leaves a shared
         /// name contributing nothing, so the query falls through to the active language.</para>
+        ///
+        /// <para>A short name from a language other than <paramref name="active"/> is no evidence
+        /// either, by the same floor <see cref="Matches"/> applies (D53). French "or" is gold, so
+        /// every English "sodium or potassium" was answered in French.</para>
         /// </remarks>
         private static void Score(
-            IReadOnlyList<ElementAlias> matches, Dictionary<string, int> scores)
+            IReadOnlyList<ElementAlias> matches, Dictionary<string, int> scores, string active)
         {
             string? only = null;
 
             foreach (var alias in matches)
             {
                 if (alias.Kind != AliasKind.Name) continue;
+                // Not for scripts that write no spaces, as in Matches: every Chinese element name
+                // is one character, and 金 is the clearest evidence of Chinese there is.
+                if (!string.Equals(alias.Language, active, StringComparison.Ordinal) &&
+                    alias.Surface.Length < MinForeignName &&
+                    !Tokenizer.IsUnspacedScript(alias.Surface)) continue;
 
                 if (only is null)
                 {

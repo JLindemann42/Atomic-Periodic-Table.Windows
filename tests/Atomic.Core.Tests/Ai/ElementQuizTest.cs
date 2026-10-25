@@ -160,6 +160,11 @@ namespace Atomic.Core.Tests.Ai
         /// A history question is only asked about an element that has both a discoverer and a
         /// year; the sentence reads "discovered by --- in ---" otherwise.
         /// </summary>
+        /// <remarks>
+        /// This used to assert the text did not contain "** in **" - which every filled question
+        /// does ("by **X** in **1878**"). It passed only because no history question was ever
+        /// asked (D53). It checks for an empty value instead.
+        /// </remarks>
         [Fact]
         public void AHistoryQuestionNeverHasBlanks()
         {
@@ -170,9 +175,20 @@ namespace Atomic.Core.Tests.Ai
                 if (text.Contains("discovered", StringComparison.OrdinalIgnoreCase))
                 {
                     Assert.DoesNotContain("---", text, StringComparison.Ordinal);
-                    Assert.DoesNotContain("** in **", text, StringComparison.Ordinal);
+                    Assert.DoesNotContain("****", text, StringComparison.Ordinal);
+                    Assert.DoesNotContain("** **", text, StringComparison.Ordinal);
                 }
             }
         }
+
+        /// <summary>
+        /// The history shape is reachable. It was not: the discoverer and year were read by JSON
+        /// key, which <c>Value</c> never finds, so every candidate was filtered out (D53).
+        /// </summary>
+        [Fact]
+        public void TheHistoryQuestionIsAskedForSomeSeed() =>
+            Assert.Contains(
+                Enumerable.Range(0, 40),
+                seed => Chat(seed).Ask("quiz me").Text.Contains("discovered", StringComparison.OrdinalIgnoreCase));
     }
 }

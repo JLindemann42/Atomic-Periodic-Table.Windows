@@ -479,6 +479,25 @@ namespace Atomic.Core.Tests.Ai
             Assert.Equal("sv", chat.Language);
         }
 
+        /// <summary>
+        /// French "or" is gold. Counting it as French evidence answered this in French - found on
+        /// an Android device, not by the corpus (D53).
+        /// </summary>
+        [Fact]
+        public void AnEnglishOrIsNotFrench()
+        {
+            var chat = Chat();
+            var reply = chat.Ask("which is more reactive, sodium or potassium");
+
+            Assert.Equal("en", chat.Language);
+            Assert.Contains("more reactive", reply.Text, StringComparison.Ordinal);
+        }
+
+        /// <summary>The floor is for foreign names only: the language in play keeps its short names.</summary>
+        [Fact]
+        public void AShortNameStillCountsInItsOwnLanguage() =>
+            Assert.Equal("fr", Service.Resolver("fr").DetectLanguage("densité de l'or", "fr"));
+
         // ---- Entitlements ------------------------------------------------------------------------
 
         /// <summary>

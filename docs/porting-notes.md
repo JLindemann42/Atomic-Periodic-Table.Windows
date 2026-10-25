@@ -1065,8 +1065,8 @@ order. The calculator's favourites moved off its code-behind onto the same store
 ### D53 — found while porting the orchestrator back to Android
 
 Porting `ChatOrchestrator` and its handlers to Kotlin (roadmap 0.2) meant reading every field they
-read, and four of those reads are wrong here. Android has the corrected versions; Windows still
-needs them.
+read, and four of those reads were wrong here. **All of it is now fixed on both platforms** — see the
+end of this entry.
 
 **Three handlers read JSON keys as field ids.** `ElementRecord.Value` is keyed by field id, and
 `element_discovered_name` and `element_year` are the JSON keys of `discovered_by` and
@@ -1100,3 +1100,16 @@ question such as "what is electronegativity" does not inherit the element in foc
 `statesItsOwnPredicate` ("is gold a metal" does not inherit the last field), and neither is in this
 register or in Android's `QueryPlanner.kt`. Both are behaviour, so both belong in Kotlin first with
 corpus rows; until then `ContextBleedTest`'s two cases for them are Windows-only.
+
+**Resolved.** On Windows: `ElementQuiz.Show` reads `discovered_by` and `year_discovered` (the quiz and
+the etymology fallback both use it), the overview's type line is gone,
+`AHistoryQuestionNeverHasBlanks` checks for an empty value, and `TheHistoryQuestionIsAskedForSomeSeed`
+pins that the shape is reachable. `Score` skips short foreign names, pinned by
+`AnEnglishOrIsNotFrench` — **except in a script that writes no spaces**, as `Matches` already
+exempts them: the first version of the floor stopped every one-character Chinese name counting, and
+`EntityResolverTest.ADistinctiveNameIsFoundInAScriptThatWritesNoSpaces` caught it here, where
+Android's suite had no such case (it has one now). On Android: `AsksForADefinition` and
+`statesItsOwnPredicate` are ported into `QueryPlanner.kt`. Six rows in `regressions.tsv`
+(`reg-define-en-*`, `reg-predicate-en-*`) pin both rules on both platforms; three of them fail
+against the Android planner without the port, with exactly the wrong answers listed above. Corpus:
+2,799 of 2,799 on both.

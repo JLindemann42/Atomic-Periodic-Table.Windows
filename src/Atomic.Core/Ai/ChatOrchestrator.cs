@@ -505,8 +505,10 @@ namespace Atomic.Core.Ai
                 Display(element, key),
                 language,
                 strings,
-                (element.Value("element_discovered_name") as Atomic.Core.Ai.Data.FieldValue.Text)?.Raw,
-                (element.Value("element_year") as Atomic.Core.Ai.Data.FieldValue.Text)?.Raw);
+                // By field id, not JSON key (D53): the keys always read Missing, so the fallback
+                // said the discoverer and year were unknown for every element.
+                ElementQuiz.Show(element, "discovered_by"),
+                ElementQuiz.Show(element, "year_discovered"));
 
             if (text is null) return null;
 

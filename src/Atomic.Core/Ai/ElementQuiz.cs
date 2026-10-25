@@ -100,8 +100,8 @@ namespace Atomic.Core.Ai
                 else
                 {
                     var pick = withHistory[random.Next(withHistory.Count)];
-                    return (strings.Get(S.ai_quiz_history, Raw(pick, "element_discovered_name")!,
-                                        Raw(pick, "element_year")!), pick);
+                    return (strings.Get(S.ai_quiz_history, Show(pick, "discovered_by")!,
+                                        Show(pick, "year_discovered")!), pick);
                 }
             }
 
@@ -116,12 +116,22 @@ namespace Atomic.Core.Ai
         }
 
         private static bool HasHistory(ElementRecord element) =>
-            Present(Raw(element, "element_discovered_name")) && Present(Raw(element, "element_year"));
+            Present(Show(element, "discovered_by")) && Present(Show(element, "year_discovered"));
 
         private static bool Present(string? value) =>
             !string.IsNullOrWhiteSpace(value) && value.Trim() != "---";
 
-        private static string? Raw(ElementRecord element, string field) =>
-            (element.Value(field) as FieldValue.Text)?.Raw;
+        /// <summary>
+        /// A field as text, by field id. The year is numeric, so it is read through the quantity's
+        /// display ("1771"). These read <c>element_discovered_name</c> and <c>element_year</c>, the
+        /// JSON keys, which <see cref="ElementRecord.Value"/> never finds - so until D53 the history
+        /// question was never asked.
+        /// </summary>
+        internal static string? Show(ElementRecord element, string fieldId) => element.Value(fieldId) switch
+        {
+            FieldValue.Text t => t.Raw,
+            FieldValue.Num n => n.Quantity.Display,
+            _ => null,
+        };
     }
 }

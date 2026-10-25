@@ -108,7 +108,6 @@ namespace Atomic.Core.Ai
             Fact(S.element_symbols, element.Symbol);
             Fact(S.atomic_mass_colon, Show(element.Value("atomic_mass")));
             Fact(S.phase_stp_colon, localized?.Text(key, "phase") ?? element.Phase);
-            Fact(S.type_label, Show(element.Value("element_type")));
 
             if (facts.Length == 0) return null;
 
