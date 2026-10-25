@@ -181,8 +181,9 @@ the quiz generator's ~100-compound corpus has none either. So this costs no pari
 alternative is shipping a molar-mass calculator that is silently wrong for an entire class of
 common compounds.
 
-**This bug is live in the Android app.** The same fix belongs in
-`ai/data/ChemistryMath.kt`: stop stripping `·` in `normalise`, and split on it in `countAtoms`.
+**Back-ported to Android** (roadmap 0.1): `ChemistryMath.kt` keeps `·` and splits on it in
+`countAtomsWithHydrates`, pinned by the same four cases in `ChemistryMathTest`. No longer a
+divergence.
 
 ### D10 — reference tables: the flow runs both ways
 
@@ -229,7 +230,7 @@ first match, so a duplicate id makes the second row uncitable:
 
 - **`Elementary charge` appears twice in Android's `ConstantsModel.kt`** (lines 22 and 26),
   identical in all five fields. `kt2cs_model.py` drops rows identical in every field and says so.
-  **Live on Android**, where the constants table shows it twice.
+  The duplicate is now deleted on Android too (roadmap 0.1).
 
 - **`Basalt` appears twice in the Poisson table on both platforms**, quoted as 0.10–0.35 and
   0.10–0.33. Those are two real literature ranges, so both rows are kept; the Windows
@@ -334,7 +335,8 @@ executor with mass 3 and Z 92, where the subtraction gives −89.
 corpus was being ported, because tightening a guard can move rows and the corpus is the
 specification for Phase 4. With P4h green the experiment is cheap: adding it leaves the score at
 2,793 of 2,793, so no row depended on the loose branch. Pinned by
-`QueryPlannerSupportTest.EveryNuclideBranchRejectsAnImpossibleMassNumber`. Still live on Android.
+`QueryPlannerSupportTest.EveryNuclideBranchRejectsAnImpossibleMassNumber`. Back-ported to Android
+(roadmap 0.1), pinned by `IsotopeComparisonTest.everyNuclideBranchRejectsAnImpossibleMassNumber`.
 
 ### D15 — the "what is known" list could offer properties that are also missing
 
@@ -358,6 +360,11 @@ which is the evident intent. Pinned by
 This was the one place the port changed user-visible behaviour without the corpus having ruled on
 it. **P4h has now ruled**: the corpus is green, and since the change can only ever *remove* a
 suggestion, a row that asserted the old text would have failed loudly. Settled.
+
+**Back-ported to Android** (roadmap 0.1), pinned by
+`AnswerComposerTest.theAlternativesOfferedAreOnesTheElementActuallyHas`. Android's
+`AnswerQualityTest.noDataOffersAnAlternative` carried the same always-true `!= null` and is fixed
+with it.
 
 ### D8 — widgets: three of five
 
@@ -625,7 +632,9 @@ themselves are diacritic-folded ASCII (`"vad kan du gora"`, not `"göra"`). So a
 full *"vad kan du göra"* only matches on Android by way of the shorter `"vad kan du"` also being in
 the list, and where no shorter prefix exists the accented spelling does not match at all. Windows
 matches against `TextMatching.NormalizeForLookup`, which folds first: it matches everything Android
-matches, plus the accented spellings. Fixing it on Android is a one-line change to `normalize()`.
+matches, plus the accented spellings. **Back-ported to Android** (roadmap 0.1): `resolveAppFeature`
+folds the query with `normalizeForLookup` and matches through `containsToken`, leaving
+`normalize()` and the other seven resolvers untouched. No longer a divergence.
 
 ### D42 — English won a language tie it was only in by coincidence
 
@@ -708,6 +717,10 @@ D41, fixed here rather than reproduced.
 Ties break on the key rather than on map order, so the greeting does not change between launches
 for someone who has asked about two elements equally often.
 
+**Back-ported to Android** (roadmap 0.1): the greeting names the element from the active
+language's element data, and `getFavoriteElement` breaks ties on the key. The unreachable
+property-interest half is left as it is until the orchestrator port (roadmap 0.2) removes it.
+
 ### D45 — turn telemetry is not ported, and this is why
 
 `AiTurnStats` records a path, intent, confidence bucket, latency, language, card kind and query
@@ -759,6 +772,13 @@ field — and wrong in a sentence, where it read **"Gold's Isotopes is 118"**. G
 and one stable isotope, so the sentence named the wrong quantity. The field now carries a
 `SentenceLabelKey`, which is what that property exists for.
 
+**Partly back-ported to Android** (roadmap 0.1), inside `AIAgentManager.provideNewInformation`:
+the thermal conductivity key, memory keyed on the data key instead of the label, and filtering
+to populated candidates before choosing (which removes the recursion). The `common_neutrons`
+label and the engine-rendered sentence (which gates the PRO fields) arrive with the orchestrator
+port in roadmap 0.2. The same pass fixed `handlePhysicalPropertyQuery`, which read the same dead
+key and appended units that the values already carry ("13.81 (kJ/mol) kJ/mol").
+
 ### D47 — "yes" continues, and two defects that made it answer about the wrong element
 
 `isAffirmative` is Android's second route into `provideNewInformation`: a bare "yes", "sure",
@@ -792,7 +812,11 @@ contributed no field, no unit and no operator evidence. The corpus is what defin
 inherit — the first two attempts at this guard failed those rows, which is what the conversation
 files are for.
 
-Both were reachable in the shipped app before any of this work, and both are live on Android.
+Both were reachable in the shipped app before any of this work. **Both are back-ported to
+Android** (roadmap 0.1): `EntityResolver.fuzzyMatch` skips `FuzzyMatch.isAffirmative` words (a new
+platform-free `ai/retrieval/FuzzyMatch.kt` mirroring this one), and `QueryPlanner` carries the
+same `contributedNothing` guard. The router's quiz judging also stopped consuming non-guesses:
+with a question open, a reply is judged only if it names the answer or an element.
 
 ### D48 — the AI in twelve languages, measured against the app's own suggestion chips
 
@@ -886,7 +910,8 @@ the atomic *mass* (196.966568), and `IntOf` keeps only digits: gold's mass numbe
 The isotope chart builds its axis and its stable band from it, so both were wrong; the
 `i.Nucleons == n || i.MassNumber == n` in `QueryExecutor` is a workaround for exactly this. It
 reads `iso_A_N` now, rounding the mass only when a slot has none. Android's `IsotopeParser.kt`
-has the same line.
+had the same line and is fixed the same way (roadmap 0.1); its `RealCorpusTest` now expects 80
+elements with a stable isotope, up from 69, which the repaired data had already broken.
 
 ### D50 — the half-lives themselves
 
