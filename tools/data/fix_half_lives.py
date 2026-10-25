@@ -306,7 +306,7 @@ def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8")
     here = os.path.dirname(os.path.abspath(__file__))
     default = os.path.normpath(
-        os.path.join(here, "..", "..", "src", "Atomic.App", "Assets", "Elements"))
+        os.path.join(here, "..", "..", "shared", "elements"))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--reference", required=True, help="mendeleev wheel, or its elements.db")

@@ -8,7 +8,8 @@ namespace Atomic.Core.Tests.Fixtures
 {
     /// <summary>
     /// The real shipped element tables, loaded from the copy the csproj links out of
-    /// <c>src/Atomic.App/Assets/Elements</c>. Mirrors <c>TestAssets.kt</c>.
+    /// <c>shared/elements</c>, the shared-data submodule the Android app reads too. Mirrors
+    /// <c>TestAssets.kt</c>.
     ///
     /// <para>Tests run against the actual data rather than a fixture on purpose: most of what can
     /// go wrong here is a mismatch between the parser and how the data is really authored, and a
@@ -36,8 +37,8 @@ namespace Atomic.Core.Tests.Fixtures
         public static ElementTable English =>
             ElementSource.Load("en") ?? throw new InvalidOperationException(
                 $"elements_en.json not found under {AssetDirectory}. " +
-                "It is linked from src/Atomic.App/Assets/Elements by the test csproj; " +
-                "if that directory is empty the data migration has not been run.");
+                "It is linked from shared/elements by the test csproj; " +
+                "if that directory is empty, run `git submodule update --init`.");
 
         private static Stream? OpenLanguage(string language)
         {

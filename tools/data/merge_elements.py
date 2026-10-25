@@ -2,6 +2,10 @@
 """
 Merge the Windows per-element JSON files into the Android elements_{lang}.json set.
 
+HISTORICAL. This ran once; its output is now the shared data in the `shared/` submodule
+(Atomic-Shared-Data, roadmap 0.3), which both apps read. The Android input folder it reads no
+longer exists. Edit `shared/elements/` directly, with the fix_* scripts beside this one.
+
 The two apps drifted from a shared ancestor. Neither side is a superset:
 
   * Android added 14 properties in v5 (thermal_conductivity, molar_volume, curie_point, ...)

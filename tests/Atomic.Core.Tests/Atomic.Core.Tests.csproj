@@ -21,18 +21,20 @@
   </ItemGroup>
 
   <!--
-    Element tables and string resources are linked from the app project rather than
-    copied, so the tests always run against exactly what ships. Populated in Phase 1
-    (elements_*.json) and Phase 2 (Resources.resw); the globs are harmless until then.
+    Element tables, the corpus and the golden files come from the shared-data submodule
+    (shared/, roadmap 0.3), which the Android app reads too, so both platforms are tested
+    against one copy. String resources are linked from the app project, so the tests run
+    against exactly what ships.
   -->
   <ItemGroup>
-    <Content Include="..\..\src\Atomic.App\Assets\Elements\elements_*.json"
+    <Content Include="..\..\shared\elements\elements_*.json"
              Link="assets\%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\..\src\Atomic.App\Strings\**\*.resw"
              Link="strings\%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="corpus\**\*.tsv"
+    <Content Include="..\..\shared\corpus\**\*.tsv"
+             Link="corpus\%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
     <!--
       The page markup, so a test can check that every {loc:Str Key=...} names a real resource.
@@ -43,7 +45,8 @@
              Exclude="..\..\src\Atomic.App\bin\**\*.xaml;..\..\src\Atomic.App\obj\**\*.xaml"
              Link="pagexaml\%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="golden\**\*.tsv"
+    <Content Include="..\..\shared\golden\**\*.tsv"
+             Link="golden\%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

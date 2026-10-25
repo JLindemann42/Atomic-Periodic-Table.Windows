@@ -154,10 +154,12 @@
 
 	<ItemGroup>
 		<!--
-			The merged element tables, one per language. Content rather than None so they are
-			included in the MSIX payload as well as the build output.
+			The merged element tables, one per language, from the shared-data submodule (shared/,
+			roadmap 0.3) that the Android app reads too. Linked into Assets\Elements so the runtime
+			path is unchanged. Content rather than None so they are included in the MSIX payload as
+			well as the build output.
 		-->
-		<Content Include="Assets\Elements\elements_*.json">
+		<Content Include="..\..\shared\elements\elements_*.json" Link="Assets\Elements\%(Filename)%(Extension)">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>

@@ -403,8 +403,8 @@ Two further departures from `CorpusTest.kt`, both deliberate:
   individual row is diagnosed.
 - **The corpus names Kotlin's enum members.** `expect_intent` reads `PROPERTY_LOOKUP` and
   `expect_card` reads `NFPA_DIAMOND`, while the C# enums are PascalCase. `CorpusTest.NameMatches`
-  drops underscores and compares case-insensitively, so the TSVs stay byte-identical to Android's
-  and the next sync is a file copy. `EnumNamesSurviveTheSnakeCaseFold` proves the fold is injective
+  drops underscores and compares case-insensitively, so one set of TSVs serves both apps - since
+  D54, literally one set, in the shared-data submodule. `EnumNamesSurviveTheSnakeCaseFold` proves the fold is injective
   over both enums, so it can never quietly accept the wrong member.
 
 Where Android skips the corpus when its assets are unreachable, the port fails: here the TSVs, the
@@ -1113,3 +1113,28 @@ Android's suite had no such case (it has one now). On Android: `AsksForADefiniti
 (`reg-define-en-*`, `reg-predicate-en-*`) pin both rules on both platforms; three of them fail
 against the Android planner without the port, with exactly the wrong answers listed above. Corpus:
 2,799 of 2,799 on both.
+
+### D54 — one copy of the data, in a submodule both apps share
+
+Roadmap 0.3. The element files, the corpus and the tokenizer golden files now live in
+**Atomic-Shared-Data**, a git submodule at `shared/` in both repositories, instead of a copy in each.
+
+**What it found.** The copies had drifted, one way: the Windows element files held everything D6's
+merge produced - 121 more isotopes, 30 CAS and 17 EC numbers, NFPA ratings for 5 elements, hassium's
+discoverer and year - and Android had never received any of it. Android had nothing Windows lacked.
+So the shared copy started from these files, and the Android app now ships the merged data too; its
+672 unit tests and the 2,799-row corpus pass on it unchanged.
+
+**How each side reads it.** Nothing at runtime moved. `Atomic.App.csproj` links
+`shared\elements\*.json` into `Assets\Elements`; the test project links elements, corpus and golden
+files into the same output folders as before (`assets\`, `corpus\`, `golden\`), so no loader
+changed. Android adds `shared/elements` to the app's asset source set, and its test loaders read
+`shared/` directly. `tools/data/fix_*.py` default to `shared/elements`; `merge_elements.py` is
+marked historical, since its Android input is gone.
+
+**Not in the submodule:** the reference dataset tables. They are Kotlin source, and the C# tables
+are generated from them by `tools/port/kt2cs_model.py`, so they already have one source; CI checks
+the generated files are current.
+
+**Working with it.** Change data in the submodule, push it, then bump `shared` in both apps in the
+same sitting. A fresh clone needs `--recurse-submodules`, or `git submodule update --init`.

@@ -191,7 +191,7 @@ def process(path: str, write: bool) -> tuple[Counter, list[tuple]]:
 
 def main() -> int:
     here = os.path.dirname(os.path.abspath(__file__))
-    default = os.path.normpath(os.path.join(here, "..", "..", "src", "Atomic.App", "Assets", "Elements"))
+    default = os.path.normpath(os.path.join(here, "..", "..", "shared", "elements"))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", default=default)

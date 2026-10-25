@@ -1,4 +1,4 @@
-// Emits tests/Atomic.Core.Tests/golden/tokens.tsv and script_probe.tsv.
+// Emits shared/golden/tokens.tsv and script_probe.tsv (the shared-data submodule).
 //
 // This is the tripwire for the whole engine port. UnicodeScripts and JavaRegex are the two places
 // where a mistake compiles, runs, throws nothing, and quietly produces a different index from the
