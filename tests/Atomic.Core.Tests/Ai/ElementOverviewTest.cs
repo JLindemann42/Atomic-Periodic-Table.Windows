@@ -201,7 +201,7 @@ namespace Atomic.Core.Tests.Ai
             var text = Chat().Ask("tell me everything about uranium").Text;
             var isotopes = text[text.IndexOf(Strings().Get(S.ai_rich_overview_isotopes, "Uranium"), StringComparison.Ordinal)..];
 
-            Assert.StartsWith("Uranium-238", isotopes[(isotopes.IndexOf("**", StringComparison.Ordinal) + 2)..], StringComparison.Ordinal);
+            Assert.StartsWith("U-238", isotopes[(isotopes.IndexOf("**", StringComparison.Ordinal) + 2)..], StringComparison.Ordinal);
         }
 
         /// <summary>The safety lines carry the language's own labels, not Android's English "Health".</summary>

@@ -32,7 +32,7 @@ namespace Atomic.Core.Tests.Ai.Data
         [InlineData(DatasetIndex.Datasets.Ion, 118)]
         [InlineData(DatasetIndex.Datasets.Indicator, 4)]
         [InlineData(DatasetIndex.Datasets.Electrode, 33)]
-        [InlineData(DatasetIndex.Datasets.Solubility, 13)]
+        [InlineData(DatasetIndex.Datasets.Solubility, 14)]
         [InlineData(DatasetIndex.Datasets.Alloy, 15)]
         [InlineData(DatasetIndex.Datasets.Unit, 65)]
         public void RowCountsMatchTheSourceTables(string dataset, int expected) =>

@@ -165,23 +165,23 @@ namespace Atomic.Core.Tests.Ai.Retrieval
         }
 
         /// <summary>
-        /// <b>A data gap, not a code defect, and it is on both platforms.</b>
-        ///
-        /// <para>Two of the seven overlaid fields are barely translated in the shipped JSON:
-        /// <c>element_appearance</c> is identical to English for every element in Afrikaans,
-        /// Italian and Swedish, and for 65-93% of them in six more languages; only Urdu is mostly
-        /// done. <c>electrical_type</c> is 69-95% English everywhere.</para>
-        ///
-        /// <para>That means the agent will answer a Swedish question about gold's appearance with
-        /// "Metallic yellow" - correctly reading the Swedish file, which simply holds the English
-        /// string. The overlay has nothing to fix; the translation does. Pinned here so the next
-        /// person to see it in an answer knows it is expected and where it comes from.</para>
+        /// <c>element_appearance</c> and <c>electrical_type</c> were marked localized but held
+        /// English, or a word-for-word substitution of it, in every language (D12). Roadmap 0.8
+        /// translated them from <c>shared/tools/translations</c> (D58), so a Swedish question about
+        /// gold's appearance is answered in Swedish. This test used to pin the gap; it now pins the
+        /// fix, in every shipped language.
         /// </summary>
-        [Fact]
-        public void AppearanceIsUntranslatedInTheDataAndThatIsKnown()
+        [Theory]
+        [InlineData("sv", "Metallisk gul")]
+        [InlineData("de", "Metallisch gelb")]
+        [InlineData("fr", "Jaune métallique")]
+        [InlineData("zh", "金属黄色")]
+        [InlineData("af", "Metaalagtig geel")]
+        [InlineData("it", "Giallo metallico")]
+        public void AppearanceIsTranslated(string language, string expected)
         {
-            Assert.Equal(_service.Localized("en")!.Text("gold", "appearance"),
-                         _service.Localized("sv")!.Text("gold", "appearance"));
+            Assert.Equal("Metallic yellow", _service.Localized("en")!.Text("gold", "appearance"));
+            Assert.Equal(expected, _service.Localized(language)!.Text("gold", "appearance"));
         }
 
         /// <summary>
