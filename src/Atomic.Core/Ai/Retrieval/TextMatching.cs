@@ -183,7 +183,7 @@ namespace Atomic.Core.Ai.Retrieval
             c is { } ch && (char.IsLetterOrDigit(ch) || ch == '_' || IsCombiningMark(ch));
 
         /// <summary>True when every letter of the text is Han, so word boundaries do not apply.</summary>
-        private static bool IsHanText(string text)
+        public static bool IsHanText(string text)
         {
             var sawHan = false;
             foreach (var ch in text)

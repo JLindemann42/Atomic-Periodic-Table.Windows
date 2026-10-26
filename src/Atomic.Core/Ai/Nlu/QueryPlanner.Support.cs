@@ -126,6 +126,17 @@ namespace Atomic.Core.Ai.Nlu
                 var grams = Grams.Match(normalized);
                 if (grams.Success)
                 {
+                    // A compound first: "10 g of sodium chloride" is not 10 g of sodium.
+                    if (_entities.ScanCompounds(rawQuery).Compounds
+                            .Select(c => c.Formula).FirstOrDefault(f => f is not null) is { } formula)
+                    {
+                        return new QueryPlan(
+                            Intent.MoleConversion,
+                            Literal: formula,
+                            RawQuery: rawQuery,
+                            Confidence: 0.85,
+                            Evidence: [$"grams {grams.Groups[1].Value} of {formula}"]);
+                    }
                     var substance = _entities.ResolveAll(rawQuery, limit: 1).FirstOrDefault();
                     if (substance is not null)
                     {
@@ -485,16 +496,72 @@ namespace Atomic.Core.Ai.Nlu
                 if (ChemistryMath.ParseFormula(candidate, AtomicMassOf) is not null) return candidate;
             }
 
-            // "percentage composition of water" names a compound rather than writing it. Matched on
-            // word boundaries: a plain Contains found "salt" inside "basalt", so "what is the
-            // composition of basalt" was answered with the formula mass of NaCl. Longest name
-            // first, so "table salt" is preferred over "salt".
-            foreach (var (name, formula) in CommonCompoundsByLength)
-            {
-                if (TextMatching.ContainsWord(normalized, name)) return formula;
-            }
-            return null;
+            // "percentage composition of water", "molar mass of calcium carbonate": a compound
+            // named in words rather than written. The resolver matches whole words, so "salt" is
+            // not found inside "basalt", and composes salts in every language (roadmap 1.2).
+            return _entities.ScanCompounds(rawQuery).Compounds
+                .Select(c => c.Formula).FirstOrDefault(f => f is not null);
         }
+
+        /// <summary>
+        /// A question about a compound named in words, or null to let the rest of the planner have
+        /// it (roadmap 1.2).
+        ///
+        /// <para>The app knows a compound's formula, molar mass and composition, and which of its
+        /// ions the solubility table covers. It holds no compound <i>properties</i>, so "density of
+        /// sodium chloride" is declined - it used to be answered with sodium's density, "molar mass
+        /// of calcium carbonate" as a comparison of calcium and carbon, and "boiling point of water"
+        /// from the glossary's "Noble gas". A superlative or an aggregate ("most abundant element
+        /// in sea water") is not about the compound and is left alone.</para>
+        /// </summary>
+        private QueryPlan? CompoundPlan(string rawQuery, string normalized, CompoundMatch compound, bool namesAField)
+        {
+            // Not WHICH: it holds "what", and "what is sodium chloride" is about the compound.
+            if (MentionsAny(normalized, Lexicon.MOST) || MentionsAny(normalized, Lexicon.LEAST) ||
+                MentionsAny(normalized, Lexicon.AVERAGE)) return null;
+
+            // "Is calcium carbonate soluble", "är silverklorid lösligt": the cation's row of the
+            // solubility table, which retrieval alone could not reach from a name in Swedish.
+            if (MentionsAny(normalized, Lexicon.SOLUBILITY_WORDS))
+            {
+                var row = compound.Cation is null ? null : _datasets.Row(DatasetIndex.Datasets.Solubility, compound.Cation);
+                if (row is null) return null;
+                return new QueryPlan(
+                    Intent.DatasetLookup,
+                    Entities: [new EntityRef.DatasetRow(DatasetIndex.Datasets.Solubility, row.Id)],
+                    Confidence: 0.8,
+                    RawQuery: rawQuery,
+                    Evidence: [$"solubility of {compound.Formula ?? compound.Surface}"]);
+            }
+
+            // "What is sodium chloride", "formula of table salt", "tell me about potassium iodide":
+            // nothing asked but the compound, which its formula and composition answer.
+            var stopwords = Lexicon.STOPWORDS["en"]
+                .Concat(Lexicon.STOPWORDS.TryGetValue(_entities.ActiveLanguage, out var own) ? own : [])
+                .ToHashSet(StringComparer.Ordinal);
+            var remainder = TextMatching.SplitQueryTokens(
+                    TextMatching.NormalizeForLookup(_entities.ScanCompounds(rawQuery).Remainder))
+                .Where(w => !stopwords.Contains(w) &&
+                            !Lexicon.FORMULA_WORDS.Contains(w) &&
+                            !Lexicon.OVERVIEW_WORDS.Contains(w))
+                .ToList();
+            if (remainder.Count == 0 && !namesAField)
+            {
+                if (compound.Formula is null) return CompoundDecline(rawQuery);
+                return new QueryPlan(
+                    Intent.FormulaMass,
+                    FieldIds: ["composition"],
+                    RawQuery: compound.Formula,
+                    Confidence: 0.85,
+                    Evidence: [$"compound {compound.Surface} = {compound.Formula}"]);
+            }
+
+            // A property of the compound, which the app does not hold.
+            return namesAField ? CompoundDecline(rawQuery) : null;
+        }
+
+        private static QueryPlan CompoundDecline(string rawQuery) =>
+            new(Intent.Unknown, Confidence: 0.0, RawQuery: rawQuery, Declined: DeclineReason.CompoundProperty);
 
         private double? AtomicMassOf(string symbol) =>
             _store.BySymbol(symbol)?.Quantity("atomic_mass")?.Value;
@@ -702,9 +769,6 @@ namespace Atomic.Core.Ai.Nlu
         private static readonly KeyValuePair<string, (string Field, bool Ascending)>[]
             ComparativeAdjectivesByLength =
                 Lexicon.COMPARATIVE_ADJECTIVES.OrderByDescending(e => e.Key.Length).ToArray();
-
-        private static readonly KeyValuePair<string, string>[] CommonCompoundsByLength =
-            Lexicon.COMMON_COMPOUNDS.OrderByDescending(e => e.Key.Length).ToArray();
 
         private static readonly KeyValuePair<string, int>[] NeighbourWordsByLength =
             Lexicon.NEIGHBOUR_WORDS.OrderByDescending(e => e.Key.Length).ToArray();

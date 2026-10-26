@@ -3,6 +3,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Atomic.Core.Ai.Nlu;
 using Atomic.Core.Text;
 
 namespace Atomic.Core.Ai.Retrieval
@@ -15,6 +16,21 @@ namespace Atomic.Core.Ai.Retrieval
 
     /// <summary>A resolved element mention, with how confident the match is.</summary>
     public sealed record ElementMatch(string Key, double Score, string Matched);
+
+    /// <summary>A compound named in words (roadmap 1.2).</summary>
+    /// <param name="Surface">The words that named it, folded.</param>
+    /// <param name="Formula">
+    /// Its formula, or null when the name does not fix one - "iron oxide", since iron has more than
+    /// one common charge.
+    /// </param>
+    /// <param name="Cation">
+    /// The cation as the solubility table writes it ("Na^+", "Ca^2+", "NH4^+"), or null for a
+    /// molecule.
+    /// </param>
+    public sealed record CompoundMatch(string Surface, string? Formula, string? Cation);
+
+    /// <summary>The compounds a query names, and the query with their words blanked out.</summary>
+    public sealed record CompoundScan(IReadOnlyList<CompoundMatch> Compounds, string Remainder);
 
     /// <summary>
     /// Finds which elements a query mentions, across all twelve languages.
@@ -84,6 +100,13 @@ namespace Atomic.Core.Ai.Retrieval
         /// </summary>
         /// <param name="limit">Maximum number of distinct elements to return.</param>
         public IReadOnlyList<ElementMatch> ResolveAll(string query, int limit = 4)
+        {
+            // A compound claims its words first: "sodium chloride" is not sodium (roadmap 1.2).
+            var scan = ScanCompounds(query);
+            return ResolveElements(scan.Compounds.Count > 0 ? scan.Remainder : query, limit);
+        }
+
+        private IReadOnlyList<ElementMatch> ResolveElements(string query, int limit)
         {
             var raw = query.ToLowerInvariant();
             var normalized = TextMatching.NormalizeForLookup(query);
@@ -155,6 +178,315 @@ namespace Atomic.Core.Ai.Retrieval
 
         /// <summary>The single best element match, or null when the query names none.</summary>
         public ElementMatch? Resolve(string query) => ResolveAll(query, limit: 1).FirstOrDefault();
+
+        /// <summary>
+        /// The compounds a query names in words, and the query with their words blanked out
+        /// (roadmap 1.2).
+        ///
+        /// <para>"Sodium chloride" used to resolve as sodium plus chlorine, so "density of sodium
+        /// chloride" was answered with sodium's density. A compound now claims its words before
+        /// elements are looked for, and <see cref="ResolveAll"/> only sees what is left: "water's
+        /// oxygen" is still oxygen, because oxygen is outside the claimed words.</para>
+        ///
+        /// <para>Salts are not listed. They are composed from an element name in any language, an
+        /// anion name from <see cref="Lexicon.ANION_NAMES"/> and the shape each language writes them
+        /// in - cation then anion ("sodium chloride"), anion, connector, cation ("cloruro de
+        /// sodio", "chlorure d'argent"), one word ("natriumklorid"), or a Han anion prefix before
+        /// the cation's character (氯化钠) - with an optional Roman numeral for the charge. The
+        /// formula follows from the charges; a metal without one common charge still claims its
+        /// words but has no formula. Molecules come from <see cref="Lexicon.COMMON_COMPOUNDS"/>.</para>
+        /// </summary>
+        public CompoundScan ScanCompounds(string query)
+        {
+            var last = _lastScan;
+            if (last is not null && string.Equals(last.Query, query, StringComparison.Ordinal))
+                return last.Scan;
+            var scan = Scan(query);
+            _lastScan = new LastScan(query, scan);
+            return scan;
+        }
+
+        private sealed record LastScan(string Query, CompoundScan Scan);
+
+        /// <summary>The planner asks about one query several times in a row; scanning it once is enough.</summary>
+        private volatile LastScan? _lastScan;
+
+        private CompoundScan Scan(string query)
+        {
+            var tokens = Whitespace.Split(query).Where(t => t.Length > 0).ToList();
+            // Each whitespace word, folded and split the way every lexicon entry is, remembering
+            // which word each piece came from so a claimed compound can be blanked in the original.
+            var words = new List<string>();
+            var origin = new List<int>();
+            for (var i = 0; i < tokens.Count; i++)
+            {
+                foreach (var piece in TextMatching.SplitQueryTokens(TextMatching.NormalizeForLookup(tokens[i])))
+                {
+                    words.Add(piece);
+                    origin.Add(i);
+                }
+            }
+
+            var claimed = new HashSet<int>();
+            var hanClaims = new Dictionary<int, List<string>>();
+            var found = new List<CompoundMatch>();
+
+            void Claim(int from, int to) { for (var k = from; k <= to; k++) claimed.Add(k); }
+            bool Free(int from, int to)
+            {
+                if (from < 0 || to >= words.Count) return false;
+                for (var k = from; k <= to; k++) if (claimed.Contains(k)) return false;
+                return true;
+            }
+            string? At(int k) => k >= 0 && k < words.Count ? words[k] : null;
+            void ClaimHan(int token, string surface)
+            {
+                if (!hanClaims.TryGetValue(token, out var list)) hanClaims[token] = list = [];
+                list.Add(surface);
+            }
+
+            // Salts first, so 硫酸铜 (copper sulfate) is not read as 硫酸 (sulfuric acid) plus copper.
+            for (var k = 0; k < words.Count; k++)
+            {
+                if (claimed.Contains(k)) continue;
+                var word = words[k];
+                if (!TextMatching.IsHanText(word) && Lexicon.ANION_NAMES.TryGetValue(word, out var anion))
+                {
+                    // cation, anion - with a Roman numeral between when the name gives the charge
+                    var roman = RomanCharge(At(k - 1));
+                    var before = roman is not null ? k - 2 : k - 1;
+                    if (CationAt(At(before), roman) is { } cation && Free(before, k) &&
+                        Salt(word, cation, anion) is { } salt)
+                    {
+                        found.Add(salt);
+                        Claim(before, k);
+                    }
+                    // anion, connector, cation
+                    if (!claimed.Contains(k) && At(k + 1) is { } connector &&
+                        Lexicon.COMPOUND_CONNECTORS.Contains(connector))
+                    {
+                        var romanAfter = RomanCharge(At(k + 3));
+                        var end = romanAfter is not null ? k + 3 : k + 2;
+                        if (CationAt(At(k + 2), romanAfter) is { } after && Free(k, end) &&
+                            Salt(word, after, anion) is { } salt2)
+                        {
+                            found.Add(salt2);
+                            Claim(k, end);
+                        }
+                    }
+                }
+                if (claimed.Contains(k)) continue;
+                if (TextMatching.IsHanText(word))
+                {
+                    foreach (var (surface, match) in HanSalts(word))
+                    {
+                        found.Add(match);
+                        ClaimHan(origin[k], surface);
+                    }
+                    continue;
+                }
+                // one word: cation and anion written together, perhaps with an ending
+                if (JoinedSalt(word) is { } joined)
+                {
+                    found.Add(joined);
+                    Claim(k, k);
+                }
+            }
+
+            // Named molecules, longest first, in the words no salt claimed.
+            foreach (var (name, formula) in Molecules)
+            {
+                if (TextMatching.IsHanText(name))
+                {
+                    for (var k = 0; k < words.Count; k++)
+                    {
+                        if (claimed.Contains(k)) continue;
+                        var rest = hanClaims.TryGetValue(origin[k], out var taken)
+                            ? taken.Aggregate(words[k], (text, s) => text.Replace(s, " ", StringComparison.Ordinal))
+                            : words[k];
+                        if (!rest.Contains(name, StringComparison.Ordinal)) continue;
+                        found.Add(new CompoundMatch(name, formula, null));
+                        ClaimHan(origin[k], name);
+                    }
+                    continue;
+                }
+                var parts = name.Split(' ');
+                var at = 0;
+                while (at + parts.Length <= words.Count)
+                {
+                    if (Free(at, at + parts.Length - 1) &&
+                        words.Skip(at).Take(parts.Length).SequenceEqual(parts, StringComparer.Ordinal))
+                    {
+                        found.Add(new CompoundMatch(name, formula, null));
+                        Claim(at, at + parts.Length - 1);
+                        at += parts.Length;
+                    }
+                    else at++;
+                }
+            }
+
+            if (found.Count == 0) return new CompoundScan([], query);
+            var blanked = claimed.Select(k => origin[k]).ToHashSet();
+            var remainder = string.Join(" ", tokens.Select((token, i) =>
+                blanked.Contains(i) ? " "
+                : hanClaims.TryGetValue(i, out var surfaces)
+                    ? surfaces.Aggregate(token, (text, s) => text.Replace(s, " ", StringComparison.Ordinal))
+                    : token));
+            return new CompoundScan(found, remainder);
+        }
+
+        private sealed record Cation(string Formula, int? Charge, string Key);
+
+        /// <summary>A cation named by a word: an element with a known or stated charge, or ammonium.</summary>
+        private Cation? CationAt(string? word, int? statedCharge)
+        {
+            if (word is null) return null;
+            if (Lexicon.AMMONIUM_NAMES.Contains(word)) return new Cation("NH4", 1, "ammonium");
+            if (!_aliases.TryGetValue(word, out var list)) return null;
+            var alias = list.FirstOrDefault(a => a.Kind == AliasKind.Name);
+            if (alias is null || SymbolOf(alias.Key) is not { } symbol) return null;
+            return new Cation(symbol, statedCharge ?? KnownCharge(alias.Key), alias.Key);
+        }
+
+        private static int? KnownCharge(string key) =>
+            Lexicon.CATION_CHARGES.TryGetValue(key, out var c) &&
+            int.TryParse(c, NumberStyles.Integer, CultureInfo.InvariantCulture, out var n) ? n : null;
+
+        /// <summary>A salt from a cation and an anion code such as "SO4^2-"; null for a pairing that is not one.</summary>
+        private static CompoundMatch? Salt(string surface, Cation cation, string anionCode)
+        {
+            var (anion, anionCharge) = Ion(anionCode);
+            // Hydrogen names an acid only with a single-atom anion: "hydrogen chloride" is HCl, but
+            // "hydrogen carbonate" is the bicarbonate ion, not carbonic acid.
+            if (cation.Key == "hydrogen" && !IsMonatomic(anion)) return null;
+            var formula = cation.Charge is { } charge ? Compose(cation.Formula, charge, anion, anionCharge) : null;
+            var code = cation.Charge switch
+            {
+                null => null,
+                1 => $"{cation.Formula}^+",
+                var c => $"{cation.Formula}^{c.Value.ToString(CultureInfo.InvariantCulture)}+",
+            };
+            return new CompoundMatch(surface, formula, code);
+        }
+
+        /// <summary>"natriumklorid", "calciumcarbonat", "silverkloriden": a cation name and an anion in one word.</summary>
+        private CompoundMatch? JoinedSalt(string word)
+        {
+            foreach (var (name, anion) in LatinAnions)
+            {
+                var at = word.IndexOf(name, 1, StringComparison.Ordinal);
+                if (at <= 0 || word.Length - at - name.Length > MaxJoinedEnding) continue;
+                if (CationAt(word[..at], null) is not { } cation) continue;
+                return Salt(word, cation, anion);
+            }
+            return null;
+        }
+
+        /// <summary>氯化钠, 硫酸铜: an anion prefix followed by the character that names the cation.</summary>
+        private List<(string Surface, CompoundMatch Match)> HanSalts(string word)
+        {
+            var output = new List<(string, CompoundMatch)>();
+            var text = word;
+            foreach (var (prefix, anion) in HanAnions)
+            {
+                var at = text.IndexOf(prefix, StringComparison.Ordinal);
+                while (at >= 0)
+                {
+                    var nextAt = at + prefix.Length;
+                    var next = nextAt < text.Length ? text[nextAt].ToString() : null;
+                    Cation? cation = null;
+                    if (next is not null)
+                    {
+                        if (Lexicon.AMMONIUM_NAMES.Contains(next)) cation = new Cation("NH4", 1, "ammonium");
+                        else if (_aliases.TryGetValue(next, out var list) &&
+                                 list.FirstOrDefault(a => a.Kind == AliasKind.Name && a.Language == "zh") is { } alias &&
+                                 SymbolOf(alias.Key) is { } symbol)
+                            cation = new Cation(symbol, KnownCharge(alias.Key), alias.Key);
+                    }
+                    if (cation is not null)
+                    {
+                        var surface = prefix + next;
+                        if (Salt(surface, cation, anion) is { } salt) output.Add((surface, salt));
+                        text = string.Concat(text.AsSpan(0, at), new string(' ', surface.Length), text.AsSpan(at + surface.Length));
+                    }
+                    at = text.IndexOf(prefix, at + 1, StringComparison.Ordinal);
+                }
+            }
+            return output;
+        }
+
+        private string? SymbolOf(string key) => _symbols.Value.TryGetValue(key, out var s) ? s : null;
+
+        /// <summary>Element key to its symbol, properly capitalised, from the symbol aliases.</summary>
+        private Lazy<IReadOnlyDictionary<string, string>> _symbols => _symbolsLazy ??= new(() =>
+            _aliases.Values.SelectMany(l => l)
+                .Where(a => a.Kind == AliasKind.Symbol)
+                .GroupBy(a => a.Key, StringComparer.Ordinal)
+                .ToDictionary(g => g.Key, g => char.ToUpperInvariant(g.First().Surface[0]) + g.First().Surface[1..],
+                    StringComparer.Ordinal));
+
+        private Lazy<IReadOnlyDictionary<string, string>>? _symbolsLazy;
+
+        /// <summary>A charge written into a salt's name: "iron(III) chloride".</summary>
+        private static int? RomanCharge(string? word) => word switch
+        {
+            "ii" => 2,
+            "iii" => 3,
+            "iv" => 4,
+            _ => null,
+        };
+
+        /// <summary>"SO4^2-" to ("SO4", 2).</summary>
+        private static (string Formula, int Charge) Ion(string code)
+        {
+            var caret = code.IndexOf('^', StringComparison.Ordinal);
+            var digits = new string(code[(caret + 1)..].Where(char.IsDigit).ToArray());
+            return (code[..caret], digits.Length > 0 ? int.Parse(digits, CultureInfo.InvariantCulture) : 1);
+        }
+
+        /// <summary>One element and no count: "Cl", "O" - which never need brackets.</summary>
+        private static bool IsMonatomic(string formula) =>
+            formula.Count(char.IsUpper) == 1 && !formula.Any(char.IsDigit);
+
+        /// <summary>
+        /// The neutral formula of a cation and an anion: as many of each as balances the charges,
+        /// with a polyatomic ion bracketed when there is more than one of it - Ca(OH)2, Al2(SO4)3,
+        /// (NH4)2SO4.
+        /// </summary>
+        internal static string Compose(string cation, int cationCharge, string anion, int anionCharge)
+        {
+            var divisor = Gcd(cationCharge, anionCharge);
+            static string Part(string formula, int count) =>
+                count == 1 ? formula
+                : IsMonatomic(formula) ? formula + count.ToString(CultureInfo.InvariantCulture)
+                : $"({formula}){count.ToString(CultureInfo.InvariantCulture)}";
+            return Part(cation, anionCharge / divisor) + Part(anion, cationCharge / divisor);
+        }
+
+        private static int Gcd(int a, int b) => b == 0 ? a : Gcd(b, a % b);
+
+        /// <summary>Longest ending accepted after an anion written into one word, Swedish "kloriden".</summary>
+        private const int MaxJoinedEnding = 3;
+
+        /// <summary>Latin-script anion names that can end a one-word salt, longest first.</summary>
+        private static readonly (string Name, string Anion)[] LatinAnions = Lexicon.ANION_NAMES
+            .Where(e => e.Key.Length >= 4 && e.Key.All(c => c is >= 'a' and <= 'z'))
+            .Select(e => (e.Key, e.Value))
+            .OrderByDescending(e => e.Key.Length).ThenBy(e => e.Key, StringComparer.Ordinal)
+            .ToArray();
+
+        /// <summary>Han anion prefixes, longest first so 氢氧化 (hydroxide) is tried before 氧化 (oxide).</summary>
+        private static readonly (string Prefix, string Anion)[] HanAnions = Lexicon.ANION_NAMES
+            .Where(e => TextMatching.IsHanText(e.Key))
+            .Select(e => (e.Key, e.Value))
+            .OrderByDescending(e => e.Key.Length).ThenBy(e => e.Key, StringComparer.Ordinal)
+            .ToArray();
+
+        /// <summary>Named molecules, longest first so "carbon dioxide" is not read as something shorter.</summary>
+        private static readonly (string Name, string Formula)[] Molecules = Lexicon.COMMON_COMPOUNDS
+            .Select(e => (e.Key, e.Value))
+            .OrderByDescending(e => e.Key.Length).ThenBy(e => e.Key, StringComparer.Ordinal)
+            .ToArray();
 
         /// <summary>
         /// Which language the user is writing in, judged by whose element names they used.

@@ -132,6 +132,10 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(Datasets))]
         public void Datasets_Pass(string key) => RunUnit("datasets", key);
 
+        public static TheoryData<string> NamedCompounds => Units("named_compounds");
+        [Theory, MemberData(nameof(NamedCompounds))]
+        public void NamedCompounds_Pass(string key) => RunUnit("named_compounds", key);
+
         public static TheoryData<string> MustDefer => Units("must_defer");
         [Theory, MemberData(nameof(MustDefer))]
         public void MustDefer_Pass(string key) => RunUnit("must_defer", key);
@@ -517,6 +521,8 @@ namespace Atomic.Core.Tests.Corpus
             ExecutionResult.Property p => p.Quantity?.Value,
             ExecutionResult.Dataset d => d.Row.NumericValue,
             ExecutionResult.Aggregate a => a.Value,
+            ExecutionResult.Formula f => f.Result.MolarMass,
+            ExecutionResult.MoleConversion m => m.Moles,
             _ => null,
         };
 

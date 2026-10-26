@@ -97,7 +97,7 @@ namespace Atomic.Core.Tests.Corpus
             "properties", "categories", "superlatives_filters", "comparisons", "aggregates",
             "isotopes_nuclides", "safety", "calculations", "unit_convert", "balance_equations",
             "decay", "solutions", "compound", "followups", "complex", "conversations_simple",
-            "conversations_complex", "datasets", "must_defer", "capabilities", "cards",
+            "conversations_complex", "datasets", "named_compounds", "must_defer", "capabilities", "cards",
             "localized_sv", "localized_other", "regressions", "reported", "multilingual",
             "multilingual_wide", "multilingual_operators", "conversations_multi",
             "conversations_deep", "conversations_repair",

@@ -179,7 +179,7 @@ namespace Atomic.Core.Ai.Engine
     ///
     /// <para>A decline used to look the same in the data whatever caused it, so the only way to
     /// learn what goes unanswered was a user's screenshot. These say which door the question hit -
-    /// never what it said. The planner sets the first seven; <see cref="AiEngine"/> adds the last
+    /// never what it said. The planner sets the first eight; <see cref="AiEngine"/> adds the last
     /// two.</para>
     /// </summary>
     public enum DeclineReason
@@ -201,6 +201,12 @@ namespace Atomic.Core.Ai.Engine
 
         /// <summary>A "why" with no dictionary entry to explain it.</summary>
         UnexplainedWhy,
+
+        /// <summary>
+        /// Names a compound and asks for something the app holds only for elements - its density,
+        /// its melting point (roadmap 1.2). It used to be answered with the first element in the name.
+        /// </summary>
+        CompoundProperty,
 
         /// <summary>Nothing in the question matched a field, an element, an operator or a dataset row.</summary>
         NoMatch,
@@ -226,6 +232,7 @@ namespace Atomic.Core.Ai.Engine
             DeclineReason.Narrative => "narrative",
             DeclineReason.Etymology => "etymology",
             DeclineReason.UnexplainedWhy => "unexplained_why",
+            DeclineReason.CompoundProperty => "compound_property",
             DeclineReason.NoMatch => "no_match",
             DeclineReason.LowConfidence => "low_confidence",
             DeclineReason.NoResult => "no_result",

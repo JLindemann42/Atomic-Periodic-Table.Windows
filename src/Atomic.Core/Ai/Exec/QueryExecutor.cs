@@ -655,6 +655,21 @@ namespace Atomic.Core.Ai.Exec
                 // without knowing what the substance is.
                 var gramsMatch = Grams.Match(lowered);
                 if (!gramsMatch.Success || !TryNumber(gramsMatch.Groups[1].Value, out var grams)) return null;
+
+                // A compound named in words carries its formula (roadmap 1.2): "10 g of sodium
+                // chloride" is converted through NaCl's molar mass, not sodium's atomic mass.
+                if (plan.Literal is { } formula)
+                {
+                    if (ChemistryMath.ParseFormula(formula, AtomicMass) is not { } parsed) return null;
+                    if (ChemistryMath.MassToMoles(grams, parsed.MolarMass) is not { } fromFormula) return null;
+                    return new ExecutionResult.MoleConversion(
+                        Moles: fromFormula,
+                        Particles: ChemistryMath.MolesToParticles(fromFormula),
+                        Substance: parsed.Formula,
+                        ToParticles: false,
+                        Grams: grams);
+                }
+
                 if (element?.Quantity("atomic_mass")?.Value is not { } molarMass) return null;
                 if (ChemistryMath.MassToMoles(grams, molarMass) is not { } converted) return null;
 

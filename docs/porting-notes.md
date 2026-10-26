@@ -1316,3 +1316,35 @@ known failures; see Android's corpus page.
 declined that it used to answer. They were fixed through new dev rows for the same phenomena, not by
 editing or tuning on the held-out rows, and the split passes again (446 here). Those three rows are
 no longer a blind test of what they cover.
+
+### D60 — named compounds as entities (roadmap 1.2)
+
+Ported from Android in the same change, with `named_compounds.tsv` (38 rows, 30 of which failed
+before) on both.
+
+**The defect.** "Sodium chloride" resolved as sodium plus chlorine. "Density of sodium chloride"
+was answered with sodium's density, "molar mass of calcium carbonate" as a comparison of calcium
+and carbon, "how many moles in 10 g of sodium chloride" as moles of sodium, and "boiling point of
+water" from the glossary's "Noble gas" (a side effect of 1.1's coverage scoring that this item
+closes).
+
+**The resolver.** `EntityResolver.ScanCompounds` finds compounds named in words and returns them
+with the query's remainder; `ResolveAll` looks for elements only in the remainder. Salts are
+composed rather than listed - an element name in any language, an anion from
+`Lexicon.ANION_NAMES`, and four shapes (cation anion; anion, connector, cation; one word; Han prefix
+and cation character) with an optional Roman numeral - and the formula follows from the charges in
+`Lexicon.CATION_CHARGES`. A metal without one common charge still claims its words but has no
+formula. Molecules come from an extended `Lexicon.COMMON_COMPOUNDS`. Everything the resolver reads is
+generated lexicon; only the scan is hand-ported.
+
+**The planner.** A compound named with no element outside it gets its formula, molar mass,
+composition and moles; "is X soluble" goes to its cation's solubility row; any other property is
+declined with the new `DeclineReason.CompoundProperty` ("compound_property"). A superlative or an
+aggregate is left alone ("most abundant element in sea water"), and so is a compound whose words
+are part of a field's name ("and in sea water" is abundance in sea water). `CommonCompoundsByLength`
+is gone; `CompoundIn` asks the resolver. `QueryExecutor.MoleConversion` converts through a
+compound's formula when the plan carries one.
+
+**The held-out split informed it once more.** It caught the "sea water" follow-up after the dev
+corpus passed. Two dev sessions with different wording describe the phenomenon; the fix was made
+against them, and the split passes (447 here).

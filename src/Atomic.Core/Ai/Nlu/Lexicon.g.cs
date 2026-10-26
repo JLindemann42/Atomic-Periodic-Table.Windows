@@ -849,15 +849,130 @@ public static class Lexicon
         new Dictionary<string, string>(StringComparer.Ordinal)
         {
             ["water"] = "H2O", ["vatten"] = "H2O", ["wasser"] = "H2O", ["agua"] = "H2O",
-            ["eau"] = "H2O", ["acqua"] = "H2O", ["水"] = "H2O",
+            ["eau"] = "H2O", ["acqua"] = "H2O", ["tubig"] = "H2O", ["पानी"] = "H2O", ["پانی"] = "H2O",
+            ["水"] = "H2O",
             ["carbon dioxide"] = "CO2", ["koldioxid"] = "CO2", ["kohlendioxid"] = "CO2",
-            ["table salt"] = "NaCl", ["salt"] = "NaCl", ["koksalt"] = "NaCl",
-            ["sulfuric acid"] = "H2SO4", ["svavelsyra"] = "H2SO4", ["schwefelsaure"] = "H2SO4",
-            ["ammonia"] = "NH3", ["ammoniak"] = "NH3",
-            ["methane"] = "CH4", ["metan"] = "CH4",
-            ["glucose"] = "C6H12O6", ["glukos"] = "C6H12O6",
-            ["hydrochloric acid"] = "HCl", ["saltsyra"] = "HCl",
+            ["kohlenstoffdioxid"] = "CO2", ["dioxido de carbono"] = "CO2", ["dioxyde de carbone"] = "CO2",
+            ["anidride carbonica"] = "CO2", ["biossido di carbonio"] = "CO2", ["koolstofdioksied"] = "CO2",
+            ["कार्बन डाइऑक्साइड"] = "CO2", ["کاربن ڈائی آکسائیڈ"] = "CO2", ["二氧化碳"] = "CO2",
+            ["carbon monoxide"] = "CO", ["kolmonoxid"] = "CO", ["kohlenmonoxid"] = "CO",
+            ["kohlenstoffmonoxid"] = "CO", ["monoxido de carbono"] = "CO", ["monoxyde de carbone"] = "CO",
+            ["monossido di carbonio"] = "CO", ["koolstofmonoksied"] = "CO", ["一氧化碳"] = "CO",
+            ["sulfur dioxide"] = "SO2", ["sulphur dioxide"] = "SO2", ["svaveldioxid"] = "SO2",
+            ["schwefeldioxid"] = "SO2", ["二氧化硫"] = "SO2",
+            ["nitrogen dioxide"] = "NO2", ["kvavedioxid"] = "NO2", ["stickstoffdioxid"] = "NO2",
+            ["二氧化氮"] = "NO2",
+            ["hydrogen peroxide"] = "H2O2", ["vateperoxid"] = "H2O2", ["wasserstoffperoxid"] = "H2O2",
+            ["peroxido de hidrogeno"] = "H2O2", ["peroxyde d hydrogene"] = "H2O2",
+            ["perossido di idrogeno"] = "H2O2", ["peroxido de hidrogenio"] = "H2O2", ["过氧化氢"] = "H2O2",
+            ["table salt"] = "NaCl", ["salt"] = "NaCl", ["koksalt"] = "NaCl", ["bordssalt"] = "NaCl",
+            ["kochsalz"] = "NaCl", ["speisesalz"] = "NaCl", ["sal de mesa"] = "NaCl", ["sel de table"] = "NaCl",
+            ["sale da cucina"] = "NaCl", ["sal de cozinha"] = "NaCl", ["tafelsout"] = "NaCl", ["食盐"] = "NaCl",
+            ["baking soda"] = "NaHCO3", ["bakpulver"] = "NaHCO3", ["natron"] = "NaHCO3",
+            ["bicarbonato de sodio"] = "NaHCO3", ["bicarbonate de soude"] = "NaHCO3",
+            ["bicarbonato di sodio"] = "NaHCO3", ["sodium bicarbonate"] = "NaHCO3", ["小苏打"] = "NaHCO3",
+            ["sulfuric acid"] = "H2SO4", ["sulphuric acid"] = "H2SO4", ["svavelsyra"] = "H2SO4",
+            ["schwefelsaure"] = "H2SO4", ["acido sulfurico"] = "H2SO4", ["acide sulfurique"] = "H2SO4",
+            ["acido solforico"] = "H2SO4", ["swaelsuur"] = "H2SO4",
+            ["nitric acid"] = "HNO3", ["salpetersyra"] = "HNO3", ["salpetersaure"] = "HNO3",
+            ["acido nitrico"] = "HNO3", ["acide nitrique"] = "HNO3", ["硝酸"] = "HNO3",
+            ["hydrochloric acid"] = "HCl", ["saltsyra"] = "HCl", ["salzsaure"] = "HCl",
+            ["acido clorhidrico"] = "HCl", ["acide chlorhydrique"] = "HCl", ["acido cloridrico"] = "HCl",
+            ["soutsuur"] = "HCl", ["盐酸"] = "HCl",
+            ["ammonia"] = "NH3", ["ammoniak"] = "NH3", ["amoniaco"] = "NH3", ["ammoniac"] = "NH3",
+            ["ammoniaca"] = "NH3", ["amonia"] = "NH3", ["氨"] = "NH3",
+            ["methane"] = "CH4", ["metan"] = "CH4", ["methan"] = "CH4", ["metano"] = "CH4", ["metaan"] = "CH4",
+            ["甲烷"] = "CH4",
+            ["ethanol"] = "C2H6O", ["etanol"] = "C2H6O", ["etanolo"] = "C2H6O", ["乙醇"] = "C2H6O",
+            ["glucose"] = "C6H12O6", ["glukos"] = "C6H12O6", ["glucosa"] = "C6H12O6",
+            ["glucosio"] = "C6H12O6", ["glicose"] = "C6H12O6", ["glukose"] = "C6H12O6", ["葡萄糖"] = "C6H12O6",
+            ["sucrose"] = "C12H22O11", ["sackaros"] = "C12H22O11", ["saccharose"] = "C12H22O11",
+            ["sacarosa"] = "C12H22O11", ["saccarosio"] = "C12H22O11", ["sacarose"] = "C12H22O11",
+            ["蔗糖"] = "C12H22O11",
         }.ToFrozenDictionary(StringComparer.Ordinal);
+
+    public static readonly FrozenDictionary<string, string> ANION_NAMES =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["chloride"] = "Cl^-", ["klorid"] = "Cl^-", ["chlorid"] = "Cl^-", ["chloried"] = "Cl^-",
+            ["cloruro"] = "Cl^-", ["chlorure"] = "Cl^-", ["cloreto"] = "Cl^-", ["klorido"] = "Cl^-",
+            ["क्लोराइड"] = "Cl^-", ["کلورائیڈ"] = "Cl^-", ["氯化"] = "Cl^-",
+            ["bromide"] = "Br^-", ["bromid"] = "Br^-", ["bromied"] = "Br^-", ["bromuro"] = "Br^-",
+            ["bromure"] = "Br^-", ["brometo"] = "Br^-", ["bromido"] = "Br^-", ["ब्रोमाइड"] = "Br^-",
+            ["برومائیڈ"] = "Br^-", ["溴化"] = "Br^-",
+            ["iodide"] = "I^-", ["jodid"] = "I^-", ["iodid"] = "I^-", ["jodied"] = "I^-", ["yoduro"] = "I^-",
+            ["iodure"] = "I^-", ["ioduro"] = "I^-", ["iodeto"] = "I^-", ["iodido"] = "I^-",
+            ["आयोडाइड"] = "I^-", ["آیوڈائیڈ"] = "I^-", ["碘化"] = "I^-",
+            ["fluoride"] = "F^-", ["fluorid"] = "F^-", ["fluoried"] = "F^-", ["fluoruro"] = "F^-",
+            ["fluorure"] = "F^-", ["fluoreto"] = "F^-", ["fluorido"] = "F^-", ["फ्लोराइड"] = "F^-",
+            ["فلورائیڈ"] = "F^-", ["氟化"] = "F^-",
+            ["oxide"] = "O^2-", ["oxid"] = "O^2-", ["oksied"] = "O^2-", ["oxido"] = "O^2-", ["oxyde"] = "O^2-",
+            ["ossido"] = "O^2-", ["oksido"] = "O^2-", ["ऑक्साइड"] = "O^2-", ["آکسائیڈ"] = "O^2-",
+            ["氧化"] = "O^2-",
+            ["sulfide"] = "S^2-", ["sulphide"] = "S^2-", ["sulfid"] = "S^2-", ["sulfied"] = "S^2-",
+            ["sulfuro"] = "S^2-", ["sulfure"] = "S^2-", ["solfuro"] = "S^2-", ["sulfeto"] = "S^2-",
+            ["sulpido"] = "S^2-", ["सल्फाइड"] = "S^2-", ["سلفائیڈ"] = "S^2-", ["硫化"] = "S^2-",
+            ["hydroxide"] = "OH^-", ["hydroxid"] = "OH^-", ["hidroksied"] = "OH^-", ["hidroxido"] = "OH^-",
+            ["hydroxyde"] = "OH^-", ["idrossido"] = "OH^-", ["haydroksayd"] = "OH^-",
+            ["हाइड्रॉक्साइड"] = "OH^-", ["ہائیڈرو آکسائیڈ"] = "OH^-", ["氢氧化"] = "OH^-",
+            ["sulfate"] = "SO4^2-", ["sulphate"] = "SO4^2-", ["sulfat"] = "SO4^2-", ["sulfaat"] = "SO4^2-",
+            ["sulfato"] = "SO4^2-", ["solfato"] = "SO4^2-", ["sulpate"] = "SO4^2-", ["सल्फेट"] = "SO4^2-",
+            ["سلفیٹ"] = "SO4^2-", ["硫酸"] = "SO4^2-",
+            ["sulfite"] = "SO3^2-", ["sulphite"] = "SO3^2-", ["sulfit"] = "SO3^2-", ["sulfiet"] = "SO3^2-",
+            ["sulfito"] = "SO3^2-", ["solfito"] = "SO3^2-", ["सल्फाइट"] = "SO3^2-", ["سلفائٹ"] = "SO3^2-",
+            ["亚硫酸"] = "SO3^2-",
+            ["carbonate"] = "CO3^2-", ["karbonat"] = "CO3^2-", ["carbonat"] = "CO3^2-",
+            ["karbonaat"] = "CO3^2-", ["carbonato"] = "CO3^2-", ["karbonato"] = "CO3^2-",
+            ["कार्बोनेट"] = "CO3^2-", ["کاربونیٹ"] = "CO3^2-", ["碳酸"] = "CO3^2-",
+            ["nitrate"] = "NO3^-", ["nitrat"] = "NO3^-", ["nitraat"] = "NO3^-", ["nitrato"] = "NO3^-",
+            ["नाइट्रेट"] = "NO3^-", ["نائٹریٹ"] = "NO3^-", ["硝酸"] = "NO3^-",
+            ["phosphate"] = "PO4^3-", ["fosfat"] = "PO4^3-", ["phosphat"] = "PO4^3-", ["fosfaat"] = "PO4^3-",
+            ["fosfato"] = "PO4^3-", ["pospeyt"] = "PO4^3-", ["फॉस्फेट"] = "PO4^3-", ["فاسفیٹ"] = "PO4^3-",
+            ["磷酸"] = "PO4^3-",
+            ["chromate"] = "CrO4^2-", ["kromat"] = "CrO4^2-", ["chromat"] = "CrO4^2-",
+            ["chromaat"] = "CrO4^2-", ["cromato"] = "CrO4^2-", ["铬酸"] = "CrO4^2-",
+            ["acetate"] = "CH3CO2^-", ["acetat"] = "CH3CO2^-", ["asetaat"] = "CH3CO2^-",
+            ["acetato"] = "CH3CO2^-", ["asetat"] = "CH3CO2^-", ["एसीटेट"] = "CH3CO2^-",
+            ["ایسیٹیٹ"] = "CH3CO2^-", ["乙酸"] = "CH3CO2^-", ["醋酸"] = "CH3CO2^-",
+            ["silicate"] = "SiO3^2-", ["silikat"] = "SiO3^2-", ["silikaat"] = "SiO3^2-",
+            ["silicato"] = "SiO3^2-", ["सिलिकेट"] = "SiO3^2-", ["سلیکیٹ"] = "SiO3^2-", ["硅酸"] = "SiO3^2-",
+        }.ToFrozenDictionary(StringComparer.Ordinal);
+
+    public static readonly IReadOnlyList<string> COMPOUND_CONNECTORS =
+    [
+        "de", "d", "di", "do", "da",
+    ];
+
+    public static readonly FrozenDictionary<string, string> CATION_CHARGES =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["hydrogen"] = "1", ["lithium"] = "1", ["sodium"] = "1", ["potassium"] = "1", ["rubidium"] = "1",
+            ["caesium"] = "1", ["silver"] = "1",
+            ["beryllium"] = "2", ["magnesium"] = "2", ["calcium"] = "2", ["strontium"] = "2", ["barium"] = "2",
+            ["zinc"] = "2", ["cadmium"] = "2", ["nickel"] = "2", ["copper"] = "2", ["lead"] = "2",
+            ["cobalt"] = "2", ["mercury"] = "2",
+            ["aluminium"] = "3",
+        }.ToFrozenDictionary(StringComparer.Ordinal);
+
+    public static readonly IReadOnlyList<string> AMMONIUM_NAMES =
+    [
+        "ammonium", "amonio", "ammonio", "amonyum", "अमोनियम", "امونیم", "铵",
+    ];
+
+    public static readonly IReadOnlyList<string> FORMULA_WORDS =
+    [
+        "formula", "chemical formula", "formel", "kemisk formel", "chemische formel", "formula quimica",
+        "formule", "formule chimique", "formula chimica", "formula quimica", "chemiese formule",
+        "pormula", "सूत्र", "فارمولا", "化学式", "分子式",
+    ];
+
+    public static readonly IReadOnlyList<string> SOLUBILITY_WORDS =
+    [
+        "soluble", "solubility", "insoluble", "dissolve", "dissolves", "loslig", "losligt", "losliga",
+        "loslighet", "olosligt", "loslich", "loslichkeit", "unloslich", "solubilidad", "solubilite",
+        "solubile", "solubilita", "insolubile", "soluvel", "solubilidade", "insoluvel", "oplosbaar",
+        "oplosbaarheid", "natutunaw", "घुलनशील", "घुलनशीलता", "حل پذیر", "溶解", "可溶", "难溶", "不溶",
+    ];
 
     public static readonly IReadOnlyList<string> WHY_WORDS =
     [

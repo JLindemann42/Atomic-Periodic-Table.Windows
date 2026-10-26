@@ -87,6 +87,22 @@ namespace Atomic.Core.Ai.Nlu
             // where the calculations run.
             if (UnitConvertPlan(rawQuery, operators) is { } conversion) return conversion;
 
+            // ---- A compound named in words ---------------------------------------------------
+            // Before inheritance, so "and the boiling point of water?" cannot inherit the thread's
+            // element. Only when no element is named outside the compound: "water's oxygen" is
+            // oxygen, and "how much gold is in sea water" is about gold. And not when the
+            // compound's words are part of a field's own name: "and in sea water" asks for the
+            // abundance in sea water of the element the thread is about.
+            if (elementMatches.Count == 0)
+            {
+                var compound = _entities.ScanCompounds(rawQuery).Compounds.FirstOrDefault(c =>
+                    !fieldMatches.Any(f => TextMatching.ContainsWord(
+                        TextMatching.NormalizeForLookup(f.Matched), c.Surface)));
+                if (compound is not null &&
+                    CompoundPlan(rawQuery, normalized, compound, fieldMatches.Count > 0) is { } compoundPlan)
+                    return compoundPlan;
+            }
+
             // ---- Narrative questions ---------------------------------------------------------
             // Usage, biological role and etymology are answered from prose, not from a field. They
             // are declined here rather than left to fall through, because falling through is what
