@@ -80,6 +80,14 @@ namespace Atomic.Core.Ai.Retrieval
         public bool MentionsUnknownTopic(string query) => _index.MentionsUnknownTerm(query);
 
         /// <summary>
+        /// Every reference-table row holding any of the query's content, scored by how much of it
+        /// the row covers (roadmap 1.1). Elements are excluded: an element named in the query is
+        /// resolved by the entity resolver, never by matching its description.
+        /// </summary>
+        public IReadOnlyList<CoverageHit> DatasetCoverage(string query, IEnumerable<string> stopwords) =>
+            _index.Coverage(query, stopwords, id => !id.StartsWith("element:", StringComparison.Ordinal));
+
+        /// <summary>
         /// Whether a retrieved hit is plausibly about what was asked.
         ///
         /// <para>BM25 ranks; it never abstains. This is the abstention test: an off-topic query

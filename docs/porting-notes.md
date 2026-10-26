@@ -1281,3 +1281,38 @@ cells - and `SolubilityData.cs` is checked against `shared/golden/solubility.tsv
 The H⁺ row describes the acid in water: H⁺ with OH⁻ is water, so `---`; carbonic acid and hydrogen
 sulfide are `Ss` because CO₂ and H₂S are sparingly soluble; silicic acid is insoluble. Two cells are
 judgement calls worth a chemist's look: lithium silicate (`Ss`) and zinc sulfite (`I`).
+
+### D59 — retrieval that can abstain (roadmap 1.1)
+
+Ported from Android in the same change, with the same corpus rows on both.
+
+**What changed.** The dataset fallback ranked with BM25 normalised against the top hit, so the best
+row always scored the same and nothing could abstain. `Bm25Index.Coverage` scores every row holding
+a content word by the share of the query's content it covers: stopwords removed
+(`Lexicon.STOPWORDS`, generated with the rest of the lexicon), unknown words counted at full weight,
+a word and its stem counted once. `QueryPlanner.BestDatasetRow` answers only above
+`MinDatasetCoverage` (0.75) and ranks by coverage, title precision, title recall, table before
+glossary, BM25. A one-content-word query must find its word in the title. An element named without
+a table cue skips the fallback - the old `DatasetConfidenceWithElement` bar of 0.6 was above the
+0.55 a lexical hit could reach, so this is the rule it already was. `DatasetConfidence`,
+`DatasetSearchDepth` and `DatasetConfidenceWithElement` are gone.
+
+**One name differs.** Kotlin's `Coverage` data class is `CoverageHit` here: a C# record cannot have
+a property named like itself, and its first field is the coverage.
+
+**Rows carry the words they are asked by**, on both platforms: anion names and "water" on
+solubility rows, the base unit on unit rows, "formula equation" on equations, "standard reduction"
+on the electrode series, "colour", "turn" and "range" on indicators. `DATASET_GLOSS` gains the
+tables' generic vocabulary in eleven languages (constant, formula, equation); "convert" and its
+translations are stopwords instead, because they frame a question rather than naming its subject -
+as row words they made "tell me about the unit converter" match the unit table.
+
+**What it fixed.** Seven of the ten known failures from D56; thirteen new rows that failed before (proton
+and neutron mass, gypsum, the mass of the moon and a phone battery's charge now declined, three
+equations by "formula", three conversions, two constants asked in German and Italian). Three remain
+known failures; see Android's corpus page.
+
+**The held-out split informed it.** Run once near the end, it showed three rows the first version
+declined that it used to answer. They were fixed through new dev rows for the same phenomena, not by
+editing or tuning on the held-out rows, and the split passes again (446 here). Those three rows are
+no longer a blind test of what they cover.

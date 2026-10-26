@@ -18,6 +18,30 @@ namespace Atomic.Core.Ai.Retrieval
     public sealed record SearchHit(string Id, string Title, double Score);
 
     /// <summary>
+    /// How well one document covers a query's content (roadmap 1.1). Unlike a BM25 score these
+    /// are absolute - a fraction of <i>this query's</i> weight - so a threshold on them means the
+    /// same thing for every query, and a query nothing covers scores low instead of winning by
+    /// default.
+    /// </summary>
+    /// <param name="Coverage">The share of the query's content weight found anywhere in the document.</param>
+    /// <param name="TitleRecall">The share of the query's content weight found in the title.</param>
+    /// <param name="TitlePrecision">
+    /// The share of the title's weight the query names; 1.0 when the query names everything the
+    /// title says, which is what tells "tell me about quartz" the mineral row ("Quartz") from the
+    /// elastic one ("α-Quartz (SiO2)").
+    /// </param>
+    /// <param name="Bm25">The raw BM25 score, kept as the tie-break.</param>
+    /// <param name="Words">How many content words the query had.</param>
+    public sealed record CoverageHit(
+        string Id,
+        string Title,
+        double Coverage,
+        double TitleRecall,
+        double TitlePrecision,
+        double Bm25,
+        int Words);
+
+    /// <summary>
     /// Okapi BM25 over the app's own data.
     ///
     /// <para>This replaces the previous embedding search, which could never work: its query
@@ -37,6 +61,7 @@ namespace Atomic.Core.Ai.Retrieval
 
         private readonly string[] _ids;
         private readonly string[] _titles;
+        private readonly HashSet<string>[] _titleTerms;
         private readonly int[] _lengths;
 
         /// <summary>Term -> (document index -> term frequency).</summary>
@@ -56,6 +81,7 @@ namespace Atomic.Core.Ai.Retrieval
 
             _ids = new string[documents.Count];
             _titles = new string[documents.Count];
+            _titleTerms = new HashSet<string>[documents.Count];
             _lengths = new int[documents.Count];
             _postings = new Dictionary<string, Dictionary<int, int>>(StringComparer.Ordinal);
 
@@ -65,6 +91,7 @@ namespace Atomic.Core.Ai.Retrieval
                 var doc = documents[docIndex];
                 _ids[docIndex] = doc.Id;
                 _titles[docIndex] = doc.Title;
+                _titleTerms[docIndex] = Tokenizer.Tokenize(doc.Title, language).ToHashSet(StringComparer.Ordinal);
 
                 var tokens = Tokenizer.Tokenize($"{doc.Title} {doc.Body}", language);
                 _lengths[docIndex] = tokens.Count;
@@ -145,6 +172,147 @@ namespace Atomic.Core.Ai.Retrieval
             if (top <= 0.0) return hits;
             return hits.Select(h => h with { Score = h.Score / top }).ToList();
         }
+
+        /// <summary>
+        /// Score every document that holds any of the query's content words by how much of that
+        /// content it covers (roadmap 1.1).
+        ///
+        /// <para><see cref="SearchNormalized"/> divides by the top hit, so the best match always
+        /// scores 1.0 and no threshold can tell a good match from the least bad one. Coverage
+        /// divides by the <i>query</i>: the IDF of the content words a document contains over the
+        /// IDF of all of them. A word the corpus has never seen counts at full weight, so "what is
+        /// the nernst equation" cannot be covered by the Arrhenius equation just because both say
+        /// "equation".</para>
+        ///
+        /// <para>Every document holding a content word is scored, not BM25's top few: "Electron
+        /// mass" is not in BM25's top six for "what is the mass of an electron", and re-ranking
+        /// those could never find it.</para>
+        /// </summary>
+        /// <param name="stopwords">Words that are not content, already folded; tokenized here like the query.</param>
+        /// <param name="accept">Which document ids may be returned.</param>
+        /// <returns>Candidates in no particular order; ranking is the caller's policy.</returns>
+        public IReadOnlyList<CoverageHit> Coverage(
+            string query, IEnumerable<string> stopwords, Func<string, bool> accept)
+        {
+            var stop = stopwords.SelectMany(w => Tokenizer.Tokenize(w, _language)).ToHashSet(StringComparer.Ordinal);
+            var groups = ContentWords(query, stop);
+            if (groups.Count == 0 || _ids.Length == 0) return [];
+            var strictForms = Tokenizer.Tokenize(query, _language).ToHashSet(StringComparer.Ordinal);
+
+            // A word weighs what its most specific form the corpus knows weighs; a word the corpus
+            // has never seen in any form weighs the most a term can. Only the tokenizer's own forms
+            // set the weight - the looser forms ContentWords adds may only say the word is present.
+            var weights = groups.Select(forms =>
+                MaxIdf(forms.Where(f => strictForms.Contains(f))) ??
+                MaxIdf(forms) ??
+                InverseDocumentFrequency(0)).ToList();
+            var total = weights.Sum();
+            if (total <= 0.0) return [];
+
+            var covered = new Dictionary<int, double>();
+            var inTitle = new Dictionary<int, double>();
+            var bm25 = new Dictionary<int, double>();
+            for (var g = 0; g < groups.Count; g++)
+            {
+                var w = weights[g];
+                var inDoc = new HashSet<int>();
+                var inDocTitle = new HashSet<int>();
+                foreach (var term in groups[g])
+                {
+                    if (!_postings.TryGetValue(term, out var bucket)) continue;
+                    foreach (var (docIndex, frequency) in bucket)
+                    {
+                        if (!accept(_ids[docIndex])) continue;
+                        inDoc.Add(docIndex);
+                        if (_titleTerms[docIndex].Contains(term)) inDocTitle.Add(docIndex);
+                        var tf = (double)frequency;
+                        var norm = 1.0 - _b + _b * (_lengths[docIndex] / Math.Max(_averageLength, 1.0));
+                        Add(bm25, docIndex, w * tf * (_k1 + 1.0) / (tf + _k1 * norm));
+                    }
+                }
+                foreach (var docIndex in inDoc) Add(covered, docIndex, w);
+                foreach (var docIndex in inDocTitle) Add(inTitle, docIndex, w);
+            }
+
+            var termSet = groups.SelectMany(f => f).ToHashSet(StringComparer.Ordinal);
+            return covered.Select(e =>
+            {
+                var title = _titleTerms[e.Key].Where(t => !stop.Contains(t)).ToList();
+                var titleWeight = title.Sum(t => InverseDocumentFrequency(DocumentFrequency(t)));
+                var named = title.Where(termSet.Contains).Sum(t => InverseDocumentFrequency(DocumentFrequency(t)));
+                return new CoverageHit(
+                    _ids[e.Key],
+                    _titles[e.Key],
+                    e.Value / total,
+                    (inTitle.TryGetValue(e.Key, out var t) ? t : 0.0) / total,
+                    titleWeight > 0.0 ? named / titleWeight : 0.0,
+                    bm25.TryGetValue(e.Key, out var s) ? s : 0.0,
+                    groups.Count);
+            }).ToList();
+
+            static void Add(Dictionary<int, double> map, int key, double value) =>
+                map[key] = map.TryGetValue(key, out var running) ? running + value : value;
+        }
+
+        private double? MaxIdf(IEnumerable<string> forms)
+        {
+            double? best = null;
+            foreach (var form in forms)
+            {
+                var df = DocumentFrequency(form);
+                if (df == 0) continue;
+                var idf = InverseDocumentFrequency(df);
+                if (best is null || idf > best) best = idf;
+            }
+            return best;
+        }
+
+        /// <summary>
+        /// The query's content words, each as the index terms it tokenizes to.
+        ///
+        /// <para><see cref="Tokenizer"/> emits a word's surface form and its folded stem as
+        /// separate terms ("joules", "joul"). Counted separately, the surface form the corpus never
+        /// wrote down weighed as an unknown word. A word and its stem are one word: covered when any
+        /// form is. Han text is the exception - its terms are single characters and bigrams, not
+        /// variants of one word - so each stays its own.</para>
+        ///
+        /// <para>The tokenizer folds a suffix only off words longer than five letters, so "joules"
+        /// becomes "joul" while the row's "joule" stays "joule". Changing that would move every BM25
+        /// score and the shared tokenizer golden files, so instead a Latin word also tries itself
+        /// with one plural or inflection ending removed, whatever its length.</para>
+        /// </summary>
+        private List<List<string>> ContentWords(string query, HashSet<string> stop)
+        {
+            var words = new List<List<string>>();
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var word in Whitespace.Split(query))
+            {
+                var forms = Tokenizer.Tokenize(word, _language).Distinct(StringComparer.Ordinal)
+                    .Where(f => !stop.Contains(f) && !seen.Contains(f) && !f.Any(char.IsDigit))
+                    .ToList();
+                if (forms.Count == 0) continue;
+                seen.UnionWith(forms);
+                var stem = forms.MinBy(f => f.Length)!;
+                if (!forms.All(f => f.StartsWith(stem, StringComparison.Ordinal)))
+                {
+                    foreach (var form in forms) words.Add([form]);
+                    continue;
+                }
+                var looser = forms.SelectMany(form => LooseEndings
+                    .Where(e => form.EndsWith(e, StringComparison.Ordinal) && form.Length - e.Length >= MinLooseStem)
+                    .Select(e => form[..^e.Length]));
+                words.Add(forms.Concat(looser).Distinct(StringComparer.Ordinal).ToList());
+            }
+            return words;
+        }
+
+        private static readonly System.Text.RegularExpressions.Regex Whitespace = new(@"\s+");
+
+        /// <summary>Endings a query word may also be tried without, for coverage only.</summary>
+        private static readonly string[] LooseEndings = ["es", "en", "er", "s", "e"];
+
+        /// <summary>Shortest stem a loose ending may leave: "gas" must not become "ga".</summary>
+        private const int MinLooseStem = 4;
 
         /// <summary>
         /// Probabilistic IDF with the +1 smoothing that keeps it non-negative. A term in every

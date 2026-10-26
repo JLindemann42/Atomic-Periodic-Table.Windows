@@ -116,6 +116,20 @@ namespace Atomic.Core.Ai.Data
         /// otherwise shadow the BCL generic and the record types of the same name inside this
         /// class - silently, since both resolve.
         /// </summary>
+        /// <summary>
+        /// The names people use for the anions the solubility table is keyed by. The table writes
+        /// "Cl^-"; nobody asks whether silver Cl^- dissolves.
+        /// </summary>
+        private static readonly IReadOnlyDictionary<string, string> AnionNames =
+            new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                ["F^-"] = "fluoride", ["Cl^-"] = "chloride", ["Br^-"] = "bromide", ["I^-"] = "iodide",
+                ["OH^-"] = "hydroxide", ["S^2-"] = "sulfide sulphide", ["SO4^2-"] = "sulfate sulphate",
+                ["CO3^2-"] = "carbonate", ["NO3^-"] = "nitrate", ["PO4^3-"] = "phosphate",
+                ["CrO4^2-"] = "chromate", ["CH3CO2^-"] = "acetate", ["SO3^2-"] = "sulfite sulphite",
+                ["SiO3^2-"] = "silicate",
+            };
+
         public static class Datasets
         {
             public const string Dictionary = "dictionary";
@@ -173,7 +187,9 @@ namespace Atomic.Core.Ai.Data
 
                 rows.Add(new DatasetRow(
                     Dataset: Datasets.Equation, Id: e.Title, Title: e.Title,
-                    Body: $"{e.Title} {e.Category} {e.Description}",
+                    // "Formula" and "equation", because that is what an equation is asked for
+                    // by: "formula for potential energy" (roadmap 1.1).
+                    Body: $"{e.Title} {e.Category} formula equation {e.Description}",
                     Detail: detail, DeepLink: DeepLinkTarget.Equations));
             }
 
@@ -239,7 +255,10 @@ namespace Atomic.Core.Ai.Data
                 var title = ind.Name.Replace('_', ' ');
                 rows.Add(new DatasetRow(
                     Dataset: Datasets.Indicator, Id: ind.Name, Title: title,
-                    Body: $"{title} ph indicator {ind.AcidColor} {ind.NeutralColor} {ind.AlkaliColor}",
+                    // "Colour", "turn" and "range", because that is how indicators are asked
+                    // about: "what colour does phenolphthalein turn" (roadmap 1.1).
+                    Body: $"{title} ph indicator ph range colour color turn turns changes " +
+                          $"{ind.AcidColor} {ind.NeutralColor} {ind.AlkaliColor}",
                     Detail: $"Acid {ind.Acid}: {ind.AcidColor} · Neutral {ind.Neutral}: " +
                             $"{ind.NeutralColor} · Alkali {ind.Alkali}: {ind.AlkaliColor}",
                     DeepLink: DeepLinkTarget.Ph));
@@ -250,7 +269,9 @@ namespace Atomic.Core.Ai.Data
                 var name = elementName?.Invoke(s.ElementKey) ?? Capitalise(s.ElementKey);
                 rows.Add(new DatasetRow(
                     Dataset: Datasets.Electrode, Id: s.Symbol, Title: name,
-                    Body: $"{name} {s.Symbol} {s.Charge} electrode potential electrochemical series",
+                    // "Standard" and "reduction": this is the standard reduction potential table,
+                    // and that is what it is asked for by (roadmap 1.1).
+                    Body: $"{name} {s.Symbol} {s.Charge} standard electrode potential reduction potential electrochemical series",
                     Detail: $"{s.Charge}: {Num(s.Voltage)} V",
                     DeepLink: DeepLinkTarget.Electrode,
                     NumericValue: s.Voltage, Unit: "V"));
@@ -265,8 +286,11 @@ namespace Atomic.Core.Ai.Data
 
                 rows.Add(new DatasetRow(
                     Dataset: Datasets.Solubility, Id: column.Cation, Title: column.Cation,
-                    Body: $"{column.Cation} solubility soluble insoluble " +
-                          string.Join(" ", pairs.Select(p => p.anion)),
+                    // Anion *names* and "water", because users write "is silver chloride soluble
+                    // in water", not "Ag^+ Cl^-" (roadmap 1.1).
+                    Body: $"{column.Cation} solubility soluble insoluble dissolve water " +
+                          string.Join(" ", pairs.Select(p =>
+                              $"{p.anion} {(AnionNames.TryGetValue(p.anion, out var n) ? n : "")}")),
                     Detail: string.Join(" · ", pairs.Select(
                         p => $"{p.anion} {SolubilityData.Word(p.code)}")),
                     DeepLink: DeepLinkTarget.Solubility));
@@ -286,11 +310,14 @@ namespace Atomic.Core.Ai.Data
 
             foreach (var (category, units) in UnitCatalog.Categories)
             {
+                // The unit everything in the category converts through, named on every row: "how
+                // many joules in a calorie" names the joule, and the calorie row did not.
+                var baseUnit = units.FirstOrDefault(u => u.Factor == 1.0)?.Name ?? "";
                 foreach (var u in units)
                 {
                     rows.Add(new DatasetRow(
                         Dataset: Datasets.Unit, Id: $"{category}/{u.Name}", Title: u.Name,
-                        Body: $"{u.Name} {category} unit conversion",
+                        Body: $"{u.Name} {category} unit conversion {baseUnit}",
                         Detail: string.Equals(category, UnitCatalog.Temperature, StringComparison.Ordinal)
                             ? category
                             : $"1 {u.Name} = {Num(u.Factor)} (base {category} unit)",

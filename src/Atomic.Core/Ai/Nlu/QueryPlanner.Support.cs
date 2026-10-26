@@ -717,14 +717,17 @@ namespace Atomic.Core.Ai.Nlu
         private const double ConfidenceThreshold = 0.7;
 
         /// <summary>
-        /// Raising this does not filter off-topic questions, which was tried and measured.
+        /// The share of a query's content a reference-table row must cover to be answered from
+        /// (roadmap 1.1).
         ///
-        /// <para>"What is the weather today" and "write me a poem" clear 0.55 as readily as 0.45,
-        /// because BM25 over a 780-document corpus finds some lexical overlap for almost any
-        /// English sentence. Rejecting off-topic input needs a different signal than a score
-        /// threshold, so the value stays where it is rather than being tightened for no gain.</para>
+        /// <para>Read off the dev corpus. The rows that must be declined cover at most 0.66 - "what
+        /// is the charge of the sulfate ion" by the glossary's "Ion", which holds two of its three
+        /// words - and every row that must be answered covers all of its question once the tables
+        /// carry the words people use for them (anion names, the base unit, "colour", "standard").
+        /// Set nearer the declines than the answers on purpose: a wrong answer costs more than a
+        /// missing one.</para>
         /// </summary>
-        private const double DatasetConfidence = 0.45;
+        private const double MinDatasetCoverage = 0.75;
 
         private const int DefaultListLimit = 10;
         private const int DefaultIsotopeLimit = 8;
@@ -736,15 +739,6 @@ namespace Atomic.Core.Ai.Nlu
         /// retrieved a dictionary row, both above the fallback's confidence floor.</para>
         /// </summary>
         private const int MinDatasetTokens = 3;
-
-        /// <summary>
-        /// How far down the ranking to look for a dataset row.
-        ///
-        /// <para>Deep enough to see past the elements a question names - "solubility of sodium
-        /// chloride" ranks both sodium and chlorine ahead of the solubility row - and shallow enough
-        /// that a genuinely unrelated row never surfaces.</para>
-        /// </summary>
-        private const int DatasetSearchDepth = 6;
 
         /// <summary>
         /// Shortest token treated as naming a topic rather than joining a sentence.
@@ -761,16 +755,6 @@ namespace Atomic.Core.Ai.Nlu
         /// separately ("the noble gases"), while staying well short of a real question.</para>
         /// </summary>
         private const int MaxBareFamilyTokens = 3;
-
-        /// <summary>
-        /// The bar a dataset match must clear when the query also names an element.
-        ///
-        /// <para>Higher than <see cref="DatasetConfidence"/>, because an element name is itself
-        /// strong evidence that the question is about the element. Only a clearly better lexical
-        /// match for something else should win, which is what "solubility of sodium chloride" is
-        /// and "tell me about gold" is not.</para>
-        /// </summary>
-        private const double DatasetConfidenceWithElement = 0.6;
 
         /// <summary>Shortest lexicon word that may be matched by stem rather than by whole word.</summary>
         private const int MinSuffixMatch = 5;

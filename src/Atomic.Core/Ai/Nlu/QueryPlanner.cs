@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Atomic.Core.Ai.Data;
@@ -937,8 +938,8 @@ namespace Atomic.Core.Ai.Nlu
         /// <para>An element in the query does not disqualify it. "Standard electrode potential of
         /// zinc" and "solubility of sodium chloride" both name an element and both are dataset
         /// questions - the element alone cannot answer them, because no <i>field</i> resolved
-        /// either. The bar is raised when an element is present, so a bare "tell me about gold"
-        /// still falls through to the overview.</para>
+        /// either. A named element keeps the question unless the query also names a table
+        /// topic, so a bare "tell me about gold" still falls through to the overview.</para>
         /// </summary>
         private QueryPlan? DatasetPlan(
             string rawQuery,
@@ -951,61 +952,91 @@ namespace Atomic.Core.Ai.Nlu
             if (TextMatching.SplitQueryTokens(normalized).Count < MinDatasetTokens) return null;
             if (_retriever is null) return null;
 
-            // Searched with the English name of anything the query named in another language. The
-            // reference tables are English and BM25 is lexical, so "vad är stål gjort av" matched
-            // nothing at all - the row is titled "Steel". Only the *search* string is glossed; the
-            // answer is still composed in the user's language.
-            var searchQuery = WithDatasetGloss(rawQuery, normalized);
-
-            // The best *dataset* row, not the best row overall. "Standard electrode potential of
-            // zinc" ranks zinc itself first - of course it does, the query says zinc - and the
-            // element hit is worth nothing here: it is already known, and no field resolved to look
-            // up on it. Taking the top hit meant these questions were declined rather than answered
-            // from the table that holds them.
-            var hit = _retriever.Search(searchQuery, DatasetSearchDepth)
-                .FirstOrDefault(h => h.Ref is RetrievedRef.Dataset);
-
-            // A query naming something the corpus has never heard of must retrieve a row that is at
-            // least *about* it. Neither test works alone: unknown words appear in perfectly good
-            // questions ("define molar mass"), and title overlap alone would not have been needed.
-            // Together they are what tells "define molar mass" from "write me a poem".
-            if (hit is not null &&
-                MentionsSomethingUnknown(rawQuery) &&
-                !_retriever.LooksRelevant(searchQuery, hit)) hit = null;
-
-            if (hit?.Ref is not RetrievedRef.Dataset reference) return null;
-
-            // The bar stays higher when the query names an element: the element is itself strong
-            // evidence the question is about it.
-            //
-            // Two relaxations were measured and rejected. Dropping this bar to the element-free one
-            // recovers five dataset rows and loses four must-defer rows; gating the drop on the
-            // retrieved row sharing a word with the query recovers the same five and still loses
-            // three. Both are bad trades: declining "solubility of sodium chloride" is a gap, while
-            // answering "what is the weather today" from the constants table is a wrong answer, and
-            // a wrong answer costs more than a missing one.
-            //
-            // Naming a *table topic* is the third possibility that two-way choice missed. "Standard
-            // electrode potential of zinc" names an element, so it got the high bar - but it also
-            // names a subject no element field covers and that only the electrode table holds. That
-            // is evidence of the same kind the element is, pointing the other way, and it admits
-            // nothing the rejected relaxations did: chatter names no table.
+            // A named element keeps the question unless the query also names a *table topic*.
+            // "Tell me about gold" is about gold, and the overview answers it; "standard electrode
+            // potential of zinc" names a subject no element field covers and only the electrode
+            // table holds, which is evidence of the same kind as the element, pointing the other
+            // way. Chatter names no table. Before roadmap 1.1 the element case had a higher score
+            // bar instead, but the scores it compared were normalised to at most 0.55 and the bar
+            // was 0.6, so it was this rule in effect; it is now written as what it was.
             var namesATableTopic = Lexicon.DATASET_TOPIC_CUES.Any(
                 cue => normalized.Contains(cue, StringComparison.Ordinal));
+            if (elementKeys.Count > 0 && !namesATableTopic) return null;
 
-            var minimumScore = elementKeys.Count == 0 || namesATableTopic
-                ? DatasetConfidence
-                : DatasetConfidenceWithElement;
+            if (BestDatasetRow(normalized) is not { } match) return null;
 
-            if (hit.Score < minimumScore) return null;
-
-            evidence.Add($"dataset {reference.Name}");
+            var separator = match.Id.IndexOf(':', StringComparison.Ordinal);
+            var dataset = match.Id[..separator];
+            evidence.Add($"dataset {dataset}");
+            evidence.Add(string.Create(CultureInfo.InvariantCulture, $"coverage {match.Coverage:0.00}"));
             return new QueryPlan(
                 Intent.DatasetLookup,
-                Entities: [new EntityRef.DatasetRow(reference.Name, reference.Id)],
+                Entities: [new EntityRef.DatasetRow(dataset, match.Id[(separator + 1)..])],
                 Confidence: 0.7,
                 RawQuery: rawQuery,
                 Evidence: evidence);
+        }
+
+        /// <summary>
+        /// The reference-table row that covers the query's content, or null when none covers
+        /// enough of it to answer from (roadmap 1.1).
+        ///
+        /// <para>Retrieval used to rank with BM25 normalised against the top hit, so the best row
+        /// always scored the same and nothing could abstain: "what is the mass of an electron" was
+        /// answered from the Pauli exclusion principle, "what is the nernst equation" from the
+        /// Arrhenius equation, and "what is the mass of the moon" from atomic mass. Coverage is a
+        /// share of the query's own content - see <see cref="Bm25Index.Coverage"/> - so one
+        /// threshold means the same thing for every query, and a word the corpus has never seen
+        /// counts against a match rather than being ignored.</para>
+        ///
+        /// <para>Ranked by coverage, then by how much of the row's title the query names (the
+        /// mineral "Quartz" over the elastic "α-Quartz (SiO2)"), then by how much of the query is in
+        /// the title ("Proton mass" over the glossary's "Proton"); a data table before the glossary
+        /// when all three tie, because the tables hold values and the glossary only defines; BM25
+        /// last.</para>
+        ///
+        /// <para>A query with one content word must find it in the row's <i>title</i>. Every real
+        /// one-word question names its row - "what is brass", "tell me about pyrite" - while a word
+        /// that is only in a body is a coincidence: "tell me more" covered the Magnalium alloy
+        /// completely, because its description says "more than cost".</para>
+        /// </summary>
+        private CoverageHit? BestDatasetRow(string normalized)
+        {
+            if (_retriever is null) return null;
+            var stopwords = Lexicon.STOPWORDS["en"].Concat(
+                Lexicon.STOPWORDS.TryGetValue(_entities.ActiveLanguage, out var own) ? own : []);
+            return _retriever.DatasetCoverage(DatasetQuery(normalized), stopwords)
+                .Where(m => m.Coverage >= MinDatasetCoverage && (m.Words > 1 || m.TitleRecall > 0.0))
+                .OrderByDescending(m => m.Coverage)
+                .ThenByDescending(m => m.TitlePrecision)
+                .ThenByDescending(m => m.TitleRecall)
+                .ThenBy(m => m.Id.StartsWith(DatasetIndex.Datasets.Dictionary + ":", StringComparison.Ordinal))
+                .ThenByDescending(m => m.Bm25)
+                .FirstOrDefault();
+        }
+
+        /// <summary>
+        /// The query with every phrase <see cref="Lexicon.DATASET_GLOSS"/> knows <i>replaced</i> by
+        /// its English name.
+        ///
+        /// <para>The tables are English, so "vad är stål gjort av" can only reach the row titled
+        /// "Steel" through the gloss. <see cref="WithDatasetGloss"/> appends it, which suited BM25;
+        /// coverage would count the Swedish words as unknown content the row does not cover, so here
+        /// the gloss stands in for them. Only the search string is glossed; the answer is still
+        /// composed in the user's language.</para>
+        /// </summary>
+        private static string DatasetQuery(string normalized)
+        {
+            var text = normalized;
+            foreach (var (phrase, english) in Lexicon.DATASET_GLOSS)
+            {
+                if (!TextMatching.ContainsWord(text, phrase)) continue;
+                text = phrase.Any(c => c > '\u2000')
+                    ? text.Replace(phrase, $" {english} ", StringComparison.Ordinal)
+                    : System.Text.RegularExpressions.Regex.Replace(
+                        text, $@"(?<![\p{{L}}\p{{N}}]){System.Text.RegularExpressions.Regex.Escape(phrase)}(?![\p{{L}}\p{{N}}])", english);
+            }
+            return text;
         }
 
         /// <summary>

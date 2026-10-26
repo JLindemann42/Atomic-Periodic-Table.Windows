@@ -35,6 +35,9 @@ namespace Atomic.Core.Ai.Retrieval
         private readonly IReadOnlyDictionary<string, IReadOnlyList<ElementAlias>> _aliases;
         private readonly string _activeLanguage;
 
+        /// <summary>The language this resolver answers in; the planner reads its stopwords off it.</summary>
+        public string ActiveLanguage => _activeLanguage;
+
         /// <summary>
         /// Flattened once at construction rather than per query. Android re-flattens and re-sorts
         /// the whole alias map on every call; with ~3,000 aliases that is a sort per keystroke in a

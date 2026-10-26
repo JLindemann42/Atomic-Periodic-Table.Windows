@@ -44,13 +44,13 @@ namespace Atomic.Core.Tests.Ai.Nlu
         {
             var vocabularies = AllVocabularies().ToList();
 
-            // 71 in Lexicon.kt: 56 lists, 14 maps, 1 set.
-            Assert.Equal(71, vocabularies.Count);
+            // 72 in Lexicon.kt: 56 lists, 15 maps (STOPWORDS joined in roadmap 1.1), 1 set.
+            Assert.Equal(72, vocabularies.Count);
             Assert.All(vocabularies, v => Assert.NotEmpty(v.Keys));
         }
 
         /// <summary>
-        /// 2,879 entries in Lexicon.kt, 2,860 here. The nineteen missing are duplicate keys in four
+        /// 2,922 entries in Lexicon.kt, 2,903 here (STOPWORDS counts its twelve languages). The nineteen missing are duplicate keys in four
         /// maps - SERIES_WORDS has "noble gas" twice, COMPARATIVE_ADJECTIVES has "tyngre" twice -
         /// and every one maps to the same value, so collapsing them is exactly what Kotlin's mapOf
         /// does. The generator reports them on every run; if a future duplicate ever maps to a
@@ -58,7 +58,7 @@ namespace Atomic.Core.Tests.Ai.Nlu
         /// </summary>
         [Fact]
         public void TotalEntryCountMatchesTheSourceLessItsDuplicateKeys() =>
-            Assert.Equal(2860, AllVocabularies().Sum(v => v.Keys.Count()));
+            Assert.Equal(2903, AllVocabularies().Sum(v => v.Keys.Count()));
 
         /// <summary>
         /// The invariant the whole file rests on. Entries are matched against text that has already
