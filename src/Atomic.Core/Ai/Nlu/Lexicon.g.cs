@@ -362,6 +362,23 @@ public static class Lexicon
         "माध्यिका", "وسطی",
     ];
 
+    public static readonly IReadOnlyList<string> COMPOUND_HEADS =
+    [
+        "varde", "temperatur", "skillnad",
+        "wert", "unterschied", "differenz",
+        "waarde", "temperatuur", "verskil",
+    ];
+
+    public static readonly FrozenDictionary<string, string> SUPERLATIVE_STEMS =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["hard"] = "hardest", ["sag"] = "softest", ["lig"] = "lightest", ["swaar"] = "heaviest",
+            ["dig"] = "densest", ["warm"] = "hottest", ["elektronegatief"] = "most electronegative",
+            ["matigas"] = "hardest", ["malambot"] = "softest", ["mabigat"] = "heaviest",
+            ["siksik"] = "densest", ["masiksik"] = "densest", ["mainit"] = "hottest",
+            ["densidad"] = "densest", ["madensidad"] = "densest",
+        }.ToFrozenDictionary(StringComparer.Ordinal);
+
     public static readonly IReadOnlyList<string> WHICH =
     [
         "which", "what", "list", "show me", "find", "all",
@@ -1268,7 +1285,7 @@ public static class Lexicon
 
     public static readonly IReadOnlyList<string> METAL_WORDS =
     [
-        "metal", "metals", "metall", "metaller", "metalle", "metales", "metaux", "metalli", "metais", "金属",
+        "metal", "metals", "metall", "metaller", "metalle", "metales", "metaux", "metalli", "metais", "metaal", "metale", "金属",
     ];
 
     public static readonly FrozenDictionary<string, Block> BLOCK_WORDS =

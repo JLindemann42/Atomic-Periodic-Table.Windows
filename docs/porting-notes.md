@@ -1410,3 +1410,28 @@ that no other corpus row is switched away from its own language, and that at lea
 recognised in conversations opened in English. Both platforms recognise the same 2,288 of 2,357 dev
 rows, which is the parity check on the feature extraction. Held-out ran once at the end and passed
 (450 here, with the two detection tests); it did not inform the work.
+
+### D63 — morphology rules (roadmap 1.5)
+
+Ported from Android in the same change, with `morphology.tsv` (32 rows: eight guards, and 24 that
+failed before) on both.
+
+**What changed.** `Nlu/Morphology.cs`, ported from `Morphology.kt`, rewrites the query before the
+planner reads it: a compound that is no known word is split into two known parts with at most a
+linking `s` ("smältpunkts|skillnaden", "Durchschnitts|dichte"); an Afrikaans -ste or Filipino
+pinaka- superlative is written as the superlative the lexicon knows ("ligste" is "lightest",
+"pinakamababang" is "pinakamababa"). `FieldResolver` gains `IsFieldWord` and `KnowsWord`, the
+latter without the compound-head rule so a compound cannot vouch for itself; `Inflects` takes the
+flag. `QueryPlanner.Plan` takes `query` and expands it into `rawQuery` first.
+
+**Alongside.** The median is checked before the mean, because "media" opens "median" and
+"mediandensiteten" was averaged. A negation written as a word matches as a word, because "no "
+was found inside the Filipino "ano ". Lexicon gains `COMPOUND_HEADS`, `SUPERLATIVE_STEMS` and
+"metaal"/"metale"; FieldAliases gains "Schmelztemperatur", "Siedetemperatur", "täthet" and the two
+Tagalog point names. Both arrive through the generators; `LexiconTest` counts 80 declarations and
+3,246 entries.
+
+**The corpus.** `expect_value` also reads the first value of a ranking and the largest value of the
+first property compared, on both harnesses: six rows passed vacuously without it.
+`MorphologyTest` asserts the same rewrites as Android's. 3,552 core tests pass; held-out (451) ran
+once at the end and did not inform the work.

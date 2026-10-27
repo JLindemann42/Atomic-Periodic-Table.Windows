@@ -239,6 +239,11 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(Language))]
         public void Language_Pass(string key) => RunUnit("language", key);
 
+        /// <summary>Compounds and superlative affixes: one word carrying a property and what is asked about it.</summary>
+        public static TheoryData<string> MorphologyRows => Units("morphology");
+        [Theory, MemberData(nameof(MorphologyRows))]
+        public void Morphology_Pass(string key) => RunUnit("morphology", key);
+
         // ---- Scoreboard ------------------------------------------------------------------------
 
         /// <summary>
@@ -532,9 +537,19 @@ namespace Atomic.Core.Tests.Corpus
         }
 
         /// <summary>The one number an answer stands on, for <c>expect_value</c>.</summary>
+        /// <summary>
+        /// The one number an answer stands on, for <c>expect_value</c>. For a ranking it is the first
+        /// element's, which pins a superlative's direction; for a comparison, the largest value of the
+        /// first field compared, which tells a comparison of melting points from the default table
+        /// that merely includes them, whatever order the elements come in (roadmap 1.5).
+        /// </summary>
         private static double? ValueOf(ExecutionResult result) => result switch
         {
             ExecutionResult.Property p => p.Quantity?.Value,
+            ExecutionResult.ElementList l => l.Results.FirstOrDefault()?.Quantity?.Value,
+            ExecutionResult.Comparison c => c.FieldIds.Count == 0 || !c.Values.TryGetValue(c.FieldIds[0], out var first)
+                ? null
+                : first.Select(v => v.Quantity?.Value).Where(v => v.HasValue).Max(),
             ExecutionResult.Dataset d => d.Row.NumericValue,
             ExecutionResult.Aggregate a => a.Value,
             ExecutionResult.Formula f => f.Result.MolarMass,

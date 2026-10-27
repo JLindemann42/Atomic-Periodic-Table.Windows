@@ -48,7 +48,11 @@ namespace Atomic.Core.Ai.Nlu
             _entities = entities;
             _fields = fields;
             _retriever = retriever;
+            _morphology = new Morphology(fields);
         }
+
+        /// <summary>Compounds and affixed superlatives, written as their parts before anything reads the query.</summary>
+        private readonly Morphology _morphology;
 
         /// <summary>Plans at or above this confidence are used; below it the caller falls back.</summary>
         public double Threshold => ConfidenceThreshold;

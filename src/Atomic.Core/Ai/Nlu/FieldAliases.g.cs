@@ -150,6 +150,14 @@ public static class FieldAliases
         ("punto de ebullicion", "boiling_point"), ("kokpunkt", "boiling_point"),
         ("siedepunkt", "boiling_point"), ("point d ebullition", "boiling_point"),
         ("kookpunt", "boiling_point"), ("沸点", "boiling_point"),
+        // The standard German terms beside Schmelzpunkt and Siedepunkt. "Schmelz" and "Siede" are
+        // no words of their own, so these are vocabulary, not compounds Morphology can split.
+        ("schmelztemperatur", "melting_point"), ("siedetemperatur", "boiling_point"),
+        // The everyday Swedish word for density, and the Tagalog names of the two points: the
+        // Filipino strings still label them in English, so "pinakamababang punto ng pagkatunaw"
+        // named no property at all.
+        ("tathet", "density"),
+        ("punto ng pagkatunaw", "melting_point"), ("punto ng pagkulo", "boiling_point"),
         ("electronegatividad", "electronegativity"), ("elektronegativitet", "electronegativity"),
         ("elektronegativitat", "electronegativity"), ("electronegativite", "electronegativity"),
         ("elettronegativita", "electronegativity"), ("电负性", "electronegativity"),

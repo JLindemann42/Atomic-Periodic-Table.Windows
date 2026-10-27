@@ -152,9 +152,12 @@ namespace Atomic.Core.Ai.Nlu
             // ---- Aggregation --------------------------------------------------------------
             // Suffix-tolerant for the same reason superlatives are: German "durchschnittliche"
             // carries an adjective ending that a word-boundary match misses entirely.
+            //
+            // The median first: the Italian and Spanish mean, "media", opens "mediana" and "median",
+            // so "mediandensiteten" was answered with the average.
             var aggregation = Aggregation.None;
-            if (Lexicon.AVERAGE.Any(m => MarksStatistic(query, m))) aggregation = Aggregation.Avg;
-            else if (Lexicon.MEDIAN.Any(m => MarksStatistic(query, m))) aggregation = Aggregation.Median;
+            if (Lexicon.MEDIAN.Any(m => MarksStatistic(query, m))) aggregation = Aggregation.Median;
+            else if (Lexicon.AVERAGE.Any(m => MarksStatistic(query, m))) aggregation = Aggregation.Avg;
             else if (Lexicon.SUM.Any(m => MentionsFamily(query, m))) aggregation = Aggregation.Sum;
             else if (Lexicon.COUNT.Any(m => MentionsFamily(query, m))) aggregation = Aggregation.Count;
 
@@ -190,7 +193,13 @@ namespace Atomic.Core.Ai.Nlu
 
             // ---- Negation -----------------------------------------------------------------
             // "which noble gases are not radioactive" must invert the filter, not drop it.
-            var negated = Lexicon.NEGATIONS.Any(n => query.Contains(n, StringComparison.Ordinal));
+            //
+            // A negation written as a word is matched as one. By containment, the Spanish and
+            // Italian "no " was found inside the Filipino "ano " ("what"), so "ano ang
+            // pinakamalambot na metal" ranked the non-metals.
+            var negated = Lexicon.NEGATIONS.Any(n => n.EndsWith(' ')
+                ? TextMatching.ContainsWord(query, n.Trim())
+                : query.Contains(n, StringComparison.Ordinal));
             var finalSubsets = negated ? subsets.Select(Invert).ToList() : subsets;
 
             return new Operators(

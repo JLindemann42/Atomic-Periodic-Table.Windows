@@ -63,8 +63,11 @@ namespace Atomic.Core.Ai.Nlu
             "dataset-row",
         ];
 
-        public QueryPlan Plan(string rawQuery, DialogueState state)
+        public QueryPlan Plan(string query, DialogueState state)
         {
+            // Everything below reads words, and "smältpunktsskillnaden" or "pinakamatigas" is one
+            // word carrying two (roadmap 1.5).
+            var rawQuery = _morphology.Expand(query);
             var normalized = TextMatching.NormalizeForLookup(rawQuery);
 
             if (EarlyDecline(rawQuery, normalized) is { } declined) return declined;

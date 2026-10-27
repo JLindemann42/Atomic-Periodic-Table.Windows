@@ -29,6 +29,8 @@ namespace Atomic.Core.Ai.Nlu
     {
         private readonly IStringProvider _strings;
         private readonly Lazy<IReadOnlyList<KeyValuePair<string, string>>> _aliasesByLength;
+        private readonly Lazy<HashSet<string>> _aliasKeys;
+        private readonly Lazy<string[]> _singleWordAliases;
 
         public FieldResolver(IStringProvider strings)
         {
@@ -37,6 +39,10 @@ namespace Atomic.Core.Ai.Nlu
             // Android re-sorts the whole ~600-entry table on every query.
             _aliasesByLength = new Lazy<IReadOnlyList<KeyValuePair<string, string>>>(
                 () => BuildAliases().OrderByDescending(e => e.Key.Length).ToArray());
+            _aliasKeys = new Lazy<HashSet<string>>(
+                () => _aliasesByLength.Value.Select(e => e.Key).ToHashSet(StringComparer.Ordinal));
+            _singleWordAliases = new Lazy<string[]>(
+                () => _aliasKeys.Value.Where(a => !a.Contains(' ', StringComparison.Ordinal) && a.Length >= 5).ToArray());
         }
 
         /// <summary>
@@ -93,6 +99,22 @@ namespace Atomic.Core.Ai.Nlu
         }
 
         public FieldMatch? Resolve(string query) => ResolveAll(query, 1).FirstOrDefault();
+
+        /// <summary>Whether <paramref name="word"/>, folded, is exactly the name of a field (roadmap 1.5).</summary>
+        public bool IsFieldWord(string word) =>
+            word.Length >= MinimumLength(word) && _aliasKeys.Value.Contains(word);
+
+        /// <summary>
+        /// Whether <paramref name="word"/>, folded, is the name of a field, or one with a grammatical
+        /// ending: the words <see cref="Morphology"/> may split a compound into. The compound rule in
+        /// <see cref="Inflects"/> is left out, or every compound would vouch for itself.
+        /// </summary>
+        public bool KnowsWord(string word)
+        {
+            if (IsFieldWord(word)) return true;
+            if (word.Length < 5) return false;
+            return _singleWordAliases.Value.Any(alias => Inflects(word, alias, compounds: false));
+        }
 
         /// <summary>
         /// Which discovery field a question is really asking for, or null when it is not asking.
@@ -152,7 +174,7 @@ namespace Atomic.Core.Ai.Nlu
         /// suffix rule could not see it and every "vad är atomnumret för guld" was declined.</item>
         /// </list>
         /// </summary>
-        private static bool Inflects(string word, string alias)
+        private static bool Inflects(string word, string alias, bool compounds = true)
         {
             if (word.Length > alias.Length &&
                 word.Length - alias.Length <= MaxInflectionSuffix &&
@@ -163,7 +185,7 @@ namespace Atomic.Core.Ai.Nlu
                 string.Equals(word, alias[..^1] + "ies", StringComparison.Ordinal))
                 return true;
 
-            if (alias.Length >= MinCompoundHead)
+            if (compounds && alias.Length >= MinCompoundHead)
             {
                 var at = word.LastIndexOf(alias, StringComparison.Ordinal);
                 if (at >= MinCompoundModifier &&
