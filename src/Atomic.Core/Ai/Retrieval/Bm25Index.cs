@@ -37,6 +37,11 @@ namespace Atomic.Core.Ai.Retrieval
     /// </param>
     /// <param name="Bm25">The raw BM25 score, kept as the tie-break.</param>
     /// <param name="Words">How many content words the query had.</param>
+    /// <param name="NamesTitle">
+    /// Whether the query names every word of the title, in one of its wordings. A formula in
+    /// brackets is notation, not a word, so "periclase" names "Periclase (MgO)" while "life" does
+    /// not name "Half-Life".
+    /// </param>
     public sealed record CoverageHit(
         string Id,
         string Title,
@@ -44,7 +49,8 @@ namespace Atomic.Core.Ai.Retrieval
         double TitleRecall,
         double TitlePrecision,
         double Bm25,
-        int Words);
+        int Words,
+        bool NamesTitle = false);
 
     /// <summary>
     /// Okapi BM25 over the app's own data.
@@ -70,6 +76,13 @@ namespace Atomic.Core.Ai.Retrieval
         /// <summary>Each document's title and alternative titles, tokenized separately.</summary>
         private readonly List<HashSet<string>>[] _titleVariants;
 
+        /// <summary>
+        /// Each title wording as its words, each word as the terms it tokenizes to, with any
+        /// bracketed formula left out. A hyphen separates words here, as it does for the tokenizer:
+        /// "Half-Life" is two words, and naming one of them is not naming the title.
+        /// </summary>
+        private readonly IReadOnlyList<HashSet<string>>[][] _titleWords;
+
         /// <summary>Every title term of a document, in any variant.</summary>
         private readonly HashSet<string>[] _titleTerms;
         private readonly int[] _lengths;
@@ -92,6 +105,7 @@ namespace Atomic.Core.Ai.Retrieval
             _ids = new string[documents.Count];
             _titles = new string[documents.Count];
             _titleVariants = new List<HashSet<string>>[documents.Count];
+            _titleWords = new IReadOnlyList<HashSet<string>>[documents.Count][];
             _titleTerms = new HashSet<string>[documents.Count];
             _lengths = new int[documents.Count];
             _postings = new Dictionary<string, Dictionary<int, int>>(StringComparer.Ordinal);
@@ -106,6 +120,13 @@ namespace Atomic.Core.Ai.Retrieval
                     .Select(t => Tokenizer.Tokenize(t, language).ToHashSet(StringComparer.Ordinal))
                     .ToList();
                 _titleTerms[docIndex] = _titleVariants[docIndex].SelectMany(v => v).ToHashSet(StringComparer.Ordinal);
+                _titleWords[docIndex] = new[] { doc.Title }.Concat(doc.AltTitles ?? Array.Empty<string>())
+                    .Select(t => (IReadOnlyList<HashSet<string>>)NonWord.Split(Bracketed.Replace(t, " "))
+                        .Where(w => w.Length > 0)
+                        .Select(w => Tokenizer.Tokenize(w, language).ToHashSet(StringComparer.Ordinal))
+                        .Where(forms => forms.Count > 0)
+                        .ToList())
+                    .ToArray();
 
                 var tokens = Tokenizer.Tokenize($"{doc.Title} {doc.Body}", language);
                 _lengths[docIndex] = tokens.Count;
@@ -266,7 +287,12 @@ namespace Atomic.Core.Ai.Retrieval
                     (inTitle.TryGetValue(e.Key, out var t) ? t : 0.0) / total,
                     titlePrecision,
                     bm25.TryGetValue(e.Key, out var s) ? s : 0.0,
-                    groups.Count);
+                    groups.Count,
+                    _titleWords[e.Key].Any(wording =>
+                    {
+                        var content = wording.Where(forms => forms.Any(f => !stop.Contains(f))).ToList();
+                        return content.Count > 0 && content.All(forms => forms.Any(termSet.Contains));
+                    }));
             }).ToList();
 
             static void Add(Dictionary<int, double> map, int key, double value) =>
@@ -338,6 +364,12 @@ namespace Atomic.Core.Ai.Retrieval
             term.Any(c => stop.Contains(c.ToString())) && DocumentFrequency(term) == 0;
 
         private static readonly System.Text.RegularExpressions.Regex Whitespace = new(@"\s+");
+
+        /// <summary>A formula or note in brackets: "(SiO2)", "(radioactive decay)".</summary>
+        private static readonly System.Text.RegularExpressions.Regex Bracketed = new(@"\([^)]*\)");
+
+        /// <summary>What separates the words of a title.</summary>
+        private static readonly System.Text.RegularExpressions.Regex NonWord = new(@"[^\p{L}\p{M}\p{N}]+");
 
         /// <summary>Endings a query word may also be tried without, for coverage only.</summary>
         private static readonly string[] LooseEndings = ["es", "en", "er", "s", "e"];

@@ -1457,3 +1457,19 @@ question something already matched is left alone by design, which is the lesson 
 **Alongside.** `Lexicon.g.cs` gains `NEVER_CORRECTED`; `LexiconTest` counts 81 declarations and
 3,283 entries. `SpellerTest` asserts the same rules as Android's. 3,581 core tests pass; held-out
 (452) ran once at the end and did not inform the work.
+
+### D65 — a one-word question must name the whole title
+
+Ported from Android in the same change, with ten `datasets.tsv` rows on both.
+
+**The defect.** D59's rule let a question with one content word take any row whose title held that
+word. "What is the meaning of life" has one ("meaning" is a stopword) and it is half of "Half-Life",
+so it was answered with the half-life equation; "what is light" and "what is speed" with the speed
+of light, "what is a law" with the law of decay. Found while writing 1.6's guards.
+
+**The fix.** `CoverageHit.NamesTitle`: whether the query names every word of some title wording,
+with a bracketed formula left out and a hyphen separating words. `BestDatasetRow` requires it of a
+one-word query instead of `TitleRecall > 0`. Title precision could not draw the line - "what is
+speed" names 0.54 of "Speed of light", "what is charge" 0.63 of "Electric Charge" - so both now
+decline, which is the side the roadmap's principles choose. 3,591 core tests pass; held-out (452)
+passes.

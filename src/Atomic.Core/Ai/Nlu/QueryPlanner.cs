@@ -1036,10 +1036,13 @@ namespace Atomic.Core.Ai.Nlu
         /// when all three tie, because the tables hold values and the glossary only defines; BM25
         /// last.</para>
         ///
-        /// <para>A query with one content word must find it in the row's <i>title</i>. Every real
-        /// one-word question names its row - "what is brass", "tell me about pyrite" - while a word
-        /// that is only in a body is a coincidence: "tell me more" covered the Magnalium alloy
-        /// completely, because its description says "more than cost".</para>
+        /// <para>A query with one content word must name the row's whole <i>title</i>, in one of its
+        /// wordings. Every real one-word question does - "what is brass", "tell me about pyrite" -
+        /// while a word that is only in a body is a coincidence ("tell me more" covered the Magnalium
+        /// alloy, whose description says "more than cost"), and so is a word that is only part of a
+        /// title: "what is the meaning of life" was answered with the half-life equation, "what is
+        /// light" with the speed of light. A formula in brackets is notation, so "tell me about
+        /// periclase" still finds "Periclase (MgO)".</para>
         /// </summary>
         private CoverageHit? BestDatasetRow(string normalized)
         {
@@ -1047,7 +1050,7 @@ namespace Atomic.Core.Ai.Nlu
             var stopwords = Lexicon.STOPWORDS["en"].Concat(
                 Lexicon.STOPWORDS.TryGetValue(_entities.ActiveLanguage, out var own) ? own : []);
             return _retriever.DatasetCoverage(DatasetQuery(normalized), stopwords)
-                .Where(m => m.Coverage >= MinDatasetCoverage && (m.Words > 1 || m.TitleRecall > 0.0))
+                .Where(m => m.Coverage >= MinDatasetCoverage && (m.Words > 1 || m.NamesTitle))
                 .OrderByDescending(m => m.Coverage)
                 .ThenByDescending(m => m.TitlePrecision)
                 .ThenByDescending(m => m.TitleRecall)
