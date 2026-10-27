@@ -136,8 +136,7 @@ namespace Atomic.Core.Ai
             // Per-message, not per-session. A thread can switch language mid-way and each turn is
             // answered in the language it was asked in - which is why the engine is keyed by
             // language rather than constructed once.
-            State.ActiveLanguage = _retrieval.Resolver(State.ActiveLanguage)
-                .DetectLanguage(message, State.ActiveLanguage);
+            State.ActiveLanguage = _retrieval.DetectLanguage(message, State.ActiveLanguage);
 
             var language = State.ActiveLanguage;
             var strings = _stringsFor(language);

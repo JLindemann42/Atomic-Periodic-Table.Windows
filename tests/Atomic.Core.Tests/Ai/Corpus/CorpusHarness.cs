@@ -80,6 +80,20 @@ namespace Atomic.Core.Tests.Corpus
         public static Stack StackFor(string language) =>
             Stacks.GetOrAdd(language, Build);
 
+        private static readonly Lazy<LanguageDetector?> Detector =
+            new(() => LanguageDetector.Parse(TestAssets.ElementSource.Text("trigrams.tsv")));
+
+        /// <summary>The trigram model (roadmap 1.4), or null when it is not reachable.</summary>
+        public static LanguageDetector? LanguageDetector => Detector.Value;
+
+        /// <summary>The element-name detector alone, the tie-breaker.</summary>
+        public static string DetectByNames(string message, string active) =>
+            new EntityResolver(Aliases.Value, active).DetectLanguage(message, active);
+
+        /// <summary>The language a message is answered in, decided as <c>RetrievalService.DetectLanguage</c> decides it.</summary>
+        public static string DetectLanguage(string message, string active) =>
+            LanguageDetector?.Detect(message, active, DetectByNames) ?? DetectByNames(message, active);
+
         private static Stack Build(string language)
         {
             var store = BaseStore.Value;

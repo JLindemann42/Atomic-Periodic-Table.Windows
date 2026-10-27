@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Atomic.Core.Ai.Data;
+using Atomic.Core.Ai.Nlu;
 
 namespace Atomic.Core.Ai.Retrieval
 {
@@ -28,6 +29,7 @@ namespace Atomic.Core.Ai.Retrieval
             _source = source;
             Store = store;
             Datasets = datasets;
+            _detector = new Lazy<LanguageDetector?>(() => LanguageDetector.Parse(source.Text("trigrams.tsv")));
         }
 
         public KnowledgeStore Store { get; }
@@ -52,6 +54,22 @@ namespace Atomic.Core.Ai.Retrieval
         /// <summary>The entity resolver for a language, built on first use.</summary>
         public EntityResolver Resolver(string language) =>
             _resolvers.GetOrAdd(language, lang => new EntityResolver(SharedAliases(), lang));
+
+        /// <summary>The trigram model (roadmap 1.4), or null when the asset is missing.</summary>
+        private LanguageDetector? Detector => _detector.Value;
+
+        private readonly Lazy<LanguageDetector?> _detector;
+
+        /// <summary>
+        /// The language to answer <paramref name="message"/> in, starting from
+        /// <paramref name="active"/>: by its letters, with element names as the tie-breaker, and by
+        /// element names alone when there is no model.
+        /// </summary>
+        public string DetectLanguage(string message, string active)
+        {
+            string ByNames(string m, string a) => Resolver(a).DetectLanguage(m, a);
+            return Detector?.Detect(message, active, ByNames) ?? ByNames(message, active);
+        }
 
         private IReadOnlyDictionary<string, IReadOnlyList<ElementAlias>> SharedAliases()
         {

@@ -43,7 +43,7 @@ namespace Atomic.App.Services
         public static IElementSource Source { get; } = new JsonElementSource(
             OpenLanguageAsset,
             new[] { "af", "de", "en", "es", "fil", "fr", "hi", "it", "pt", "sv", "ur", "zh" },
-            OpenDatasetAsset);
+            OpenSharedAsset);
 
         // -- lookup ----------------------------------------------------------------------------
 
@@ -160,11 +160,18 @@ namespace Atomic.App.Services
             return File.Exists(path) ? File.OpenRead(path) : null;
         }
 
-        /// <summary>The reference-table titles in each language (roadmap 1.3), <c>titles_sv.tsv</c>.</summary>
-        private static Stream? OpenDatasetAsset(string name)
+        /// <summary>
+        /// The other shared files the engine reads: the reference-table titles (roadmap 1.3),
+        /// <c>titles_sv.tsv</c>, and the language model (1.4), <c>trigrams.tsv</c>.
+        /// </summary>
+        private static Stream? OpenSharedAsset(string name)
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "Assets", "Datasets", Path.GetFileName(name));
-            return File.Exists(path) ? File.OpenRead(path) : null;
+            foreach (var folder in new[] { "Datasets", "Language" })
+            {
+                var path = Path.Combine(AppContext.BaseDirectory, "Assets", folder, Path.GetFileName(name));
+                if (File.Exists(path)) return File.OpenRead(path);
+            }
+            return null;
         }
     }
 }

@@ -17,11 +17,13 @@ namespace Atomic.Core.Tests.Corpus
     /// a 3,000-question corpus useless for the thing it is for - seeing how wide a defect is, and
     /// watching a number move as it gets fixed.</para>
     ///
-    /// <para>Two pseudo-intents are recognised in <c>expect_intent</c>, because clause splitting is
-    /// a decision made before any intent exists:</para>
+    /// <para>Three pseudo-intents are recognised in <c>expect_intent</c>, for decisions made before
+    /// any intent exists:</para>
     /// <list type="bullet">
     /// <item><c>COMPOUND</c> - the query must split into clauses and the engine must answer it</item>
     /// <item><c>NOSPLIT</c> - the query must <i>not</i> split; the guard on "compare gold and silver"</item>
+    /// <item><c>LANGUAGE</c> - the message must be detected as the row's <c>lang</c>, starting from
+    /// the language the session's previous turn was answered in (roadmap 1.4)</item>
     /// </list>
     ///
     /// <para><b>Where this departs from Android:</b> the Kotlin runs one JUnit method per file and
@@ -232,6 +234,11 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(Reported))]
         public void Reported_Pass(string key) => RunUnit("reported", key);
 
+        /// <summary>Which language each message is answered in, the one decision every other file presets.</summary>
+        public static TheoryData<string> Language => Units("language");
+        [Theory, MemberData(nameof(Language))]
+        public void Language_Pass(string key) => RunUnit("language", key);
+
         // ---- Scoreboard ------------------------------------------------------------------------
 
         /// <summary>
@@ -404,6 +411,15 @@ namespace Atomic.Core.Tests.Corpus
 
         private string? Evaluate(CorpusCase corpusCase, DialogueState state)
         {
+            if (corpusCase.ExpectIntent == "LANGUAGE")
+            {
+                var detected = CorpusHarness.DetectLanguage(corpusCase.Query, state.ActiveLanguage);
+                state.ActiveLanguage = detected;
+                return detected == corpusCase.Lang
+                    ? null
+                    : $"'{corpusCase.Query}' was detected as {detected}, expected {corpusCase.Lang}";
+            }
+
             var stack = CorpusHarness.StackFor(corpusCase.Lang);
 
             switch (corpusCase.ExpectIntent)
