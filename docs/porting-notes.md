@@ -1435,3 +1435,25 @@ Tagalog point names. Both arrive through the generators; `LexiconTest` counts 80
 first property compared, on both harnesses: six rows passed vacuously without it.
 `MorphologyTest` asserts the same rewrites as Android's. 3,552 core tests pass; held-out (451) ran
 once at the end and did not inform the work.
+
+### D64 — a speller for declined questions (roadmap 1.6)
+
+Ported from Android in the same change, with `spelling.tsv` (sixteen misspelled questions, all
+declined before, and eight guards) on both.
+
+**What changed.** `Nlu/Speller.cs`, ported from `Speller.kt`, corrects a word to the one vocabulary
+word within an edit or two - element names (`EntityResolver.NameWords`), every field alias's words
+(`FieldResolver.AliasWords`) and the lexicon's operator words - by optimal string alignment, a
+transposition counting as one. Only Latin-script words of four letters or more that the vocabulary
+does not know are touched; stopwords, the "yes, go on" words, `Lexicon.NEVER_CORRECTED` and the
+personality-layer words never are; and the nearest candidates must all mean one thing. SymSpell's
+deletion index is not built: correction runs only on a decline, over a few thousand words.
+
+**Where it runs.** `QueryPlanner.Plan` plans the question as written (`PlanWords`), and only on
+`DeclineReason.NoMatch` plans the corrected one, keeping it only when it is claimed and not a
+`DatasetLookup` - a correction only retrieval would answer is a guess on a guess. A typo in a
+question something already matched is left alone by design, which is the lesson of D47.
+
+**Alongside.** `Lexicon.g.cs` gains `NEVER_CORRECTED`; `LexiconTest` counts 81 declarations and
+3,283 entries. `SpellerTest` asserts the same rules as Android's. 3,581 core tests pass; held-out
+(452) ran once at the end and did not inform the work.

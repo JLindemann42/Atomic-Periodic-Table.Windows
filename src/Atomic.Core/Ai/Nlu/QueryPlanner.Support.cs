@@ -49,7 +49,11 @@ namespace Atomic.Core.Ai.Nlu
             _fields = fields;
             _retriever = retriever;
             _morphology = new Morphology(fields);
+            _speller = new Lazy<Speller>(() => Speller.Build(entities.NameWords(), fields.AliasWords()));
         }
+
+        /// <summary>Misspellings, corrected when nothing else matched (roadmap 1.6).</summary>
+        private readonly Lazy<Speller> _speller;
 
         /// <summary>Compounds and affixed superlatives, written as their parts before anything reads the query.</summary>
         private readonly Morphology _morphology;

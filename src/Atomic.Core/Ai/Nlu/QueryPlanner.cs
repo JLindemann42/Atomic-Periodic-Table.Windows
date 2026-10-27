@@ -63,7 +63,29 @@ namespace Atomic.Core.Ai.Nlu
             "dataset-row",
         ];
 
+        /// <summary>
+        /// The plan for <paramref name="query"/>, corrected for misspelling when it would otherwise
+        /// be declined (roadmap 1.6).
+        ///
+        /// <para>Correction runs only on a <see cref="DeclineReason.NoMatch"/>: a question something
+        /// already matched is left as written, so a typo can never move an answer that was right.
+        /// The corrected question must then be answered from the element data; one only a dataset
+        /// row would answer is a guess on a guess - "tell me about mars" is one edit from "mass" -
+        /// and the original decline stands.</para>
+        /// </summary>
         public QueryPlan Plan(string query, DialogueState state)
+        {
+            var plan = PlanWords(query, state);
+            if (plan.Declined != DeclineReason.NoMatch) return plan;
+            var corrected = _speller.Value.Correct(query);
+            if (corrected == query) return plan;
+            var second = PlanWords(corrected, state);
+            var answered = second.Intent != Intent.Unknown && second.Intent != Intent.DatasetLookup &&
+                           second.Confidence >= Threshold;
+            return answered ? second with { Evidence = [.. second.Evidence, "spelling: " + corrected] } : plan;
+        }
+
+        private QueryPlan PlanWords(string query, DialogueState state)
         {
             // Everything below reads words, and "smältpunktsskillnaden" or "pinakamatigas" is one
             // word carrying two (roadmap 1.5).

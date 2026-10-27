@@ -379,6 +379,14 @@ public static class Lexicon
             ["densidad"] = "densest", ["madensidad"] = "densest",
         }.ToFrozenDictionary(StringComparer.Ordinal);
 
+    public static readonly IReadOnlyList<string> NEVER_CORRECTED =
+    [
+        "nice", "cool", "great", "awesome", "amazing", "wonderful", "interesting", "really", "wow",
+        "thanks", "thank", "hello", "goodbye", "love", "good", "fine", "okay", "haha", "lol",
+        "tack", "hej", "bra", "danke", "hallo", "gracias", "hola", "merci", "bonjour", "grazie",
+        "ciao", "obrigado", "obrigada", "dankie", "salamat", "kumusta", "shukriya", "namaste",
+    ];
+
     public static readonly IReadOnlyList<string> WHICH =
     [
         "which", "what", "list", "show me", "find", "all",

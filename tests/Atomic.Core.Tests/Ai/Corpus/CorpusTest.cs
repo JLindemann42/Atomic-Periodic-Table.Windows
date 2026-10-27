@@ -244,6 +244,11 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(MorphologyRows))]
         public void Morphology_Pass(string key) => RunUnit("morphology", key);
 
+        /// <summary>Misspellings corrected when a question would otherwise be declined, and the words never to touch.</summary>
+        public static TheoryData<string> Spelling => Units("spelling");
+        [Theory, MemberData(nameof(Spelling))]
+        public void Spelling_Pass(string key) => RunUnit("spelling", key);
+
         // ---- Scoreboard ------------------------------------------------------------------------
 
         /// <summary>

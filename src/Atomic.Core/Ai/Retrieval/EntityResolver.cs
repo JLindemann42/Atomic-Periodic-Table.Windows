@@ -96,6 +96,21 @@ namespace Atomic.Core.Ai.Retrieval
         }.ToFrozenSet(StringComparer.Ordinal);
 
         /// <summary>
+        /// Every element name of one word, folded, in any language, and its element: the speller's
+        /// names (roadmap 1.6).
+        /// </summary>
+        public IReadOnlyDictionary<string, string> NameWords()
+        {
+            var names = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (var alias in _aliases.Values.SelectMany(a => a))
+            {
+                if (alias.Kind == AliasKind.Name && !alias.Surface.Contains(' ', StringComparison.Ordinal))
+                    names[alias.Surface] = alias.Key;
+            }
+            return names;
+        }
+
+        /// <summary>
         /// Resolve every element mentioned in a query, best match first.
         /// </summary>
         /// <param name="limit">Maximum number of distinct elements to return.</param>

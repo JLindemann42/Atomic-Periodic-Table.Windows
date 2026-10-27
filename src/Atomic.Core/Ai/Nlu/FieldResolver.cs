@@ -100,6 +100,22 @@ namespace Atomic.Core.Ai.Nlu
 
         public FieldMatch? Resolve(string query) => ResolveAll(query, 1).FirstOrDefault();
 
+        /// <summary>Every word of every alias, folded, and the fields it names: the speller's field words (roadmap 1.6).</summary>
+        public IReadOnlyDictionary<string, HashSet<string>> AliasWords()
+        {
+            var words = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+            foreach (var (alias, fieldId) in _aliasesByLength.Value)
+            {
+                foreach (var word in alias.Split(' '))
+                {
+                    if (word.Length == 0) continue;
+                    if (!words.TryGetValue(word, out var ids)) words[word] = ids = new HashSet<string>(StringComparer.Ordinal);
+                    ids.Add(fieldId);
+                }
+            }
+            return words;
+        }
+
         /// <summary>Whether <paramref name="word"/>, folded, is exactly the name of a field (roadmap 1.5).</summary>
         public bool IsFieldWord(string word) =>
             word.Length >= MinimumLength(word) && _aliasKeys.Value.Contains(word);
