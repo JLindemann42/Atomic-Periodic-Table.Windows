@@ -919,7 +919,13 @@ namespace Atomic.Core.Ai.Compose
         /// </summary>
         private string Dataset(ExecutionResult.Dataset result)
         {
-            var body = $"**{result.Row.Title}**\n{result.Row.Detail}";
+            // The title in the reader's language when the shared data has it (roadmap 1.3), with the
+            // English one beside it, because the row's text below is still English.
+            var translated = _localized?.DatasetTitlesOf(result.Row).FirstOrDefault();
+            var heading = translated is not null && translated != result.Row.Title
+                ? $"**{translated}** ({result.Row.Title})"
+                : $"**{result.Row.Title}**";
+            var body = $"{heading}\n{result.Row.Detail}";
             if (string.Equals(_strings.Language, English, StringComparison.OrdinalIgnoreCase)) return body;
 
             var note = Try.OrNull(() => _strings.Get(S.ai_dataset_english_note));

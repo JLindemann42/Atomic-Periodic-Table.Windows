@@ -804,6 +804,24 @@ namespace Atomic.Core.Ai.Nlu
         /// </summary>
         private const int MinDatasetTokens = 3;
 
+        /// <summary>The same floor in Han characters, each of which carries about what a word does.</summary>
+        private const int MinDatasetHanChars = 4;
+
+        /// <summary>How the glossary titles its periodic-trend entries.</summary>
+        private const string TrendPrefix = "Periodic trend: ";
+
+        /// <summary>
+        /// Whether a query is long enough for a lexical dataset match to mean anything.
+        ///
+        /// <para>Words for spaced scripts, characters for Han: unspaced, 动能的公式 is one "word"
+        /// and never reached retrieval at all, though it is as complete a question as "formula for
+        /// kinetic energy".</para>
+        /// </summary>
+        private static bool LongEnoughForDataset(string normalized) =>
+            Tokenizer.IsUnspacedScript(normalized)
+                ? normalized.Count(Tokenizer.IsHan) >= MinDatasetHanChars
+                : TextMatching.SplitQueryTokens(normalized).Count >= MinDatasetTokens;
+
         /// <summary>
         /// Shortest token treated as naming a topic rather than joining a sentence.
         ///

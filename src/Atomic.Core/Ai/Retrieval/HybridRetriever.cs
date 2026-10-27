@@ -207,16 +207,23 @@ namespace Atomic.Core.Ai.Retrieval
 
             foreach (var row in datasets.Rows)
             {
+                // The title in the index's language (roadmap 1.3). The tables are English, so
+                // "vad är neutronens massa" shared no word with "Neutron mass" until the row also
+                // carried its Swedish title.
+                var translated = localized?.DatasetTitlesOf(row) ?? Array.Empty<string>();
+                var tableNames = localized?.TableNames(row.Dataset) ?? Array.Empty<string>();
                 documents.Add(new Document(
                     Id: $"{row.Dataset}:{row.Id}",
                     Title: row.Title,
+                    AltTitles: translated,
                     // Rows titled with a chemical symbol carry the element's *name* too. The
                     // solubility table is indexed by ion - "Na^+", "Ag^+" - and the electrode table
                     // by symbol, so "solubility of sodium chloride" and "standard electrode
                     // potential of zinc" shared no word with the row that answers them and
                     // retrieved a dictionary definition instead. Users write the name; the table is
                     // keyed by the symbol.
-                    Body: row.Body + ElementGloss(row, store, localized)));
+                    Body: row.Body + ElementGloss(row, store, localized) +
+                          " " + string.Join(" ", translated) + " " + string.Join(" ", tableNames)));
             }
 
             return documents;

@@ -162,6 +162,10 @@
 		<Content Include="..\..\shared\elements\elements_*.json" Link="Assets\Elements\%(Filename)%(Extension)">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<!-- The reference tables' titles in each language (roadmap 1.3). -->
+		<Content Include="..\..\shared\datasets\titles_*.tsv" Link="Assets\Datasets\%(Filename)%(Extension)">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 

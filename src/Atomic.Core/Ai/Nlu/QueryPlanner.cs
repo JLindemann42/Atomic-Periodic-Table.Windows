@@ -965,7 +965,7 @@ namespace Atomic.Core.Ai.Nlu
             List<string> evidence)
         {
             if (elementKeys.Count > 0 && fieldIds.Count > 0) return null;
-            if (TextMatching.SplitQueryTokens(normalized).Count < MinDatasetTokens) return null;
+            if (!LongEnoughForDataset(normalized)) return null;
             if (_retriever is null) return null;
 
             // A named element keeps the question unless the query also names a *table topic*.
@@ -1089,9 +1089,15 @@ namespace Atomic.Core.Ai.Nlu
             // *mechanism* frame is not: it asks how one thing follows from another, and any topic
             // it happens to mention is incidental. Returning a definition there looks like an
             // answer and is not one.
+            //
+            // A definition wants the definition. The topics map to the periodic-trend entries, which
+            // answer "why does electronegativity increase", but "what is electronegativity" was
+            // answered with the trend too in every language whose word reaches this path (roadmap
+            // 1.3); English only escaped because its word resolves a field first.
             var row = isMechanism || topic is null
                 ? null
-                : _datasets.Row(DatasetIndex.Datasets.Dictionary, topic.Value.Value);
+                : (isDefinition && !isWhy ? PlainDefinition(topic.Value.Value) : null)
+                  ?? _datasets.Row(DatasetIndex.Datasets.Dictionary, topic.Value.Value);
 
             // No explanation to give - so decline, rather than falling through to the property path.
             //
@@ -1108,6 +1114,16 @@ namespace Atomic.Core.Ai.Nlu
                 Confidence: 0.85,
                 RawQuery: rawQuery,
                 Evidence: [isWhy ? $"explains {topic!.Value.Value}" : $"defines {topic!.Value.Value}"]);
+        }
+
+        /// <summary>"Electronegativity" for "Periodic trend: electronegativity", when the glossary has one.</summary>
+        private DatasetRow? PlainDefinition(string topic)
+        {
+            if (!topic.StartsWith(TrendPrefix, StringComparison.Ordinal)) return null;
+            var concept = topic[TrendPrefix.Length..];
+            return _datasets.Rows.FirstOrDefault(r =>
+                r.Dataset == DatasetIndex.Datasets.Dictionary &&
+                string.Equals(r.Title, concept, StringComparison.OrdinalIgnoreCase));
         }
 
         // ---- Cascade predicates --------------------------------------------------------------

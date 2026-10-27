@@ -6,7 +6,12 @@ namespace Atomic.Core.Ai.Retrieval
 {
     /// <summary>A document in the retrieval corpus. <paramref name="Id"/> is prefixed by kind,
     /// e.g. <c>element:gold</c>.</summary>
-    public sealed record Document(string Id, string Title, string Body);
+    /// <param name="AltTitles">
+    /// The title in the index's language, and other wordings of it (roadmap 1.3). They count as
+    /// title for coverage, so "neutronens massa" names the "Neutron mass" row's Swedish title as
+    /// fully as "neutron mass" names the English one.
+    /// </param>
+    public sealed record Document(string Id, string Title, string Body, IReadOnlyList<string>? AltTitles = null);
 
     /// <summary>
     /// A scored search result.
@@ -61,6 +66,11 @@ namespace Atomic.Core.Ai.Retrieval
 
         private readonly string[] _ids;
         private readonly string[] _titles;
+
+        /// <summary>Each document's title and alternative titles, tokenized separately.</summary>
+        private readonly List<HashSet<string>>[] _titleVariants;
+
+        /// <summary>Every title term of a document, in any variant.</summary>
         private readonly HashSet<string>[] _titleTerms;
         private readonly int[] _lengths;
 
@@ -81,6 +91,7 @@ namespace Atomic.Core.Ai.Retrieval
 
             _ids = new string[documents.Count];
             _titles = new string[documents.Count];
+            _titleVariants = new List<HashSet<string>>[documents.Count];
             _titleTerms = new HashSet<string>[documents.Count];
             _lengths = new int[documents.Count];
             _postings = new Dictionary<string, Dictionary<int, int>>(StringComparer.Ordinal);
@@ -91,7 +102,10 @@ namespace Atomic.Core.Ai.Retrieval
                 var doc = documents[docIndex];
                 _ids[docIndex] = doc.Id;
                 _titles[docIndex] = doc.Title;
-                _titleTerms[docIndex] = Tokenizer.Tokenize(doc.Title, language).ToHashSet(StringComparer.Ordinal);
+                _titleVariants[docIndex] = new[] { doc.Title }.Concat(doc.AltTitles ?? Array.Empty<string>())
+                    .Select(t => Tokenizer.Tokenize(t, language).ToHashSet(StringComparer.Ordinal))
+                    .ToList();
+                _titleTerms[docIndex] = _titleVariants[docIndex].SelectMany(v => v).ToHashSet(StringComparer.Ordinal);
 
                 var tokens = Tokenizer.Tokenize($"{doc.Title} {doc.Body}", language);
                 _lengths[docIndex] = tokens.Count;
@@ -237,15 +251,20 @@ namespace Atomic.Core.Ai.Retrieval
             var termSet = groups.SelectMany(f => f).ToHashSet(StringComparer.Ordinal);
             return covered.Select(e =>
             {
-                var title = _titleTerms[e.Key].Where(t => !stop.Contains(t)).ToList();
-                var titleWeight = title.Sum(t => InverseDocumentFrequency(DocumentFrequency(t)));
-                var named = title.Where(termSet.Contains).Sum(t => InverseDocumentFrequency(DocumentFrequency(t)));
+                // The best of the title's wordings: a query names one of them, not all at once.
+                var titlePrecision = _titleVariants[e.Key].Select(variant =>
+                {
+                    var title = variant.Where(t => !stop.Contains(t)).ToList();
+                    var titleWeight = title.Sum(t => InverseDocumentFrequency(DocumentFrequency(t)));
+                    var named = title.Where(termSet.Contains).Sum(t => InverseDocumentFrequency(DocumentFrequency(t)));
+                    return titleWeight > 0.0 ? named / titleWeight : 0.0;
+                }).DefaultIfEmpty(0.0).Max();
                 return new CoverageHit(
                     _ids[e.Key],
                     _titles[e.Key],
                     e.Value / total,
                     (inTitle.TryGetValue(e.Key, out var t) ? t : 0.0) / total,
-                    titleWeight > 0.0 ? named / titleWeight : 0.0,
+                    titlePrecision,
                     bm25.TryGetValue(e.Key, out var s) ? s : 0.0,
                     groups.Count);
             }).ToList();
@@ -295,7 +314,7 @@ namespace Atomic.Core.Ai.Retrieval
                 var stem = forms.MinBy(f => f.Length)!;
                 if (!forms.All(f => f.StartsWith(stem, StringComparison.Ordinal)))
                 {
-                    foreach (var form in forms) words.Add([form]);
+                    foreach (var form in forms.Where(f => !IsStraddlingBigram(f, stop))) words.Add([form]);
                     continue;
                 }
                 var looser = forms.SelectMany(form => LooseEndings
@@ -305,6 +324,18 @@ namespace Atomic.Core.Ai.Retrieval
             }
             return words;
         }
+
+        /// <summary>
+        /// A Han bigram that runs across a function character and that no document contains.
+        ///
+        /// <para>Han bigrams are every adjacent pair, so 动能的公式 also yields 能的 and 的公. Those
+        /// are not words but seams around the particle 的, and counted as unknown content they
+        /// outweighed the whole question. A bigram the corpus does contain stays, function character
+        /// or not.</para>
+        /// </summary>
+        private bool IsStraddlingBigram(string term, HashSet<string> stop) =>
+            term.Length == 2 && term.All(Tokenizer.IsHan) &&
+            term.Any(c => stop.Contains(c.ToString())) && DocumentFrequency(term) == 0;
 
         private static readonly System.Text.RegularExpressions.Regex Whitespace = new(@"\s+");
 

@@ -111,12 +111,6 @@ namespace Atomic.Core.Ai.Data
         }
 
         /// <summary>
-        /// The dataset ids. Nested rather than sitting on <see cref="DatasetIndex"/> directly
-        /// because names like <c>Dictionary</c>, <c>Equation</c> and <c>Poisson</c> would
-        /// otherwise shadow the BCL generic and the record types of the same name inside this
-        /// class - silently, since both resolve.
-        /// </summary>
-        /// <summary>
         /// The names people use for the anions the solubility table is keyed by. The table writes
         /// "Cl^-"; nobody asks whether silver Cl^- dissolves.
         /// </summary>
@@ -130,6 +124,34 @@ namespace Atomic.Core.Ai.Data
                 ["SiO3^2-"] = "silicate",
             };
 
+        /// <summary>
+        /// Translated row titles from <c>datasets/titles_{lang}.tsv</c> in the shared data (roadmap
+        /// 1.3): canonical key, then the title, with other wordings after a <c>|</c> - "Neutronens
+        /// massa | neutronmassa". <c>#</c> lines and the header are skipped; a row with no title is
+        /// no row. Mirrors Android's <c>DatasetIndex.parseTitles</c>.
+        /// </summary>
+        public static IReadOnlyDictionary<string, IReadOnlyList<string>> ParseTitles(string? text)
+        {
+            var output = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
+            if (string.IsNullOrWhiteSpace(text)) return output;
+            foreach (var line in text.Split('\n'))
+            {
+                if (string.IsNullOrWhiteSpace(line) || line.StartsWith('#') ||
+                    line.StartsWith("key\t", StringComparison.Ordinal)) continue;
+                var cells = line.TrimEnd('\r').Split('\t');
+                var forms = (cells.Length > 1 ? cells[1] : string.Empty).Split('|')
+                    .Select(f => f.Trim()).Where(f => f.Length > 0).ToList();
+                if (forms.Count > 0) output[cells[0]] = forms;
+            }
+            return output;
+        }
+
+        /// <summary>
+        /// The dataset ids. Nested rather than sitting on <see cref="DatasetIndex"/> directly
+        /// because names like <c>Dictionary</c>, <c>Equation</c> and <c>Poisson</c> would
+        /// otherwise shadow the BCL generic and the record types of the same name inside this
+        /// class - silently, since both resolve.
+        /// </summary>
         public static class Datasets
         {
             public const string Dictionary = "dictionary";

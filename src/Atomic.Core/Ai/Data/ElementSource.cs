@@ -37,6 +37,12 @@ namespace Atomic.Core.Ai.Data
 
         /// <summary>The table for a language, or null when it cannot be loaded.</summary>
         ElementTable? Load(string language);
+
+        /// <summary>
+        /// A text file shipped beside the element tables, such as <c>titles_sv.tsv</c> (roadmap
+        /// 1.3), or null when there is none.
+        /// </summary>
+        string? Text(string name) => null;
     }
 
     /// <summary>In-memory <see cref="IElementSource"/> for unit tests and previews.</summary>

@@ -42,7 +42,8 @@ namespace Atomic.App.Services
         /// </summary>
         public static IElementSource Source { get; } = new JsonElementSource(
             OpenLanguageAsset,
-            new[] { "af", "de", "en", "es", "fil", "fr", "hi", "it", "pt", "sv", "ur", "zh" });
+            new[] { "af", "de", "en", "es", "fil", "fr", "hi", "it", "pt", "sv", "ur", "zh" },
+            OpenDatasetAsset);
 
         // -- lookup ----------------------------------------------------------------------------
 
@@ -156,6 +157,13 @@ namespace Atomic.App.Services
         private static Stream? OpenLanguageAsset(string language)
         {
             var path = Path.Combine(AppContext.BaseDirectory, "Assets", "Elements", $"elements_{language}.json");
+            return File.Exists(path) ? File.OpenRead(path) : null;
+        }
+
+        /// <summary>The reference-table titles in each language (roadmap 1.3), <c>titles_sv.tsv</c>.</summary>
+        private static Stream? OpenDatasetAsset(string name)
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, "Assets", "Datasets", Path.GetFileName(name));
             return File.Exists(path) ? File.OpenRead(path) : null;
         }
     }

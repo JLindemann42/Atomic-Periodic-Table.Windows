@@ -130,7 +130,8 @@ namespace Atomic.Core.Tests.Corpus
                     ElectricalType: Text(row, "electrical_type"),
                     MagneticType: Text(row, "magnetic_type"));
             }
-            return new LocalizedView(language, map);
+            return new LocalizedView(language, map,
+                DatasetIndex.ParseTitles(TestAssets.ElementSource.Text($"titles_{language}.tsv")));
         }
 
         // ElementRow is a global-using alias inside Atomic.Core, so the test project spells the

@@ -53,18 +53,56 @@ namespace Atomic.Core.Ai.Data
     /// <summary>A language's display overlay on top of the shared numeric index.</summary>
     public sealed class LocalizedView
     {
-        public LocalizedView(string language, IReadOnlyDictionary<string, LocalizedElement> elements)
+        private static readonly IReadOnlyDictionary<string, IReadOnlyList<string>> NoTitles =
+            new Dictionary<string, IReadOnlyList<string>>();
+
+        public LocalizedView(string language, IReadOnlyDictionary<string, LocalizedElement> elements,
+            IReadOnlyDictionary<string, IReadOnlyList<string>>? datasetTitles = null)
         {
             Language = language;
             Elements = elements;
+            DatasetTitles = datasetTitles ?? NoTitles;
         }
 
         public string Language { get; }
 
         public IReadOnlyDictionary<string, LocalizedElement> Elements { get; }
 
+        /// <summary>
+        /// The reference tables' row titles in this language (roadmap 1.3), by canonical row key,
+        /// each the title shown first and then any other wording people use for it.
+        /// </summary>
+        public IReadOnlyDictionary<string, IReadOnlyList<string>> DatasetTitles { get; }
+
         public string? Name(string key) =>
             Elements.TryGetValue(key, out var element) ? element.Name : null;
+
+        /// <summary>
+        /// What a reference table is called in this language - "Poissons tal" for the Poisson
+        /// table - from the <c>dataset/&lt;table&gt;</c> rows of the same file. "Poissons tal för
+        /// sandsten" asks for the row "Sandsten" by its table's name.
+        /// </summary>
+        public IReadOnlyList<string> TableNames(string dataset) =>
+            DatasetTitles.TryGetValue("dataset/" + dataset, out var names) ? names : Array.Empty<string>();
+
+        /// <summary>
+        /// Every wording of a reference-table row's title in this language, the one to show first,
+        /// or empty when it has none.
+        ///
+        /// <para>The tables are English. Their titles are translated in the shared data
+        /// (<c>datasets/titles_{lang}.tsv</c>); an ion or electrode row is titled by an element,
+        /// whose name this overlay already knows.</para>
+        /// </summary>
+        public IReadOnlyList<string> DatasetTitlesOf(DatasetRow row)
+        {
+            if (DatasetTitles.TryGetValue(row.Key, out var titles)) return titles;
+            if (row.Dataset == DatasetIndex.Datasets.Ion || row.Dataset == DatasetIndex.Datasets.Electrode)
+            {
+                var name = Name(row.Title.ToLowerInvariant());
+                if (!string.IsNullOrWhiteSpace(name) && name != row.Title) return new[] { name };
+            }
+            return Array.Empty<string>();
+        }
 
         /// <summary>
         /// A translated value for one of the seven overlaid fields, or null when this language has
@@ -225,7 +263,9 @@ namespace Atomic.Core.Ai.Data
             // description. Silent, because a missing overlay is a legitimate state.
             var table = source.Load(language) ?? LoadBaseLanguage(source, language);
             if (table is null) return null;
-            var view = BuildOverlay(language, table);
+            var titles = DatasetIndex.ParseTitles(
+                source.Text($"titles_{language}.tsv") ?? source.Text($"titles_{BareLanguage(language)}.tsv"));
+            var view = BuildOverlay(language, table, titles);
             Overlays[language] = view;
             return view;
         }
@@ -233,8 +273,15 @@ namespace Atomic.Core.Ai.Data
         /// <summary>The table for the bare language of a regional tag: pt-BR to pt.</summary>
         private static ElementTable? LoadBaseLanguage(IElementSource source, string language)
         {
+            var bare = BareLanguage(language);
+            return bare != language ? source.Load(bare) : null;
+        }
+
+        /// <summary>The language of a regional tag without its region: pt-BR to pt.</summary>
+        private static string BareLanguage(string language)
+        {
             var dash = language.IndexOf('-', StringComparison.Ordinal);
-            return dash > 0 ? source.Load(language[..dash]) : null;
+            return dash > 0 ? language[..dash] : language;
         }
 
         /// <summary>Drop all cached state. Used by tests and by a language-data change.</summary>
@@ -377,7 +424,8 @@ namespace Atomic.Core.Ai.Data
                 coverage: coverage);
         }
 
-        private static LocalizedView BuildOverlay(string language, ElementTable table)
+        private static LocalizedView BuildOverlay(string language, ElementTable table,
+            IReadOnlyDictionary<string, IReadOnlyList<string>> titles)
         {
             var map = new Dictionary<string, LocalizedElement>(table.Count * 2, StringComparer.Ordinal);
             foreach (var (key, row) in table.Rows)
@@ -391,7 +439,7 @@ namespace Atomic.Core.Ai.Data
                     ElectricalType: Text(row, "electrical_type") ?? string.Empty,
                     MagneticType: Text(row, "magnetic_type") ?? string.Empty);
             }
-            return new LocalizedView(language, map);
+            return new LocalizedView(language, map, titles);
         }
 
         private static object? Raw(ElementRow row, string jsonKey) =>

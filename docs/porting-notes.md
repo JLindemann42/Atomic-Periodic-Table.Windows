@@ -1348,3 +1348,33 @@ compound's formula when the plan carries one.
 **The held-out split informed it once more.** It caught the "sea water" follow-up after the dev
 corpus passed. Two dev sessions with different wording describe the phenomenon; the fix was made
 against them, and the split passes (447 here).
+
+### D61 — translated reference-table titles (roadmap 1.3)
+
+Ported from Android in the same change, with twenty new `datasets.tsv` rows in nine languages, all
+of which failed before, on both.
+
+**The data.** `shared/datasets/titles_{lang}.tsv` gives every reference-table row its title in the
+eleven other languages, by canonical key, with other wordings after a `|`, plus `dataset/<table>`
+rows naming the tables. Both csproj files link them as content: `Assets\Datasets` in the app,
+`assets` beside the element tables in the tests.
+
+**Where it differs.** Android's `ElementSource.text` reads an asset by name. Here
+`IElementSource.Text` is a default interface member returning null, and `JsonElementSource` takes an
+optional third delegate that opens a file by name; `ElementRepository.OpenDatasetAsset` and the test
+fixture's `OpenFile` supply it. `KnowledgeStore.Overlay` falls back from `titles_pt-BR.tsv` to
+`titles_pt.tsv` as it already did for the element table. Kotlin's overloaded
+`LocalizedView.datasetTitles(row)` is `DatasetTitlesOf(row)`, because C# cannot overload a method
+with the `DatasetTitles` property.
+
+**The rest is a straight port.** `Document.AltTitles` count as title for coverage, and title
+precision is the best of the wordings. `HybridRetriever` appends the translated titles and table
+names to each row's body. `AnswerComposer` heads a dataset answer with the translated title and the
+English one in brackets. In the planner, a "what is" question takes the plain glossary entry
+rather than the periodic-trend one (`PlainDefinition`), and Han queries reach the dataset fallback
+at four characters (`LongEnoughForDataset`). In retrieval, a Han bigram straddling a function
+character that no document contains is not content (`IsStraddlingBigram`). The new stopwords
+(request verbs in four languages, Italian elided articles) arrive through the regenerated
+`Lexicon.g.cs`.
+
+**Held-out.** Run once at the end; it passed unchanged (447 here) and did not inform the work.

@@ -27,7 +27,7 @@ namespace Atomic.Core.Tests.Fixtures
                     ? Directory.EnumerateFiles(AssetDirectory, "elements_*.json")
                     : Enumerable.Empty<string>());
 
-            return new JsonElementSource(OpenLanguage, languages);
+            return new JsonElementSource(OpenLanguage, languages, OpenFile);
         });
 
         public static JsonElementSource ElementSource => Source.Value;
@@ -43,6 +43,13 @@ namespace Atomic.Core.Tests.Fixtures
         private static Stream? OpenLanguage(string language)
         {
             var path = Path.Combine(AssetDirectory, $"elements_{language}.json");
+            return File.Exists(path) ? File.OpenRead(path) : null;
+        }
+
+        /// <summary>The other shared files beside the tables, such as <c>titles_sv.tsv</c>.</summary>
+        private static Stream? OpenFile(string name)
+        {
+            var path = Path.Combine(AssetDirectory, Path.GetFileName(name));
             return File.Exists(path) ? File.OpenRead(path) : null;
         }
     }

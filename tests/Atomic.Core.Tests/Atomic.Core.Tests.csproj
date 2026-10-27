@@ -30,6 +30,10 @@
     <Content Include="..\..\shared\elements\elements_*.json"
              Link="assets\%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
+    <!-- The reference tables' titles in each language (roadmap 1.3). -->
+    <Content Include="..\..\shared\datasets\titles_*.tsv"
+             Link="assets\%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\..\src\Atomic.App\Strings\**\*.resw"
              Link="strings\%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />

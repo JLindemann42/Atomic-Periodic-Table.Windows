@@ -24,6 +24,7 @@ namespace Atomic.Core.Ai.Data
     public sealed class JsonElementSource : IElementSource
     {
         private readonly Func<string, Stream?> _open;
+        private readonly Func<string, Stream?>? _openFile;
         private readonly IReadOnlyList<string> _languages;
         private readonly ConcurrentDictionary<string, ElementTable?> _cache = new(StringComparer.Ordinal);
 
@@ -32,15 +33,29 @@ namespace Atomic.Core.Ai.Data
         /// language has no file. The caller owns nothing; this class disposes the stream.
         /// </param>
         /// <param name="languages">Language codes to advertise from <see cref="AvailableLanguages"/>.</param>
-        public JsonElementSource(Func<string, Stream?> open, IReadOnlyList<string> languages)
+        /// <param name="openFile">
+        /// Opens another shipped file by name, such as <c>titles_sv.tsv</c>, or returns null when
+        /// there is none; disposed here too. Without it <see cref="Text"/> has nothing to read.
+        /// </param>
+        public JsonElementSource(Func<string, Stream?> open, IReadOnlyList<string> languages,
+            Func<string, Stream?>? openFile = null)
         {
             _open = open ?? throw new ArgumentNullException(nameof(open));
             _languages = languages ?? throw new ArgumentNullException(nameof(languages));
+            _openFile = openFile;
         }
 
         public IReadOnlyList<string> AvailableLanguages() => _languages;
 
         public ElementTable? Load(string language) => _cache.GetOrAdd(language, Parse);
+
+        public string? Text(string name)
+        {
+            using var stream = _openFile?.Invoke(name);
+            if (stream is null) return null;
+            using var reader = new StreamReader(stream, System.Text.Encoding.UTF8);
+            return reader.ReadToEnd();
+        }
 
         private ElementTable? Parse(string language)
         {
