@@ -1511,3 +1511,37 @@ explanation and its decline, and `no-match` at the end; `QueryPlannerCascadeTest
 **`ArbitrationTest`**, as on Android, checks that the pick is the plan for every corpus row and
 reports where the order still decides. Both platforms report the same: 520 of 2,521 dev rows have
 more than one branch proposing. 3,619 core tests pass; held-out (456) passes.
+
+### D68 — planner arbitration, stage 2: evidence (roadmap 1.8)
+
+Ported from Android in the same change. No answer changes.
+
+**What changed.** The branches up to `Explanation` (`Branch.Preempts()`) still win by order: they
+decide what kind of question this is. The rest compete on evidence. Each `Proposal` carries `Uses`,
+the things the user said that its plan answers with, and `Arbiter.Pick` takes the most, with the
+`Branch` order only breaking ties. `Said` (built once the query is resolved, after the comparator
+filters) holds the named elements and fields, the statistic, the unit and the inherited filters;
+`Arbiter.Uses` scores a plan against it and adds the cues its branch passes to `Propose` - a
+comparative, a ranking, "isotopes", "after", "compare", "by how much" (`Margin`). `ByOrder` keeps the
+stage-1 pick so the test can show what evidence changed.
+
+**Five rules**, the same on both platforms: a number the operators read is not also an element
+("group 17" is not chlorine); one word names one element (an element match whose surface lies
+inside a longer one's - the "tin" in Filipino "tingga", lead - does not count); a field whose matched words name a reading of its own (isotope, safety,
+spectrum words) is not field evidence; `NamesACompareVerb` leaves out the `COMPARE` entries that are
+comparative adjectives ("denser than"); a comparative with `Limit == 3` claims the margin words.
+
+**C# specifics.** `Propose` takes `params string[] cues`, so `EarlyDecline` is handed a lambda rather
+than the method group. Filter evidence is labelled by position (`filter 1: …`) on both platforms:
+a record holding a `HashSet` prints its type name rather than its contents, and two families would
+have collapsed into one string. The test compares plans field by field (`SameAnswer`), because
+record equality compares the lists inside a `QueryPlan` by reference.
+
+**Measured** by `ArbitrationTest`, identically on both platforms: of 2,521 dev rows, 475 have
+branches proposing different answers; the evidence picks what the order did on all of them and
+decides every reading-tier contest but 5 (151 before the five rules), all whole sentences the
+splitter divides before planning. 3,621 core tests pass; held-out (458) passes with no pick changed.
+The held-out run informed nothing: its one tie, "锇比铝致密多少" (多少 is not in `BY_HOW_MUCH`), is
+left for a stage with dev rows of its own. The Filipino held-out tie the first run showed went with
+the one-word rule, which was found and fixed on the dev row "mas madensidad ba ang ginto kaysa
+tingga".

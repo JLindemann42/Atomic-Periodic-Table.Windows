@@ -69,17 +69,21 @@ namespace Atomic.Core.Ai.Nlu
         internal IReadOnlyList<Proposal> Proposals(string query, DialogueState state)
         {
             var proposals = new List<Proposal>();
+            // What the query said, once it is resolved; the branches before that pre-empt by order
+            // and are not scored.
+            Said? said = null;
             // Each proposal keeps the evidence it had when it was made: the list below is shared,
-            // and the branches further down keep adding to it.
-            void Propose(Branch branch, QueryPlan plan) =>
-                proposals.Add(new Proposal(branch, plan with { Evidence = plan.Evidence.ToList() }));
+            // and the branches further down keep adding to it. The cues are the words only this
+            // branch's reading accounts for.
+            void Propose(Branch branch, QueryPlan plan, params string[] cues) =>
+                proposals.Add(new Proposal(branch, plan with { Evidence = plan.Evidence.ToList() }, Arbiter.Uses(plan, said, cues)));
 
             // Everything below reads words, and "smältpunktsskillnaden" or "pinakamatigas" is one
             // word carrying two (roadmap 1.5).
             var rawQuery = _morphology.Expand(query);
             var normalized = TextMatching.NormalizeForLookup(rawQuery);
 
-            EarlyDecline(rawQuery, normalized, state, Propose);
+            EarlyDecline(rawQuery, normalized, state, (branch, plan) => Propose(branch, plan));
 
             // ---- Calculations ---------------------------------------------------------------
             // Checked first among the real intents: these questions name a formula or a nuclide,
@@ -338,6 +342,30 @@ namespace Atomic.Core.Ai.Nlu
                 .Select(c => new Filter.FieldCompare(fieldIds[0], c.Op, c.Value))
                 .ToList();
 
+            // A number the operators read - a group, a period, a threshold, a count - is not also
+            // the name of an element: "which elements are in group 17" does not mention chlorine.
+            var operatorsReadANumber = operators.Comparators.Count > 0 || operators.Range is not null ||
+                                       operators.TopN is not null ||
+                                       operators.SubsetFilters.Any(f => f is Filter.InGroup or Filter.InPeriod);
+            // A word that names a reading of its own is evidence for that reading, not for a field
+            // whose label it shares: "isotopes of uranium" asks for the isotopes, not the
+            // common-neutron count.
+            var dedicatedWords = Lexicon.ISOTOPE_WORDS.Concat(Lexicon.SAFETY_WORDS).Concat(Lexicon.SPECTRUM_WORDS).ToList();
+            var named = elementMatches.Where(m => !(operatorsReadANumber && m.Matched.All(char.IsDigit))).ToList();
+            said = new Said(
+                // One word names one element: "tingga" is lead, and the "tin" inside it is not a
+                // second subject.
+                Elements: named
+                    .Where(m => !named.Any(other => other.Matched.Length > m.Matched.Length &&
+                                                     other.Matched.Contains(m.Matched, StringComparison.OrdinalIgnoreCase)))
+                    .Select(m => m.Key).ToHashSet(StringComparer.Ordinal),
+                Fields: fieldMatches
+                    .Where(m => !dedicatedWords.Any(w => TextMatching.ContainsWord(TextMatching.NormalizeForLookup(m.Matched), w)))
+                    .Select(m => m.Spec.Id).ToHashSet(StringComparer.Ordinal),
+                Statistic: operators.Aggregation != Aggregation.None,
+                Unit: operators.TargetUnit,
+                InheritedFilters: operators.SubsetFilters.Count == 0 ? subsetFilters : []);
+
             // ---- Comparative against the focus element ---------------------------------------
             // "is gold denser" after a turn about lead, "which is denser" after comparing two. The
             // adjective is the signal - it is what makes the turn a comparison rather than a
@@ -362,7 +390,7 @@ namespace Atomic.Core.Ai.Nlu
                 if (ComparativePlan(rawQuery, normalized, pair, fieldIds) is { } against)
                 {
                     evidence.Add("comparative against focus element");
-                    Propose(Branch.ComparativeAgainstFocus, against with { Evidence = [.. against.Evidence, .. evidence] });
+                    Propose(Branch.ComparativeAgainstFocus, against with { Evidence = [.. against.Evidence, .. evidence] }, ["comparative", .. Margin(against)]);
                 }
 
                 // ComparativePlan reads an explicit "X is denser than Y" and needs a comparator, an
@@ -379,7 +407,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: operators.TargetUnit ?? state.LastTargetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), "comparative");
                 }
             }
 
@@ -450,7 +478,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: operators.TargetUnit ?? state.LastTargetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), "comparative");
                 }
             }
 
@@ -480,7 +508,7 @@ namespace Atomic.Core.Ai.Nlu
                 if (ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } explicitPlan)
                 {
                     evidence.Add($"comparative {string.Join(", ", fieldIds)}");
-                    Propose(Branch.PeriphrasticComparative, explicitPlan with { Evidence = [.. explicitPlan.Evidence, .. evidence] });
+                    Propose(Branch.PeriphrasticComparative, explicitPlan with { Evidence = [.. explicitPlan.Evidence, .. evidence] }, ["comparative", .. Margin(explicitPlan)]);
                 }
 
                 evidence.Add("periphrastic comparative");
@@ -491,7 +519,7 @@ namespace Atomic.Core.Ai.Nlu
                     TargetUnit: operators.TargetUnit,
                     Confidence: 0.8,
                     RawQuery: rawQuery,
-                    Evidence: evidence));
+                    Evidence: evidence), "comparative");
             }
 
             // A threshold can name an element instead of a number: "denser than iron" means denser
@@ -530,7 +558,7 @@ namespace Atomic.Core.Ai.Nlu
             // before the general comparison so the answer leads with yes/no or the winner.
             if (elementKeys.Count >= 2 &&
                 ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } direct)
-                Propose(Branch.DirectComparative, direct with { Evidence = [.. direct.Evidence, .. evidence] });
+                Propose(Branch.DirectComparative, direct with { Evidence = [.. direct.Evidence, .. evidence] }, ["comparative", .. Margin(direct)]);
 
             // ---- Aggregation: "average electronegativity of the halogens" --------------------
             // A filter is not required: "the average density of all elements" ranges over the whole
@@ -589,7 +617,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: targetUnit,
                         Confidence: comparatorFilters.Count > 0 ? 0.85 : 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), wantsRanking ? ["ranking"] : []);
                 }
             }
 
@@ -620,7 +648,7 @@ namespace Atomic.Core.Ai.Nlu
                     Limit: DefaultListLimit,
                     Confidence: 0.75,
                     RawQuery: rawQuery,
-                    Evidence: evidence));
+                    Evidence: evidence), comparesASubset && comparatorFilters.Count == 0 ? ["compare"] : []);
             }
 
             // ---- Field coverage: "which elements have a recorded curie point" ----------------
@@ -643,7 +671,7 @@ namespace Atomic.Core.Ai.Nlu
                         Limit: DefaultListLimit,
                         Confidence: 0.75,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), "has a value");
                 }
             }
 
@@ -661,7 +689,7 @@ namespace Atomic.Core.Ai.Nlu
                 // compare to iron" is a request for a winner, and without this it fell through to
                 // the side-by-side table the branch below builds.
                 if (ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } rerun)
-                    Propose(Branch.CompareWithFocus, rerun with { Evidence = [.. rerun.Evidence, .. evidence] });
+                    Propose(Branch.CompareWithFocus, rerun with { Evidence = [.. rerun.Evidence, .. evidence] }, ["compare", .. Margin(rerun)]);
             }
 
             // ---- Neighbour: "what comes after carbon" ----------------------------------------
@@ -677,7 +705,7 @@ namespace Atomic.Core.Ai.Nlu
                     Limit: direction,
                     Confidence: 0.85,
                     RawQuery: rawQuery,
-                    Evidence: evidence));
+                    Evidence: evidence), "neighbour");
             }
 
             // ---- Element versus alloy: "the difference between iron and steel" ---------------
@@ -698,7 +726,7 @@ namespace Atomic.Core.Ai.Nlu
                     Entities: [new EntityRef.DatasetRow(DatasetIndex.Datasets.Alloy, alloy.Id)],
                     Confidence: 0.8,
                     RawQuery: rawQuery,
-                    Evidence: evidence));
+                    Evidence: evidence), "alloy");
             }
 
             // ---- Selective comparison: "which melts first, iron or copper" -------------------
@@ -709,7 +737,7 @@ namespace Atomic.Core.Ai.Nlu
                 ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } selective)
             {
                 evidence.Add("selective comparison");
-                Propose(Branch.SelectiveComparison, selective with { Evidence = [.. selective.Evidence, .. evidence] });
+                Propose(Branch.SelectiveComparison, selective with { Evidence = [.. selective.Evidence, .. evidence] }, ["selective", .. Margin(selective)]);
             }
 
             // ---- Comparison: two or more elements named together ----------------------------
@@ -736,7 +764,7 @@ namespace Atomic.Core.Ai.Nlu
                     TargetUnit: targetUnit,
                     Confidence: 0.8,
                     RawQuery: rawQuery,
-                    Evidence: [.. evidence, .. unsupported.Select(a => $"no field for {a}")]));
+                    Evidence: [.. evidence, .. unsupported.Select(a => $"no field for {a}")]), NamesACompareVerb(normalized) ? ["compare"] : []);
             }
 
             var element = elementKeys.FirstOrDefault() is { } singleKey ? _store.Element(singleKey) : null;
@@ -771,7 +799,7 @@ namespace Atomic.Core.Ai.Nlu
                         Limit: operators.TopN ?? DefaultIsotopeLimit,
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), "isotopes");
                 }
 
                 if (MentionsAny(normalized, Lexicon.SAFETY_WORDS))
@@ -782,7 +810,7 @@ namespace Atomic.Core.Ai.Nlu
                         Entities: [new EntityRef.Element(element.Key)],
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), "safety");
                 }
 
                 // Also checked before field resolution: "what does the emission spectrum of iron
@@ -796,7 +824,7 @@ namespace Atomic.Core.Ai.Nlu
                         Entities: [new EntityRef.Element(element.Key)],
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), "spectrum");
                 }
             }
 
@@ -827,7 +855,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: targetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), "category");
                 }
             }
 
@@ -861,7 +889,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: targetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence));
+                        Evidence: evidence), operators.Ordinal is not null ? ["ordinal"] : []);
                 }
             }
 

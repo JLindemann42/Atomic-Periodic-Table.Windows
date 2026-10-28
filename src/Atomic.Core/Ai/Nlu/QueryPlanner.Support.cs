@@ -391,6 +391,20 @@ namespace Atomic.Core.Ai.Nlu
         }
 
         /// <summary>
+        /// "Compare", "versus", "the difference between" - and not "denser than", which
+        /// <see cref="Lexicon.COMPARE"/> also lists but which is the comparative's word: counted for
+        /// the side-by-side reading as well, it would tie that reading with the one that answers the
+        /// question asked.
+        /// </summary>
+        private static bool NamesACompareVerb(string normalized) =>
+            Lexicon.COMPARE.Any(word =>
+                normalized.Contains(word, StringComparison.Ordinal) &&
+                !Lexicon.COMPARATIVE_ADJECTIVES.Keys.Any(adjective => word.Contains(adjective, StringComparison.Ordinal)));
+
+        /// <summary>A comparative that answers "by how much" accounts for those words too (roadmap 1.8).</summary>
+        private static string[] Margin(QueryPlan plan) => plan.Limit == 3 ? ["margin"] : [];
+
+        /// <summary>
         /// Recognise a question about how two elements stand relative to one another.
         ///
         /// <para>Covers three phrasings that all reduce to the same operation:</para>
