@@ -23,45 +23,14 @@ namespace Atomic.Core.Ai.Nlu
     public sealed partial class QueryPlanner
     {
         /// <summary>
-        /// The order intents are attempted in, as a fact a test can assert.
-        ///
-        /// <para>Not used by <see cref="Plan"/> - it is documentation with teeth. A future Android
-        /// sync that moves a guard changes behaviour silently; changing this list is what makes the
-        /// change visible in review.</para>
+        /// The order the branches are preferred in, as a fact a test can assert: <see cref="Branch"/>'s,
+        /// which <see cref="Arbiter.Pick"/> chooses by (roadmap 1.8). It was a hand-kept list beside
+        /// the code it described; it is now read off the enum the planner actually uses.
         /// </summary>
         internal static readonly IReadOnlyList<string> CascadeOrder =
-        [
-            "defer-to-personality",
-            "out-of-range-element",
-            "unbacked-concept",
-            "count-of-all-elements",
-            "calculation",          // BALANCE, SOLUTION, DECAY, MOLE, ISOTOPE_COMPARISON,
-                                    // NUCLIDE_COUNT, ISOTOPES, FORMULA_MASS - see CalculationPlan
-            "set-of-an-element",    // roadmap 1.7: a list returns here; an operator ranges below
-            "unit-convert",
-            "narrative-decline",
-            "etymology-decline",
-            "explanation",
-            "comparative-against-focus",
-            "comparative-over-previous-answer",
-            "periphrastic-comparative",
-            "direct-comparative",
-            "aggregate",
-            "superlative-or-filtered-list",
-            "subset-list",
-            "field-coverage-list",
-            "compare-with-focus",
-            "neighbour",
-            "alloy",
-            "selective-comparison",
-            "comparison",
-            "isotopes",
-            "safety",
-            "emission-spectrum",
-            "category-lookup",
-            "property-lookup",
-            "dataset-row",
-        ];
+            Enum.GetValues<Branch>()
+                .Select(b => System.Text.RegularExpressions.Regex.Replace(b.ToString(), "(?<!^)([A-Z])", "-$1").ToLowerInvariant())
+                .ToList();
 
         /// <summary>
         /// The plan for <paramref name="query"/>, corrected for misspelling when it would otherwise
@@ -85,21 +54,39 @@ namespace Atomic.Core.Ai.Nlu
             return answered ? second with { Evidence = [.. second.Evidence, "spelling: " + corrected] } : plan;
         }
 
-        private QueryPlan PlanWords(string query, DialogueState state)
+        private QueryPlan PlanWords(string query, DialogueState state) =>
+            Arbiter.Pick(Proposals(query, state))!.Plan;
+
+        /// <summary>
+        /// Every plan the branches propose for <paramref name="query"/>, in the order they proposed
+        /// (roadmap 1.8). The last is always <see cref="Branch.NoMatch"/>, so there is always one
+        /// to pick.
+        ///
+        /// <para>The branches still run in the order the cascade had, because the steps between them
+        /// refine what the later ones see - the subject a follow-up inherits, a threshold read off
+        /// an element. What changed is that a branch proposes instead of ending the method.</para>
+        /// </summary>
+        internal IReadOnlyList<Proposal> Proposals(string query, DialogueState state)
         {
+            var proposals = new List<Proposal>();
+            // Each proposal keeps the evidence it had when it was made: the list below is shared,
+            // and the branches further down keep adding to it.
+            void Propose(Branch branch, QueryPlan plan) =>
+                proposals.Add(new Proposal(branch, plan with { Evidence = plan.Evidence.ToList() }));
+
             // Everything below reads words, and "smältpunktsskillnaden" or "pinakamatigas" is one
             // word carrying two (roadmap 1.5).
             var rawQuery = _morphology.Expand(query);
             var normalized = TextMatching.NormalizeForLookup(rawQuery);
 
-            if (EarlyDecline(rawQuery, normalized, state) is { } declined) return declined;
+            EarlyDecline(rawQuery, normalized, state, Propose);
 
             // ---- Calculations ---------------------------------------------------------------
             // Checked first among the real intents: these questions name a formula or a nuclide,
             // which the element and field resolvers would otherwise pick apart into unrelated
             // matches. "the molar mass of H2SO4" used to retrieve the dictionary definition of
             // molar mass instead of a number.
-            if (CalculationPlan(rawQuery, normalized) is { } calculation) return calculation;
+            if (CalculationPlan(rawQuery, normalized) is { } calculation) Propose(Branch.Calculation, calculation);
 
             var operators = OperatorExtractor.Extract(rawQuery);
             var elementMatches = _entities.ResolveAll(rawQuery, limit: 4);
@@ -131,14 +118,14 @@ namespace Atomic.Core.Ai.Nlu
                 fieldMatches = fieldMatches.Where(m => m.Spec.Id != DimensionFields[dimension]).ToList();
                 if (asksForMembers)
                 {
-                    return new QueryPlan(
+                    Propose(Branch.SetOfAnElement, new QueryPlan(
                         Intent.FilterList,
                         FieldIds: fieldMatches.Select(m => m.Spec.Id).ToList(),
                         Filters: operators.SubsetFilters,
                         Limit: DefaultListLimit,
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -146,7 +133,7 @@ namespace Atomic.Core.Ai.Nlu
             // Placed here rather than in CalculationPlan, because the guard that separates this
             // from a property lookup needs the resolved field and element, and neither is available
             // where the calculations run.
-            if (UnitConvertPlan(rawQuery, operators) is { } conversion) return conversion;
+            if (UnitConvertPlan(rawQuery, operators) is { } conversion) Propose(Branch.UnitConvert, conversion);
 
             // ---- A compound named in words ---------------------------------------------------
             // Before inheritance, so "and the boiling point of water?" cannot inherit the thread's
@@ -161,7 +148,7 @@ namespace Atomic.Core.Ai.Nlu
                         TextMatching.NormalizeForLookup(f.Matched), c.Surface)));
                 if (compound is not null &&
                     CompoundPlan(rawQuery, normalized, compound, fieldMatches.Count > 0) is { } compoundPlan)
-                    return compoundPlan;
+                    Propose(Branch.Compound, compoundPlan);
             }
 
             // ---- Narrative questions ---------------------------------------------------------
@@ -175,14 +162,14 @@ namespace Atomic.Core.Ai.Nlu
             // density" still has a real question in it.
             if (fieldMatches.Count == 0 &&
                 Lexicon.NARRATIVE_INTENTS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
-                return Decline(rawQuery, DeclineReason.Narrative);
+                Propose(Branch.NarrativeDecline, Decline(rawQuery, DeclineReason.Narrative));
 
             // Etymology declines even with a field in hand, because the field is the *subject* of
             // the question rather than the thing being asked for: "where does that symbol come
             // from" resolves `symbol`, and answering it with a value - tin's nine abundance
             // reservoirs, as reported - mistakes what the sentence is about.
             if (Lexicon.ETYMOLOGY_INTENTS.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
-                return Decline(rawQuery, DeclineReason.Etymology);
+                Propose(Branch.EtymologyDecline, Decline(rawQuery, DeclineReason.Etymology));
 
             // ---- Explanations ----------------------------------------------------------------
             // "Why does atomic radius increase down a group" and "what is a halogen" want prose,
@@ -214,7 +201,7 @@ namespace Atomic.Core.Ai.Nlu
             if (AsksHowItWorks(normalized) || (!carriesOperator && !continuesAThread))
             {
                 if (ExplanationPlan(rawQuery, normalized, elementMatches.Count > 0) is { } explanation)
-                    return explanation;
+                    Propose(Branch.Explanation, explanation);
             }
 
             // ---- Slot-emptiness inheritance --------------------------------------------------
@@ -375,7 +362,7 @@ namespace Atomic.Core.Ai.Nlu
                 if (ComparativePlan(rawQuery, normalized, pair, fieldIds) is { } against)
                 {
                     evidence.Add("comparative against focus element");
-                    return against with { Evidence = [.. against.Evidence, .. evidence] };
+                    Propose(Branch.ComparativeAgainstFocus, against with { Evidence = [.. against.Evidence, .. evidence] });
                 }
 
                 // ComparativePlan reads an explicit "X is denser than Y" and needs a comparator, an
@@ -385,14 +372,14 @@ namespace Atomic.Core.Ai.Nlu
                 if (fieldIds.Count > 0)
                 {
                     evidence.Add("comparative against focus element");
-                    return new QueryPlan(
+                    Propose(Branch.ComparativeAgainstFocus, new QueryPlan(
                         Intent.Comparative,
                         Entities: pair.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
                         FieldIds: [fieldIds[0]],
                         TargetUnit: operators.TargetUnit ?? state.LastTargetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -454,7 +441,7 @@ namespace Atomic.Core.Ai.Nlu
                 if (comparativeField is not null && readsAsComparison)
                 {
                     evidence.Add("comparative over the previous answer");
-                    return new QueryPlan(
+                    Propose(Branch.ComparativeOverPrevious, new QueryPlan(
                         Intent.Comparative,
                         Entities: recentPair.Take(2).Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
                         FieldIds: [comparativeField],
@@ -463,7 +450,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: operators.TargetUnit ?? state.LastTargetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -493,18 +480,18 @@ namespace Atomic.Core.Ai.Nlu
                 if (ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } explicitPlan)
                 {
                     evidence.Add($"comparative {string.Join(", ", fieldIds)}");
-                    return explicitPlan with { Evidence = [.. explicitPlan.Evidence, .. evidence] };
+                    Propose(Branch.PeriphrasticComparative, explicitPlan with { Evidence = [.. explicitPlan.Evidence, .. evidence] });
                 }
 
                 evidence.Add("periphrastic comparative");
-                return new QueryPlan(
+                Propose(Branch.PeriphrasticComparative, new QueryPlan(
                     Intent.Comparative,
                     Entities: elementKeys.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
                     FieldIds: [fieldIds[0]],
                     TargetUnit: operators.TargetUnit,
                     Confidence: 0.8,
                     RawQuery: rawQuery,
-                    Evidence: evidence);
+                    Evidence: evidence));
             }
 
             // A threshold can name an element instead of a number: "denser than iron" means denser
@@ -543,7 +530,7 @@ namespace Atomic.Core.Ai.Nlu
             // before the general comparison so the answer leads with yes/no or the winner.
             if (elementKeys.Count >= 2 &&
                 ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } direct)
-                return direct with { Evidence = [.. direct.Evidence, .. evidence] };
+                Propose(Branch.DirectComparative, direct with { Evidence = [.. direct.Evidence, .. evidence] });
 
             // ---- Aggregation: "average electronegativity of the halogens" --------------------
             // A filter is not required: "the average density of all elements" ranges over the whole
@@ -558,7 +545,7 @@ namespace Atomic.Core.Ai.Nlu
                 if (operators.Aggregation == Aggregation.Count || fieldId is not null)
                 {
                     evidence.Add($"aggregation {operators.Aggregation}");
-                    return new QueryPlan(
+                    Propose(Branch.Aggregate, new QueryPlan(
                         Intent.Aggregate,
                         Entities: elementKeys.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
                         FieldIds: fieldId is null ? [] : [fieldId],
@@ -568,7 +555,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: targetUnit,
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -591,7 +578,7 @@ namespace Atomic.Core.Ai.Nlu
                     var rankOrdinal = operators.RankOrdinal;
                     if (rankOrdinal is not null) evidence.Add($"rank {rankOrdinal}");
 
-                    return new QueryPlan(
+                    Propose(Branch.SuperlativeOrFilteredList, new QueryPlan(
                         isList && rankOrdinal is null ? Intent.FilterList : Intent.Superlative,
                         FieldIds: [sortField],
                         FieldOrdinal: rankOrdinal,
@@ -602,7 +589,7 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: targetUnit,
                         Confidence: comparatorFilters.Count > 0 ? 0.85 : 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -622,7 +609,7 @@ namespace Atomic.Core.Ai.Nlu
                 // filter itself, so requiring no field here would make that query unplannable.
                 var displayField = NumericFieldOrNull(fieldIds.FirstOrDefault());
                 evidence.Add("subset list");
-                return new QueryPlan(
+                Propose(Branch.SubsetList, new QueryPlan(
                     Intent.FilterList,
                     FieldIds: displayField is null ? [] : [displayField],
                     // Every filter, not just the subset: "which metals are lighter than aluminium"
@@ -633,7 +620,7 @@ namespace Atomic.Core.Ai.Nlu
                     Limit: DefaultListLimit,
                     Confidence: 0.75,
                     RawQuery: rawQuery,
-                    Evidence: evidence);
+                    Evidence: evidence));
             }
 
             // ---- Field coverage: "which elements have a recorded curie point" ----------------
@@ -648,7 +635,7 @@ namespace Atomic.Core.Ai.Nlu
                 if (coverageField is not null)
                 {
                     evidence.Add("field coverage");
-                    return new QueryPlan(
+                    Propose(Branch.FieldCoverageList, new QueryPlan(
                         Intent.FilterList,
                         FieldIds: [coverageField],
                         SortField: coverageField,
@@ -656,7 +643,7 @@ namespace Atomic.Core.Ai.Nlu
                         Limit: DefaultListLimit,
                         Confidence: 0.75,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -674,7 +661,7 @@ namespace Atomic.Core.Ai.Nlu
                 // compare to iron" is a request for a winner, and without this it fell through to
                 // the side-by-side table the branch below builds.
                 if (ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } rerun)
-                    return rerun with { Evidence = [.. rerun.Evidence, .. evidence] };
+                    Propose(Branch.CompareWithFocus, rerun with { Evidence = [.. rerun.Evidence, .. evidence] });
             }
 
             // ---- Neighbour: "what comes after carbon" ----------------------------------------
@@ -684,13 +671,13 @@ namespace Atomic.Core.Ai.Nlu
                 _store.ByNumber(subject.AtomicNumber + direction) is { } target)
             {
                 evidence.Add($"neighbour {(direction > 0 ? "after" : "before")}");
-                return new QueryPlan(
+                Propose(Branch.Neighbour, new QueryPlan(
                     Intent.Neighbour,
                     Entities: [new EntityRef.Element(subject.Key), new EntityRef.Element(target.Key)],
                     Limit: direction,
                     Confidence: 0.85,
                     RawQuery: rawQuery,
-                    Evidence: evidence);
+                    Evidence: evidence));
             }
 
             // ---- Element versus alloy: "the difference between iron and steel" ---------------
@@ -706,12 +693,12 @@ namespace Atomic.Core.Ai.Nlu
             if (!asksForAFieldOfAnElement && AlloyIn(normalized) is { } alloy)
             {
                 evidence.Add($"alloy {alloy.Id}");
-                return new QueryPlan(
+                Propose(Branch.Alloy, new QueryPlan(
                     Intent.DatasetLookup,
                     Entities: [new EntityRef.DatasetRow(DatasetIndex.Datasets.Alloy, alloy.Id)],
                     Confidence: 0.8,
                     RawQuery: rawQuery,
-                    Evidence: evidence);
+                    Evidence: evidence));
             }
 
             // ---- Selective comparison: "which melts first, iron or copper" -------------------
@@ -722,7 +709,7 @@ namespace Atomic.Core.Ai.Nlu
                 ComparativePlan(rawQuery, normalized, elementKeys, fieldIds) is { } selective)
             {
                 evidence.Add("selective comparison");
-                return selective with { Evidence = [.. selective.Evidence, .. evidence] };
+                Propose(Branch.SelectiveComparison, selective with { Evidence = [.. selective.Evidence, .. evidence] });
             }
 
             // ---- Comparison: two or more elements named together ----------------------------
@@ -742,14 +729,14 @@ namespace Atomic.Core.Ai.Nlu
                     fieldIds.Count > 0 ? fieldIds :
                     DefaultComparisonFields;
 
-                return new QueryPlan(
+                Propose(Branch.Comparison, new QueryPlan(
                     Intent.Comparison,
                     Entities: elementKeys.Select(k => (EntityRef)new EntityRef.Element(k)).ToList(),
                     FieldIds: comparisonFields,
                     TargetUnit: targetUnit,
                     Confidence: 0.8,
                     RawQuery: rawQuery,
-                    Evidence: [.. evidence, .. unsupported.Select(a => $"no field for {a}")]);
+                    Evidence: [.. evidence, .. unsupported.Select(a => $"no field for {a}")]));
             }
 
             var element = elementKeys.FirstOrDefault() is { } singleKey ? _store.Element(singleKey) : null;
@@ -778,24 +765,24 @@ namespace Atomic.Core.Ai.Nlu
                 if (MentionsAny(normalized, Lexicon.ISOTOPE_WORDS))
                 {
                     evidence.Add("isotopes");
-                    return new QueryPlan(
+                    Propose(Branch.Isotopes, new QueryPlan(
                         Intent.Isotopes,
                         Entities: [new EntityRef.Element(element.Key)],
                         Limit: operators.TopN ?? DefaultIsotopeLimit,
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
 
                 if (MentionsAny(normalized, Lexicon.SAFETY_WORDS))
                 {
                     evidence.Add("safety");
-                    return new QueryPlan(
+                    Propose(Branch.Safety, new QueryPlan(
                         Intent.Safety,
                         Entities: [new EntityRef.Element(element.Key)],
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
 
                 // Also checked before field resolution: "what does the emission spectrum of iron
@@ -804,12 +791,12 @@ namespace Atomic.Core.Ai.Nlu
                 if (MentionsAny(normalized, Lexicon.SPECTRUM_WORDS))
                 {
                     evidence.Add("emission spectrum");
-                    return new QueryPlan(
+                    Propose(Branch.EmissionSpectrum, new QueryPlan(
                         Intent.EmissionSpectrum,
                         Entities: [new EntityRef.Element(element.Key)],
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -833,14 +820,14 @@ namespace Atomic.Core.Ai.Nlu
                 if (populated.Count >= 2)
                 {
                     evidence.Add($"category {category}");
-                    return new QueryPlan(
+                    Propose(Branch.CategoryLookup, new QueryPlan(
                         Intent.CategoryLookup,
                         Entities: [new EntityRef.Element(element.Key)],
                         FieldIds: populated,
                         TargetUnit: targetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
@@ -866,7 +853,7 @@ namespace Atomic.Core.Ai.Nlu
                             ? $"no data for {propertyField}"
                             : $"property {propertyField}");
 
-                    return new QueryPlan(
+                    Propose(Branch.PropertyLookup, new QueryPlan(
                         Intent.PropertyLookup,
                         Entities: [new EntityRef.Element(element.Key)],
                         FieldIds: [propertyField],
@@ -874,15 +861,16 @@ namespace Atomic.Core.Ai.Nlu
                         TargetUnit: targetUnit,
                         Confidence: 0.8,
                         RawQuery: rawQuery,
-                        Evidence: evidence);
+                        Evidence: evidence));
                 }
             }
 
             // ---- Dataset row, when retrieval is confident ------------------------------------
             if (DatasetPlan(rawQuery, normalized, elementKeys, fieldIds, evidence) is { } dataset)
-                return dataset;
+                Propose(Branch.DatasetRow, dataset);
 
-            return Decline(rawQuery, DeclineReason.NoMatch);
+            Propose(Branch.NoMatch, Decline(rawQuery, DeclineReason.NoMatch));
+            return proposals;
         }
 
         /// <summary>
@@ -891,7 +879,7 @@ namespace Atomic.Core.Ai.Nlu
         /// <para>Separated because none of them needs the operators, the resolvers or the dialogue
         /// state - they are decisions about whether the sentence is a chemistry question at all.</para>
         /// </summary>
-        private QueryPlan? EarlyDecline(string rawQuery, string normalized, DialogueState state)
+        private void EarlyDecline(string rawQuery, string normalized, DialogueState state, Action<Branch, QueryPlan> propose)
         {
             // ---- Conversation, not chemistry -------------------------------------------------
             // Checked before anything else. A greeting or a quiz request has no grounded answer,
@@ -902,13 +890,13 @@ namespace Atomic.Core.Ai.Nlu
                     w => TextMatching.ContainsWord(normalized, w) ||
                          (w.Contains(' ', StringComparison.Ordinal) &&
                           normalized.Contains(w, StringComparison.Ordinal))))
-                return Decline(rawQuery, DeclineReason.Conversational);
+                propose(Branch.DeferToPersonality, Decline(rawQuery, DeclineReason.Conversational));
 
             // An element number past 118 has a definite answer - there is no such element - and the
             // worst thing to do is guess. Declining lets the personality layer say so; answering
             // from retrieval produced "Electron mass" for "tell me about element 119".
             if (_entities.OutOfRangeElementNumber(rawQuery) is not null)
-                return Decline(rawQuery, DeclineReason.NoSuchElement);
+                propose(Branch.OutOfRangeElement, Decline(rawQuery, DeclineReason.NoSuchElement));
 
             // ---- Concepts with no backing field ----------------------------------------------
             // "समान" is Hindi for "similar" and also the first word of "समान समूह" - "the same
@@ -935,7 +923,7 @@ namespace Atomic.Core.Ai.Nlu
 
                 if (!superlative &&
                     ExplanationPlan(rawQuery, normalized, hasElement: false) is { } explanation)
-                    return explanation;
+                    propose(Branch.UnbackedExplanation, explanation);
 
                 // Mentioning one of these in passing does not block a comparison that also asks
                 // about real properties: "compare lithium, sodium and potassium on reactivity,
@@ -949,7 +937,7 @@ namespace Atomic.Core.Ai.Nlu
                 var comparableAspect = _fields.ResolveAll(rawQuery, limit: 3).Count > 0;
                 var severalElements = _entities.ResolveAll(rawQuery, limit: 3).Count >= 2;
                 if (!comparableAspect || !severalElements)
-                    return Decline(rawQuery, DeclineReason.UnbackedConcept);
+                    propose(Branch.UnbackedConcept, Decline(rawQuery, DeclineReason.UnbackedConcept));
             }
 
             // ---- "How many elements are there" -----------------------------------------------
@@ -971,16 +959,16 @@ namespace Atomic.Core.Ai.Nlu
                 var operators = OperatorExtractor.Extract(rawQuery);
                 if (operators.SubsetFilters.Count == 0 && operators.Aggregation == Aggregation.Count)
                 {
-                    return new QueryPlan(
+                    propose(Branch.CountOfAllElements, new QueryPlan(
                         Intent.Aggregate,
                         Aggregation: Aggregation.Count,
                         Confidence: 0.85,
                         RawQuery: rawQuery,
-                        Evidence: ["count of all elements"]);
+                        Evidence: ["count of all elements"]));
                 }
             }
 
-            return null;
+            return;
         }
 
         /// <summary>

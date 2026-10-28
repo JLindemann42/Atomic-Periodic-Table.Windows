@@ -48,8 +48,9 @@ namespace Atomic.Core.Tests.Ai.Nlu
             // The four early declines come first, and the dataset fallback is last - those two ends
             // are what the whole shape rests on.
             Assert.Equal("defer-to-personality", QueryPlanner.CascadeOrder[0]);
-            Assert.Equal("calculation", QueryPlanner.CascadeOrder[4]);
-            Assert.Equal("dataset-row", QueryPlanner.CascadeOrder[^1]);
+            Assert.Equal("calculation", QueryPlanner.CascadeOrder[5]);
+            Assert.Equal("dataset-row", QueryPlanner.CascadeOrder[^2]);
+            Assert.Equal("no-match", QueryPlanner.CascadeOrder[^1]);
         }
 
         // ---- Early declines -----------------------------------------------------------------

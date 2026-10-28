@@ -1492,3 +1492,22 @@ count, superlative and aggregate branches all range over the set. "Else" and "ot
 answers 118 for "how many elements are in its period". `QueryPlannerCascadeTest` reads the new
 evidence ("group of carbon"). `LexiconTest` counts 84 declarations and 3,480 entries. 3,616 core
 tests pass; held-out (453) ran once at the end and did not inform the work.
+
+### D67 — planner arbitration, stage 1 (roadmap 1.8)
+
+Ported from Android in the same change. No answer changes.
+
+**What changed.** `PlanWords` is `Arbiter.Pick(Proposals(query, state))`. `Proposals` is the old
+cascade with every `return` turned into a proposal from a named `Branch` (`Nlu/Arbiter.cs`, the same
+32 branches in the same order as Android's), its evidence snapshotted when it is made, and a final
+`Branch.NoMatch`. `EarlyDecline` takes the `Propose` callback and proposes its five branches itself.
+`Arbiter.Pick` takes the earliest branch, and within one branch the first proposal - the same
+choice the cascade made, now as data rather than control flow.
+
+**`CascadeOrder`** was a hand-kept list beside the code it described; it is now read off `Branch`,
+which the arbiter actually uses. It gained the split of the unbacked-concept guard into its
+explanation and its decline, and `no-match` at the end; `QueryPlannerCascadeTest` follows.
+
+**`ArbitrationTest`**, as on Android, checks that the pick is the plan for every corpus row and
+reports where the order still decides. Both platforms report the same: 520 of 2,521 dev rows have
+more than one branch proposing. 3,619 core tests pass; held-out (456) passes.
