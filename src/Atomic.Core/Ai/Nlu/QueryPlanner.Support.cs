@@ -802,6 +802,65 @@ namespace Atomic.Core.Ai.Nlu
         private const double MinDatasetCoverage = 0.75;
 
         private const int DefaultListLimit = 10;
+
+        /// <summary>The field that names each set, which a question about the set is not asking for.</summary>
+        private static readonly IReadOnlyDictionary<string, string> DimensionFields = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["group"] = "group_number", ["period"] = "period", ["block"] = "block", ["series"] = "series",
+        };
+
+        /// <summary>Longest ending on a set's name: "familj" + "en".</summary>
+        private const int MaxSetEnding = 3;
+
+        /// <summary>
+        /// The set a question reads off an element, or null (roadmap 1.7): "in its period" is the
+        /// period, "the rest of that family" the series. A set's name counts only after one of
+        /// <see cref="Lexicon.SET_DETERMINERS"/>, so "what group is iron in" stays a question about
+        /// iron's group; the whole phrases of <see cref="Lexicon.SAME_AS_WORDS"/> count too, and
+        /// name the group unless they say which.
+        /// </summary>
+        private static string? SetDimension(string normalized)
+        {
+            var words = TextMatching.SplitQueryTokens(normalized);
+            foreach (var determiner in Lexicon.SET_DETERMINERS)
+            {
+                if (determiner.Any(Tokenizer.IsHan))
+                {
+                    foreach (var (name, dimension) in Lexicon.SET_DIMENSIONS)
+                        if (normalized.Contains(determiner + name, StringComparison.Ordinal)) return dimension;
+                    continue;
+                }
+                var parts = determiner.Split(' ');
+                for (var at = 0; at <= words.Count - parts.Length - 1; at++)
+                {
+                    var matches = true;
+                    for (var i = 0; i < parts.Length; i++)
+                        if (words[at + i] != parts[i]) { matches = false; break; }
+                    if (matches && DimensionOf(words[at + parts.Length]) is { } found) return found;
+                }
+            }
+            if (!Lexicon.SAME_AS_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal))) return null;
+            return words.Select(DimensionOf).FirstOrDefault(d => d is not null)
+                   ?? Lexicon.SET_DIMENSIONS.FirstOrDefault(e => e.Key.Length <= 2 && normalized.Contains(e.Key, StringComparison.Ordinal)).Value
+                   ?? "group";
+        }
+
+        /// <summary>The set a word names, allowing a short ending: "gruppen", "perioden", "blocket".</summary>
+        private static string? DimensionOf(string word) =>
+            Lexicon.SET_DIMENSIONS.FirstOrDefault(e =>
+                word.StartsWith(e.Key, StringComparison.Ordinal) && word.Length - e.Key.Length <= MaxSetEnding).Value;
+
+        /// <summary>The filter for the reference's set of that kind; a lanthanide has no group, so its series stands in.</summary>
+        private static Filter? SetFilter(string dimension, ElementRecord reference) => dimension switch
+        {
+            "group" => reference.GroupNumber is { } group
+                ? new Filter.InGroup(group)
+                : new Filter.InSeries(new HashSet<SeriesId> { reference.Series }),
+            "period" => new Filter.InPeriod(reference.Period),
+            "block" => new Filter.InBlock(reference.Block),
+            "series" => new Filter.InSeries(new HashSet<SeriesId> { reference.Series }),
+            _ => null,
+        };
         private const int DefaultIsotopeLimit = 8;
 
         /// <summary>

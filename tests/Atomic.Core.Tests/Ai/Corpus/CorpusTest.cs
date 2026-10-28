@@ -249,6 +249,11 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(Spelling))]
         public void Spelling_Pass(string key) => RunUnit("spelling", key);
 
+        /// <summary>Sets read off an element: "what else is in that group", "the same block as iron".</summary>
+        public static TheoryData<string> FocusSets => Units("focus_sets");
+        [Theory, MemberData(nameof(FocusSets))]
+        public void FocusSets_Pass(string key) => RunUnit("focus_sets", key);
+
         // ---- Scoreboard ------------------------------------------------------------------------
 
         /// <summary>

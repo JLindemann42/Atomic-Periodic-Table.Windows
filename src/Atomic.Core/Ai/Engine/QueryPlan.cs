@@ -134,6 +134,12 @@ namespace Atomic.Core.Ai.Engine
         public sealed record IsSynthetic(bool Synthetic) : Filter;
 
         /// <summary>
+        /// Any element but these: "what <b>else</b> is in that group" leaves out the one it was read
+        /// off (roadmap 1.7).
+        /// </summary>
+        public sealed record Excludes(IReadOnlySet<string> Keys) : Filter;
+
+        /// <summary>
         /// Whether an element satisfies this condition.
         ///
         /// <para>An element with no value for the compared field never matches, rather than
@@ -151,6 +157,7 @@ namespace Atomic.Core.Ai.Engine
             InGroup f => element.GroupNumber == f.Group,
             IsMetal f => element.Series.IsMetal() == f.Metal,
             IsSynthetic f => element.Synthetic == f.Synthetic,
+            Excludes f => !f.Keys.Contains(element.Key),
             // C# will not warn about a missing variant the way Kotlin's exhaustive `when` does, so
             // the gap is made loud at runtime instead - inside the test suite, where it is cheap.
             _ => throw new UnreachableException($"unhandled filter {GetType().Name}"),

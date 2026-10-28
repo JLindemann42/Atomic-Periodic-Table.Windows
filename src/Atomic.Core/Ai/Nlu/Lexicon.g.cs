@@ -257,6 +257,59 @@ public static class Lexicon
         "in daardie groep", "sa grupong iyon", "उस समूह में", "اس گروپ میں", "在那一族",
     ];
 
+    public static readonly FrozenDictionary<string, string> SET_DIMENSIONS =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["group"] = "group", ["column"] = "group", ["grupp"] = "group", ["gruppe"] = "group",
+            ["grupo"] = "group", ["groupe"] = "group", ["gruppo"] = "group", ["groep"] = "group",
+            ["grupong"] = "group", ["समूह"] = "group", ["گروپ"] = "group", ["族"] = "group",
+            ["period"] = "period", ["row"] = "period", ["periode"] = "period", ["periodo"] = "period",
+            ["आवर्त"] = "period", ["دور"] = "period", ["周期"] = "period",
+            ["block"] = "block", ["bloque"] = "block", ["bloc"] = "block", ["blocco"] = "block",
+            ["bloco"] = "block", ["blok"] = "block", ["ब्लॉक"] = "block", ["بلاک"] = "block", ["区"] = "block",
+            ["family"] = "series", ["series"] = "series", ["familj"] = "series", ["serie"] = "series",
+            ["familie"] = "series", ["familia"] = "series", ["famille"] = "series", ["famiglia"] = "series",
+            ["pamilya"] = "series", ["परिवार"] = "series", ["خاندان"] = "series", ["系列"] = "series",
+        }.ToFrozenDictionary(StringComparer.Ordinal);
+
+    public static readonly IReadOnlyList<string> SET_DETERMINERS =
+    [
+        "in that", "in this", "in its", "in the same", "of that", "of its", "of the same",
+        "from that", "from its", "rest of that", "rest of its", "share its",
+        "i den", "i denna", "i samma", "i dess", "av samma", "inom samma", "resten av",
+        "in dieser", "in diesem", "in derselben", "in demselben", "in der gleichen", "im gleichen",
+        "im selben", "in seiner", "in seinem", "aus dieser", "aus derselben", "aus der gleichen",
+        "en ese", "en este", "en esa", "en esta", "en su", "en el mismo", "en la misma", "de su",
+        "del mismo", "de la misma", "de ese", "de este", "resto de su", "resto del",
+        "dans ce", "dans cette", "dans son", "dans sa", "dans le meme", "dans la meme", "de son",
+        "de sa", "du meme", "de la meme", "de ce", "reste de son",
+        "in quel", "in quella", "in questo", "in questa", "nel suo", "nella sua", "nello stesso",
+        "nella stessa", "del suo", "della sua", "dello stesso", "della stessa", "di quel",
+        "nesse", "nessa", "neste", "nesta", "no seu", "na sua", "no mesmo", "na mesma", "do seu",
+        "da sua", "do mesmo", "da mesma", "desse", "dessa",
+        "in daardie", "in hierdie", "in sy", "in dieselfde", "van sy", "van dieselfde", "van daardie",
+        "sa parehong", "sa kanyang", "ng parehong", "ng kanyang",
+        "उस", "उसी", "इसके", "इसी", "इस",
+        "اس", "اسی", "اس کے",
+        "那一", "同一", "这一", "这个", "那个", "它的", "该",
+    ];
+
+    public static readonly IReadOnlyList<string> OTHER_WORDS =
+    [
+        "else", "other", "others", "rest",
+        "mer", "andra", "annat", "ovriga", "resten",
+        "noch", "andere", "anderen", "ubrigen",
+        "mas", "otro", "otros", "otra", "otras", "resto", "demas",
+        "autre", "autres", "reste",
+        "altri", "altre", "altro",
+        "outro", "outros", "outra", "outras", "mais",
+        "ander", "res", "nog",
+        "iba", "ibang", "natitira",
+        "और", "अन्य", "बाकी",
+        "اور", "دوسرے", "باقی",
+        "其他", "其余", "别的", "还有",
+    ];
+
     public static readonly FrozenSet<string> PLURAL_SERIES_WORDS =
     new HashSet<string>(StringComparer.Ordinal)
     {

@@ -1473,3 +1473,22 @@ one-word query instead of `TitleRecall > 0`. Title precision could not draw the 
 speed" names 0.54 of "Speed of light", "what is charge" 0.63 of "Electric Charge" - so both now
 decline, which is the side the roadmap's principles choose. 3,591 core tests pass; held-out (452)
 passes.
+
+### D66 — sets read off an element (roadmap 1.7)
+
+Ported from Android in the same change, with `focus_sets.tsv` (45 rows, 19 of which failed before)
+on both.
+
+**What changed.** The "same group as carbon" branch is gone, replaced by one that runs right after
+the operators are extracted (`set-of-an-element` in `CascadeOrder`). `SetDimension` reads a set's
+name after one of `Lexicon.SET_DETERMINERS`, or inside a `SAME_AS_WORDS` phrase; `SetFilter` turns
+the reference element's group, period, block or series into a filter. The reference is the named
+element, else `DialogueState.FocusElement`. The filter joins `Operators.SubsetFilters`, the reference
+leaves the element matches, and the field that named the set leaves the field matches, so the list,
+count, superlative and aggregate branches all range over the set. "Else" and "other"
+(`Lexicon.OTHER_WORDS`) add the new `Filter.Excludes` to a list or a count only.
+
+**Also.** `EarlyDecline` takes the dialogue state, so "how many elements are there" no longer
+answers 118 for "how many elements are in its period". `QueryPlannerCascadeTest` reads the new
+evidence ("group of carbon"). `LexiconTest` counts 84 declarations and 3,480 entries. 3,616 core
+tests pass; held-out (453) ran once at the end and did not inform the work.

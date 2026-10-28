@@ -37,6 +37,7 @@ namespace Atomic.Core.Ai.Nlu
             "count-of-all-elements",
             "calculation",          // BALANCE, SOLUTION, DECAY, MOLE, ISOTOPE_COMPARISON,
                                     // NUCLIDE_COUNT, ISOTOPES, FORMULA_MASS - see CalculationPlan
+            "set-of-an-element",    // roadmap 1.7: a list returns here; an operator ranges below
             "unit-convert",
             "narrative-decline",
             "etymology-decline",
@@ -44,7 +45,6 @@ namespace Atomic.Core.Ai.Nlu
             "comparative-against-focus",
             "comparative-over-previous-answer",
             "periphrastic-comparative",
-            "same-group-as",
             "direct-comparative",
             "aggregate",
             "superlative-or-filtered-list",
@@ -92,7 +92,7 @@ namespace Atomic.Core.Ai.Nlu
             var rawQuery = _morphology.Expand(query);
             var normalized = TextMatching.NormalizeForLookup(rawQuery);
 
-            if (EarlyDecline(rawQuery, normalized) is { } declined) return declined;
+            if (EarlyDecline(rawQuery, normalized, state) is { } declined) return declined;
 
             // ---- Calculations ---------------------------------------------------------------
             // Checked first among the real intents: these questions name a formula or a nuclide,
@@ -105,6 +105,42 @@ namespace Atomic.Core.Ai.Nlu
             var elementMatches = _entities.ResolveAll(rawQuery, limit: 4);
             var fieldMatches = _fields.ResolveAll(rawQuery, limit: 3);
             var evidence = new List<string>(6);
+
+            // ---- A set read off an element: "what else is in that group" (roadmap 1.7) ------
+            // The element is the reference, not the subject: the one named ("the same block as
+            // iron") or the one the conversation is about. Its set joins the subsets, so every
+            // branch below - list, count, superlative, statistic - ranges over it, and the words
+            // that named the set stop naming a property. "Else" and "other" leave the reference out
+            // of a list or a count, never out of a ranking: "más" and "mais" make superlatives too,
+            // and the densest in iron's group may be iron.
+            if (SetDimension(normalized) is { } dimension &&
+                (elementMatches.FirstOrDefault()?.Key ?? state.FocusElement) is { } referenceKey &&
+                _store.Element(referenceKey) is { } reference &&
+                SetFilter(dimension, reference) is { } setFilter)
+            {
+                var asksForMembers = operators.SuperlativeDescending is null && operators.TopN is null &&
+                                     operators.Aggregation == Aggregation.None && operators.Comparators.Count == 0 &&
+                                     operators.Range is null;
+                var excludes = (asksForMembers || operators.Aggregation == Aggregation.Count) &&
+                               MentionsAny(normalized, Lexicon.OTHER_WORDS);
+                var filters = new List<Filter> { setFilter };
+                if (excludes) filters.Add(new Filter.Excludes(new HashSet<string>(StringComparer.Ordinal) { reference.Key }));
+                evidence.Add($"{dimension} of {reference.Key}" + (excludes ? ", without it" : ""));
+                operators = operators with { SubsetFilters = operators.SubsetFilters.Concat(filters).ToList() };
+                elementMatches = elementMatches.Where(m => m.Key != reference.Key).ToList();
+                fieldMatches = fieldMatches.Where(m => m.Spec.Id != DimensionFields[dimension]).ToList();
+                if (asksForMembers)
+                {
+                    return new QueryPlan(
+                        Intent.FilterList,
+                        FieldIds: fieldMatches.Select(m => m.Spec.Id).ToList(),
+                        Filters: operators.SubsetFilters,
+                        Limit: DefaultListLimit,
+                        Confidence: 0.85,
+                        RawQuery: rawQuery,
+                        Evidence: evidence);
+                }
+            }
 
             // ---- Standalone unit conversion --------------------------------------------------
             // Placed here rather than in CalculationPlan, because the guard that separates this
@@ -502,31 +538,6 @@ namespace Atomic.Core.Ai.Nlu
             var allFilters = subsetFilters.Concat(comparatorFilters).ToList();
             var targetUnit = operators.TargetUnit ?? (fieldIds.Count > 0 ? state.LastTargetUnit : null);
 
-            // ---- "in the same group as carbon" -----------------------------------------------
-            // The named element supplies the group or period; it is the reference, not the answer.
-            if (Lexicon.SAME_AS_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
-                elementKeys.FirstOrDefault() is { } sameAsKey &&
-                _store.Element(sameAsKey) is { } reference)
-            {
-                var byPeriod = normalized.Contains("period", StringComparison.Ordinal) ||
-                               normalized.Contains("row", StringComparison.Ordinal);
-
-                Filter filter = byPeriod
-                    ? new Filter.InPeriod(reference.Period)
-                    : reference.GroupNumber is { } group
-                        ? new Filter.InGroup(group)
-                        : new Filter.InSeries(new HashSet<SeriesId> { reference.Series });
-
-                evidence.Add($"same {(byPeriod ? "period" : "group")} as {reference.Key}");
-                return new QueryPlan(
-                    Intent.FilterList,
-                    Filters: [filter],
-                    Limit: DefaultListLimit,
-                    Confidence: 0.85,
-                    RawQuery: rawQuery,
-                    Evidence: evidence);
-            }
-
             // ---- Direct comparative: "is gold denser than lead" ------------------------------
             // A question with a one-word answer should get one, not a property table. Checked
             // before the general comparison so the answer leads with yes/no or the winner.
@@ -880,7 +891,7 @@ namespace Atomic.Core.Ai.Nlu
         /// <para>Separated because none of them needs the operators, the resolvers or the dialogue
         /// state - they are decisions about whether the sentence is a chemistry question at all.</para>
         /// </summary>
-        private QueryPlan? EarlyDecline(string rawQuery, string normalized)
+        private QueryPlan? EarlyDecline(string rawQuery, string normalized, DialogueState state)
         {
             // ---- Conversation, not chemistry -------------------------------------------------
             // Checked before anything else. A greeting or a quiz request has no grounded answer,
@@ -949,9 +960,13 @@ namespace Atomic.Core.Ai.Nlu
             // 多少 ("how much"), so "镧系元素的中位原子量是多少" - the median atomic mass of the
             // lanthanides - matched the count word, the word "element" and no subset, and came back
             // as the size of the periodic table.
+            //
+            // Not when the elements are a set read off the one in focus: "how many elements are in
+            // its period" names no element, and was answered with 118.
             if (Lexicon.COUNT.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
                 Lexicon.ELEMENT_WORDS.Any(w => normalized.Contains(w, StringComparison.Ordinal)) &&
-                _entities.ResolveAll(rawQuery, limit: 1).Count == 0)
+                _entities.ResolveAll(rawQuery, limit: 1).Count == 0 &&
+                (SetDimension(normalized) is null || state.FocusElement is null))
             {
                 var operators = OperatorExtractor.Extract(rawQuery);
                 if (operators.SubsetFilters.Count == 0 && operators.Aggregation == Aggregation.Count)

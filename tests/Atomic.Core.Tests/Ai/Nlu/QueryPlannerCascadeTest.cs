@@ -82,7 +82,8 @@ namespace Atomic.Core.Tests.Ai.Nlu
         {
             var plan = Plan("which elements are in the same group as carbon");
             Assert.Equal(Intent.FilterList, plan.Intent);
-            Assert.Contains(plan.Evidence, e => e.StartsWith("same group", StringComparison.Ordinal));
+            // The set read off the named element (roadmap 1.7).
+            Assert.Contains(plan.Evidence, e => e.StartsWith("group of carbon", StringComparison.Ordinal));
         }
 
         /// <summary>
