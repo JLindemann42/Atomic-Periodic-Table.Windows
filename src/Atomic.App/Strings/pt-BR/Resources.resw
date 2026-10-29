@@ -327,6 +327,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>, enquanto </value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s corresponde a **%2$s** da massa de %3$s.</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>Composição de %1$s</value>
   </data>
@@ -503,6 +506,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>Este é o espectro de emissão de %1$s: a luz que seus átomos emitem quando os elétrons excitados voltam a cair. O app o guarda como imagem, então posso mostrar o padrão, mas não nomear linhas individuais.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>Com uma massa molar de %1$s g/mol, a fórmula molecular é **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>A fórmula empírica de %1$s é **%2$s**: seus índices têm um fator comum de %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>A fórmula empírica é **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s já está na sua proporção inteira mais simples, então é a sua própria fórmula empírica.</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>Ótima pergunta! 🌟</value>
@@ -1433,6 +1448,9 @@ Eles compartilham comportamentos químicos semelhantes devido aos seus elétrons
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ é a meia-vida, t o tempo decorrido, n o número de meias-vidas, e N₀ e N as quantidades antes e depois.</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Cada massa em mols e depois cada uma dividida pela menor:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>A massa molar é a soma, para cada elemento, do número de átomos vezes sua massa atômica:</value>
   </data>
@@ -1453,6 +1471,27 @@ Eles compartilham comportamentos químicos semelhantes devido aos seus elétrons
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n é a quantidade em mols, c a concentração, V o volume, m a massa e M a massa molar.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Cada quantidade em mols e depois pelos coeficientes:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>Sobram %1$s g de %2$s.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>Em %1$s, **%2$s** é o reagente limitante: acaba primeiro.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>Em %1$s, %2$s produzem **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>Em %1$s, %2$s correspondem a **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>Em %1$s, %2$s precisam de **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>Formam-se **%1$s g de %2$s** (%3$s mol).</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Não consegui encontrar nada nesse grupo ou período. Lembre-se: existem 18 grupos e 7 períodos!</value>

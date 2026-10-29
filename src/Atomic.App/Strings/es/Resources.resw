@@ -327,6 +327,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>, mientras </value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s representa **%2$s** de la masa de %3$s.</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>Composición de %1$s</value>
   </data>
@@ -503,6 +506,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>Este es el espectro de emisión de %1$s: la luz que emiten sus átomos cuando los electrones excitados vuelven a caer. La app lo guarda como imagen, así que puedo mostrar el patrón pero no nombrar líneas concretas.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>Con una masa molar de %1$s g/mol, la fórmula molecular es **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>La fórmula empírica de %1$s es **%2$s**: sus subíndices comparten un factor de %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>La fórmula empírica es **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s ya está en su proporción entera más simple, así que es su propia fórmula empírica.</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>¡Buena pregunta! 🌟</value>
@@ -1433,6 +1448,9 @@ No se envía: tu nombre, tu cuenta, tu dispositivo ni el resto de esta conversac
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ es el periodo de semidesintegración, t el tiempo transcurrido, n el número de periodos, y N₀ y N las cantidades antes y después.</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Cada masa en moles y luego cada una dividida entre la menor:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>La masa molar es la suma, para cada elemento, de su número de átomos por su masa atómica:</value>
   </data>
@@ -1453,6 +1471,27 @@ No se envía: tu nombre, tu cuenta, tu dispositivo ni el resto de esta conversac
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n es la cantidad en moles, c la concentración, V el volumen, m la masa y M la masa molar.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Cada cantidad en moles y luego a través de los coeficientes:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>Sobran %1$s g de %2$s.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>En %1$s, **%2$s** es el reactivo limitante: se agota primero.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>En %1$s, %2$s producen **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>En %1$s, %2$s corresponden a **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>En %1$s, %2$s necesitan **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>Se forman **%1$s g de %2$s** (%3$s mol).</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>No pude encontrar nada en ese grupo o periodo. ¡Recuerda: hay 18 grupos y 7 periodos!</value>

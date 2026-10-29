@@ -327,6 +327,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>, जबकि </value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%3$s के द्रव्यमान में %1$s का हिस्सा **%2$s** है।</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>%1$s की संरचना</value>
   </data>
@@ -503,6 +506,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>यह %1$s का उत्सर्जन स्पेक्ट्रम है: वह प्रकाश जो इसके परमाणु तब छोड़ते हैं जब उत्तेजित इलेक्ट्रॉन वापस नीचे गिरते हैं। ऐप इसे एक छवि के रूप में रखता है, इसलिए मैं पैटर्न दिखा सकता हूँ पर अलग-अलग रेखाओं के नाम नहीं बता सकता।</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>%1$s g/mol के मोलर द्रव्यमान के साथ आण्विक सूत्र **%2$s** है, %3$d × %4$s।</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>%1$s का मूलानुपाती सूत्र **%2$s** है: इसके अधोलेखों में %3$d का साझा गुणनखंड है।</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>मूलानुपाती सूत्र **%1$s** है।</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s पहले से ही अपने सबसे सरल पूर्णांक अनुपात में है, इसलिए यही इसका मूलानुपाती सूत्र है।</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>अच्छा सवाल! 🌟</value>
@@ -1433,6 +1448,9 @@
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ अर्धायु है, t बीता हुआ समय, n अर्धायुओं की संख्या, और N₀ और N पहले और बाद की मात्राएँ।</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>हर द्रव्यमान को मोल में बदलें, फिर हर एक को सबसे छोटे से भाग दें:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>मोलर द्रव्यमान हर तत्व के परमाणुओं की संख्या और उसके परमाणु द्रव्यमान के गुणनफल का योग है:</value>
   </data>
@@ -1453,6 +1471,27 @@
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n मोल में मात्रा है, c सांद्रता, V आयतन, m द्रव्यमान और M मोलर द्रव्यमान।</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>हर मात्रा को मोल में बदलें, फिर गुणांकों के ज़रिए:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>%1$s g %2$s बच जाता है।</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>%1$s में, **%2$s** सीमांत अभिकर्मक है: यह सबसे पहले ख़त्म होता है।</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>%1$s में, %2$s से **%3$s g %4$s** (%5$s mol) बनता है।</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>%1$s में, %2$s के साथ **%3$s g %4$s** (%5$s mol) जुड़ता है।</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>%1$s में, %2$s के लिए **%3$s g %4$s** (%5$s mol) चाहिए।</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>इससे **%1$s g %2$s** (%3$s mol) बनता है।</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>मुझे उस समूह या आवर्त में कुछ भी नहीं मिला। याद रखें: 18 समूह और 7 आवर्त हैं!</value>

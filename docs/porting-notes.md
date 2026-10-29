@@ -1813,3 +1813,29 @@ those a synthetic plan cannot answer; the calculators corpus supplies real ones.
 
 `corpus/calculators.tsv` (21 rows) runs as `CorpusTest.Calculators_Pass`. `CalculatorMathTest`
 mirrors Android's. 3,830 core tests pass; held-out (452) passes; the app builds.
+
+### D80 — more calculators, stage 2 (roadmap 2.8, PRO+)
+
+Ported from Android in the same change. `Empirical` and `Stoichiometry` join `CalculatorMath.cs`;
+`EquationBalancer.SpanOf` (Android's `span`) cuts an equation out of a sentence. The intents are
+`EmpiricalFormula` and `Stoichiometry`, PRO+ like the other calculators, and the planner tries them
+after `IonConfigPlan` and before the balance branch, as Android does. `ExecutionResult.Formula`
+gains `Focus`, the element whose share a composition question asked for.
+
+Three spellings differ from Android:
+- **`SpanOf`.** The method is not called `Span`, which would clash with the nested `Span` record.
+  It returns the equation's first and last characters rather than an `IntRange`.
+- **`MolecularFormula` and `MolecularOf`.** The result's property is `MolecularFormula` and the
+  method is `MolecularOf`, because a property named `Molecular` would clash with the nested
+  `Molecular` record (as `ExplainedTrend` did in D74).
+- **Element order.** `ElementMasses` keeps the order the elements were written in by hand, where
+  Android's `LinkedHashMap` keeps it for free. The order is the order of the working's rows.
+
+`EMPIRICAL_WORDS` and `MOLECULAR_FORMULA_WORDS` come through `kt2cs_lexicon.py`, with the new
+`COMPOSITION_WORDS` entries. Lexicon.kt now has 94 declarations and 3,855 entries; `LexiconTest`
+counts 3,836 here. `QueryExecutorTest.EveryIntentIsHandled` names the two new intents. The thirteen
+`ai_composition_element`, `ai_empirical_*`, `ai_stoich_*` and `ai_steps_*` strings come through
+`strings_xml_to_resw.py`.
+
+`corpus/calculators.tsv` grows to 40 rows. `CalculatorMathTest` gains Android's five new cases. 3,854
+core tests pass; held-out (452) passes; the app builds.

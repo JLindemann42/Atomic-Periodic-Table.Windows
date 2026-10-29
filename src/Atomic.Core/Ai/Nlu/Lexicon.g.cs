@@ -907,6 +907,27 @@ public static class Lexicon
         "percentage of", "made up of", "sammansattning", "zusammensetzung",
         "composicion", "composition", "composizione", "composicao", "samestelling",
         "komposisyon", "संघटन", "ترکیب", "组成", "百分比组成",
+        // One element's share, "mass percent of oxygen in water" (roadmap 2.8).
+        "percent by mass", "percentage by mass", "mass percentage", "mass fraction", "masshalt",
+        "massprocent", "viktprocent", "massenanteil", "massenprozent", "porcentaje en masa",
+        "pourcentage massique", "pourcentage en masse", "percentuale in massa", "porcentagem em massa",
+        "percentagem em massa", "massapercentage", "massaprocent", "porsyento ayon sa masa",
+        "द्रव्यमान प्रतिशत", "کمیتی فیصد", "质量分数", "质量百分比",
+    ];
+
+    public static readonly IReadOnlyList<string> EMPIRICAL_WORDS =
+    [
+        "empirical formula", "simplest formula", "empirisk formel", "enklaste formel",
+        "empirische formel", "verhaltnisformel", "formula empirica", "formule empirique",
+        "formula minima", "empirische formule", "empirikal na pormula", "pinakasimpleng pormula",
+        "मूलानुपाती सूत्र", "आनुभविक सूत्र", "تجربی فارمولا", "سادہ ترین فارمولا", "最简式", "实验式",
+    ];
+
+    public static readonly IReadOnlyList<string> MOLECULAR_FORMULA_WORDS =
+    [
+        "molecular formula", "molekylformel", "summenformel", "molekularformel", "formula molecular",
+        "formule moleculaire", "formula molecolare", "molecuulformule", "molekular na pormula",
+        "आण्विक सूत्र", "आणविक सूत्र", "سالمی فارمولا", "分子式",
     ];
 
     public static readonly IReadOnlyList<string> NEUTRON_WORDS =

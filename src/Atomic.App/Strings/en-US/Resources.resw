@@ -327,6 +327,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>", while "</value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s makes up **%2$s** of %3$s by mass.</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>Composition of %1$s</value>
   </data>
@@ -503,6 +506,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>Here is the emission spectrum of %1$s: the light its atoms give off when excited electrons drop back down. The app stores it as an image, so I can show the pattern but cannot name individual lines.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>With a molar mass of %1$s g/mol, the molecular formula is **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>The empirical formula of %1$s is **%2$s**: its subscripts share a factor of %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>The empirical formula is **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s is already in its simplest whole-number ratio, so it is its own empirical formula.</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>Great question! 🌟</value>
@@ -1433,6 +1448,9 @@ They share similar chemical behaviors due to their valence electrons!</value>
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ is the half-life, t the time elapsed, n the number of half-lives, and N₀ and N the amounts before and after.</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Each mass in moles, then each divided by the smallest:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>The molar mass is the sum of each element's atom count times its atomic mass:</value>
   </data>
@@ -1453,6 +1471,27 @@ They share similar chemical behaviors due to their valence electrons!</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n is the amount in moles, c the concentration, V the volume, m the mass and M the molar mass.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Each amount in moles, then through the coefficients:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>%1$s g %2$s is left over.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>In %1$s, **%2$s** is the limiting reagent: it runs out first.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>In %1$s, %2$s makes **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>In %1$s, %2$s goes with **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>In %1$s, %2$s needs **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>It makes **%1$s g %2$s** (%3$s mol).</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>I couldn't find anything in that group or period. Remember: there are 18 groups and 7 periods!</value>

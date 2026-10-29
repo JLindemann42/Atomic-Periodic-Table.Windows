@@ -264,7 +264,7 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(Explanations))]
         public void Explanations_Pass(string key) => RunUnit("explanations", key);
 
-        /// <summary>The ideal gas law, pH, and ion configurations (roadmap 2.8).</summary>
+        /// <summary>The ideal gas law, pH, ion configurations, empirical formulas and stoichiometry (roadmap 2.8).</summary>
         public static TheoryData<string> Calculators => Units("calculators");
         [Theory, MemberData(nameof(Calculators))]
         public void Calculators_Pass(string key) => RunUnit("calculators", key);
@@ -594,6 +594,13 @@ namespace Atomic.Core.Tests.Corpus
             ExecutionResult.GasLaw g => g.Solution.Solved,
             ExecutionResult.Ph p => p.Result.PH,
             ExecutionResult.IonConfiguration i => i.Element.AtomicNumber - i.Charge,
+            // The formula's mass, the molecular one's when a molar mass was given; and the grams of
+            // the species asked about, or of the first product (roadmap 2.8, stage 2).
+            ExecutionResult.EmpiricalFormula e => e.Result.MolecularFormula is { } m
+                ? e.Result.EmpiricalMass * m.Factor
+                : e.Result.EmpiricalMass,
+            ExecutionResult.Stoichiometry s => s.Result.Amounts[
+                s.Targets.Count > 0 ? s.Targets[0] : s.Result.Lines.ToList().FindIndex(l => !l.Reactant)].Grams,
             ExecutionResult.BalancedEquation b => b.Reason is null
                 ? b.Reactants.Concat(b.Products).Sum(t => t.Coefficient)
                 : null,

@@ -148,6 +148,115 @@ namespace Atomic.Core.Ai.Data
         /// <summary>A word of lower-case letters only: prose, never a formula as written.</summary>
         private static readonly Regex Prose = new(@"^\p{Ll}+$");
 
+        /// <summary>The equation written inside a sentence, and where it sits in it.</summary>
+        public sealed record Span(string Equation, int Start, int End);
+
+        private static readonly Regex Token = new(@"\S+", RegexOptions.CultureInvariant);
+
+        private static readonly char[] Punctuation = [',', ';', ':', '?', '!', '.'];
+
+        /// <summary>
+        /// Cut the equation out of a sentence that says something else as well (roadmap 2.8): "how
+        /// many grams of water from 4 g of H2 in 2H2 + O2 -&gt; 2H2O". From the arrow outwards,
+        /// species and + alternate; the first word that breaks the pattern ends the equation on that
+        /// side. Mirrors Android's <c>span</c>.
+        ///
+        /// <para><see cref="Parse"/> drops prose words but keeps numbers, so the "4" and "H2" before
+        /// the equation become a species "H2 2H2"; that is fine for a request to balance, where
+        /// nothing else is written, and wrong for a question that also gives amounts.</para>
+        /// </summary>
+        /// <returns>The equation, and its first and last character in <paramref name="raw"/>.</returns>
+        public static Span? SpanOf(string raw, Func<string, bool> isKnownSymbol)
+        {
+            var arrow = Arrow.Match(raw);
+            if (!arrow.Success) return null;
+            var before = Token.Matches(raw[..arrow.Index]).Reverse().ToList();
+            var after = Token.Matches(raw, arrow.Index + arrow.Length).ToList();
+            if (Walk(before, isKnownSymbol, backwards: true) is not { } left) return null;
+            if (Walk(after, isKnownSymbol, backwards: false) is not { } right) return null;
+            var leftTokens = left.Tokens.ToList();
+            leftTokens.Reverse();
+            return new Span(string.Join(" ", leftTokens) + " -> " + string.Join(" ", right.Tokens), left.Edge, right.Edge);
+        }
+
+        /// <summary>Species and + from the arrow outwards: the outermost character reached and the tokens taken, nearest the arrow first.</summary>
+        private static (int Edge, List<string> Tokens)? Walk(List<Match> tokens, Func<string, bool> isKnownSymbol, bool backwards)
+        {
+            var taken = new List<string>();
+            var edge = -1;
+            var expectSpecies = true;
+            for (var i = 0; i < tokens.Count; i++)
+            {
+                var match = tokens[i];
+                var token = match.Value.Trim(Punctuation);
+                // "2H2+O2" written without spaces reads as three tokens.
+                var parts = SplitPlus(token);
+                if (backwards) parts.Reverse();
+                var stop = false;
+                foreach (var part in parts)
+                {
+                    if (expectSpecies && IsSpecies(part, isKnownSymbol))
+                    {
+                        taken.Add(part);
+                        expectSpecies = false;
+                    }
+                    // A coefficient written apart, "2 H2": behind the species when reading backwards.
+                    else if (!expectSpecies && backwards && part.All(char.IsDigit) && part.Length > 0 && taken[^1] != "+")
+                    {
+                        taken[^1] = part + taken[^1];
+                    }
+                    else if (expectSpecies && !backwards && part.Length > 0 && part.All(char.IsDigit) &&
+                             i + 1 < tokens.Count && IsSpecies(tokens[i + 1].Value.Trim(Punctuation), isKnownSymbol))
+                    {
+                        // Joined with the species that follows, on the next token.
+                        taken.Add(part);
+                    }
+                    else if (!expectSpecies && part == "+")
+                    {
+                        taken.Add(part);
+                        expectSpecies = true;
+                    }
+                    else
+                    {
+                        stop = true;
+                        break;
+                    }
+                }
+                if (stop) break;
+                edge = backwards ? match.Index : match.Index + match.Length - 1;
+            }
+            // A forward coefficient joins the species after it: "2", "H2" is "2H2".
+            var joined = new List<string>();
+            foreach (var t in taken)
+            {
+                if (joined.Count > 0 && joined[^1].All(char.IsDigit)) joined[^1] += t;
+                else joined.Add(t);
+            }
+            while (joined.Count > 0 && (joined[^1] == "+" || joined[^1].All(char.IsDigit))) joined.RemoveAt(joined.Count - 1);
+            if (joined.Count == 0 || edge < 0) return null;
+            return (edge, joined);
+        }
+
+        private static List<string> SplitPlus(string token)
+        {
+            if (token == "+" || token.Length < 2 || !token[..^1].Contains('+', StringComparison.Ordinal)) return [token];
+            var result = new List<string>();
+            var pieces = token.Split('+');
+            for (var i = 0; i < pieces.Length; i++)
+            {
+                if (i > 0) result.Add("+");
+                result.Add(pieces[i]);
+            }
+            return result.Where(p => p.Length > 0).ToList();
+        }
+
+        private static bool IsSpecies(string token, Func<string, bool> isKnownSymbol)
+        {
+            if (token.Length == 0 || Prose.IsMatch(token)) return false;
+            var cleaned = LeadingCoefficient.Replace(ChemistryMath.StripStateAnnotation(token).Trim(), "").Trim();
+            return cleaned.Length > 0 && char.IsUpper(cleaned[0]) && ChemistryMath.ElementCounts(cleaned, isKnownSymbol) is not null;
+        }
+
         /// <summary>
         /// Split raw text into reactants and products, saying which way it failed if it did.
         ///

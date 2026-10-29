@@ -92,6 +92,8 @@ namespace Atomic.Core.Ai.Compose
                 ExecutionResult.GasLaw r => StepsInstead(plan, working => GasLaw(r, working), () => _workings.GasLaw(r)),
                 ExecutionResult.Ph r => StepsInstead(plan, _ => Ph(r), () => _workings.Ph(r)),
                 ExecutionResult.IonConfiguration r => IonConfiguration(r) + Steps(plan, () => _workings.Ion(r)),
+                ExecutionResult.EmpiricalFormula r => EmpiricalFormula(r) + Steps(plan, () => _workings.Empirical(r)),
+                ExecutionResult.Stoichiometry r => Stoichiometry(r) + Steps(plan, () => _workings.Stoichiometry(r)),
                 ExecutionResult.NoData r => NoData(r),
                 ExecutionResult.Locked r => Locked(r),
                 ExecutionResult.Empty => _strings.Get(S.ai_filter_none),
@@ -468,6 +470,59 @@ namespace Atomic.Core.Ai.Compose
             return builder.ToString();
         }
 
+        /// <summary>An empirical formula, and the molecular formula when a molar mass was given (roadmap 2.8).</summary>
+        private string EmpiricalFormula(ExecutionResult.EmpiricalFormula result)
+        {
+            var r = result.Result;
+            var builder = new StringBuilder(
+                r.From is null ? _strings.Get(S.ai_empirical_result, r.Formula)
+                : r.Divisor > 1 ? _strings.Get(S.ai_empirical_reduced, r.From, r.Formula, r.Divisor)
+                : _strings.Get(S.ai_empirical_same, r.From));
+            if (r.MolecularFormula is { } m)
+            {
+                builder.Append('\n').Append(_strings.Get(S.ai_empirical_molecular, Format(m.MolarMass), m.Formula, m.Factor, r.Formula));
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>Amounts through a balanced equation, or the limiting reagent and what it makes (roadmap 2.8).</summary>
+        private string Stoichiometry(ExecutionResult.Stoichiometry result)
+        {
+            var r = result.Result;
+            var lines = r.Lines;
+            var builder = new StringBuilder();
+            if (r.Limiting is { } limiting)
+            {
+                builder.Append(_strings.Get(S.ai_stoich_limiting, r.Equation, lines[limiting].Formula));
+                var products = result.Targets.Where(i => !lines[i].Reactant).ToList();
+                if (products.Count == 0) products = Enumerable.Range(0, lines.Count).Where(i => !lines[i].Reactant).ToList();
+                foreach (var i in products)
+                {
+                    builder.Append('\n').Append(_strings.Get(S.ai_stoich_product, Format(r.Amounts[i].Grams), lines[i].Formula, Format(r.Amounts[i].Moles)));
+                }
+                foreach (var left in r.Leftovers)
+                {
+                    builder.Append('\n').Append(_strings.Get(S.ai_stoich_excess, Format(left.Grams), lines[left.Index].Formula));
+                }
+                return builder.ToString();
+            }
+            var given = r.Givens[0];
+            var givenText = (given.Grams is { } grams ? $"{Format(grams)} g" : $"{Format(given.Moles)} mol") + " " + lines[given.Index].Formula;
+            var givenIsReactant = lines[given.Index].Reactant;
+            // Asked about nothing in particular: the other side of the equation.
+            var shown = result.Targets.Count > 0
+                ? result.Targets.ToList()
+                : Enumerable.Range(0, lines.Count).Where(i => lines[i].Reactant != givenIsReactant).ToList();
+            for (var n = 0; n < shown.Count; n++)
+            {
+                var i = shown[n];
+                var template = lines[i].Reactant ? S.ai_stoich_needs : givenIsReactant ? S.ai_stoich_makes : S.ai_stoich_matches;
+                if (n > 0) builder.Append('\n');
+                builder.Append(_strings.Get(template, r.Equation, givenText, Format(r.Amounts[i].Grams), lines[i].Formula, Format(r.Amounts[i].Moles)));
+            }
+            return builder.ToString();
+        }
+
         /// <summary>A strong acid's or base's pH (roadmap 2.8).</summary>
         private string Ph(ExecutionResult.Ph result)
         {
@@ -586,8 +641,14 @@ namespace Atomic.Core.Ai.Compose
         private string Formula(ExecutionResult.Formula result)
         {
             var r = result.Result;
-            var builder = new StringBuilder(
-                _strings.Get(S.ai_formula_mass, r.Formula, Format(r.MolarMass)));
+            var builder = new StringBuilder();
+            // "Mass percent of oxygen in water" leads with oxygen's share (roadmap 2.8).
+            if (r.Parts.FirstOrDefault(p => p.Symbol == result.Focus) is { } focus)
+            {
+                var name = _store.BySymbol(focus.Symbol) is { } element ? DisplayName(element.Key) : focus.Symbol;
+                builder.Append(_strings.Get(S.ai_composition_element, name, Format(focus.Percent) + "%", r.Formula)).Append('\n');
+            }
+            builder.Append(_strings.Get(S.ai_formula_mass, r.Formula, Format(r.MolarMass)));
 
             // The per-element breakdown *is* the calculation, so a compound shows it whether or not
             // the word "composition" was used. Asked for the molar mass of Ca(NO3)2 the agent gave

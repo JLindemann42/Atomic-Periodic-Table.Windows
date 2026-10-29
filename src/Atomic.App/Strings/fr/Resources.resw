@@ -327,6 +327,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>, alors que </value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s représente **%2$s** de la masse de %3$s.</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>Composition de %1$s</value>
   </data>
@@ -503,6 +506,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>Voici le spectre d'émission de %1$s : la lumière émise par ses atomes lorsque les électrons excités retombent. L'application le stocke sous forme d'image, je peux donc montrer le motif mais pas nommer les raies.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>Avec une masse molaire de %1$s g/mol, la formule moléculaire est **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>La formule empirique de %1$s est **%2$s** : ses indices ont un facteur commun de %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>La formule empirique est **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s est déjà dans son rapport entier le plus simple : c'est sa propre formule empirique.</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>Excellente question ! 🌟</value>
@@ -1433,6 +1448,9 @@ Ils partagent des comportements chimiques similaires grâce à leurs électrons 
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ est la demi-vie, t le temps écoulé, n le nombre de demi-vies, N₀ et N les quantités avant et après.</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Chaque masse en moles, puis chacune divisée par la plus petite :</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>La masse molaire est la somme, pour chaque élément, du nombre d'atomes multiplié par sa masse atomique :</value>
   </data>
@@ -1453,6 +1471,27 @@ Ils partagent des comportements chimiques similaires grâce à leurs électrons 
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n est la quantité de matière en moles, c la concentration, V le volume, m la masse et M la masse molaire.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Chaque quantité en moles, puis à travers les coefficients :</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>Il reste %1$s g de %2$s.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>Dans %1$s, **%2$s** est le réactif limitant : il s'épuise en premier.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>Dans %1$s, %2$s donnent **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>Dans %1$s, %2$s vont avec **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>Dans %1$s, %2$s nécessitent **%3$s g de %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>Il se forme **%1$s g de %2$s** (%3$s mol).</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Je n'ai rien trouvé dans ce groupe ou cette période. Rappelez-vous : il y a 18 groupes et 7 périodes !</value>

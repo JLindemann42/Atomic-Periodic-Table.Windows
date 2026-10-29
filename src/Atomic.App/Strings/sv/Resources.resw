@@ -315,6 +315,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>", medan "</value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s utgör **%2$s** av massan i %3$s.</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>Sammansättning av %1$s</value>
   </data>
@@ -491,6 +494,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>Här är emissionsspektrumet för %1$s: ljuset som dess atomer sänder ut när exciterade elektroner faller tillbaka. Appen lagrar det som en bild, så jag kan visa mönstret men inte namnge enskilda linjer.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>Med molmassan %1$s g/mol är molekylformeln **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>Den empiriska formeln för %1$s är **%2$s**: dess index har den gemensamma faktorn %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>Den empiriska formeln är **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s har redan det enklaste heltalsförhållandet, så det är sin egen empiriska formel.</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>Bra fråga! 🌟</value>
@@ -1421,6 +1436,9 @@ De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ är halveringstiden, t den tid som gått, n antalet halveringstider, och N₀ och N mängden före och efter.</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Varje massa i mol, sedan var och en delad med den minsta:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>Molmassan är summan av varje grundämnes antal atomer gånger dess atommassa:</value>
   </data>
@@ -1441,6 +1459,27 @@ De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n är substansmängden i mol, c koncentrationen, V volymen, m massan och M molmassan.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Varje mängd i mol, sedan genom koefficienterna:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>%1$s g %2$s blir över.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>I %1$s är **%2$s** det begränsande ämnet: det tar slut först.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>I %1$s ger %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>I %1$s hör %2$s ihop med **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>I %1$s behöver %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>Det ger **%1$s g %2$s** (%3$s mol).</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Jag hittade inget i den gruppen eller perioden. Kom ihåg: det finns 18 grupper och 7 perioder!</value>

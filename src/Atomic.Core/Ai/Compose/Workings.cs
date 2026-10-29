@@ -50,6 +50,61 @@ namespace Atomic.Core.Ai.Compose
             return steps;
         }
 
+        /// <summary>Each mass in moles, the ratios over the smallest, then a multiplier to make them whole (roadmap 2.8).</summary>
+        public IReadOnlyList<string> Empirical(ExecutionResult.EmpiricalFormula result)
+        {
+            var r = result.Result;
+            var steps = new List<string>();
+            if (r.From is not null)
+            {
+                steps.Add($"{r.From}: " + string.Join(", ", r.Counts.Select(e => $"{e.Key} {e.Value * r.Divisor}")));
+                steps.Add($"÷ {r.Divisor} → {r.Formula}");
+            }
+            else
+            {
+                steps.Add(_strings.Get(S.ai_steps_empirical));
+                foreach (var row in r.Rows)
+                    steps.Add($"n({row.Symbol}) = {Number(row.Mass)} g ÷ {Number(row.AtomicMass)} g/mol = {Number(row.Moles)} mol");
+                var smallest = r.Rows.Min(row => row.Moles);
+                steps.Add($"÷ {Number(smallest)} mol: " + string.Join(", ", r.Rows.Select(row => $"{row.Symbol} {Number(row.Ratio)}")));
+                if (r.Multiplier > 1)
+                    steps.Add($"× {r.Multiplier}: " + string.Join(", ", r.Rows.Select(row => $"{row.Symbol} {Number(row.Ratio * r.Multiplier)}")));
+                steps.Add($"→ {r.Formula}");
+            }
+            if (r.MolecularFormula is { } m)
+            {
+                steps.Add($"M({r.Formula}) = {Number(r.EmpiricalMass)} g/mol");
+                steps.Add($"{Number(m.MolarMass)} ÷ {Number(r.EmpiricalMass)} ≈ {m.Factor} → {m.Formula}");
+            }
+            return steps;
+        }
+
+        /// <summary>Given amounts in moles, the extent each allows, then every amount from the smallest (roadmap 2.8).</summary>
+        public IReadOnlyList<string> Stoichiometry(ExecutionResult.Stoichiometry result)
+        {
+            var r = result.Result;
+            var steps = new List<string> { _strings.Get(S.ai_steps_stoich), r.Equation };
+            foreach (var g in r.Givens)
+            {
+                var line = r.Lines[g.Index];
+                if (g.Grams is { } grams)
+                    steps.Add($"n({line.Formula}) = {Number(grams)} g ÷ {Number(line.MolarMass)} g/mol = {Number(g.Moles)} mol");
+                if (r.Givens.Count > 1 || line.Coefficient > 1)
+                    steps.Add($"{Number(g.Moles)} mol ÷ {line.Coefficient} = {Number(g.Moles / line.Coefficient)} mol");
+            }
+            if (r.Limiting is { } limiting) steps.Add($"→ {r.Lines[limiting].Formula}");
+            var shown = result.Targets.Count > 0
+                ? result.Targets.ToList()
+                : Enumerable.Range(0, r.Lines.Count).Where(i => r.Givens.All(g => g.Index != i)).ToList();
+            foreach (var i in shown)
+            {
+                var line = r.Lines[i];
+                var a = r.Amounts[i];
+                steps.Add($"n({line.Formula}) = {line.Coefficient} × {Number(r.Extent)} mol = {Number(a.Moles)} mol; m = {Number(a.Moles)} mol × {Number(line.MolarMass)} g/mol = {Number(a.Grams)} g");
+            }
+            return steps;
+        }
+
         /// <summary>Full dissociation, then the negative logarithm (roadmap 2.8).</summary>
         public IReadOnlyList<string> Ph(ExecutionResult.Ph result)
         {

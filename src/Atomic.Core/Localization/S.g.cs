@@ -105,6 +105,7 @@ public static partial class S
     public const string ai_comparison_verdict = "ai_comparison_verdict";
     public const string ai_comparison_vs = "ai_comparison_vs";
     public const string ai_comparison_while = "ai_comparison_while";
+    public const string ai_composition_element = "ai_composition_element";
     public const string ai_composition_header = "ai_composition_header";
     public const string ai_composition_row = "ai_composition_row";
     public const string ai_concept_atomic_number = "ai_concept_atomic_number";
@@ -164,6 +165,10 @@ public static partial class S
     public const string ai_element_overview_isotopes = "ai_element_overview_isotopes";
     public const string ai_element_overview_series = "ai_element_overview_series";
     public const string ai_emission_spectrum = "ai_emission_spectrum";
+    public const string ai_empirical_molecular = "ai_empirical_molecular";
+    public const string ai_empirical_reduced = "ai_empirical_reduced";
+    public const string ai_empirical_result = "ai_empirical_result";
+    public const string ai_empirical_same = "ai_empirical_same";
     public const string ai_encouragement = "ai_encouragement";
     public const string ai_eqn_no_desc = "ai_eqn_no_desc";
     public const string ai_equation_balanced = "ai_equation_balanced";
@@ -467,6 +472,7 @@ public static partial class S
     public const string ai_steps_balance_solve = "ai_steps_balance_solve";
     public const string ai_steps_balance_unknowns = "ai_steps_balance_unknowns";
     public const string ai_steps_decay_legend = "ai_steps_decay_legend";
+    public const string ai_steps_empirical = "ai_steps_empirical";
     public const string ai_steps_formula = "ai_steps_formula";
     public const string ai_steps_gas = "ai_steps_gas";
     public const string ai_steps_header = "ai_steps_header";
@@ -474,6 +480,13 @@ public static partial class S
     public const string ai_steps_moles_legend = "ai_steps_moles_legend";
     public const string ai_steps_ph = "ai_steps_ph";
     public const string ai_steps_solution_legend = "ai_steps_solution_legend";
+    public const string ai_steps_stoich = "ai_steps_stoich";
+    public const string ai_stoich_excess = "ai_stoich_excess";
+    public const string ai_stoich_limiting = "ai_stoich_limiting";
+    public const string ai_stoich_makes = "ai_stoich_makes";
+    public const string ai_stoich_matches = "ai_stoich_matches";
+    public const string ai_stoich_needs = "ai_stoich_needs";
+    public const string ai_stoich_product = "ai_stoich_product";
     public const string ai_structural_no_results = "ai_structural_no_results";
     public const string ai_structural_result = "ai_structural_result";
     public const string ai_structural_specify_number = "ai_structural_specify_number";

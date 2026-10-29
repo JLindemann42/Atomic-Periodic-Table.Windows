@@ -327,6 +327,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>, terwyl </value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s maak **%2$s** van die massa van %3$s uit.</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>Samestelling van %1$s</value>
   </data>
@@ -503,6 +506,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>Hier is die emissiespektrum van %1$s: die lig wat sy atome uitstraal wanneer opgewekte elektrone terugval. Die program stoor dit as 'n prent, so ek kan die patroon wys maar nie individuele lyne benoem nie.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>Met 'n molêre massa van %1$s g/mol is die molekulêre formule **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>Die empiriese formule van %1$s is **%2$s**: sy onderskrifte deel 'n faktor van %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>Die empiriese formule is **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s is reeds in sy eenvoudigste heelgetalverhouding, dus is dit sy eie empiriese formule.</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>Goeie vraag! 🌟</value>
@@ -1433,6 +1448,9 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ is die halfleeftyd, t die tyd wat verloop het, n die aantal halfleeftye, en N₀ en N die hoeveelhede voor en ná.</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Elke massa in mol, dan elkeen gedeel deur die kleinste:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>Die molêre massa is die som van elke element se aantal atome maal sy atoommassa:</value>
   </data>
@@ -1453,6 +1471,27 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n is die hoeveelheid in mol, c die konsentrasie, V die volume, m die massa en M die molêre massa.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Elke hoeveelheid in mol, dan deur die koëffisiënte:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>%1$s g %2$s bly oor.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>In %1$s is **%2$s** die beperkende reagens: dit raak eerste op.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>In %1$s lewer %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>In %1$s hoort %2$s by **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>In %1$s benodig %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>Dit lewer **%1$s g %2$s** (%3$s mol).</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Ek kon niks in daardie groep of periode vind nie. Onthou: daar is 18 groepe en 7 periodes!</value>

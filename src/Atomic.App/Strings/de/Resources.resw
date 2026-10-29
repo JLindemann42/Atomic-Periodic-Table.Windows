@@ -315,6 +315,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>", während "</value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s macht **%2$s** der Masse von %3$s aus.</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>Zusammensetzung von %1$s</value>
   </data>
@@ -491,6 +494,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>Hier ist das Emissionsspektrum von %1$s: das Licht, das seine Atome aussenden, wenn angeregte Elektronen zurückfallen. Die App speichert es als Bild, daher kann ich das Muster zeigen, aber keine einzelnen Linien benennen.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>Bei einer molaren Masse von %1$s g/mol lautet die Summenformel **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>Die empirische Formel von %1$s ist **%2$s**: Ihre Indizes haben den gemeinsamen Faktor %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>Die empirische Formel lautet **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s hat bereits das einfachste ganzzahlige Verhältnis und ist damit seine eigene empirische Formel.</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>Gute Frage! 🌟</value>
@@ -1421,6 +1436,9 @@ Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ ist die Halbwertszeit, t die vergangene Zeit, n die Zahl der Halbwertszeiten, N₀ und N die Mengen vorher und nachher.</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Jede Masse in Mol, dann jede durch die kleinste geteilt:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>Die molare Masse ist die Summe aus der Atomzahl jedes Elements mal seiner Atommasse:</value>
   </data>
@@ -1441,6 +1459,27 @@ Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n ist die Stoffmenge in Mol, c die Konzentration, V das Volumen, m die Masse und M die molare Masse.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Jede Menge in Mol, dann über die Koeffizienten:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>Übrig bleiben %1$s g %2$s.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>In %1$s ist **%2$s** der limitierende Reaktant: Er ist zuerst verbraucht.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>In %1$s ergeben %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>In %1$s gehören zu %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>In %1$s brauchen %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>Es entstehen **%1$s g %2$s** (%3$s mol).</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Ich konnte in dieser Gruppe oder Periode nichts finden. Denken Sie daran: es gibt 18 Gruppen und 7 Perioden!</value>

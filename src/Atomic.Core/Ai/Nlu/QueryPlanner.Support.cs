@@ -84,6 +84,13 @@ namespace Atomic.Core.Ai.Nlu
             // be the neutral atom's configuration, which is exactly the wrong one.
             if (IonConfigPlan(rawQuery, normalized) is { } ion) return ion;
 
+            // --- Empirical formulas and stoichiometry (roadmap 2.8) ---------------------------
+            // Above balancing: a stoichiometry question carries an equation, and the balancer reads
+            // the amounts written around it as species. Percentages beside element names would
+            // otherwise be taken for a comparison of those elements.
+            if (EmpiricalPlan(rawQuery, normalized) is { } empirical) return empirical;
+            if (StoichiometryPlan(rawQuery) is { } stoichiometry) return stoichiometry;
+
             // --- Balance an equation --------------------------------------------------------
             // First, and on the raw query. The arrow is the most specific syntax any of these
             // questions carry, and `normalized` is lowercased, which destroys every formula in the
@@ -244,9 +251,11 @@ namespace Atomic.Core.Ai.Nlu
 
             var candidate = CompoundIn(rawQuery, normalized);
             if (candidate is null) return null;
+            var focus = wantsComposition ? FocusElement(rawQuery, candidate) : null;
 
             return new QueryPlan(
                 Intent.FormulaMass,
+                Entities: focus is null ? null : [new EntityRef.Element(focus.Key)],
                 FieldIds: wantsComposition ? ["composition"] : [],
                 RawQuery: candidate,
                 Confidence: 0.9,
@@ -327,6 +336,187 @@ namespace Atomic.Core.Ai.Nlu
                        !Lexicon.SCRIPT_UNIT_WORDS.ContainsKey(cleaned);
             }));
         }
+
+        /// <summary>
+        /// The element whose share a composition question asks for, "oxygen in water", "Fe in Fe2O3"
+        /// (roadmap 2.8), when it is one of the compound's own.
+        /// </summary>
+        private ElementRecord? FocusElement(string rawQuery, string formula)
+        {
+            if (ChemistryMath.ParseFormula(formula, AtomicMassOf) is not { } parsed) return null;
+            var symbols = parsed.Parts.Select(p => p.Symbol).ToHashSet(StringComparer.Ordinal);
+            if (symbols.Count < 2) return null;
+            var rest = rawQuery.Replace(formula, " ", StringComparison.OrdinalIgnoreCase);
+            return _entities.ResolveAll(rest, limit: 3).Select(m => _store.Element(m.Key)).OfType<ElementRecord>()
+                .FirstOrDefault(e => symbols.Contains(e.Symbol));
+        }
+
+        /// <summary>
+        /// "Empirical formula of 40% C, 6.7% H and 53.3% O", "empirical formula of C6H12O6",
+        /// "molecular formula of CH2O with a molar mass of 180 g/mol" (roadmap 2.8). The literal
+        /// carries the masses or the formula, and the molar mass after a bar.
+        /// </summary>
+        internal QueryPlan? EmpiricalPlan(string rawQuery, string normalized)
+        {
+            var empirical = MentionsAny(normalized, Lexicon.EMPIRICAL_WORDS);
+            var molecular = MentionsAny(normalized, Lexicon.MOLECULAR_FORMULA_WORDS);
+            if (!empirical && !molecular) return null;
+            var molarMass = MolarMassGiven(rawQuery, normalized);
+            // A molecular formula alone says nothing a formula does not; with a molar mass it does.
+            if (!empirical && molarMass is null) return null;
+            var masses = ElementMasses(rawQuery);
+            string body;
+            if (masses.Count >= 2)
+            {
+                body = string.Join(";", masses.Select(e => $"{e.Key}={e.Value.ToString("R", CultureInfo.InvariantCulture)}"));
+            }
+            else
+            {
+                if (CompoundIn(rawQuery, normalized) is not { } formula) return null;
+                body = "formula:" + formula;
+            }
+            return new QueryPlan(
+                Intent.EmpiricalFormula,
+                RawQuery: rawQuery,
+                Literal: body + (molarMass is { } m ? "|" + m.ToString("R", CultureInfo.InvariantCulture) : ""),
+                Confidence: 0.9,
+                Evidence: ["empirical formula"]);
+        }
+
+        /// <summary>A molar mass the question gives: "180 g/mol", or a number after "molar mass".</summary>
+        private static double? MolarMassGiven(string rawQuery, string normalized)
+        {
+            var given = MolarMassGivenPattern.Match(rawQuery);
+            if (given.Success) return Decimal(given.Groups[1].Value);
+            foreach (var word in Lexicon.MOLAR_MASS_WORDS)
+            {
+                var at = normalized.IndexOf(word, StringComparison.Ordinal);
+                if (at < 0) continue;
+                var rest = normalized[(at + word.Length)..];
+                var number = NumberAfter.Match(rest.Length > 24 ? rest[..24] : rest);
+                if (number.Success) return Decimal(number.Groups[1].Value);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Each element's percentage or mass, "40% C", "6.7 % hydrogen", "53.3 g of oxygen", "C: 40%".
+        /// An element is a symbol as written, or a name in any language.
+        /// </summary>
+        private Dictionary<string, double> ElementMasses(string rawQuery)
+        {
+            var masses = new Dictionary<string, double>(StringComparer.Ordinal);
+            var order = new List<string>();
+            void Put(string symbol, double value)
+            {
+                if (masses.ContainsKey(symbol)) return;
+                masses[symbol] = value;
+                order.Add(symbol);
+            }
+            foreach (Match m in ElementAmount.Matches(rawQuery))
+            {
+                if (Decimal(m.Groups[1].Value) is not { } value) continue;
+                // The element is one of the next two words: "40% C", "40 % of carbon", "40 g av kol".
+                var element = WordPattern.Matches(rawQuery, m.Index + m.Length).Take(2)
+                    .Select(w => ElementWord(w.Value)).FirstOrDefault(e => e is not null);
+                if (element is null) continue;
+                Put(element.Symbol, value);
+            }
+            if (masses.Count < 2)
+            {
+                masses.Clear();
+                order.Clear();
+                foreach (Match m in ElementThenPercent.Matches(rawQuery))
+                {
+                    if (ElementWord(m.Groups[1].Value) is not { } element || Decimal(m.Groups[2].Value) is not { } value) continue;
+                    Put(element.Symbol, value);
+                }
+            }
+            // In the order written, as Android's LinkedHashMap keeps it.
+            var ordered = new Dictionary<string, double>(StringComparer.Ordinal);
+            foreach (var symbol in order) ordered[symbol] = masses[symbol];
+            return ordered;
+        }
+
+        private ElementRecord? ElementWord(string word) =>
+            SymbolPattern.IsMatch(word) ? _store.BySymbol(word)
+            : word.Length < 3 ? null
+            : _store.Element(word.ToLowerInvariant())
+              ?? (_entities.ResolveAll(word, limit: 1).FirstOrDefault() is { } match ? _store.Element(match.Key) : null);
+
+        private static double? Decimal(string text) =>
+            double.TryParse(text.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out var value) ? value : null;
+
+        /// <summary>
+        /// "How many grams of water from 4 g of H2 in 2H2 + O2 -&gt; 2H2O", "2H2 + O2 -&gt; 2H2O with 4 g
+        /// H2 and 40 g O2" (roadmap 2.8). The equation is cut out of the sentence; each amount around
+        /// it is tied to the species written or named just after it, and a species named without one
+        /// is a target. The literal is "equation|H2=4 g;O2=40 g|H2O".
+        /// </summary>
+        internal QueryPlan? StoichiometryPlan(string rawQuery)
+        {
+            bool Known(string s) => _store.BySymbol(s) is not null;
+            if (EquationBalancer.SpanOf(rawQuery, Known) is not { } span) return null;
+            if (EquationBalancer.Parse(span.Equation, Known) is not EquationBalancer.ParseOutcome.Sides sides) return null;
+            var species = sides.Reactants.Concat(sides.Products).ToList();
+            var outside = rawQuery[..span.Start] + rawQuery[(span.End + 1)..];
+
+            Species? SpeciesOf(IReadOnlyDictionary<string, int>? counts) =>
+                counts is null ? null : species.FirstOrDefault(s => s.Counts.Count == counts.Count &&
+                    s.Counts.All(e => counts.TryGetValue(e.Key, out var n) && n == e.Value));
+            Species? FormulaSpecies(string token)
+            {
+                var trimmed = token.Trim(',', ';', ':', '?', '!', '.', '(', ')');
+                return trimmed.Length > 0 && char.IsUpper(trimmed[0]) ? SpeciesOf(ChemistryMath.ElementCounts(trimmed, Known)) : null;
+            }
+            Species? NamedSpecies(string text) => _entities.ScanCompounds(text).Compounds
+                .Select(c => c.Formula is { } f ? SpeciesOf(ChemistryMath.ElementCounts(f, Known)) : null)
+                .FirstOrDefault(s => s is not null);
+
+            var givens = new List<(string Formula, string Amount)>();
+            foreach (Match m in SpeciesAmount.Matches(outside))
+            {
+                if (Decimal(m.Groups[1].Value) is not { } value) continue;
+                var unit = m.Groups[2].Value.StartsWith("mol", StringComparison.OrdinalIgnoreCase) ? "mol" : "g";
+                // The species is one of the next three words, written as a formula or named.
+                var next = TokenPattern.Matches(outside, m.Index + m.Length).Take(3).Select(t => t.Value).ToList();
+                var named = next.Select(FormulaSpecies).FirstOrDefault(s => s is not null) ?? NamedSpecies(string.Join(" ", next));
+                if (named is null || givens.Any(g => g.Formula == named.Formula)) continue;
+                givens.Add((named.Formula, value.ToString("R", CultureInfo.InvariantCulture) + " " + unit));
+            }
+            // The amount is what makes this a stoichiometry question rather than a request to balance.
+            if (givens.Count == 0) return null;
+
+            var mentioned = TokenPattern.Matches(outside).Select(t => FormulaSpecies(t.Value)).OfType<Species>().ToList();
+            mentioned.AddRange(_entities.ScanCompounds(outside).Compounds
+                .Select(c => c.Formula is { } f ? SpeciesOf(ChemistryMath.ElementCounts(f, Known)) : null).OfType<Species>());
+            var targets = mentioned.Select(s => s.Formula).Distinct().Where(f => givens.All(g => g.Formula != f));
+            return new QueryPlan(
+                Intent.Stoichiometry,
+                RawQuery: rawQuery,
+                Literal: span.Equation + "|" + string.Join(";", givens.Select(g => $"{g.Formula}={g.Amount}")) + "|" + string.Join(",", targets),
+                Confidence: 0.9,
+                Evidence: ["stoichiometry"]);
+        }
+
+        private static readonly Regex MolarMassGivenPattern =
+            new(@"(\d+(?:[.,]\d+)?)\s*g\s*/\s*mol", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+
+        private static readonly Regex NumberAfter = new(@"(\d+(?:[.,]\d+)?)", RegexOptions.CultureInvariant);
+
+        private static readonly Regex ElementAmount = new(
+            @"(\d+(?:[.,]\d+)?)\s*(?:%|g(?![\p{L}/])|grams?(?![\p{L}])|gramm(?![\p{L}])|grammes?(?![\p{L}])|gramos?(?![\p{L}])|grammi(?![\p{L}])|gramas?(?![\p{L}]))",
+            RegexOptions.CultureInvariant);
+
+        private static readonly Regex ElementThenPercent = new(@"([\p{L}\p{M}]+)\s*[:=]?\s*(\d+(?:[.,]\d+)?)\s*%", RegexOptions.CultureInvariant);
+
+        private static readonly Regex SpeciesAmount = new(
+            @"(\d+(?:[.,]\d+)?)\s*(g(?![\p{L}/])|grams?(?![\p{L}])|gramm(?![\p{L}])|grammes?(?![\p{L}])|gramos?(?![\p{L}])|grammi(?![\p{L}])|gramas?(?![\p{L}])|mol(?:es|s|i)?(?![\p{L}/]))",
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+
+        private static readonly Regex WordPattern = new(@"[\p{L}\p{M}]+", RegexOptions.CultureInvariant);
+        private static readonly Regex TokenPattern = new(@"\S+", RegexOptions.CultureInvariant);
+        private static readonly Regex SymbolPattern = new(@"^[A-Z][a-z]?$", RegexOptions.CultureInvariant);
 
         /// <summary>
         /// "pH of 0.01 M HCl", "the pH of 0.05 M sodium hydroxide" (roadmap 2.8). Only for a strong

@@ -107,6 +107,16 @@ namespace Atomic.Core.Ai.Engine
         /// <summary>An ion's electron configuration, Fe³⁺ (roadmap 2.8). <see cref="QueryPlan.Literal"/> is "symbol:charge".</summary>
         IonConfig,
 
+        /// <summary>
+        /// An empirical formula from element percentages or masses, or from a molecular formula; with
+        /// a molar mass, the molecular formula too (roadmap 2.8). <see cref="QueryPlan.Literal"/> is
+        /// "C=40;H=6.7;O=53.3" or "formula:C6H12O6", either followed by "|180" for a molar mass.
+        /// </summary>
+        EmpiricalFormula,
+
+        /// <summary>Amounts through a balanced equation, and the limiting reagent (roadmap 2.8). <see cref="QueryPlan.Literal"/> is the equation, the amounts and the targets.</summary>
+        Stoichiometry,
+
         /// <summary>Nothing recognised. The caller should fall back.</summary>
         Unknown,
     }
@@ -118,7 +128,7 @@ namespace Atomic.Core.Ai.Engine
         public static readonly IReadOnlySet<Intent> Calculations = new HashSet<Intent>
         {
             Intent.FormulaMass, Intent.MoleConversion, Intent.BalanceEquation, Intent.SolutionCalc, Intent.DecayCalc,
-            Intent.GasLaw, Intent.PhCalc, Intent.IonConfig,
+            Intent.GasLaw, Intent.PhCalc, Intent.IonConfig, Intent.EmpiricalFormula, Intent.Stoichiometry,
         };
     }
 

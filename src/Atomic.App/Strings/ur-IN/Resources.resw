@@ -315,6 +315,9 @@
   <data name="ai_comparison_while" xml:space="preserve">
     <value>، جبکہ </value>
   </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%3$s کی کمیت میں %1$s کا حصہ **%2$s** ہے۔</value>
+  </data>
   <data name="ai_composition_header" xml:space="preserve">
     <value>%1$s کی ترکیب</value>
   </data>
@@ -491,6 +494,18 @@
   </data>
   <data name="ai_emission_spectrum" xml:space="preserve">
     <value>یہ %1$s کا اخراجی طیف ہے: وہ روشنی جو اس کے ایٹم اُس وقت خارج کرتے ہیں جب برانگیختہ الیکٹران واپس نیچے آتے ہیں۔ ایپ اسے تصویر کے طور پر رکھتی ہے، اس لیے میں نمونہ دکھا سکتا ہوں مگر انفرادی لکیروں کے نام نہیں بتا سکتا۔</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>%1$s g/mol کی مولر کمیت کے ساتھ سالمی فارمولا **%2$s** ہے، %3$d × %4$s۔</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>%1$s کا تجربی فارمولا **%2$s** ہے: اس کے زیریں اعداد میں %3$d کا مشترک جزو ہے۔</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>تجربی فارمولا **%1$s** ہے۔</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s پہلے ہی اپنی سادہ ترین مکمل عددی نسبت میں ہے، اس لیے یہی اس کا تجربی فارمولا ہے۔</value>
   </data>
   <data name="ai_encouragement" xml:space="preserve">
     <value>اچھا سوال! 🌟</value>
@@ -1421,6 +1436,9 @@
   <data name="ai_steps_decay_legend" xml:space="preserve">
     <value>t½ نصف عمر ہے، t گزرا ہوا وقت، n نصف عمروں کی تعداد، اور N₀ اور N پہلے اور بعد کی مقداریں۔</value>
   </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>ہر کمیت کو مول میں بدلیں، پھر ہر ایک کو سب سے چھوٹی سے تقسیم کریں:</value>
+  </data>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>مولر کمیت ہر عنصر کے ایٹموں کی تعداد ضرب اس کی جوہری کمیت کا مجموعہ ہے:</value>
   </data>
@@ -1441,6 +1459,27 @@
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n مول میں مقدار ہے، c ارتکاز، V حجم، m کمیت اور M مولر کمیت۔</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>ہر مقدار کو مول میں بدلیں، پھر ضربی عددوں کے ذریعے:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>%1$s g %2$s بچ جاتا ہے۔</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>%1$s میں، **%2$s** محدود کرنے والا ری ایجنٹ ہے: یہ سب سے پہلے ختم ہوتا ہے۔</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>%1$s میں، %2$s سے **%3$s g %4$s** (%5$s mol) بنتا ہے۔</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>%1$s میں، %2$s کے ساتھ **%3$s g %4$s** (%5$s mol) آتا ہے۔</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>%1$s میں، %2$s کے لیے **%3$s g %4$s** (%5$s mol) درکار ہے۔</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>اس سے **%1$s g %2$s** (%3$s mol) بنتا ہے۔</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>مجھے اس گروپ یا پیریڈ میں کچھ نہیں ملا۔ یاد رکھیں: 18 گروپ اور 7 پیریڈز ہیں!</value>

@@ -137,14 +137,17 @@ namespace Atomic.Core.Ai.Exec
                 Intent.DecayCalc => Decay(plan),
 
                 // PRO+, as the other calculators are (roadmap 2.8).
-                Intent.GasLaw or Intent.PhCalc or Intent.IonConfig => !_entitlements.Allows(Tier.ProPlus)
-                    ? new ExecutionResult.Locked(Tier.ProPlus, [], null)
-                    : plan.Intent switch
-                    {
-                        Intent.GasLaw => GasLaw(plan),
-                        Intent.PhCalc => Ph(plan),
-                        _ => IonConfig(plan),
-                    },
+                Intent.GasLaw or Intent.PhCalc or Intent.IonConfig or Intent.EmpiricalFormula or Intent.Stoichiometry =>
+                    !_entitlements.Allows(Tier.ProPlus)
+                        ? new ExecutionResult.Locked(Tier.ProPlus, [], null)
+                        : plan.Intent switch
+                        {
+                            Intent.GasLaw => GasLaw(plan),
+                            Intent.PhCalc => Ph(plan),
+                            Intent.EmpiricalFormula => EmpiricalFormula(plan),
+                            Intent.Stoichiometry => Stoichiometry(plan),
+                            _ => IonConfig(plan),
+                        },
 
                 Intent.Comparison => Comparison(plan),
                 Intent.Superlative or Intent.FilterList => ElementList(plan),
@@ -327,7 +330,11 @@ namespace Atomic.Core.Ai.Exec
                     .OfType<ElementRecord>()
                     .Select(e => CitationFor("atomic_mass", e))
                     .Take(3)
-                    .ToList());
+                    .ToList(),
+                Focus: plan.ElementKeys.Count > 0 && _store.Element(plan.ElementKeys[0]) is { } focus &&
+                       result.Parts.Any(p => p.Symbol == focus.Symbol)
+                    ? focus.Symbol
+                    : null);
         }
 
         /// <summary>
@@ -1139,6 +1146,73 @@ namespace Atomic.Core.Ai.Exec
             if (molarity is null) return null;
             if (AcidBase.Strong(formula, Composition) is not { } strong) return null;
             return AcidBase.Solve(strong.Formula, strong.Base, molarity.Value) is { } result ? new ExecutionResult.Ph(result) : null;
+        }
+
+        private IReadOnlyList<Citation> AtomicMassCitations(IEnumerable<string> symbols) =>
+            symbols.Select(s => _store.BySymbol(s)).OfType<ElementRecord>().Select(e => CitationFor("atomic_mass", e)).Take(3).ToList();
+
+        /// <summary>An empirical formula (roadmap 2.8); the literal is "C=40;H=6.7" or "formula:C6H12O6", then "|molar mass".</summary>
+        private ExecutionResult? EmpiricalFormula(QueryPlan plan)
+        {
+            if (plan.Literal is not { } literal) return null;
+            var parts = literal.Split('|');
+            double? molarMass = parts.Length > 1 && TryNumber(parts[1], out var mm) ? mm : null;
+            var body = parts[0];
+            Empirical.Result? result;
+            if (body.StartsWith("formula:", StringComparison.Ordinal))
+            {
+                if (ChemistryMath.ParseFormula(body["formula:".Length..], AtomicMass) is not { } parsed) return null;
+                var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+                foreach (var part in parsed.Parts) counts[part.Symbol] = counts.GetValueOrDefault(part.Symbol) + part.Count;
+                result = Empirical.FromFormula(parsed.Formula, counts, AtomicMass);
+                if (result is not null && molarMass is { } given)
+                    result = result with { MolecularFormula = Empirical.MolecularOf(result.Counts, result.EmpiricalMass, given) };
+            }
+            else
+            {
+                var masses = new Dictionary<string, double>(StringComparer.Ordinal);
+                foreach (var entry in body.Split(';'))
+                {
+                    var pair = entry.Split('=');
+                    if (pair.Length != 2 || !TryNumber(pair[1], out var value)) return null;
+                    masses[pair[0]] = value;
+                }
+                result = Empirical.FromMasses(masses, AtomicMass, molarMass);
+            }
+            return result is null ? null : new ExecutionResult.EmpiricalFormula(result, AtomicMassCitations(result.Counts.Keys));
+        }
+
+        /// <summary>Amounts through a balanced equation (roadmap 2.8); the literal is "equation|H2=4 g;O2=40 g|H2O".</summary>
+        private ExecutionResult? Stoichiometry(QueryPlan plan)
+        {
+            var parts = plan.Literal?.Split('|');
+            if (parts is not { Length: 3 }) return null;
+            if (EquationBalancer.Parse(parts[0], s => _store.BySymbol(s) is not null) is not EquationBalancer.ParseOutcome.Sides sides) return null;
+            if (EquationBalancer.Balance(sides.Reactants, sides.Products) is not EquationBalancer.Result.Balanced balanced) return null;
+            var lines = new List<Data.Stoichiometry.Line>();
+            foreach (var (term, reactant) in balanced.Reactants.Select(t => (t, true)).Concat(balanced.Products.Select(t => (t, false))))
+            {
+                if (ChemistryMath.ParseFormula(term.Formula, AtomicMass) is not { } parsed) return null;
+                lines.Add(new Data.Stoichiometry.Line(term.Formula, term.Coefficient, parsed.MolarMass, reactant));
+            }
+            var givens = new List<Data.Stoichiometry.Given>();
+            foreach (var entry in parts[1].Split(';', StringSplitOptions.RemoveEmptyEntries))
+            {
+                var pair = entry.Split('=');
+                if (pair.Length != 2) return null;
+                var amount = pair[1].Split(' ');
+                if (amount.Length != 2 || !TryNumber(amount[0], out var number)) return null;
+                var index = lines.FindIndex(l => l.Formula == pair[0]);
+                if (index < 0) return null;
+                givens.Add(amount[1] == "mol"
+                    ? new Data.Stoichiometry.Given(index, number, null)
+                    : new Data.Stoichiometry.Given(index, number / lines[index].MolarMass, number));
+            }
+            if (Data.Stoichiometry.Solve(lines, givens) is not { } result) return null;
+            var targets = parts[2].Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(f => lines.FindIndex(l => l.Formula == f)).Where(i => i >= 0).ToList();
+            var symbols = sides.Reactants.SelectMany(s => s.Counts.Keys).Distinct();
+            return new ExecutionResult.Stoichiometry(result, targets, AtomicMassCitations(symbols));
         }
 
         private IReadOnlyDictionary<string, int>? Composition(string formula) =>

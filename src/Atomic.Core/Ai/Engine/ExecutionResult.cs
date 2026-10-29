@@ -166,10 +166,12 @@ namespace Atomic.Core.Ai.Engine
 
         /// <summary>A parsed chemical formula with its molar mass and composition.</summary>
         /// <param name="WantsComposition">Whether the question asked for the percentage breakdown.</param>
+        /// <param name="Focus">The element whose share the question asked for, "oxygen in water" (roadmap 2.8).</param>
         public sealed record Formula(
             FormulaResult Result,
             bool WantsComposition,
-            IReadOnlyList<Citation> Citations) : ExecutionResult
+            IReadOnlyList<Citation> Citations,
+            string? Focus = null) : ExecutionResult
         {
             public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
         }
@@ -357,6 +359,22 @@ namespace Atomic.Core.Ai.Engine
         public sealed record Ph(Data.AcidBase.Result Result, IReadOnlyList<Citation>? Citations = null) : ExecutionResult
         {
             public override IReadOnlyList<Citation> Citations { get; init; } = Citations ?? [];
+        }
+
+        /// <summary>An empirical formula, and the molecular formula when a molar mass was given (roadmap 2.8).</summary>
+        public sealed record EmpiricalFormula(Data.Empirical.Result Result, IReadOnlyList<Citation> Citations) : ExecutionResult
+        {
+            public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
+        }
+
+        /// <summary>Amounts through a balanced equation (roadmap 2.8).</summary>
+        /// <param name="Targets">The species the question asked about, by index; empty for "what does it make".</param>
+        public sealed record Stoichiometry(
+            Data.Stoichiometry.Result Result,
+            IReadOnlyList<int> Targets,
+            IReadOnlyList<Citation> Citations) : ExecutionResult
+        {
+            public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
         }
 
         /// <summary>An ion's electron configuration, beside the neutral atom's (roadmap 2.8).</summary>

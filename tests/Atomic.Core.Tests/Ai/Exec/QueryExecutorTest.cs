@@ -584,10 +584,12 @@ namespace Atomic.Core.Tests.Ai.Exec
             // not because the intent is unhandled - they need entities this synthetic plan has no
             // way to supply. Named so the set cannot grow unnoticed. An explanation needs its key and
             // the explanations it names, which ExplanationTest supplies (roadmap 2.4); the gas law
-            // its quantities, pH its formula and molarity, and an ion its "symbol:charge", which the
+            // its quantities, pH its formula and molarity, an ion its "symbol:charge", an empirical
+            // formula its masses or formula, and stoichiometry its equation and amounts, which the
             // calculators corpus supplies (roadmap 2.8).
             Assert.Equal(
-                [Intent.Explanation, Intent.GasLaw, Intent.IonConfig, Intent.PhCalc, Intent.SolutionCalc, Intent.UnitConvert],
+                [Intent.EmpiricalFormula, Intent.Explanation, Intent.GasLaw, Intent.IonConfig, Intent.PhCalc,
+                 Intent.SolutionCalc, Intent.Stoichiometry, Intent.UnitConvert],
                 unhandled.OrderBy(i => i.ToString(), StringComparer.Ordinal));
 
             static QueryPlan PlanFor(Intent intent) => intent switch

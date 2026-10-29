@@ -196,4 +196,186 @@ namespace Atomic.Core.Ai.Data
 
         private static string Superscript(int n) => string.Concat(n.ToString(System.Globalization.CultureInfo.InvariantCulture).Select(c => "⁰¹²³⁴⁵⁶⁷⁸⁹"[c - '0']));
     }
+
+    /// <summary>
+    /// Empirical and molecular formulas (roadmap 2.8): from the mass of each element, or a
+    /// percentage, which is the mass in 100 g; or from a molecular formula by dividing out its common
+    /// factor. Mirrors Android's <c>Empirical</c>.
+    /// </summary>
+    public static class Empirical
+    {
+        /// <summary>How far a mole ratio may sit from a whole number and still be read as one.</summary>
+        public const double Tolerance = 0.1;
+
+        /// <summary>The largest multiplier tried to clear a ratio such as 1.5 or 1.33.</summary>
+        public const int MaxMultiplier = 8;
+
+        /// <summary>How far the given molar mass may sit from a whole multiple of the empirical one, relatively.</summary>
+        public const double MolarMassTolerance = 0.02;
+
+        /// <summary>One element's path from mass to subscript.</summary>
+        public sealed record Row(string Symbol, double Mass, double AtomicMass, double Moles, double Ratio, int Count);
+
+        /// <summary>The molecular formula, <paramref name="Factor"/> times the empirical one, for the <paramref name="MolarMass"/> the question gave.</summary>
+        public sealed record Molecular(int Factor, IReadOnlyDictionary<string, int> Counts, double MolarMass)
+        {
+            public string Formula => Format(Counts);
+        }
+
+        /// <param name="Rows">The working, in Hill order; empty when the formula was reduced rather than built.</param>
+        /// <param name="Multiplier">What the mole ratios were multiplied by to make them whole.</param>
+        /// <param name="From">The molecular formula that was reduced, when one was given.</param>
+        /// <param name="Divisor">The common factor that was divided out of <paramref name="From"/>.</param>
+        public sealed record Result(
+            IReadOnlyDictionary<string, int> Counts,
+            double EmpiricalMass,
+            IReadOnlyList<Row> Rows,
+            int Multiplier,
+            string? From,
+            int Divisor,
+            Molecular? MolecularFormula)
+        {
+            public string Formula => Format(Counts);
+        }
+
+        /// <summary>The empirical formula from each element's mass or percentage, or null when no ratio comes out whole.</summary>
+        public static Result? FromMasses(IReadOnlyDictionary<string, double> masses, Func<string, double?> atomicMassOf, double? molarMass = null)
+        {
+            if (masses.Count < 2 || masses.Values.Any(m => m <= 0 || double.IsNaN(m) || double.IsInfinity(m))) return null;
+            var atomic = new Dictionary<string, double>(StringComparer.Ordinal);
+            foreach (var symbol in masses.Keys)
+            {
+                if (atomicMassOf(symbol) is not { } am) return null;
+                atomic[symbol] = am;
+            }
+            var moles = masses.ToDictionary(e => e.Key, e => e.Value / atomic[e.Key], StringComparer.Ordinal);
+            var smallest = moles.Values.Min();
+            var ratios = moles.ToDictionary(e => e.Key, e => e.Value / smallest, StringComparer.Ordinal);
+            var multiplier = Enumerable.Range(1, MaxMultiplier)
+                .FirstOrDefault(k => ratios.Values.All(r => Math.Abs(r * k - Math.Round(r * k, MidpointRounding.AwayFromZero)) <= Tolerance));
+            if (multiplier == 0) return null;
+            var order = Hill(masses.Keys);
+            var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+            foreach (var symbol in order) counts[symbol] = (int)Math.Round(ratios[symbol] * multiplier, MidpointRounding.AwayFromZero);
+            var rows = order.Select(s => new Row(s, masses[s], atomic[s], moles[s], ratios[s], counts[s])).ToList();
+            if (MassOf(counts, s => atomic.TryGetValue(s, out var v) ? v : null) is not { } mass) return null;
+            return new Result(counts, mass, rows, multiplier, null, 1, molarMass is { } m ? MolecularOf(counts, mass, m) : null);
+        }
+
+        /// <summary>A molecular formula's empirical formula: its subscripts over their greatest common divisor.</summary>
+        public static Result? FromFormula(string formula, IReadOnlyDictionary<string, int> counts, Func<string, double?> atomicMassOf)
+        {
+            if (counts.Count == 0 || counts.Values.Any(n => n <= 0)) return null;
+            var divisor = counts.Values.Aggregate(Gcd);
+            var reduced = new Dictionary<string, int>(StringComparer.Ordinal);
+            foreach (var (symbol, n) in counts) reduced[symbol] = n / divisor;
+            if (MassOf(reduced, atomicMassOf) is not { } mass) return null;
+            return new Result(reduced, mass, [], 1, formula, divisor, null);
+        }
+
+        /// <summary>The molecular formula with <paramref name="molarMass"/>, or null when it is not close to a whole multiple.</summary>
+        public static Molecular? MolecularOf(IReadOnlyDictionary<string, int> counts, double empiricalMass, double molarMass)
+        {
+            if (molarMass <= 0 || empiricalMass <= 0) return null;
+            var factor = (int)Math.Round(molarMass / empiricalMass, MidpointRounding.AwayFromZero);
+            if (factor < 1 || Math.Abs(molarMass / (empiricalMass * factor) - 1) > MolarMassTolerance) return null;
+            var multiplied = new Dictionary<string, int>(StringComparer.Ordinal);
+            foreach (var (symbol, n) in counts) multiplied[symbol] = n * factor;
+            return new Molecular(factor, multiplied, molarMass);
+        }
+
+        /// <summary>"CH2O": each symbol with its count, a count of one left out.</summary>
+        public static string Format(IReadOnlyDictionary<string, int> counts) =>
+            string.Concat(counts.Select(e => e.Value == 1 ? e.Key : e.Key + e.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+
+        /// <summary>Carbon first, then hydrogen, then the rest alphabetically; with no carbon, all alphabetically.</summary>
+        public static List<string> Hill(IEnumerable<string> symbols)
+        {
+            var all = symbols.ToList();
+            if (!all.Contains("C")) return all.OrderBy(s => s, StringComparer.Ordinal).ToList();
+            var order = new List<string> { "C" };
+            if (all.Contains("H")) order.Add("H");
+            order.AddRange(all.Where(s => s != "C" && s != "H").OrderBy(s => s, StringComparer.Ordinal));
+            return order;
+        }
+
+        private static double? MassOf(IReadOnlyDictionary<string, int> counts, Func<string, double?> atomicMassOf)
+        {
+            var total = 0.0;
+            foreach (var (symbol, n) in counts)
+            {
+                if (atomicMassOf(symbol) is not { } am) return null;
+                total += am * n;
+            }
+            return total;
+        }
+
+        private static int Gcd(int a, int b) => b == 0 ? a : Gcd(b, a % b);
+    }
+
+    /// <summary>
+    /// Gram-to-gram stoichiometry and the limiting reagent (roadmap 2.8), over a balanced equation.
+    /// Every given amount becomes moles; divided by its coefficient it says how far the reaction could
+    /// run on that amount alone. The smallest of those over the given reactants is how far it does
+    /// run, and that reactant is the limiting one. Mirrors Android's <c>Stoichiometry</c>.
+    /// </summary>
+    public static class Stoichiometry
+    {
+        /// <summary>One species of the balanced equation.</summary>
+        public sealed record Line(string Formula, int Coefficient, double MolarMass, bool Reactant);
+
+        /// <summary>An amount the question gave, for the species at <paramref name="Index"/>; <paramref name="Grams"/> when it was given as a mass.</summary>
+        public sealed record Given(int Index, double Moles, double? Grams);
+
+        /// <summary>An amount of the species at <paramref name="Index"/>.</summary>
+        public sealed record Amount(int Index, double Moles, double Grams);
+
+        /// <param name="Extent">How many times the balanced equation runs, in moles.</param>
+        /// <param name="Limiting">The reactant that runs out first, when two or more reactants were given.</param>
+        /// <param name="Amounts">Every species' amount at that extent, in equation order.</param>
+        /// <param name="Leftovers">What remains of each other given reactant.</param>
+        public sealed record Result(
+            IReadOnlyList<Line> Lines,
+            IReadOnlyList<Given> Givens,
+            double Extent,
+            int? Limiting,
+            IReadOnlyList<Amount> Amounts,
+            IReadOnlyList<Amount> Leftovers)
+        {
+            /// <summary>"2H2 + O2 → 2H2O".</summary>
+            public string Equation
+            {
+                get
+                {
+                    string Side(bool reactant) => string.Join(" + ", Lines.Where(l => l.Reactant == reactant)
+                        .Select(l => (l.Coefficient == 1 ? "" : l.Coefficient.ToString(System.Globalization.CultureInfo.InvariantCulture)) + l.Formula));
+                    return Side(true) + " → " + Side(false);
+                }
+            }
+        }
+
+        /// <summary>Below this a leftover is rounding, not excess.</summary>
+        private const double Negligible = 1e-9;
+
+        public static Result? Solve(IReadOnlyList<Line> lines, IReadOnlyList<Given> givens)
+        {
+            if (lines.Count == 0 || givens.Count == 0) return null;
+            if (givens.Any(g => g.Index < 0 || g.Index >= lines.Count || g.Moles <= 0 || double.IsNaN(g.Moles) || double.IsInfinity(g.Moles))) return null;
+            if (givens.Select(g => g.Index).Distinct().Count() != givens.Count) return null;
+            var reactants = givens.Where(g => lines[g.Index].Reactant).ToList();
+            // A product given alone fixes the extent; reactants given alongside one decide it instead.
+            var deciding = reactants.Count > 0 ? reactants : givens.ToList();
+            var first = deciding.MinBy(g => g.Moles / lines[g.Index].Coefficient)!;
+            var extent = first.Moles / lines[first.Index].Coefficient;
+            int? limiting = reactants.Count >= 2 ? first.Index : null;
+            var amounts = lines.Select((line, i) => new Amount(i, extent * line.Coefficient, extent * line.Coefficient * line.MolarMass)).ToList();
+            var leftovers = new List<Amount>();
+            foreach (var given in reactants.Where(g => g.Index != first.Index))
+            {
+                var left = given.Moles - extent * lines[given.Index].Coefficient;
+                if (left > Negligible) leftovers.Add(new Amount(given.Index, left, left * lines[given.Index].MolarMass));
+            }
+            return new Result(lines, givens, extent, limiting, amounts, leftovers);
+        }
+    }
 }
