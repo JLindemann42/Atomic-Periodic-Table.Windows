@@ -1419,6 +1419,15 @@ No se envía: tu nombre, tu cuenta, tu dispositivo ni el resto de esta conversac
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>¡Por favor, especifica un número de grupo o periodo!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>El entrenador de estudio es parte de PRO: recuerda las preguntas de quiz que fallas y trae cada una justo antes de que la olvides.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>No hay nada que repasar ahora. Las preguntas de quiz que fallas vuelven aquí cuando toca practicarlas.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Hora de repasar: **%1$d preguntas** pendientes. Toca una respuesta o di parar para terminar.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Usos del %1$s</value>
   </data>

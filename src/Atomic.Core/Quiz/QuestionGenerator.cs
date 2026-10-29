@@ -12,11 +12,15 @@ namespace Atomic.Core.Quiz
     /// <para>Deliberately separate from the page's own question type: generators are a data concern
     /// and must not depend on a page. The page maps between the two.</para>
     /// </summary>
+    /// <param name="SubjectKey">The element the question is about, when it is about one; feeds the study coach (roadmap 2.6).</param>
+    /// <param name="Category">The category that generated it, so an answer can be filed under its skill.</param>
     public sealed record QuizQuestion(
         string Question,
         string CorrectAnswer,
         IReadOnlyList<string> Alternatives,
-        int BaseXp);
+        int BaseXp,
+        string? SubjectKey = null,
+        string? Category = null);
 
     /// <summary>
     /// Everything a generator needs, built once per game.

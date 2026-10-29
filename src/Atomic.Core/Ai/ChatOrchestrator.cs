@@ -98,8 +98,10 @@ namespace Atomic.Core.Ai
             ChatCardPolicy? cardPolicy = null,
             string language = "en",
             Random? random = null,
-            Action<int>? onXp = null)
+            Action<int>? onXp = null,
+            Atomic.Core.Study.StudyAccess? study = null)
         {
+            _study = study;
             _random = random ?? new Random();
             _onXp = onXp ?? (_ => { });
             _retrieval = retrieval;
@@ -117,6 +119,9 @@ namespace Atomic.Core.Ai
 
         /// <summary>Receives the XP a right answer in a quiz run earns (roadmap 2.5); the app adds it to the user's.</summary>
         private readonly Action<int> _onXp;
+
+        /// <summary>The study coach's deck (roadmap 2.6), or null where there is none. Used only with PRO.</summary>
+        private readonly Atomic.Core.Study.StudyAccess? _study;
 
         /// <summary>The quiz run in progress, if any (roadmap 2.5). Not persisted: a run belongs to one sitting.</summary>
         public QuizRunState? QuizRun { get; private set; }
@@ -238,6 +243,9 @@ namespace Atomic.Core.Ai
         private ChatReply? Quiz(string message, IStringProvider strings)
         {
             var normalized = TextMatching.NormalizeForLookup(message);
+
+            // "Review", "what should I study": the study coach's due cards as a run (roadmap 2.6).
+            if (Ai.QuizRun.AsksForReview(normalized)) return Review(strings);
 
             // A run in progress (roadmap 2.5): an option picks an answer, "stop" ends it, and
             // anything else is a new question, so the run is left and the message answered as usual.
@@ -558,7 +566,7 @@ namespace Atomic.Core.Ai
             var scope = QuizScope(message);
             if (scope is null && !request.ExplicitCount && !Ai.QuizRun.NamesATopic(request)) return null;
 
-            var context = new Quiz.GeneratorContext(
+            var context = new Atomic.Core.Quiz.GeneratorContext(
                 _store, _retrieval.Localized(State.ActiveLanguage), strings, "medium", _random, scope);
             var questions = Ai.QuizRun.Questions(context, request);
             if (questions.Count == 0)
@@ -596,12 +604,50 @@ namespace Atomic.Core.Ai
         private static string RunQuestion(QuizRunState run, IStringProvider strings) =>
             strings.Get(S.ai_quiz_run_question, run.Index + 1, run.Questions.Count, run.Current.Question);
 
+        /// <summary>Whether the study coach is in play: there is a deck, and the user has PRO (roadmap 2.6).</summary>
+        private bool Studying() => _study is not null && _entitlements().Allows(Tier.Pro);
+
+        /// <summary>
+        /// The study coach's due cards as a run (roadmap 2.6): each card's skill asked again about
+        /// its element, with fresh options. PRO only; without it, what the coach would do.
+        /// </summary>
+        private ChatReply Review(IStringProvider strings)
+        {
+            if (_study is not { } access || !Studying())
+                return new ChatReply(strings.Get(S.ai_study_locked), ReplySource.Personality, [], null, Suggestions(strings, null));
+
+            var questions = new List<Atomic.Core.Quiz.QuizQuestion>();
+            foreach (var key in access.Deck.Due(access.Now()))
+            {
+                if (Atomic.Core.Study.StudyDeck.Parse(key) is not { } card) continue;
+                if (Atomic.Core.Quiz.QuestionGenerators.ForCategory(card.Skill) is not { } generator) continue;
+                var context = new Atomic.Core.Quiz.GeneratorContext(
+                    _store, _retrieval.Localized(State.ActiveLanguage), strings, "medium", _random,
+                    new HashSet<string>(StringComparer.Ordinal) { card.Element });
+                if (generator.Generate(context, 1).FirstOrDefault() is { } question) questions.Add(question);
+            }
+            if (questions.Count == 0)
+                return new ChatReply(strings.Get(S.ai_study_none), ReplySource.Personality, [], null, Suggestions(strings, null));
+
+            var run = new QuizRunState(questions, null);
+            QuizRun = run;
+            State.PendingQuizAnswer = null;
+            var intro = strings.Get(S.ai_study_start, questions.Count);
+            return new ChatReply($"{intro}\n\n{RunQuestion(run, strings)}", ReplySource.Personality, [], null, run.Current.Alternatives);
+        }
+
         /// <summary>Judge a pick, award its XP, and ask the next question or close the run.</summary>
         private ChatReply AnswerRun(QuizRunState run, string pick, IStringProvider strings)
         {
             var question = run.Current;
+            var right = pick == question.CorrectAnswer;
+            // Every answer in a run reviews its card, whether the run is a review or a quiz (roadmap 2.6).
+            if (_study is { } access && Studying() &&
+                access.Deck.Record(question.Category, question.SubjectKey, right, access.Now()) is not null)
+                access.Save();
+
             string verdict;
-            if (pick == question.CorrectAnswer)
+            if (right)
             {
                 run.Correct++;
                 run.Xp += question.BaseXp;

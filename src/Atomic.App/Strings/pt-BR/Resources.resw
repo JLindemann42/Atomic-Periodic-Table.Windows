@@ -1419,6 +1419,15 @@ Eles compartilham comportamentos químicos semelhantes devido aos seus elétrons
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>Por favor, especifique um número de grupo ou período!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>O treinador de estudo faz parte do PRO: ele lembra as perguntas de quiz que você erra e traz cada uma de volta pouco antes de você esquecer.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Nada para revisar agora. As perguntas de quiz que você erra voltam aqui quando chega a hora de praticá-las.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Hora de revisar: **%1$d perguntas** para praticar. Toque numa resposta, ou diga parar para terminar.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Usos do %1$s</value>
   </data>

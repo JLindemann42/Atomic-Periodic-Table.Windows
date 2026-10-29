@@ -412,7 +412,9 @@ namespace Atomic.App.Services
                 Entitlement,
                 language: AppLanguage.BaseCode(AppLanguage.Current),
                 // A right answer in a chat quiz run earns XP like the Learning Games (roadmap 2.5).
-                onXp: ProgressStore.AddGameXp);
+                onXp: ProgressStore.AddGameXp,
+                // The study coach's deck, shared with the Learning Games (roadmap 2.6).
+                study: StudyStore.Access());
 
             return _orchestrator;
         }

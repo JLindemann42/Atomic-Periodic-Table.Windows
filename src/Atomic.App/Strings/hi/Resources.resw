@@ -1419,6 +1419,15 @@
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>कृपया एक समूह या आवर्त संख्या निर्दिष्ट करें!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>अध्ययन कोच PRO का हिस्सा है: यह आपके चूके हुए प्रश्नोत्तरी प्रश्न याद रखता है और हर एक को आपके भूलने से ठीक पहले वापस लाता है।</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>अभी दोहराने के लिए कुछ नहीं है। प्रश्नोत्तरी के जो प्रश्न आप चूकते हैं, वे अभ्यास का समय आने पर यहाँ लौटते हैं।</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>दोहराने का समय: **%1$d प्रश्न** अभ्यास के लिए तैयार हैं। किसी उत्तर पर टैप करें, या रोकने के लिए बस कहें।</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>%1$s के उपयोग</value>
   </data>

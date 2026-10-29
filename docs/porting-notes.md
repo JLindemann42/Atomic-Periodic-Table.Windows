@@ -1733,3 +1733,32 @@ under its noble-gas label. Three aggregate rows over "the halogens" in `morpholo
 expected values with it. `ElementReactions` keeps its group-17 check.
 
 3,787 core tests pass; held-out (451) passes.
+
+### D77 — the study coach (roadmap 2.6, PRO)
+
+Ported from Android in the same change. The cards, the scheduler and the `study` field are defined
+in the shared data's `sync/study.md` first, the way D52 did for favourites.
+
+**Core.** `Study/Fsrs.cs` is FSRS-5 with its default parameters, rated Again or Good.
+`Study/StudyDeck.cs` holds one card per skill and element (`periodic_group:bromine`), the due order
+and the per-card merge (`Newer`). `StudyAccess` is what the chat gets: the deck, a save and a clock.
+`QuizQuestion` gains `SubjectKey` and `Category`; the classification, position and
+isotope-neutron generators fill them in. `golden/fsrs.tsv`, from the shared `tools/fsrs_golden.py`,
+pins both apps' schedulers to the same numbers, and `FsrsTest` reads it.
+
+**Chat.** "Review" or "what should I study" (short messages only) starts a run of the due cards,
+most overdue first, at most ten, each asked again with its generator scoped to its element. Every
+answer in a run reviews its card. All of it needs PRO (`Tier.Pro`); without it, the reply says what
+the coach would do. The `Quiz` method shadows the `Quiz` namespace inside `ChatOrchestrator`, so
+the review code names `Atomic.Core.Quiz` in full.
+
+**App.** `StudyStore` keeps the deck in `study_cards.tsv` in the local folder. The Learning Games
+record every answer, a timeout counting as a miss. `ChatSession` passes `StudyStore.Access()`.
+
+**Sync.** `ProgressSnapshot.Study` travels as `study.cards.<key>` = `{s, d, due, last, reps,
+lapses}`. `study` joins the update mask whole, since the sync merges the cloud's cards in before it
+writes. `ProgressMerge.MergeStudy` keeps each card's later review; on a tie, the one with more reps,
+then the cloud's.
+
+`StudyCoachTest` and `FsrsTest` mirror Android's. 3,798 core tests pass; held-out (451) passes; the
+app builds.

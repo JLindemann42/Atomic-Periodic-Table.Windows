@@ -39,6 +39,10 @@ namespace Atomic.Core.Sync
         // own document code, ChatHistoryDocument, and its own PATCH that masks "chats" alone.
         public const string LastUpdated = "lastUpdated";
 
+        /// <summary>The study coach's cards (roadmap 2.6): <c>study.cards.&lt;key&gt;</c> = <c>{s, d, due, last, reps, lapses}</c>.</summary>
+        public const string Study = "study";
+        public const string StudyCards = "cards";
+
         /// <summary>
         /// The per-platform entitlement map: <c>entitlements.windows</c>, <c>entitlements.android</c>,
         /// <c>entitlements.ultimate</c>.
@@ -64,6 +68,10 @@ namespace Atomic.Core.Sync
         [
             Xp, Level, Streak, StreakLastPlay, Achievements, Statistics, Notes, LastUpdated,
 
+            // The whole map: the sync merges the cloud's cards in before it writes, so what goes up
+            // is every card either device has (shared data sync/study.md).
+            Study,
+
             // Nested paths, not the bare "entitlements" map. Masking the whole map would delete
             // entitlements.android on every Windows sync - the same co-ownership rule the mask
             // exists to enforce, one level further down.
@@ -81,6 +89,7 @@ namespace Atomic.Core.Sync
                 [StreakLastPlay] = FirestoreValue.String(snapshot.StreakLastPlay),
                 [Notes] = FirestoreValue.String(snapshot.Notes),
                 [LastUpdated] = FirestoreValue.Timestamp(now),
+                [Study] = StudyValue(snapshot.Study),
 
                 [Achievements] = FirestoreValue.Array(
                     snapshot.Achievements.Select(a => FirestoreValue.Map(
@@ -157,12 +166,50 @@ namespace Atomic.Core.Sync
                 WindowsTier = FirestoreValue.ReadString(Entitlement("windows")),
                 AndroidTier = FirestoreValue.ReadString(Entitlement("android")),
                 Ultimate = FirestoreValue.ReadBoolean(Entitlement("ultimate")) ?? false,
+                Study = ReadStudy(Field(Study)),
             };
 
             JsonNode? Entitlement(string platform) =>
                 FirestoreValue.ReadMap(Field(Entitlements)).GetValueOrDefault(platform);
 
             JsonNode? Field(string name) => fields.GetValueOrDefault(name);
+        }
+
+        /// <summary>The <c>study</c> value: every card, whole.</summary>
+        public static JsonNode StudyValue(IReadOnlyDictionary<string, Atomic.Core.Study.CardState> cards) =>
+            FirestoreValue.Map(new Dictionary<string, JsonNode>(StringComparer.Ordinal)
+            {
+                [StudyCards] = FirestoreValue.Map(cards.ToDictionary(
+                    e => e.Key,
+                    e => FirestoreValue.Map(new Dictionary<string, JsonNode>(StringComparer.Ordinal)
+                    {
+                        ["s"] = FirestoreValue.Double(e.Value.Stability),
+                        ["d"] = FirestoreValue.Double(e.Value.Difficulty),
+                        ["due"] = FirestoreValue.Integer(e.Value.Due),
+                        ["last"] = FirestoreValue.Integer(e.Value.Last),
+                        ["reps"] = FirestoreValue.Integer(e.Value.Reps),
+                        ["lapses"] = FirestoreValue.Integer(e.Value.Lapses),
+                    }),
+                    StringComparer.Ordinal)),
+            });
+
+        /// <summary><c>study.cards</c>, dropping any card whose fields are missing or of the wrong type.</summary>
+        public static IReadOnlyDictionary<string, Atomic.Core.Study.CardState> ReadStudy(JsonNode? value)
+        {
+            var cards = new Dictionary<string, Atomic.Core.Study.CardState>(StringComparer.Ordinal);
+            foreach (var (key, raw) in FirestoreValue.ReadMap(FirestoreValue.ReadMap(value).GetValueOrDefault(StudyCards)))
+            {
+                var card = FirestoreValue.ReadMap(raw);
+                if (FirestoreValue.ReadDouble(card.GetValueOrDefault("s")) is not { } s ||
+                    FirestoreValue.ReadDouble(card.GetValueOrDefault("d")) is not { } d ||
+                    FirestoreValue.ReadInteger(card.GetValueOrDefault("due")) is not { } due ||
+                    FirestoreValue.ReadInteger(card.GetValueOrDefault("last")) is not { } last ||
+                    FirestoreValue.ReadInteger(card.GetValueOrDefault("reps")) is not { } reps ||
+                    FirestoreValue.ReadInteger(card.GetValueOrDefault("lapses")) is not { } lapses)
+                    continue;
+                cards[key] = new Atomic.Core.Study.CardState(s, d, due, last, (int)reps, (int)lapses);
+            }
+            return cards;
         }
 
         /// <summary>

@@ -8,7 +8,7 @@ using Atomic.Core.Localization;
 namespace Atomic.Core.Quiz
 {
     /// <summary>An isotope together with the label the quiz shows for it.</summary>
-    internal sealed record Nuclide(string Label, Isotope Isotope)
+    internal sealed record Nuclide(string Label, Isotope Isotope, string ElementKey)
     {
         public int? Neutrons => Isotope.Neutrons;
 
@@ -49,7 +49,7 @@ namespace Atomic.Core.Quiz
                     if (protons != element.AtomicNumber) return null;
 
                     return new Nuclide(
-                        $"{element.Symbol}-{nucleons.ToString(CultureInfo.InvariantCulture)}", iso);
+                        $"{element.Symbol}-{nucleons.ToString(CultureInfo.InvariantCulture)}", iso, element.Key);
                 })
                 .Where(n => n is not null)
                 .Select(n => n!)
@@ -100,7 +100,9 @@ namespace Atomic.Core.Quiz
                     Question: context.String(S.question_isotope_neutrons, nuclide.Label),
                     CorrectAnswer: Text(correct),
                     Alternatives: wrongs.Append(correct).Select(Text).Shuffled(context.Random),
-                    BaseXp: BaseXp));
+                    BaseXp: BaseXp,
+                    SubjectKey: nuclide.ElementKey,
+                    Category: CategoryKey));
             }
 
             return questions;

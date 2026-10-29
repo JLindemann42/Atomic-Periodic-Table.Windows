@@ -462,6 +462,9 @@ public static partial class S
     public const string ai_structural_no_results = "ai_structural_no_results";
     public const string ai_structural_result = "ai_structural_result";
     public const string ai_structural_specify_number = "ai_structural_specify_number";
+    public const string ai_study_locked = "ai_study_locked";
+    public const string ai_study_none = "ai_study_none";
+    public const string ai_study_start = "ai_study_start";
     public const string ai_suggest_element_0 = "ai_suggest_element.0";
     public const string ai_suggest_element_1 = "ai_suggest_element.1";
     public const string ai_suggest_element_2 = "ai_suggest_element.2";

@@ -1419,6 +1419,15 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>Spesifiseer asseblief 'n groep- of periodenommer!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>Die studieafrigter is deel van PRO: dit onthou die vasvravrae wat jy mis en bring elkeen terug net voordat jy dit sou vergeet.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Daar is niks om nou te hersien nie. Vasvravrae wat jy mis, kom hierheen terug wanneer dit tyd is om hulle te oefen.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Tyd om te hersien: **%1$d vrae** om te oefen. Tik op 'n antwoord, of sê stop om te eindig.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Gebruike van %1$s</value>
   </data>

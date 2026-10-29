@@ -178,6 +178,7 @@ namespace Atomic.App.Services
             WindowsTier = Atomic.Core.Licensing.EntitlementRules.ToWire(SettingsStore.Entitlement.Tier),
             Ultimate = SettingsStore.HasUltimate,
             Notes = NotesCodec.Format(ReadLocalNotes(), CodeByAtomicNumber()),
+            Study = StudyStore.Deck.Snapshot(),
         };
 
         /// <summary>
@@ -237,6 +238,8 @@ namespace Atomic.App.Services
                 merged.Statistics);
 
             WriteLocalNotes(NotesCodec.Parse(merged.Notes, AtomicNumberByCode()));
+
+            StudyStore.MergeFrom(merged.Study);
         }
 
         // ---- Notes -----------------------------------------------------------------------------

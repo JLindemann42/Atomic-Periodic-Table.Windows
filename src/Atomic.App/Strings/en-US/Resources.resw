@@ -1419,6 +1419,15 @@ They share similar chemical behaviors due to their valence electrons!</value>
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>Please specify a group or period number!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>The study coach is part of PRO: it remembers the quiz questions you miss and brings each one back just before you'd forget it.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Nothing is due for review right now. The quiz questions you miss come back here when it's time to practise them.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Time to review: **%1$d questions** you're due to practise. Tap an answer, or say stop to end it.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Uses of %1$s</value>
   </data>

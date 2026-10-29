@@ -76,7 +76,9 @@ namespace Atomic.Core.Quiz
                     Question: context.String(S.question_element_group, context.Name(element)),
                     CorrectAnswer: correct,
                     Alternatives: wrongs.Append(correct).Shuffled(context.Random),
-                    BaseXp: BaseXp));
+                    BaseXp: BaseXp,
+                    SubjectKey: element.Key,
+                    Category: CategoryKey));
             }
 
             return questions;

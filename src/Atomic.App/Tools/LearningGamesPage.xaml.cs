@@ -39,6 +39,10 @@ namespace Atomic.App.Tools
         public string CorrectAnswer { get; set; }
         public List<string> Alternatives { get; set; }
         public int BaseXp { get; set; }
+
+        /// <summary>The element and category the question is about, for the study coach (roadmap 2.6).</summary>
+        public string? SubjectKey { get; set; }
+        public string? Category { get; set; }
     }
 
     public sealed partial class LearningGamesPage : Page
@@ -219,6 +223,8 @@ namespace Atomic.App.Tools
                         CorrectAnswer = q.CorrectAnswer,
                         Alternatives = [.. q.Alternatives],
                         BaseXp = q.BaseXp,
+                        SubjectKey = q.SubjectKey,
+                        Category = q.Category,
                     });
                 }
             }
@@ -302,6 +308,8 @@ namespace Atomic.App.Tools
         {
             var q = questions[currentQuestionIndex];
             bool correct = NormalizeLabel(selectedAnswer) == NormalizeLabel(q.CorrectAnswer);
+            // A timeout is a miss: the coach schedules the card sooner either way (roadmap 2.6).
+            StudyStore.Record(q.Category, q.SubjectKey, correct);
 
             gameResults.Add(new GameResultItem
             {

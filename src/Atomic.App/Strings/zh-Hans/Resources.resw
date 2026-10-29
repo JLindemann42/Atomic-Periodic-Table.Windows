@@ -1419,6 +1419,15 @@
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>请指定族或周期编号！</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>学习教练是PRO的一部分：它会记住你答错的测验题，并在你快要忘记之前把每一道带回来。</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>现在没有需要复习的内容。你在测验中答错的题目会在该练习时回到这里。</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>该复习了：有**%1$d道题**需要练习。点击一个答案，或说停止来结束。</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>%1$s 的用途</value>
   </data>

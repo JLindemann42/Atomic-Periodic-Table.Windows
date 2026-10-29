@@ -1419,6 +1419,15 @@ Condividono comportamenti chimici simili grazie ai loro elettroni di valenza!</v
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>Specifica un numero di gruppo o periodo!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>Il coach di studio fa parte di PRO: ricorda le domande dei quiz che sbagli e riporta ognuna poco prima che tu la dimentichi.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Al momento non c'è niente da ripassare. Le domande dei quiz che sbagli tornano qui quando è il momento di esercitarti.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Ora di ripassare: **%1$d domande** da rivedere. Tocca una risposta, oppure di' basta per finire.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Usi del %1$s</value>
   </data>

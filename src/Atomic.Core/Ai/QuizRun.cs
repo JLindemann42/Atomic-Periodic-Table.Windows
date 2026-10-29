@@ -161,6 +161,31 @@ namespace Atomic.Core.Ai
             return output;
         }
 
+        /// <summary>"Review", "what should I study", in each language (roadmap 2.6).</summary>
+        private static readonly string[] ReviewWords =
+        [
+            "review", "revise", "what should i study", "study session",
+            "repetera", "plugga", "vad ska jag plugga",
+            "wiederholen", "wiederholung", "was soll ich lernen",
+            "reviser", "revision", "que dois je reviser",
+            "repasar", "repaso", "que debo estudiar",
+            "ripassare", "ripasso", "cosa devo studiare",
+            "revisar", "revisao", "o que devo estudar",
+            "hersien", "hersiening", "wat moet ek leer",
+            "balik aral", "ano ang dapat kong pag aralan",
+            "दोहराना", "दोहराओ", "पुनरावृत्ति", "क्या पढ़ूँ",
+            "دہرائی", "دہرانا", "کیا پڑھوں",
+            "复习", "该学什么",
+        ];
+
+        /// <summary>
+        /// Whether a message asks the study coach for its review. Short messages only: "review"
+        /// inside a longer question ("review the trend of density") is that question.
+        /// </summary>
+        public static bool AsksForReview(string normalized) =>
+            TextMatching.SplitQueryTokens(normalized).Count <= 6 &&
+            ReviewWords.Any(w => TextMatching.ContainsWord(normalized, w));
+
         public static bool Stops(string normalized) =>
             TextMatching.SplitQueryTokens(normalized).Count <= 4 &&
             StopWords.Any(w => TextMatching.ContainsWord(normalized, w));

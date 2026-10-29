@@ -1419,6 +1419,15 @@ Nagbabahagi sila ng mga katulad na gawi sa kemikal dahil sa kanilang mga valence
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>Mangyaring tukuyin ang isang group o period number!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>Bahagi ng PRO ang study coach: tinatandaan nito ang mga tanong sa quiz na namali mo at ibinabalik ang bawat isa bago mo ito makalimutan.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Walang kailangang i-repaso ngayon. Babalik dito ang mga tanong sa quiz na namali mo kapag oras na para sanayin ang mga ito.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Oras na para mag-repaso: **%1$d tanong** na dapat sanayin. I-tap ang sagot, o sabihing stop para tapusin.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Gamit ng %1$s</value>
   </data>

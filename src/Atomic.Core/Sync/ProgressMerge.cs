@@ -41,8 +41,13 @@ namespace Atomic.Core.Sync
         string? Notes = null,
         string? WindowsTier = null,
         string? AndroidTier = null,
-        bool Ultimate = false)
+        bool Ultimate = false,
+        IReadOnlyDictionary<string, Atomic.Core.Study.CardState>? Study = null)
     {
+        /// <summary>The study coach's cards, <c>study.cards</c> (roadmap 2.6; shared data <c>sync/study.md</c>).</summary>
+        public IReadOnlyDictionary<string, Atomic.Core.Study.CardState> Study { get; init; } =
+            Study ?? new Dictionary<string, Atomic.Core.Study.CardState>(StringComparer.Ordinal);
+
         public IReadOnlyList<AchievementProgress> Achievements { get; init; } = Achievements ?? [];
 
         public IReadOnlyDictionary<string, int> Statistics { get; init; } =
@@ -93,7 +98,21 @@ namespace Atomic.Core.Sync
 
                 // Ultimate is bought once and honoured everywhere, so it only ever grants.
                 Ultimate = local.Ultimate || cloud.Ultimate,
+
+                Study = MergeStudy(local.Study, cloud.Study),
             };
+
+        /// <summary>
+        /// Per card, the later review wins; on a tie the one with more reps, then the cloud's.
+        /// Cards are never deleted, so a card on either side is kept (shared data <c>sync/study.md</c>).
+        /// </summary>
+        public static IReadOnlyDictionary<string, Atomic.Core.Study.CardState> MergeStudy(
+            IReadOnlyDictionary<string, Atomic.Core.Study.CardState> local,
+            IReadOnlyDictionary<string, Atomic.Core.Study.CardState> cloud) =>
+            local.Keys.Union(cloud.Keys, StringComparer.Ordinal).ToDictionary(
+                key => key,
+                key => Atomic.Core.Study.StudyDeck.Newer(local.GetValueOrDefault(key), cloud.GetValueOrDefault(key))!,
+                StringComparer.Ordinal);
 
         /// <summary>
         /// The later of two ISO days.

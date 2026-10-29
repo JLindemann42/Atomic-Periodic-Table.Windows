@@ -1407,6 +1407,15 @@ Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>Bitte geben Sie eine Gruppen- oder Periodennummer an!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>Der Lerncoach gehört zu PRO: Er merkt sich die Quizfragen, die du verpasst, und bringt jede kurz bevor du sie vergessen würdest zurück.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Gerade ist nichts zum Wiederholen fällig. Quizfragen, die du verpasst, kommen hierher zurück, wenn es Zeit zum Üben ist.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Zeit zum Wiederholen: **%1$d Fragen** sind fällig. Tippe auf eine Antwort oder sag Stopp, um zu beenden.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Verwendung von %1$s</value>
   </data>

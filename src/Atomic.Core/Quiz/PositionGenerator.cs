@@ -102,7 +102,9 @@ namespace Atomic.Core.Quiz
                     Question: context.String(_aspect.QuestionKey(), context.Name(element)),
                     CorrectAnswer: Text(correct),
                     Alternatives: options.Shuffled(context.Random),
-                    BaseXp: BaseXp));
+                    BaseXp: BaseXp,
+                    SubjectKey: element.Key,
+                    Category: CategoryKey));
             }
 
             return questions;

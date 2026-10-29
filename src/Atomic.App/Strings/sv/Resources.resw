@@ -1407,6 +1407,15 @@ De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>Ange ett grupp- eller periodnummer!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>Studiecoachen ingår i PRO: den minns quizfrågorna du missar och tar tillbaka var och en precis innan du skulle glömma den.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Inget behöver repeteras just nu. Quizfrågor du missar kommer tillbaka hit när det är dags att öva på dem.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Dags att repetera: **%1$d frågor** som ska övas nu. Tryck på ett svar, eller säg stopp för att avsluta.</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>Användning av %1$s</value>
   </data>

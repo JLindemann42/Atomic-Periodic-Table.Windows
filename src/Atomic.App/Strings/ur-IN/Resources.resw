@@ -1407,6 +1407,15 @@
   <data name="ai_structural_specify_number" xml:space="preserve">
     <value>براہ کرم ایک گروپ یا پیریڈ نمبر بتائیں!</value>
   </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>مطالعہ کوچ PRO کا حصہ ہے: یہ آپ سے چھوٹے ہوئے کوئز سوالات یاد رکھتا ہے اور ہر ایک کو آپ کے بھولنے سے ذرا پہلے واپس لاتا ہے۔</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>ابھی دہرانے کے لیے کچھ نہیں ہے۔ کوئز کے جو سوال آپ سے چھوٹ جاتے ہیں وہ مشق کا وقت آنے پر یہاں لوٹتے ہیں۔</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>دہرائی کا وقت: **%1$d سوالات** مشق کے لیے تیار ہیں۔ کسی جواب پر ٹیپ کریں، یا ختم کرنے کے لیے بس کہیں۔</value>
+  </data>
   <data name="ai_suggest_element.0" xml:space="preserve">
     <value>%1$s کے استعمال</value>
   </data>
