@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>The s-block consists of the first two groups: alkali metals, alkaline earth metals, plus hydrogen and helium.</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s across the table</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>Unlock visual answers</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>%1$s trend</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>Enable AI Chat Assistant</value>
@@ -1494,8 +1500,17 @@ They share similar chemical behaviors due to their valence electrons!</value>
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>Electronegativity generally increases from left to right across a period and decreases down a group. Fluorine is the champion here!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>Highest: %1$s (%2$s). Lowest: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>It falls overall, from %1$s (%2$s) to %3$s (%4$s).</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>Periodic trends are patterns in the properties of elements! Which trend are you curious about: Atomic Radius, Electronegativity, or Ionization Energy?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** across %2$d elements, in atomic-number order:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>Ionization energy increases across a period and decreases down a group. It gets harder to pull away an electron as you move right!</value>
@@ -1503,8 +1518,17 @@ They share similar chemical behaviors due to their valence electrons!</value>
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>Metallic character decreases across a period and increases down a group. The most metallic elements are at the bottom left (like Francium).</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>It has no steady direction: %1$s (%2$s) at one end, %3$s (%4$s) at the other.</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>Atomic radius decreases across a period (left to right) because the nucleus pulls electrons tighter, and increases down a group as more shells are added.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>It rises overall, from %1$s (%2$s) to %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** across the periodic table: %2$d elements have a recorded value.</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>atoms per 10⁶ atoms of silicon</value>

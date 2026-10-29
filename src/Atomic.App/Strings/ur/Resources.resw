@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>s-بلاک پہلے دو گروپس پر مشتمل ہے: الکلی دھاتیں، الکلائن ارتھ میٹلز، علاوہ ہائیڈروجن اور ہیلیم۔</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>جدول میں %1$s</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>بصری جوابات کھولیں</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>%1$s کا رجحان</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>AI چیٹ اسسٹنٹ کو فعال کریں</value>
@@ -1494,8 +1500,17 @@
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>الیکٹرو نیگیٹیوٹی عام طور پر ایک پیریڈ میں بائیں سے دائیں بڑھتی ہے اور گروپ میں اوپر سے نیچے کم ہوتی ہے۔ فلورین یہاں کا فاتح ہے!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>سب سے زیادہ: %1$s (%2$s)۔ سب سے کم: %3$s (%4$s)۔</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>مجموعی طور پر یہ گھٹتا ہے، %1$s (%2$s) سے %3$s (%4$s) تک۔</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>پیریاڈک ٹرینڈز عناصر کی خصوصیات میں ایک پیٹرن ہیں! آپ کس ٹرینڈ کے بارے میں جاننا چاہتے ہیں: ایٹمی رداس، الیکٹرو نیگیٹیوٹی، یا آئیونائزیشن انرجی؟</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>%2$d عناصر میں **%1$s**، جوہری نمبر کی ترتیب سے:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>آئیونائزیشن انرجی ایک پیریڈ میں بڑھتی ہے اور گروپ میں نیچے کی طرف کم ہوتی ہے۔ جیسے جیسے آپ دائیں طرف بڑھتے ہیں، الیکٹران کو باہر نکالنا مشکل ہوتا جاتا ہے!</value>
@@ -1503,8 +1518,17 @@
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>دھاتی خاصیت (Metallic character) ایک پیریڈ میں کم ہوتی ہے اور گروپ میں نیچے کی طرف بڑھتی ہے۔ سب سے زیادہ دھاتی عناصر نیچے بائیں طرف (جیسے فرانسیم) پائے جاتے ہیں۔</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>اس کی کوئی ایک سمت نہیں: ایک سرے پر %1$s (%2$s)، دوسرے پر %3$s (%4$s)۔</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>ایٹمی رداس (Atomic radius) ایک پیریڈ میں کم ہوتا ہے کیونکہ نیوکلیئس الیکٹرانوں کو زیادہ طاقت سے کھینچتا ہے، اور گروپ میں نیچے کی طرف بڑھتا ہے کیونکہ مزید شیلز شامل ہوتے جاتے ہیں۔</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>مجموعی طور پر یہ بڑھتا ہے، %1$s (%2$s) سے %3$s (%4$s) تک۔</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>پوری دوری جدول میں **%1$s**: %2$d عناصر کی قدر درج ہے۔</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>ہر 10⁶ سلیکون ایٹموں پر ایٹم</value>

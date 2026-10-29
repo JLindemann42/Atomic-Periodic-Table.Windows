@@ -101,6 +101,7 @@ namespace Atomic.Core.Tests.Corpus
             "localized_sv", "localized_other", "regressions", "reported", "multilingual",
             "multilingual_wide", "multilingual_operators", "conversations_multi",
             "conversations_deep", "conversations_repair", "language", "morphology", "spelling", "focus_sets",
+            "trends",
         ];
 
         private static readonly Dictionary<(string Folder, string Name), IReadOnlyList<CorpusCase>> Cache = new();

@@ -239,8 +239,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>Der s-Block besteht aus den ersten beiden Gruppen: Alkalimetalle, Erdalkalimetalle, plus Wasserstoff und Helium.</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s im Periodensystem</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>Visuelle Antworten freischalten</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>Verlauf: %1$s</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>KI-Chat-Assistenten aktivieren</value>
@@ -1482,8 +1488,17 @@ Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>Die Elektronegativität nimmt im Allgemeinen von links nach rechts innerhalb einer Periode zu und nimmt innerhalb einer Gruppe von oben nach unten ab. Fluor ist hier der Spitzenreiter!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>Am höchsten: %1$s (%2$s). Am niedrigsten: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>Insgesamt sinkt der Wert, von %1$s (%2$s) bis %3$s (%4$s).</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>Periodische Trends sind Muster in den Eigenschaften der Elemente! Für welchen Trend interessierst du dich: Atomradius, Elektronegativität oder Ionisierungsenergie?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** über %2$d Elemente, nach Ordnungszahl:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>Die Ionisierungsenergie nimmt innerhalb einer Periode zu und innerhalb einer Gruppe nach unten ab. Es wird schwieriger, ein Elektron zu entfernen, je weiter man sich nach rechts bewegt!</value>
@@ -1491,8 +1506,17 @@ Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>Der metallische Charakter nimmt innerhalb einer Periode ab und innerhalb einer Gruppe nach unten zu. Die metallischsten Elemente befinden sich unten links (wie Francium).</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>Ohne klare Richtung: %1$s (%2$s) am einen Ende, %3$s (%4$s) am anderen.</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>Der Atomradius nimmt innerhalb einer Periode (von links nach rechts) ab, da der Kern die Elektronen stärker anzieht, und nimmt innerhalb einer Gruppe nach unten zu, da mehr Schalen hinzugefügt werden.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>Insgesamt steigt der Wert, von %1$s (%2$s) bis %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** im ganzen Periodensystem: %2$d Elemente haben einen Wert.</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>Atome pro 10⁶ Siliciumatome</value>

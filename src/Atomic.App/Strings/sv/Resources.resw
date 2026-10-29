@@ -239,8 +239,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>s-blocket består av de två första grupperna: alkalimetaller, alkaliska jordartsmetaller, plus väte och helium.</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s i hela systemet</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>Lås upp visuella svar</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>%1$s – trend</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>Aktivera AI-chattassistent</value>
@@ -1482,8 +1488,17 @@ De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>Elektronegativitet ökar generellt från vänster till höger över en period och minskar neråt i en grupp. Fluor är mästaren här!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>Högst: %1$s (%2$s). Lägst: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>Den sjunker överlag, från %1$s (%2$s) till %3$s (%4$s).</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>Periodiska trender är mönster i grundämnenas egenskaper! Vilken trend är du nyfiken på: atomradie, elektronegativitet eller joniseringsenergi?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** för %2$d grundämnen, i atomnummerordning:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>Joniseringsenergin ökar över en period och minskar neråt i en grupp. Det blir svårare att dra bort en elektron ju längre till höger du kommer!</value>
@@ -1491,8 +1506,17 @@ De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>Metallisk karaktär minskar över en period och ökar neråt i en grupp. De mest metalliska grundämnena finns längst ner till vänster (som Francium).</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>Den har ingen tydlig riktning: %1$s (%2$s) i ena änden, %3$s (%4$s) i den andra.</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>Atomradien minskar över en period (vänster till höger) eftersom kärnan drar till sig elektroner hårdare, och ökar neråt i en grupp då fler skal läggs till.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>Den stiger överlag, från %1$s (%2$s) till %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** i hela periodiska systemet: %2$d grundämnen har ett värde.</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>atomer per 10⁶ kiselatomer</value>

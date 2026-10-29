@@ -269,6 +269,7 @@ namespace Atomic.Core.Ai.Engine
             ExecutionResult.Property r => [r.Element.Key],
             ExecutionResult.Comparison r => r.Elements.Select(e => e.Key).ToList(),
             ExecutionResult.ElementList r => r.Results.Select(v => v.Element.Key).ToList(),
+            ExecutionResult.Trend r => r.Points.Select(v => v.Element.Key).ToList(),
             ExecutionResult.Aggregate r => r.Contributors.Select(v => v.Element.Key).ToList(),
             ExecutionResult.Isotopes r => [r.Element.Key],
             ExecutionResult.Safety r => [r.Element.Key],

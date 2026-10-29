@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>Die s-blok bestaan uit die eerste twee groepe: alkalimetale, aardalkalimetale, plus waterstof en helium.</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s oor die tabel</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>Ontsluit visuele antwoorde</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>Tendens: %1$s</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>Aktiveer KI-kletsassistent</value>
@@ -1494,8 +1500,17 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>Elektronegatiwiteit neem gewoonlik toe van links na regs oor 'n periode en neem af afwaarts in 'n groep. Fluoor is die kampioen hier!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>Hoogste: %1$s (%2$s). Laagste: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>Dit daal oor die algemeen, van %1$s (%2$s) tot %3$s (%4$s).</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>Periodieke tendense is patrone in die eienskappe van elemente! Oor watter tendens is jy nuuskierig: Atoomradius, Elektronegatiwiteit, of Ionisasie-energie?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** oor %2$d elemente, volgens atoomnommer:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>Ionisasie-energie neem toe oor 'n periode en neem af afwaarts in 'n groep. Dit word moeiliker om 'n elektron weg te trek namate jy na regs beweeg!</value>
@@ -1503,8 +1518,17 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>Metaalkarakter neem af oor 'n periode en neem toe afwaarts in 'n groep. Die mees metaalagtige elemente is links onder (soos Fransium).</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>Dit het geen vaste rigting nie: %1$s (%2$s) aan die een kant, %3$s (%4$s) aan die ander.</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>Atoomradius neem af oor 'n periode (links na regs) omdat die kern elektrone stywer trek, en neem toe afwaarts in 'n groep namate meer skille bygevoeg word.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>Dit styg oor die algemeen, van %1$s (%2$s) tot %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** oor die hele periodieke tabel: %2$d elemente het ’n waarde.</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>atome per 10⁶ silikonatome</value>

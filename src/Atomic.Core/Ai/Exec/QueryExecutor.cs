@@ -137,6 +137,7 @@ namespace Atomic.Core.Ai.Exec
                 Intent.Superlative or Intent.FilterList => ElementList(plan),
                 Intent.Aggregate => Aggregate(plan),
                 Intent.DatasetLookup => Dataset(plan),
+                Intent.Trend => Trend(plan),
                 Intent.Unknown => null,
                 _ => null,
             };
@@ -795,6 +796,33 @@ namespace Atomic.Core.Ai.Exec
         }
 
         // ---- Superlative and filtered list ------------------------------------------------------
+
+        /// <summary>
+        /// One field across the elements the filters leave, in atomic-number order (roadmap 2.3).
+        /// Unlike a list, nothing is ranked or cut: a trend is read left to right, and a missing value
+        /// is a gap in it rather than a reason to drop the rest.
+        /// </summary>
+        private ExecutionResult Trend(QueryPlan plan)
+        {
+            if (plan.FieldIds.FirstOrDefault() is not { } fieldId) return new ExecutionResult.Empty(DescribeFilters(plan));
+            // The store's own order is not the table's; a trend is read in atomic-number order.
+            var pool = plan.Candidates(_store).OrderBy(e => e.AtomicNumber).ToList();
+            var points = pool
+                .Select(element => _store.QuantityIn(element, fieldId, plan.TargetUnit) is { } quantity
+                    ? new ValuedElement(element, quantity, Render(element.Value(fieldId), quantity, plan.TargetUnit, element, fieldId))
+                    : null)
+                .OfType<ValuedElement>()
+                .ToList();
+            if (points.Count == 0)
+            {
+                return pool.Count == 0
+                    ? new ExecutionResult.Empty(DescribeFilters(plan))
+                    : new ExecutionResult.NoData(fieldId, null, _store.CoverageOf(fieldId));
+            }
+            return new ExecutionResult.Trend(
+                fieldId, points, pool.Count - points.Count, plan.Filters.Count == 0,
+                new[] { points[0], points[^1] }.Distinct().Select(p => CitationFor(fieldId, p.Element)).ToList());
+        }
 
         private ExecutionResult ElementList(QueryPlan plan)
         {

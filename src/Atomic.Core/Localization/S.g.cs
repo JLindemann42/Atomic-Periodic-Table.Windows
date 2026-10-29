@@ -80,7 +80,9 @@ public static partial class S
     public const string ai_block_generic = "ai_block_generic";
     public const string ai_block_p = "ai_block_p";
     public const string ai_block_s = "ai_block_s";
+    public const string ai_card_heat_map_title = "ai_card_heat_map_title";
     public const string ai_card_pro_locked = "ai_card_pro_locked";
+    public const string ai_card_trend_title = "ai_card_trend_title";
     public const string ai_chat_setting = "ai_chat_setting";
     public const string ai_chat_setting_description = "ai_chat_setting_description";
     public const string ai_check_isotope_table = "ai_check_isotope_table";
@@ -487,10 +489,16 @@ public static partial class S
     public const string ai_thermal_header = "ai_thermal_header";
     public const string ai_thermal_properties = "ai_thermal_properties";
     public const string ai_trend_electronegativity = "ai_trend_electronegativity";
+    public const string ai_trend_extremes = "ai_trend_extremes";
+    public const string ai_trend_falls = "ai_trend_falls";
     public const string ai_trend_general = "ai_trend_general";
+    public const string ai_trend_header = "ai_trend_header";
     public const string ai_trend_ionization = "ai_trend_ionization";
     public const string ai_trend_metallic = "ai_trend_metallic";
+    public const string ai_trend_mixed = "ai_trend_mixed";
     public const string ai_trend_radius = "ai_trend_radius";
+    public const string ai_trend_rises = "ai_trend_rises";
+    public const string ai_trend_table_header = "ai_trend_table_header";
     public const string ai_unit_atoms_per_si = "ai_unit_atoms_per_si";
     public const string ai_unit_bridge_note = "ai_unit_bridge_note";
     public const string ai_unit_converted = "ai_unit_converted";

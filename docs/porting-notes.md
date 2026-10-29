@@ -1621,3 +1621,28 @@ same digits.
 coefficient sum, and `balance_equations.tsv` is corpus format 2 with it on every row that balances;
 `bal-de-1`, `bal-en-3` and `bal-en-8` failed until the fix. `LexiconTest` counts 85 declarations and
 3,532 entries. 3,647 core tests pass; held-out (458) passes.
+
+### D72 — the trend explorer (roadmap 2.3)
+
+Ported from Android in the same change.
+
+**What changed.** `Intent.Trend` and `Branch.Trend` (after `SubsetList`): one numeric field over a
+period, group or series in atomic-number order, or over the whole table for a map, with
+`TREND_WORDS` and `HEATMAP_WORDS` from the generated lexicon. `QueryExecutor.Trend` sorts by atomic
+number itself - `Candidates` keeps the store's order, which is not the table's, and the halogens came
+out alphabetically until it did. `AnswerComposer.Trend` gives the values by symbol, the overall
+direction (`SteadyShare`, 0.7) and the extremes. `AsksHowItWorks` is now an instance method, because
+`ReadsAsATrend` needs the field resolver to let "how does atomic radius change down group 1" through
+as data rather than decline it as a mechanism.
+
+**Cards.** `ChatCardKind.TrendLine` and `HeatMap`, with `TrendSeriesReducer` and `HeatMapReducer`
+(`Ai/Cards/TrendCharts.cs`) and two charts in the app, `TrendLineChart` and `HeatMapChart` on
+`ChartBase`; `ChatCardView` builds them from the card's arguments. They are the first cards about
+many elements: the element key is the first point, as the codec needs one.
+
+**Also fixed**, on both platforms: `OperatorExtractor.TopN` blanks out a number a period or group
+has read, so "which element in period 3 has the highest electronegativity" is one element rather
+than the top three.
+
+`trends.tsv` joins the corpus (37 files), with `ValueOf` reading a trend's first value. `LexiconTest`
+counts 87 declarations and 3,631 entries. 3,665 core tests pass; held-out (459) passes; the app builds.

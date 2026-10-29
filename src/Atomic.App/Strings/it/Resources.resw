@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>Il blocco s è costituito dai primi due gruppi: metalli alcalini, metalli alcalino-terrosi, più idrogeno ed elio.</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s nella tavola</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>Sblocca le risposte visive</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>Andamento: %1$s</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>Attiva assistente chat IA</value>
@@ -1494,8 +1500,17 @@ Condividono comportamenti chimici simili grazie ai loro elettroni di valenza!</v
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>L'elettronegatività generalmente aumenta da sinistra a destra lungo un periodo e diminuisce scendendo in un gruppo. Il fluoro è il campione qui!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>Il più alto: %1$s (%2$s). Il più basso: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>Nel complesso diminuisce, da %1$s (%2$s) a %3$s (%4$s).</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>Le tendenze periodiche sono modelli nelle proprietà degli elementi! Quale tendenza ti incuriosisce: raggio atomico, elettronegatività o energia di ionizzazione?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** su %2$d elementi, per numero atomico:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>L'energia di ionizzazione aumenta lungo un periodo e diminuisce scendendo in un gruppo. Diventa più difficile strappare un elettrone man mano che ci si sposta a destra!</value>
@@ -1503,8 +1518,17 @@ Condividono comportamenti chimici simili grazie ai loro elettroni di valenza!</v
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>Il carattere metallico diminuisce lungo un periodo e aumenta scendendo in un gruppo. Gli elementi più metallici si trovano in basso a sinistra (come il francio).</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>Senza una direzione netta: %1$s (%2$s) a un estremo, %3$s (%4$s) all’altro.</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>Il raggio atomico diminuisce lungo un periodo (da sinistra a destra) perché il nucleo attira gli elettroni più fortemente, e aumenta scendendo in un gruppo man mano che si aggiungono più gusci.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>Nel complesso cresce, da %1$s (%2$s) a %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** in tutta la tavola periodica: %2$d elementi hanno un valore.</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>atomi per 10⁶ atomi di silicio</value>

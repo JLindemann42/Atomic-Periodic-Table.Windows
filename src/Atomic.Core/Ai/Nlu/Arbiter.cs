@@ -39,6 +39,7 @@ namespace Atomic.Core.Ai.Nlu
         Aggregate,
         SuperlativeOrFilteredList,
         SubsetList,
+        Trend,
         FieldCoverageList,
         CompareWithFocus,
         Neighbour,

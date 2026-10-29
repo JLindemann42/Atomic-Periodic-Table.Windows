@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>s 区由前两族组成：碱金属、碱土金属，加上氢和氦。</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>周期表中的%1$s</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>解锁可视化答案</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>%1$s趋势</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>启用 AI 聊天助手</value>
@@ -1494,8 +1500,17 @@
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>电负性通常在同一周期内从左向右增加，在同一族内从上到下减少。氟是这里的冠军！</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>最高：%1$s（%2$s）。最低：%3$s（%4$s）。</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>总体下降，从 %1$s（%2$s）到 %3$s（%4$s）。</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>周期性趋势是元素属性中的规律！你对哪种趋势感兴趣：原子半径、电负性还是电离能？</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>%2$d 种元素的**%1$s**，按原子序数排列：</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>电离能沿周期增加，沿族减少。越往右移动，就越难剥离一个电子！</value>
@@ -1503,8 +1518,17 @@
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>金属性沿周期减小，沿族增加。金属性最强的元素位于左下角（如钫）。</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>没有稳定的方向：一端是 %1$s（%2$s），另一端是 %3$s（%4$s）。</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>原子半径在同一周期内（从左向右）减小，因为原子核对电子的吸引力更强；而在同一族内向下增加，因为增加了更多的电子层。</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>总体上升，从 %1$s（%2$s）到 %3$s（%4$s）。</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>整个周期表的**%1$s**：%2$d 种元素有数值。</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>每 10⁶ 个硅原子中的原子数</value>

@@ -662,6 +662,32 @@ namespace Atomic.Core.Ai.Nlu
                     Evidence: evidence), comparesASubset && comparatorFilters.Count == 0 ? ["compare"] : []);
             }
 
+            // ---- Trend: "electronegativity across period 3", "a heat map of density" (roadmap 2.3)
+            // One measurable field read across a set in atomic-number order, or across the whole
+            // table. A ranking, a statistic or a threshold asks something else of the same set, and a
+            // named element makes it a question about that element; Said is used rather than the
+            // element matches, because "period 3" also reads as lithium's atomic number. A position
+            // is not a trend ("periodic" resolves period, and "what are periodic trends" is a
+            // definition), and a trend word alone is no question about the whole table.
+            var asksForTheTable = MentionsAny(normalized, Lexicon.HEATMAP_WORDS);
+            if ((asksForTheTable || MentionsAny(normalized, Lexicon.TREND_WORDS)) && (said?.Elements.Count ?? 0) == 0 &&
+                operators.SuperlativeDescending is null && operators.TopN is null &&
+                operators.Aggregation == Aggregation.None && comparatorFilters.Count == 0 &&
+                fieldMatches.FirstOrDefault()?.Spec is { Kind: FieldKind.Numeric } trendSpec &&
+                !StructuralFields.Contains(trendSpec.Id) && (asksForTheTable || subsetFilters.Count > 0))
+            {
+                evidence.Add($"trend of {trendSpec.Id}");
+                Propose(Branch.Trend, new QueryPlan(
+                    Intent.Trend,
+                    FieldIds: [trendSpec.Id],
+                    // A heat map is the whole table, whatever subset its words also name.
+                    Filters: asksForTheTable ? [] : subsetFilters,
+                    TargetUnit: targetUnit,
+                    Confidence: 0.85,
+                    RawQuery: rawQuery,
+                    Evidence: evidence), "trend");
+            }
+
             // ---- Field coverage: "which elements have a recorded curie point" ----------------
             // A list question with a field and no constraint at all. The set is everything with a
             // value, which for the sparse fields is the interesting part of the answer: the
@@ -1133,6 +1159,17 @@ namespace Atomic.Core.Ai.Nlu
         /// question still takes the explanation even with an element present, because "why is
         /// chromium's electron configuration unusual" is asking about the rule.</para>
         /// </summary>
+        /// <summary>
+        /// "How does atomic radius change down group 1" asks what the values do, which the data shows
+        /// as a trend (roadmap 2.3); "why does it" asks for the mechanism, which is an explanation. A
+        /// measurable field and a trend word, without a why, is the first.
+        /// </summary>
+        private bool ReadsAsATrend(string normalized) =>
+            (MentionsAny(normalized, Lexicon.TREND_WORDS) || MentionsAny(normalized, Lexicon.HEATMAP_WORDS)) &&
+            !Lexicon.WHY_WORDS.Any(w => normalized.StartsWith(w + " ", StringComparison.Ordinal) ||
+                                        normalized.Contains(" " + w + " ", StringComparison.Ordinal)) &&
+            _fields.ResolveAll(normalized, limit: 1).Any(m => m.Spec.Kind == FieldKind.Numeric);
+
         private QueryPlan? ExplanationPlan(string rawQuery, string normalized, bool hasElement)
         {
             var isWhy = Lexicon.WHY_WORDS.Any(
@@ -1209,10 +1246,11 @@ namespace Atomic.Core.Ai.Nlu
         /// "how does" as "how does that change above the Curie temperature", but it has a grounded
         /// answer and declining it would break the compound question it usually arrives in.</para>
         /// </summary>
-        private static bool AsksHowItWorks(string normalized)
+        private bool AsksHowItWorks(string normalized)
         {
             if (!Lexicon.MECHANISM_FRAMES.Any(f => normalized.Contains(f, StringComparison.Ordinal)))
                 return false;
+            if (ReadsAsATrend(normalized)) return false;
             if (Lexicon.COMPARE.Any(w => normalized.Contains(w, StringComparison.Ordinal)))
                 return false;
             if (Lexicon.COMPARATIVE_ADJECTIVES.Keys.Any(a => TextMatching.ContainsWord(normalized, a)))

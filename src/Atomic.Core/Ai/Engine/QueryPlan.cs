@@ -86,6 +86,12 @@ namespace Atomic.Core.Ai.Engine
         /// <summary>A row from one of the app's tables: a constant, equation, mineral, dictionary term.</summary>
         DatasetLookup,
 
+        /// <summary>
+        /// One field across a set of elements in atomic-number order (roadmap 2.3): "electronegativity
+        /// across period 3", or with no subset the whole table, "a heat map of density".
+        /// </summary>
+        Trend,
+
         /// <summary>Nothing recognised. The caller should fall back.</summary>
         Unknown,
     }

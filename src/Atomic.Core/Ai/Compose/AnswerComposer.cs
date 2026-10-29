@@ -87,6 +87,7 @@ namespace Atomic.Core.Ai.Compose
                 ExecutionResult.Safety r => Safety(r),
                 ExecutionResult.EmissionSpectrum r => EmissionSpectrum(r),
                 ExecutionResult.Dataset r => Dataset(r),
+                ExecutionResult.Trend r => Trend(r),
                 ExecutionResult.NoData r => NoData(r),
                 ExecutionResult.Locked r => Locked(r),
                 ExecutionResult.Empty => _strings.Get(S.ai_filter_none),
@@ -945,6 +946,52 @@ namespace Atomic.Core.Ai.Compose
         /// asking what an isotope is got an English definition with no indication why. Said once,
         /// and only when the conversation is not already in English.</para>
         /// </summary>
+        /// <summary>
+        /// A field across a set of elements (roadmap 2.3): the values in atomic-number order, which way
+        /// they run from the first to the last, and where they peak and bottom out. The card draws it;
+        /// the text says what the drawing shows, so the answer stands without the picture.
+        ///
+        /// <para>A whole-table trend is a map, not a line, and has no direction to state - the values
+        /// are not read in one order - so it gives the span and the extremes only.</para>
+        /// </summary>
+        private string Trend(ExecutionResult.Trend result)
+        {
+            var label = FieldLabel(result.FieldId);
+            var points = result.Points;
+            var highest = points.MaxBy(p => p.Quantity!.Mid)!;
+            var lowest = points.MinBy(p => p.Quantity!.Mid)!;
+            var builder = new StringBuilder();
+            if (result.WholeTable)
+            {
+                builder.Append(_strings.Get(S.ai_trend_table_header, label, points.Count));
+            }
+            else
+            {
+                builder.Append(_strings.Get(S.ai_trend_header, label, points.Count));
+                // Symbols rather than names: a period is up to eighteen entries, and the line is read
+                // as a sequence, the way the table itself is.
+                builder.Append('\n').Append(string.Join(" · ", points.Select(p => $"{p.Element.Symbol} {p.Display}")));
+                var first = points[0];
+                var last = points[^1];
+                var steps = points.Zip(points.Skip(1), (a, b) => b.Quantity!.Mid.CompareTo(a.Quantity!.Mid))
+                    .Where(c => c != 0).ToList();
+                var rises = steps.Count(c => c > 0);
+                string? direction = steps.Count == 0 ? null
+                    : rises >= steps.Count * SteadyShare ? S.ai_trend_rises
+                    : steps.Count - rises >= steps.Count * SteadyShare ? S.ai_trend_falls
+                    : S.ai_trend_mixed;
+                if (direction is not null)
+                {
+                    builder.Append("\n\n").Append(_strings.Get(direction,
+                        DisplayName(first.Element.Key), first.Display, DisplayName(last.Element.Key), last.Display));
+                }
+            }
+            builder.Append('\n').Append(_strings.Get(S.ai_trend_extremes,
+                DisplayName(highest.Element.Key), highest.Display, DisplayName(lowest.Element.Key), lowest.Display));
+            if (result.Missing > 0) builder.Append('\n').Append(_strings.Get(S.ai_aggregate_missing_note, result.Missing));
+            return builder.ToString();
+        }
+
         private string Dataset(ExecutionResult.Dataset result)
         {
             // The title in the reader's language when the shared data has it (roadmap 1.3), with the
@@ -1090,6 +1137,13 @@ namespace Atomic.Core.Ai.Compose
 
         /// <summary>Below this many decided fields, a tally of wins says less than the table above it.</summary>
         private const int MinFieldsToJudge = 2;
+
+        /// <summary>
+        /// The share of steps that must go one way for a trend to be called rising or falling. Period
+        /// 3's electronegativity rises at every step; ionization energy across a period dips twice and
+        /// still rises, which is what a reader means by the trend.
+        /// </summary>
+        private const double SteadyShare = 0.7;
 
         /// <summary>Longest list of neighbouring properties offered beside a missing one.</summary>
         private const int MaxAlternatives = 4;

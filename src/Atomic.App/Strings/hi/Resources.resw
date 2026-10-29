@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>s-ब्लॉक में पहले दो समूह होते हैं: क्षार धातुएं, क्षारीय मृदा धातुएं, साथ ही हाइड्रोजन और हीलियम।</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>सारणी में %1$s</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>दृश्य उत्तर अनलॉक करें</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>%1$s की प्रवृत्ति</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>AI चैट सहायक सक्षम करें</value>
@@ -1494,8 +1500,17 @@
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>वैद्युतीय ऋणात्मकता (Electronegativity) आम तौर पर एक आवर्त (Period) में बाएं से दाएं बढ़ती है और एक समूह (Group) में नीचे की ओर घटती है। फ्लोरीन यहाँ का चैंपियन है!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>सबसे अधिक: %1$s (%2$s)। सबसे कम: %3$s (%4$s)।</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>कुल मिलाकर यह घटता है, %1$s (%2$s) से %3$s (%4$s) तक।</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>आवर्त प्रवृत्तियाँ (Periodic trends) तत्वों के गुणों में एक पैटर्न हैं! आप किस प्रवृत्ति के बारे में जानना चाहते हैं: परमाणु त्रिज्या, वैद्युतीय ऋणात्मकता, या आयनन ऊर्जा?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>%2$d तत्वों में **%1$s**, परमाणु क्रमांक के क्रम में:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>आयनन ऊर्जा (Ionization energy) एक आवर्त में बढ़ती है और समूह में नीचे की ओर घटती है। जैसे-जैसे आप दाईं ओर बढ़ते हैं, इलेक्ट्रॉन को बाहर निकालना कठिन होता जाता है!</value>
@@ -1503,8 +1518,17 @@
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>धात्विक गुण एक आवर्त में घटता है और समूह में नीचे की ओर बढ़ता है। सबसे धात्विक तत्व नीचे बाईं ओर (जैसे फ्रांसियम) पाए जाते हैं।</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>इसकी कोई स्थिर दिशा नहीं है: एक सिरे पर %1$s (%2$s), दूसरे पर %3$s (%4$s)।</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>परमाणु त्रिज्या एक आवर्त में (बाएं से दाएं) घटती है क्योंकि नाभिक इलेक्ट्रॉनों को अधिक मजबूती से खींचता है, और एक समूह में नीचे की ओर बढ़ती है क्योंकि अधिक कोश (Shells) जुड़ते जाते हैं।</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>कुल मिलाकर यह बढ़ता है, %1$s (%2$s) से %3$s (%4$s) तक।</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>पूरी आवर्त सारणी में **%1$s**: %2$d तत्वों का मान दर्ज है।</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>प्रति 10⁶ सिलिकॉन परमाणु पर परमाणु</value>

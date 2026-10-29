@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>O bloco s consiste nos dois primeiros grupos: metais alcalinos, metais alcalino-terrosos, além de hidrogênio e hélio.</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s na tabela</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>Desbloqueie as respostas visuais</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>Tendência: %1$s</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>Ativar assistente de chat de IA</value>
@@ -1494,8 +1500,17 @@ Eles compartilham comportamentos químicos semelhantes devido aos seus elétrons
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>A eletronegatividade geralmente aumenta da esquerda para a direita em um período e diminui ao descer em um grupo. O flúor é o campeão aqui!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>O mais alto: %1$s (%2$s). O mais baixo: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>No geral diminui, de %1$s (%2$s) a %3$s (%4$s).</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>Tendências periódicas são padrões nas propriedades dos elementos! Sobre qual tendência você tem curiosidade: Raio Atômico, Eletronegatividade ou Energia de Ionização?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** em %2$d elementos, por número atômico:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>A energia de ionização aumenta ao longo de um período e diminui ao descer em um grupo. Fica mais difícil remover um elétron à medida que você se move para a direita!</value>
@@ -1503,8 +1518,17 @@ Eles compartilham comportamentos químicos semelhantes devido aos seus elétrons
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>O caráter metálico diminui ao longo de um período e aumenta ao descer em um grupo. Os elementos mais metálicos estão na parte inferior esquerda (como o Frâncio).</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>Sem uma direção clara: %1$s (%2$s) numa ponta, %3$s (%4$s) na outra.</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>O raio atômico diminui ao longo de um período (da esquerda para a direita) porque o núcleo atrai os elétrons com mais força, e aumenta ao descer em um grupo à medida que mais camadas são adicionadas.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>No geral aumenta, de %1$s (%2$s) a %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** em toda a tabela periódica: %2$d elementos têm um valor.</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>átomos por 10⁶ átomos de silício</value>

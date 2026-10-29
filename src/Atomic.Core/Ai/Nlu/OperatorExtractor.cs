@@ -465,12 +465,22 @@ namespace Atomic.Core.Ai.Nlu
 
             if (!HasSuperlative(query)) return null;
 
-            // "5 densest nonmetals" - a bare number only counts alongside a superlative.
-            var match = TopNPattern.Match(query);
+            // "5 densest nonmetals" - a bare number only counts alongside a superlative. And not a
+            // number a period or group has read: "which element in period 3 has the highest
+            // electronegativity" asks for one element, and was answered with the top three (found
+            // with roadmap 2.3).
+            var match = TopNPattern.Match(WithoutPeriodOrGroup(query));
             if (!match.Success) return null;
             if (!int.TryParse(match.Groups[1].Value, NumberStyles.Integer,
                               CultureInfo.InvariantCulture, out var n)) return null;
             return n is >= 2 and <= 118 ? n : null;
+        }
+
+        /// <summary>The query with "period 3", "group 17" and "第3周期" blanked out, for reading a count.</summary>
+        private static string WithoutPeriodOrGroup(string query)
+        {
+            var words = string.Join('|', PeriodWords.Concat(GroupWords).Select(Regex.Escape));
+            return Regex.Replace(query, $@"(?:{words})\s*\d{{1,2}}|\d{{1,2}}\s*(?:{words})", " ");
         }
 
         /// <summary>A requested output unit, e.g. "in Fahrenheit".</summary>

@@ -251,8 +251,14 @@
   <data name="ai_block_s" xml:space="preserve">
     <value>Ang s-block ay binubuo ng unang dalawang group: alkali metals, alkaline earth metals, kasama ang hydrogen at helium.</value>
   </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s sa buong table</value>
+  </data>
   <data name="ai_card_pro_locked" xml:space="preserve">
     <value>I-unlock ang mga visual na sagot</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>Takbo ng %1$s</value>
   </data>
   <data name="ai_chat_setting" xml:space="preserve">
     <value>Paganahin ang AI Chat Assistant</value>
@@ -1494,8 +1500,17 @@ Nagbabahagi sila ng mga katulad na gawi sa kemikal dahil sa kanilang mga valence
   <data name="ai_trend_electronegativity" xml:space="preserve">
     <value>Ang electronegativity ay karaniwang tumataas mula kaliwa pakanan sa isang period at bumababa pababa sa isang group. Ang Fluorine ang kampeon dito!</value>
   </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>Pinakamataas: %1$s (%2$s). Pinakamababa: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>Bumababa ito sa kabuuan, mula %1$s (%2$s) hanggang %3$s (%4$s).</value>
+  </data>
   <data name="ai_trend_general" xml:space="preserve">
     <value>Ang mga periodic trend ay mga pattern sa mga katangian ng mga elemento! Aling trend ang gusto mong malaman: Atomic Radius, Electronegativity, o Ionization Energy?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** sa %2$d elemento, ayon sa atomic number:</value>
   </data>
   <data name="ai_trend_ionization" xml:space="preserve">
     <value>Ang ionization energy ay tumataas sa isang period at bumababa pababa sa isang group. Mas nagiging mahirap kumuha ng electron habang gumagalaw pakanan!</value>
@@ -1503,8 +1518,17 @@ Nagbabahagi sila ng mga katulad na gawi sa kemikal dahil sa kanilang mga valence
   <data name="ai_trend_metallic" xml:space="preserve">
     <value>Ang metallic character ay bumababa sa isang period at tumataas pababa sa isang group. Ang pinaka-metallic na mga elemento ay nasa ibabang kaliwa (tulad ng Francium).</value>
   </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>Walang tiyak na direksyon: %1$s (%2$s) sa isang dulo, %3$s (%4$s) sa kabila.</value>
+  </data>
   <data name="ai_trend_radius" xml:space="preserve">
     <value>Ang atomic radius ay bumababa sa isang period (kaliwa pakanan) dahil mas hinihila ng nucleus ang mga electron, at tumataas pababa sa isang group habang nagdaragdag ng mas maraming shell.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>Tumataas ito sa kabuuan, mula %1$s (%2$s) hanggang %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** sa buong periodic table: may halaga ang %2$d elemento.</value>
   </data>
   <data name="ai_unit_atoms_per_si" xml:space="preserve">
     <value>mga atomo bawat 10⁶ atomo ng silikon</value>

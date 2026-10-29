@@ -9,6 +9,12 @@ namespace Atomic.Core.Ai.Cards
     {
         ElectronShell, CrystalStructure, EmissionSpectrum, PoissonBand,
         NfpaDiamond, IonizationSeries, IsotopeDecay, Abundance,
+
+        /// <summary>A field across a period, group or series, as a line (roadmap 2.3).</summary>
+        TrendLine,
+
+        /// <summary>A field over the whole table, as a mini periodic table shaded by value (roadmap 2.3).</summary>
+        HeatMap,
     }
 
     public sealed record ChatCard(

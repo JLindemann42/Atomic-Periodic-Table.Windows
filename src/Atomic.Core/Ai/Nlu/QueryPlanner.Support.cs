@@ -817,6 +817,10 @@ namespace Atomic.Core.Ai.Nlu
 
         private const int DefaultListLimit = 10;
 
+        /// <summary>Fields that say where an element sits rather than what it is like: no trend runs along them.</summary>
+        private static readonly HashSet<string> StructuralFields =
+            new(StringComparer.Ordinal) { "atomic_number", "period", "group_number", "protons", "electrons" };
+
         /// <summary>The field that names each set, which a question about the set is not asking for.</summary>
         private static readonly IReadOnlyDictionary<string, string> DimensionFields = new Dictionary<string, string>(StringComparer.Ordinal)
         {

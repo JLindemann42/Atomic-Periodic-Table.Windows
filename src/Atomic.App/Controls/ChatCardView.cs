@@ -137,6 +137,26 @@ namespace Atomic.App.Controls
                     return chart;
                 }
 
+                // The two cards about many elements (roadmap 2.3). The card's element is only its first
+                // point; what it draws is in its arguments, read back out of the store.
+                case ChatCardKind.TrendLine:
+                {
+                    if (TrendSeriesReducer.Of(card, store) is not { } series) return null;
+
+                    var chart = new TrendLineChart { Height = 170 };
+                    chart.SetSeries(series);
+                    return chart;
+                }
+
+                case ChatCardKind.HeatMap:
+                {
+                    if (HeatMapReducer.Of(card, store) is not { } map) return null;
+
+                    var chart = new HeatMapChart { Height = 190 };
+                    chart.SetMap(map);
+                    return chart;
+                }
+
                 case ChatCardKind.EmissionSpectrum:
                 {
                     var card2 = new EmissionSpectrumCard();

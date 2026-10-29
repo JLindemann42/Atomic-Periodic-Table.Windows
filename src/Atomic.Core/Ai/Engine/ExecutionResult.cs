@@ -325,6 +325,20 @@ namespace Atomic.Core.Ai.Engine
             public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
         }
 
+        /// <summary>One field across a set of elements, in atomic-number order (roadmap 2.3).</summary>
+        /// <param name="Points">The elements with a value, in atomic-number order - the order a trend is read in.</param>
+        /// <param name="Missing">Elements in the set with no value for the field, so the answer can say so.</param>
+        /// <param name="WholeTable">True when no subset was named: the answer is a map of the table, not a line.</param>
+        public sealed record Trend(
+            string FieldId,
+            IReadOnlyList<ValuedElement> Points,
+            int Missing,
+            bool WholeTable,
+            IReadOnlyList<Citation> Citations) : ExecutionResult
+        {
+            public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
+        }
+
         /// <summary>A row from one of the app's tables.</summary>
         public sealed record Dataset(
             Data.DatasetRow Row,

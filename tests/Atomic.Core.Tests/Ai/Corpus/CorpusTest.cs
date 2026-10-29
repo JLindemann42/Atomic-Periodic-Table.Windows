@@ -254,6 +254,11 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(FocusSets))]
         public void FocusSets_Pass(string key) => RunUnit("focus_sets", key);
 
+        /// <summary>A field across a period, group or series, or the whole table (roadmap 2.3).</summary>
+        public static TheoryData<string> Trends => Units("trends");
+        [Theory, MemberData(nameof(Trends))]
+        public void Trends_Pass(string key) => RunUnit("trends", key);
+
         // ---- Scoreboard ------------------------------------------------------------------------
 
         /// <summary>
@@ -566,6 +571,8 @@ namespace Atomic.Core.Tests.Corpus
             ExecutionResult.MoleConversion m => m.Moles,
             // The sum of the coefficients, so a row checks the balance and not only that one was
             // tried (roadmap 2.2): a declined equation carries no value, and fails a row that expects one.
+            // The first element's value, which pins the field and the order (roadmap 2.3).
+            ExecutionResult.Trend t => t.Points.FirstOrDefault()?.Quantity?.Value,
             ExecutionResult.BalancedEquation b => b.Reason is null
                 ? b.Reactants.Concat(b.Products).Sum(t => t.Coefficient)
                 : null,

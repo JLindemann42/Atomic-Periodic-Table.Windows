@@ -92,8 +92,40 @@ namespace Atomic.Core.Ai.Cards
                     ? null
                     : ForLocked(l.Element, l.FieldIds, store, strings, localized),
 
+                ExecutionResult.Trend t => ForTrend(t, store, strings),
+
                 _ => null,
             };
+        }
+
+        /// <summary>
+        /// The trend card: a line across the set, or a map of the table when no set was named (roadmap
+        /// 2.3). The first card that is about many elements, so its element is only the first point,
+        /// which the codec needs; the card's arguments carry what it draws, and its reducer reads the
+        /// values back out of the store.
+        /// </summary>
+        private static ChatCard? ForTrend(ExecutionResult.Trend result, KnowledgeStore store, IStringProvider strings)
+        {
+            if (result.Points.Count == 0) return null;
+            var first = result.Points[0].Element;
+            var label = FieldRegistry.ById.TryGetValue(result.FieldId, out var spec)
+                ? Text.Try.OrNull(() => strings.Get(spec.SentenceLabel()))?.Replace(":", string.Empty, StringComparison.Ordinal).Trim()
+                : null;
+            label ??= result.FieldId;
+            if (result.WholeTable)
+            {
+                if (HeatMapReducer.Of(result.FieldId, store) is null) return null;
+                return new ChatCard(ChatCardKind.HeatMap, first.Key, strings.Get(S.ai_card_heat_map_title, label),
+                    new Dictionary<string, string> { [HeatMapReducer.FieldArg] = result.FieldId });
+            }
+            var keys = result.Points.Select(p => p.Element.Key).ToList();
+            if (TrendSeriesReducer.Of(result.FieldId, keys, store) is null) return null;
+            return new ChatCard(ChatCardKind.TrendLine, first.Key, strings.Get(S.ai_card_trend_title, label),
+                new Dictionary<string, string>
+                {
+                    [TrendSeriesReducer.FieldArg] = result.FieldId,
+                    [TrendSeriesReducer.KeysArg] = string.Join(',', keys),
+                });
         }
 
         /// <summary>The card that goes with one field of one element, or none.</summary>
