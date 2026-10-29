@@ -639,6 +639,21 @@
   <data name="ai_filter_top" xml:space="preserve">
     <value>I primi %1$d di %2$d elementi corrispondenti:</value>
   </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%1$s di %2$s e %3$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>Quanti sono?</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>Quale elemento ha il valore di %1$s più alto?</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>Quale elemento ha il valore di %1$s più basso?</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%1$s di %2$s in %3$s</value>
+  </data>
   <data name="ai_formula_c6h12o6" xml:space="preserve">
     <value>C6H12O6 è il glucosio, uno zucchero semplice che fornisce energia agli esseri viventi. Ha 6 carboni, 12 idrogeni e 6 ossigeni.</value>
   </data>

@@ -627,6 +627,21 @@
   <data name="ai_filter_top" xml:space="preserve">
     <value>Topp %1$d av %2$d matchande grundämnen:</value>
   </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%1$s för %2$s och %3$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>Hur många finns det?</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>Vilket grundämne har högst %1$s?</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>Vilket grundämne har lägst %1$s?</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%1$s för %2$s i %3$s</value>
+  </data>
   <data name="ai_formula_c6h12o6" xml:space="preserve">
     <value>C6H12O6 är glukos, ett enkelt socker som ger energi till levande varelser. Det har 6 kol, 12 väte och 6 syre.</value>
   </data>

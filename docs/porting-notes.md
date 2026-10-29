@@ -1569,3 +1569,30 @@ regenerated; Afrikaans, Filipino and Swedish no longer learn English trigrams as
 translated nobelium symbol in the shipped files. Both tests failed on the old data. .NET's `\b` is
 Unicode-aware, like Python's; Android's test needs `(?U)`, or the "it" in Portuguese "itérbio" counts.
 3,623 core tests pass; held-out (458) passes.
+
+### D70 — follow-up chips that fit the answer (roadmap 2.1)
+
+Ported from Android in the same change.
+
+**What changed.** `FollowUps` (`Ai/FollowUps.cs`) builds chips from the plan just answered: after a
+property, the same field for the element's group neighbour, the element with the highest value, and
+the value in another unit `UnitConverter` supports; after a comparison, the highest value; after a
+ranking over the whole table, its other end; after a list or a statistic over a subset, "How many
+are there?". `ChatOrchestrator.Suggestions` puts them before the fixed chips, and drops a fixed chip
+that would repeat the question. The five templates (`ai_follow_*`) come through
+`strings_xml_to_resw.py` in all twelve languages.
+
+**Only answerable chips.** `AiEngine.WouldAnswer` plans a chip as the next turn against a copy of the
+dialogue state; a chip it would decline, or one that plans to the answer just given, is not offered.
+`FollowUpsTest` mirrors Android's and prints the same chips in every language.
+
+**C# specifics.** The partner is chosen with `OrderBy`/`ThenBy` where Kotlin uses `minWithOrNull`;
+both take the first of equal keys. `AsksTheSame` compares the lists in a plan with `SequenceEqual`,
+because record equality compares them by reference.
+
+**Three planner gaps** the chips exposed, fixed on both platforms with rows in `unit_convert.tsv`
+(now corpus format 2, so the rows pin the converted value): `UNIT_WORDS` gains "kg/m³", "g/cm³",
+"°f" and "°c"; `EntityResolver.AppearsAsSymbol` refuses a capital right after a degree sign, so "in
+°F" is not fluorine; and `UNIT_PREPOSITIONS` gains Afrikaans "na", without which the app's own chip
+"Skakel 500 K om na °C" was answered as a comparison of potassium and carbon. `LexiconTest` counts
+3,485 entries. 3,635 core tests pass; held-out (458) passes.

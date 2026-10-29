@@ -639,6 +639,21 @@
   <data name="ai_filter_top" xml:space="preserve">
     <value>Nangungunang %1$d sa %2$d tugmang elemento:</value>
   </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%1$s ng %2$s at %3$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>Ilan ang mayroon?</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>Aling elemento ang may pinakamataas na %1$s?</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>Aling elemento ang may pinakamababang %1$s?</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%1$s ng %2$s sa %3$s</value>
+  </data>
   <data name="ai_formula_c6h12o6" xml:space="preserve">
     <value>Ang C6H12O6 ay Glucose, isang simpleng asukal na nagbibigay ng enerhiya sa mga buhay na bagay. Mayroon itong 6 na Carbon, 12 Hydrogen, at 6 na Oxygen.</value>
   </data>

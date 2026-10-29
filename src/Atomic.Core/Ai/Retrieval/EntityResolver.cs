@@ -727,7 +727,9 @@ namespace Atomic.Core.Ai.Retrieval
                 var before = at > 0 ? originalQuery[at - 1] : (char?)null;
                 var afterIndex = at + expected.Length;
                 var after = afterIndex < originalQuery.Length ? originalQuery[afterIndex] : (char?)null;
-                if ((before is null || !char.IsLetterOrDigit(before.Value)) &&
+                // A capital after a degree sign is a temperature scale: "in °F" is not fluorine, and
+                // "in °C" is not carbon (roadmap 2.1).
+                if ((before is null || !char.IsLetterOrDigit(before.Value)) && before != '°' &&
                     (after is null || !char.IsLetterOrDigit(after.Value)))
                     return true;
                 from = at + 1;

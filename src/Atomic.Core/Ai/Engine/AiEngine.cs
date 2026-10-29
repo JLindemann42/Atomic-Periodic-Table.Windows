@@ -170,6 +170,17 @@ namespace Atomic.Core.Ai.Engine
         public QueryPlan Plan(string query, DialogueState state) => _planner.Plan(query, state);
 
         /// <summary>
+        /// The plan an answer to <paramref name="query"/> would use, or null where it would decline -
+        /// without answering, and against a copy of <paramref name="state"/>, so asking changes
+        /// nothing. Used to offer only the follow-up chips the engine can answer (roadmap 2.1).
+        /// </summary>
+        public QueryPlan? WouldAnswer(string query, DialogueState state) =>
+            _planner.Plan(query, state.CopyOf()) is { } plan &&
+            plan.Intent != Intent.Unknown && plan.Confidence >= _planner.Threshold
+                ? plan
+                : null;
+
+        /// <summary>
         /// Run an intent directly against a known element, bypassing query parsing.
         ///
         /// <para>Used when the conversation already establishes what is being asked - a "yes" to a

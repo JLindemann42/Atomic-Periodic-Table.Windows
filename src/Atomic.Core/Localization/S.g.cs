@@ -209,6 +209,11 @@ public static partial class S
     public const string ai_filter_matched = "ai_filter_matched";
     public const string ai_filter_none = "ai_filter_none";
     public const string ai_filter_top = "ai_filter_top";
+    public const string ai_follow_compare = "ai_follow_compare";
+    public const string ai_follow_count = "ai_follow_count";
+    public const string ai_follow_highest = "ai_follow_highest";
+    public const string ai_follow_lowest = "ai_follow_lowest";
+    public const string ai_follow_unit = "ai_follow_unit";
     public const string ai_formula_c6h12o6 = "ai_formula_c6h12o6";
     public const string ai_formula_ch4 = "ai_formula_ch4";
     public const string ai_formula_co2 = "ai_formula_co2";

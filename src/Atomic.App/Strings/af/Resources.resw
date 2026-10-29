@@ -639,6 +639,21 @@
   <data name="ai_filter_top" xml:space="preserve">
     <value>Top %1$d van %2$d passende elemente:</value>
   </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%1$s van %2$s en %3$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>Hoeveel is daar?</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>Watter element het die hoogste %1$s?</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>Watter element het die laagste %1$s?</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%1$s van %2$s in %3$s</value>
+  </data>
   <data name="ai_formula_c6h12o6" xml:space="preserve">
     <value>C6H12O6 is Glukose, 'n eenvoudige suiker wat energie aan lewende dinge verskaf. Dit het 6 Koolstowwe, 12 Waterstowwe, en 6 Suurstowwe.</value>
   </data>

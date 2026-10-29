@@ -627,6 +627,21 @@
   <data name="ai_filter_top" xml:space="preserve">
     <value>%2$d مطابق عناصر میں سے سرفہرست %1$d:</value>
   </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%2$s اور %3$s کی %1$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>کتنے ہیں؟</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>کس عنصر کی %1$s سب سے زیادہ ہے؟</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>کس عنصر کی %1$s سب سے کم ہے؟</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%2$s کی %1$s %3$s میں</value>
+  </data>
   <data name="ai_formula_c6h12o6" xml:space="preserve">
     <value>C6H12O6 گلوکوز ہے, ایک سادہ شکر جو جانداروں کو توانائی فراہم کرتی ہے۔ اس میں 6 کاربن، 12 ہائیڈروجن اور 6 آکسیجن ہوتے ہیں۔</value>
   </data>

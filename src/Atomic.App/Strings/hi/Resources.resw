@@ -639,6 +639,21 @@
   <data name="ai_filter_top" xml:space="preserve">
     <value>%2$d मेल खाते तत्वों में से शीर्ष %1$d:</value>
   </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%2$s और %3$s का %1$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>कितने हैं?</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>किस तत्व का %1$s सबसे अधिक है?</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>किस तत्व का %1$s सबसे कम है?</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%2$s का %1$s %3$s में</value>
+  </data>
   <data name="ai_formula_c6h12o6" xml:space="preserve">
     <value>C6H12O6 ग्लूकोज है, एक साधारण शर्करा जो जीवित चीजों को ऊर्जा प्रदान करती है। इसमें 6 कार्बन, 12 हाइड्रोजन और 6 ऑक्सीजन होते हैं।</value>
   </data>

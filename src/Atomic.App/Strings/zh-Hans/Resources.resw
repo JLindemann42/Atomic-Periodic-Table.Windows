@@ -639,6 +639,21 @@
   <data name="ai_filter_top" xml:space="preserve">
     <value>%2$d 种符合条件的元素中的前 %1$d 种：</value>
   </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%2$s 和 %3$s 的%1$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>有多少个？</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>哪种元素的%1$s最高？</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>哪种元素的%1$s最低？</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%2$s 的%1$s，单位 %3$s</value>
+  </data>
   <data name="ai_formula_c6h12o6" xml:space="preserve">
     <value>C6H12O6 是葡萄糖，一种为生物提供能量的单糖。它含有 6 个碳、12 个氢和 6 个氧。</value>
   </data>

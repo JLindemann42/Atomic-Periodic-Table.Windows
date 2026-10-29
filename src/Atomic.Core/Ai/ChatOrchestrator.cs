@@ -627,28 +627,39 @@ namespace Atomic.Core.Ai
         /// </summary>
         private IReadOnlyList<string> Suggestions(IStringProvider strings, QueryPlan? plan)
         {
-            // With an element in play the follow-ups are about it; otherwise there is room to
-            // advertise what the assistant can do beyond lookups.
-            var subject = plan?.ElementKeys.FirstOrDefault() ?? State.FocusElement;
+            // Follow-ups built from the answer just given come first (roadmap 2.1), and only the
+            // ones the engine would answer next.
+            var engine = EngineFor(strings.Language);
+            var followUps = new FollowUps(_store, chip => engine.WouldAnswer(chip, State), DisplayKey);
+            var fitted = plan is null ? [] : followUps.After(plan, strings, MaxSuggestions);
 
+            // Then the fixed chips. With an element in play they are about it; otherwise there is
+            // room to advertise what the assistant can do beyond lookups.
+            var subject = plan?.ElementKeys.FirstOrDefault() ?? State.FocusElement;
+            IEnumerable<string> fixedChips;
             if (subject is not null)
             {
-                var name = _retrieval.Localized(State.ActiveLanguage)?.Name(subject)
-                           ?? char.ToUpperInvariant(subject[0]) + subject[1..];
-
-                return strings.Array(SuggestElement)
+                var name = DisplayKey(subject);
+                fixedChips = strings.Array(SuggestElement)
                     .Select(template =>
                         Try.OrNull(() => JavaFormat.Format(CultureInfo.InvariantCulture, template, name))
-                        ?? template)
-                    .Take(MaxSuggestions)
-                    .ToList();
+                        ?? template);
+            }
+            else
+            {
+                fixedChips = strings.Array(SuggestGeneral).Concat(strings.Array(SuggestTools).Take(1));
             }
 
-            return strings.Array(SuggestGeneral)
-                .Concat(strings.Array(SuggestTools).Take(1))
-                .Take(MaxSuggestions)
-                .ToList();
+            // "Atomic mass of gold" is no follow-up to the atomic mass of gold.
+            var fresh = fixedChips.Where(chip => plan is null || !followUps.Repeats(chip, plan));
+            return fitted.Concat(fresh).Distinct(StringComparer.Ordinal).Take(MaxSuggestions).ToList();
         }
+
+        /// <summary>An element's name in the reader's language.</summary>
+        private string DisplayKey(string key) =>
+            _retrieval.Localized(State.ActiveLanguage)?.Name(key) is { Length: > 0 } localized
+                ? localized
+                : char.ToUpperInvariant(key[0]) + key[1..];
 
         /// <summary>
         /// The engine for a language, rebuilt when the user's entitlements change.
