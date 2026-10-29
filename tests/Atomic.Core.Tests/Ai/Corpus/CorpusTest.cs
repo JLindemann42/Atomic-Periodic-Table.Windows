@@ -564,6 +564,11 @@ namespace Atomic.Core.Tests.Corpus
             ExecutionResult.Aggregate a => a.Value,
             ExecutionResult.Formula f => f.Result.MolarMass,
             ExecutionResult.MoleConversion m => m.Moles,
+            // The sum of the coefficients, so a row checks the balance and not only that one was
+            // tried (roadmap 2.2): a declined equation carries no value, and fails a row that expects one.
+            ExecutionResult.BalancedEquation b => b.Reason is null
+                ? b.Reactants.Concat(b.Products).Sum(t => t.Coefficient)
+                : null,
             _ => null,
         };
 

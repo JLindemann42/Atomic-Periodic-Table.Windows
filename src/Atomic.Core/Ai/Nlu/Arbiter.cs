@@ -25,6 +25,7 @@ namespace Atomic.Core.Ai.Nlu
         UnbackedConcept,
         CountOfAllElements,
         Calculation,
+        ShowSteps,
         SetOfAnElement,
         UnitConvert,
         Compound,

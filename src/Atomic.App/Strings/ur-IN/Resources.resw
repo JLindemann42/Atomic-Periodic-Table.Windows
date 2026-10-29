@@ -639,6 +639,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>کس عنصر کی %1$s سب سے کم ہے؟</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>مراحل دکھائیں</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%2$s کی %1$s %3$s میں</value>
   </data>
@@ -1336,6 +1339,30 @@
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>مستحکم</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>ہر عنصر کے بائیں طرف اتنے ہی ایٹم ہونے چاہییں جتنے دائیں طرف:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>سب سے چھوٹے صحیح اعداد جو ہر سطر کو پورا کریں:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>ہر فارمولے کے آگے ایک نامعلوم عددی سر لکھیں:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ نصف عمر ہے، t گزرا ہوا وقت، n نصف عمروں کی تعداد، اور N₀ اور N پہلے اور بعد کی مقداریں۔</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>مولر کمیت ہر عنصر کے ایٹموں کی تعداد ضرب اس کی جوہری کمیت کا مجموعہ ہے:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>مرحلہ وار</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m کمیت ہے، M مولر کمیت، n مول میں مقدار، N ذرات کی تعداد اور N_A ایووگاڈرو مستقل۔</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n مول میں مقدار ہے، c ارتکاز، V حجم، m کمیت اور M مولر کمیت۔</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>مجھے اس گروپ یا پیریڈ میں کچھ نہیں ملا۔ یاد رکھیں: 18 گروپ اور 7 پیریڈز ہیں!</value>

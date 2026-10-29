@@ -213,6 +213,7 @@ public static partial class S
     public const string ai_follow_count = "ai_follow_count";
     public const string ai_follow_highest = "ai_follow_highest";
     public const string ai_follow_lowest = "ai_follow_lowest";
+    public const string ai_follow_steps = "ai_follow_steps";
     public const string ai_follow_unit = "ai_follow_unit";
     public const string ai_formula_c6h12o6 = "ai_formula_c6h12o6";
     public const string ai_formula_ch4 = "ai_formula_ch4";
@@ -439,6 +440,14 @@ public static partial class S
     public const string ai_source_table = "ai_source_table";
     public const string ai_sources_header = "ai_sources_header";
     public const string ai_stable_label = "ai_stable_label";
+    public const string ai_steps_balance_equations = "ai_steps_balance_equations";
+    public const string ai_steps_balance_solve = "ai_steps_balance_solve";
+    public const string ai_steps_balance_unknowns = "ai_steps_balance_unknowns";
+    public const string ai_steps_decay_legend = "ai_steps_decay_legend";
+    public const string ai_steps_formula = "ai_steps_formula";
+    public const string ai_steps_header = "ai_steps_header";
+    public const string ai_steps_moles_legend = "ai_steps_moles_legend";
+    public const string ai_steps_solution_legend = "ai_steps_solution_legend";
     public const string ai_structural_no_results = "ai_structural_no_results";
     public const string ai_structural_result = "ai_structural_result";
     public const string ai_structural_specify_number = "ai_structural_specify_number";

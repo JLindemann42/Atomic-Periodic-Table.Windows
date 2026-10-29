@@ -639,6 +639,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>Vilket grundämne har lägst %1$s?</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Visa stegen</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%1$s för %2$s i %3$s</value>
   </data>
@@ -1336,6 +1339,30 @@ De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>Stabil</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Varje grundämne behöver lika många atomer till vänster som till höger:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>De minsta heltal som uppfyller varje rad:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Skriv en okänd koefficient framför varje formel:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ är halveringstiden, t den tid som gått, n antalet halveringstider, och N₀ och N mängden före och efter.</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>Molmassan är summan av varje grundämnes antal atomer gånger dess atommassa:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Steg för steg</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m är massan, M molmassan, n substansmängden i mol, N antalet partiklar och N_A Avogadros konstant.</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n är substansmängden i mol, c koncentrationen, V volymen, m massan och M molmassan.</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Jag hittade inget i den gruppen eller perioden. Kom ihåg: det finns 18 grupper och 7 perioder!</value>

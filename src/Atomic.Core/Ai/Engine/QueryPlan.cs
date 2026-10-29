@@ -90,6 +90,16 @@ namespace Atomic.Core.Ai.Engine
         Unknown,
     }
 
+    /// <summary>Groups of <see cref="Intent"/>s. Mirrors Android's <c>Intent.CALCULATIONS</c>.</summary>
+    public static class Intents
+    {
+        /// <summary>The intents that compute an answer from numbers, and so have steps to show (roadmap 2.2).</summary>
+        public static readonly IReadOnlySet<Intent> Calculations = new HashSet<Intent>
+        {
+            Intent.FormulaMass, Intent.MoleConversion, Intent.BalanceEquation, Intent.SolutionCalc, Intent.DecayCalc,
+        };
+    }
+
     /// <summary>Comparison operators available in a filter.</summary>
     public enum Op { Gt, Gte, Lt, Lte, Eq, Between }
 
@@ -265,6 +275,10 @@ namespace Atomic.Core.Ai.Engine
     /// <param name="Confidence">0..1; below the planner's threshold the caller should not use this plan.</param>
     /// <param name="Evidence">Human-readable reasons the planner chose this, for debugging and tests.</param>
     /// <param name="Declined">Why the planner declined, on an <see cref="Intent.Unknown"/> plan.</param>
+    /// <param name="ShowSteps">
+    /// Whether to show the calculation step by step rather than only its short working (roadmap
+    /// 2.2): asked for in the question, or as "show the steps" after a calculation.
+    /// </param>
     public sealed record QueryPlan(
         Intent Intent,
         IReadOnlyList<EntityRef>? Entities = null,
@@ -280,7 +294,8 @@ namespace Atomic.Core.Ai.Engine
         double Confidence = 0.0,
         string RawQuery = "",
         IReadOnlyList<string>? Evidence = null,
-        DeclineReason? Declined = null)
+        DeclineReason? Declined = null,
+        bool ShowSteps = false)
     {
         // Kotlin defaults these to emptyList(); C# cannot put a collection in a default parameter,
         // so they are normalised on read. Callers still write `new QueryPlan(Intent.Unknown)`.

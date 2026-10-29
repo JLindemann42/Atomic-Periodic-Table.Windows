@@ -101,6 +101,10 @@ namespace Atomic.Core.Ai
                     if (label is not null && plan.Filters.Count == 0)
                         yield return Format(strings, plan.SortDescending ? S.ai_follow_lowest : S.ai_follow_highest, label);
                     break;
+                // A calculation invites its working, unless that is what was just shown (roadmap 2.2).
+                case var calculation when Intents.Calculations.Contains(calculation):
+                    if (!plan.ShowSteps) yield return strings.Get(S.ai_follow_steps);
+                    break;
                 case Intent.FilterList:
                     if (plan.Filters.Count > 0) yield return strings.Get(S.ai_follow_count);
                     break;
@@ -162,6 +166,7 @@ namespace Atomic.Core.Ai
         private static bool AsksTheSame(QueryPlan next, QueryPlan previous) =>
             next.Intent == previous.Intent && next.ElementKeys.SequenceEqual(previous.ElementKeys) &&
             next.FieldIds.SequenceEqual(previous.FieldIds) && next.Filters.SequenceEqual(previous.Filters) &&
-            next.SortDescending == previous.SortDescending && next.TargetUnit == previous.TargetUnit;
+            next.SortDescending == previous.SortDescending && next.TargetUnit == previous.TargetUnit &&
+            next.ShowSteps == previous.ShowSteps;
     }
 }

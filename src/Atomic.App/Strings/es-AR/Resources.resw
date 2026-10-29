@@ -639,6 +639,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>¿Qué elemento tiene el valor más bajo de %1$s?</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Muestra los pasos</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%1$s de %2$s en %3$s</value>
   </data>
@@ -1336,6 +1339,30 @@ No se envía: tu nombre, tu cuenta, tu dispositivo ni el resto de esta conversac
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>Estable</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Cada elemento necesita tantos átomos a la izquierda como a la derecha:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>Los menores números enteros que cumplen cada línea:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Escribe un coeficiente desconocido delante de cada fórmula:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ es el periodo de semidesintegración, t el tiempo transcurrido, n el número de periodos, y N₀ y N las cantidades antes y después.</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>La masa molar es la suma, para cada elemento, de su número de átomos por su masa atómica:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Paso a paso</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m es la masa, M la masa molar, n la cantidad en moles, N el número de partículas y N_A la constante de Avogadro.</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n es la cantidad en moles, c la concentración, V el volumen, m la masa y M la masa molar.</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>No pude encontrar nada en ese grupo o periodo. ¡Recuerda: hay 18 grupos y 7 periodos!</value>

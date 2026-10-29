@@ -651,6 +651,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>Qual elemento tem o menor valor de %1$s?</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Mostre os passos</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%1$s de %2$s em %3$s</value>
   </data>
@@ -1348,6 +1351,30 @@ Eles compartilham comportamentos químicos semelhantes devido aos seus elétrons
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>Estável</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Cada elemento precisa de tantos átomos à esquerda quanto à direita:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>Os menores números inteiros que satisfazem cada linha:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Escreva um coeficiente desconhecido na frente de cada fórmula:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ é a meia-vida, t o tempo decorrido, n o número de meias-vidas, e N₀ e N as quantidades antes e depois.</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>A massa molar é a soma, para cada elemento, do número de átomos vezes sua massa atômica:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Passo a passo</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m é a massa, M a massa molar, n a quantidade em mols, N o número de partículas e N_A a constante de Avogadro.</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n é a quantidade em mols, c a concentração, V o volume, m a massa e M a massa molar.</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Não consegui encontrar nada nesse grupo ou período. Lembre-se: existem 18 grupos e 7 períodos!</value>

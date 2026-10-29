@@ -145,6 +145,9 @@ namespace Atomic.Core.Ai.Data
         /// <summary>A leading coefficient the user supplied, which is re-derived rather than kept.</summary>
         private static readonly Regex LeadingCoefficient = JavaRegex.Compile(@"^(\d+)\s*(?=[A-Za-z(])");
 
+        /// <summary>A word of lower-case letters only: prose, never a formula as written.</summary>
+        private static readonly Regex Prose = new(@"^\p{Ll}+$");
+
         /// <summary>
         /// Split raw text into reactants and products, saying which way it failed if it did.
         ///
@@ -197,8 +200,15 @@ namespace Atomic.Core.Ai.Data
 
             foreach (var token in Plus.Split(raw))
             {
+                // A word of prose sharing a token with a formula is not part of it. Read together,
+                // the German chip's "Fe2O3 aus" was Fe2O3 + Au + S, "balance C3H8" was Ba + La + N +
+                // Ce + C3H8, and "Fe2O3 step by step" grew sulfur: each answered that an element
+                // appears on one side only (roadmap 2.2). A lower-case word with no digit is prose;
+                // a token that is one word stays as written, so "na" and "fe2o3" are still read.
+                var words = token.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var formula = words.Length > 1 ? string.Join(' ', words.Where(w => !Prose.IsMatch(w))) : token;
                 var cleaned = LeadingCoefficient
-                    .Replace(ChemistryMath.StripStateAnnotation(token).Trim(), string.Empty)
+                    .Replace(ChemistryMath.StripStateAnnotation(formula).Trim(), string.Empty)
                     .Trim();
                 if (cleaned.Length == 0) continue;
 

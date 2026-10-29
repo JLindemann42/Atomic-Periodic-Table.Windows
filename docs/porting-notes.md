@@ -1596,3 +1596,28 @@ because record equality compares them by reference.
 °F" is not fluorine; and `UNIT_PREPOSITIONS` gains Afrikaans "na", without which the app's own chip
 "Skakel 500 K om na °C" was answered as a comparison of potassium and carbon. `LexiconTest` counts
 3,485 entries. 3,635 core tests pass; held-out (458) passes.
+
+### D71 — show the working (roadmap 2.2)
+
+Ported from Android in the same change.
+
+**What changed.** `QueryPlan.ShowSteps` asks for a calculation step by step. The planner sets it on a
+calculation whose message carries a steps phrase (`Lexicon.STEPS_WORDS`, twelve languages), and the
+new `Branch.ShowSteps`, right after `Branch.Calculation`, re-plans the previous calculation with it
+for a bare "show the steps"; `Intents.Calculations` names the five intents it applies to.
+`Compose/Workings.cs` writes the derivation - the coefficient equations of a balance, each solution,
+decay and mole formula with its numbers - and `AnswerComposer` shows it numbered in place of the
+short working (`StepsInstead`), or after the answer for a molar mass and a mole conversion.
+`FollowUps` offers "Show the steps" under every calculation that did not just show them, and
+`AsksTheSame` now compares `ShowSteps`, or the chip would be read as a repeat of the answer.
+
+**C# specifics.** `Workings.Number` reproduces Android's `BigDecimal` rounding - four significant
+figures, half up - with `Math.Round(..., MidpointRounding.AwayFromZero)`, so both platforms print the
+same digits.
+
+**The balancer** drops a lower-case word with no digit that shares a token with a formula
+(`EquationBalancer.SideOf`, both platforms): "Fe2O3 aus" had been read as Fe2O3 + Au + S, and
+"balance C3H8" as Ba + La + N + Ce + C3H8. The corpus harness's `ValueOf` reads a balanced equation's
+coefficient sum, and `balance_equations.tsv` is corpus format 2 with it on every row that balances;
+`bal-de-1`, `bal-en-3` and `bal-en-8` failed until the fix. `LexiconTest` counts 85 declarations and
+3,532 entries. 3,647 core tests pass; held-out (458) passes.

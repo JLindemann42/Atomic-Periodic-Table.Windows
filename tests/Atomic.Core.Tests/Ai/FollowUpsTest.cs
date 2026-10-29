@@ -30,7 +30,7 @@ namespace Atomic.Core.Tests.Ai
 
         /// <summary>
         /// Questions every language has a chip for already, so each can be asked in its own words: a
-        /// property lookup, a ranking and a list.
+        /// property lookup, a ranking, a list and a calculation.
         /// </summary>
         private static IEnumerable<string> Seeds(string language)
         {
@@ -40,6 +40,7 @@ namespace Atomic.Core.Tests.Ai
                 strings.Array("ai_suggest_element")[1], gold);
             yield return strings.Array("ai_suggest_general")[3];
             yield return strings.Array("ai_suggest_general")[2];
+            yield return strings.Array("ai_suggest_tools")[0];
         }
 
         [Fact]

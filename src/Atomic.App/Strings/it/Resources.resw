@@ -651,6 +651,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>Quale elemento ha il valore di %1$s più basso?</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Mostra i passaggi</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%1$s di %2$s in %3$s</value>
   </data>
@@ -1348,6 +1351,30 @@ Condividono comportamenti chimici simili grazie ai loro elettroni di valenza!</v
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>Stabile</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Ogni elemento deve avere tanti atomi a sinistra quanti a destra:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>I più piccoli numeri interi che soddisfano ogni riga:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Scrivi un coefficiente incognito davanti a ogni formula:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ è il tempo di dimezzamento, t il tempo trascorso, n il numero di dimezzamenti, N₀ e N le quantità prima e dopo.</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>La massa molare è la somma, per ogni elemento, del numero di atomi per la sua massa atomica:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Passo per passo</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m è la massa, M la massa molare, n la quantità in moli, N il numero di particelle e N_A la costante di Avogadro.</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n è la quantità in moli, c la concentrazione, V il volume, m la massa e M la massa molare.</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Non ho trovato nulla in quel gruppo o periodo. Ricorda: ci sono 18 gruppi e 7 periodi!</value>

@@ -639,6 +639,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>Welches Element hat den niedrigsten Wert für %1$s?</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Zeig die Schritte</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%1$s von %2$s in %3$s</value>
   </data>
@@ -1336,6 +1339,30 @@ Sie teilen ähnliche chemische Verhaltensweisen aufgrund ihrer Valenzelektronen!
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>Stabil</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Jedes Element braucht links so viele Atome wie rechts:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>Die kleinsten ganzen Zahlen, die jede Zeile erfüllen:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Schreibe vor jede Formel einen unbekannten Koeffizienten:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ ist die Halbwertszeit, t die vergangene Zeit, n die Zahl der Halbwertszeiten, N₀ und N die Mengen vorher und nachher.</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>Die molare Masse ist die Summe aus der Atomzahl jedes Elements mal seiner Atommasse:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Schritt für Schritt</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m ist die Masse, M die molare Masse, n die Stoffmenge in Mol, N die Teilchenzahl und N_A die Avogadro-Konstante.</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n ist die Stoffmenge in Mol, c die Konzentration, V das Volumen, m die Masse und M die molare Masse.</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Ich konnte in dieser Gruppe oder Periode nichts finden. Denken Sie daran: es gibt 18 Gruppen und 7 Perioden!</value>

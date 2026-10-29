@@ -651,6 +651,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>Aling elemento ang may pinakamababang %1$s?</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Ipakita ang mga hakbang</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%1$s ng %2$s sa %3$s</value>
   </data>
@@ -1348,6 +1351,30 @@ Nagbabahagi sila ng mga katulad na gawi sa kemikal dahil sa kanilang mga valence
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>Stable</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Kailangan ng bawat elemento ng kasindaming atom sa kaliwa at sa kanan:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>Ang pinakamaliliit na buong bilang na tumutugon sa bawat linya:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Maglagay ng hindi kilalang coefficient sa harap ng bawat formula:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>Ang t½ ay ang half-life, t ang lumipas na oras, n ang bilang ng half-life, at N₀ at N ang dami bago at pagkatapos.</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>Ang molar mass ay ang kabuuan ng bilang ng atom ng bawat elemento na pinarami sa atomic mass nito:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Hakbang-hakbang</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>Ang m ay ang masa, M ang molar mass, n ang dami sa mole, N ang bilang ng particle at N_A ang Avogadro constant.</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>Ang n ay ang dami sa mole, c ang konsentrasyon, V ang volume, m ang masa at M ang molar mass.</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Wala akong nahanap sa grupo o period na iyon. Tandaan: mayroong 18 groups at 7 periods!</value>

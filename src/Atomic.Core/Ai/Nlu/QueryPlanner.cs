@@ -90,7 +90,18 @@ namespace Atomic.Core.Ai.Nlu
             // which the element and field resolvers would otherwise pick apart into unrelated
             // matches. "the molar mass of H2SO4" used to retrieve the dictionary definition of
             // molar mass instead of a number.
-            if (CalculationPlan(rawQuery, normalized) is { } calculation) Propose(Branch.Calculation, calculation);
+            // "Balance Fe + O2 -> Fe2O3 step by step" asks for the steps with the calculation; "show
+            // the steps" after one asks for the steps of the calculation just answered (roadmap 2.2).
+            // Ranked after the calculation, so a new one in the same message is the one that is shown.
+            var asksForSteps = MentionsAny(normalized, Lexicon.STEPS_WORDS);
+            if (CalculationPlan(rawQuery, normalized) is { } calculation)
+                Propose(Branch.Calculation, asksForSteps ? calculation with { ShowSteps = true } : calculation);
+            if (asksForSteps && state.LastPlan is { } calculated && Intents.Calculations.Contains(calculated.Intent))
+                Propose(Branch.ShowSteps, calculated with
+                {
+                    ShowSteps = true,
+                    Evidence = [.. calculated.Evidence, "steps of the previous answer"],
+                });
 
             var operators = OperatorExtractor.Extract(rawQuery);
             var elementMatches = _entities.ResolveAll(rawQuery, limit: 4);

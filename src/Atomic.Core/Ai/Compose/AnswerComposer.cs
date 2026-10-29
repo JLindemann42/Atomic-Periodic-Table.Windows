@@ -36,6 +36,7 @@ namespace Atomic.Core.Ai.Compose
         private readonly LocalizedView? _localized;
         private readonly IStringProvider _strings;
         private readonly ChatCardPolicy _cardPolicy;
+        private readonly Workings _workings;
 
         public AnswerComposer(
             KnowledgeStore store,
@@ -47,6 +48,7 @@ namespace Atomic.Core.Ai.Compose
             _localized = localized;
             _strings = strings;
             _cardPolicy = cardPolicy ?? ChatCardPolicy.Default;
+            _workings = new Workings(strings);
         }
 
         /// <summary>
@@ -69,16 +71,18 @@ namespace Atomic.Core.Ai.Compose
                 ExecutionResult.Comparison r => Comparison(r) + UncoveredAspects(plan),
                 ExecutionResult.ElementList r => ElementList(r, plan),
                 ExecutionResult.Aggregate r => Aggregate(r),
-                ExecutionResult.Formula r => Formula(r),
+                ExecutionResult.Formula r => Formula(r) + Steps(plan, () => _workings.Formula(r.Result)),
                 ExecutionResult.Comparative r => Comparative(r),
                 ExecutionResult.Neighbour r => Neighbour(r),
                 ExecutionResult.Nuclide r => Nuclide(r),
                 ExecutionResult.IsotopeComparison r => IsotopeComparison(r),
-                ExecutionResult.MoleConversion r => MoleConversion(r),
+                ExecutionResult.MoleConversion r => MoleConversion(r) + Steps(plan, () => _workings.Moles(r)),
                 ExecutionResult.UnitConversion r => UnitConversion(r),
-                ExecutionResult.BalancedEquation r => BalancedEquation(r),
-                ExecutionResult.SolutionCalc r => SolutionCalc(r),
-                ExecutionResult.Decay r => Decay(r),
+                ExecutionResult.BalancedEquation r =>
+                    StepsInstead(plan, working => BalancedEquation(r, working), () => _workings.Balance(r)),
+                ExecutionResult.SolutionCalc r =>
+                    StepsInstead(plan, working => SolutionCalc(r, working), () => _workings.Solution(r)),
+                ExecutionResult.Decay r => StepsInstead(plan, working => Decay(r, working), () => _workings.Decay(r)),
                 ExecutionResult.Isotopes r => Isotopes(r),
                 ExecutionResult.Safety r => Safety(r),
                 ExecutionResult.EmissionSpectrum r => EmissionSpectrum(r),
@@ -103,6 +107,26 @@ namespace Atomic.Core.Ai.Compose
                 // Derived from the typed result, never from the query text - so the picture can only
                 // show what the prose above it has already asserted.
                 Card: CardSelector.Select(result, plan, _store, _strings, _localized, _cardPolicy));
+        }
+
+        /// <summary>A calculation's steps as a numbered section, when the plan asks for them (roadmap 2.2).</summary>
+        private string Steps(QueryPlan plan, Func<IReadOnlyList<string>> lines)
+        {
+            if (!plan.ShowSteps) return string.Empty;
+            var steps = lines();
+            if (steps.Count == 0) return string.Empty;
+            return "\n\n### " + _strings.Get(S.ai_steps_header) + "\n" +
+                   string.Join('\n', steps.Select((line, i) => $"{i + 1}. {line}"));
+        }
+
+        /// <summary>
+        /// An answer whose short working the steps replace rather than repeat: <paramref name="render"/>
+        /// is called with whether to include its own working.
+        /// </summary>
+        private string StepsInstead(QueryPlan plan, Func<bool, string> render, Func<IReadOnlyList<string>> lines)
+        {
+            var steps = Steps(plan, lines);
+            return steps.Length == 0 ? render(true) : render(false) + steps;
         }
 
         /// <summary>The "Get PRO" chip shown beside a withheld answer, or null when nothing was withheld.</summary>
@@ -650,7 +674,7 @@ namespace Atomic.Core.Ai.Compose
             return result.Bridged ? body + "\n\n" + _strings.Get(S.ai_unit_bridge_note) : body;
         }
 
-        private string BalancedEquation(ExecutionResult.BalancedEquation result)
+        private string BalancedEquation(ExecutionResult.BalancedEquation result, bool working = true)
         {
             if (result.Reason is { } reason)
             {
@@ -665,6 +689,7 @@ namespace Atomic.Core.Ai.Compose
             var left = string.Join(" + ", result.Reactants.Select(Term));
             var right = string.Join(" + ", result.Products.Select(Term));
             var builder = new StringBuilder(_strings.Get(S.ai_equation_balanced, left, right));
+            if (!working) return builder.ToString();
 
             // The tally is the proof. A balancer that prints only coefficients is asking to be
             // trusted; one that shows both sides' atom counts can be checked in a few seconds.
@@ -693,7 +718,7 @@ namespace Atomic.Core.Ai.Compose
             _ => S.ai_equation_parse_failed,
         };
 
-        private string SolutionCalc(ExecutionResult.SolutionCalc result)
+        private string SolutionCalc(ExecutionResult.SolutionCalc result, bool working = true)
         {
             var substance = result.Substance ?? string.Empty;
 
@@ -710,6 +735,7 @@ namespace Atomic.Core.Ai.Compose
                         _strings.Get(S.ai_dilution_add_solvent, Format(added * 1000)));
                 }
 
+                if (!working) return dilution.ToString();
                 dilution.Append("\n\n### ").Append(_strings.Get(S.ai_solution_working_header));
                 dilution.Append('\n').Append(_strings.Get(
                     S.ai_solution_working_c1v1,
@@ -736,6 +762,7 @@ namespace Atomic.Core.Ai.Compose
             // The working is shown for the same reason the composition breakdown is: a number a
             // reader cannot reproduce is a number they have to take on faith.
             var builder = new StringBuilder(lead);
+            if (!working) return builder.ToString();
             builder.Append("\n\n### ").Append(_strings.Get(S.ai_solution_working_header));
             builder.Append('\n').Append(_strings.Get(
                 S.ai_solution_working_nvc, Format(moles), Format(molarity), Format(litres)));
@@ -748,7 +775,7 @@ namespace Atomic.Core.Ai.Compose
             return builder.ToString();
         }
 
-        private string Decay(ExecutionResult.Decay result)
+        private string Decay(ExecutionResult.Decay result, bool working = true)
         {
             var nuclide = $"{DisplayName(result.Element.Key)}-{result.MassNumber.ToString(CultureInfo.InvariantCulture)}";
 
@@ -805,6 +832,7 @@ namespace Atomic.Core.Ai.Compose
             }
 
             var builder = new StringBuilder(lead);
+            if (!working) return builder.ToString();
             builder.Append("\n\n### ").Append(_strings.Get(S.ai_decay_working_header));
             builder.Append('\n').Append(_strings.Get(
                 S.ai_decay_working_half_life, nuclide, GroupDigits(result.HalfLifeDisplay)));

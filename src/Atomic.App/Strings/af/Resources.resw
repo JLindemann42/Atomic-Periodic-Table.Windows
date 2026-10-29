@@ -651,6 +651,9 @@
   <data name="ai_follow_lowest" xml:space="preserve">
     <value>Watter element het die laagste %1$s?</value>
   </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Wys die stappe</value>
+  </data>
   <data name="ai_follow_unit" xml:space="preserve">
     <value>%1$s van %2$s in %3$s</value>
   </data>
@@ -1348,6 +1351,30 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   </data>
   <data name="ai_stable_label" xml:space="preserve">
     <value>Stabiel</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Elke element het net soveel atome links as regs nodig:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>Die kleinste heelgetalle wat aan elke reël voldoen:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Skryf 'n onbekende koëffisiënt voor elke formule:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ is die halfleeftyd, t die tyd wat verloop het, n die aantal halfleeftye, en N₀ en N die hoeveelhede voor en ná.</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>Die molêre massa is die som van elke element se aantal atome maal sy atoommassa:</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Stap vir stap</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m is die massa, M die molêre massa, n die hoeveelheid in mol, N die aantal deeltjies en N_A Avogadro se konstante.</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n is die hoeveelheid in mol, c die konsentrasie, V die volume, m die massa en M die molêre massa.</value>
   </data>
   <data name="ai_structural_no_results" xml:space="preserve">
     <value>Ek kon niks in daardie groep of periode vind nie. Onthou: daar is 18 groepe en 7 periodes!</value>
