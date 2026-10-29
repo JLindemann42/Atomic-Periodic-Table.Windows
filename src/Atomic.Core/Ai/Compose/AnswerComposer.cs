@@ -89,6 +89,9 @@ namespace Atomic.Core.Ai.Compose
                 ExecutionResult.Dataset r => Dataset(r),
                 ExecutionResult.Trend r => Trend(r),
                 ExecutionResult.Explanation r => Explanation(r),
+                ExecutionResult.GasLaw r => StepsInstead(plan, working => GasLaw(r, working), () => _workings.GasLaw(r)),
+                ExecutionResult.Ph r => StepsInstead(plan, _ => Ph(r), () => _workings.Ph(r)),
+                ExecutionResult.IonConfiguration r => IonConfiguration(r) + Steps(plan, () => _workings.Ion(r)),
                 ExecutionResult.NoData r => NoData(r),
                 ExecutionResult.Locked r => Locked(r),
                 ExecutionResult.Empty => _strings.Get(S.ai_filter_none),
@@ -436,6 +439,55 @@ namespace Atomic.Core.Ai.Compose
             if (result.Missing > 0 && result.FieldId is not null)
             {
                 builder.Append('\n').Append(_strings.Get(S.ai_aggregate_missing_note, result.Missing));
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>PV = nRT solved (roadmap 2.8): the unknown, and the three it came from as the working.</summary>
+        private string GasLaw(ExecutionResult.GasLaw result, bool working = true)
+        {
+            var s = result.Solution;
+            var answer = s.Unknown switch
+            {
+                Data.GasLaw.Unknown.Pressure => $"P = {Format(s.Atm)} atm",
+                Data.GasLaw.Unknown.Volume => $"V = {Format(s.Litres)} L",
+                Data.GasLaw.Unknown.Moles => $"n = {Format(s.Moles)} mol",
+                _ => $"T = {Format(s.Kelvin)} K ({Format(s.Kelvin - 273.15)} °C)",
+            };
+            var builder = new StringBuilder(_strings.Get(S.ai_gas_result, answer));
+            if (working)
+            {
+                var given = new List<string>();
+                if (s.Unknown != Data.GasLaw.Unknown.Pressure) given.Add($"P = {Format(s.Atm)} atm");
+                if (s.Unknown != Data.GasLaw.Unknown.Volume) given.Add($"V = {Format(s.Litres)} L");
+                if (s.Unknown != Data.GasLaw.Unknown.Moles) given.Add($"n = {Format(s.Moles)} mol");
+                if (s.Unknown != Data.GasLaw.Unknown.Temperature) given.Add($"T = {Format(s.Kelvin)} K");
+                builder.Append('\n').Append(string.Join(", ", given));
+            }
+            if (result.Stp) builder.Append('\n').Append(_strings.Get(S.ai_gas_stp));
+            return builder.ToString();
+        }
+
+        /// <summary>A strong acid's or base's pH (roadmap 2.8).</summary>
+        private string Ph(ExecutionResult.Ph result)
+        {
+            var r = result.Result;
+            return r.Base
+                ? _strings.Get(S.ai_ph_base, r.Formula, Format(r.Molarity), Format(r.Hydroxide), Format(r.POH), Format(r.PH))
+                : _strings.Get(S.ai_ph_acid, r.Formula, Format(r.Molarity), Format(r.Hydrogen), Format(r.PH));
+        }
+
+        /// <summary>An ion's configuration beside the neutral atom's, and the rule that got from one to the other (roadmap 2.8).</summary>
+        private string IonConfiguration(ExecutionResult.IonConfiguration result)
+        {
+            var label = Data.IonConfig.IonLabel(result.Element.Symbol, result.Charge);
+            var builder = new StringBuilder(_strings.Get(
+                S.ai_ion_config, label, result.Ion.ToString(), DisplayName(result.Element.Key), result.Neutral.ToString()));
+            builder.Append('\n').Append(_strings.Get(result.Charge > 0 ? S.ai_ion_cation : S.ai_ion_anion));
+            if (result.Ion.IsoelectronicWith is { } noble)
+            {
+                var name = _store.BySymbol(noble) is { } gas ? DisplayName(gas.Key) : noble;
+                builder.Append('\n').Append(_strings.Get(S.ai_ion_isoelectronic, name));
             }
             return builder.ToString();
         }

@@ -1483,6 +1483,31 @@ public static class Lexicon
         "同周期", "周期中", "从左到右",
     ];
 
+    public static readonly IReadOnlyList<string> GAS_LAW_WORDS =
+    [
+        "ideal gas", "gas law", "pv=nrt", "pv = nrt", "gaslagen", "allmanna gaslagen", "idealgas",
+        "ideales gas", "gasgesetz", "gaz parfait", "loi des gaz", "gas ideal", "ley de los gases",
+        "gas ideale", "legge dei gas", "lei dos gases", "ideale gas", "gaswet", "batas ng gas",
+        "आदर्श गैस", "गैस नियम", "مثالی گیس", "گیس کا قانون", "理想气体", "气体定律",
+        // Asking for the pressure frames it as well: "pressure of 2 mol in 10 L at 300 K" gives
+        // no pressure to see. Three gas quantities are still required, so a conversion is not caught.
+        "pressure", "tryck", "trycket", "druck", "pression", "presion", "pressione", "pressao", "druk",
+        "presyon", "दाब", "دباؤ", "压强", "压力",
+    ];
+
+    public static readonly IReadOnlyList<string> STP_WORDS =
+    [
+        "stp", "standard temperature and pressure", "normalforhallanden", "normbedingungen", "cntp", "tpn",
+        "condiciones normales", "condizioni normali", "condicoes normais", "standaardtemperatuur en druk",
+        "मानक ताप और दाब", "معیاری درجہ حرارت اور دباؤ", "标准状况", "标准状态",
+    ];
+
+    public static readonly IReadOnlyList<string> CONFIGURATION_WORDS =
+    [
+        "configuration", "config", "konfiguration", "konfigurasie", "configuracion", "configurazione",
+        "configuracao", "kumpigurasyon", "विन्यास", "ترتیب", "排布", "构型",
+    ];
+
     public static readonly IReadOnlyList<string> HEATMAP_WORDS =
     [
         "heat map", "heatmap", "map of", "across the periodic table", "over the periodic table",

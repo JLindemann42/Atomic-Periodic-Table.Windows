@@ -29,6 +29,9 @@ namespace Atomic.Core.Ai.Data
             ["nm"] = "nm", ["angstrom"] = "Å", ["å"] = "Å", ["a"] = "Å",
             ["ev"] = "eV", ["kj/mol"] = "kJ/mol", ["j/mol"] = "J/mol",
             ["gpa"] = "GPa", ["mpa"] = "MPa", ["pa"] = "Pa", ["kpa"] = "kPa",
+            // The pressures a gas-law question is written in (roadmap 2.8).
+            ["atm"] = "atm", ["atmosphere"] = "atm", ["atmospheres"] = "atm", ["bar"] = "bar",
+            ["mmhg"] = "mmHg", ["torr"] = "Torr",
             ["m/s"] = "m/s", ["km/h"] = "km/h",
             ["nωm"] = "nΩm", ["nohmm"] = "nΩm", ["μωm"] = "µΩm", ["µωm"] = "µΩm", ["ωm"] = "Ωm",
             ["cm3/mol"] = "cm³/mol", ["cm^3/mol"] = "cm³/mol", ["cm³/mol"] = "cm³/mol",
@@ -134,6 +137,10 @@ namespace Atomic.Core.Ai.Data
                 ["kPa"] = (Dimension.Pressure, 1e3),
                 ["MPa"] = (Dimension.Pressure, 1e6),
                 ["GPa"] = (Dimension.Pressure, 1e9),
+                ["atm"] = (Dimension.Pressure, 101_325.0),
+                ["bar"] = (Dimension.Pressure, 1e5),
+                ["mmHg"] = (Dimension.Pressure, 133.322387415),
+                ["Torr"] = (Dimension.Pressure, 101_325.0 / 760.0),
                 // Velocity, base m/s
                 ["m/s"] = (Dimension.Velocity, 1.0),
                 ["km/h"] = (Dimension.Velocity, 1.0 / 3.6),

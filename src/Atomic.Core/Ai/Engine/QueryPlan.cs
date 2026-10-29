@@ -98,6 +98,15 @@ namespace Atomic.Core.Ai.Engine
         /// </summary>
         Explanation,
 
+        /// <summary>PV = nRT given three of the four (roadmap 2.8).</summary>
+        GasLaw,
+
+        /// <summary>The pH of a strong acid or base at a given molarity (roadmap 2.8). <see cref="QueryPlan.Literal"/> is its formula.</summary>
+        PhCalc,
+
+        /// <summary>An ion's electron configuration, Fe³⁺ (roadmap 2.8). <see cref="QueryPlan.Literal"/> is "symbol:charge".</summary>
+        IonConfig,
+
         /// <summary>Nothing recognised. The caller should fall back.</summary>
         Unknown,
     }
@@ -109,6 +118,7 @@ namespace Atomic.Core.Ai.Engine
         public static readonly IReadOnlySet<Intent> Calculations = new HashSet<Intent>
         {
             Intent.FormulaMass, Intent.MoleConversion, Intent.BalanceEquation, Intent.SolutionCalc, Intent.DecayCalc,
+            Intent.GasLaw, Intent.PhCalc, Intent.IonConfig,
         };
     }
 

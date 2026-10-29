@@ -726,6 +726,12 @@
   <data name="ai_free_user" xml:space="preserve">
     <value>免费</value>
   </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>根据理想气体定律 PV = nRT：**%1$s**。</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>标准状况取1 atm和273.15 K。</value>
+  </data>
   <data name="ai_geo_color" xml:space="preserve">
     <value>%1$s：%2$s %3$s，%4$s %5$s。</value>
   </data>
@@ -785,8 +791,20 @@
   <data name="ai_identity_result" xml:space="preserve">
     <value>根据应用程序中的数值，其属性接近 **%1$s** 的元素是 **%2$s**（实际：%3$s）。</value>
   </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>阴离子把多出的电子按填充顺序放入接下来的位置。</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>阳离子先失去最外层电子：最高的电子层，以及其中最高的亚层。</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>**%1$s**的电子排布是**%2$s**。中性%3$s是%4$s。</value>
+  </data>
   <data name="ai_ion_count" xml:space="preserve">
     <value>%1$s 在应用程序中有 %2$d 个电离能值可用。</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>这与%1$s的电子排布相同。</value>
   </data>
   <data name="ai_isotope_compare_header" xml:space="preserve">
     <value>%1$s 对比 %2$s</value>
@@ -1038,6 +1056,12 @@
   </data>
   <data name="ai_personalized_greeting_interest" xml:space="preserve">
     <value>欢迎回来！准备好探索更多关于 %1$s 的信息了吗？我们可以再次查看 %2$s。</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>%1$s是强酸，所以%2$s M溶液的[H⁺] = %3$s M，pH为**%4$s**。</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>%1$s是强碱，所以%2$s M溶液的[OH⁻] = %3$s M，pOH为%4$s，pH为**%5$s**。</value>
   </data>
   <data name="ai_ph_info" xml:space="preserve">
     <value>%1$s：pH 低于 %2$s 时为酸性 %3$s，中性范围 %4$s 为 %5$s，pH 高于 %6$s 时为 %7$s。</value>
@@ -1412,11 +1436,20 @@
   <data name="ai_steps_formula" xml:space="preserve">
     <value>摩尔质量是每种元素的原子数乘以其原子量之和：</value>
   </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>将PV = nRT对未知量变形，R = 0.08206 L·atm/(mol·K)：</value>
+  </data>
   <data name="ai_steps_header" xml:space="preserve">
     <value>逐步计算</value>
   </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>从中性原子出发，失去或得到电子：</value>
+  </data>
   <data name="ai_steps_moles_legend" xml:space="preserve">
     <value>m 是质量，M 是摩尔质量，n 是物质的量（摩尔），N 是粒子数，N_A 是阿伏加德罗常数。</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>强酸或强碱完全电离，所以浓度直接给出离子浓度：</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n 是物质的量（摩尔），c 是浓度，V 是体积，m 是质量，M 是摩尔质量。</value>

@@ -285,6 +285,7 @@ namespace Atomic.Core.Ai.Engine
             ExecutionResult.NoData r => r.Element is null ? [] : [r.Element.Key],
             ExecutionResult.Locked r => r.Element is null ? [] : [r.Element.Key],
             ExecutionResult.Decay r => [r.Element.Key],
+            ExecutionResult.IonConfiguration r => [r.Element.Key],
             _ => [],
         };
     }

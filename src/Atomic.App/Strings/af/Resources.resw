@@ -726,6 +726,12 @@
   <data name="ai_free_user" xml:space="preserve">
     <value>Gratis</value>
   </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>Volgens die ideale gaswet, PV = nRT: **%1$s**.</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>STD word as 1 atm en 273,15 K geneem.</value>
+  </data>
   <data name="ai_geo_color" xml:space="preserve">
     <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
   </data>
@@ -785,8 +791,20 @@ Vra net en ek sal die antwoord in die toepassing se rekords vind! 🌟</value>
   <data name="ai_identity_result" xml:space="preserve">
     <value>Gebaseer op die waardes in die toepassing, is die element met 'n waarde naby aan **%1$s** vir sy eienskappe **%2$s** (werklik: %3$s).</value>
   </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>'n Anioon neem sy ekstra elektrone op die volgende plekke in die vulvolgorde op.</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>'n Katioon verloor eers sy buitenste elektrone: die hoogste skil, en daarin die hoogste subskil.</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>Die elektronkonfigurasie van **%1$s** is **%2$s**. Neutrale %3$s is %4$s.</value>
+  </data>
   <data name="ai_ion_count" xml:space="preserve">
     <value>%1$s het %2$d ionisasie-energiewaarde(s) beskikbaar in die toepassing.</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>Dit is dieselfde konfigurasie as %1$s.</value>
   </data>
   <data name="ai_isotope_compare_header" xml:space="preserve">
     <value>%1$s teenoor %2$s</value>
@@ -1038,6 +1056,12 @@ Vra net en ek sal die antwoord in die toepassing se rekords vind! 🌟</value>
   </data>
   <data name="ai_personalized_greeting_interest" xml:space="preserve">
     <value>Welkom terug! Gereed om meer oor %1$s te verken? Ons kan weer na %2$s kyk.</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>%1$s is 'n sterk suur, so 'n %2$s M oplossing het [H⁺] = %3$s M en 'n pH van **%4$s**.</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>%1$s is 'n sterk basis, so 'n %2$s M oplossing het [OH⁻] = %3$s M, 'n pOH van %4$s en 'n pH van **%5$s**.</value>
   </data>
   <data name="ai_ph_info" xml:space="preserve">
     <value>%1$s: suur onder pH %2$s is %3$s, neutrale reeks %4$s is %5$s, en bo pH %6$s is dit %7$s.</value>
@@ -1412,11 +1436,20 @@ Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value
   <data name="ai_steps_formula" xml:space="preserve">
     <value>Die molêre massa is die som van elke element se aantal atome maal sy atoommassa:</value>
   </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>Herrangskik PV = nRT vir die onbekende, met R = 0,08206 L·atm/(mol·K):</value>
+  </data>
   <data name="ai_steps_header" xml:space="preserve">
     <value>Stap vir stap</value>
   </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>Begin by die neutrale atoom en verwyder of voeg elektrone by:</value>
+  </data>
   <data name="ai_steps_moles_legend" xml:space="preserve">
     <value>m is die massa, M die molêre massa, n die hoeveelheid in mol, N die aantal deeltjies en N_A Avogadro se konstante.</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>'n Sterk suur of basis dissosieer heeltemal, so die konsentrasie gee die ioon direk:</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n is die hoeveelheid in mol, c die konsentrasie, V die volume, m die massa en M die molêre massa.</value>

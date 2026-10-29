@@ -28,6 +28,62 @@ namespace Atomic.Core.Ai.Compose
 
         public Workings(IStringProvider strings) => _strings = strings;
 
+        /// <summary>PV = nRT rearranged for the unknown, with n = m ÷ M first when a mass was given (roadmap 2.8).</summary>
+        public IReadOnlyList<string> GasLaw(ExecutionResult.GasLaw result)
+        {
+            var s = result.Solution;
+            var r = $"{Number(Data.GasLaw.R)} L·atm/(mol·K)";
+            var steps = new List<string> { _strings.Get(S.ai_steps_gas) };
+            if (result.Grams is { } grams && result.MolarMass is { } molarMass && result.Substance is not null)
+                steps.Add($"n = m ÷ M = {Number(grams)} g ÷ {Number(molarMass)} g/mol = {Number(s.Moles)} mol");
+            var p = $"{Number(s.Atm)} atm";
+            var v = $"{Number(s.Litres)} L";
+            var n = $"{Number(s.Moles)} mol";
+            var t = $"{Number(s.Kelvin)} K";
+            steps.Add(s.Unknown switch
+            {
+                Data.GasLaw.Unknown.Pressure => $"P = nRT ÷ V = {n} × {r} × {t} ÷ {v} = {p}",
+                Data.GasLaw.Unknown.Volume => $"V = nRT ÷ P = {n} × {r} × {t} ÷ {p} = {v}",
+                Data.GasLaw.Unknown.Moles => $"n = PV ÷ RT = {p} × {v} ÷ ({r} × {t}) = {n}",
+                _ => $"T = PV ÷ nR = {p} × {v} ÷ ({n} × {r}) = {t}",
+            });
+            return steps;
+        }
+
+        /// <summary>Full dissociation, then the negative logarithm (roadmap 2.8).</summary>
+        public IReadOnlyList<string> Ph(ExecutionResult.Ph result)
+        {
+            var r = result.Result;
+            var supplied = $"{r.Factor} × {Number(r.Molarity)} M = {Number(r.Molarity * r.Factor)} M";
+            return r.Base
+                ?
+                [
+                    _strings.Get(S.ai_steps_ph),
+                    $"[OH⁻] = {supplied}",
+                    $"pOH = −log₁₀({Number(r.Hydroxide)}) = {Number(r.POH)}",
+                    $"pH = 14 − pOH = {Number(r.PH)}",
+                ]
+                :
+                [
+                    _strings.Get(S.ai_steps_ph),
+                    $"[H⁺] = {supplied}",
+                    $"pH = −log₁₀({Number(r.Hydrogen)}) = {Number(r.PH)}",
+                ];
+        }
+
+        /// <summary>From the neutral atom to the ion, electron by electron (roadmap 2.8).</summary>
+        public IReadOnlyList<string> Ion(ExecutionResult.IonConfiguration result)
+        {
+            var label = Data.IonConfig.IonLabel(result.Element.Symbol, result.Charge);
+            var change = result.Charge > 0 ? $"−{result.Charge} e⁻" : $"+{-result.Charge} e⁻";
+            return
+            [
+                _strings.Get(S.ai_steps_ion),
+                $"{result.Element.Symbol}: {result.Neutral}",
+                $"{label}: {change} → {result.Ion}",
+            ];
+        }
+
         /// <summary>M = Σ count × atomic mass.</summary>
         public IReadOnlyList<string> Formula(FormulaResult result)
         {

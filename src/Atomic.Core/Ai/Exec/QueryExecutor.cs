@@ -136,6 +136,16 @@ namespace Atomic.Core.Ai.Exec
                 // data would be a new paywall rather than a mirror of an existing one.
                 Intent.DecayCalc => Decay(plan),
 
+                // PRO+, as the other calculators are (roadmap 2.8).
+                Intent.GasLaw or Intent.PhCalc or Intent.IonConfig => !_entitlements.Allows(Tier.ProPlus)
+                    ? new ExecutionResult.Locked(Tier.ProPlus, [], null)
+                    : plan.Intent switch
+                    {
+                        Intent.GasLaw => GasLaw(plan),
+                        Intent.PhCalc => Ph(plan),
+                        _ => IonConfig(plan),
+                    },
+
                 Intent.Comparison => Comparison(plan),
                 Intent.Superlative or Intent.FilterList => ElementList(plan),
                 Intent.Aggregate => Aggregate(plan),
@@ -1086,6 +1096,65 @@ namespace Atomic.Core.Ai.Exec
                 Source: DisplayName(element),
                 DeepLink: spec?.DeepLink ?? DeepLinkTarget.ElementInfo,
                 Args: new Dictionary<string, string>(StringComparer.Ordinal) { ["key"] = element.Key });
+        }
+
+        /// <summary>
+        /// PV = nRT (roadmap 2.8). A mass with a compound counts as an amount; "at STP" fills in 1 atm
+        /// and 273.15 K where the question gives no pressure or temperature.
+        /// </summary>
+        private ExecutionResult? GasLaw(QueryPlan plan)
+        {
+            var raw = plan.RawQuery;
+            double? First(Dimension dimension, string unit) =>
+                QuantityScanner.Of(raw, dimension).Select(q => q.InUnit(unit)).OfType<double>().Cast<double?>().FirstOrDefault();
+            var atm = First(Dimension.Pressure, "atm");
+            var litres = First(Dimension.Volume, "L");
+            var kelvin = First(Dimension.Temperature, "K");
+            var amount = First(Dimension.Amount, "mol");
+            var gramsMatch = Grams.Match(raw.ToLowerInvariant());
+            double? grams = gramsMatch.Success && TryNumber(gramsMatch.Groups[1].Value, out var g) ? g : null;
+            var formula = plan.Literal is { } f ? ChemistryMath.ParseFormula(f, AtomicMass) : null;
+            var moles = amount ?? (grams is { } mass && formula is not null ? mass / formula.MolarMass : null);
+            var stp = plan.Evidence?.Contains("stp") == true;
+            var solution = Data.GasLaw.Solve(
+                atm ?? (stp ? Data.GasLaw.StpAtm : null),
+                litres,
+                moles,
+                kelvin ?? (stp ? Data.GasLaw.StpKelvin : null));
+            if (solution is null) return null;
+            IReadOnlyList<Citation> citations = formula is null
+                ? []
+                : formula.Parts.Select(part => _store.BySymbol(part.Symbol)).OfType<ElementRecord>()
+                    .Select(e => CitationFor("atomic_mass", e)).Take(3).ToList();
+            return new ExecutionResult.GasLaw(
+                solution, formula?.Formula, amount is null && formula is not null ? grams : null, formula?.MolarMass,
+                Stp: stp && (atm is null || kelvin is null), Citations: citations);
+        }
+
+        /// <summary>The pH of a strong acid or base (roadmap 2.8). The planner claims only strong ones.</summary>
+        private ExecutionResult? Ph(QueryPlan plan)
+        {
+            if (plan.Literal is not { } formula) return null;
+            var molarity = QuantityScanner.Of(plan.RawQuery, Dimension.Molarity).Select(q => q.InUnit("M")).OfType<double>().Cast<double?>().FirstOrDefault();
+            if (molarity is null) return null;
+            if (AcidBase.Strong(formula, Composition) is not { } strong) return null;
+            return AcidBase.Solve(strong.Formula, strong.Base, molarity.Value) is { } result ? new ExecutionResult.Ph(result) : null;
+        }
+
+        private IReadOnlyDictionary<string, int>? Composition(string formula) =>
+            ChemistryMath.ParseFormula(formula, AtomicMass)?.Parts.ToDictionary(p => p.Symbol, p => p.Count);
+
+        /// <summary>An ion's electron configuration (roadmap 2.8); the literal is "symbol:charge".</summary>
+        private ExecutionResult? IonConfig(QueryPlan plan)
+        {
+            var parts = plan.Literal?.Split(':');
+            if (parts is not { Length: 2 }) return null;
+            if (!int.TryParse(parts[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out var charge) || charge == 0) return null;
+            if (_store.BySymbol(parts[0]) is not { } element) return null;
+            if (element.Value("electron_configuration") is not FieldValue.Text outer) return null;
+            if (Data.IonConfig.Ion(element.AtomicNumber, outer.Raw, 0) is not { } neutral) return null;
+            if (Data.IonConfig.Ion(element.AtomicNumber, outer.Raw, charge) is not { } ion) return null;
+            return new ExecutionResult.IonConfiguration(element, charge, neutral, ion, [CitationFor("electron_configuration", element)]);
         }
 
         private static IReadOnlyList<string> DescribeFilters(QueryPlan plan) =>

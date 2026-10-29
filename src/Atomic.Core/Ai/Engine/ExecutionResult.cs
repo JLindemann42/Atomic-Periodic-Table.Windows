@@ -339,6 +339,37 @@ namespace Atomic.Core.Ai.Engine
             public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
         }
 
+        /// <summary>The ideal gas law solved for its unknown (roadmap 2.8).</summary>
+        /// <param name="Grams">With <paramref name="Substance"/>, when the amount was given as a mass, so the working can show n = m ÷ M.</param>
+        /// <param name="Stp">Whether standard temperature and pressure filled in what the question left out.</param>
+        public sealed record GasLaw(
+            Data.GasLaw.Solution Solution,
+            string? Substance,
+            double? Grams,
+            double? MolarMass,
+            bool Stp,
+            IReadOnlyList<Citation> Citations) : ExecutionResult
+        {
+            public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
+        }
+
+        /// <summary>The pH of a strong acid or base (roadmap 2.8).</summary>
+        public sealed record Ph(Data.AcidBase.Result Result, IReadOnlyList<Citation>? Citations = null) : ExecutionResult
+        {
+            public override IReadOnlyList<Citation> Citations { get; init; } = Citations ?? [];
+        }
+
+        /// <summary>An ion's electron configuration, beside the neutral atom's (roadmap 2.8).</summary>
+        public sealed record IonConfiguration(
+            ElementRecord Element,
+            int Charge,
+            Data.IonConfig.Configuration Neutral,
+            Data.IonConfig.Configuration Ion,
+            IReadOnlyList<Citation> Citations) : ExecutionResult
+        {
+            public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
+        }
+
         /// <summary>
         /// A reviewed explanation (roadmap 2.4), with the data it explains: a trend over a set or the
         /// whole table, or one element's ionization series.

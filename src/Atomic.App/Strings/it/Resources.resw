@@ -726,6 +726,12 @@
   <data name="ai_free_user" xml:space="preserve">
     <value>Gratis</value>
   </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>Secondo la legge dei gas ideali, PV = nRT: **%1$s**.</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>Le condizioni normali sono prese come 1 atm e 273,15 K.</value>
+  </data>
   <data name="ai_geo_color" xml:space="preserve">
     <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
   </data>
@@ -785,8 +791,20 @@ Chiedi pure e troverò la risposta nei registri dell'app! 🌟</value>
   <data name="ai_identity_result" xml:space="preserve">
     <value>In base ai valori nell'app, l'elemento con un valore vicino a **%1$s** per le sue proprietà è **%2$s** (reale: %3$s).</value>
   </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>Un anione mette gli elettroni in più nei posti successivi dell'ordine di riempimento.</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>Un catione perde prima gli elettroni più esterni: il guscio più alto, e al suo interno il sottolivello più alto.</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>La configurazione elettronica di **%1$s** è **%2$s**. Il %3$s neutro è %4$s.</value>
+  </data>
   <data name="ai_ion_count" xml:space="preserve">
     <value>%1$s ha %2$d valore/i di energia di ionizzazione disponibili nell'app.</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>È la stessa configurazione del %1$s.</value>
   </data>
   <data name="ai_isotope_compare_header" xml:space="preserve">
     <value>%1$s contro %2$s</value>
@@ -1038,6 +1056,12 @@ Chiedi pure e troverò la risposta nei registri dell'app! 🌟</value>
   </data>
   <data name="ai_personalized_greeting_interest" xml:space="preserve">
     <value>Bentornato! Pronto a scoprire di più su %1$s? Potremmo riguardare %2$s.</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>%1$s è un acido forte, quindi una soluzione %2$s M ha [H⁺] = %3$s M e un pH di **%4$s**.</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>%1$s è una base forte, quindi una soluzione %2$s M ha [OH⁻] = %3$s M, un pOH di %4$s e un pH di **%5$s**.</value>
   </data>
   <data name="ai_ph_info" xml:space="preserve">
     <value>%1$s: acido sotto pH %2$s è %3$s, intervallo neutro %4$s è %5$s, e sopra pH %6$s è %7$s.</value>
@@ -1412,11 +1436,20 @@ Condividono comportamenti chimici simili grazie ai loro elettroni di valenza!</v
   <data name="ai_steps_formula" xml:space="preserve">
     <value>La massa molare è la somma, per ogni elemento, del numero di atomi per la sua massa atomica:</value>
   </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>Ricava l'incognita da PV = nRT, con R = 0,08206 L·atm/(mol·K):</value>
+  </data>
   <data name="ai_steps_header" xml:space="preserve">
     <value>Passo per passo</value>
   </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>Parti dall'atomo neutro e togli o aggiungi elettroni:</value>
+  </data>
   <data name="ai_steps_moles_legend" xml:space="preserve">
     <value>m è la massa, M la massa molare, n la quantità in moli, N il numero di particelle e N_A la costante di Avogadro.</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>Un acido o una base forte si dissocia completamente, quindi la concentrazione dà direttamente lo ione:</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n è la quantità in moli, c la concentrazione, V il volume, m la massa e M la massa molare.</value>

@@ -714,6 +714,12 @@
   <data name="ai_free_user" xml:space="preserve">
     <value>Gratis</value>
   </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>Enligt allmänna gaslagen, PV = nRT: **%1$s**.</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>STP räknas som 1 atm och 273,15 K.</value>
+  </data>
   <data name="ai_geo_color" xml:space="preserve">
     <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
   </data>
@@ -773,8 +779,20 @@ Fråga bara så hittar jag svaret i appens register! 🌟</value>
   <data name="ai_identity_result" xml:space="preserve">
     <value>Utifrån värdena i appen är grundämnet med ett värde nära **%1$s** för sina egenskaper **%2$s** (faktiskt: %3$s).</value>
   </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>En anjon tar upp sina extra elektroner på nästa platser i fyllnadsordningen.</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>En katjon förlorar sina yttersta elektroner först: det högsta skalet, och inom det det högsta underskalet.</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>Elektronkonfigurationen för **%1$s** är **%2$s**. Neutralt %3$s är %4$s.</value>
+  </data>
   <data name="ai_ion_count" xml:space="preserve">
     <value>%1$s har %2$d joniseringsenergivärde(n) tillgängliga i appen.</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>Det är samma konfiguration som %1$s.</value>
   </data>
   <data name="ai_isotope_compare_header" xml:space="preserve">
     <value>%1$s mot %2$s</value>
@@ -1026,6 +1044,12 @@ Fråga bara så hittar jag svaret i appens register! 🌟</value>
   </data>
   <data name="ai_personalized_greeting_interest" xml:space="preserve">
     <value>Välkommen tillbaka! Redo att utforska mer om %1$s? Vi kan titta på %2$s igen.</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>%1$s är en stark syra, så en %2$s M lösning har [H⁺] = %3$s M och pH **%4$s**.</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>%1$s är en stark bas, så en %2$s M lösning har [OH⁻] = %3$s M, pOH %4$s och pH **%5$s**.</value>
   </data>
   <data name="ai_ph_info" xml:space="preserve">
     <value>%1$s: syra under pH %2$s är %3$s, neutralt intervall %4$s är %5$s, och över pH %6$s är det %7$s.</value>
@@ -1400,11 +1424,20 @@ De delar liknande kemiska beteenden tack vare sina valenselektroner!</value>
   <data name="ai_steps_formula" xml:space="preserve">
     <value>Molmassan är summan av varje grundämnes antal atomer gånger dess atommassa:</value>
   </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>Lös ut det okända ur PV = nRT, med R = 0,08206 L·atm/(mol·K):</value>
+  </data>
   <data name="ai_steps_header" xml:space="preserve">
     <value>Steg för steg</value>
   </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>Utgå från den neutrala atomen och ta bort eller lägg till elektroner:</value>
+  </data>
   <data name="ai_steps_moles_legend" xml:space="preserve">
     <value>m är massan, M molmassan, n substansmängden i mol, N antalet partiklar och N_A Avogadros konstant.</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>En stark syra eller bas dissocierar helt, så koncentrationen ger jonen direkt:</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n är substansmängden i mol, c koncentrationen, V volymen, m massan och M molmassan.</value>

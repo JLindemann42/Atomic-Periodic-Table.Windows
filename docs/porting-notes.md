@@ -1783,3 +1783,33 @@ The `ai_fact_data_*` templates in all twelve languages come through `strings_xml
 German, Hindi and Urdu ones avoid gender agreement with the field name ("den höchsten Wert für
 Schmelzpunkt"). `DataFactsTest` mirrors Android's. 3,804 core tests pass; held-out (451) passes; the
 app builds.
+
+### D79 — more calculators, stage 1 (roadmap 2.8, PRO+)
+
+Ported from Android in the same change. `Ai/Data/CalculatorMath.cs` holds the three classes Android
+keeps in separate files: `GasLaw` (PV = nRT for whichever of the four is missing), `AcidBase` (the pH
+of a strong acid or base, with water's own ions counted) and `IonConfig` (an ion's configuration
+from the element's own). The intents are `GasLaw`, `PhCalc` and `IonConfig`, all in
+`Intents.Calculations` and all gated at PRO+ like the 2.2 calculators. `UnitConverter` gains atm,
+bar, mmHg and Torr.
+
+Two naming clashes:
+- **`from`.** Inside a LINQ-capable method, `var from = ...` parses as the start of a query
+  expression, so the cation loop's local is `outermost`.
+- **Method names.** The executor's `GasLaw` and `IonConfig` methods and the composer's `GasLaw`
+  share their names with the data classes, so the classes are written `Data.GasLaw` and
+  `Data.IonConfig` there.
+
+The planner order matches Android:
+- `IonConfigPlan` comes first in `CalculationPlan`, so "Fe3+" is not read as iron.
+- `PhPlan` and `GasLawPlan` come before `SolutionPlan`, so a molarity or a volume and amount is not
+  taken for a concentration question.
+
+`GAS_LAW_WORDS`, `STP_WORDS` and `CONFIGURATION_WORDS` come through `kt2cs_lexicon.py`. Lexicon.kt
+now has 92 declarations and 3,802 entries; `LexiconTest` counts 3,783 here, the same nineteen
+duplicate keys apart. `QueryExecutorTest.EveryIntentIsHandled` names the three new intents among
+those a synthetic plan cannot answer; the calculators corpus supplies real ones. The eleven
+`ai_gas_*`, `ai_ph_*`, `ai_ion_*` and `ai_steps_*` strings come through `strings_xml_to_resw.py`.
+
+`corpus/calculators.tsv` (21 rows) runs as `CorpusTest.Calculators_Pass`. `CalculatorMathTest`
+mirrors Android's. 3,830 core tests pass; held-out (452) passes; the app builds.

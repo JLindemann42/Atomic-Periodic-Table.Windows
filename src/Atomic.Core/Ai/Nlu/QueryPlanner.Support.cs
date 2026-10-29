@@ -79,6 +79,11 @@ namespace Atomic.Core.Ai.Nlu
         /// </remarks>
         internal QueryPlan? CalculationPlan(string rawQuery, string normalized)
         {
+            // --- An ion's configuration (roadmap 2.8) -----------------------------------------
+            // Before everything else: "Fe3+" would otherwise be read as iron, and the answer would
+            // be the neutral atom's configuration, which is exactly the wrong one.
+            if (IonConfigPlan(rawQuery, normalized) is { } ion) return ion;
+
             // --- Balance an equation --------------------------------------------------------
             // First, and on the raw query. The arrow is the most specific syntax any of these
             // questions carry, and `normalized` is lowercased, which destroys every formula in the
@@ -107,6 +112,12 @@ namespace Atomic.Core.Ai.Nlu
                         Evidence: [evidence]);
                 }
             }
+
+            // --- pH and the gas law (roadmap 2.8) -----------------------------------------------
+            // Above the solution branch: a pH question carries a molarity, and a gas-law one a
+            // volume and an amount, which the solution branch would read as a concentration question.
+            if (PhPlan(rawQuery, normalized) is { } ph) return ph;
+            if (GasLawPlan(rawQuery, normalized) is { } gas) return gas;
 
             // --- Solutions: molarity, mass-moles-concentration, dilution ---------------------
             // Above the mole branch, because MoleQuantity matches the "0.5 mol" inside "0.5 mol/L"
@@ -316,6 +327,89 @@ namespace Atomic.Core.Ai.Nlu
                        !Lexicon.SCRIPT_UNIT_WORDS.ContainsKey(cleaned);
             }));
         }
+
+        /// <summary>
+        /// "pH of 0.01 M HCl", "the pH of 0.05 M sodium hydroxide" (roadmap 2.8). Only for a strong
+        /// acid or base: a weak one needs a Ka the app does not have, and is left for the decline.
+        /// </summary>
+        internal QueryPlan? PhPlan(string rawQuery, string normalized)
+        {
+            if (!TextMatching.ContainsWord(normalized, "ph")) return null;
+            if (QuantityScanner.Of(rawQuery, Dimension.Molarity).Count == 0) return null;
+            if (CompoundIn(rawQuery, normalized) is not { } formula) return null;
+            IReadOnlyDictionary<string, int>? Composition(string f) =>
+                ChemistryMath.ParseFormula(f, AtomicMassOf)?.Parts.ToDictionary(p => p.Symbol, p => p.Count);
+            if (AcidBase.Strong(formula, Composition) is null) return null;
+            return new QueryPlan(Intent.PhCalc, RawQuery: rawQuery, Literal: formula, Confidence: 0.9, Evidence: ["ph"]);
+        }
+
+        /// <summary>
+        /// "Volume of 2 mol of gas at 300 K and 1.5 atm", "moles in 10 L at STP" (roadmap 2.8). Three
+        /// of pressure, volume, amount and temperature, counting STP as two; a gas-law word or a
+        /// pressure says it is a gas question rather than a solution one.
+        /// </summary>
+        internal QueryPlan? GasLawPlan(string rawQuery, string normalized)
+        {
+            var pressures = QuantityScanner.Of(rawQuery, Dimension.Pressure).Count;
+            var volumes = QuantityScanner.Of(rawQuery, Dimension.Volume).Count;
+            var amounts = QuantityScanner.Of(rawQuery, Dimension.Amount).Count;
+            var temperatures = QuantityScanner.Of(rawQuery, Dimension.Temperature).Count;
+            var grams = Grams.IsMatch(normalized) ? 1 : 0;
+            var stp = MentionsAny(normalized, Lexicon.STP_WORDS);
+            var framed = MentionsAny(normalized, Lexicon.GAS_LAW_WORDS);
+            var known = Math.Min(pressures, 1) + Math.Min(volumes, 1) + Math.Min(amounts + grams, 1) + Math.Min(temperatures, 1) +
+                (stp ? 2 : 0);
+            if (known < 3) return null;
+            if (!framed && !stp && pressures == 0) return null;
+            return new QueryPlan(
+                Intent.GasLaw,
+                RawQuery: rawQuery,
+                Literal: grams > 0 ? CompoundIn(rawQuery, normalized) : null,
+                Confidence: 0.9,
+                Evidence: stp ? ["gas law", "stp"] : ["gas law"]);
+        }
+
+        /// <summary>
+        /// "Electron configuration of Fe3+", "Cl⁻ configuration" (roadmap 2.8): an ion, written with
+        /// its charge, beside a configuration word.
+        /// </summary>
+        internal QueryPlan? IonConfigPlan(string rawQuery, string normalized)
+        {
+            var asksConfiguration = _fields.ResolveAll(rawQuery, limit: 3).Any(m => m.Spec.Id == "electron_configuration") ||
+                MentionsAny(normalized, Lexicon.CONFIGURATION_WORDS);
+            if (!asksConfiguration) return null;
+            if (IonIn(rawQuery) is not { } ion) return null;
+            if (_store.BySymbol(ion.Symbol) is null) return null;
+            return new QueryPlan(Intent.IonConfig, RawQuery: rawQuery, Literal: $"{ion.Symbol}:{ion.Charge}", Confidence: 0.92, Evidence: ["ion"]);
+        }
+
+        /// <summary>The first ion written in <paramref name="rawQuery"/>: Fe3+, Fe 3+, Fe+3, Fe^3+, Fe³⁺, Cl-, Cl⁻, O2-.</summary>
+        private static (string Symbol, int Charge)? IonIn(string rawQuery)
+        {
+            var after = IonChargeAfter.Match(rawQuery);
+            if (after.Success)
+            {
+                var digits = string.Concat(after.Groups[2].Value.Select(c => SuperscriptDigits.IndexOf(c, StringComparison.Ordinal) is var i and >= 0 ? (char)('0' + i) : c));
+                var size = int.TryParse(digits, NumberStyles.Integer, CultureInfo.InvariantCulture, out var n) ? n : 1;
+                var sign = after.Groups[3].Value is "+" or "⁺" ? 1 : -1;
+                return (after.Groups[1].Value, sign * size);
+            }
+            var first = IonSignFirst.Match(rawQuery);
+            if (first.Success)
+            {
+                var sign = first.Groups[2].Value == "+" ? 1 : -1;
+                return (first.Groups[1].Value, sign * int.Parse(first.Groups[3].Value, CultureInfo.InvariantCulture));
+            }
+            return null;
+        }
+
+        private const string SuperscriptDigits = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+
+        private static readonly Regex IonChargeAfter =
+            JavaRegex.Compile(@"(?<![A-Za-z])([A-Z][a-z]?)\s?\^?([1-7]|[¹²³⁴⁵⁶⁷])?\s?([+⁺]|[-−⁻])(?![A-Za-z0-9>])");
+
+        private static readonly Regex IonSignFirst =
+            JavaRegex.Compile(@"(?<![A-Za-z])([A-Z][a-z]?)([+\-−])([1-7])(?![A-Za-z0-9])");
 
         /// <summary>
         /// A solution-chemistry question: molarity, a mass from a concentration, or a dilution.

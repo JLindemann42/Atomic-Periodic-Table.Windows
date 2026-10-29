@@ -726,6 +726,12 @@
   <data name="ai_free_user" xml:space="preserve">
     <value>Libre</value>
   </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>Ayon sa batas ng ideal na gas, PV = nRT: **%1$s**.</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>Ang STP ay itinuturing na 1 atm at 273.15 K.</value>
+  </data>
   <data name="ai_geo_color" xml:space="preserve">
     <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
   </data>
@@ -785,8 +791,20 @@ Magtanong lang at hahanapin ko ang sagot sa mga record ng app! 🌟</value>
   <data name="ai_identity_result" xml:space="preserve">
     <value>Batay sa mga value sa app, ang elemento na may value na malapit sa **%1$s** para sa mga katangian nito ay **%2$s** (aktwal: %3$s).</value>
   </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>Inilalagay ng isang anion ang dagdag nitong electron sa mga susunod na puwesto sa pagkakasunod ng pagpuno.</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>Unang nawawala sa isang cation ang pinakalabas nitong electron: ang pinakamataas na shell, at sa loob nito ang pinakamataas na subshell.</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>Ang electron configuration ng **%1$s** ay **%2$s**. Ang neutral na %3$s ay %4$s.</value>
+  </data>
   <data name="ai_ion_count" xml:space="preserve">
     <value>Ang %1$s ay may %2$d na (mga) value ng ionization energy na available sa app.</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>Iyan ang parehong configuration ng %1$s.</value>
   </data>
   <data name="ai_isotope_compare_header" xml:space="preserve">
     <value>%1$s laban sa %2$s</value>
@@ -1038,6 +1056,12 @@ Magtanong lang at hahanapin ko ang sagot sa mga record ng app! 🌟</value>
   </data>
   <data name="ai_personalized_greeting_interest" xml:space="preserve">
     <value>Maligayang pagbabalik! Handa nang galugarin ang higit pa tungkol sa %1$s? Maaari nating tingnan muli ang %2$s.</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>Ang %1$s ay malakas na asido, kaya ang %2$s M na solusyon ay may [H⁺] = %3$s M at pH na **%4$s**.</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>Ang %1$s ay malakas na base, kaya ang %2$s M na solusyon ay may [OH⁻] = %3$s M, pOH na %4$s at pH na **%5$s**.</value>
   </data>
   <data name="ai_ph_info" xml:space="preserve">
     <value>%1$s: ang acid sa ibaba ng pH %2$s ay %3$s, ang neutral range na %4$s ay %5$s, at sa itaas ng pH %6$s ito ay %7$s.</value>
@@ -1412,11 +1436,20 @@ Nagbabahagi sila ng mga katulad na gawi sa kemikal dahil sa kanilang mga valence
   <data name="ai_steps_formula" xml:space="preserve">
     <value>Ang molar mass ay ang kabuuan ng bilang ng atom ng bawat elemento na pinarami sa atomic mass nito:</value>
   </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>Ayusin ang PV = nRT para sa hindi alam, na R = 0.08206 L·atm/(mol·K):</value>
+  </data>
   <data name="ai_steps_header" xml:space="preserve">
     <value>Hakbang-hakbang</value>
   </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>Magsimula sa neutral na atom at magbawas o magdagdag ng electron:</value>
+  </data>
   <data name="ai_steps_moles_legend" xml:space="preserve">
     <value>Ang m ay ang masa, M ang molar mass, n ang dami sa mole, N ang bilang ng particle at N_A ang Avogadro constant.</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>Ganap na naghihiwalay ang malakas na asido o base, kaya direktang ibinibigay ng konsentrasyon ang ion:</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>Ang n ay ang dami sa mole, c ang konsentrasyon, V ang volume, m ang masa at M ang molar mass.</value>

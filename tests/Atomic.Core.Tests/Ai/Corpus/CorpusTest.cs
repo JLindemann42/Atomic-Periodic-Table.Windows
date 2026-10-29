@@ -264,6 +264,11 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(Explanations))]
         public void Explanations_Pass(string key) => RunUnit("explanations", key);
 
+        /// <summary>The ideal gas law, pH, and ion configurations (roadmap 2.8).</summary>
+        public static TheoryData<string> Calculators => Units("calculators");
+        [Theory, MemberData(nameof(Calculators))]
+        public void Calculators_Pass(string key) => RunUnit("calculators", key);
+
         // ---- Scoreboard ------------------------------------------------------------------------
 
         /// <summary>
@@ -585,6 +590,10 @@ namespace Atomic.Core.Tests.Corpus
             // tried (roadmap 2.2): a declined equation carries no value, and fails a row that expects one.
             // The first element's value, which pins the field and the order (roadmap 2.3).
             ExecutionResult.Trend t => t.Points.FirstOrDefault()?.Quantity?.Value,
+            // The solved quantity, the pH, and the ion's electron count (roadmap 2.8).
+            ExecutionResult.GasLaw g => g.Solution.Solved,
+            ExecutionResult.Ph p => p.Result.PH,
+            ExecutionResult.IonConfiguration i => i.Element.AtomicNumber - i.Charge,
             ExecutionResult.BalancedEquation b => b.Reason is null
                 ? b.Reactants.Concat(b.Products).Sum(t => t.Coefficient)
                 : null,

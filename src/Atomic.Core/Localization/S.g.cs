@@ -238,6 +238,8 @@ public static partial class S
     public const string ai_formula_pro_plus = "ai_formula_pro_plus";
     public const string ai_formula_recognize = "ai_formula_recognize";
     public const string ai_free_user = "ai_free_user";
+    public const string ai_gas_result = "ai_gas_result";
+    public const string ai_gas_stp = "ai_gas_stp";
     public const string ai_geo_color = "ai_geo_color";
     public const string ai_geo_dens = "ai_geo_dens";
     public const string ai_geo_hard = "ai_geo_hard";
@@ -254,7 +256,11 @@ public static partial class S
     public const string ai_id_header = "ai_id_header";
     public const string ai_identifiers_for = "ai_identifiers_for";
     public const string ai_identity_result = "ai_identity_result";
+    public const string ai_ion_anion = "ai_ion_anion";
+    public const string ai_ion_cation = "ai_ion_cation";
+    public const string ai_ion_config = "ai_ion_config";
     public const string ai_ion_count = "ai_ion_count";
+    public const string ai_ion_isoelectronic = "ai_ion_isoelectronic";
     public const string ai_isotope_compare_header = "ai_isotope_compare_header";
     public const string ai_isotope_compare_row = "ai_isotope_compare_row";
     public const string ai_isotope_decay = "ai_isotope_decay";
@@ -338,6 +344,8 @@ public static partial class S
     public const string ai_period = "ai_period";
     public const string ai_personalized_greeting_fav = "ai_personalized_greeting_fav";
     public const string ai_personalized_greeting_interest = "ai_personalized_greeting_interest";
+    public const string ai_ph_acid = "ai_ph_acid";
+    public const string ai_ph_base = "ai_ph_base";
     public const string ai_ph_info = "ai_ph_info";
     public const string ai_ph_info_short = "ai_ph_info_short";
     public const string ai_phase_gas = "ai_phase_gas";
@@ -460,8 +468,11 @@ public static partial class S
     public const string ai_steps_balance_unknowns = "ai_steps_balance_unknowns";
     public const string ai_steps_decay_legend = "ai_steps_decay_legend";
     public const string ai_steps_formula = "ai_steps_formula";
+    public const string ai_steps_gas = "ai_steps_gas";
     public const string ai_steps_header = "ai_steps_header";
+    public const string ai_steps_ion = "ai_steps_ion";
     public const string ai_steps_moles_legend = "ai_steps_moles_legend";
+    public const string ai_steps_ph = "ai_steps_ph";
     public const string ai_steps_solution_legend = "ai_steps_solution_legend";
     public const string ai_structural_no_results = "ai_structural_no_results";
     public const string ai_structural_result = "ai_structural_result";

@@ -714,6 +714,12 @@
   <data name="ai_free_user" xml:space="preserve">
     <value>مفت</value>
   </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>مثالی گیس کے قانون، PV = nRT، سے: **%1$s**۔</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>STP کو 1 atm اور 273.15 K مانا گیا ہے۔</value>
+  </data>
   <data name="ai_geo_color" xml:space="preserve">
     <value>%1$s: %2$s %3$s، %4$s %5$s۔</value>
   </data>
@@ -773,8 +779,20 @@
   <data name="ai_identity_result" xml:space="preserve">
     <value>ایپ میں موجود اقدار کی بنیاد پر، اس کی خصوصیات کے لیے **%1$s** کے قریب ترین قدر والا عنصر **%2$s** ہے (اصل: %3$s)۔</value>
   </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>اینائن اپنے اضافی الیکٹران بھرنے کی ترتیب میں اگلی جگہوں پر لیتا ہے۔</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>کیٹائن پہلے اپنے سب سے باہری الیکٹران کھوتا ہے: سب سے اونچا شیل، اور اس کے اندر سب سے اونچا سب شیل۔</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>**%1$s** کی الیکٹرانی ترتیب **%2$s** ہے۔ غیر جانبدار %3$s %4$s ہے۔</value>
+  </data>
   <data name="ai_ion_count" xml:space="preserve">
     <value>%1$s کے پاس ایپ میں %2$d آئیونائزیشن توانائی کی اقدار دستیاب ہیں۔</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>یہ %1$s جیسی ہی ترتیب ہے۔</value>
   </data>
   <data name="ai_isotope_compare_header" xml:space="preserve">
     <value>%1$s بمقابلہ %2$s</value>
@@ -1026,6 +1044,12 @@
   </data>
   <data name="ai_personalized_greeting_interest" xml:space="preserve">
     <value>خوش آمدید! %1$s کے بارے میں مزید جاننے کے لیے تیار ہیں؟ ہم دوبارہ %2$s کو دیکھ سکتے ہیں۔</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>%1$s ایک طاقتور تیزاب ہے، اس لیے %2$s M محلول میں [H⁺] = %3$s M اور pH **%4$s** ہے۔</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>%1$s ایک طاقتور اساس ہے، اس لیے %2$s M محلول میں [OH⁻] = %3$s M، pOH %4$s اور pH **%5$s** ہے۔</value>
   </data>
   <data name="ai_ph_info" xml:space="preserve">
     <value>%1$s: pH %2$s سے نیچے تیزاب %3$s ہے، نیوٹرل رینج %4$s %5$s ہے، اور pH %6$s سے اوپر یہ %7$s ہے۔</value>
@@ -1400,11 +1424,20 @@
   <data name="ai_steps_formula" xml:space="preserve">
     <value>مولر کمیت ہر عنصر کے ایٹموں کی تعداد ضرب اس کی جوہری کمیت کا مجموعہ ہے:</value>
   </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>نامعلوم کے لیے PV = nRT کو ترتیب دیں، R = 0.08206 L·atm/(mol·K) کے ساتھ:</value>
+  </data>
   <data name="ai_steps_header" xml:space="preserve">
     <value>مرحلہ وار</value>
   </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>غیر جانبدار ایٹم سے شروع کریں اور الیکٹران ہٹائیں یا جوڑیں:</value>
+  </data>
   <data name="ai_steps_moles_legend" xml:space="preserve">
     <value>m کمیت ہے، M مولر کمیت، n مول میں مقدار، N ذرات کی تعداد اور N_A ایووگاڈرو مستقل۔</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>طاقتور تیزاب یا اساس مکمل طور پر علیحدہ ہوتا ہے، اس لیے ارتکاز براہ راست آئن دیتا ہے:</value>
   </data>
   <data name="ai_steps_solution_legend" xml:space="preserve">
     <value>n مول میں مقدار ہے، c ارتکاز، V حجم، m کمیت اور M مولر کمیت۔</value>
