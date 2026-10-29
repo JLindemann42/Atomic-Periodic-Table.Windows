@@ -121,9 +121,9 @@ namespace Atomic.Core.Ai
         /// Group 17, not <see cref="SeriesId.Halogen"/>.
         /// </summary>
         /// <remarks>
-        /// The enum has a Halogen member but the shipped element data does not use it - chlorine
-        /// is classified ReactiveNonmetal - so matching on the series silently never fired and
-        /// sodium and chlorine got the generic answer instead of forming a salt.
+        /// Until D76 the shipped element data classified chlorine as ReactiveNonmetal, so matching
+        /// on the series silently never fired and sodium and chlorine got the generic answer
+        /// instead of forming a salt. The group check keeps it right whatever the series data says.
         /// </remarks>
         private static bool IsHalogen(ElementRecord element) =>
             element.Series == SeriesId.Halogen || element.GroupNumber == 17;

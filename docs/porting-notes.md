@@ -1723,3 +1723,13 @@ answer earns the game's XP with the bonus multiplier, as on Android.
 not. That is a shared-data fix of its own.
 
 3,787 core tests pass; held-out (451) passes; the app builds.
+
+### D76 — the halogens, corrected in the shared data
+
+Not a port: a shared-data fix exposed by D75. Radon's `element_group` said "Halogens", and fluorine
+and chlorine were "Reactive Nonmetal(s)", so every "halogens" filter gave Br, I, At, Ts and Rn. All
+twelve `elements_*.json` now file fluorine and chlorine under each file's halogen label and radon
+under its noble-gas label. Three aggregate rows over "the halogens" in `morphology.tsv` changed their
+expected values with it. `ElementReactions` keeps its group-17 check.
+
+3,787 core tests pass; held-out (451) passes.
