@@ -37,6 +37,7 @@ namespace Atomic.Core.Quiz
         /// </summary>
         public static IReadOnlyList<Nuclide> Of(GeneratorContext context) =>
             context.Store.Elements
+                .Where(context.InScope)
                 .SelectMany(element => element.Isotopes.Select(iso => (element, iso)))
                 .Select(pair =>
                 {

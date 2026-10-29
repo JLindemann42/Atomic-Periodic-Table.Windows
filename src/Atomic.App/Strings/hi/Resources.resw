@@ -1072,6 +1072,33 @@
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>मैं अभी क्विज़ मोड में नहीं हूँ।</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>प्रश्नोत्तरी पूरी: **%2$d में से %1$d** सही, **%3$d XP** मिले।</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>मैं इस पर प्रश्न नहीं बना सका। कोई समूह, आवर्त, तत्वों का परिवार या एक तत्व आज़माएँ।</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**प्रश्न %1$d / %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ सही! **+%1$d XP**।</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d तत्वों</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>पूरी सारणी से **%1$d प्रश्नों** की प्रश्नोत्तरी। किसी उत्तर पर टैप करें, या रोकने के लिए बस कहें।</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>%2$s पर **%1$d प्रश्नों** की प्रश्नोत्तरी। किसी उत्तर पर टैप करें, या रोकने के लिए बस कहें।</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>प्रश्नोत्तरी रोकी गई: **%2$d में से %1$d** सही, **%3$d XP** मिले।</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>पूरी तरह नहीं: उत्तर था **%1$s**।</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>मैं एक तत्व के बारे में सोच रहा हूँ। इसका प्रतीक **%1$s** है। इसका नाम क्या है?</value>
   </data>

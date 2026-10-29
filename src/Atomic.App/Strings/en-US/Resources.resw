@@ -1072,6 +1072,33 @@ Just ask and I'll find the answer in the app's records! 🌟</value>
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>I'm not in quiz mode right now.</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>That's the quiz: **%1$d of %2$d** right, **%3$d XP** earned.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>I couldn't make questions on that. Try a group, a period, a family of elements or a single element.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Question %1$d of %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Right! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d elements</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>A quiz of **%1$d questions** from the whole table. Tap an answer, or say stop to end it.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>A quiz of **%1$d questions** on %2$s. Tap an answer, or say stop to end it.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Quiz stopped: **%1$d of %2$d** right, **%3$d XP** earned.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Not quite: the answer was **%1$s**.</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>I'm thinking of an element. Its symbol is **%1$s**. What's its name?</value>
   </data>

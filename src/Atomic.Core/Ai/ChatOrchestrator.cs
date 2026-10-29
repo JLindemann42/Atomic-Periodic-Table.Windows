@@ -97,9 +97,11 @@ namespace Atomic.Core.Ai
             Func<Entitlements>? entitlements = null,
             ChatCardPolicy? cardPolicy = null,
             string language = "en",
-            Random? random = null)
+            Random? random = null,
+            Action<int>? onXp = null)
         {
             _random = random ?? new Random();
+            _onXp = onXp ?? (_ => { });
             _retrieval = retrieval;
             _store = retrieval.Store;
             _stringsFor = stringsFor;
@@ -112,6 +114,12 @@ namespace Atomic.Core.Ai
 
         /// <summary>What the conversation remembers. Public so a host can persist and restore a thread.</summary>
         public DialogueState State { get; }
+
+        /// <summary>Receives the XP a right answer in a quiz run earns (roadmap 2.5); the app adds it to the user's.</summary>
+        private readonly Action<int> _onXp;
+
+        /// <summary>The quiz run in progress, if any (roadmap 2.5). Not persisted: a run belongs to one sitting.</summary>
+        public QuizRunState? QuizRun { get; private set; }
 
         /// <summary>
         /// Which elements this user keeps asking about. Public for the same reason
@@ -230,6 +238,21 @@ namespace Atomic.Core.Ai
         private ChatReply? Quiz(string message, IStringProvider strings)
         {
             var normalized = TextMatching.NormalizeForLookup(message);
+
+            // A run in progress (roadmap 2.5): an option picks an answer, "stop" ends it, and
+            // anything else is a new question, so the run is left and the message answered as usual.
+            if (QuizRun is { } run)
+            {
+                if (Ai.QuizRun.Stops(normalized))
+                {
+                    QuizRun = null;
+                    return new ChatReply(strings.Get(S.ai_quiz_run_stopped, run.Correct, run.Index, run.Xp),
+                                         ReplySource.Personality, [], null, Suggestions(strings, null));
+                }
+                if (Ai.QuizRun.Choice(normalized, run.Current.Alternatives) is { } pick) return AnswerRun(run, pick, strings);
+                QuizRun = null;
+            }
+
             var pending = State.PendingQuizAnswer;
 
             // A short reply while a question is open is the answer to it - but only if it names
@@ -261,6 +284,10 @@ namespace Atomic.Core.Ai
             }
 
             if (!ElementQuiz.Asks(normalized)) return null;
+
+            // A quiz with a scope, a count or a kind of question is a run; a bare "quiz me" is the
+            // single question below.
+            if (StartRun(message, normalized, strings) is { } started) return started;
 
             if (ElementQuiz.Ask(_store.Elements, _random, strings, e => Display(e, e.Key)) is not { } question)
                 return new ChatReply(strings.Get(S.ai_quiz_no_start), ReplySource.Personality, [],
@@ -521,6 +548,80 @@ namespace Atomic.Core.Ai
         }
 
         /// <summary>An element's name in the reader's language.</summary>
+        /// <summary>
+        /// Start a run, or null when the request names no scope, count or kind of question. Its
+        /// questions come from the Learning Games generators, about the elements the request names.
+        /// </summary>
+        private ChatReply? StartRun(string message, string normalized, IStringProvider strings)
+        {
+            var request = Ai.QuizRun.Request(normalized);
+            var scope = QuizScope(message);
+            if (scope is null && !request.ExplicitCount && !Ai.QuizRun.NamesATopic(request)) return null;
+
+            var context = new Quiz.GeneratorContext(
+                _store, _retrieval.Localized(State.ActiveLanguage), strings, "medium", _random, scope);
+            var questions = Ai.QuizRun.Questions(context, request);
+            if (questions.Count == 0)
+                return new ChatReply(strings.Get(S.ai_quiz_run_none), ReplySource.Personality, [], null, Suggestions(strings, null));
+
+            var run = new QuizRunState(questions, scope);
+            QuizRun = run;
+            State.PendingQuizAnswer = null;
+            var intro = scope is null
+                ? strings.Get(S.ai_quiz_run_start_all, questions.Count)
+                : strings.Get(S.ai_quiz_run_start_scoped, questions.Count, ScopeLabel(scope, strings));
+            return new ChatReply($"{intro}\n\n{RunQuestion(run, strings)}", ReplySource.Personality, [], null, run.Current.Alternatives);
+        }
+
+        /// <summary>
+        /// The elements a quiz request is about: those its filters leave ("the halogens", "period
+        /// 3"), or those it names ("uranium"); null for the whole table. Read with the operator
+        /// extractor rather than the planner, which declines anything with a quiz word in it.
+        /// </summary>
+        private IReadOnlySet<string>? QuizScope(string message)
+        {
+            var filters = OperatorExtractor.Extract(message).SubsetFilters;
+            IReadOnlySet<string> keys = filters.Count > 0
+                ? _store.Elements.Where(e => filters.All(f => f.Matches(e, _store))).Select(e => e.Key).ToHashSet(StringComparer.Ordinal)
+                : _retrieval.Resolver(State.ActiveLanguage).ResolveAll(message, limit: 4).Select(m => m.Key).ToHashSet(StringComparer.Ordinal);
+            return keys.Count > 0 ? keys : null;
+        }
+
+        /// <summary>"gold", "lithium, sodium", or "8 elements".</summary>
+        private string ScopeLabel(IReadOnlySet<string> scope, IStringProvider strings) =>
+            scope.Count <= 3
+                ? string.Join(", ", scope.Select(_store.Element).OfType<ElementRecord>().OrderBy(e => e.AtomicNumber).Select(e => Display(e, e.Key)))
+                : strings.Get(S.ai_quiz_run_scope_count, scope.Count);
+
+        private static string RunQuestion(QuizRunState run, IStringProvider strings) =>
+            strings.Get(S.ai_quiz_run_question, run.Index + 1, run.Questions.Count, run.Current.Question);
+
+        /// <summary>Judge a pick, award its XP, and ask the next question or close the run.</summary>
+        private ChatReply AnswerRun(QuizRunState run, string pick, IStringProvider strings)
+        {
+            var question = run.Current;
+            string verdict;
+            if (pick == question.CorrectAnswer)
+            {
+                run.Correct++;
+                run.Xp += question.BaseXp;
+                _onXp(question.BaseXp);
+                verdict = strings.Get(S.ai_quiz_run_right, question.BaseXp);
+            }
+            else
+            {
+                verdict = strings.Get(S.ai_quiz_run_wrong, question.CorrectAnswer);
+            }
+            run.Index++;
+            if (run.Finished)
+            {
+                QuizRun = null;
+                var done = strings.Get(S.ai_quiz_run_done, run.Correct, run.Questions.Count, run.Xp);
+                return new ChatReply($"{verdict}\n\n{done}", ReplySource.Personality, [], null, Suggestions(strings, null));
+            }
+            return new ChatReply($"{verdict}\n\n{RunQuestion(run, strings)}", ReplySource.Personality, [], null, run.Current.Alternatives);
+        }
+
         private string Display(ElementRecord element, string key) =>
             _retrieval.Localized(State.ActiveLanguage)?.Name(key) is { Length: > 0 } localized
                 ? localized
@@ -695,7 +796,11 @@ namespace Atomic.Core.Ai
         }
 
         /// <summary>Start a new thread, keeping the language the user is writing in.</summary>
-        public void Reset() => State.Clear();
+        public void Reset()
+        {
+            State.Clear();
+            QuizRun = null;
+        }
 
         private static bool Mentions(string normalized, IReadOnlyList<string> phrases) =>
             phrases.Any(p => p.Contains(' ', StringComparison.Ordinal) || p.Any(c => c > 0x2000)

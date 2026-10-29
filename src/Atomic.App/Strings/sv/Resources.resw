@@ -1060,6 +1060,33 @@ Fråga bara så hittar jag svaret i appens register! 🌟</value>
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>Jag är inte i quiz-läge just nu.</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>Quizet är klart: **%1$d av %2$d** rätt, **%3$d XP** intjänat.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>Jag kunde inte göra frågor om det. Prova en grupp, en period, en grundämnesfamilj eller ett enskilt grundämne.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Fråga %1$d av %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Rätt! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d grundämnen</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>Ett quiz med **%1$d frågor** från hela tabellen. Tryck på ett svar, eller säg stopp för att avsluta.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>Ett quiz med **%1$d frågor** om %2$s. Tryck på ett svar, eller säg stopp för att avsluta.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Quizet avbrutet: **%1$d av %2$d** rätt, **%3$d XP** intjänat.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Inte riktigt: svaret var **%1$s**.</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>Jag tänker på ett grundämne. Dess symbol är **%1$s**. Vad heter det?</value>
   </data>

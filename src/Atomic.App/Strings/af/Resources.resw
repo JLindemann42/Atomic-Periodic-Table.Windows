@@ -1072,6 +1072,33 @@ Vra net en ek sal die antwoord in die toepassing se rekords vind! 🌟</value>
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>Ek is nie nou in vasvra-modus nie.</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>Dis die vasvra: **%1$d uit %2$d** reg, **%3$d XP** verdien.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>Ek kon nie vrae daaroor maak nie. Probeer 'n groep, 'n periode, 'n familie elemente of 'n enkele element.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Vraag %1$d van %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Reg! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d elemente</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>'n Vasvra van **%1$d vrae** uit die hele tabel. Tik op 'n antwoord, of sê stop om te eindig.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>'n Vasvra van **%1$d vrae** oor %2$s. Tik op 'n antwoord, of sê stop om te eindig.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Vasvra gestop: **%1$d uit %2$d** reg, **%3$d XP** verdien.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Nie heeltemal nie: die antwoord was **%1$s**.</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>Ek dink aan 'n element. Sy simbool is **%1$s**. Wat is sy naam?</value>
   </data>

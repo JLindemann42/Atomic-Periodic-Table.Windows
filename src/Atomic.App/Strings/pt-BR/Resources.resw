@@ -1072,6 +1072,33 @@ Basta perguntar e encontrarei a resposta nos registros do aplicativo! 🌟</valu
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>Não estou no modo quiz agora.</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>Fim do quiz: **%1$d de %2$d** certas, **%3$d XP** ganhos.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>Não consegui criar perguntas sobre isso. Tente um grupo, um período, uma família de elementos ou um único elemento.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Pergunta %1$d de %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Certo! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d elementos</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>Um quiz de **%1$d perguntas** da tabela inteira. Toque numa resposta, ou diga parar para terminar.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>Um quiz de **%1$d perguntas** sobre %2$s. Toque numa resposta, ou diga parar para terminar.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Quiz interrompido: **%1$d de %2$d** certas, **%3$d XP** ganhos.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Não exatamente: a resposta era **%1$s**.</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>Estou pensando em um elemento. Seu símbolo é **%1$s**. Qual é o nome dele?</value>
   </data>

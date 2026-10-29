@@ -349,6 +349,15 @@ public static partial class S
     public const string ai_quiz_history = "ai_quiz_history";
     public const string ai_quiz_no_start = "ai_quiz_no_start";
     public const string ai_quiz_not_active = "ai_quiz_not_active";
+    public const string ai_quiz_run_done = "ai_quiz_run_done";
+    public const string ai_quiz_run_none = "ai_quiz_run_none";
+    public const string ai_quiz_run_question = "ai_quiz_run_question";
+    public const string ai_quiz_run_right = "ai_quiz_run_right";
+    public const string ai_quiz_run_scope_count = "ai_quiz_run_scope_count";
+    public const string ai_quiz_run_start_all = "ai_quiz_run_start_all";
+    public const string ai_quiz_run_start_scoped = "ai_quiz_run_start_scoped";
+    public const string ai_quiz_run_stopped = "ai_quiz_run_stopped";
+    public const string ai_quiz_run_wrong = "ai_quiz_run_wrong";
     public const string ai_quiz_start = "ai_quiz_start";
     public const string ai_quiz_wrong = "ai_quiz_wrong";
     public const string ai_radioactive_no = "ai_radioactive_no";

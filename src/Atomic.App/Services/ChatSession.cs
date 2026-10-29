@@ -410,7 +410,9 @@ namespace Atomic.App.Services
                 // rather than the language of the UI - the whole point of detecting it per turn.
                 language => ResourceStringProvider.For(language),
                 Entitlement,
-                language: AppLanguage.BaseCode(AppLanguage.Current));
+                language: AppLanguage.BaseCode(AppLanguage.Current),
+                // A right answer in a chat quiz run earns XP like the Learning Games (roadmap 2.5).
+                onXp: ProgressStore.AddGameXp);
 
             return _orchestrator;
         }

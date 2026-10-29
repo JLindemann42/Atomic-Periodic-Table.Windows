@@ -1072,6 +1072,33 @@ Magtanong lang at hahanapin ko ang sagot sa mga record ng app! 🌟</value>
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>Wala ako sa quiz mode ngayon.</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>Tapos na ang quiz: **%1$d sa %2$d** tama, **%3$d XP** ang nakuha.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>Hindi ako makagawa ng tanong tungkol diyan. Subukan ang isang grupo, period, pamilya ng elemento o iisang elemento.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Tanong %1$d ng %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Tama! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d elemento</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>Isang quiz na may **%1$d tanong** mula sa buong talaan. I-tap ang sagot, o sabihing stop para tapusin.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>Isang quiz na may **%1$d tanong** tungkol sa %2$s. I-tap ang sagot, o sabihing stop para tapusin.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Itinigil ang quiz: **%1$d sa %2$d** tama, **%3$d XP** ang nakuha.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Hindi pa: ang sagot ay **%1$s**.</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>May iniisip akong elemento. Ang simbolo nito ay **%1$s**. Ano ang pangalan nito?</value>
   </data>

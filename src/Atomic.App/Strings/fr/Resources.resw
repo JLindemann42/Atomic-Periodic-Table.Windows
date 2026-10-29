@@ -1072,6 +1072,33 @@ Demandez et je trouverai la réponse dans les registres de l'application ! 🌟<
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>Je ne suis pas en mode quiz pour le moment.</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>Quiz terminé : **%1$d sur %2$d** justes, **%3$d XP** gagnés.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>Je n'ai pas pu créer de questions là-dessus. Essaie un groupe, une période, une famille d'éléments ou un seul élément.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Question %1$d sur %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Exact ! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d éléments</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>Un quiz de **%1$d questions** sur tout le tableau. Touche une réponse, ou dis stop pour arrêter.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>Un quiz de **%1$d questions** sur %2$s. Touche une réponse, ou dis stop pour arrêter.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Quiz arrêté : **%1$d sur %2$d** justes, **%3$d XP** gagnés.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Pas tout à fait : la réponse était **%1$s**.</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>Je pense à un élément. Son symbole est **%1$s**. Quel est son nom ?</value>
   </data>

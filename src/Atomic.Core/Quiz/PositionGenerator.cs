@@ -66,13 +66,14 @@ namespace Atomic.Core.Quiz
 
         public IReadOnlyList<QuizQuestion> Generate(GeneratorContext context, int count)
         {
-            var pool = context.Store.Elements
+            var all = context.Store.Elements
                 .Select(e => (Element: e, Value: _aspect.ValueOf(e)))
                 .Where(p => p.Value is not null)
                 .Select(p => (p.Element, Value: p.Value!.Value))
                 .ToList();
+            var pool = all.Where(p => context.InScope(p.Element)).ToList();
 
-            var values = pool.Select(p => p.Value).Distinct().OrderBy(v => v).ToList();
+            var values = all.Select(p => p.Value).Distinct().OrderBy(v => v).ToList();
             if (pool.Count == 0 || values.Count < 2) return [];
 
             var questions = new List<QuizQuestion>(count);

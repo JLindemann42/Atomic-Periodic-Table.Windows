@@ -52,7 +52,8 @@ namespace Atomic.Core.Quiz
             if (byLabel.Count < 2) return [];
 
             var labels = byLabel.Keys.ToList();
-            var pool = byLabel.Values.SelectMany(v => v).ToList();
+            var pool = byLabel.Values.SelectMany(v => v).Where(context.InScope).ToList();
+            if (pool.Count == 0) return [];
 
             var questions = new List<QuizQuestion>(count);
             var used = new HashSet<string>(StringComparer.Ordinal);

@@ -1072,6 +1072,33 @@
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>我目前不在测验模式中。</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>测验结束：答对**%1$d/%2$d**题，获得**%3$d XP**。</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>我无法就此出题。试试一个族、一个周期、一类元素或单个元素。</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**第%1$d题，共%2$d题。** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ 答对了！**+%1$d XP**。</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d种元素</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>一个来自整个周期表的**%1$d道题**测验。点击一个答案，或说停止来结束。</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>一个关于%2$s的**%1$d道题**测验。点击一个答案，或说停止来结束。</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>测验已停止：答对**%1$d/%2$d**题，获得**%3$d XP**。</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>不太对：答案是**%1$s**。</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>我正在想一个元素。它的符号是 **%1$s**。它叫什么名字？</value>
   </data>

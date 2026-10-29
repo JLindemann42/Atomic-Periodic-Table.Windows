@@ -1060,6 +1060,33 @@ Frag einfach und ich finde die Antwort in den Aufzeichnungen der App! 🌟</valu
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>Ich befinde mich gerade nicht im Quiz-Modus.</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>Das war das Quiz: **%1$d von %2$d** richtig, **%3$d XP** verdient.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>Dazu konnte ich keine Fragen erstellen. Versuch es mit einer Gruppe, einer Periode, einer Elementfamilie oder einem einzelnen Element.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Frage %1$d von %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Richtig! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d Elementen</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>Ein Quiz mit **%1$d Fragen** aus dem ganzen Periodensystem. Tippe auf eine Antwort oder sag Stopp, um es zu beenden.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>Ein Quiz mit **%1$d Fragen** zu %2$s. Tippe auf eine Antwort oder sag Stopp, um es zu beenden.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Quiz beendet: **%1$d von %2$d** richtig, **%3$d XP** verdient.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Nicht ganz: Die Antwort war **%1$s**.</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>Ich denke an ein Element. Sein Symbol ist **%1$s**. Wie heißt es?</value>
   </data>

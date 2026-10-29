@@ -38,14 +38,26 @@ namespace Atomic.Core.Quiz
             LocalizedView? names,
             IStringProvider strings,
             string difficulty,
-            Random? random = null)
+            Random? random = null,
+            IReadOnlySet<string>? scope = null)
         {
             Store = store;
             _names = names;
             _strings = strings;
             Difficulty = difficulty;
             Random = random ?? new Random();
+            _scope = scope;
         }
+
+        /// <summary>
+        /// The elements a question may be about, by key, or null for the whole table: a quiz run
+        /// from chat on "the halogens" (roadmap 2.5). Wrong options still come from the whole table,
+        /// since a question about bromine's period needs periods other than bromine's.
+        /// </summary>
+        private readonly IReadOnlySet<string>? _scope;
+
+        /// <summary>Whether a question may be about <paramref name="element"/>.</summary>
+        public bool InScope(ElementRecord element) => _scope is null || _scope.Contains(element.Key);
 
         public KnowledgeStore Store { get; }
 
@@ -87,6 +99,7 @@ namespace Atomic.Core.Quiz
             if (_rankable.TryGetValue(fieldId, out var cached)) return cached;
 
             var pool = Store.Elements
+                .Where(InScope)
                 .Select(e => (Element: e, Value: e.Quantity(fieldId)))
                 .Where(p => p.Value is { IsRange: false })
                 .Select(p => (p.Element, Value: p.Value!))

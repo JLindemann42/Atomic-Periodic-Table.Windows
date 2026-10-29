@@ -1072,6 +1072,33 @@
   <data name="ai_quiz_not_active" xml:space="preserve">
     <value>میں ابھی کوئز موڈ میں نہیں ہوں۔</value>
   </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>کوئز مکمل: **%2$d میں سے %1$d** درست، **%3$d XP** حاصل۔</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>میں اس پر سوال نہیں بنا سکا۔ کوئی گروپ، پیریڈ، عناصر کا خاندان یا ایک عنصر آزمائیں۔</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**سوال %1$d از %2$d۔** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ درست! **+%1$d XP**۔</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d عناصر</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>پورے جدول سے **%1$d سوالات** کا کوئز۔ کسی جواب پر ٹیپ کریں، یا ختم کرنے کے لیے بس کہیں۔</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>%2$s پر **%1$d سوالات** کا کوئز۔ کسی جواب پر ٹیپ کریں، یا ختم کرنے کے لیے بس کہیں۔</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>کوئز روکا گیا: **%2$d میں سے %1$d** درست، **%3$d XP** حاصل۔</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>بالکل نہیں: جواب تھا **%1$s**۔</value>
+  </data>
   <data name="ai_quiz_start" xml:space="preserve">
     <value>میں ایک عنصر کے بارے میں سوچ رہا ہوں۔ اس کا سمبل **%1$s** ہے۔ اس کا نام کیا ہے؟</value>
   </data>

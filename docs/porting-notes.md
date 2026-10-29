@@ -1696,3 +1696,30 @@ the card to free users; now a free user gets the text without the card.
 `ExplanationTest.AProFieldsCardStaysPro` covers it on both platforms.
 
 3,774 core tests pass; held-out (451) passes; the app builds.
+
+### D75 — quiz runs from chat (roadmap 2.5)
+
+Ported from Android in the same change.
+
+**What changed.** "Quiz me on the halogens" or "five isotope questions on uranium" starts a run of
+multiple-choice questions from the Learning Games generators, asked one at a time with the options as
+chips. `Ai/QuizRun.cs` reads the count (digits or number words up to ten; Chinese needs a measure
+word, since 三 also opens 第三周期) and the kind (isotopes, molar mass, rankings, or a mix).
+`ChatOrchestrator.QuizScope` reads the scope with `OperatorExtractor.Extract` or the resolver,
+because the planner declines anything with a quiz word in it. A bare "quiz me" keeps the single
+`ElementQuiz` question.
+
+**Generators.** `GeneratorContext` takes an optional scope and exposes `InScope`. The isotope pool,
+`RankableFor`, `PositionGenerator` and `ClassificationGenerator` draw the element a question is
+about from it. Wrong options still come from the whole table.
+
+**XP.** `ChatOrchestrator` takes `onXp`; `ChatSession` passes `ProgressStore.AddGameXp`, so a right
+answer earns the game's XP with the bonus multiplier, as on Android.
+
+**Strings.** The `ai_quiz_run_*` strings in all twelve languages come through
+`strings_xml_to_resw.py`. `QuizRunTest` mirrors Android's.
+
+"The halogens" scopes to what the data files as halogens, radon included and fluorine and chlorine
+not. That is a shared-data fix of its own.
+
+3,787 core tests pass; held-out (451) passes; the app builds.
