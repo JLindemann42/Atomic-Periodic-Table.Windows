@@ -528,6 +528,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>Namnet **%1$s** har ett intressant ursprung:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>**%1$s** har högst %2$s av de %3$d grundämnen som har ett uppmätt värde: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>**%1$s** har lägst %2$s av de %3$d grundämnen som har ett uppmätt värde: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s** ligger på plats %2$d av %3$d grundämnen för högst %4$s: %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s** ligger på plats %2$d av %3$d grundämnen för lägst %4$s: %5$s.</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>Visste du? Syre är det vanligaste grundämnet i jordskorpan!</value>
   </data>

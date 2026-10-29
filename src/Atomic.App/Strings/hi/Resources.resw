@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>**%1$s** नाम की एक दिलचस्प उत्पत्ति है:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>दर्ज मान वाले %3$d तत्वों में से **%1$s** में %2$s सबसे अधिक है: %4$s।</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>दर्ज मान वाले %3$d तत्वों में से **%1$s** में %2$s सबसे कम है: %4$s।</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>सबसे अधिक %4$s में **%1$s** %3$d तत्वों में %2$d वें स्थान पर है: %5$s।</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>सबसे कम %4$s में **%1$s** %3$d तत्वों में %2$d वें स्थान पर है: %5$s।</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>क्या आप जानते हैं? पृथ्वी की पपड़ी में ऑक्सीजन सबसे प्रचुर मात्रा में पाया जाने वाला तत्व है!</value>
   </data>

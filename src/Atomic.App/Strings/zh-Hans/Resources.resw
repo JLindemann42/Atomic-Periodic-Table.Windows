@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>**%1$s** 这个名字有一个有趣的来源：</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>在有记录数值的%3$d种元素中，**%1$s**的%2$s最高：%4$s。</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>在有记录数值的%3$d种元素中，**%1$s**的%2$s最低：%4$s。</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s**的%4$s在%3$d种元素中排第%2$d高：%5$s。</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s**的%4$s在%3$d种元素中排第%2$d低：%5$s。</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>你知道吗？氧是地壳中含量最丰富的元素！</value>
   </data>

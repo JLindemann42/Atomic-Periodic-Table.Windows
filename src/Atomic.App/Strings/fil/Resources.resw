@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>Ang pangalang **%1$s** ay may kawili-wiling pinagmulan:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>Ang **%1$s** ang may pinakamataas na %2$s sa %3$d elementong may naitalang halaga: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>Ang **%1$s** ang may pinakamababang %2$s sa %3$d elementong may naitalang halaga: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>Ang **%1$s** ay pang-%2$d sa %3$d elemento sa pinakamataas na %4$s: %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>Ang **%1$s** ay pang-%2$d sa %3$d elemento sa pinakamababang %4$s: %5$s.</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>Alam mo ba? Ang Oxygen ang pinakamaraming elemento sa crust ng Earth!</value>
   </data>

@@ -421,16 +421,21 @@ namespace Atomic.Core.Tests.Ai
             Assert.NotEqual(Strings().Get(S.ai_no_data), reply.Text);
         }
 
-        /// <summary>A fact request gets one of the ten shipped facts.</summary>
+        /// <summary>
+        /// A fact request gets one of the ten shipped facts or one read off the data (roadmap 2.7).
+        /// </summary>
         [Theory]
         [InlineData("tell me a fun fact")]
         [InlineData("did you know anything interesting")]
-        public void AFactRequestGetsAShippedFact(string message)
+        public void AFactRequestGetsAFact(string message)
         {
             var reply = Chat(seed: 7).Ask(message);
 
             Assert.Equal(ReplySource.Personality, reply.Source);
-            Assert.Contains(reply.Text, Strings().Array("ai_facts"));
+            Assert.True(
+                Strings().Array("ai_facts").Contains(reply.Text) ||
+                reply.Text.Contains("elements with a recorded value", StringComparison.Ordinal),
+                reply.Text);
         }
 
         /// <summary>

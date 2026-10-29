@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>**%1$s** نام کی ایک دلچسپ اصلیت ہے:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>درج شدہ قدر والے %3$d عناصر میں سے **%1$s** میں %2$s سب سے زیادہ ہے: %4$s۔</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>درج شدہ قدر والے %3$d عناصر میں سے **%1$s** میں %2$s سب سے کم ہے: %4$s۔</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>سب سے زیادہ %4$s میں **%1$s** %3$d عناصر میں %2$d ویں نمبر پر ہے: %5$s۔</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>سب سے کم %4$s میں **%1$s** %3$d عناصر میں %2$d ویں نمبر پر ہے: %5$s۔</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>کیا آپ جانتے ہیں؟ زمین کی پرت میں آکسیجن سب سے وافر عنصر ہے!</value>
   </data>

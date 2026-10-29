@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>The name **%1$s** has an interesting origin:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>**%1$s** has the highest %2$s of the %3$d elements with a recorded value: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>**%1$s** has the lowest %2$s of the %3$d elements with a recorded value: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s** ranks #%2$d of %3$d elements for the highest %4$s: %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s** ranks #%2$d of %3$d elements for the lowest %4$s: %5$s.</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>Did you know? Oxygen is the most abundant element in Earth's crust!</value>
   </data>

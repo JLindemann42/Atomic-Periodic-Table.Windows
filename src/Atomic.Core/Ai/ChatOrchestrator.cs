@@ -746,9 +746,19 @@ namespace Atomic.Core.Ai
         /// </summary>
         private string? Fact(IStringProvider strings)
         {
-            var facts = strings.Array(Facts);
-            return facts.Count == 0 ? null : facts[_random.Next(facts.Count)];
+            // The shipped facts and the ones read off the data (roadmap 2.7), drawn from together.
+            var shipped = strings.Array(Facts);
+            var derived = (_dataFacts ??= new DataFacts(_store)).Extremes();
+            var total = shipped.Count + derived.Count;
+            if (total == 0) return null;
+            var pick = _random.Next(total);
+            return pick < shipped.Count
+                ? shipped[pick]
+                : DataFacts.Render(derived[pick - shipped.Count], strings, _retrieval.Localized(State.ActiveLanguage));
         }
+
+        /// <summary>Facts read off the data (roadmap 2.7), built once per conversation.</summary>
+        private DataFacts? _dataFacts;
 
         /// <summary>
         /// The honest failure: nothing here could be said from the app's data.

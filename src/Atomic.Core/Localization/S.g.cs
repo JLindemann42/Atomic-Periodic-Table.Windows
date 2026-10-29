@@ -176,6 +176,10 @@ public static partial class S
     public const string ai_equation_too_large = "ai_equation_too_large";
     public const string ai_equation_underdetermined = "ai_equation_underdetermined";
     public const string ai_etymology_header = "ai_etymology_header";
+    public const string ai_fact_data_highest = "ai_fact_data_highest";
+    public const string ai_fact_data_lowest = "ai_fact_data_lowest";
+    public const string ai_fact_data_rank_high = "ai_fact_data_rank_high";
+    public const string ai_fact_data_rank_low = "ai_fact_data_rank_low";
     public const string ai_facts_0 = "ai_facts.0";
     public const string ai_facts_1 = "ai_facts.1";
     public const string ai_facts_2 = "ai_facts.2";

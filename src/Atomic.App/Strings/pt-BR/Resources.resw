@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>O nome **%1$s** tem uma origem interessante:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>**%1$s** tem o maior valor de %2$s entre os %3$d elementos com um valor registrado: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>**%1$s** tem o menor valor de %2$s entre os %3$d elementos com um valor registrado: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s** está em %2$dº de %3$d elementos no maior valor de %4$s: %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s** está em %2$dº de %3$d elementos no menor valor de %4$s: %5$s.</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>Você sabia? O oxigênio é o elemento mais abundante na crosta terrestre!</value>
   </data>

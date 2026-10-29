@@ -1762,3 +1762,24 @@ then the cloud's.
 
 `StudyCoachTest` and `FsrsTest` mirror Android's. 3,798 core tests pass; held-out (451) passes; the
 app builds.
+
+### D78 — facts read off the data (roadmap 2.7)
+
+Ported from Android in the same change. `Ai/Data/DataFacts.cs` ranks ten free fields over the elements
+up to fermium (past it most values are predictions; with them, seaborgium's predicted 35 g/cm³ was
+the densest element) and keeps each field's top and bottom: twenty facts such as "Osmium has the
+highest density of the 99 elements with a recorded value: 22.59 (g/cm^3)". On a tie at either end
+the lighter element wins, since caesium and francium share the lowest electronegativity and
+francium's is an estimate. `ForElement` gives an element's place when it is within three of either
+end, and `ForDay` cycles through the extremes.
+
+The chat's fun fact now draws from the ten shipped facts and the twenty data facts together;
+`AiEngineTest.AFactRequestGetsAFact` accepts either. On Android, the facts also feed the Science
+Daily widget (a data fact on even days) and the Element of the Day widget (the element's place
+leads its description). This repo has no Widgets Board provider, despite D8, so on Windows the
+facts reach the chat only.
+
+The `ai_fact_data_*` templates in all twelve languages come through `strings_xml_to_resw.py`. The
+German, Hindi and Urdu ones avoid gender agreement with the field name ("den höchsten Wert für
+Schmelzpunkt"). `DataFactsTest` mirrors Android's. 3,804 core tests pass; held-out (451) passes; the
+app builds.

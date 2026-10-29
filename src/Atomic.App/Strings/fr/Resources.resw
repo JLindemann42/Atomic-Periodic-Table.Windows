@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>Le nom **%1$s** a une origine intéressante :</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>**%1$s** a la plus forte valeur de %2$s parmi les %3$d éléments qui en ont une : %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>**%1$s** a la plus faible valeur de %2$s parmi les %3$d éléments qui en ont une : %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s** est n° %2$d sur %3$d éléments pour la plus forte valeur de %4$s : %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s** est n° %2$d sur %3$d éléments pour la plus faible valeur de %4$s : %5$s.</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>Le saviez-vous ? L'oxygène est l'élément le plus abondant dans la croûte terrestre !</value>
   </data>

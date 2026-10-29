@@ -540,6 +540,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>Die naam **%1$s** het 'n interessante oorsprong:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>**%1$s** het die hoogste %2$s van die %3$d elemente met 'n aangetekende waarde: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>**%1$s** het die laagste %2$s van die %3$d elemente met 'n aangetekende waarde: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s** is nommer %2$d uit %3$d elemente vir die hoogste %4$s: %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s** is nommer %2$d uit %3$d elemente vir die laagste %4$s: %5$s.</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>Het jy geweet? Suurstof is die mees oorvloedige element in die aardkors!</value>
   </data>

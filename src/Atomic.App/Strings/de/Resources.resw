@@ -528,6 +528,18 @@
   <data name="ai_etymology_header" xml:space="preserve">
     <value>Der Name **%1$s** hat einen interessanten Ursprung:</value>
   </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>**%1$s** hat den höchsten Wert für %2$s unter den %3$d Elementen mit einem erfassten Wert: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>**%1$s** hat den niedrigsten Wert für %2$s unter den %3$d Elementen mit einem erfassten Wert: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s** liegt beim höchsten Wert für %4$s auf Platz %2$d von %3$d Elementen: %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s** liegt beim niedrigsten Wert für %4$s auf Platz %2$d von %3$d Elementen: %5$s.</value>
+  </data>
   <data name="ai_facts.0" xml:space="preserve">
     <value>Wusstest du schon? Sauerstoff ist das am häufigsten vorkommende Element in der Erdkruste!</value>
   </data>
