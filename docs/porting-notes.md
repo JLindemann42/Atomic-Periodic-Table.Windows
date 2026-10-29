@@ -1545,3 +1545,27 @@ The held-out run informed nothing: its one tie, "锇比铝致密多少" (多少 
 left for a stage with dev rows of its own. The Filipino held-out tie the first run showed went with
 the one-word rule, which was found and fixed on the dev row "mas madensidad ba ang ginto kaysa
 tingga".
+
+### D69 — the element descriptions, finished (roadmap 1.10)
+
+A shared-data change; no engine code changes on either platform.
+
+**What changed.** The 277 descriptions that were still part English - Afrikaans 81, Swedish 84,
+Filipino 84, French 25, Hindi 2, Portuguese 2, Italian 1 - are translated whole from the English in
+`shared/tools/translations/descriptions_<lang>.tsv`, machine-translated with `reviewed` blank, and
+written by `shared/tools/element_descriptions.py`. The tool also repairs nobelium's symbol, which
+three locales had translated as the word "no" (French "Non", Urdu and Hindi "not"), adds the symbol
+sentence Chinese lanthanum lacked, and joins five German words broken across a blank line.
+
+**Two corrections to the backlog figures** Android's `check_description_translations.py` reported:
+Afrikaans "is", "was" and "of" are Afrikaans words, so 23 of the 104 Afrikaans rows were already
+Afrikaans; and two French rows (sulfur, titanium) were English under a word-for-word substitution
+that the count did not see ("est a", "crystalldanse"). The tool has a French artefact check for it.
+
+**The language model.** The detector (D62) trains on the descriptions, so `trigrams.tsv` is
+regenerated; Afrikaans, Filipino and Swedish no longer learn English trigrams as their own.
+
+**`ElementDescriptionLanguageTest`**, as on Android, fails a part-English description or a
+translated nobelium symbol in the shipped files. Both tests failed on the old data. .NET's `\b` is
+Unicode-aware, like Python's; Android's test needs `(?U)`, or the "it" in Portuguese "itérbio" counts.
+3,623 core tests pass; held-out (458) passes.
