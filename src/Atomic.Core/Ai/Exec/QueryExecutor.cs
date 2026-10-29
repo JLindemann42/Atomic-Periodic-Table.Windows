@@ -836,7 +836,8 @@ namespace Atomic.Core.Ai.Exec
         private ExecutionResult? Explanation(QueryPlan plan)
         {
             if (plan.Literal is not { } key || _explanations.ByKey(key) is not { } explanation) return null;
-            var trend = explanation.Card is ExplanationCard.Trend card
+            // The text is free; a PRO field's values are not, so its card is left off for a free user.
+            var trend = explanation.Card is ExplanationCard.Trend card && _entitlements.AllowsField(card.FieldId)
                 ? Trend(new QueryPlan(Intent.Trend, FieldIds: [card.FieldId], Filters: card.Filter is null ? [] : [card.Filter]))
                     as ExecutionResult.Trend
                 : null;

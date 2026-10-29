@@ -56,6 +56,18 @@ namespace Atomic.Core.Tests.Ai
         }
 
         [Fact]
+        public void AProFieldsCardStaysPro()
+        {
+            const string query = "why does electron affinity increase across a period";
+            Assert.Equal(ChatCardKind.TrendLine, Chat().Ask(query).Card?.Kind);
+            var free = new ChatOrchestrator(
+                Service, lang => new ReswStringProvider(lang, fallBackToEnglish: true),
+                () => new Entitlements(IsPro: false, IsProPlus: false), null, "en").Ask(query);
+            Assert.Equal(Intent.Explanation, free.Plan?.Intent);
+            Assert.Null(free.Card);
+        }
+
+        [Fact]
         public void ADefinitionIsNotAWhy() =>
             Assert.NotEqual(Intent.Explanation, Chat().Ask("what is electronegativity").Plan?.Intent);
     }

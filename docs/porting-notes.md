@@ -1679,3 +1679,20 @@ the trend line or map, or the ionization series.
 complete, since the plan has no key and no explanations. `ExplanationTest` covers them instead.
 `LexiconTest` counts 89 declarations and 3,718 entries. 3,707 core tests pass, held-out (451) passes,
 and the app builds.
+
+### D74 — explanations, stage 2 (roadmap 2.4)
+
+Ported from Android in the same change. There is no new code beyond one guard; stage 2 is data.
+
+**Data.** There are 40 more explanations in the shared `explanations*.tsv`, which makes 60 in all
+twelve languages. The new cards include thermal conductivity, specific heat and work function.
+`explanations.tsv` in the corpus gains a row per new explanation in English and two in each other
+language. Trigger parts are matched as substrings, so short ones are spelled unambiguously: French
+"l'or" rather than "or" (inside "chlore"), Chinese 黄金 rather than 金 (inside 金属).
+
+**PRO stays PRO.** `QueryExecutor.Explanation` now builds a trend card only when
+`_entitlements.AllowsField` allows its field. Electron affinity is PRO. Stage 1 showed its values in
+the card to free users; now a free user gets the text without the card.
+`ExplanationTest.AProFieldsCardStaysPro` covers it on both platforms.
+
+3,774 core tests pass; held-out (451) passes; the app builds.
