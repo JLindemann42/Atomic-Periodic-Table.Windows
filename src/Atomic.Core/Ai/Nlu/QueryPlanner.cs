@@ -213,7 +213,11 @@ namespace Atomic.Core.Ai.Nlu
             // A mechanism question is checked even mid-thread. Every reported case was a follow-up
             // - "why does that trend hold", "how does that change above Curie temperature" - so
             // excluding follow-ups here exempted exactly the turns that were failing.
-            if (AsksHowItWorks(normalized) || (!carriesOperator && !continuesAThread))
+            // A why with an operator in it is still a why when there is an explanation to give: "why
+            // is fluorine the most electronegative element" asks the reason, not for the ranking
+            // (roadmap 2.4).
+            var whyWithAnAnswer = carriesOperator && AsksWhy(normalized) && ExplanationFor(rawQuery, normalized) is not null;
+            if (AsksHowItWorks(normalized) || (!carriesOperator && !continuesAThread) || whyWithAnAnswer)
             {
                 if (ExplanationPlan(rawQuery, normalized, elementMatches.Count > 0) is { } explanation)
                     Propose(Branch.Explanation, explanation);
@@ -986,7 +990,9 @@ namespace Atomic.Core.Ai.Nlu
                     Lexicon.MOST.Any(w => normalized.Contains(w, StringComparison.Ordinal)) ||
                     Lexicon.LEAST.Any(w => normalized.Contains(w, StringComparison.Ordinal));
 
-                if (!superlative &&
+                // Unless it is a why with an explanation to give: "why is fluorine the most reactive
+                // halogen" asks the reason, not for the ranking (roadmap 2.4).
+                if ((!superlative || (AsksWhy(normalized) && ExplanationFor(rawQuery, normalized) is not null)) &&
                     ExplanationPlan(rawQuery, normalized, hasElement: false) is { } explanation)
                     propose(Branch.UnbackedExplanation, explanation);
 
@@ -1166,15 +1172,12 @@ namespace Atomic.Core.Ai.Nlu
         /// </summary>
         private bool ReadsAsATrend(string normalized) =>
             (MentionsAny(normalized, Lexicon.TREND_WORDS) || MentionsAny(normalized, Lexicon.HEATMAP_WORDS)) &&
-            !Lexicon.WHY_WORDS.Any(w => normalized.StartsWith(w + " ", StringComparison.Ordinal) ||
-                                        normalized.Contains(" " + w + " ", StringComparison.Ordinal)) &&
+            !AsksWhy(normalized) &&
             _fields.ResolveAll(normalized, limit: 1).Any(m => m.Spec.Kind == FieldKind.Numeric);
 
         private QueryPlan? ExplanationPlan(string rawQuery, string normalized, bool hasElement)
         {
-            var isWhy = Lexicon.WHY_WORDS.Any(
-                w => normalized.StartsWith(w + " ", StringComparison.Ordinal) ||
-                     normalized.Contains(" " + w + " ", StringComparison.Ordinal));
+            var isWhy = AsksWhy(normalized);
 
             // A definitional frame over a family named in the *plural* is a request for its members,
             // not for its definition. Deliberately narrowed to isDefinition: "why are noble gases
@@ -1185,6 +1188,19 @@ namespace Atomic.Core.Ai.Nlu
 
             var isMechanism = AsksHowItWorks(normalized);
             if (!isWhy && !isDefinition && !isMechanism) return null;
+
+            // A reviewed explanation first (roadmap 2.4): one that names its own subject, "why are
+            // noble gases unreactive", or the trend a field and a direction pick out, "why does atomic
+            // radius increase down a group". A definition is not a why, and keeps the dictionary.
+            if ((isWhy || isMechanism) && ExplanationFor(rawQuery, normalized) is { } reviewed)
+            {
+                return new QueryPlan(
+                    Intent.Explanation,
+                    Literal: reviewed.Key,
+                    Confidence: 0.9,
+                    RawQuery: rawQuery,
+                    Evidence: [$"explanation {reviewed.Key}"]);
+            }
 
             // Longest topic first, so "electron configuration unusual" beats "electron".
             var topic = ExplanationTopicsByLength
@@ -1222,6 +1238,32 @@ namespace Atomic.Core.Ai.Nlu
                 RawQuery: rawQuery,
                 Evidence: [isWhy ? $"explains {topic!.Value.Value}" : $"defines {topic!.Value.Value}"]);
         }
+
+        /// <summary>
+        /// The explanation a why question asks for: by its trigger phrases, or by the field it names
+        /// and the way it reads the table - down a group, across a period, or neither, which takes the
+        /// field's first.
+        /// </summary>
+        private Explanation? ExplanationFor(string rawQuery, string normalized)
+        {
+            if (_explanations.ForTopic(normalized) is { } byTopic) return byTopic;
+            ExplanationScope? scope =
+                MentionsAny(normalized, Lexicon.EXPLAIN_DOWN_WORDS) ? ExplanationScope.Group :
+                MentionsAny(normalized, Lexicon.EXPLAIN_ACROSS_WORDS) ? ExplanationScope.Period :
+                null;
+            // Each field the question names, until one has an explanation: "why does radius decrease
+            // left to right, despite adding electrons" names electrons as well as radius.
+            return _fields.ResolveAll(rawQuery, limit: 3)
+                .Where(m => m.Spec.Kind == FieldKind.Numeric)
+                .Select(m => _explanations.ForTrend(m.Spec.Id, scope))
+                .FirstOrDefault(e => e is not null);
+        }
+
+        /// <summary>Chinese writes no spaces, so "为什么汞是液体" holds its why word with nothing around it.</summary>
+        private static bool AsksWhy(string normalized) => Lexicon.WHY_WORDS.Any(w =>
+            normalized.StartsWith(w + " ", StringComparison.Ordinal) ||
+            normalized.Contains(" " + w + " ", StringComparison.Ordinal) ||
+            (w.Any(c => c > '\u2000') && normalized.Contains(w, StringComparison.Ordinal)));
 
         /// <summary>"Electronegativity" for "Periodic trend: electronegativity", when the glossary has one.</summary>
         private DatasetRow? PlainDefinition(string topic)

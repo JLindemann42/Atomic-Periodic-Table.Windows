@@ -92,6 +92,12 @@ namespace Atomic.Core.Ai.Engine
         /// </summary>
         Trend,
 
+        /// <summary>
+        /// A reviewed explanation of a mechanism (roadmap 2.4): "why does atomic radius increase down a
+        /// group", shown with the trend it explains. <see cref="QueryPlan.Literal"/> is its key.
+        /// </summary>
+        Explanation,
+
         /// <summary>Nothing recognised. The caller should fall back.</summary>
         Unknown,
     }

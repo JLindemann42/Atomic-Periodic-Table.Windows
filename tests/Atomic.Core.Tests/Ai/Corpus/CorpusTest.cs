@@ -259,6 +259,11 @@ namespace Atomic.Core.Tests.Corpus
         [Theory, MemberData(nameof(Trends))]
         public void Trends_Pass(string key) => RunUnit("trends", key);
 
+        /// <summary>Why-questions answered with a written explanation and its card (roadmap 2.4).</summary>
+        public static TheoryData<string> Explanations => Units("explanations");
+        [Theory, MemberData(nameof(Explanations))]
+        public void Explanations_Pass(string key) => RunUnit("explanations", key);
+
         // ---- Scoreboard ------------------------------------------------------------------------
 
         /// <summary>
@@ -534,10 +539,17 @@ namespace Atomic.Core.Tests.Corpus
             // Content, not only routing (roadmap 0.6): which row, which number.
             if (corpusCase.ExpectRow is { } expectedRow)
             {
-                if (result is not ExecutionResult.Dataset dataset)
+                // An explanation is a row of the explanations table (roadmap 2.4): explanation/<key>.
+                var key = result switch
+                {
+                    ExecutionResult.Dataset dataset => dataset.Row.Key,
+                    ExecutionResult.Explanation explanation => $"explanation/{explanation.Key}",
+                    _ => null,
+                };
+                if (key is null)
                     return $"'{corpusCase.Query}' should answer from {expectedRow}, but produced {result.GetType().Name}";
-                if (!string.Equals(dataset.Row.Key, expectedRow, StringComparison.Ordinal))
-                    return $"'{corpusCase.Query}' answered from {dataset.Row.Key}, expected {expectedRow}";
+                if (!string.Equals(key, expectedRow, StringComparison.Ordinal))
+                    return $"'{corpusCase.Query}' answered from {key}, expected {expectedRow}";
             }
 
             if (corpusCase.ExpectValue is { } expectedValue)

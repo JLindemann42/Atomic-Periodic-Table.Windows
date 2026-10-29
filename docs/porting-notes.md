@@ -1646,3 +1646,36 @@ than the top three.
 
 `trends.tsv` joins the corpus (37 files), with `ValueOf` reading a trend's first value. `LexiconTest`
 counts 87 declarations and 3,631 entries. 3,665 core tests pass; held-out (459) passes; the app builds.
+
+### D73 — explanations for why-questions (roadmap 2.4, stage 1)
+
+Ported from Android in the same change.
+
+**What changed.** `Intent.Explanation` and `ExecutionResult.Explanation`: a reviewed explanation of a
+mechanism, shown with the data it explains. `Ai/Data/Explanations.cs` reads `explanations.tsv` (what
+each explains and its card) and `explanations_<lang>.tsv` (the words, English filling a missing row),
+and picks one by trigger phrase, longest match first, or by a named field and a direction
+(`EXPLAIN_DOWN_WORDS`, `EXPLAIN_ACROSS_WORDS`, from the generated lexicon). `RetrievalService.Explanations`
+caches the set per language; `ChatOrchestrator` passes it to `AiEngine`, which hands it to the planner
+and the executor. Stage 1 has 20 explanations of the roughly 60 the roadmap lists.
+
+**Planner.** `ExplanationPlan` tries an explanation before the dictionary, for a why or a mechanism
+only. A why with an operator in it reaches it when one exists (`whyWithAnAnswer`), and so does a
+superlative behind the unbacked-concept guard ("why is fluorine the most reactive halogen").
+`AsksWhy` replaces three inline copies of the why test and matches a CJK why word on its own:
+Chinese "为什么" was never recognised. `Branch.Trend` moves before `SubsetList`, as on Android.
+
+**Executor, composer, cards.** `QueryExecutor.Explanation` builds the card's data through `Trend` or
+`KnowledgeStore.Element`. The record's trend is `ExplainedTrend`, not `Trend` as on Android, because a
+positional property cannot share its name with the nested `ExecutionResult.Trend` type. The composer
+returns the text, adding `ai_dataset_english_note` when it fell back to English. `CardSelector` shows
+the trend line or map, or the ionization series.
+
+**Shipping.** `explanations*.tsv` is a `Content` item in the app (`Assets\Datasets`) and in the tests
+(`assets\`). `MapElementSource` takes an optional text lookup, as on Android.
+
+`explanations.tsv` joins the corpus (38 files). `expect_row` accepts `explanation/<key>`.
+`QueryExecutorTest.EveryIntentIsHandled` names `Explanation` among the intents a synthetic plan cannot
+complete, since the plan has no key and no explanations. `ExplanationTest` covers them instead.
+`LexiconTest` counts 89 declarations and 3,718 entries. 3,707 core tests pass, held-out (451) passes,
+and the app builds.

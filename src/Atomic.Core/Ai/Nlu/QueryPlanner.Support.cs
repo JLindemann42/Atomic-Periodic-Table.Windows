@@ -35,19 +35,23 @@ namespace Atomic.Core.Ai.Nlu
         private readonly EntityResolver _entities;
         private readonly FieldResolver _fields;
         private readonly HybridRetriever? _retriever;
+        private readonly Explanations _explanations;
 
+        /// <param name="explanations">The reviewed explanations for this language (roadmap 2.4).</param>
         public QueryPlanner(
             KnowledgeStore store,
             DatasetIndex datasets,
             EntityResolver entities,
             FieldResolver fields,
-            HybridRetriever? retriever)
+            HybridRetriever? retriever,
+            Explanations? explanations = null)
         {
             _store = store;
             _datasets = datasets;
             _entities = entities;
             _fields = fields;
             _retriever = retriever;
+            _explanations = explanations ?? Explanations.Empty;
             _morphology = new Morphology(fields);
             _speller = new Lazy<Speller>(() => Speller.Build(entities.NameWords(), fields.AliasWords()));
         }

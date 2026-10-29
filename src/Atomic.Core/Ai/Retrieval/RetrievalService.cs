@@ -51,6 +51,14 @@ namespace Atomic.Core.Ai.Retrieval
             return new HybridRetriever(Store, Datasets, index, Resolver(language), view);
         }
 
+        private readonly ConcurrentDictionary<string, Explanations> _explanations = new(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>The reviewed explanations for a language, English filling its gaps (roadmap 2.4).</summary>
+        public Explanations Explanations(string language) =>
+            _explanations.GetOrAdd(language, lang => Data.Explanations.Parse(
+                _source.Text("explanations.tsv"), _source.Text($"explanations_{lang}.tsv"),
+                _source.Text("explanations_en.tsv"), lang));
+
         /// <summary>The entity resolver for a language, built on first use.</summary>
         public EntityResolver Resolver(string language) =>
             _resolvers.GetOrAdd(language, lang => new EntityResolver(SharedAliases(), lang));

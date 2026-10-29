@@ -1459,6 +1459,30 @@ public static class Lexicon
         "趋势", "变化", "规律",
     ];
 
+    public static readonly IReadOnlyList<string> EXPLAIN_DOWN_WORDS =
+    [
+        "down a group", "down the group", "down group", "down a column", "going down", "in a group",
+        "in the group", "nedat i en grupp", "nedat i gruppen", "i en grupp", "i gruppen",
+        "in einer gruppe", "in der gruppe", "nach unten", "dans un groupe", "dans le groupe", "en descendant", "vers le bas",
+        "le long du groupe", "le long d un groupe", "le long dun groupe",
+        "en un grupo", "en el grupo", "al bajar", "in un gruppo", "nel gruppo", "scendendo",
+        "em um grupo", "num grupo", "no grupo", "descendo", "in 'n groep", "in n groep", "in die groep",
+        "af in", "sa isang grupo", "sa grupo", "pababa", "समूह में", "گروپ میں", "同族", "族中", "从上到下",
+    ];
+
+    public static readonly IReadOnlyList<string> EXPLAIN_ACROSS_WORDS =
+    [
+        "across a period", "across the period", "across period", "across a row", "left to right",
+        "in a period", "in the period", "over en period", "over perioden", "i en period", "i perioden",
+        "fran vanster till hoger", "in einer periode", "in der periode", "von links nach rechts",
+        "uber die periode", "dans une periode", "dans la periode", "de gauche a droite", "le long",
+        "en un periodo", "en el periodo", "de izquierda a derecha", "in un periodo", "nel periodo",
+        "da sinistra a destra", "em um periodo", "num periodo", "no periodo", "da esquerda para a direita",
+        "oor 'n periode", "oor n periode", "in die periode", "van links na regs", "sa isang period",
+        "sa period", "mula kaliwa pakanan", "आवर्त में", "बाएँ से दाएँ", "دور میں", "بائیں سے دائیں",
+        "同周期", "周期中", "从左到右",
+    ];
+
     public static readonly IReadOnlyList<string> HEATMAP_WORDS =
     [
         "heat map", "heatmap", "map of", "across the periodic table", "over the periodic table",

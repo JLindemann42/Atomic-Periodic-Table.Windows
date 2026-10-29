@@ -49,11 +49,16 @@ namespace Atomic.Core.Ai.Data
     public sealed class MapElementSource : IElementSource
     {
         private readonly IReadOnlyDictionary<string, ElementTable> _byLanguage;
+        private readonly System.Func<string, string?> _texts;
 
-        public MapElementSource(IReadOnlyDictionary<string, ElementTable> byLanguage)
+        /// <param name="texts">The text files beside the tables, for tests that read them (roadmap 2.4).</param>
+        public MapElementSource(IReadOnlyDictionary<string, ElementTable> byLanguage, System.Func<string, string?>? texts = null)
         {
             _byLanguage = byLanguage;
+            _texts = texts ?? (_ => null);
         }
+
+        public string? Text(string name) => _texts(name);
 
         public IReadOnlyList<string> AvailableLanguages() =>
             _byLanguage.Keys.OrderBy(k => k, System.StringComparer.Ordinal).ToList();

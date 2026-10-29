@@ -47,11 +47,12 @@ namespace Atomic.Core.Ai.Engine
             EntityResolver entities,
             HybridRetriever? retriever,
             Entitlements? entitlements = null,
-            ChatCardPolicy? cardPolicy = null)
+            ChatCardPolicy? cardPolicy = null,
+            Explanations? explanations = null)
         {
             _store = store;
-            _planner = new QueryPlanner(store, datasets, entities, new FieldResolver(strings), retriever);
-            _executor = new QueryExecutor(store, datasets, localized, strings, entitlements);
+            _planner = new QueryPlanner(store, datasets, entities, new FieldResolver(strings), retriever, explanations);
+            _executor = new QueryExecutor(store, datasets, localized, strings, entitlements, explanations);
             _composer = new AnswerComposer(store, localized, strings, cardPolicy);
         }
 
@@ -270,6 +271,8 @@ namespace Atomic.Core.Ai.Engine
             ExecutionResult.Comparison r => r.Elements.Select(e => e.Key).ToList(),
             ExecutionResult.ElementList r => r.Results.Select(v => v.Element.Key).ToList(),
             ExecutionResult.Trend r => r.Points.Select(v => v.Element.Key).ToList(),
+            ExecutionResult.Explanation r => r.ExplainedTrend?.Points.Select(v => v.Element.Key).ToList()
+                ?? (r.Ionization is null ? [] : [r.Ionization.Key]),
             ExecutionResult.Aggregate r => r.Contributors.Select(v => v.Element.Key).ToList(),
             ExecutionResult.Isotopes r => [r.Element.Key],
             ExecutionResult.Safety r => [r.Element.Key],

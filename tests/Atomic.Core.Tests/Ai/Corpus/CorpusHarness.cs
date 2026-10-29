@@ -110,10 +110,14 @@ namespace Atomic.Core.Tests.Corpus
             // A real corpus and a real index, so the dataset fallback behaves as it does in the app.
             var index = new Bm25Index(HybridRetriever.BuildCorpus(store, datasets, localized), language);
             var retriever = new HybridRetriever(store, datasets, index, entities, localized);
-            var planner = new QueryPlanner(store, datasets, entities, new FieldResolver(strings), retriever);
-            var executor = new QueryExecutor(store, datasets, localized, strings);
+            // The reviewed explanations, as the app loads them (roadmap 2.4).
+            var explanations = Explanations.Parse(
+                TestAssets.ElementSource.Text("explanations.tsv"), TestAssets.ElementSource.Text($"explanations_{language}.tsv"),
+                TestAssets.ElementSource.Text("explanations_en.tsv"), language);
+            var planner = new QueryPlanner(store, datasets, entities, new FieldResolver(strings), retriever, explanations);
+            var executor = new QueryExecutor(store, datasets, localized, strings, explanations: explanations);
             var composer = new AnswerComposer(store, localized, strings);
-            var engine = new AiEngine(store, datasets, localized, strings, entities, retriever);
+            var engine = new AiEngine(store, datasets, localized, strings, entities, retriever, explanations: explanations);
 
             return new Stack(language, store, datasets, localized, strings, entities,
                 retriever, index, planner, executor, composer, engine);

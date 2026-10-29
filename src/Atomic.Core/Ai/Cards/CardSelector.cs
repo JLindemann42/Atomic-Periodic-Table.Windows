@@ -94,6 +94,13 @@ namespace Atomic.Core.Ai.Cards
 
                 ExecutionResult.Trend t => ForTrend(t, store, strings),
 
+                // An explanation is shown with the data it explains (roadmap 2.4).
+                ExecutionResult.Explanation x => x.ExplainedTrend is not null
+                    ? ForTrend(x.ExplainedTrend, store, strings)
+                    : x.Ionization is not null && IonizationSeriesReducer.Of(x.Ionization) is not null
+                        ? Card(ChatCardKind.IonizationSeries, x.Ionization, localized)
+                        : null,
+
                 _ => null,
             };
         }

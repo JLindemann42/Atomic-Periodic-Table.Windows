@@ -88,6 +88,7 @@ namespace Atomic.Core.Ai.Compose
                 ExecutionResult.EmissionSpectrum r => EmissionSpectrum(r),
                 ExecutionResult.Dataset r => Dataset(r),
                 ExecutionResult.Trend r => Trend(r),
+                ExecutionResult.Explanation r => Explanation(r),
                 ExecutionResult.NoData r => NoData(r),
                 ExecutionResult.Locked r => Locked(r),
                 ExecutionResult.Empty => _strings.Get(S.ai_filter_none),
@@ -990,6 +991,20 @@ namespace Atomic.Core.Ai.Compose
                 DisplayName(highest.Element.Key), highest.Display, DisplayName(lowest.Element.Key), lowest.Display));
             if (result.Missing > 0) builder.Append('\n').Append(_strings.Get(S.ai_aggregate_missing_note, result.Missing));
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// A reviewed explanation (roadmap 2.4). The card beside it shows the data; an explanation only
+        /// written in English so far says so, as a dictionary entry does.
+        /// </summary>
+        private string Explanation(ExecutionResult.Explanation result)
+        {
+            if (string.Equals(result.Language, English, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(_strings.Language, English, StringComparison.OrdinalIgnoreCase)) return result.Text;
+            var note = Try.OrNull(() => _strings.Get(S.ai_dataset_english_note));
+            return note is null || note.StartsWith("str:", StringComparison.Ordinal)
+                ? result.Text
+                : $"{result.Text}\n\n{note}";
         }
 
         private string Dataset(ExecutionResult.Dataset result)

@@ -34,6 +34,10 @@
     <Content Include="..\..\shared\datasets\titles_*.tsv"
              Link="assets\%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
+    <!-- The written explanations for why-questions, and their words in each language (roadmap 2.4). -->
+    <Content Include="..\..\shared\datasets\explanations*.tsv"
+             Link="assets\%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
     <!-- The language detector's trigram model (roadmap 1.4). -->
     <Content Include="..\..\shared\language\trigrams.tsv"
              Link="assets\trigrams.tsv"

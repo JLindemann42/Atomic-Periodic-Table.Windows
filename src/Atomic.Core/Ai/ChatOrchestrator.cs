@@ -687,7 +687,8 @@ namespace Atomic.Core.Ai
                 _retrieval.Resolver(language),
                 _retrieval.Retriever(language),
                 current,
-                _cardPolicy);
+                _cardPolicy,
+                _retrieval.Explanations(language));
 
             _engines[language] = engine;
             return engine;

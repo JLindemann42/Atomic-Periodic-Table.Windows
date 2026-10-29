@@ -32,6 +32,7 @@ namespace Atomic.Core.Ai.Exec
         private readonly LocalizedView? _localized;
         private readonly IStringProvider _strings;
         private readonly Entitlements _entitlements;
+        private readonly Explanations _explanations;
 
         /// <param name="entitlements">
         /// What the user may be told. Defaulted to full access so existing callers and tests are
@@ -42,13 +43,15 @@ namespace Atomic.Core.Ai.Exec
             DatasetIndex datasets,
             LocalizedView? localized,
             IStringProvider strings,
-            Entitlements? entitlements = null)
+            Entitlements? entitlements = null,
+            Explanations? explanations = null)
         {
             _store = store;
             _datasets = datasets;
             _localized = localized;
             _strings = strings;
             _entitlements = entitlements ?? Entitlements.Full;
+            _explanations = explanations ?? Explanations.Empty;
         }
 
         /// <summary>
@@ -138,6 +141,7 @@ namespace Atomic.Core.Ai.Exec
                 Intent.Aggregate => Aggregate(plan),
                 Intent.DatasetLookup => Dataset(plan),
                 Intent.Trend => Trend(plan),
+                Intent.Explanation => Explanation(plan),
                 Intent.Unknown => null,
                 _ => null,
             };
@@ -822,6 +826,24 @@ namespace Atomic.Core.Ai.Exec
             return new ExecutionResult.Trend(
                 fieldId, points, pool.Count - points.Count, plan.Filters.Count == 0,
                 new[] { points[0], points[^1] }.Distinct().Select(p => CitationFor(fieldId, p.Element)).ToList());
+        }
+
+        /// <summary>
+        /// A reviewed explanation, with the data it explains computed now from the store (roadmap 2.4):
+        /// the trend it describes, or the element whose ionization series shows it. The text says why;
+        /// the card shows that it is so.
+        /// </summary>
+        private ExecutionResult? Explanation(QueryPlan plan)
+        {
+            if (plan.Literal is not { } key || _explanations.ByKey(key) is not { } explanation) return null;
+            var trend = explanation.Card is ExplanationCard.Trend card
+                ? Trend(new QueryPlan(Intent.Trend, FieldIds: [card.FieldId], Filters: card.Filter is null ? [] : [card.Filter]))
+                    as ExecutionResult.Trend
+                : null;
+            var ionization = explanation.Card is ExplanationCard.Ionization i ? _store.Element(i.ElementKey) : null;
+            return new ExecutionResult.Explanation(
+                explanation.Key, explanation.Text, explanation.Language, trend, ionization,
+                trend?.Citations ?? []);
         }
 
         private ExecutionResult ElementList(QueryPlan plan)

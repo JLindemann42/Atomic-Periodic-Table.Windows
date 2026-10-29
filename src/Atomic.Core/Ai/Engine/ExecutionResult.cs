@@ -339,6 +339,22 @@ namespace Atomic.Core.Ai.Engine
             public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
         }
 
+        /// <summary>
+        /// A reviewed explanation (roadmap 2.4), with the data it explains: a trend over a set or the
+        /// whole table, or one element's ionization series.
+        /// </summary>
+        /// <param name="Language">The language <paramref name="Text"/> is in, so an English fallback can be disclosed.</param>
+        public sealed record Explanation(
+            string Key,
+            string Text,
+            string Language,
+            Trend? ExplainedTrend,
+            ElementRecord? Ionization,
+            IReadOnlyList<Citation> Citations) : ExecutionResult
+        {
+            public override IReadOnlyList<Citation> Citations { get; init; } = Citations;
+        }
+
         /// <summary>A row from one of the app's tables.</summary>
         public sealed record Dataset(
             Data.DatasetRow Row,

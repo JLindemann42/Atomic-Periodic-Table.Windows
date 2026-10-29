@@ -582,9 +582,10 @@ namespace Atomic.Core.Tests.Ai.Exec
 
             // The intents that legitimately return null do so because the *plan* was incomplete,
             // not because the intent is unhandled - they need entities this synthetic plan has no
-            // way to supply. Named so the set cannot grow unnoticed.
+            // way to supply. Named so the set cannot grow unnoticed. An explanation needs its key and
+            // the explanations it names, which ExplanationTest supplies (roadmap 2.4).
             Assert.Equal(
-                [Intent.SolutionCalc, Intent.UnitConvert],
+                [Intent.Explanation, Intent.SolutionCalc, Intent.UnitConvert],
                 unhandled.OrderBy(i => i.ToString(), StringComparer.Ordinal));
 
             static QueryPlan PlanFor(Intent intent) => intent switch

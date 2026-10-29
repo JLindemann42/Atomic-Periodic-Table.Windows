@@ -166,6 +166,10 @@
 		<Content Include="..\..\shared\datasets\titles_*.tsv" Link="Assets\Datasets\%(Filename)%(Extension)">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<!-- The written explanations for why-questions, and their words in each language (roadmap 2.4). -->
+		<Content Include="..\..\shared\datasets\explanations*.tsv" Link="Assets\Datasets\%(Filename)%(Extension)">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<!-- The language detector's trigram model (roadmap 1.4). -->
 		<Content Include="..\..\shared\language\trigrams.tsv" Link="Assets\Language\trigrams.tsv">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
