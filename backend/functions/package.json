@@ -1,0 +1,28 @@
+{
+  "name": "atomic-entitlements",
+  "private": true,
+  "description": "Store-verified entitlements for Atomic - Periodic Table. See docs/ultimate-sync-plan.md.",
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "probe": "tsc && node lib/probe.js",
+    "test": "tsc && node --test lib/**/*.test.js",
+    "test:rules": "firebase emulators:exec --only firestore \"node --test lib/rules.test.js\"",
+    "serve": "npm run build && firebase emulators:start --only functions,firestore,auth",
+    "deploy": "firebase deploy --only functions,firestore:rules"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.1.0",
+    "google-auth-library": "^9.14.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^4.0.1",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0",
+    "firebase": "^10.13.0"
+  }
+}

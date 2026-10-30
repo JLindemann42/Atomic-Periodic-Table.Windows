@@ -1,0 +1,3969 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dictionary" xml:space="preserve">
+    <value>词典</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>新</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>表格</value>
+  </data>
+  <data name="about_app_name" xml:space="preserve">
+    <value>Atomic - 元素周期表</value>
+  </data>
+  <data name="about_title" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="abundance_crustal_rocks" xml:space="preserve">
+    <value>地壳岩石中</value>
+  </data>
+  <data name="abundance_earth_crust" xml:space="preserve">
+    <value>地壳中</value>
+  </data>
+  <data name="abundance_earth_soils" xml:space="preserve">
+    <value>土壤中</value>
+  </data>
+  <data name="abundance_human_body" xml:space="preserve">
+    <value>人体内</value>
+  </data>
+  <data name="abundance_meteorites" xml:space="preserve">
+    <value>陨石中</value>
+  </data>
+  <data name="abundance_sea_water" xml:space="preserve">
+    <value>海水中</value>
+  </data>
+  <data name="abundance_solar_system" xml:space="preserve">
+    <value>太阳系原子中</value>
+  </data>
+  <data name="abundance_sun" xml:space="preserve">
+    <value>太阳原子中</value>
+  </data>
+  <data name="abundance_title" xml:space="preserve">
+    <value>丰度</value>
+  </data>
+  <data name="abundance_urban_soil" xml:space="preserve">
+    <value>城市土壤中</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>账户</value>
+  </data>
+  <data name="account_id" xml:space="preserve">
+    <value>账户 ID</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>账户 ID 已复制</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>它必须与 Windows 应用中显示的 ID 一致。如果不同，说明两台设备正在同步到不同的账户。</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>未登录</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>尚未同步</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>账户</value>
+  </data>
+  <data name="achievement_reached_prefix" xml:space="preserve">
+    <value>达成成就：</value>
+  </data>
+  <data name="activity_alloy_title" xml:space="preserve">
+    <value>合金</value>
+  </data>
+  <data name="activity_equations_title" xml:space="preserve">
+    <value>公式</value>
+  </data>
+  <data name="activity_formulas_search" xml:space="preserve">
+    <value>搜索公式：</value>
+  </data>
+  <data name="activity_geology_mineral" xml:space="preserve">
+    <value>矿物</value>
+  </data>
+  <data name="activity_geology_rock" xml:space="preserve">
+    <value>岩石</value>
+  </data>
+  <data name="activity_geology_soil" xml:space="preserve">
+    <value>土壤</value>
+  </data>
+  <data name="activity_geology_title" xml:space="preserve">
+    <value>地质学</value>
+  </data>
+  <data name="activity_io_title" xml:space="preserve">
+    <value>电离能</value>
+  </data>
+  <data name="activity_ph_acid" xml:space="preserve">
+    <value>酸</value>
+  </data>
+  <data name="activity_ph_alkaline" xml:space="preserve">
+    <value>碱</value>
+  </data>
+  <data name="activity_ph_bromothymol_blue" xml:space="preserve">
+    <value>溴麝香草酚蓝</value>
+  </data>
+  <data name="activity_ph_congo_red" xml:space="preserve">
+    <value>刚果红</value>
+  </data>
+  <data name="activity_ph_methyl_orange" xml:space="preserve">
+    <value>甲基橙</value>
+  </data>
+  <data name="activity_ph_neutral" xml:space="preserve">
+    <value>中性</value>
+  </data>
+  <data name="activity_ph_phenolphthalein" xml:space="preserve">
+    <value>酚酞</value>
+  </data>
+  <data name="activity_ph_title" xml:space="preserve">
+    <value>pH指示剂</value>
+  </data>
+  <data name="activity_table_title" xml:space="preserve">
+    <value>表格</value>
+  </data>
+  <data name="activity_unit_title" xml:space="preserve">
+    <value>表格单位</value>
+  </data>
+  <data name="add_widget" xml:space="preserve">
+    <value>添加小部件</value>
+  </data>
+  <data name="additional_ai_messages" xml:space="preserve">
+    <value>增加的 AI 消息限制：</value>
+  </data>
+  <data name="additional_data_item" xml:space="preserve">
+    <value>- 额外数据：</value>
+  </data>
+  <data name="additional_flashcards_games" xml:space="preserve">
+    <value>额外闪卡游戏：</value>
+  </data>
+  <data name="additional_properties_requires_pro" xml:space="preserve">
+    <value>额外属性需要PRO版本。获取PRO以解锁更多数据和表格：</value>
+  </data>
+  <data name="additional_tables_item" xml:space="preserve">
+    <value>- 额外表格：</value>
+  </data>
+  <data name="ai_abundance_caption" xml:space="preserve">
+    <value>对数刻度。各储库的单位不同，彼此之间无法换算。</value>
+  </data>
+  <data name="ai_abundance_header" xml:space="preserve">
+    <value>以下是来自应用数据库的 **%1$s** 丰度数据：</value>
+  </data>
+  <data name="ai_abundance_relative" xml:space="preserve">
+    <value>（相对于 H=10¹²）</value>
+  </data>
+  <data name="ai_adv_header" xml:space="preserve">
+    <value>%1$s 的高级属性：</value>
+  </data>
+  <data name="ai_aggregate_average" xml:space="preserve">
+    <value>平均%1$s</value>
+  </data>
+  <data name="ai_aggregate_median" xml:space="preserve">
+    <value>%1$s中位数</value>
+  </data>
+  <data name="ai_aggregate_missing_note" xml:space="preserve">
+    <value>有 %1$d 个符合条件但没有记录值，因此被排除。</value>
+  </data>
+  <data name="ai_aggregate_over" xml:space="preserve">
+    <value>基于 %2$d 个符合条件的元素中的 %1$d 个计算。</value>
+  </data>
+  <data name="ai_aggregate_result" xml:space="preserve">
+    <value>**%1$s**：%2$s</value>
+  </data>
+  <data name="ai_aggregate_spread" xml:space="preserve">
+    <value>范围从 %1$s (%2$s) 到 %3$s (%4$s)。</value>
+  </data>
+  <data name="ai_aggregate_sum" xml:space="preserve">
+    <value>%1$s总计</value>
+  </data>
+  <data name="ai_all_covered" xml:space="preserve">
+    <value>我们已经涵盖了很多关于 %1$s 的内容！你知道吗？</value>
+  </data>
+  <data name="ai_another_isotope" xml:space="preserve">
+    <value> 另一个同位素是 %1$s。</value>
+  </data>
+  <data name="ai_appears_as" xml:space="preserve">
+    <value>%1$s 的外观为：%2$s</value>
+  </data>
+  <data name="ai_aspects_not_compared" xml:space="preserve">
+    <value>我无法根据已存储的数据比较%1$s——它不是记录在案的属性。针对单个元素提问，我可以解释它。</value>
+  </data>
+  <data name="ai_avogadro_note" xml:space="preserve">
+    <value>使用阿伏伽德罗常数，每摩尔 6.02214076 × 10²³。</value>
+  </data>
+  <data name="ai_beta_badge" xml:space="preserve">
+    <value>测试版</value>
+  </data>
+  <data name="ai_bio_role_header" xml:space="preserve">
+    <value>关于它的生物学作用，我找到了以下关于 **%1$s** 的信息：</value>
+  </data>
+  <data name="ai_block_d" xml:space="preserve">
+    <value>d 区包含第 3 到 12 族的过渡金属。</value>
+  </data>
+  <data name="ai_block_f" xml:space="preserve">
+    <value>f 区包含镧系和锕系，通常显示在主表下方。</value>
+  </data>
+  <data name="ai_block_generic" xml:space="preserve">
+    <value>我不确定你指的是哪个区。我了解 s、p、d 和 f 区！</value>
+  </data>
+  <data name="ai_block_p" xml:space="preserve">
+    <value>p 区包含第 13 到 18 族，包括所有非金属（除 H 和 He 外）、类金属和后过渡金属。</value>
+  </data>
+  <data name="ai_block_s" xml:space="preserve">
+    <value>s 区由前两族组成：碱金属、碱土金属，加上氢和氦。</value>
+  </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>周期表中的%1$s</value>
+  </data>
+  <data name="ai_card_pro_locked" xml:space="preserve">
+    <value>解锁可视化答案</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>%1$s趋势</value>
+  </data>
+  <data name="ai_chat_setting" xml:space="preserve">
+    <value>启用 AI 聊天助手</value>
+  </data>
+  <data name="ai_chat_setting_description" xml:space="preserve">
+    <value>允许 AI 助手回答有关元素的问题</value>
+  </data>
+  <data name="ai_check_isotope_table" xml:space="preserve">
+    <value>%1$s 有多种同位素。您可以查看详细的同位素表以获取完整列表！</value>
+  </data>
+  <data name="ai_common_isotopes" xml:space="preserve">
+    <value>%1$s 的常见同位素包括 %2$s。</value>
+  </data>
+  <data name="ai_comparative_no" xml:space="preserve">
+    <value>**否**——正好相反。在%5$s上，%1$s（%2$s）超过 %3$s（%4$s）。</value>
+  </data>
+  <data name="ai_comparative_ratio" xml:space="preserve">
+    <value>%1$s 的%5$s是 %3$s 的 **%2$s 倍**——%4$s。</value>
+  </data>
+  <data name="ai_comparative_winner" xml:space="preserve">
+    <value>**%1$s。** 它的%5$s是 %2$s，而 %3$s 是 %4$s。</value>
+  </data>
+  <data name="ai_comparative_yes" xml:space="preserve">
+    <value>**是。** 在%5$s上，%1$s（%2$s）超过 %3$s（%4$s）。</value>
+  </data>
+  <data name="ai_compare_all_same" xml:space="preserve">
+    <value>
+• **%1$s：** 全部都是 %2$s%3$s。</value>
+  </data>
+  <data name="ai_compare_difference_value" xml:space="preserve">
+    <value>它们之间存在 **%1$s%2$s** 的差异。</value>
+  </data>
+  <data name="ai_compare_mixed_item" xml:space="preserve">
+    <value>%1$s 是 %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_property_row" xml:space="preserve">
+    <value>• %1$s：%2$s%3$s</value>
+  </data>
+  <data name="ai_compare_the_others" xml:space="preserve">
+    <value>其他的</value>
+  </data>
+  <data name="ai_comparing_title" xml:space="preserve">
+    <value>%1$s 的比较：</value>
+  </data>
+  <data name="ai_comparison_all" xml:space="preserve">
+    <value>全部 </value>
+  </data>
+  <data name="ai_comparison_and" xml:space="preserve">
+    <value> 和 </value>
+  </data>
+  <data name="ai_comparison_are" xml:space="preserve">
+    <value> 是 </value>
+  </data>
+  <data name="ai_comparison_but" xml:space="preserve">
+    <value>，但是 </value>
+  </data>
+  <data name="ai_comparison_is" xml:space="preserve">
+    <value> 是 </value>
+  </data>
+  <data name="ai_comparison_verdict" xml:space="preserve">
+    <value>在比较的 %3$d 项属性中，%1$s 有 %2$d 项数值更高。</value>
+  </data>
+  <data name="ai_comparison_vs" xml:space="preserve">
+    <value> 对比 </value>
+  </data>
+  <data name="ai_comparison_while" xml:space="preserve">
+    <value>，而 </value>
+  </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s 占 %3$s 质量的 **%2$s**。</value>
+  </data>
+  <data name="ai_composition_header" xml:space="preserve">
+    <value>%1$s 的组成</value>
+  </data>
+  <data name="ai_composition_row" xml:space="preserve">
+    <value>• **%1$s** ×%2$d — %3$s g/mol（%4$s%%）</value>
+  </data>
+  <data name="ai_concept_atomic_number" xml:space="preserve">
+    <value>**原子序数**是原子中质子的数量。它是元素在元素周期表中排列的主要方式。</value>
+  </data>
+  <data name="ai_concept_electron" xml:space="preserve">
+    <value>**电子**是绕原子核运行的带负电的粒子。它们参与化学键和导电。</value>
+  </data>
+  <data name="ai_concept_electronegativity" xml:space="preserve">
+    <value>**电负性**衡量原子在化学键中吸引电子的能力。氟是最具电负性的元素！</value>
+  </data>
+  <data name="ai_concept_generic" xml:space="preserve">
+    <value>这是化学中的一个核心概念！您想深入了解其中的哪一部分？我了解质子、化学键、放射性等等。</value>
+  </data>
+  <data name="ai_concept_group" xml:space="preserve">
+    <value>**族**是垂直的一列。同一族的元素通常具有相似的化学性质和相同数量的价电子。</value>
+  </data>
+  <data name="ai_concept_ionization" xml:space="preserve">
+    <value>**电离能**是从原子中移除一个电子所需的能量。它通常随着在元素周期表中向右移动而增加。</value>
+  </data>
+  <data name="ai_concept_isotope" xml:space="preserve">
+    <value>**同位素**是具有相同质子数但不同中子数的元素变体。这会影响其原子量！</value>
+  </data>
+  <data name="ai_concept_neutron" xml:space="preserve">
+    <value>**中子**是原子核中的中性粒子。它们增加质量并有助于稳定原子核，特别是在较重的元素中。</value>
+  </data>
+  <data name="ai_concept_orbital" xml:space="preserve">
+    <value>**轨道**是原子核周围空间中存在电子概率较高的区域。它们的形状如 s、p、d 和 f。</value>
+  </data>
+  <data name="ai_concept_period" xml:space="preserve">
+    <value>**周期**是元素周期表中的水平一行。同一周期的元素具有相同数量的电子层。</value>
+  </data>
+  <data name="ai_concept_proton" xml:space="preserve">
+    <value>**质子**是原子核中带正电的粒子。质子的数量（原子序数）决定了它是哪种元素！</value>
+  </data>
+  <data name="ai_concept_radioactivity" xml:space="preserve">
+    <value>**放射性**是不稳定的原子核通过发射辐射失去能量的过程。铀等元素以此闻名！</value>
+  </data>
+  <data name="ai_concept_shell" xml:space="preserve">
+    <value>电子存在于原子核周围的**层**（能级）中。配置决定了元素在表中的位置。</value>
+  </data>
+  <data name="ai_concept_valence" xml:space="preserve">
+    <value>**价电子**是原子最外层的电子。它们决定了一个元素如何与其他元素反应。</value>
+  </data>
+  <data name="ai_config_is" xml:space="preserve">
+    <value>其电子排布为 %1$s。</value>
+  </data>
+  <data name="ai_connector_question_1" xml:space="preserve">
+    <value>为了回答您的问题，</value>
+  </data>
+  <data name="ai_connector_question_2" xml:space="preserve">
+    <value>我明白了。这是我找到的内容：</value>
+  </data>
+  <data name="ai_connector_question_3" xml:space="preserve">
+    <value>关于那一点，</value>
+  </data>
+  <data name="ai_connector_why_1" xml:space="preserve">
+    <value>这是一个很好的追问！</value>
+  </data>
+  <data name="ai_connector_why_2" xml:space="preserve">
+    <value>好点子。让我进一步解释。</value>
+  </data>
+  <data name="ai_connector_why_3" xml:space="preserve">
+    <value>就我刚才所说的进行扩展，</value>
+  </data>
+  <data name="ai_context_lost" xml:space="preserve">
+    <value>上下文丢失</value>
+  </data>
+  <data name="ai_context_series" xml:space="preserve">
+    <value>%1$s 属于%2$s，位于第 %3$d 周期。</value>
+  </data>
+  <data name="ai_converted_from" xml:space="preserve">
+    <value>由记录值 %1$s 换算而来。</value>
+  </data>
+  <data name="ai_copy_image" xml:space="preserve">
+    <value>复制图片</value>
+  </data>
+  <data name="ai_count_result" xml:space="preserve">
+    <value>有 **%1$d** 种元素符合条件。</value>
+  </data>
+  <data name="ai_coverage_note" xml:space="preserve">
+    <value>%3$d 种元素中有 %2$d 种记录了%1$s。</value>
+  </data>
+  <data name="ai_covered_all" xml:space="preserve">
+    <value>我们已经涵盖了很多关于 **%1$s** 的内容！</value>
+  </data>
+  <data name="ai_dataset_english_note" xml:space="preserve">
+    <value>*此参考条目仅提供英文版本。*</value>
+  </data>
+  <data name="ai_decay_effectively_none" xml:space="preserve">
+    <value>经过 %2$s %3$s 后，%1$s 实际上已所剩无几。</value>
+  </data>
+  <data name="ai_decay_elapsed" xml:space="preserve">
+    <value>%3$s 从 **%1$s g** 减到 **%2$s g** 大约需要 **%4$s %5$s**。</value>
+  </data>
+  <data name="ai_decay_half_lives" xml:space="preserve">
+    <value>在这段时间里 %1$s 经历了 **%2$s** 个半衰期，样品还剩约 **%3$s%%**。</value>
+  </data>
+  <data name="ai_decay_no_half_life" xml:space="preserve">
+    <value>%1$s 有记录，但其半衰期标为“%2$s”，因此无法据此计算衰变。</value>
+  </data>
+  <data name="ai_decay_remaining" xml:space="preserve">
+    <value>经过 %5$s %6$s 后，最初 %3$s g 的 %4$s 大约还剩 **%1$s %2$s**。</value>
+  </data>
+  <data name="ai_decay_stable" xml:space="preserve">
+    <value>%1$s 是稳定的 —— 它不衰变，随时间不会减少。</value>
+  </data>
+  <data name="ai_decay_unlisted" xml:space="preserve">
+    <value>应用未把 %1$s 列入该元素的同位素，因此我没有它的半衰期。</value>
+  </data>
+  <data name="ai_decay_working_half_life" xml:space="preserve">
+    <value>%1$s 的半衰期：%2$s</value>
+  </data>
+  <data name="ai_decay_working_header" xml:space="preserve">
+    <value>计算过程</value>
+  </data>
+  <data name="ai_decay_working_n" xml:space="preserve">
+    <value>n = t / t½ = %1$s → 2⁻ⁿ = %2$s%%</value>
+  </data>
+  <data name="ai_difference_group" xml:space="preserve">
+    <value>• **%1$s**：%2$s：%3$s，%4$s：%5$s</value>
+  </data>
+  <data name="ai_difference_mass" xml:space="preserve">
+    <value>• **%1$s**：%2$s 明显更重。</value>
+  </data>
+  <data name="ai_difference_need_two" xml:space="preserve">
+    <value>我需要两个元素来解释它们的差异！</value>
+  </data>
+  <data name="ai_difference_phase" xml:space="preserve">
+    <value>• **%1$s**：%2$s：%3$s，%4$s：%5$s</value>
+  </data>
+  <data name="ai_difference_similar" xml:space="preserve">
+    <value>%1$s 和 %2$s 非常相似！它们都是 %5$s 系列中的 %3$s %4$s 元素。</value>
+  </data>
+  <data name="ai_difference_type" xml:space="preserve">
+    <value>• **%1$s**：%2$s：%3$s，%4$s：%5$s</value>
+  </data>
+  <data name="ai_dilution_add_solvent" xml:space="preserve">
+    <value>加入 **%1$s mL** 溶剂。</value>
+  </data>
+  <data name="ai_dilution_result" xml:space="preserve">
+    <value>把 **%2$s mL** 的 **%1$s mol/L** 稀释后，可得 **%4$s mL** 的 **%3$s mol/L**。</value>
+  </data>
+  <data name="ai_discovered_by" xml:space="preserve">
+    <value>%1$s 由 %2$s 在 %3$s 年发现。</value>
+  </data>
+  <data name="ai_discovered_in" xml:space="preserve">
+    <value>%1$s 在 %2$s 年被发现。</value>
+  </data>
+  <data name="ai_elec_mag_header" xml:space="preserve">
+    <value>%1$s 的电磁特性：</value>
+  </data>
+  <data name="ai_elec_mag_properties" xml:space="preserve">
+    <value>**%1$s** 的电磁性质：</value>
+  </data>
+  <data name="ai_element" xml:space="preserve">
+    <value>元素</value>
+  </data>
+  <data name="ai_element_overview_appearance" xml:space="preserve">
+    <value> 它通常表现为：%1$s。</value>
+  </data>
+  <data name="ai_element_overview_electrons" xml:space="preserve">
+    <value> 它有 %1$s 个电子绕核运行。</value>
+  </data>
+  <data name="ai_element_overview_intro" xml:space="preserve">
+    <value>%1$s %2$s (%3$s) 是一个迷人的元素！它的原子序数是 %4$s，属于 %5$s 族。</value>
+  </data>
+  <data name="ai_element_overview_isotopes" xml:space="preserve">
+    <value> %1$s 的一个原子包含 %2$s 个质子、%3$s 个电子，通常还有 %4$s 个中子。</value>
+  </data>
+  <data name="ai_element_overview_series" xml:space="preserve">
+    <value> 它是 %1$s 系列的一部分。</value>
+  </data>
+  <data name="ai_emission_spectrum" xml:space="preserve">
+    <value>这是 %1$s 的发射光谱：受激电子回落时其原子发出的光。应用以图像形式保存，因此我可以展示图样，但无法说出具体谱线。</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>摩尔质量为 %1$s g/mol 时，分子式为 **%2$s**，即 %3$d × %4$s。</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>%1$s 的最简式为 **%2$s**：其下标有公因数 %3$d。</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>最简式为 **%1$s**。</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s 已是最简整数比，所以它就是自己的最简式。</value>
+  </data>
+  <data name="ai_encouragement" xml:space="preserve">
+    <value>好问题！🌟</value>
+  </data>
+  <data name="ai_eqn_no_desc" xml:space="preserve">
+    <value>应用程序包含此方程式作为视觉参考。</value>
+  </data>
+  <data name="ai_equation_balanced" xml:space="preserve">
+    <value>**%1$s → %2$s**</value>
+  </data>
+  <data name="ai_equation_check_header" xml:space="preserve">
+    <value>原子核对</value>
+  </data>
+  <data name="ai_equation_no_solution" xml:space="preserve">
+    <value>这个方程没有全部为正整数的配平解。</value>
+  </data>
+  <data name="ai_equation_one_sided" xml:space="preserve">
+    <value>这个方程无法配平：某个元素只出现在一侧，任何系数都补不平。</value>
+  </data>
+  <data name="ai_equation_one_sided_named" xml:space="preserve">
+    <value>这个方程无法配平：%1$s 只出现在一侧，任何系数都补不平。</value>
+  </data>
+  <data name="ai_equation_parse_failed" xml:space="preserve">
+    <value>我没能把它读成化学方程式。可以试试 Fe + O2 -&gt; Fe2O3 这样的写法。</value>
+  </data>
+  <data name="ai_equation_tally_row" xml:space="preserve">
+    <value>• **%1$s** —— 左边 %2$d，右边 %3$d</value>
+  </data>
+  <data name="ai_equation_too_large" xml:space="preserve">
+    <value>这个方程需要的系数大得不像真实反应。请检查化学式。</value>
+  </data>
+  <data name="ai_equation_underdetermined" xml:space="preserve">
+    <value>这个方程有不止一种独立的配平方式 —— 它读起来像是把两个反应写成了一个。拆开后我可以分别配平。</value>
+  </data>
+  <data name="ai_etymology_header" xml:space="preserve">
+    <value>**%1$s** 这个名字有一个有趣的来源：</value>
+  </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>在有记录数值的%3$d种元素中，**%1$s**的%2$s最高：%4$s。</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>在有记录数值的%3$d种元素中，**%1$s**的%2$s最低：%4$s。</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s**的%4$s在%3$d种元素中排第%2$d高：%5$s。</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s**的%4$s在%3$d种元素中排第%2$d低：%5$s。</value>
+  </data>
+  <data name="ai_facts.0" xml:space="preserve">
+    <value>你知道吗？氧是地壳中含量最丰富的元素！</value>
+  </data>
+  <data name="ai_facts.1" xml:space="preserve">
+    <value>趣闻：黄金永远不会生锈或腐蚀。它永远闪闪发光！</value>
+  </data>
+  <data name="ai_facts.2" xml:space="preserve">
+    <value>这里有个很酷的事实：氢是宇宙中含量最丰富的元素！ 🌌</value>
+  </data>
+  <data name="ai_facts.3" xml:space="preserve">
+    <value>太神奇了：碳是地球上所有已知生命的基础！</value>
+  </data>
+  <data name="ai_facts.4" xml:space="preserve">
+    <value>有意思：氦是唯一一种在常压下不会固化的元素！</value>
+  </data>
+  <data name="ai_facts.5" xml:space="preserve">
+    <value>趣闻：汞是唯一在室温下呈液态的金属元素！ 💧</value>
+  </data>
+  <data name="ai_facts.6" xml:space="preserve">
+    <value>你知道吗？钫元素极具放射性，会瞬间气化！</value>
+  </data>
+  <data name="ai_facts.7" xml:space="preserve">
+    <value>很酷：钻石和石墨都是由纯碳组成的，但性质却完全不同！</value>
+  </data>
+  <data name="ai_facts.8" xml:space="preserve">
+    <value>太神奇了：一盎司黄金可以被打成 300 平方英尺的薄片！</value>
+  </data>
+  <data name="ai_facts.9" xml:space="preserve">
+    <value>有意思：氖在正常条件下实际上不会形成任何化学化合物！</value>
+  </data>
+  <data name="ai_feature_achievements" xml:space="preserve">
+    <value>在用户页面通过**成就**和使用统计追踪你的进度。</value>
+  </data>
+  <data name="ai_feature_capabilities" xml:space="preserve">
+    <value>我可以查询和比较元素性质、配平方程、计算摩尔质量和溶液浓度、换算单位，以及做衰变计算。问我某个元素，或者写一个化学式或方程式。</value>
+  </data>
+  <data name="ai_feature_emission_spectrum" xml:space="preserve">
+    <value>你可以在元素的详情面板中查看其**发射光谱**，它显示该元素独有的光谱图样。</value>
+  </data>
+  <data name="ai_feature_flashcards" xml:space="preserve">
+    <value>应用提供多款**记忆卡小游戏**，涵盖元素符号、原子量和分类，并有等级和经验值可追踪。</value>
+  </data>
+  <data name="ai_feature_ideal_gas" xml:space="preserve">
+    <value>用**理想气体计算器**由 PV = nRT 求压强、体积、物质的量或温度。</value>
+  </data>
+  <data name="ai_feature_molar_mass" xml:space="preserve">
+    <value>应用内置**摩尔质量计算器**，可算出复杂化合物的分子量。我在这里也能算 —— 给我一个化学式就行。</value>
+  </data>
+  <data name="ai_feature_nuclide_table" xml:space="preserve">
+    <value>应用内置完整的**核素表**，展示所有元素的同位素，并按衰变类型（α、β 等）着色。</value>
+  </data>
+  <data name="ai_feature_reaction_balancer" xml:space="preserve">
+    <value>**化学反应配平器**可帮你配平方程并收藏常用反应。你也可以在这里问我 —— 写成 Fe + O2 -&gt; Fe2O3 就行。</value>
+  </data>
+  <data name="ai_feature_unit_converter" xml:space="preserve">
+    <value>应用内置**单位换算器**，可换算温度和其他科学单位。你也可以直接问我，例如“把 500 K 换算成 °C”。</value>
+  </data>
+  <data name="ai_field_abundance_crustal_rocks" xml:space="preserve">
+    <value>地壳岩石中的丰度</value>
+  </data>
+  <data name="ai_field_abundance_earth_crust" xml:space="preserve">
+    <value>地壳丰度</value>
+  </data>
+  <data name="ai_field_abundance_earth_soils" xml:space="preserve">
+    <value>土壤中的丰度</value>
+  </data>
+  <data name="ai_field_abundance_human_body" xml:space="preserve">
+    <value>人体中的丰度</value>
+  </data>
+  <data name="ai_field_abundance_meteorites" xml:space="preserve">
+    <value>陨石中的丰度</value>
+  </data>
+  <data name="ai_field_abundance_sea_water" xml:space="preserve">
+    <value>海水中的丰度</value>
+  </data>
+  <data name="ai_field_abundance_solar_system" xml:space="preserve">
+    <value>太阳系中的丰度</value>
+  </data>
+  <data name="ai_field_abundance_sun" xml:space="preserve">
+    <value>太阳中的丰度</value>
+  </data>
+  <data name="ai_field_abundance_urban_soils" xml:space="preserve">
+    <value>城市土壤中的丰度</value>
+  </data>
+  <data name="ai_field_nfpa_flammability" xml:space="preserve">
+    <value>易燃性等级</value>
+  </data>
+  <data name="ai_field_nfpa_health" xml:space="preserve">
+    <value>健康等级</value>
+  </data>
+  <data name="ai_field_nfpa_instability" xml:space="preserve">
+    <value>不稳定性等级</value>
+  </data>
+  <data name="ai_field_nfpa_special" xml:space="preserve">
+    <value>特殊危害</value>
+  </data>
+  <data name="ai_filter_matched" xml:space="preserve">
+    <value>有 %1$d 种元素符合条件：</value>
+  </data>
+  <data name="ai_filter_none" xml:space="preserve">
+    <value>没有元素符合这些条件。</value>
+  </data>
+  <data name="ai_filter_top" xml:space="preserve">
+    <value>%2$d 种符合条件的元素中的前 %1$d 种：</value>
+  </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%2$s 和 %3$s 的%1$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>有多少个？</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>哪种元素的%1$s最高？</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>哪种元素的%1$s最低？</value>
+  </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>显示步骤</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%2$s 的%1$s，单位 %3$s</value>
+  </data>
+  <data name="ai_formula_c6h12o6" xml:space="preserve">
+    <value>C6H12O6 是葡萄糖，一种为生物提供能量的单糖。它含有 6 个碳、12 个氢和 6 个氧。</value>
+  </data>
+  <data name="ai_formula_ch4" xml:space="preserve">
+    <value>CH4 是甲烷，它是最简单的烷烃，也是一种强效温室气体。它由一个碳和四个氢组成。</value>
+  </data>
+  <data name="ai_formula_co2" xml:space="preserve">
+    <value>CO2 是二氧化碳。它由一个碳原子和两个氧原子组成。</value>
+  </data>
+  <data name="ai_formula_composition_offer" xml:space="preserve">
+    <value> 您想让我分析它的元素组成吗？</value>
+  </data>
+  <data name="ai_formula_consists_of" xml:space="preserve">
+    <value>它由以下部分组成：</value>
+  </data>
+  <data name="ai_formula_generic" xml:space="preserve">
+    <value>我看出这像是一个化学式，但我还在学习分子方面的知识！请问我关于单个元素的问题吧。</value>
+  </data>
+  <data name="ai_formula_h2o" xml:space="preserve">
+    <value>H2O 是水！它由两个氢原子和一个氧原子组成。</value>
+  </data>
+  <data name="ai_formula_h2so4" xml:space="preserve">
+    <value>H2SO4 是硫酸，一种非常强且重要的工业酸。它含有氢、硫和氧。</value>
+  </data>
+  <data name="ai_formula_hcl" xml:space="preserve">
+    <value>HCl 是盐酸，它实际上存在于你的胃里，帮助消化！</value>
+  </data>
+  <data name="ai_formula_item" xml:space="preserve">
+    <value>• %1$s × %2$s (%3$s)</value>
+  </data>
+  <data name="ai_formula_mass" xml:space="preserve">
+    <value>**%1$s** 的摩尔质量是 **%2$s g/mol**。</value>
+  </data>
+  <data name="ai_formula_nacl" xml:space="preserve">
+    <value>NaCl 是氯化钠，也就是我们常说的食盐！它结合了钠和氯。</value>
+  </data>
+  <data name="ai_formula_nh3" xml:space="preserve">
+    <value>NH3 是氨，常用于清洁产品。它由一个氮和三个氢组成。</value>
+  </data>
+  <data name="ai_formula_o2" xml:space="preserve">
+    <value>O2 是我们呼吸的氧气！它是两个氧原子结合在一起。</value>
+  </data>
+  <data name="ai_formula_pro_plus" xml:space="preserve">
+    <value>分析像 **%1$s** 这样的化学化合物是 **PRO+** 功能。作为 %2$s 用户，我只能帮助您查询单个元素！</value>
+  </data>
+  <data name="ai_formula_recognize" xml:space="preserve">
+    <value>我识别出 **%1$s** 是一个摩尔质量为 **%2$s** 的化合物。</value>
+  </data>
+  <data name="ai_free_user" xml:space="preserve">
+    <value>免费</value>
+  </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>根据理想气体定律 PV = nRT：**%1$s**。</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>标准状况取1 atm和273.15 K。</value>
+  </data>
+  <data name="ai_geo_color" xml:space="preserve">
+    <value>%1$s：%2$s %3$s，%4$s %5$s。</value>
+  </data>
+  <data name="ai_geo_dens" xml:space="preserve">
+    <value>%1$s：%2$s %3$s。</value>
+  </data>
+  <data name="ai_geo_hard" xml:space="preserve">
+    <value>%1$s：%2$s %3$s。</value>
+  </data>
+  <data name="ai_geo_info" xml:space="preserve">
+    <value>%1$s 是 %3$s 族中的 %2$s。颜色：%4$s。硬度：%5$s。密度：%6$s。磁性：%7$s。</value>
+  </data>
+  <data name="ai_grams_to_moles" xml:space="preserve">
+    <value>**%1$s g** %2$s 为 **%3$s mol**。</value>
+  </data>
+  <data name="ai_greeting" xml:space="preserve">
+    <value>你好！👋 我是你的化学伙伴。有任何关于元素的问题都可以问我！</value>
+  </data>
+  <data name="ai_group" xml:space="preserve">
+    <value>族</value>
+  </data>
+  <data name="ai_hard_header" xml:space="preserve">
+    <value>%1$s 的硬度特性：</value>
+  </data>
+  <data name="ai_help_response" xml:space="preserve">
+    <value>我严格基于此应用程序中的数据进行训练！我可以帮助您：
+
+🧪 **详细元素**：直接来自我们 JSON 数据库的属性、外观和发现事实。
+⚖️ **数据对比**：比较元素之间的密度、质量、半径和反应性。
+💥 **反应性**：我使用应用程序的族和周期数据来解释像钠这样的元素如何与水反应。
+🧬 **生物/安全**：在元素描述中找到的毒性和生物作用。
+⚛️ **同位素与丰度**：来自我们专用同位素和丰度表的特定数据。
+📉 **周期趋势**：基于表格结构解释电负性等模式。
+🔢 **摩尔质量**：使用应用程序中的原子量进行精确计算。
+📝 **定义**：对整个应用程序中使用的化学术语的解释。
+
+只需提问，我就会在应用程序的记录中为您找到答案！ 🌟</value>
+  </data>
+  <data name="ai_higher_than" xml:space="preserve">
+    <value>%1$s 的 %2$s 比 %3$s 高。</value>
+  </data>
+  <data name="ai_hint" xml:space="preserve">
+    <value>问我任何问题...</value>
+  </data>
+  <data name="ai_history_pro_only" xml:space="preserve">
+    <value>聊天记录是 PRO 功能</value>
+  </data>
+  <data name="ai_history_sign_in" xml:space="preserve">
+    <value>请登录以查看聊天记录</value>
+  </data>
+  <data name="ai_id_header" xml:space="preserve">
+    <value>%1$s 的标识符：</value>
+  </data>
+  <data name="ai_identifiers_for" xml:space="preserve">
+    <value>**%1$s** 的标识符：</value>
+  </data>
+  <data name="ai_identity_result" xml:space="preserve">
+    <value>根据应用程序中的数值，其属性接近 **%1$s** 的元素是 **%2$s**（实际：%3$s）。</value>
+  </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>阴离子把多出的电子按填充顺序放入接下来的位置。</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>阳离子先失去最外层电子：最高的电子层，以及其中最高的亚层。</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>**%1$s**的电子排布是**%2$s**。中性%3$s是%4$s。</value>
+  </data>
+  <data name="ai_ion_count" xml:space="preserve">
+    <value>%1$s 在应用程序中有 %2$d 个电离能值可用。</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>这与%1$s的电子排布相同。</value>
+  </data>
+  <data name="ai_isotope_compare_header" xml:space="preserve">
+    <value>%1$s 对比 %2$s</value>
+  </data>
+  <data name="ai_isotope_compare_row" xml:space="preserve">
+    <value>• **%1$s**：%2$s 对比 %3$s</value>
+  </data>
+  <data name="ai_isotope_decay" xml:space="preserve">
+    <value>（衰变：%1$s）</value>
+  </data>
+  <data name="ai_isotope_decays" xml:space="preserve">
+    <value>• **%1$s** — %2$s，半衰期 %3$s</value>
+  </data>
+  <data name="ai_isotope_half_life" xml:space="preserve">
+    <value> 它的半衰期为 %1$s，通过 %2$s 衰变。</value>
+  </data>
+  <data name="ai_isotope_halflife_only" xml:space="preserve">
+    <value>• **%1$s** — 半衰期 %2$s</value>
+  </data>
+  <data name="ai_isotope_header" xml:space="preserve">
+    <value>根据应用的同位素表，以下是 **%1$s** 的主要同位素：</value>
+  </data>
+  <data name="ai_isotope_neutron_diff" xml:space="preserve">
+    <value>%1$s 有 %2$d 个中子，%3$s 有 %4$d 个——相差 %5$d 个。</value>
+  </data>
+  <data name="ai_isotope_same_element" xml:space="preserve">
+    <value>两者都是 %1$s 的同位素，因此质子数相同（%2$d 个），仅中子数不同。</value>
+  </data>
+  <data name="ai_isotope_stable" xml:space="preserve">
+    <value>• **%1$s** — 稳定</value>
+  </data>
+  <data name="ai_isotope_unlisted" xml:space="preserve">
+    <value>未列入同位素表</value>
+  </data>
+  <data name="ai_isotopes_header" xml:space="preserve">
+    <value>%1$s 的同位素</value>
+  </data>
+  <data name="ai_isotopes_summary" xml:space="preserve">
+    <value>已知 %1$d 种同位素，其中 %2$d 种稳定。</value>
+  </data>
+  <data name="ai_label_decay" xml:space="preserve">
+    <value>衰变方式</value>
+  </data>
+  <data name="ai_label_half_life" xml:space="preserve">
+    <value>半衰期</value>
+  </data>
+  <data name="ai_label_mass_number" xml:space="preserve">
+    <value>质量数</value>
+  </data>
+  <data name="ai_label_neutrons" xml:space="preserve">
+    <value>中子</value>
+  </data>
+  <data name="ai_label_protons" xml:space="preserve">
+    <value>质子</value>
+  </data>
+  <data name="ai_lang_switched" xml:space="preserve">
+    <value>AI 语言已切换为：%1$s 🌐</value>
+  </data>
+  <data name="ai_limit_reset_badge" xml:space="preserve">
+    <value>%1$s 重置</value>
+  </data>
+  <data name="ai_limit_unlimited" xml:space="preserve">
+    <value>无限</value>
+  </data>
+  <data name="ai_list_header" xml:space="preserve">
+    <value>以下是 **%1$s** 元素：</value>
+  </data>
+  <data name="ai_list_more" xml:space="preserve">
+    <value>……还有 %1$d 种。</value>
+  </data>
+  <data name="ai_list_row" xml:space="preserve">
+    <value>• **%1$s** — %2$s</value>
+  </data>
+  <data name="ai_list_row_plain" xml:space="preserve">
+    <value>• **%1$s**</value>
+  </data>
+  <data name="ai_list_spread" xml:space="preserve">
+    <value>数值范围从 %1$s 到 %2$s。</value>
+  </data>
+  <data name="ai_locked_fields" xml:space="preserve">
+    <value>%1$s属于%2$s。升级后即可在此处以及每个元素页面查看。</value>
+  </data>
+  <data name="ai_locked_generic" xml:space="preserve">
+    <value>该答案属于%1$s。升级即可解锁。</value>
+  </data>
+  <data name="ai_lower_than" xml:space="preserve">
+    <value>%1$s 的 %2$s 比 %3$s 低。</value>
+  </data>
+  <data name="ai_mech_header" xml:space="preserve">
+    <value>%2$s 的 %1$s：</value>
+  </data>
+  <data name="ai_molar_mass_generic" xml:space="preserve">
+    <value>我可以帮忙计算摩尔质量！试着问“H2O 的摩尔质量是多少？”</value>
+  </data>
+  <data name="ai_molar_mass_of" xml:space="preserve">
+    <value>%1$s 的摩尔质量为 %2$s。</value>
+  </data>
+  <data name="ai_molar_mass_pro_plus" xml:space="preserve">
+    <value>计算化合物的摩尔质量是 **PRO+** 功能。作为 %1$s 用户，您仍然可以获取单个元素的摩尔质量！</value>
+  </data>
+  <data name="ai_moles_of" xml:space="preserve">
+    <value>**%1$s 摩尔**的 %2$s 含有 **%3$s** 个原子。</value>
+  </data>
+  <data name="ai_moles_to_particles" xml:space="preserve">
+    <value>**%1$s 摩尔**含有 **%2$s** 个粒子。</value>
+  </data>
+  <data name="ai_naturally_occurring" xml:space="preserve">
+    <value>天然存在</value>
+  </data>
+  <data name="ai_neighbour_after" xml:space="preserve">
+    <value>**%1$s**（原子序数 %2$d）紧接在 %3$s 之后。</value>
+  </data>
+  <data name="ai_neighbour_before" xml:space="preserve">
+    <value>**%1$s**（原子序数 %2$d）紧接在 %3$s 之前。</value>
+  </data>
+  <data name="ai_nfpa_flammable_0" xml:space="preserve">
+    <value>不会燃烧</value>
+  </data>
+  <data name="ai_nfpa_flammable_1" xml:space="preserve">
+    <value>必须预热才能燃烧</value>
+  </data>
+  <data name="ai_nfpa_flammable_2" xml:space="preserve">
+    <value>适度加热时点燃</value>
+  </data>
+  <data name="ai_nfpa_flammable_3" xml:space="preserve">
+    <value>常温下点燃</value>
+  </data>
+  <data name="ai_nfpa_flammable_4" xml:space="preserve">
+    <value>极易燃</value>
+  </data>
+  <data name="ai_nfpa_health_0" xml:space="preserve">
+    <value>普通材料</value>
+  </data>
+  <data name="ai_nfpa_health_1" xml:space="preserve">
+    <value>轻微危险</value>
+  </data>
+  <data name="ai_nfpa_health_2" xml:space="preserve">
+    <value>危险</value>
+  </data>
+  <data name="ai_nfpa_health_3" xml:space="preserve">
+    <value>极其危险</value>
+  </data>
+  <data name="ai_nfpa_health_4" xml:space="preserve">
+    <value>致命</value>
+  </data>
+  <data name="ai_nfpa_instability_0" xml:space="preserve">
+    <value>稳定</value>
+  </data>
+  <data name="ai_nfpa_instability_1" xml:space="preserve">
+    <value>受热时不稳定</value>
+  </data>
+  <data name="ai_nfpa_instability_2" xml:space="preserve">
+    <value>可能发生剧烈化学变化</value>
+  </data>
+  <data name="ai_nfpa_instability_3" xml:space="preserve">
+    <value>在强引发下可能爆轰</value>
+  </data>
+  <data name="ai_nfpa_instability_4" xml:space="preserve">
+    <value>极易爆轰</value>
+  </data>
+  <data name="ai_nfpa_special_none" xml:space="preserve">
+    <value>未记录特殊危险</value>
+  </data>
+  <data name="ai_nfpa_special_ox" xml:space="preserve">
+    <value>氧化剂</value>
+  </data>
+  <data name="ai_nfpa_special_sa" xml:space="preserve">
+    <value>单纯窒息剂</value>
+  </data>
+  <data name="ai_nfpa_special_w" xml:space="preserve">
+    <value>遇水反应</value>
+  </data>
+  <data name="ai_nfpa_unrated" xml:space="preserve">
+    <value>未分级</value>
+  </data>
+  <data name="ai_no_abundance_data" xml:space="preserve">
+    <value>我没有 %1$s 的具体数值丰度数据，但描述中提到：%2$s。</value>
+  </data>
+  <data name="ai_no_bio_data" xml:space="preserve">
+    <value>我没有 %1$s 的详细生物学数据，但标准安全说明如下：</value>
+  </data>
+  <data name="ai_no_data" xml:space="preserve">
+    <value>嗯，我没能找到相关信息。试着询问像“氧”或“金”这样的元素吧！</value>
+  </data>
+  <data name="ai_no_data_alternatives" xml:space="preserve">
+    <value>%1$s 已记录：%2$s。</value>
+  </data>
+  <data name="ai_no_data_right_now" xml:space="preserve">
+    <value>我目前无法检查。</value>
+  </data>
+  <data name="ai_no_etymology_data" xml:space="preserve">
+    <value>我不确定它名字的确切根源，但它是由 %2$s 在 %3$s 年发现的。</value>
+  </data>
+  <data name="ai_no_isotope_data" xml:space="preserve">
+    <value>我的快速访问数据中没有 %1$s 的详细同位素列表，但您可以在同位素表中找到完整列表！</value>
+  </data>
+  <data name="ai_no_list_data" xml:space="preserve">
+    <value>我没能在数据库中找到符合这些条件的元素。</value>
+  </data>
+  <data name="ai_no_physical_data" xml:space="preserve">
+    <value>我在快速访问数据中没有 %1$s 的详细物理属性，但您可以查看详细的属性面板！</value>
+  </data>
+  <data name="ai_no_property_data" xml:space="preserve">
+    <value>抱歉，我目前没有 %1$s 的 %2$s 数据。</value>
+  </data>
+  <data name="ai_no_usage_data" xml:space="preserve">
+    <value>我没有 %1$s 的具体用途列表，但它是一个迷人的元素！您可以在详细描述中了解更多信息。</value>
+  </data>
+  <data name="ai_nuclide_body" xml:space="preserve">
+    <value>• **质子：** %1$d
+• **中子：** %2$d
+• **质量数：** %3$d</value>
+  </data>
+  <data name="ai_nuclide_explain" xml:space="preserve">
+    <value>中子数 = 质量数 − 原子序数 = %1$d − %2$d = **%3$d**。</value>
+  </data>
+  <data name="ai_nuclide_header" xml:space="preserve">
+    <value>%1$s-%2$d</value>
+  </data>
+  <data name="ai_open_in_app" xml:space="preserve">
+    <value>打开%1$s</value>
+  </data>
+  <data name="ai_ordinal_suffix_nd" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_rd" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_st" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_ordinal_suffix_th" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ai_oxidation_neg" xml:space="preserve">
+    <value>• 负价：%1$s</value>
+  </data>
+  <data name="ai_oxidation_pos" xml:space="preserve">
+    <value>• 正价：%1$s</value>
+  </data>
+  <data name="ai_oxidation_states" xml:space="preserve">
+    <value>**%1$s** 有几种可能的氧化态。</value>
+  </data>
+  <data name="ai_period" xml:space="preserve">
+    <value>周期</value>
+  </data>
+  <data name="ai_personalized_greeting_fav" xml:space="preserve">
+    <value>嘿！我记得你最近在查看 %1$s。想看看更多细节吗？</value>
+  </data>
+  <data name="ai_personalized_greeting_interest" xml:space="preserve">
+    <value>欢迎回来！准备好探索更多关于 %1$s 的信息了吗？我们可以再次查看 %2$s。</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>%1$s是强酸，所以%2$s M溶液的[H⁺] = %3$s M，pH为**%4$s**。</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>%1$s是强碱，所以%2$s M溶液的[OH⁻] = %3$s M，pOH为%4$s，pH为**%5$s**。</value>
+  </data>
+  <data name="ai_ph_info" xml:space="preserve">
+    <value>%1$s：pH 低于 %2$s 时为酸性 %3$s，中性范围 %4$s 为 %5$s，pH 高于 %6$s 时为 %7$s。</value>
+  </data>
+  <data name="ai_ph_info_short" xml:space="preserve">
+    <value>%1$s：pH 范围 %2$s 为 %3$s。</value>
+  </data>
+  <data name="ai_phase_gas" xml:space="preserve">
+    <value>气态</value>
+  </data>
+  <data name="ai_phase_liquid" xml:space="preserve">
+    <value>液态</value>
+  </data>
+  <data name="ai_phase_solid" xml:space="preserve">
+    <value>固态</value>
+  </data>
+  <data name="ai_physical_header" xml:space="preserve">
+    <value>基于应用中存储的 **%1$s** 物理属性：</value>
+  </data>
+  <data name="ai_poi_info" xml:space="preserve">
+    <value>%1$s：泊松比范围 %2$s (%3$s)。</value>
+  </data>
+  <data name="ai_pro_tip_hint" xml:space="preserve">
+    <value>专业提示：您还可以问我关于它的来源、生物学作用或反应性！</value>
+  </data>
+  <data name="ai_pro_user" xml:space="preserve">
+    <value>专业版</value>
+  </data>
+  <data name="ai_property_is" xml:space="preserve">
+    <value>%1$s 的 %2$s 是 %3$s。</value>
+  </data>
+  <data name="ai_quiz_atomic" xml:space="preserve">
+    <value>哪个元素的原子序数是 **%1$s**？</value>
+  </data>
+  <data name="ai_quiz_correct" xml:space="preserve">
+    <value>✨ **正确！** 做得好。答案确实是 **%1$s**。准备好进入下一题了吗？</value>
+  </data>
+  <data name="ai_quiz_history" xml:space="preserve">
+    <value>这个元素由 **%1$s** 在 **%2$s** 年发现。你能猜出它是哪一个吗？</value>
+  </data>
+  <data name="ai_quiz_no_start" xml:space="preserve">
+    <value>我目前无法开始测验。</value>
+  </data>
+  <data name="ai_quiz_not_active" xml:space="preserve">
+    <value>我目前不在测验模式中。</value>
+  </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>测验结束：答对**%1$d/%2$d**题，获得**%3$d XP**。</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>我无法就此出题。试试一个族、一个周期、一类元素或单个元素。</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**第%1$d题，共%2$d题。** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ 答对了！**+%1$d XP**。</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d种元素</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>一个来自整个周期表的**%1$d道题**测验。点击一个答案，或说停止来结束。</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>一个关于%2$s的**%1$d道题**测验。点击一个答案，或说停止来结束。</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>测验已停止：答对**%1$d/%2$d**题，获得**%3$d XP**。</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>不太对：答案是**%1$s**。</value>
+  </data>
+  <data name="ai_quiz_start" xml:space="preserve">
+    <value>我正在想一个元素。它的符号是 **%1$s**。它叫什么名字？</value>
+  </data>
+  <data name="ai_quiz_wrong" xml:space="preserve">
+    <value>不完全正确！答案是 **%1$s**。想再试一次吗？只需输入“quiz”！</value>
+  </data>
+  <data name="ai_radioactive_no" xml:space="preserve">
+    <value>%1$s 通常被认为是稳定的，不具放射性。</value>
+  </data>
+  <data name="ai_radioactive_yes" xml:space="preserve">
+    <value>%1$s 具有放射性：%2$s</value>
+  </data>
+  <data name="ai_radius_details" xml:space="preserve">
+    <value>以下是 **%1$s** 的半径详情：</value>
+  </data>
+  <data name="ai_radius_header" xml:space="preserve">
+    <value>%1$s 的半径详情：</value>
+  </data>
+  <data name="ai_rank_highest" xml:space="preserve">
+    <value>这是记录了%2$s的 %1$d 种元素中最高的。</value>
+  </data>
+  <data name="ai_rank_lowest" xml:space="preserve">
+    <value>这是记录了%2$s的 %1$d 种元素中最低的。</value>
+  </data>
+  <data name="ai_rank_nth" xml:space="preserve">
+    <value>按%3$s排列，它在 %2$d 种元素中位列第 **%1$d**。</value>
+  </data>
+  <data name="ai_rate_limit_reached" xml:space="preserve">
+    <value>您已达到每日 %1$d 条消息的限制。升级到 PRO 或 PRO+ 以获取更多！</value>
+  </data>
+  <data name="ai_rate_limit_resets" xml:space="preserve">
+    <value>你的每日消息将在 %1$s 恢复。</value>
+  </data>
+  <data name="ai_reaction_acid" xml:space="preserve">
+    <value>许多金属与酸反应释放出氢气。%1$s 的反应性取决于它在活动性序列中的位置。</value>
+  </data>
+  <data name="ai_reaction_alkali_halogen" xml:space="preserve">
+    <value>这些剧烈反应生成**盐**（离子化合物）。例如，%1$s 和 %2$s 可以结合生成一种独特的化合物！</value>
+  </data>
+  <data name="ai_reaction_alkali_water" xml:space="preserve">
+    <value>像 %1$s 这样的碱金属与水发生**剧烈**反应，产生氢气和强碱。甚至可能发生爆炸！</value>
+  </data>
+  <data name="ai_reaction_alkaline_earth_water" xml:space="preserve">
+    <value>%1$s 与水剧烈反应，产生氢气和其氢氧化物。</value>
+  </data>
+  <data name="ai_reaction_complex" xml:space="preserve">
+    <value>反应可能很复杂！通常，%1$s 的行为取决于它的族 (%2$s) 和电负性。</value>
+  </data>
+  <data name="ai_reaction_generic_elements" xml:space="preserve">
+    <value>%1$s 和 %2$s 之间的反应取决于它们的电子排布。如果一个能提供电子而另一个能接受电子，它们可能会形成化合物！</value>
+  </data>
+  <data name="ai_reaction_generic_water" xml:space="preserve">
+    <value>我没有 %1$s 与水反应的具体数据，但许多金属随时间推移会形成氧化物或氢氧化物。</value>
+  </data>
+  <data name="ai_reaction_magnesium_water" xml:space="preserve">
+    <value>%1$s 与冷水反应缓慢，但与水蒸气反应迅速。</value>
+  </data>
+  <data name="ai_reaction_noble_gas" xml:space="preserve">
+    <value>%1$s 是一种稀有气体，极其稳定，几乎不与任何物质反应，因为它的最外层电子已满。</value>
+  </data>
+  <data name="ai_reaction_oxygen" xml:space="preserve">
+    <value>大多数元素与氧反应生成氧化物。例如，像 %1$s 这样的金属通常会形成保护层或生锈。</value>
+  </data>
+  <data name="ai_reactivity_more" xml:space="preserve">
+    <value>根据在元素周期表中的位置，**%1$s** 通常比 **%2$s** 更具反应性。</value>
+  </data>
+  <data name="ai_reactivity_need_two" xml:space="preserve">
+    <value>我至少需要两个元素来比较它们的反应性！</value>
+  </data>
+  <data name="ai_reactivity_no_result" xml:space="preserve">
+    <value>我无法确定最具反应性的元素。</value>
+  </data>
+  <data name="ai_reactivity_result" xml:space="preserve">
+    <value>最具反应性的 %1$s 是 **%2$s**。</value>
+  </data>
+  <data name="ai_reactivity_similar" xml:space="preserve">
+    <value>**%1$s** 和 **%2$s** 的反应性水平相似。</value>
+  </data>
+  <data name="ai_recap_is" xml:space="preserve">
+    <value>重申一下，%1$s 的 %2$s 是 %3$s。</value>
+  </data>
+  <data name="ai_related_label" xml:space="preserve">
+    <value>相关信息：</value>
+  </data>
+  <data name="ai_related_offer" xml:space="preserve">
+    <value>我找到了本地相关信息。请问“显示相关”以查看。</value>
+  </data>
+  <data name="ai_related_offer_lang" xml:space="preserve">
+    <value>我找到了本地相关信息，但不是您选择的语言。尝试更改语言或直接询问。</value>
+  </data>
+  <data name="ai_rich_overview_advanced" xml:space="preserve">
+    <value>高级原子数据</value>
+  </data>
+  <data name="ai_rich_overview_applications" xml:space="preserve">
+    <value>应用与用途</value>
+  </data>
+  <data name="ai_rich_overview_basic_facts" xml:space="preserve">
+    <value>基本事实</value>
+  </data>
+  <data name="ai_rich_overview_biological" xml:space="preserve">
+    <value>生物学作用</value>
+  </data>
+  <data name="ai_rich_overview_compounds" xml:space="preserve">
+    <value>常见化合物</value>
+  </data>
+  <data name="ai_rich_overview_etymology" xml:space="preserve">
+    <value>起源与历史</value>
+  </data>
+  <data name="ai_rich_overview_isotopes" xml:space="preserve">
+    <value>值得注意的同位素</value>
+  </data>
+  <data name="ai_rich_overview_properties" xml:space="preserve">
+    <value>性质</value>
+  </data>
+  <data name="ai_rich_overview_safety" xml:space="preserve">
+    <value>安全与危害</value>
+  </data>
+  <data name="ai_rich_overview_where_found" xml:space="preserve">
+    <value>%1$s 存在于何处？</value>
+  </data>
+  <data name="ai_runner_up" xml:space="preserve">
+    <value>其次是 %1$s，为 %2$s。</value>
+  </data>
+  <data name="ai_safety_caution_flammable" xml:space="preserve">
+    <value>警告：此元素极易燃！</value>
+  </data>
+  <data name="ai_safety_caution_health" xml:space="preserve">
+    <value>警告：此元素对健康具有高度危险性！</value>
+  </data>
+  <data name="ai_safety_flammability" xml:space="preserve">
+    <value>• **易燃性：** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_header" xml:space="preserve">
+    <value>%1$s 的安全概况 (NFPA 704)：</value>
+  </data>
+  <data name="ai_safety_health" xml:space="preserve">
+    <value>• **健康：** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_instability" xml:space="preserve">
+    <value>• **不稳定性：** %1$d/4</value>
+  </data>
+  <data name="ai_safety_no_data" xml:space="preserve">
+    <value>我没有 %1$s 的特定 NFPA 危险评级，但请务必遵循标准实验室安全协议。</value>
+  </data>
+  <data name="ai_safety_none_recorded" xml:space="preserve">
+    <value>没有记录 %1$s 的 NFPA 危险等级。</value>
+  </data>
+  <data name="ai_safety_radioactive" xml:space="preserve">
+    <value>%1$s 具有放射性 (%2$s)，这是其主要的安全顾虑。请极其小心地处理！</value>
+  </data>
+  <data name="ai_safety_radioactive_note" xml:space="preserve">
+    <value>该元素具有放射性。</value>
+  </data>
+  <data name="ai_safety_special" xml:space="preserve">
+    <value>• **特殊：** %1$s</value>
+  </data>
+  <data name="ai_same_value" xml:space="preserve">
+    <value>两者的 %1$s 相同！</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>发送这个问题</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>你的问题将发送给开发者，以便在未来的版本中得到解答。
+
+会发送：你输入的问题原文、应用的语言和版本，以及无法回答的原因。
+不会发送：你的姓名、账户、设备或本次聊天的其余内容。</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>无法发送问题。请检查网络连接后重试。</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>谢谢——你的问题已发送。</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>发送这个问题？</value>
+  </data>
+  <data name="ai_series_actinide" xml:space="preserve">
+    <value>锕系元素是原子序数为 89 到 103 的 15 种元素。它们都具有放射性！</value>
+  </data>
+  <data name="ai_series_actinide_label" xml:space="preserve">
+    <value>锕系元素</value>
+  </data>
+  <data name="ai_series_alkali" xml:space="preserve">
+    <value>碱金属位于第 1 族。它们非常活泼，最外层有一个电子。例子包括锂、钠和钾。</value>
+  </data>
+  <data name="ai_series_alkali_metal_label" xml:space="preserve">
+    <value>碱金属</value>
+  </data>
+  <data name="ai_series_alkaline_earth_label" xml:space="preserve">
+    <value>碱土金属</value>
+  </data>
+  <data name="ai_series_generic" xml:space="preserve">
+    <value>我熟悉那个系列！它们具有独特的化学性质。你想了解该系列中的哪个特定元素？</value>
+  </data>
+  <data name="ai_series_halogen" xml:space="preserve">
+    <value>卤素位于第 17 族。它们是高度活泼的非金属。氟和氯是最著名的卤素！</value>
+  </data>
+  <data name="ai_series_halogen_label" xml:space="preserve">
+    <value>卤素</value>
+  </data>
+  <data name="ai_series_lanthanide" xml:space="preserve">
+    <value>镧系元素是原子序数为 57 到 71 的 15 种元素。它们也被称为“稀土元素”。</value>
+  </data>
+  <data name="ai_series_lanthanide_label" xml:space="preserve">
+    <value>镧系元素</value>
+  </data>
+  <data name="ai_series_metalloid" xml:space="preserve">
+    <value>类金属兼有金属和非金属的性质。它们位于周期表的“阶梯”线上。</value>
+  </data>
+  <data name="ai_series_metalloid_label" xml:space="preserve">
+    <value>类金属</value>
+  </data>
+  <data name="ai_series_noble_gas" xml:space="preserve">
+    <value>稀有气体位于第 18 族。它们非常稳定，很少与其他元素反应，因为它们的最外层电子已满。</value>
+  </data>
+  <data name="ai_series_noble_gas_label" xml:space="preserve">
+    <value>稀有气体</value>
+  </data>
+  <data name="ai_series_nonmetal_label" xml:space="preserve">
+    <value>非金属</value>
+  </data>
+  <data name="ai_series_transition" xml:space="preserve">
+    <value>过渡金属是第 3-12 族的元素。它们是良好的导体，经常形成色彩鲜艳的化合物。</value>
+  </data>
+  <data name="ai_series_transition_metal_label" xml:space="preserve">
+    <value>过渡金属</value>
+  </data>
+  <data name="ai_share_failed" xml:space="preserve">
+    <value>无法生成图片</value>
+  </data>
+  <data name="ai_share_footer" xml:space="preserve">
+    <value>由 Atomic（元素周期表应用）回答</value>
+  </data>
+  <data name="ai_share_image" xml:space="preserve">
+    <value>以图片分享</value>
+  </data>
+  <data name="ai_similarity_generic" xml:space="preserve">
+    <value>**%1$s** 是 %2$s 系列的一部分。该系列中的其他元素将具有相关的特性！</value>
+  </data>
+  <data name="ai_similarity_no_element" xml:space="preserve">
+    <value>我不确定您想寻找哪个元素的相似性。</value>
+  </data>
+  <data name="ai_similarity_result_footer" xml:space="preserve">
+    <value>。
+
+由于它们的价电子，它们共享相似的化学行为！</value>
+  </data>
+  <data name="ai_similarity_result_header" xml:space="preserve">
+    <value>就像 **%1$s**，这些元素也是 **%2$ss**： 
+
+</value>
+  </data>
+  <data name="ai_solution_generic_substance" xml:space="preserve">
+    <value>该溶液</value>
+  </data>
+  <data name="ai_solution_mass_needed" xml:space="preserve">
+    <value>配制 %3$s mL 的 %4$s mol/L %2$s 溶液需要 **%1$s g**。</value>
+  </data>
+  <data name="ai_solution_molarity" xml:space="preserve">
+    <value>%2$s 的浓度是 **%1$s mol/L**。</value>
+  </data>
+  <data name="ai_solution_moles" xml:space="preserve">
+    <value>那是 **%1$s mol** 的 %2$s。</value>
+  </data>
+  <data name="ai_solution_volume" xml:space="preserve">
+    <value>在 **%2$s mol/L** 下需要 **%1$s mL**。</value>
+  </data>
+  <data name="ai_solution_working_c1v1" xml:space="preserve">
+    <value>C₁V₁ = C₂V₂ → %1$s × %2$s = %3$s × %4$s</value>
+  </data>
+  <data name="ai_solution_working_header" xml:space="preserve">
+    <value>计算过程</value>
+  </data>
+  <data name="ai_solution_working_mass" xml:space="preserve">
+    <value>m = n × M → %1$s g = %2$s mol × %3$s g/mol</value>
+  </data>
+  <data name="ai_solution_working_nvc" xml:space="preserve">
+    <value>n = c × V → %1$s mol = %2$s mol/L × %3$s L</value>
+  </data>
+  <data name="ai_source_element_data" xml:space="preserve">
+    <value>%1$s — 元素数据（%2$s）</value>
+  </data>
+  <data name="ai_source_table" xml:space="preserve">
+    <value>%1$s — %2$s表</value>
+  </data>
+  <data name="ai_sources_header" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="ai_stable_label" xml:space="preserve">
+    <value>稳定</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>每种元素在左边和右边的原子数必须相等：</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>满足每一行的最小整数：</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>在每个化学式前写一个未知系数：</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ 是半衰期，t 是经过的时间，n 是半衰期的个数，N₀ 和 N 是之前和之后的量。</value>
+  </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>把每个质量换算成摩尔，再都除以最小的那个：</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>摩尔质量是每种元素的原子数乘以其原子量之和：</value>
+  </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>将PV = nRT对未知量变形，R = 0.08206 L·atm/(mol·K)：</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>逐步计算</value>
+  </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>从中性原子出发，失去或得到电子：</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m 是质量，M 是摩尔质量，n 是物质的量（摩尔），N 是粒子数，N_A 是阿伏加德罗常数。</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>强酸或强碱完全电离，所以浓度直接给出离子浓度：</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n 是物质的量（摩尔），c 是浓度，V 是体积，m 是质量，M 是摩尔质量。</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>把每个量换算成摩尔，再按系数计算：</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>剩余 %1$s g %2$s。</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>在 %1$s 中，**%2$s** 是限量试剂：它最先耗尽。</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>在 %1$s 中，%2$s 生成 **%3$s g %4$s**（%5$s mol）。</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>在 %1$s 中，%2$s 对应 **%3$s g %4$s**（%5$s mol）。</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>在 %1$s 中，%2$s 需要 **%3$s g %4$s**（%5$s mol）。</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>生成 **%1$s g %2$s**（%3$s mol）。</value>
+  </data>
+  <data name="ai_structural_no_results" xml:space="preserve">
+    <value>我在该族或周期中找不到任何内容。记住：共有 18 个族和 7 个周期！</value>
+  </data>
+  <data name="ai_structural_result" xml:space="preserve">
+    <value>**%1$s %2$s** 中的元素是： 
+</value>
+  </data>
+  <data name="ai_structural_specify_number" xml:space="preserve">
+    <value>请指定族或周期编号！</value>
+  </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>学习教练是PRO的一部分：它会记住你答错的测验题，并在你快要忘记之前把每一道带回来。</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>现在没有需要复习的内容。你在测验中答错的题目会在该练习时回到这里。</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>该复习了：有**%1$d道题**需要练习。点击一个答案，或说停止来结束。</value>
+  </data>
+  <data name="ai_suggest_element.0" xml:space="preserve">
+    <value>%1$s 的用途</value>
+  </data>
+  <data name="ai_suggest_element.1" xml:space="preserve">
+    <value>%1$s 的原子量</value>
+  </data>
+  <data name="ai_suggest_element.2" xml:space="preserve">
+    <value>%1$s 危险吗？</value>
+  </data>
+  <data name="ai_suggest_element.3" xml:space="preserve">
+    <value>%1$s 在哪里找到？</value>
+  </data>
+  <data name="ai_suggest_element.4" xml:space="preserve">
+    <value>%1$s 的电子排布</value>
+  </data>
+  <data name="ai_suggest_element.5" xml:space="preserve">
+    <value>%1$s 的同位素</value>
+  </data>
+  <data name="ai_suggest_general.0" xml:space="preserve">
+    <value>讲个有趣的知识</value>
+  </data>
+  <data name="ai_suggest_general.1" xml:space="preserve">
+    <value>开始一个测验</value>
+  </data>
+  <data name="ai_suggest_general.2" xml:space="preserve">
+    <value>什么是碱金属？</value>
+  </data>
+  <data name="ai_suggest_general.3" xml:space="preserve">
+    <value>最重的元素？</value>
+  </data>
+  <data name="ai_suggest_tools.0" xml:space="preserve">
+    <value>配平 Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="ai_suggest_tools.1" xml:space="preserve">
+    <value>把 500 K 换算成 °C</value>
+  </data>
+  <data name="ai_suggest_tools.2" xml:space="preserve">
+    <value>250 mL 的 0.5 mol/L 需要多少克 NaCl？</value>
+  </data>
+  <data name="ai_suggest_tools.3" xml:space="preserve">
+    <value>100 g 碳-14 经过 11460 年还剩多少？</value>
+  </data>
+  <data name="ai_suggest_trends.0" xml:space="preserve">
+    <value>什么是周期性趋势？</value>
+  </data>
+  <data name="ai_suggest_trends.1" xml:space="preserve">
+    <value>电负性趋势</value>
+  </data>
+  <data name="ai_suggest_trends.2" xml:space="preserve">
+    <value>原子半径趋势</value>
+  </data>
+  <data name="ai_suggest_trends.3" xml:space="preserve">
+    <value>电离能</value>
+  </data>
+  <data name="ai_suggestion_abundance" xml:space="preserve">
+    <value>我们要看看它在宇宙中的分布吗？</value>
+  </data>
+  <data name="ai_suggestion_bio" xml:space="preserve">
+    <value>您想了解它的生物学作用吗？</value>
+  </data>
+  <data name="ai_suggestion_compare" xml:space="preserve">
+    <value>您想将它与其他元素进行比较吗？</value>
+  </data>
+  <data name="ai_suggestion_iso" xml:space="preserve">
+    <value>我也可以告诉您关于它的同位素。</value>
+  </data>
+  <data name="ai_suggestion_safety" xml:space="preserve">
+    <value>如果您感兴趣，我也有它的安全数据。</value>
+  </data>
+  <data name="ai_superlative_among" xml:space="preserve">
+    <value>在 %1$ss 中，%2$s</value>
+  </data>
+  <data name="ai_superlative_generic" xml:space="preserve">
+    <value>这是一个好问题！我可以找到密度最大、最重或电负性最强的元素。你想知道哪一个？</value>
+  </data>
+  <data name="ai_superlative_highest" xml:space="preserve">
+    <value>最高</value>
+  </data>
+  <data name="ai_superlative_lowest" xml:space="preserve">
+    <value>最低</value>
+  </data>
+  <data name="ai_superlative_no_calculate" xml:space="preserve">
+    <value>我目前无法计算出那个结果。</value>
+  </data>
+  <data name="ai_superlative_nth" xml:space="preserve">
+    <value>第 **%1$d**%2$s %3$s%4$s是 **%5$s**，为 %6$s。</value>
+  </data>
+  <data name="ai_superlative_result" xml:space="preserve">
+    <value>%2$s 最 %1$s 的元素是 **%3$s**，其数值为 %4$s。</value>
+  </data>
+  <data name="ai_synthetic_only" xml:space="preserve">
+    <value>人工合成（不天然存在）</value>
+  </data>
+  <data name="ai_technical_config" xml:space="preserve">
+    <value> 它的电子排布为 %1$s。</value>
+  </data>
+  <data name="ai_technical_mass" xml:space="preserve">
+    <value> 它的精确原子质量为 %1$s。</value>
+  </data>
+  <data name="ai_thermal_header" xml:space="preserve">
+    <value>%1$s 的热性能：</value>
+  </data>
+  <data name="ai_thermal_properties" xml:space="preserve">
+    <value>**%1$s** 的热学性质：</value>
+  </data>
+  <data name="ai_trend_electronegativity" xml:space="preserve">
+    <value>电负性通常在同一周期内从左向右增加，在同一族内从上到下减少。氟是这里的冠军！</value>
+  </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>最高：%1$s（%2$s）。最低：%3$s（%4$s）。</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>总体下降，从 %1$s（%2$s）到 %3$s（%4$s）。</value>
+  </data>
+  <data name="ai_trend_general" xml:space="preserve">
+    <value>周期性趋势是元素属性中的规律！你对哪种趋势感兴趣：原子半径、电负性还是电离能？</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>%2$d 种元素的**%1$s**，按原子序数排列：</value>
+  </data>
+  <data name="ai_trend_ionization" xml:space="preserve">
+    <value>电离能沿周期增加，沿族减少。越往右移动，就越难剥离一个电子！</value>
+  </data>
+  <data name="ai_trend_metallic" xml:space="preserve">
+    <value>金属性沿周期减小，沿族增加。金属性最强的元素位于左下角（如钫）。</value>
+  </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>没有稳定的方向：一端是 %1$s（%2$s），另一端是 %3$s（%4$s）。</value>
+  </data>
+  <data name="ai_trend_radius" xml:space="preserve">
+    <value>原子半径在同一周期内（从左向右）减小，因为原子核对电子的吸引力更强；而在同一族内向下增加，因为增加了更多的电子层。</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>总体上升，从 %1$s（%2$s）到 %3$s（%4$s）。</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>整个周期表的**%1$s**：%2$d 种元素有数值。</value>
+  </data>
+  <data name="ai_unit_atoms_per_si" xml:space="preserve">
+    <value>每 10⁶ 个硅原子中的原子数</value>
+  </data>
+  <data name="ai_unit_bridge_note" xml:space="preserve">
+    <value>使用 1 eV = 96.485 kJ/mol 换算 —— 同一份能量，按每个粒子而非每摩尔计。</value>
+  </data>
+  <data name="ai_unit_converted" xml:space="preserve">
+    <value>**%1$s %2$s** 等于 **%3$s %4$s**。</value>
+  </data>
+  <data name="ai_unit_mg_per_kg" xml:space="preserve">
+    <value>mg/kg (ppm)</value>
+  </data>
+  <data name="ai_unit_ug_per_l" xml:space="preserve">
+    <value>µg/l</value>
+  </data>
+  <data name="ai_usage_header" xml:space="preserve">
+    <value>以下是关于 **%1$s** 的一些常见应用和事实：</value>
+  </data>
+  <data name="ai_valence_alkali" xml:space="preserve">
+    <value>作为碱金属，它的最外层有 **1 个价电子**。</value>
+  </data>
+  <data name="ai_valence_alkaline" xml:space="preserve">
+    <value>作为碱土金属，它有 **2 个价电子**。</value>
+  </data>
+  <data name="ai_valence_halogen" xml:space="preserve">
+    <value>作为卤素，它有 **7 个价电子**，并且非常渴望再获得一个！</value>
+  </data>
+  <data name="ai_valence_noble_helium" xml:space="preserve">
+    <value>氦有 **2 个价电子**，填满了它唯一的电子层。</value>
+  </data>
+  <data name="ai_valence_noble_other" xml:space="preserve">
+    <value>它有一个完整的最外层，包含 **8 个价电子**，这使它非常稳定。</value>
+  </data>
+  <data name="ai_value_is_range" xml:space="preserve">
+    <value>这是一个范围；排名使用其中点值。</value>
+  </data>
+  <data name="ai_value_trace" xml:space="preserve">
+    <value>微量</value>
+  </data>
+  <data name="ai_versus" xml:space="preserve">
+    <value>对比</value>
+  </data>
+  <data name="all_ai_features" xml:space="preserve">
+    <value>所有 AI 功能：</value>
+  </data>
+  <data name="all_core_features" xml:space="preserve">
+    <value>所有核心功能</value>
+  </data>
+  <data name="alloy_base_aluminium" xml:space="preserve">
+    <value>铝</value>
+  </data>
+  <data name="alloy_base_copper" xml:space="preserve">
+    <value>铜</value>
+  </data>
+  <data name="alloy_base_gold" xml:space="preserve">
+    <value>金</value>
+  </data>
+  <data name="alloy_base_iron" xml:space="preserve">
+    <value>铁</value>
+  </data>
+  <data name="alloy_base_mercury" xml:space="preserve">
+    <value>汞</value>
+  </data>
+  <data name="alloy_base_nickel" xml:space="preserve">
+    <value>镍</value>
+  </data>
+  <data name="alloy_base_silver" xml:space="preserve">
+    <value>银</value>
+  </data>
+  <data name="alloy_base_tin" xml:space="preserve">
+    <value>锡</value>
+  </data>
+  <data name="alloy_base_titanium" xml:space="preserve">
+    <value>钛</value>
+  </data>
+  <data name="alloy_clear_filter" xml:space="preserve">
+    <value>清除筛选</value>
+  </data>
+  <data name="alo" xml:space="preserve">
+    <value>合金表</value>
+  </data>
+  <data name="alphabetical" xml:space="preserve">
+    <value>按字母顺序</value>
+  </data>
+  <data name="analytics_desc" xml:space="preserve">
+    <value>通过共享匿名使用数据来帮助改进应用程序</value>
+  </data>
+  <data name="analytics_title" xml:space="preserve">
+    <value>使用分析</value>
+  </data>
+  <data name="and_more_item" xml:space="preserve">
+    <value>- 更多</value>
+  </data>
+  <data name="answer_no" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="answer_timeout" xml:space="preserve">
+    <value>超时</value>
+  </data>
+  <data name="answer_yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>Atomic</value>
+  </data>
+  <data name="appearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="appearance_colon" xml:space="preserve">
+    <value>外观：</value>
+  </data>
+  <data name="appwidget_text" xml:space="preserve">
+    <value>示例</value>
+  </data>
+  <data name="ask_atomic" xml:space="preserve">
+    <value>咨询 Atomic</value>
+  </data>
+  <data name="atomic_mass" xml:space="preserve">
+    <value>原子质量</value>
+  </data>
+  <data name="atomic_mass_colon" xml:space="preserve">
+    <value>原子质量：</value>
+  </data>
+  <data name="atomic_number" xml:space="preserve">
+    <value>原子序数</value>
+  </data>
+  <data name="atomic_number_label" xml:space="preserve">
+    <value>原子序数：</value>
+  </data>
+  <data name="atomic_properties" xml:space="preserve">
+    <value>原子属性</value>
+  </data>
+  <data name="atomic_radius_calculated_colon" xml:space="preserve">
+    <value>原子半径（计算值）：</value>
+  </data>
+  <data name="atomic_radius_empirical_colon" xml:space="preserve">
+    <value>原子半径（实验值）：</value>
+  </data>
+  <data name="atomic_weight" xml:space="preserve">
+    <value>原子量</value>
+  </data>
+  <data name="atomic_weight_relative_atomic_mass" xml:space="preserve">
+    <value>原子量（相对原子质量）：</value>
+  </data>
+  <data name="auto_hide_bottombar" xml:space="preserve">
+    <value>自动隐藏底栏</value>
+  </data>
+  <data name="auto_hide_bottombar_desc" xml:space="preserve">
+    <value>禁用标准行为</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="bal" xml:space="preserve">
+    <value>配平器</value>
+  </data>
+  <data name="balance_equation" xml:space="preserve">
+    <value>平衡方程式：</value>
+  </data>
+  <data name="balance_equation_colon" xml:space="preserve">
+    <value>平衡方程式：</value>
+  </data>
+  <data name="balancer_text" xml:space="preserve">
+    <value>平衡不同的化学反应并保存收藏夹以供以后使用</value>
+  </data>
+  <data name="balancer_title" xml:space="preserve">
+    <value>化学反应</value>
+  </data>
+  <data name="balancer_tool_card_title" xml:space="preserve">
+    <value>配平一个方程式</value>
+  </data>
+  <data name="balancer_tool_copied" xml:space="preserve">
+    <value>方程式已复制</value>
+  </data>
+  <data name="balancer_tool_examples" xml:space="preserve">
+    <value>示例</value>
+  </data>
+  <data name="balancer_tool_hint" xml:space="preserve">
+    <value>Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="balancer_tool_note" xml:space="preserve">
+    <value>箭头可写作 -&gt;、=&gt;、= 或 →。(s)、(l)、(g)、(aq) 等状态符号会被忽略。</value>
+  </data>
+  <data name="balancer_tool_prompt" xml:space="preserve">
+    <value>输入带箭头的方程式，例如 Fe + O2 -&gt; Fe2O3。</value>
+  </data>
+  <data name="balancer_tool_result" xml:space="preserve">
+    <value>配平后的方程式</value>
+  </data>
+  <data name="balancer_tool_text" xml:space="preserve">
+    <value>用精确的整数系数配平化学方程式</value>
+  </data>
+  <data name="balancer_tool_title" xml:space="preserve">
+    <value>方程配平器</value>
+  </data>
+  <data name="base_label" xml:space="preserve">
+    <value>基体金属：</value>
+  </data>
+  <data name="block" xml:space="preserve">
+    <value>区</value>
+  </data>
+  <data name="block_colon" xml:space="preserve">
+    <value>区：</value>
+  </data>
+  <data name="blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="boiling_point" xml:space="preserve">
+    <value>沸点</value>
+  </data>
+  <data name="boiling_point_celsius" xml:space="preserve">
+    <value>沸点（°C）：</value>
+  </data>
+  <data name="boiling_point_colon" xml:space="preserve">
+    <value>沸点：</value>
+  </data>
+  <data name="boiling_point_fahrenheit" xml:space="preserve">
+    <value>沸点（°F）：</value>
+  </data>
+  <data name="boiling_point_kelvin" xml:space="preserve">
+    <value>沸点（开尔文）：</value>
+  </data>
+  <data name="bonus_xp" xml:space="preserve">
+    <value>+0%%奖励激活</value>
+  </data>
+  <data name="brinell_hardness" xml:space="preserve">
+    <value>布氏硬度</value>
+  </data>
+  <data name="brinell_hardness_colon" xml:space="preserve">
+    <value>布氏硬度：</value>
+  </data>
+  <data name="bug" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="bulk_modulus" xml:space="preserve">
+    <value>体积模量</value>
+  </data>
+  <data name="cal" xml:space="preserve">
+    <value>计算器</value>
+  </data>
+  <data name="calc_elements_shown" xml:space="preserve">
+    <value>包含的元素将显示在这里</value>
+  </data>
+  <data name="calc_favorites" xml:space="preserve">
+    <value>收藏夹：</value>
+  </data>
+  <data name="calc_molar_mass" xml:space="preserve">
+    <value>摩尔质量：</value>
+  </data>
+  <data name="calc_no_favorites" xml:space="preserve">
+    <value>当前无收藏</value>
+  </data>
+  <data name="calc_no_pro_text" xml:space="preserve">
+    <value>要访问和保存到收藏夹，您需要获取PRO版本</value>
+  </data>
+  <data name="calculations" xml:space="preserve">
+    <value>计算</value>
+  </data>
+  <data name="calculations_stat" xml:space="preserve">
+    <value>计算</value>
+  </data>
+  <data name="calculator_card_title" xml:space="preserve">
+    <value>计算器：</value>
+  </data>
+  <data name="calculator_default_value" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="calculator_formula" xml:space="preserve">
+    <value>公式：</value>
+  </data>
+  <data name="calculator_text" xml:space="preserve">
+    <value>包含计算不同化合物摩尔质量的计算器以及保存收藏夹</value>
+  </data>
+  <data name="calculator_title" xml:space="preserve">
+    <value>计算器</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="card_order" xml:space="preserve">
+    <value>卡片顺序</value>
+  </data>
+  <data name="cas_number" xml:space="preserve">
+    <value>CAS编号：</value>
+  </data>
+  <data name="cas_number_colon" xml:space="preserve">
+    <value>CAS编号：</value>
+  </data>
+  <data name="chip_chemistry" xml:space="preserve">
+    <value>化学</value>
+  </data>
+  <data name="chip_math" xml:space="preserve">
+    <value>数学</value>
+  </data>
+  <data name="chip_minerals" xml:space="preserve">
+    <value>矿物</value>
+  </data>
+  <data name="chip_physics" xml:space="preserve">
+    <value>物理</value>
+  </data>
+  <data name="chip_reactions" xml:space="preserve">
+    <value>反应</value>
+  </data>
+  <data name="chip_rocks" xml:space="preserve">
+    <value>岩石</value>
+  </data>
+  <data name="chip_soils" xml:space="preserve">
+    <value>土壤</value>
+  </data>
+  <data name="chip_water" xml:space="preserve">
+    <value>水</value>
+  </data>
+  <data name="clear_cache_title" xml:space="preserve">
+    <value>清除缓存</value>
+  </data>
+  <data name="clear_filter" xml:space="preserve">
+    <value>清除筛选</value>
+  </data>
+  <data name="color_label" xml:space="preserve">
+    <value>颜色：</value>
+  </data>
+  <data name="compare_elements" xml:space="preserve">
+    <value>比较元素</value>
+  </data>
+  <data name="comparison_title_format" xml:space="preserve">
+    <value>%1$s | %2$s</value>
+  </data>
+  <data name="composition_label" xml:space="preserve">
+    <value>成分：</value>
+  </data>
+  <data name="con" xml:space="preserve">
+    <value>常数表</value>
+  </data>
+  <data name="confirm_sign_out" xml:space="preserve">
+    <value>您确定要登出吗？</value>
+  </data>
+  <data name="constants_search" xml:space="preserve">
+    <value>搜索常数</value>
+  </data>
+  <data name="constants_table_label" xml:space="preserve">
+    <value>常数表：</value>
+  </data>
+  <data name="constants_tite" xml:space="preserve">
+    <value>常数表</value>
+  </data>
+  <data name="correct" xml:space="preserve">
+    <value>正确</value>
+  </data>
+  <data name="correct_answer" xml:space="preserve">
+    <value>正确答案：%s</value>
+  </data>
+  <data name="covalent_radius_colon" xml:space="preserve">
+    <value>共价半径：</value>
+  </data>
+  <data name="credits_electro_boy_info" xml:space="preserve">
+    <value>南非荷兰语翻译</value>
+  </data>
+  <data name="credits_giancarlo_info" xml:space="preserve">
+    <value>西班牙语和意大利语翻译</value>
+  </data>
+  <data name="credits_text" xml:space="preserve">
+    <value>贡献者致谢</value>
+  </data>
+  <data name="credits_title" xml:space="preserve">
+    <value>致谢</value>
+  </data>
+  <data name="cristal_structure_label" xml:space="preserve">
+    <value>晶体结构：</value>
+  </data>
+  <data name="crystal_structure" xml:space="preserve">
+    <value>晶体结构：</value>
+  </data>
+  <data name="curie_point_colon" xml:space="preserve">
+    <value>居里点：</value>
+  </data>
+  <data name="current_version" xml:space="preserve">
+    <value>当前版本</value>
+  </data>
+  <data name="currently_no_favorites" xml:space="preserve">
+    <value>当前无收藏</value>
+  </data>
+  <data name="customize_detail_card_order" xml:space="preserve">
+    <value>自定义详细卡片顺序</value>
+  </data>
+  <data name="customize_units_table" xml:space="preserve">
+    <value>自定义主表中的单位</value>
+  </data>
+  <data name="dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="data_issue" xml:space="preserve">
+    <value>数据问题</value>
+  </data>
+  <data name="data_visualisations" xml:space="preserve">
+    <value>数据可视化：</value>
+  </data>
+  <data name="debye_temperature_low_temperature_limit" xml:space="preserve">
+    <value>德拜温度：（低温极限）</value>
+  </data>
+  <data name="debye_temperature_room_temperature" xml:space="preserve">
+    <value>德拜温度：（室温）</value>
+  </data>
+  <data name="decay_alpha" xml:space="preserve">
+    <value>α 衰变</value>
+  </data>
+  <data name="decay_beta_minus" xml:space="preserve">
+    <value>β− 衰变</value>
+  </data>
+  <data name="decay_beta_plus" xml:space="preserve">
+    <value>β+ 衰变</value>
+  </data>
+  <data name="decay_electron_capture" xml:space="preserve">
+    <value>电子俘获</value>
+  </data>
+  <data name="decay_info_fab" xml:space="preserve">
+    <value>不同衰变类型的信息</value>
+  </data>
+  <data name="decay_neutron_emission" xml:space="preserve">
+    <value>中子发射</value>
+  </data>
+  <data name="decay_proton_emission" xml:space="preserve">
+    <value>质子发射</value>
+  </data>
+  <data name="decay_spontaneous_fission" xml:space="preserve">
+    <value>自发裂变</value>
+  </data>
+  <data name="density" xml:space="preserve">
+    <value>密度</value>
+  </data>
+  <data name="density_colon" xml:space="preserve">
+    <value>密度：</value>
+  </data>
+  <data name="density_label" xml:space="preserve">
+    <value>密度：</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="description_colon" xml:space="preserve">
+    <value>描述：</value>
+  </data>
+  <data name="detail_card_order" xml:space="preserve">
+    <value>详细卡片顺序</value>
+  </data>
+  <data name="dic" xml:space="preserve">
+    <value>词典</value>
+  </data>
+  <data name="dictionary" xml:space="preserve">
+    <value>词典</value>
+  </data>
+  <data name="dictionary_search" xml:space="preserve">
+    <value>搜索词典项</value>
+  </data>
+  <data name="dictionary_text" xml:space="preserve">
+    <value>一份全面的化学和物理术语词典</value>
+  </data>
+  <data name="discovered_by" xml:space="preserve">
+    <value>发现者</value>
+  </data>
+  <data name="discovered_by_colon" xml:space="preserve">
+    <value>发现者：</value>
+  </data>
+  <data name="discovery_year" xml:space="preserve">
+    <value>发现年份</value>
+  </data>
+  <data name="display_mode" xml:space="preserve">
+    <value>显示模式</value>
+  </data>
+  <data name="early_access_features" xml:space="preserve">
+    <value>提前访问新功能：</value>
+  </data>
+  <data name="easy" xml:space="preserve">
+    <value>简单</value>
+  </data>
+  <data name="eg_number" xml:space="preserve">
+    <value>EG编号：</value>
+  </data>
+  <data name="eg_number_colon" xml:space="preserve">
+    <value>EG编号：</value>
+  </data>
+  <data name="ele" xml:space="preserve">
+    <value>电化学系列</value>
+  </data>
+  <data name="electrical_resistivity" xml:space="preserve">
+    <value>电阻率</value>
+  </data>
+  <data name="electrical_resistivity_colon" xml:space="preserve">
+    <value>电阻率：</value>
+  </data>
+  <data name="electrical_type" xml:space="preserve">
+    <value>电性类型</value>
+  </data>
+  <data name="electrical_type_colon" xml:space="preserve">
+    <value>电气类型：</value>
+  </data>
+  <data name="electrochemical_series" xml:space="preserve">
+    <value>电化学系列</value>
+  </data>
+  <data name="electrochemical_series_search" xml:space="preserve">
+    <value>搜索元素</value>
+  </data>
+  <data name="electromagnetic_properties" xml:space="preserve">
+    <value>电磁属性</value>
+  </data>
+  <data name="electron_affinity_colon" xml:space="preserve">
+    <value>电子亲和能:</value>
+  </data>
+  <data name="electron_configuration_colon" xml:space="preserve">
+    <value>电子构型：</value>
+  </data>
+  <data name="electron_shell_colon" xml:space="preserve">
+    <value>电子层：</value>
+  </data>
+  <data name="electronegativity" xml:space="preserve">
+    <value>电负性</value>
+  </data>
+  <data name="electronegativity_allen_colon" xml:space="preserve">
+    <value>电负性 (Allen)：</value>
+  </data>
+  <data name="electronegativity_colon" xml:space="preserve">
+    <value>电负性：</value>
+  </data>
+  <data name="element_bulk_modulus" xml:space="preserve">
+    <value>体积模量：</value>
+  </data>
+  <data name="element_description_title" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="element_elastic_modulus" xml:space="preserve">
+    <value>弹性模量：</value>
+  </data>
+  <data name="element_electrons" xml:space="preserve">
+    <value>电子：</value>
+  </data>
+  <data name="element_groups" xml:space="preserve">
+    <value>元素族</value>
+  </data>
+  <data name="element_info_title" xml:space="preserve">
+    <value>元素信息</value>
+  </data>
+  <data name="element_more_title" xml:space="preserve">
+    <value>额外属性</value>
+  </data>
+  <data name="element_name_default" xml:space="preserve">
+    <value>元素名称（默认）</value>
+  </data>
+  <data name="element_names" xml:space="preserve">
+    <value>元素名称</value>
+  </data>
+  <data name="element_number" xml:space="preserve">
+    <value>元素序号</value>
+  </data>
+  <data name="element_of_the_day" xml:space="preserve">
+    <value>每日元素</value>
+  </data>
+  <data name="element_of_the_day_description" xml:space="preserve">
+    <value>每天显示不同的元素，包括其符号、名称和描述</value>
+  </data>
+  <data name="element_overview" xml:space="preserve">
+    <value>元素概览：</value>
+  </data>
+  <data name="element_poisson_ratio" xml:space="preserve">
+    <value>泊松比：</value>
+  </data>
+  <data name="element_shear_modulus" xml:space="preserve">
+    <value>剪切模量：</value>
+  </data>
+  <data name="element_speed_sound" xml:space="preserve">
+    <value>声速：</value>
+  </data>
+  <data name="element_symbols" xml:space="preserve">
+    <value>元素符号</value>
+  </data>
+  <data name="element_young_modulus" xml:space="preserve">
+    <value>杨氏模量：</value>
+  </data>
+  <data name="elements_included_will_be_shown_here" xml:space="preserve">
+    <value>包含的元素将显示在这里</value>
+  </data>
+  <data name="elements_opened" xml:space="preserve">
+    <value>打开的元素</value>
+  </data>
+  <data name="emi" xml:space="preserve">
+    <value>发射光谱表</value>
+  </data>
+  <data name="emission_spectrum_colon" xml:space="preserve">
+    <value>发射光谱：</value>
+  </data>
+  <data name="emission_spectrum_table" xml:space="preserve">
+    <value>发射光谱表：</value>
+  </data>
+  <data name="emission_text" xml:space="preserve">
+    <value>元素的发射光谱，即电子从较高能态跃迁到较低能态时发射的电磁辐射频率。</value>
+  </data>
+  <data name="emission_title" xml:space="preserve">
+    <value>发射光谱表</value>
+  </data>
+  <data name="enable_sync" xml:space="preserve">
+    <value>启用同步</value>
+  </data>
+  <data name="enable_sync_desc" xml:space="preserve">
+    <value>PRO和PRO+用户可以同步等级、xp、成就等进度</value>
+  </data>
+  <data name="enable_sync_pro_button" xml:space="preserve">
+    <value>升级</value>
+  </data>
+  <data name="enable_zoom_in_tables" xml:space="preserve">
+    <value>在表格中启用缩放</value>
+  </data>
+  <data name="english_name_colon" xml:space="preserve">
+    <value>英文名称：</value>
+  </data>
+  <data name="enter_new_text" xml:space="preserve">
+    <value>输入新文本</value>
+  </data>
+  <data name="eqe" xml:space="preserve">
+    <value>公式</value>
+  </data>
+  <data name="equations_search_other" xml:space="preserve">
+    <value>尝试搜索其他词或检查拼写。</value>
+  </data>
+  <data name="exam_best_score" xml:space="preserve">
+    <value>最佳成绩：%1$d%%</value>
+  </data>
+  <data name="exam_finished_xp" xml:space="preserve">
+    <value>考试完成：+%1$d XP</value>
+  </data>
+  <data name="exam_locked" xml:space="preserve">
+    <value>达到第 %1$d 级后解锁</value>
+  </data>
+  <data name="exam_not_taken" xml:space="preserve">
+    <value>尚未尝试</value>
+  </data>
+  <data name="exam_passed" xml:space="preserve">
+    <value>已通过 · 最佳成绩 %1$d%%</value>
+  </data>
+  <data name="exam_pro_locked" xml:space="preserve">
+    <value>此考试需要 PRO+</value>
+  </data>
+  <data name="exam_results" xml:space="preserve">
+    <value>考试结果</value>
+  </data>
+  <data name="exam_start" xml:space="preserve">
+    <value>开始考试</value>
+  </data>
+  <data name="exam_test_subtitle" xml:space="preserve">
+    <value>第 %1$d 级到第 %2$d 级的全部内容，混合出题</value>
+  </data>
+  <data name="exam_test_title" xml:space="preserve">
+    <value>考试</value>
+  </data>
+  <data name="exit_compare_mode" xml:space="preserve">
+    <value>退出比较</value>
+  </data>
+  <data name="experimental" xml:space="preserve">
+    <value>实验性</value>
+  </data>
+  <data name="experimental_text" xml:space="preserve">
+    <value>额外实验性设置</value>
+  </data>
+  <data name="experimental_title" xml:space="preserve">
+    <value>实验性设置</value>
+  </data>
+  <data name="favorite_bar" xml:space="preserve">
+    <value>收藏栏</value>
+  </data>
+  <data name="favorite_settings_atomic_properties" xml:space="preserve">
+    <value>原子属性</value>
+  </data>
+  <data name="favorite_settings_electromagnetic" xml:space="preserve">
+    <value>电磁属性</value>
+  </data>
+  <data name="favorite_settings_general" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="favorite_settings_nuclear" xml:space="preserve">
+    <value>核</value>
+  </data>
+  <data name="favorite_settings_temperatures" xml:space="preserve">
+    <value>温度</value>
+  </data>
+  <data name="favorite_settings_thermodynamics" xml:space="preserve">
+    <value>热力学</value>
+  </data>
+  <data name="favorite_settings_title" xml:space="preserve">
+    <value>收藏栏</value>
+  </data>
+  <data name="favorites_colon" xml:space="preserve">
+    <value>收藏夹：</value>
+  </data>
+  <data name="feature_check" xml:space="preserve">
+    <value>包含的功能</value>
+  </data>
+  <data name="features" xml:space="preserve">
+    <value>功能：</value>
+  </data>
+  <data name="fifty_lives_in_flashcards" xml:space="preserve">
+    <value>闪卡中50条生命：</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="finished_game_xp" xml:space="preserve">
+    <value>完成游戏：+%dxp</value>
+  </data>
+  <data name="fire_hazard" xml:space="preserve">
+    <value>火灾危害：</value>
+  </data>
+  <data name="fla" xml:space="preserve">
+    <value>闪卡</value>
+  </data>
+  <data name="flashcards_atomic_mass" xml:space="preserve">
+    <value>原子质量</value>
+  </data>
+  <data name="flashcards_chemical_reactions" xml:space="preserve">
+    <value>化学反应</value>
+  </data>
+  <data name="flashcards_difficulty" xml:space="preserve">
+    <value>选择难度：</value>
+  </data>
+  <data name="flashcards_difficulty_title" xml:space="preserve">
+    <value>难度</value>
+  </data>
+  <data name="flashcards_element_classifications" xml:space="preserve">
+    <value>元素分类</value>
+  </data>
+  <data name="flashcards_element_symbols" xml:space="preserve">
+    <value>元素符号</value>
+  </data>
+  <data name="flashcards_free_games" xml:space="preserve">
+    <value>免费游戏：</value>
+  </data>
+  <data name="flashcards_game_element_appearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="flashcards_game_element_atomic_mass" xml:space="preserve">
+    <value>原子质量</value>
+  </data>
+  <data name="flashcards_game_element_density" xml:space="preserve">
+    <value>密度</value>
+  </data>
+  <data name="flashcards_game_element_groups" xml:space="preserve">
+    <value>元素族</value>
+  </data>
+  <data name="flashcards_game_element_names" xml:space="preserve">
+    <value>元素名称</value>
+  </data>
+  <data name="flashcards_game_element_symbols" xml:space="preserve">
+    <value>元素符号</value>
+  </data>
+  <data name="flashcards_info" xml:space="preserve">
+    <value>使用内置的"学习游戏"学习元素周期表</value>
+  </data>
+  <data name="flashcards_level" xml:space="preserve">
+    <value>等级</value>
+  </data>
+  <data name="flashcards_lives_info" xml:space="preserve">
+    <value>每次回答错误会失去一条生命</value>
+  </data>
+  <data name="flashcards_mixed_questions" xml:space="preserve">
+    <value>混合问题</value>
+  </data>
+  <data name="flashcards_pro_level_0_5" xml:space="preserve">
+    <value>等级0：</value>
+  </data>
+  <data name="flashcards_pro_level_10_15" xml:space="preserve">
+    <value>等级10：</value>
+  </data>
+  <data name="flashcards_pro_level_5_10" xml:space="preserve">
+    <value>等级5：</value>
+  </data>
+  <data name="flashcards_pro_plus_games" xml:space="preserve">
+    <value>PRO+游戏：</value>
+  </data>
+  <data name="flashcards_statistics" xml:space="preserve">
+    <value>统计</value>
+  </data>
+  <data name="flashcards_title" xml:space="preserve">
+    <value>闪卡</value>
+  </data>
+  <data name="flashcards_total_games" xml:space="preserve">
+    <value>游戏</value>
+  </data>
+  <data name="flashcards_total_xp" xml:space="preserve">
+    <value>总XP</value>
+  </data>
+  <data name="flashcards_unlimited_lives" xml:space="preserve">
+    <value>闪卡无限生命：</value>
+  </data>
+  <data name="formula_will_be_displayed_here" xml:space="preserve">
+    <value>公式将显示在这里</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>免费</value>
+  </data>
+  <data name="fusion_heat" xml:space="preserve">
+    <value>熔化热</value>
+  </data>
+  <data name="fusion_heat_colon" xml:space="preserve">
+    <value>熔化热：</value>
+  </data>
+  <data name="game_compare_pair" xml:space="preserve">
+    <value>正面对决</value>
+  </data>
+  <data name="game_extremes_advanced" xml:space="preserve">
+    <value>进阶极值</value>
+  </data>
+  <data name="game_group" xml:space="preserve">
+    <value>族</value>
+  </data>
+  <data name="game_highest" xml:space="preserve">
+    <value>哪个最高？</value>
+  </data>
+  <data name="game_isotope_decay" xml:space="preserve">
+    <value>衰变方式</value>
+  </data>
+  <data name="game_isotope_half_life" xml:space="preserve">
+    <value>半衰期</value>
+  </data>
+  <data name="game_isotope_neutrons" xml:space="preserve">
+    <value>中子数</value>
+  </data>
+  <data name="game_isotope_stability" xml:space="preserve">
+    <value>稳定同位素</value>
+  </data>
+  <data name="game_lowest" xml:space="preserve">
+    <value>哪个最低？</value>
+  </data>
+  <data name="game_molar_mass" xml:space="preserve">
+    <value>摩尔质量</value>
+  </data>
+  <data name="game_odd_one_out" xml:space="preserve">
+    <value>找出不同</value>
+  </data>
+  <data name="game_period" xml:space="preserve">
+    <value>周期</value>
+  </data>
+  <data name="game_results" xml:space="preserve">
+    <value>游戏结果</value>
+  </data>
+  <data name="game_valence_electrons" xml:space="preserve">
+    <value>价电子</value>
+  </data>
+  <data name="gas" xml:space="preserve">
+    <value>理想气体计算器</value>
+  </data>
+  <data name="geo" xml:space="preserve">
+    <value>地质表</value>
+  </data>
+  <data name="geo_clear_filter" xml:space="preserve">
+    <value>清除筛选</value>
+  </data>
+  <data name="geo_no_results" xml:space="preserve">
+    <value>无结果</value>
+  </data>
+  <data name="geo_search_hint" xml:space="preserve">
+    <value>搜索地质项</value>
+  </data>
+  <data name="geo_try_another_search" xml:space="preserve">
+    <value>尝试搜索其他词或检查拼写。</value>
+  </data>
+  <data name="geology_table" xml:space="preserve">
+    <value>地质表：</value>
+  </data>
+  <data name="get_pro" xml:space="preserve">
+    <value>获取 PRO</value>
+  </data>
+  <data name="get_pro_button" xml:space="preserve">
+    <value>获取PRO</value>
+  </data>
+  <data name="get_pro_element_text" xml:space="preserve">
+    <value>获取PRO版本以解锁元素的额外信息</value>
+  </data>
+  <data name="get_pro_plus" xml:space="preserve">
+    <value>获取 PRO+</value>
+  </data>
+  <data name="get_pro_plus_button" xml:space="preserve">
+    <value>获取PRO+</value>
+  </data>
+  <data name="get_pro_title" xml:space="preserve">
+    <value>获取PRO版本</value>
+  </data>
+  <data name="git_text" xml:space="preserve">
+    <value>Atomic开源GitHub仓库</value>
+  </data>
+  <data name="go_online_for_emission" xml:space="preserve">
+    <value>在线查看发射线</value>
+  </data>
+  <data name="go_online_for_emission_lines" xml:space="preserve">
+    <value>在线查看发射线</value>
+  </data>
+  <data name="go_pro_more_features" xml:space="preserve">
+    <value>Go Pro - 更多功能</value>
+  </data>
+  <data name="go_pro_school_start_sale" xml:space="preserve">
+    <value>GO PRO - 开学促销</value>
+  </data>
+  <data name="grid_parameters" xml:space="preserve">
+    <value>晶格参数：（晶格常数）</value>
+  </data>
+  <data name="grid_title" xml:space="preserve">
+    <value>晶格属性</value>
+  </data>
+  <data name="group_label" xml:space="preserve">
+    <value>族：</value>
+  </data>
+  <data name="hard" xml:space="preserve">
+    <value>困难</value>
+  </data>
+  <data name="hardness_label" xml:space="preserve">
+    <value>硬度：</value>
+  </data>
+  <data name="hardness_properties" xml:space="preserve">
+    <value>硬度属性</value>
+  </data>
+  <data name="hardness_properties_requires_pro" xml:space="preserve">
+    <value>硬度属性需要PRO版本。获取PRO以解锁更多数据和表格：</value>
+  </data>
+  <data name="hazard_diamond" xml:space="preserve">
+    <value>危险菱形标志</value>
+  </data>
+  <data name="hazard_flammability" xml:space="preserve">
+    <value>易燃性</value>
+  </data>
+  <data name="hazard_health" xml:space="preserve">
+    <value>健康危害</value>
+  </data>
+  <data name="hazard_instability" xml:space="preserve">
+    <value>不稳定性</value>
+  </data>
+  <data name="hazard_materials" xml:space="preserve">
+    <value>危险材料：</value>
+  </data>
+  <data name="hazard_title" xml:space="preserve">
+    <value>材料危害</value>
+  </data>
+  <data name="hazard_title_requires_pro" xml:space="preserve">
+    <value>材料危害需要PRO版本。获取PRO以解锁更多数据和表格：</value>
+  </data>
+  <data name="health_hazard" xml:space="preserve">
+    <value>健康危害：</value>
+  </data>
+  <data name="highest" xml:space="preserve">
+    <value>最高的</value>
+  </data>
+  <data name="ideal_calculated" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="ideal_gas_calculate_field" xml:space="preserve">
+    <value>计算：</value>
+  </data>
+  <data name="ideal_gas_calculator_title" xml:space="preserve">
+    <value>理想气体计算器</value>
+  </data>
+  <data name="ideal_gas_card_title" xml:space="preserve">
+    <value>理想气体状态方程计算器 (PV=nRT)：</value>
+  </data>
+  <data name="ideal_gas_moles" xml:space="preserve">
+    <value>摩尔数 (n)：</value>
+  </data>
+  <data name="ideal_gas_moles_hint" xml:space="preserve">
+    <value>输入摩尔数</value>
+  </data>
+  <data name="ideal_gas_pressure" xml:space="preserve">
+    <value>压力 (P)：</value>
+  </data>
+  <data name="ideal_gas_pressure_hint" xml:space="preserve">
+    <value>输入压力</value>
+  </data>
+  <data name="ideal_gas_result" xml:space="preserve">
+    <value>结果：</value>
+  </data>
+  <data name="ideal_gas_temperature" xml:space="preserve">
+    <value>温度 (T)：</value>
+  </data>
+  <data name="ideal_gas_temperature_hint" xml:space="preserve">
+    <value>输入温度</value>
+  </data>
+  <data name="ideal_gas_text" xml:space="preserve">
+    <value>使用理想气体状态方程 PV=nRT 计算理想气体特性。选择要计算的变量并输入其他三个值。</value>
+  </data>
+  <data name="ideal_gas_volume" xml:space="preserve">
+    <value>体积 (V)：</value>
+  </data>
+  <data name="ideal_gas_volume_hint" xml:space="preserve">
+    <value>输入体积</value>
+  </data>
+  <data name="info_text" xml:space="preserve">
+    <value>应用版本和详细信息</value>
+  </data>
+  <data name="info_title" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="intro_calculator_description" xml:space="preserve">
+    <value>快速准确地计算化合物的摩尔质量。非常适合化学专业的学生和专业人士。</value>
+  </data>
+  <data name="intro_calculator_title" xml:space="preserve">
+    <value>摩尔质量计算器</value>
+  </data>
+  <data name="intro_finish" xml:space="preserve">
+    <value>开始使用</value>
+  </data>
+  <data name="intro_flashcards_description" xml:space="preserve">
+    <value>通过交互式闪卡掌握元素周期表。测试您对元素符号、原子质量和化学性质的了解。</value>
+  </data>
+  <data name="intro_flashcards_title" xml:space="preserve">
+    <value>使用闪卡学习</value>
+  </data>
+  <data name="intro_image_description" xml:space="preserve">
+    <value>介绍图片</value>
+  </data>
+  <data name="intro_next" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="intro_pro_description" xml:space="preserve">
+    <value>使用 PRO 版本访问额外数据、高级表格、增强型计算器和独家功能。</value>
+  </data>
+  <data name="intro_pro_title" xml:space="preserve">
+    <value>解锁 PRO 功能</value>
+  </data>
+  <data name="intro_skip" xml:space="preserve">
+    <value>跳过</value>
+  </data>
+  <data name="intro_welcome_description" xml:space="preserve">
+    <value>您的综合元素周期表参考，包含详细的元素信息、交互式工具和学习功能。</value>
+  </data>
+  <data name="intro_welcome_title" xml:space="preserve">
+    <value>欢迎使用 Atomic</value>
+  </data>
+  <data name="ion" xml:space="preserve">
+    <value>电离能</value>
+  </data>
+  <data name="ion_charge_colon" xml:space="preserve">
+    <value>离子电荷：</value>
+  </data>
+  <data name="ion_no_results" xml:space="preserve">
+    <value>无结果</value>
+  </data>
+  <data name="ion_try_another_search" xml:space="preserve">
+    <value>尝试搜索其他词或检查拼写。</value>
+  </data>
+  <data name="ionization_energies_colon" xml:space="preserve">
+    <value>电离能：</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>同位素</value>
+  </data>
+  <data name="iso_half_life_colon" xml:space="preserve">
+    <value>半衰期：</value>
+  </data>
+  <data name="iso_no_results" xml:space="preserve">
+    <value>无结果</value>
+  </data>
+  <data name="iso_search_hint" xml:space="preserve">
+    <value>搜索同位素</value>
+  </data>
+  <data name="iso_try_another_search" xml:space="preserve">
+    <value>尝试搜索其他词或检查拼写。</value>
+  </data>
+  <data name="isotope" xml:space="preserve">
+    <value>同位素</value>
+  </data>
+  <data name="isotopes_colon" xml:space="preserve">
+    <value>同位素：</value>
+  </data>
+  <data name="isotopes_table_description" xml:space="preserve">
+    <value>包含不同元素同位素以及半衰期、质量、质子、中子和核子数据的表格。</value>
+  </data>
+  <data name="isotopes_title" xml:space="preserve">
+    <value>同位素</value>
+  </data>
+  <data name="language_content" xml:space="preserve">
+    <value>选择语言</value>
+  </data>
+  <data name="language_title" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>上次同步</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>从未</value>
+  </data>
+  <data name="learning_games" xml:space="preserve">
+    <value>学习游戏：</value>
+  </data>
+  <data name="learning_games_nav" xml:space="preserve">
+    <value>闪卡</value>
+  </data>
+  <data name="leave_game_confirm" xml:space="preserve">
+    <value>离开</value>
+  </data>
+  <data name="leave_game_message" xml:space="preserve">
+    <value>确定要离开游戏吗？你将失去 %1$d 点生命。</value>
+  </data>
+  <data name="leave_game_stay" xml:space="preserve">
+    <value>留下</value>
+  </data>
+  <data name="leave_game_title" xml:space="preserve">
+    <value>离开游戏？</value>
+  </data>
+  <data name="level_0_4" xml:space="preserve">
+    <value>等级0</value>
+  </data>
+  <data name="level_10_14" xml:space="preserve">
+    <value>等级10</value>
+  </data>
+  <data name="level_15_19" xml:space="preserve">
+    <value>等级15</value>
+  </data>
+  <data name="level_20_24" xml:space="preserve">
+    <value>等级20</value>
+  </data>
+  <data name="level_25_29" xml:space="preserve">
+    <value>等级25</value>
+  </data>
+  <data name="level_30_34" xml:space="preserve">
+    <value>等级30</value>
+  </data>
+  <data name="level_5_9" xml:space="preserve">
+    <value>等级5</value>
+  </data>
+  <data name="level_range_format" xml:space="preserve">
+    <value>等级%1$d</value>
+  </data>
+  <data name="level_up_message" xml:space="preserve">
+    <value>恭喜，你已达到第 %1$d 级！</value>
+  </data>
+  <data name="level_up_title" xml:space="preserve">
+    <value>升级了！</value>
+  </data>
+  <data name="level_x_y" xml:space="preserve">
+    <value>等级X-Y</value>
+  </data>
+  <data name="license_title" xml:space="preserve">
+    <value>许可证</value>
+  </data>
+  <data name="licenses_text" xml:space="preserve">
+    <value>Atomic使用的作品许可证</value>
+  </data>
+  <data name="licenses_title" xml:space="preserve">
+    <value>许可证</value>
+  </data>
+  <data name="light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="lives_label" xml:space="preserve">
+    <value>生命：%s</value>
+  </data>
+  <data name="lives_lost_detail" xml:space="preserve">
+    <value>失去的生命：%1$d（每次错误/超时回答%2$d）</value>
+  </data>
+  <data name="lives_lost_result.Other" xml:space="preserve">
+    <value>失去 %d 点生命</value>
+  </data>
+  <data name="lives_unlimited" xml:space="preserve">
+    <value>生命：∞</value>
+  </data>
+  <data name="login_for_sync" xml:space="preserve">
+    <value>登录以启用同步</value>
+  </data>
+  <data name="login_for_sync_and_more" xml:space="preserve">
+    <value>登录以同步数据</value>
+  </data>
+  <data name="lowest" xml:space="preserve">
+    <value>最低的</value>
+  </data>
+  <data name="magnetic_type" xml:space="preserve">
+    <value>磁性类型</value>
+  </data>
+  <data name="magnetic_type_colon" xml:space="preserve">
+    <value>磁性类型：</value>
+  </data>
+  <data name="magnetism_label" xml:space="preserve">
+    <value>磁性：</value>
+  </data>
+  <data name="medium" xml:space="preserve">
+    <value>中等</value>
+  </data>
+  <data name="melting_point" xml:space="preserve">
+    <value>熔点</value>
+  </data>
+  <data name="melting_point_celsius" xml:space="preserve">
+    <value>熔点（°C）：</value>
+  </data>
+  <data name="melting_point_colon" xml:space="preserve">
+    <value>熔点：</value>
+  </data>
+  <data name="melting_point_fahrenheit" xml:space="preserve">
+    <value>熔点（°F）：</value>
+  </data>
+  <data name="melting_point_kelvin" xml:space="preserve">
+    <value>熔点（开尔文）：</value>
+  </data>
+  <data name="member_already" xml:space="preserve">
+    <value>您是PRO会员！</value>
+  </data>
+  <data name="member_btn" xml:space="preserve">
+    <value>您的PRO特权</value>
+  </data>
+  <data name="member_desch" xml:space="preserve">
+    <value>感谢支持"Atomic - 元素周期表"的开发。随着更多PRO功能的添加，此页面将显示您的PRO特权信息。</value>
+  </data>
+  <data name="member_title" xml:space="preserve">
+    <value>PRO会员页面</value>
+  </data>
+  <data name="mohs_hardness" xml:space="preserve">
+    <value>莫氏硬度</value>
+  </data>
+  <data name="mohs_hardness_colon" xml:space="preserve">
+    <value>莫氏硬度：</value>
+  </data>
+  <data name="molar_heat_capacity_colon" xml:space="preserve">
+    <value>摩尔热容：</value>
+  </data>
+  <data name="molar_mass_value" xml:space="preserve">
+    <value>%1$s g/mol</value>
+  </data>
+  <data name="molar_volume_colon" xml:space="preserve">
+    <value>摩尔体积：</value>
+  </data>
+  <data name="more_information" xml:space="preserve">
+    <value>更多信息：</value>
+  </data>
+  <data name="most_advanced" xml:space="preserve">
+    <value>最高级</value>
+  </data>
+  <data name="most_used" xml:space="preserve">
+    <value>最常用：</value>
+  </data>
+  <data name="neel_point_colon" xml:space="preserve">
+    <value>奈尔点：</value>
+  </data>
+  <data name="neutron_cross_sectional" xml:space="preserve">
+    <value>中子截面</value>
+  </data>
+  <data name="neutron_cross_sectional_colon" xml:space="preserve">
+    <value>中子截面：</value>
+  </data>
+  <data name="neutrons" xml:space="preserve">
+    <value>中子：</value>
+  </data>
+  <data name="new_label" xml:space="preserve">
+    <value>新</value>
+  </data>
+  <data name="next_life_gain.Other" xml:space="preserve">
+    <value>你将获得 %d 点生命。</value>
+  </data>
+  <data name="next_life_in_detail" xml:space="preserve">
+    <value>下一点生命将在 %1$d 分 %2$d 秒后恢复。
+%3$s</value>
+  </data>
+  <data name="no_image" xml:space="preserve">
+    <value>无图片</value>
+  </data>
+  <data name="no_questions_title" xml:space="preserve">
+    <value>数据不足</value>
+  </data>
+  <data name="no_results" xml:space="preserve">
+    <value>No Results</value>
+  </data>
+  <data name="no_unlocked_games" xml:space="preserve">
+    <value>没有已解锁的游戏！</value>
+  </data>
+  <data name="non_pro" xml:space="preserve">
+    <value>非PRO</value>
+  </data>
+  <data name="notes_placeholder" xml:space="preserve">
+    <value>为元素做笔记：</value>
+  </data>
+  <data name="nuc" xml:space="preserve">
+    <value>核素表</value>
+  </data>
+  <data name="nuclear_properties" xml:space="preserve">
+    <value>核属性</value>
+  </data>
+  <data name="nucleons" xml:space="preserve">
+    <value>核子：</value>
+  </data>
+  <data name="nuclide_table" xml:space="preserve">
+    <value>核素表：</value>
+  </data>
+  <data name="nuclide_table_title" xml:space="preserve">
+    <value>核素表</value>
+  </data>
+  <data name="offline_mode" xml:space="preserve">
+    <value>离线模式</value>
+  </data>
+  <data name="offline_mode_desc" xml:space="preserve">
+    <value>禁用图片加载</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="open_base_element" xml:space="preserve">
+    <value>打开基体元素</value>
+  </data>
+  <data name="open_table_button" xml:space="preserve">
+    <value>打开表格</value>
+  </data>
+  <data name="other_settings" xml:space="preserve">
+    <value>高级</value>
+  </data>
+  <data name="other_title" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="out_of_lives_hours" xml:space="preserve">
+    <value>生命用尽！%1$d小时%2$d分%3$d秒后恢复生命。</value>
+  </data>
+  <data name="out_of_lives_minutes" xml:space="preserve">
+    <value>生命用尽！%1$d分%2$d秒后恢复生命。</value>
+  </data>
+  <data name="overview" xml:space="preserve">
+    <value>概览</value>
+  </data>
+  <data name="owns_pro_plus" xml:space="preserve">
+    <value>拥有 PRO+</value>
+  </data>
+  <data name="oxidation_states_colon" xml:space="preserve">
+    <value>氧化态：</value>
+  </data>
+  <data name="perfect_all_correct_xp" xml:space="preserve">
+    <value>完美（全部正确）：+%dxp</value>
+  </data>
+  <data name="personalise_favorite_bar" xml:space="preserve">
+    <value>个性化收藏栏</value>
+  </data>
+  <data name="personalization_settings" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="ph_title" xml:space="preserve">
+    <value>pH指示剂</value>
+  </data>
+  <data name="phase_stp" xml:space="preserve">
+    <value>相（STP）</value>
+  </data>
+  <data name="phase_stp_colon" xml:space="preserve">
+    <value>相（STP）：</value>
+  </data>
+  <data name="phi" xml:space="preserve">
+    <value>pH指示剂</value>
+  </data>
+  <data name="poi" xml:space="preserve">
+    <value>泊松比表</value>
+  </data>
+  <data name="poi_clear_filter" xml:space="preserve">
+    <value>清除筛选</value>
+  </data>
+  <data name="poi_no_results" xml:space="preserve">
+    <value>无结果</value>
+  </data>
+  <data name="poi_search_hint" xml:space="preserve">
+    <value>搜索词典项</value>
+  </data>
+  <data name="poi_try_another_search" xml:space="preserve">
+    <value>尝试搜索其他词或检查拼写。</value>
+  </data>
+  <data name="poisson_constants_sound_speed" xml:space="preserve">
+    <value>泊松常数，声速：</value>
+  </data>
+  <data name="poisson_ratio_table" xml:space="preserve">
+    <value>泊松比表：</value>
+  </data>
+  <data name="poissons_ratio" xml:space="preserve">
+    <value>泊松比</value>
+  </data>
+  <data name="poissons_ratio_title" xml:space="preserve">
+    <value>泊松比</value>
+  </data>
+  <data name="popup_action_button" xml:space="preserve">
+    <value>升级到PRO+</value>
+  </data>
+  <data name="popup_content_text" xml:space="preserve">
+    <value>升级"Atomic - 元素周期表"以解锁额外数据、表格和闪卡，了解更多关于元素周期表的知识。</value>
+  </data>
+  <data name="popup_secondary_button" xml:space="preserve">
+    <value>今天不</value>
+  </data>
+  <data name="popup_title" xml:space="preserve">
+    <value>升级到PRO+</value>
+  </data>
+  <data name="price_not_available" xml:space="preserve">
+    <value>价格不可用</value>
+  </data>
+  <data name="price_placeholder" xml:space="preserve">
+    <value>价格</value>
+  </data>
+  <data name="pro_additional_data" xml:space="preserve">
+    <value>额外数据</value>
+  </data>
+  <data name="pro_additional_data_descr" xml:space="preserve">
+    <value>额外数据，如硬度属性（莫氏、维氏和布氏硬度）以及声速、泊松常数、杨氏模量、体积模量和剪切模量等。还有矿物鉴定信息。</value>
+  </data>
+  <data name="pro_additional_flashcards" xml:space="preserve">
+    <value>额外闪卡和同步</value>
+  </data>
+  <data name="pro_additional_flashcards_descr" xml:space="preserve">
+    <value>访问额外闪卡，更多生命值以及同步您的进度</value>
+  </data>
+  <data name="pro_additional_sync" xml:space="preserve">
+    <value>笔记和进度同步</value>
+  </data>
+  <data name="pro_additional_sync_descr" xml:space="preserve">
+    <value>启用笔记和进度同步，让您在所有设备上更轻松地学习</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>额外表格</value>
+  </data>
+  <data name="pro_additional_tables_descr" xml:space="preserve">
+    <value>额外表格包括核素表、泊松比表、常数表、地质表等，未来还会有更多</value>
+  </data>
+  <data name="pro_additional_visualisations" xml:space="preserve">
+    <value>额外可视化</value>
+  </data>
+  <data name="pro_additional_visualisations_descr" xml:space="preserve">
+    <value>在主表中访问更多可视化效果，如泊松比、体积模量等。</value>
+  </data>
+  <data name="pro_already_purchased_check" xml:space="preserve">
+    <value>检查账户中的产品</value>
+  </data>
+  <data name="pro_already_purchased_title" xml:space="preserve">
+    <value>已经购买了Atomic - 元素周期表 PRO？</value>
+  </data>
+  <data name="pro_better_ai" xml:space="preserve">
+    <value>额外的 AI 功能</value>
+  </data>
+  <data name="pro_better_ai_descr" xml:space="preserve">
+    <value>解锁 AI 助手的所有功能，包括测验、访问专业数据等</value>
+  </data>
+  <data name="pro_better_calculator" xml:space="preserve">
+    <value>更好的计算器</value>
+  </data>
+  <data name="pro_better_calculator_descr" xml:space="preserve">
+    <value>增强型计算器，可以在收藏页面保存不同化合物的摩尔质量。</value>
+  </data>
+  <data name="pro_descr" xml:space="preserve">
+    <value>"Atomic - 元素周期表"是我在瑞典业余时间开发的免费开源应用。购买PRO版本可以帮助支持开发，同时还能获得额外的数据和功能！</value>
+  </data>
+  <data name="pro_features_descr" xml:space="preserve">
+    <value>探索PRO版本的众多功能及其包含的内容。</value>
+  </data>
+  <data name="pro_features_table_description" xml:space="preserve">
+    <value>下表详细列出了免费版、PRO版和PRO+版中包含的功能：</value>
+  </data>
+  <data name="pro_features_title" xml:space="preserve">
+    <value>PRO版本功能：</value>
+  </data>
+  <data name="pro_get_more_out" xml:space="preserve">
+    <value>充分利用Atomic</value>
+  </data>
+  <data name="pro_plus_badge_text" xml:space="preserve">
+    <value>最先进</value>
+  </data>
+  <data name="pro_plus_rewards" xml:space="preserve">
+    <value>PRO+奖励：%s</value>
+  </data>
+  <data name="pro_plus_subtitle" xml:space="preserve">
+    <value>解锁高级数据和额外的闪卡。</value>
+  </data>
+  <data name="pro_plus_user" xml:space="preserve">
+    <value>PRO+用户</value>
+  </data>
+  <data name="pro_plus_version" xml:space="preserve">
+    <value>PRO+ 版本</value>
+  </data>
+  <data name="pro_price_loading" xml:space="preserve">
+    <value>正在获取价格...</value>
+  </data>
+  <data name="pro_title" xml:space="preserve">
+    <value>PRO版本</value>
+  </data>
+  <data name="pro_upgrade_to_pro" xml:space="preserve">
+    <value>升级到PRO</value>
+  </data>
+  <data name="pro_user" xml:space="preserve">
+    <value>PRO用户</value>
+  </data>
+  <data name="pro_user_badge" xml:space="preserve">
+    <value>PRO用户</value>
+  </data>
+  <data name="pro_version" xml:space="preserve">
+    <value>PRO版本</value>
+  </data>
+  <data name="properties" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="protons" xml:space="preserve">
+    <value>质子：</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>问题</value>
+  </data>
+  <data name="question_appearance" xml:space="preserve">
+    <value>%s的外观是什么？</value>
+  </data>
+  <data name="question_atomic_mass" xml:space="preserve">
+    <value>%s的原子质量是多少？</value>
+  </data>
+  <data name="question_atomic_number" xml:space="preserve">
+    <value>%s的原子序数是多少？</value>
+  </data>
+  <data name="question_block" xml:space="preserve">
+    <value>%s属于哪个区块？</value>
+  </data>
+  <data name="question_boiling_point_celsius" xml:space="preserve">
+    <value>%s的沸点（°C）是多少？</value>
+  </data>
+  <data name="question_boiling_point_fahrenheit" xml:space="preserve">
+    <value>%s的沸点（°F）是多少？</value>
+  </data>
+  <data name="question_boiling_point_kelvin" xml:space="preserve">
+    <value>%s的沸点（Kelvin）是多少？</value>
+  </data>
+  <data name="question_brinell_hardness" xml:space="preserve">
+    <value>%s的布氏硬度是多少？</value>
+  </data>
+  <data name="question_crystal_structure" xml:space="preserve">
+    <value>%s的晶体结构是什么？</value>
+  </data>
+  <data name="question_density" xml:space="preserve">
+    <value>%s的密度是多少？</value>
+  </data>
+  <data name="question_discovered_by" xml:space="preserve">
+    <value>谁发现了%s？</value>
+  </data>
+  <data name="question_discovery_year" xml:space="preserve">
+    <value>%s是在哪一年被发现的？</value>
+  </data>
+  <data name="question_earth_crust_abundance" xml:space="preserve">
+    <value>%s在地壳中的丰度是多少？mg/kg (ppm)</value>
+  </data>
+  <data name="question_earth_soils_abundance" xml:space="preserve">
+    <value>%s在土壤中的丰度是多少？mg/kg (ppm)</value>
+  </data>
+  <data name="question_electrical_type" xml:space="preserve">
+    <value>%s的电学类型是什么？</value>
+  </data>
+  <data name="question_electronegativity" xml:space="preserve">
+    <value>%s的电负性是多少？</value>
+  </data>
+  <data name="question_element_group" xml:space="preserve">
+    <value>%s的元素族是什么？</value>
+  </data>
+  <data name="question_element_name" xml:space="preserve">
+    <value>%s的名称是什么？</value>
+  </data>
+  <data name="question_element_symbol" xml:space="preserve">
+    <value>%s的符号是什么？</value>
+  </data>
+  <data name="question_group_of" xml:space="preserve">
+    <value>%1$s 位于第几族？</value>
+  </data>
+  <data name="question_highest_atomic_mass" xml:space="preserve">
+    <value>以下哪种元素的原子质量最高？</value>
+  </data>
+  <data name="question_highest_boiling_point" xml:space="preserve">
+    <value>以下哪种元素的沸点最高？</value>
+  </data>
+  <data name="question_highest_brinell_hardness" xml:space="preserve">
+    <value>以下哪种元素的布氏硬度最高？</value>
+  </data>
+  <data name="question_highest_bulk_modulus" xml:space="preserve">
+    <value>以下哪种元素的体积模量最高？</value>
+  </data>
+  <data name="question_highest_density" xml:space="preserve">
+    <value>以下哪种元素的密度最高？</value>
+  </data>
+  <data name="question_highest_electronegativity" xml:space="preserve">
+    <value>以下哪种元素的电负性最高？</value>
+  </data>
+  <data name="question_highest_fusion_heat" xml:space="preserve">
+    <value>以下哪种元素的熔化热最高？</value>
+  </data>
+  <data name="question_highest_melting_point" xml:space="preserve">
+    <value>以下哪种元素的熔点最高？</value>
+  </data>
+  <data name="question_highest_mohs_hardness" xml:space="preserve">
+    <value>以下哪种元素的莫氏硬度最高？</value>
+  </data>
+  <data name="question_highest_shear_modulus" xml:space="preserve">
+    <value>以下哪种元素的剪切模量最高？</value>
+  </data>
+  <data name="question_highest_speed_of_sound" xml:space="preserve">
+    <value>声音在以下哪种元素中传播最快？</value>
+  </data>
+  <data name="question_highest_thermal_conductivity" xml:space="preserve">
+    <value>以下哪种元素的导热率最高？</value>
+  </data>
+  <data name="question_highest_vaporization_heat" xml:space="preserve">
+    <value>以下哪种元素的汽化热最高？</value>
+  </data>
+  <data name="question_highest_vickers_hardness" xml:space="preserve">
+    <value>以下哪种元素的维氏硬度最高？</value>
+  </data>
+  <data name="question_highest_young_modulus" xml:space="preserve">
+    <value>以下哪种元素的杨氏模量最高？</value>
+  </data>
+  <data name="question_isotope_decay" xml:space="preserve">
+    <value>%1$s 如何衰变？</value>
+  </data>
+  <data name="question_isotope_longest_half_life" xml:space="preserve">
+    <value>以下哪种同位素的半衰期最长？</value>
+  </data>
+  <data name="question_isotope_neutrons" xml:space="preserve">
+    <value>%1$s 有多少个中子？</value>
+  </data>
+  <data name="question_isotope_shortest_half_life" xml:space="preserve">
+    <value>以下哪种同位素的半衰期最短？</value>
+  </data>
+  <data name="question_isotope_stable" xml:space="preserve">
+    <value>以下哪种同位素是稳定的？</value>
+  </data>
+  <data name="question_largest_atomic_radius" xml:space="preserve">
+    <value>以下哪种元素的原子半径最大？</value>
+  </data>
+  <data name="question_largest_molar_volume" xml:space="preserve">
+    <value>以下哪种元素的摩尔体积最大？</value>
+  </data>
+  <data name="question_lowest_atomic_mass" xml:space="preserve">
+    <value>以下哪种元素的原子质量最低？</value>
+  </data>
+  <data name="question_lowest_boiling_point" xml:space="preserve">
+    <value>以下哪种元素的沸点最低？</value>
+  </data>
+  <data name="question_lowest_brinell_hardness" xml:space="preserve">
+    <value>以下哪种元素的布氏硬度最低？</value>
+  </data>
+  <data name="question_lowest_bulk_modulus" xml:space="preserve">
+    <value>以下哪种元素的体积模量最低？</value>
+  </data>
+  <data name="question_lowest_density" xml:space="preserve">
+    <value>以下哪种元素的密度最低？</value>
+  </data>
+  <data name="question_lowest_electronegativity" xml:space="preserve">
+    <value>以下哪种元素的电负性最低？</value>
+  </data>
+  <data name="question_lowest_fusion_heat" xml:space="preserve">
+    <value>以下哪种元素的熔化热最低？</value>
+  </data>
+  <data name="question_lowest_melting_point" xml:space="preserve">
+    <value>以下哪种元素的熔点最低？</value>
+  </data>
+  <data name="question_lowest_mohs_hardness" xml:space="preserve">
+    <value>以下哪种元素的莫氏硬度最低？</value>
+  </data>
+  <data name="question_lowest_shear_modulus" xml:space="preserve">
+    <value>以下哪种元素的剪切模量最低？</value>
+  </data>
+  <data name="question_lowest_speed_of_sound" xml:space="preserve">
+    <value>声音在以下哪种元素中传播最慢？</value>
+  </data>
+  <data name="question_lowest_thermal_conductivity" xml:space="preserve">
+    <value>以下哪种元素的导热率最低？</value>
+  </data>
+  <data name="question_lowest_vaporization_heat" xml:space="preserve">
+    <value>以下哪种元素的汽化热最低？</value>
+  </data>
+  <data name="question_lowest_vickers_hardness" xml:space="preserve">
+    <value>以下哪种元素的维氏硬度最低？</value>
+  </data>
+  <data name="question_lowest_young_modulus" xml:space="preserve">
+    <value>以下哪种元素的杨氏模量最低？</value>
+  </data>
+  <data name="question_magnetic_type" xml:space="preserve">
+    <value>%s的磁性类型是什么？</value>
+  </data>
+  <data name="question_melting_point_celsius" xml:space="preserve">
+    <value>%s的熔点（°C）是多少？</value>
+  </data>
+  <data name="question_melting_point_fahrenheit" xml:space="preserve">
+    <value>%s的熔点（°F）是多少？</value>
+  </data>
+  <data name="question_melting_point_kelvin" xml:space="preserve">
+    <value>%s的熔点（Kelvin）是多少？</value>
+  </data>
+  <data name="question_mohs_hardness" xml:space="preserve">
+    <value>%s的莫氏硬度是多少？</value>
+  </data>
+  <data name="question_molar_mass" xml:space="preserve">
+    <value>%1$s 的摩尔质量是多少？</value>
+  </data>
+  <data name="question_neutron_cross_sectional" xml:space="preserve">
+    <value>%s的中子截面是多少？</value>
+  </data>
+  <data name="question_nfpa_diamond" xml:space="preserve">
+    <value>%s 的 NFPA 704 危险菱形标志是什么？（健康 / 易燃性 / 不稳定性）</value>
+  </data>
+  <data name="question_nfpa_flammability" xml:space="preserve">
+    <value>%s 的 NFPA 704 易燃性等级是多少？</value>
+  </data>
+  <data name="question_nfpa_health" xml:space="preserve">
+    <value>%s 的 NFPA 704 健康危害等级是多少？</value>
+  </data>
+  <data name="question_nfpa_instability" xml:space="preserve">
+    <value>%s 的 NFPA 704 不稳定性等级是多少？</value>
+  </data>
+  <data name="question_not_a_series" xml:space="preserve">
+    <value>以下哪种元素不是%1$s？</value>
+  </data>
+  <data name="question_period_of" xml:space="preserve">
+    <value>%1$s 位于第几周期？</value>
+  </data>
+  <data name="question_phase_stp" xml:space="preserve">
+    <value>%s在标准状况下的相态是什么？</value>
+  </data>
+  <data name="question_radioactive" xml:space="preserve">
+    <value>%s是放射性的吗？</value>
+  </data>
+  <data name="question_smallest_atomic_radius" xml:space="preserve">
+    <value>以下哪种元素的原子半径最小？</value>
+  </data>
+  <data name="question_smallest_molar_volume" xml:space="preserve">
+    <value>以下哪种元素的摩尔体积最小？</value>
+  </data>
+  <data name="question_specific_heat_capacity" xml:space="preserve">
+    <value>%s的比热容是多少？</value>
+  </data>
+  <data name="question_superconducting_point" xml:space="preserve">
+    <value>%s的超导点是多少？</value>
+  </data>
+  <data name="question_text" xml:space="preserve">
+    <value>问题文本</value>
+  </data>
+  <data name="question_valence_electrons" xml:space="preserve">
+    <value>%1$s 有多少个价电子？</value>
+  </data>
+  <data name="question_vickers_hardness" xml:space="preserve">
+    <value>%s的维氏硬度是多少？</value>
+  </data>
+  <data name="question_xp_detail" xml:space="preserve">
+    <value>本题 XP：+%1$d</value>
+  </data>
+  <data name="questions_correct_xp" xml:space="preserve">
+    <value>正确问题：+%dxp</value>
+  </data>
+  <data name="quiz_loading" xml:space="preserve">
+    <value>正在准备题目…</value>
+  </data>
+  <data name="quiz_no_questions" xml:space="preserve">
+    <value>无法为此游戏生成题目，请换一个。</value>
+  </data>
+  <data name="radioactive" xml:space="preserve">
+    <value>放射性</value>
+  </data>
+  <data name="radioactive_colon" xml:space="preserve">
+    <value>放射性：</value>
+  </data>
+  <data name="random_element" xml:space="preserve">
+    <value>随机元素</value>
+  </data>
+  <data name="rate" xml:space="preserve">
+    <value>评分</value>
+  </data>
+  <data name="rate_app" xml:space="preserve">
+    <value>评分应用</value>
+  </data>
+  <data name="rate_app_description" xml:space="preserve">
+    <value>在Play Store上评分，让我们知道您对应用的看法！</value>
+  </data>
+  <data name="reaction_balancer" xml:space="preserve">
+    <value>反应平衡器：</value>
+  </data>
+  <data name="reactivity_hazard" xml:space="preserve">
+    <value>反应性：</value>
+  </data>
+  <data name="read_more" xml:space="preserve">
+    <value>..更多</value>
+  </data>
+  <data name="read_more_widget" xml:space="preserve">
+    <value>阅读更多</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>化学反应</value>
+  </data>
+  <data name="refractive_index_colon" xml:space="preserve">
+    <value>折射率：</value>
+  </data>
+  <data name="requires_pro" xml:space="preserve">
+    <value>需要PRO版本</value>
+  </data>
+  <data name="requires_pro_plus_until_2026" xml:space="preserve">
+    <value>在 2026 年 1 月 1 日之前需要 PRO+</value>
+  </data>
+  <data name="reward_5pct_title" xml:space="preserve">
+    <value>+5%% XP奖励</value>
+  </data>
+  <data name="rewards_available" xml:space="preserve">
+    <value>奖励：</value>
+  </data>
+  <data name="save_calculations" xml:space="preserve">
+    <value>保存计算：</value>
+  </data>
+  <data name="save_equations" xml:space="preserve">
+    <value>保存方程：</value>
+  </data>
+  <data name="save_units" xml:space="preserve">
+    <value>保存单位：</value>
+  </data>
+  <data name="score_summary" xml:space="preserve">
+    <value>得分：%1$d/%2$d</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>搜索元素</value>
+  </data>
+  <data name="search_elements" xml:space="preserve">
+    <value>搜索元素</value>
+  </data>
+  <data name="search_for_element" xml:space="preserve">
+    <value>搜索元素</value>
+  </data>
+  <data name="searches" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="select_element_to_compare" xml:space="preserve">
+    <value>选择要比较的元素</value>
+  </data>
+  <data name="select_theme" xml:space="preserve">
+    <value>选择主题</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="settings_favorite_content" xml:space="preserve">
+    <value>个性化收藏栏</value>
+  </data>
+  <data name="settings_favorite_title" xml:space="preserve">
+    <value>收藏栏</value>
+  </data>
+  <data name="settings_nav_bar_content" xml:space="preserve">
+    <value>禁用标准行为</value>
+  </data>
+  <data name="settings_nav_bar_title" xml:space="preserve">
+    <value>自动隐藏底栏</value>
+  </data>
+  <data name="settings_offline_content" xml:space="preserve">
+    <value>禁用图片加载</value>
+  </data>
+  <data name="settings_offline_title" xml:space="preserve">
+    <value>离线模式</value>
+  </data>
+  <data name="settings_order_content" xml:space="preserve">
+    <value>自定义详细卡片顺序</value>
+  </data>
+  <data name="settings_order_title" xml:space="preserve">
+    <value>详细卡片顺序</value>
+  </data>
+  <data name="settings_themes_content" xml:space="preserve">
+    <value>选择主题</value>
+  </data>
+  <data name="settings_themes_title" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="settings_title" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="settings_unit_content" xml:space="preserve">
+    <value>自定义主表中的单位</value>
+  </data>
+  <data name="settings_unit_title" xml:space="preserve">
+    <value>表格单位</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>分享</value>
+  </data>
+  <data name="share_app" xml:space="preserve">
+    <value>分享应用</value>
+  </data>
+  <data name="share_app_description" xml:space="preserve">
+    <value>如果您觉得这个应用有用，请与您的朋友和其他人分享！</value>
+  </data>
+  <data name="shear_modulus" xml:space="preserve">
+    <value>剪切模量</value>
+  </data>
+  <data name="short_voltage" xml:space="preserve">
+    <value>(伏特)</value>
+  </data>
+  <data name="show_atomic_radius_calculated" xml:space="preserve">
+    <value>显示原子半径（计算值）</value>
+  </data>
+  <data name="show_atomic_radius_empirical" xml:space="preserve">
+    <value>显示原子半径（实验值）</value>
+  </data>
+  <data name="show_boiling_point" xml:space="preserve">
+    <value>显示沸点</value>
+  </data>
+  <data name="show_covalent_radius" xml:space="preserve">
+    <value>显示共价半径</value>
+  </data>
+  <data name="show_density" xml:space="preserve">
+    <value>显示密度</value>
+  </data>
+  <data name="show_electronegativity" xml:space="preserve">
+    <value>显示电负性</value>
+  </data>
+  <data name="show_fusion_heat" xml:space="preserve">
+    <value>显示熔化热</value>
+  </data>
+  <data name="show_if_radioactive" xml:space="preserve">
+    <value>显示是否为放射性元素</value>
+  </data>
+  <data name="show_melting_point" xml:space="preserve">
+    <value>显示熔点</value>
+  </data>
+  <data name="show_molar_mass" xml:space="preserve">
+    <value>显示摩尔质量</value>
+  </data>
+  <data name="show_resistivity" xml:space="preserve">
+    <value>显示电阻率</value>
+  </data>
+  <data name="show_specific_heat_capacity" xml:space="preserve">
+    <value>显示比热容</value>
+  </data>
+  <data name="show_stp_phase" xml:space="preserve">
+    <value>显示STP相</value>
+  </data>
+  <data name="show_van_der_waals_radius" xml:space="preserve">
+    <value>显示范德华半径</value>
+  </data>
+  <data name="show_vaporization_heat" xml:space="preserve">
+    <value>显示汽化热</value>
+  </data>
+  <data name="sign_in_failed" xml:space="preserve">
+    <value>登录失败</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>正在登录…</value>
+  </data>
+  <data name="sol" xml:space="preserve">
+    <value>溶解度表</value>
+  </data>
+  <data name="solubility_info_c" xml:space="preserve">
+    <value>"S：可溶
+Ss：微溶
+I：不溶"</value>
+  </data>
+  <data name="solubility_info_t" xml:space="preserve">
+    <value>溶解度帮助</value>
+  </data>
+  <data name="solubility_table" xml:space="preserve">
+    <value>溶解度表</value>
+  </data>
+  <data name="sources_settings_title" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="sources_wwe_title" xml:space="preserve">
+    <value>水与废水工程</value>
+  </data>
+  <data name="space_group_name_colon" xml:space="preserve">
+    <value>空间群名称：</value>
+  </data>
+  <data name="space_group_number_colon" xml:space="preserve">
+    <value>空间群编号：</value>
+  </data>
+  <data name="specific_hazard" xml:space="preserve">
+    <value>特定危害：</value>
+  </data>
+  <data name="specific_heat_capacity" xml:space="preserve">
+    <value>比热容</value>
+  </data>
+  <data name="specific_heat_capacity_colon" xml:space="preserve">
+    <value>比热容：</value>
+  </data>
+  <data name="spelling" xml:space="preserve">
+    <value>尝试搜索其他词或检查拼写</value>
+  </data>
+  <data name="split_view" xml:space="preserve">
+    <value>元素拆分视图</value>
+  </data>
+  <data name="streak_label" xml:space="preserve">
+    <value>连续：</value>
+  </data>
+  <data name="streak_notification_body" xml:space="preserve">
+    <value>今天玩以保存您的%1$d天连续。</value>
+  </data>
+  <data name="streak_notification_title" xml:space="preserve">
+    <value>保持您的%1$d天连续！</value>
+  </data>
+  <data name="submit_activity_title" xml:space="preserve">
+    <value>提交问题</value>
+  </data>
+  <data name="submit_bug" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="submit_data_i" xml:space="preserve">
+    <value>数据问题</value>
+  </data>
+  <data name="submit_data_issue" xml:space="preserve">
+    <value>提交数据问题</value>
+  </data>
+  <data name="submit_issue" xml:space="preserve">
+    <value>问题</value>
+  </data>
+  <data name="submit_question" xml:space="preserve">
+    <value>问题</value>
+  </data>
+  <data name="submit_send" xml:space="preserve">
+    <value>提交问题</value>
+  </data>
+  <data name="submit_text" xml:space="preserve">
+    <value>报告错误和数据错误</value>
+  </data>
+  <data name="submit_title" xml:space="preserve">
+    <value>报告问题</value>
+  </data>
+  <data name="superconducting_point" xml:space="preserve">
+    <value>超导点</value>
+  </data>
+  <data name="superconducting_point_colon" xml:space="preserve">
+    <value>超导点：</value>
+  </data>
+  <data name="sync_available_pro_only" xml:space="preserve">
+    <value>获取PRO或PRO+以启用云同步</value>
+  </data>
+  <data name="sync_complete" xml:space="preserve">
+    <value>进度已同步</value>
+  </data>
+  <data name="sync_data" xml:space="preserve">
+    <value>同步数据：</value>
+  </data>
+  <data name="sync_failed" xml:space="preserve">
+    <value>同步失败</value>
+  </data>
+  <data name="sync_status" xml:space="preserve">
+    <value>未同步</value>
+  </data>
+  <data name="syncing_progress" xml:space="preserve">
+    <value>正在同步进度…</value>
+  </data>
+  <data name="system_default" xml:space="preserve">
+    <value>系统默认</value>
+  </data>
+  <data name="table_alloy" xml:space="preserve">
+    <value>合金表</value>
+  </data>
+  <data name="table_alloy_text" xml:space="preserve">
+    <value>常见合金一览表，说明它们由什么组成以及为何用它们代替纯金属</value>
+  </data>
+  <data name="table_constants_text" xml:space="preserve">
+    <value>包含常用计算常数的表格，包括数学、物理、标准水流等</value>
+  </data>
+  <data name="table_electrochemical" xml:space="preserve">
+    <value>电化学系列</value>
+  </data>
+  <data name="table_electrochemical_text" xml:space="preserve">
+    <value>电化学系列表，按(-)到(+)电压排序</value>
+  </data>
+  <data name="table_equations" xml:space="preserve">
+    <value>公式</value>
+  </data>
+  <data name="table_equations_text" xml:space="preserve">
+    <value>包含数学、物理和化学公式的表格</value>
+  </data>
+  <data name="table_geology" xml:space="preserve">
+    <value>地质表</value>
+  </data>
+  <data name="table_geology_text" xml:space="preserve">
+    <value>包含矿物、岩石和土壤信息的表格</value>
+  </data>
+  <data name="table_ionization" xml:space="preserve">
+    <value>电离能</value>
+  </data>
+  <data name="table_ionization_text" xml:space="preserve">
+    <value>不同元素电离能的表格</value>
+  </data>
+  <data name="table_nuclide" xml:space="preserve">
+    <value>核素表</value>
+  </data>
+  <data name="table_nuclide_text" xml:space="preserve">
+    <value>二维核素表，用颜色区分衰变类型</value>
+  </data>
+  <data name="table_order_text" xml:space="preserve">
+    <value>确定表格顺序</value>
+  </data>
+  <data name="table_order_title" xml:space="preserve">
+    <value>排序表格列表</value>
+  </data>
+  <data name="table_ph" xml:space="preserve">
+    <value>pH指示剂</value>
+  </data>
+  <data name="table_ph_text" xml:space="preserve">
+    <value>不同酸碱水平颜色的pH指示剂表</value>
+  </data>
+  <data name="table_poisson" xml:space="preserve">
+    <value>泊松比表</value>
+  </data>
+  <data name="table_poisson_text" xml:space="preserve">
+    <value>不同岩石、土壤、矿物和其他材料的泊松比表</value>
+  </data>
+  <data name="table_solubility" xml:space="preserve">
+    <value>溶解度表</value>
+  </data>
+  <data name="table_solubility_text" xml:space="preserve">
+    <value>不同物质溶解度信息的表格</value>
+  </data>
+  <data name="table_units" xml:space="preserve">
+    <value>表格单位</value>
+  </data>
+  <data name="take_notes_for_element" xml:space="preserve">
+    <value>为元素做笔记</value>
+  </data>
+  <data name="temperatures" xml:space="preserve">
+    <value>温度</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="thermal_conductivity_colon" xml:space="preserve">
+    <value>导热系数：</value>
+  </data>
+  <data name="thermal_expansion_colon" xml:space="preserve">
+    <value>热膨胀系数：</value>
+  </data>
+  <data name="thermodynamic_properties" xml:space="preserve">
+    <value>热力学属性</value>
+  </data>
+  <data name="time_up" xml:space="preserve">
+    <value>时间到</value>
+  </data>
+  <data name="tool_btn_open" xml:space="preserve">
+    <value>打开工具</value>
+  </data>
+  <data name="tools" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="tools_title" xml:space="preserve">
+    <value>工具（如计算器）</value>
+  </data>
+  <data name="total_xp_stat" xml:space="preserve">
+    <value>总XP：%d</value>
+  </data>
+  <data name="total_xp_with_multiplier" xml:space="preserve">
+    <value>总 XP：%1$d（%2$s ×%3$s）</value>
+  </data>
+  <data name="try_another_search" xml:space="preserve">
+    <value>尝试搜索其他词或检查拼写。</value>
+  </data>
+  <data name="type_label" xml:space="preserve">
+    <value>类型：</value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>您已在此账户上拥有 PRO+ Ultimate。</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>获取 PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>即将推出</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>只需一次购买，即可在 Android 和 Windows 上解锁 PRO+。让您的笔记、成就和进度在所有设备上与您同在！</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>已拥有 PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>升级到 Ultimate</value>
+  </data>
+  <data name="uni" xml:space="preserve">
+    <value>单位转换器</value>
+  </data>
+  <data name="unit_add_favorite" xml:space="preserve">
+    <value>添加到收藏夹：</value>
+  </data>
+  <data name="unit_category" xml:space="preserve">
+    <value>类别：</value>
+  </data>
+  <data name="unit_converter_title" xml:space="preserve">
+    <value>单位转换器</value>
+  </data>
+  <data name="unit_description" xml:space="preserve">
+    <value>用于多种用途的简单单位转换器</value>
+  </data>
+  <data name="unit_display_formula" xml:space="preserve">
+    <value>公式将显示在这里</value>
+  </data>
+  <data name="unit_enter_value" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="unit_favorites" xml:space="preserve">
+    <value>收藏夹：</value>
+  </data>
+  <data name="unit_formula" xml:space="preserve">
+    <value>公式：</value>
+  </data>
+  <data name="unit_output_value" xml:space="preserve">
+    <value>输出</value>
+  </data>
+  <data name="unit_settings_title" xml:space="preserve">
+    <value>表格单位</value>
+  </data>
+  <data name="unit_temperature" xml:space="preserve">
+    <value>温度</value>
+  </data>
+  <data name="unit_title" xml:space="preserve">
+    <value>单位转换器</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="unlimited_ai_messages" xml:space="preserve">
+    <value>无限 AI 消息：</value>
+  </data>
+  <data name="unlock_advanced_data_and_additional_flashcards" xml:space="preserve">
+    <value>解锁高级数据和额外闪卡。</value>
+  </data>
+  <data name="unlock_advanced_data_and_extra_atomic_content" xml:space="preserve">
+    <value>解锁高级数据和额外的Atomic内容。</value>
+  </data>
+  <data name="unlock_all_flashcards" xml:space="preserve">
+    <value>解锁所有闪卡和功能</value>
+  </data>
+  <data name="upgrade_pro_plus_description" xml:space="preserve">
+    <value>获得无限生命和额外的闪卡游戏，如电负性、放射性、晶体结构等！</value>
+  </data>
+  <data name="upgrade_to_pro_plus" xml:space="preserve">
+    <value>升级到PRO+</value>
+  </data>
+  <data name="usage_statistics" xml:space="preserve">
+    <value>使用统计</value>
+  </data>
+  <data name="user_achievements" xml:space="preserve">
+    <value>成就</value>
+  </data>
+  <data name="user_achievements_Text" xml:space="preserve">
+    <value>通过成就追踪您学习世界元素的进度</value>
+  </data>
+  <data name="user_img" xml:space="preserve">
+    <value>更改头像</value>
+  </data>
+  <data name="user_signed_in_fmt" xml:space="preserve">
+    <value>已登录为%1$s</value>
+  </data>
+  <data name="user_signed_out" xml:space="preserve">
+    <value>未登录</value>
+  </data>
+  <data name="user_title" xml:space="preserve">
+    <value>用户页面</value>
+  </data>
+  <data name="van_der_waals_radius_colon" xml:space="preserve">
+    <value>范德华半径：</value>
+  </data>
+  <data name="vaporization_heat" xml:space="preserve">
+    <value>汽化热</value>
+  </data>
+  <data name="vaporization_heat_colon" xml:space="preserve">
+    <value>汽化热：</value>
+  </data>
+  <data name="vickers_hardness" xml:space="preserve">
+    <value>维氏硬度</value>
+  </data>
+  <data name="vickers_hardness_colon" xml:space="preserve">
+    <value>维氏硬度：</value>
+  </data>
+  <data name="view_all" xml:space="preserve">
+    <value>查看全部</value>
+  </data>
+  <data name="view_all_isotopes" xml:space="preserve">
+    <value>查看所有同位素</value>
+  </data>
+  <data name="weight_calculator_title" xml:space="preserve">
+    <value>重量计算器</value>
+  </data>
+  <data name="widget_description_placeholder" xml:space="preserve">
+    <value>正在加载元素信息...</value>
+  </data>
+  <data name="win_text" xml:space="preserve">
+    <value>下载Windows应用</value>
+  </data>
+  <data name="win_title" xml:space="preserve">
+    <value>获取桌面应用</value>
+  </data>
+  <data name="work_function_colon" xml:space="preserve">
+    <value>逸出功：</value>
+  </data>
+  <data name="wrong" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="xp_bonus" xml:space="preserve">
+    <value>+%d%%奖励xp</value>
+  </data>
+  <data name="xp_bonus_unlocked" xml:space="preserve">
+    <value>已在第 %1$d 级解锁 5%% XP 加成！</value>
+  </data>
+  <data name="year_discovered" xml:space="preserve">
+    <value>发现年份</value>
+  </data>
+  <data name="year_discovered_colon" xml:space="preserve">
+    <value>发现年份：</value>
+  </data>
+  <data name="you_have_full_lives" xml:space="preserve">
+    <value>您的生命已满！</value>
+  </data>
+  <data name="young_bulk_shear_modulus" xml:space="preserve">
+    <value>杨氏模量、体积模量、剪切模量：</value>
+  </data>
+  <data name="youngs_modulus" xml:space="preserve">
+    <value>杨氏模量</value>
+  </data>
+  <data name="your_answer" xml:space="preserve">
+    <value>您的答案：%s</value>
+  </data>
+</root>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="chip_electricity" xml:space="preserve">
+    <value>بجلی</value>
+  </data>
+  <data name="chip_magnetism" xml:space="preserve">
+    <value>مقناطیسیت اور القا</value>
+  </data>
+  <data name="chip_mechanics" xml:space="preserve">
+    <value>میکانیات</value>
+  </data>
+  <data name="chip_nuclear_physics" xml:space="preserve">
+    <value>جوہری طبیعیات</value>
+  </data>
+  <data name="chip_wavelengths" xml:space="preserve">
+    <value>طول موج</value>
+  </data>
+  <data name="element_notes_title" xml:space="preserve">
+    <value>%1$s کے نوٹس</value>
+  </data>
+  <data name="emission_spectrum_of" xml:space="preserve">
+    <value>%1$s کا اخراجی طیف:</value>
+  </data>
+  <data name="emission_wavelength_range" xml:space="preserve">
+    <value>طول موج کی حد: 380-720 nm</value>
+  </data>
+  <data name="emission_wavelength_vacuum" xml:space="preserve">
+    <value>طول موج بمقام: خلا</value>
+  </data>
+  <data name="enter_compound" xml:space="preserve">
+    <value>مرکب درج کریں...</value>
+  </data>
+  <data name="enter_value" xml:space="preserve">
+    <value>قدر درج کریں</value>
+  </data>
+  <data name="feature_additional_games" xml:space="preserve">
+    <value>اضافی فلیش کارڈ کھیل</value>
+  </data>
+  <data name="feature_early_access" xml:space="preserve">
+    <value>نئی خصوصیات تک جلد رسائی</value>
+  </data>
+  <data name="feature_element_notes" xml:space="preserve">
+    <value>عنصر کے نوٹس</value>
+  </data>
+  <data name="feature_element_overview" xml:space="preserve">
+    <value>عنصر کا جائزہ</value>
+  </data>
+  <data name="feature_hazard_materials" xml:space="preserve">
+    <value>خطرناک مواد</value>
+  </data>
+  <data name="feature_poisson_sound" xml:space="preserve">
+    <value>پوائسن مستقل، آواز کی رفتار</value>
+  </data>
+  <data name="feature_poisson_table" xml:space="preserve">
+    <value>پوائسن تناسب ٹیبل</value>
+  </data>
+  <data name="feature_save_calculations" xml:space="preserve">
+    <value>حساب محفوظ کریں</value>
+  </data>
+  <data name="feature_save_unit_converter" xml:space="preserve">
+    <value>یونٹ کنورٹر میں محفوظ کریں</value>
+  </data>
+  <data name="feature_sixty_lives" xml:space="preserve">
+    <value>فلیش کارڈز میں 60 لائیوز</value>
+  </data>
+  <data name="feature_unlimited_lives" xml:space="preserve">
+    <value>فلیش کارڈز میں لامحدود زندگیاں</value>
+  </data>
+  <data name="feature_young_bulk_shear" xml:space="preserve">
+    <value>ینگ ماڈیولس، بلک ماڈیولس، شیئر ماڈیولس</value>
+  </data>
+  <data name="flashcards_pro_pitch" xml:space="preserve">
+    <value>'Atomic - Periodic Table' کی مکمل صلاحیت اَن لاک کریں - تمام لرننگ گیمز اور لامحدود لائیوز۔</value>
+  </data>
+  <data name="flashcards_quiz_completed" xml:space="preserve">
+    <value>کوئز مکمل</value>
+  </data>
+  <data name="flashcards_start" xml:space="preserve">
+    <value>فلیش کارڈ شروع کریں</value>
+  </data>
+  <data name="info_about" xml:space="preserve">
+    <value>%1$s کے بارے میں:</value>
+  </data>
+  <data name="ionization_for" xml:space="preserve">
+    <value>%1$s کی آئنائزیشن توانائیاں</value>
+  </data>
+  <data name="label_all" xml:space="preserve">
+    <value>تمام</value>
+  </data>
+  <data name="label_categories" xml:space="preserve">
+    <value>زمرے</value>
+  </data>
+  <data name="label_copy" xml:space="preserve">
+    <value>کاپی کریں</value>
+  </data>
+  <data name="label_correct_answer" xml:space="preserve">
+    <value>درست جواب:</value>
+  </data>
+  <data name="label_detail_view" xml:space="preserve">
+    <value>تفصیلی منظر</value>
+  </data>
+  <data name="label_detailed_info" xml:space="preserve">
+    <value>مزید معلومات</value>
+  </data>
+  <data name="label_details" xml:space="preserve">
+    <value>تفصیلات</value>
+  </data>
+  <data name="label_electrons" xml:space="preserve">
+    <value>الیکٹران</value>
+  </data>
+  <data name="label_features" xml:space="preserve">
+    <value>خصوصیات</value>
+  </data>
+  <data name="label_hide_info" xml:space="preserve">
+    <value>معلومات چھپائیں</value>
+  </data>
+  <data name="label_learn_more" xml:space="preserve">
+    <value>مزید جانیں</value>
+  </data>
+  <data name="label_lives" xml:space="preserve">
+    <value>لائیوز</value>
+  </data>
+  <data name="label_mass_colon" xml:space="preserve">
+    <value>کمیت:</value>
+  </data>
+  <data name="label_more_info" xml:space="preserve">
+    <value>مزید معلومات</value>
+  </data>
+  <data name="label_most_common_isotope" xml:space="preserve">
+    <value>سب سے عام آئسوٹوپ:</value>
+  </data>
+  <data name="label_notes" xml:space="preserve">
+    <value>نوٹس</value>
+  </data>
+  <data name="label_purchase" xml:space="preserve">
+    <value>خریدیں</value>
+  </data>
+  <data name="label_remove" xml:space="preserve">
+    <value>ہٹائیں</value>
+  </data>
+  <data name="label_show_info" xml:space="preserve">
+    <value>معلومات دکھائیں</value>
+  </data>
+  <data name="label_your_answer" xml:space="preserve">
+    <value>آپ کا جواب:</value>
+  </data>
+  <data name="loading_progress" xml:space="preserve">
+    <value>لوڈ ہو رہا ہے: %1$s/%2$s</value>
+  </data>
+  <data name="nav_constants" xml:space="preserve">
+    <value>کانسٹنٹس ٹیبل</value>
+  </data>
+  <data name="nav_element_details" xml:space="preserve">
+    <value>عنصر کی معلومات</value>
+  </data>
+  <data name="nav_equations" xml:space="preserve">
+    <value>فارمولے</value>
+  </data>
+  <data name="nav_solubility" xml:space="preserve">
+    <value>حل پذیری ٹیبل</value>
+  </data>
+  <data name="nuclide_table_info" xml:space="preserve">
+    <value>نیوکلائیڈ ٹیبل کے بارے میں</value>
+  </data>
+  <data name="ph_bromothymol_desc" xml:space="preserve">
+    <value>اسے بروموتھائمول سلفون تھیلین اور BTB بھی کہا جاتا ہے</value>
+  </data>
+  <data name="ph_universal_desc" xml:space="preserve">
+    <value>کئی مرکبات سے بنا ایک محلول</value>
+  </data>
+  <data name="ph_universal_indicator" xml:space="preserve">
+    <value>یونیورسل انڈیکیٹر</value>
+  </data>
+  <data name="poisson_ratio_for" xml:space="preserve">
+    <value>%1$s کا پوئسون تناسب:</value>
+  </data>
+  <data name="pro_additional_features" xml:space="preserve">
+    <value>اضافی خصوصیات</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>اضافی جدول</value>
+  </data>
+  <data name="pro_all_free_features" xml:space="preserve">
+    <value>تمام مفت خصوصیات</value>
+  </data>
+  <data name="pro_all_pro_features" xml:space="preserve">
+    <value>تمام PRO خصوصیات</value>
+  </data>
+  <data name="pro_card_free_tagline" xml:space="preserve">
+    <value>بنیادی رسائی کے لیے بہترین۔</value>
+  </data>
+  <data name="pro_card_free_title" xml:space="preserve">
+    <value>مفت ورژن</value>
+  </data>
+  <data name="pro_card_pro_tagline" xml:space="preserve">
+    <value>جدید ڈیٹا اَن لاک کریں۔</value>
+  </data>
+  <data name="pro_card_proplus_tagline" xml:space="preserve">
+    <value>جدید ڈیٹا اور تمام پلیٹ فارمز پر رسائی اَن لاک کریں۔</value>
+  </data>
+  <data name="pro_compare_subtitle" xml:space="preserve">
+    <value>آسانی سے موازنہ کریں کہ ہر ورژن میں کیا ہے</value>
+  </data>
+  <data name="pro_compare_title" xml:space="preserve">
+    <value>ورژنز کی خصوصیات کا موازنہ کریں</value>
+  </data>
+  <data name="pro_flashcards_and_lives" xml:space="preserve">
+    <value>مزید فلیش کارڈز اور لائیوز</value>
+  </data>
+  <data name="pro_most_popular" xml:space="preserve">
+    <value>سب سے مقبول</value>
+  </data>
+  <data name="pro_state_current" xml:space="preserve">
+    <value>موجودہ ورژن</value>
+  </data>
+  <data name="pro_state_upgraded" xml:space="preserve">
+    <value>PRO+ میں اپ گریڈ ہو گیا</value>
+  </data>
+  <data name="search_placeholder" xml:space="preserve">
+    <value>تلاش کریں...</value>
+  </data>
+  <data name="settings_android_desc" xml:space="preserve">
+    <value>اپنے موبائل آلات کے لیے ایپ ڈاؤن لوڈ کریں اور ہر جگہ تمام ڈیٹا تک رسائی حاصل کریں</value>
+  </data>
+  <data name="settings_android_link" xml:space="preserve">
+    <value>اینڈرائڈ کے لیے ڈاؤن لوڈ کریں</value>
+  </data>
+  <data name="settings_android_title" xml:space="preserve">
+    <value>اینڈرائڈ کے لیے Atomic حاصل کریں</value>
+  </data>
+  <data name="settings_general" xml:space="preserve">
+    <value>جنرل</value>
+  </data>
+  <data name="settings_github_desc" xml:space="preserve">
+    <value>ایٹامک کا اوپن سورس گٹ ہب ریپو</value>
+  </data>
+  <data name="settings_language" xml:space="preserve">
+    <value>زبانیں</value>
+  </data>
+  <data name="settings_language_desc" xml:space="preserve">
+    <value>زبان منتخب کریں</value>
+  </data>
+  <data name="settings_language_system" xml:space="preserve">
+    <value>سسٹم ڈیفالٹ</value>
+  </data>
+  <data name="settings_temperature_desc" xml:space="preserve">
+    <value>وہ اکائی جو ہر جگہ درجہ حرارت دکھانے کے لیے استعمال ہوتی ہے</value>
+  </data>
+  <data name="settings_temperature_title" xml:space="preserve">
+    <value>درجہ حرارت</value>
+  </data>
+  <data name="settings_theme_desc" xml:space="preserve">
+    <value>تھیم منتخب کریں</value>
+  </data>
+  <data name="settings_theme_title" xml:space="preserve">
+    <value>تھیمز</value>
+  </data>
+  <data name="solubility_decomposed" xml:space="preserve">
+    <value>-: پانی سے تحلیل</value>
+  </data>
+  <data name="solubility_insoluble" xml:space="preserve">
+    <value>I: غیر حل پذیر</value>
+  </data>
+  <data name="solubility_slightly" xml:space="preserve">
+    <value>Ss: جزوی حل پذیر</value>
+  </data>
+  <data name="solubility_soluble" xml:space="preserve">
+    <value>S: حل پذیر</value>
+  </data>
+  <data name="ultimate_badge" xml:space="preserve">
+    <value>تمام پلیٹ فارمز</value>
+  </data>
+  <data name="ultimate_bullets" xml:space="preserve">
+    <value>• PRO+ کی تمام خصوصیات
+• ہر وہ پلیٹ فارم جہاں آپ سائن اِن کرتے ہیں
+• ایک خریداری، اپ گریڈ کی ضرورت نہیں</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Ultimate خریدیں</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>جلد آ رہا ہے</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>ونڈوز اور اینڈرائڈ پر PRO+، ایک بار خریدیں۔</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Ultimate اپ گریڈ</value>
+  </data>
+  <data name="value_range" xml:space="preserve">
+    <value>قدر کی حد: %1$s - %2$s</value>
+  </data>
+</root>

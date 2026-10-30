@@ -1,0 +1,75 @@
+rules_version = '2';
+
+// Firestore rules for the Atomic account document and its entitlements.
+//
+// The whole point of this file is one split:
+//
+//   users/{uid}         the client writes; it holds progress, and it is co-owned with Android.
+//   entitlements/{uid}  the client reads and NEVER writes; it holds what the user has paid for.
+//   receipts/{hash}     the client cannot see at all; it binds a purchase to the account that
+//                       redeemed it.
+//
+// Rules apply per document, which is why the entitlement is a separate document rather than a
+// field on users/{uid}. There is no way to make one field of a writable document unwritable.
+//
+// Cloud Functions use the Admin SDK, which bypasses these rules entirely - so "allow write: if
+// false" locks out every client while leaving the server free. No service-account exception is
+// needed here, and adding one would only widen the surface.
+
+// !! DO NOT DEPLOY THESE RULES YET !!
+//
+// The shipped Windows client still writes entitlements.ultimate - it is in
+// ProgressDocument.FieldPaths and in every PATCH it sends. Deploying this file before that client
+// is gone would not merely ignore the field: Firestore rejects the whole write, so progress sync
+// would stop for anyone still running it. Android is unaffected; it never writes entitlements.
+//
+// Order: land P3 (client stops writing the field), let it roll out, then deploy.
+// Until then this file exists to be reviewed and tested against the emulator - npm run test:rules.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // ---- Progress -------------------------------------------------------------------------
+    //
+    // Unchanged behaviour: signed-in users read and write their own document. The per-platform
+    // tiers live here and stay client-written, because they are descriptive rather than
+    // load-bearing - each platform gates itself on its own store licence, so a forged
+    // entitlements.windows unlocks nothing. It is only ever displayed.
+    //
+    // entitlements.ultimate is the exception and must not survive here. It is the one value that
+    // unlocks a platform whose own store has no licence to show, so a client that can write it
+    // can grant itself the product.
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow write: if isOwner(uid)
+                   && !request.resource.data.get('entitlements', {}).keys().hasAny(['ultimate']);
+    }
+
+    // ---- Entitlements ---------------------------------------------------------------------
+    //
+    // Written only by a Cloud Function that has asked the selling store. The client reads the
+    // lease and honours it until expiresAt; it has no way to extend one.
+    match /entitlements/{uid} {
+      allow read: if isOwner(uid);
+      allow write: if false;
+    }
+
+    // ---- Receipts -------------------------------------------------------------------------
+    //
+    // Not readable by anyone. A purchase token is a bearer credential: a buyer who can list this
+    // collection can hand out their own, and one purchase becomes unlimited accounts. The client
+    // has no reason to see it - redemption is a function call that answers yes or no.
+    match /receipts/{receiptHash} {
+      allow read, write: if false;
+    }
+
+    // Anything not named above stays closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+# Core tests, including the Ask Atomic corpus, and a check that the generated C# is current
+# (roadmap 0.4).
+#
+# The corpus lives in the shared-data submodule, which the Android app runs too; every row is its
+# own test case, so one question getting worse fails the run.
+#
+# The generated tables (Lexicon.g.cs, FieldAliases.g.cs, Models/*.g.cs) come from Android's Kotlin
+# by tools/port/kt2cs_*.py, and must never be edited by hand. tools/port/android-ref records the
+# Android commit they were generated from; the second job regenerates from that commit and fails on
+# any difference. After syncing from Android, regenerate and update android-ref in the same commit.
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-tests:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Shared data is checked out
+        shell: bash
+        run: |
+          test -f shared/corpus/regressions.tsv
+          test -f shared/elements/elements_en.json
+          echo "shared data at $(git -C shared rev-parse --short HEAD)"
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Atomic.Core tests
+        run: dotnet test tests/Atomic.Core.Tests/Atomic.Core.Tests.csproj --logger trx --results-directory TestResults
+
+      - name: Test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/
+
+  # The held-out fifth of the corpus (roadmap 0.5): scored at release - a tag - or on demand, never
+  # on an ordinary push, so day-to-day work is not tuned against it.
+  heldout-corpus:
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Held-out data is checked out
+        shell: bash
+        run: test -f shared/heldout/must_defer.tsv
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Held-out corpus
+        env:
+          CORPUS_SPLIT: heldout
+        run: dotnet test tests/Atomic.Core.Tests/Atomic.Core.Tests.csproj --filter "FullyQualifiedName~Corpus" --logger trx --results-directory TestResults
+
+  generated-code:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Android commit the generated code came from
+        id: ref
+        run: echo "sha=$(tr -d '[:space:]' < tools/port/android-ref)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        with:
+          repository: JLindemann42/Atomic-Periodic-Table.Android
+          ref: ${{ steps.ref.outputs.sha }}
+          path: android
+          sparse-checkout: app/src/main/java
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Regenerate from Kotlin
+        env:
+          ANDROID_REPO: ${{ github.workspace }}/android
+        run: |
+          python tools/port/kt2cs_model.py --write
+          python tools/port/kt2cs_lexicon.py --write
+
+      - name: Generated code is current
+        run: |
+          if ! git diff --exit-code -- src/Atomic.Core; then
+            echo "::error::Generated C# differs from what tools/port/kt2cs_*.py produce from Android ${{ steps.ref.outputs.sha }}. Regenerate rather than editing the .g.cs files, and update tools/port/android-ref when syncing."
+            exit 1
+          fi

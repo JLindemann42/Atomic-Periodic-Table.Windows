@@ -1,0 +1,11 @@
+node_modules/
+lib/
+*.log
+
+# Service-account keys and store credentials. These are the keys to the entitlement system;
+# nothing that grants a product may be committed. See docs/ultimate-sync-setup.md.
+*.serviceaccount.json
+play-service-account.json
+.env
+.env.*
+.runtimeconfig.json

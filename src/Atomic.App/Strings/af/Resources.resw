@@ -1,0 +1,3975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dictionary" xml:space="preserve">
+    <value>Woordeboek</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nuut</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Tabelle</value>
+  </data>
+  <data name="about_app_name" xml:space="preserve">
+    <value>Atomic - Periodieke Tabel</value>
+  </data>
+  <data name="about_title" xml:space="preserve">
+    <value>Oor</value>
+  </data>
+  <data name="abundance_crustal_rocks" xml:space="preserve">
+    <value>In korsgesteentes</value>
+  </data>
+  <data name="abundance_earth_crust" xml:space="preserve">
+    <value>In aardkors</value>
+  </data>
+  <data name="abundance_earth_soils" xml:space="preserve">
+    <value>In aarde se grond</value>
+  </data>
+  <data name="abundance_human_body" xml:space="preserve">
+    <value>In menslike liggaam</value>
+  </data>
+  <data name="abundance_meteorites" xml:space="preserve">
+    <value>In meteoriete</value>
+  </data>
+  <data name="abundance_sea_water" xml:space="preserve">
+    <value>In seewater</value>
+  </data>
+  <data name="abundance_solar_system" xml:space="preserve">
+    <value>In sonnestelsel-atome</value>
+  </data>
+  <data name="abundance_sun" xml:space="preserve">
+    <value>In sonatome</value>
+  </data>
+  <data name="abundance_title" xml:space="preserve">
+    <value>Oorvloed</value>
+  </data>
+  <data name="abundance_urban_soil" xml:space="preserve">
+    <value>In stedelike grond</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>Rekening</value>
+  </data>
+  <data name="account_id" xml:space="preserve">
+    <value>Rekening-ID</value>
+  </data>
+  <data name="account_id_copied" xml:space="preserve">
+    <value>Rekening-ID gekopieer</value>
+  </data>
+  <data name="account_id_hint" xml:space="preserve">
+    <value>Dit moet ooreenstem met die ID wat in die Windows-toepassing gewys word. As dit verskil, sinkroniseer die twee toestelle met aparte rekeninge.</value>
+  </data>
+  <data name="account_id_signed_out" xml:space="preserve">
+    <value>Nie aangemeld nie</value>
+  </data>
+  <data name="account_tier_unknown" xml:space="preserve">
+    <value>Nog nie gesinkroniseer nie</value>
+  </data>
+  <data name="account_title" xml:space="preserve">
+    <value>Rekening</value>
+  </data>
+  <data name="achievement_reached_prefix" xml:space="preserve">
+    <value>Prestasie bereik: </value>
+  </data>
+  <data name="activity_alloy_title" xml:space="preserve">
+    <value>Legerings</value>
+  </data>
+  <data name="activity_equations_title" xml:space="preserve">
+    <value>Formules</value>
+  </data>
+  <data name="activity_formulas_search" xml:space="preserve">
+    <value>Soek na Formules:</value>
+  </data>
+  <data name="activity_geology_mineral" xml:space="preserve">
+    <value>Minerale</value>
+  </data>
+  <data name="activity_geology_rock" xml:space="preserve">
+    <value>Gesteentes</value>
+  </data>
+  <data name="activity_geology_soil" xml:space="preserve">
+    <value>Gronde</value>
+  </data>
+  <data name="activity_geology_title" xml:space="preserve">
+    <value>Geologie</value>
+  </data>
+  <data name="activity_io_title" xml:space="preserve">
+    <value>Ionisasie-energieë</value>
+  </data>
+  <data name="activity_ph_acid" xml:space="preserve">
+    <value>Suur</value>
+  </data>
+  <data name="activity_ph_alkaline" xml:space="preserve">
+    <value>Alkalies</value>
+  </data>
+  <data name="activity_ph_bromothymol_blue" xml:space="preserve">
+    <value>Bromotimolblou</value>
+  </data>
+  <data name="activity_ph_congo_red" xml:space="preserve">
+    <value>Kongo-rooi</value>
+  </data>
+  <data name="activity_ph_methyl_orange" xml:space="preserve">
+    <value>Metiel-oranje</value>
+  </data>
+  <data name="activity_ph_neutral" xml:space="preserve">
+    <value>Neutraal</value>
+  </data>
+  <data name="activity_ph_phenolphthalein" xml:space="preserve">
+    <value>Fenolftaleïen</value>
+  </data>
+  <data name="activity_ph_title" xml:space="preserve">
+    <value>pH-aanwysers</value>
+  </data>
+  <data name="activity_table_title" xml:space="preserve">
+    <value>Tabelle</value>
+  </data>
+  <data name="activity_unit_title" xml:space="preserve">
+    <value>Tabeleenhede</value>
+  </data>
+  <data name="add_widget" xml:space="preserve">
+    <value>Voeg widget by</value>
+  </data>
+  <data name="additional_ai_messages" xml:space="preserve">
+    <value>Verhoogde KI-boodskappelimiet:</value>
+  </data>
+  <data name="additional_data_item" xml:space="preserve">
+    <value>- Addisionele Data:</value>
+  </data>
+  <data name="additional_flashcards_games" xml:space="preserve">
+    <value>Addisionele Flitskaart-speletjies:</value>
+  </data>
+  <data name="additional_properties_requires_pro" xml:space="preserve">
+    <value>Addisionele eienskappe vereis PRO-weergawe. Kry PRO om meer data en tabelle te ontsluit:</value>
+  </data>
+  <data name="additional_tables_item" xml:space="preserve">
+    <value>- Addisionele Tabelle:</value>
+  </data>
+  <data name="ai_abundance_caption" xml:space="preserve">
+    <value>Logaritmiese skaal. Die eenhede verskil per reservoir en kan nie na mekaar omgeskakel word nie.</value>
+  </data>
+  <data name="ai_abundance_header" xml:space="preserve">
+    <value>Hier is die oorvloedsdata vir **%1$s** uit die toepassing se databasis:</value>
+  </data>
+  <data name="ai_abundance_relative" xml:space="preserve">
+    <value>(relatief tot H=10¹²)</value>
+  </data>
+  <data name="ai_adv_header" xml:space="preserve">
+    <value>Gevorderde eienskappe van %1$s:</value>
+  </data>
+  <data name="ai_aggregate_average" xml:space="preserve">
+    <value>Gemiddelde %1$s</value>
+  </data>
+  <data name="ai_aggregate_median" xml:space="preserve">
+    <value>Mediaan %1$s</value>
+  </data>
+  <data name="ai_aggregate_missing_note" xml:space="preserve">
+    <value>%1$d het gepas maar het geen aangeteken waarde nie, en word dus uitgesluit.</value>
+  </data>
+  <data name="ai_aggregate_over" xml:space="preserve">
+    <value>Bereken oor %1$d van %2$d passende elemente.</value>
+  </data>
+  <data name="ai_aggregate_result" xml:space="preserve">
+    <value>**%1$s**: %2$s</value>
+  </data>
+  <data name="ai_aggregate_spread" xml:space="preserve">
+    <value>Wissel van %1$s (%2$s) tot %3$s (%4$s).</value>
+  </data>
+  <data name="ai_aggregate_sum" xml:space="preserve">
+    <value>Totale %1$s</value>
+  </data>
+  <data name="ai_all_covered" xml:space="preserve">
+    <value>Ons het baie oor %1$s gedek! Het jy geweet?</value>
+  </data>
+  <data name="ai_another_isotope" xml:space="preserve">
+    <value> 'n Ander isotoop is %1$s.</value>
+  </data>
+  <data name="ai_appears_as" xml:space="preserve">
+    <value>%1$s lyk soos: %2$s</value>
+  </data>
+  <data name="ai_aspects_not_compared" xml:space="preserve">
+    <value>Ek kan nie %1$s uit gestoorde data vergelyk nie — dit is nie 'n aangetekende eienskap nie. Vra daaroor vir 'n enkele element en ek kan dit verduidelik.</value>
+  </data>
+  <data name="ai_avogadro_note" xml:space="preserve">
+    <value>Met Avogadro se getal, 6,02214076 × 10²³ per mol.</value>
+  </data>
+  <data name="ai_beta_badge" xml:space="preserve">
+    <value>Beta</value>
+  </data>
+  <data name="ai_bio_role_header" xml:space="preserve">
+    <value>Wat sy biologiese rol betref, hier is wat ek oor **%1$s** gevind het:</value>
+  </data>
+  <data name="ai_block_d" xml:space="preserve">
+    <value>Die d-blok bevat die oorgangsmetale van groepe 3 tot 12.</value>
+  </data>
+  <data name="ai_block_f" xml:space="preserve">
+    <value>Die f-blok bevat die lantanoiede- en aktinoiede-reekse, wat gewoonlik onder die hooftabel gewys word.</value>
+  </data>
+  <data name="ai_block_generic" xml:space="preserve">
+    <value>Ek is nie seker watter blok jy bedoel nie. Ek weet van s, p, d en f blokke!</value>
+  </data>
+  <data name="ai_block_p" xml:space="preserve">
+    <value>Die p-blok bevat groepe 13 tot 18, insluitend alle nie-metale (behalwe H en He), metalloïede en post-oorgangsmetale.</value>
+  </data>
+  <data name="ai_block_s" xml:space="preserve">
+    <value>Die s-blok bestaan uit die eerste twee groepe: alkalimetale, aardalkalimetale, plus waterstof en helium.</value>
+  </data>
+  <data name="ai_card_heat_map_title" xml:space="preserve">
+    <value>%1$s oor die tabel</value>
+  </data>
+  <data name="ai_card_pro_locked" xml:space="preserve">
+    <value>Ontsluit visuele antwoorde</value>
+  </data>
+  <data name="ai_card_trend_title" xml:space="preserve">
+    <value>Tendens: %1$s</value>
+  </data>
+  <data name="ai_chat_setting" xml:space="preserve">
+    <value>Aktiveer KI-kletsassistent</value>
+  </data>
+  <data name="ai_chat_setting_description" xml:space="preserve">
+    <value>Laat KI-assistent toe om vrae oor elemente te beantwoord</value>
+  </data>
+  <data name="ai_check_isotope_table" xml:space="preserve">
+    <value>%1$s het verskeie isotope. Jy kan die gedetailleerde isotopentabel nagaan vir 'n volledige lys!</value>
+  </data>
+  <data name="ai_common_isotopes" xml:space="preserve">
+    <value>Algemene isotope vir %1$s sluit in %2$s.</value>
+  </data>
+  <data name="ai_comparative_no" xml:space="preserve">
+    <value>**Nee** — dit is omgekeerd. %1$s (%2$s) klop %3$s (%4$s) op %5$s.</value>
+  </data>
+  <data name="ai_comparative_ratio" xml:space="preserve">
+    <value>%1$s het **%2$s keer** die %5$s van %3$s — %4$s.</value>
+  </data>
+  <data name="ai_comparative_winner" xml:space="preserve">
+    <value>**%1$s.** Sy %5$s is %2$s, teenoor %4$s vir %3$s.</value>
+  </data>
+  <data name="ai_comparative_yes" xml:space="preserve">
+    <value>**Ja.** %1$s (%2$s) klop %3$s (%4$s) op %5$s.</value>
+  </data>
+  <data name="ai_compare_all_same" xml:space="preserve">
+    <value>
+• **%1$s:** Almal is %2$s%3$s.</value>
+  </data>
+  <data name="ai_compare_difference_value" xml:space="preserve">
+    <value>Daar is 'n verskil van **%1$s%2$s** tussen hulle.</value>
+  </data>
+  <data name="ai_compare_mixed_item" xml:space="preserve">
+    <value>%1$s is %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_property_row" xml:space="preserve">
+    <value>• %1$s: %2$s%3$s</value>
+  </data>
+  <data name="ai_compare_the_others" xml:space="preserve">
+    <value>die ander</value>
+  </data>
+  <data name="ai_comparing_title" xml:space="preserve">
+    <value>Vergelyk %1$s:</value>
+  </data>
+  <data name="ai_comparison_all" xml:space="preserve">
+    <value>almal </value>
+  </data>
+  <data name="ai_comparison_and" xml:space="preserve">
+    <value> en </value>
+  </data>
+  <data name="ai_comparison_are" xml:space="preserve">
+    <value> is </value>
+  </data>
+  <data name="ai_comparison_but" xml:space="preserve">
+    <value>, maar </value>
+  </data>
+  <data name="ai_comparison_is" xml:space="preserve">
+    <value> is </value>
+  </data>
+  <data name="ai_comparison_verdict" xml:space="preserve">
+    <value>%1$s het die hoër waarde by %2$d van die %3$d vergelykte eienskappe.</value>
+  </data>
+  <data name="ai_comparison_vs" xml:space="preserve">
+    <value> teen </value>
+  </data>
+  <data name="ai_comparison_while" xml:space="preserve">
+    <value>, terwyl </value>
+  </data>
+  <data name="ai_composition_element" xml:space="preserve">
+    <value>%1$s maak **%2$s** van die massa van %3$s uit.</value>
+  </data>
+  <data name="ai_composition_header" xml:space="preserve">
+    <value>Samestelling van %1$s</value>
+  </data>
+  <data name="ai_composition_row" xml:space="preserve">
+    <value>• **%1$s** ×%2$d — %3$s g/mol (%4$s%%)</value>
+  </data>
+  <data name="ai_concept_atomic_number" xml:space="preserve">
+    <value>Die **Atoomgetal** is die aantal protone in 'n atoom. Dit is die primêre manier waarop elemente in die periodieke tabel georden word.</value>
+  </data>
+  <data name="ai_concept_electron" xml:space="preserve">
+    <value>**Elektrone** is negatief gelaaide deeltjies wat om die kern wentel. Hulle is betrokke by binding en elektrisiteit.</value>
+  </data>
+  <data name="ai_concept_electronegativity" xml:space="preserve">
+    <value>**Elektronegatiwiteit** meet hoe sterk 'n atoom elektrone na homself trek in 'n chemiese binding. Fluoor is die mees elektronegatiewe!</value>
+  </data>
+  <data name="ai_concept_generic" xml:space="preserve">
+    <value>Dit is 'n kernkonsep in chemie! In watter deel daarvan wil jy hê ek moet dieper delf? Ek weet van protone, binding, radioaktiwiteit, en meer.</value>
+  </data>
+  <data name="ai_concept_group" xml:space="preserve">
+    <value>'n **Groep** is 'n vertikale kolom. Elemente in 'n groep het gewoonlik soortgelyke chemiese eienskappe en dieselfde aantal valenselektrone.</value>
+  </data>
+  <data name="ai_concept_ionization" xml:space="preserve">
+    <value>**Ionisasie-energie** is die energie wat nodig is om 'n elektron van 'n atoom te verwyder. Dit neem gewoonlik toe as jy regs beweeg oor die periodieke tabel.</value>
+  </data>
+  <data name="ai_concept_isotope" xml:space="preserve">
+    <value>'n **Isotoop** is 'n variasie van 'n element met dieselfde aantal protone maar 'n verskillende aantal neutrone. Dit beïnvloed sy atoommassa!</value>
+  </data>
+  <data name="ai_concept_neutron" xml:space="preserve">
+    <value>**Neutrone** is neutrale deeltjies in die kern. Hulle voeg massa by en help om die kern te stabiliseer, veral in swaarder elemente.</value>
+  </data>
+  <data name="ai_concept_orbital" xml:space="preserve">
+    <value>**Orbitale** is streke in die ruimte rondom 'n kern waar daar 'n hoë waarskynlikheid is om 'n elektron te vind. Hulle het vorms soos s, p, d, en f.</value>
+  </data>
+  <data name="ai_concept_period" xml:space="preserve">
+    <value>'n **Periode** is 'n horisontale ry in die periodieke tabel. Elemente in dieselfde periode het dieselfde aantal elektronskille.</value>
+  </data>
+  <data name="ai_concept_proton" xml:space="preserve">
+    <value>**Protone** is positief gelaaide deeltjies in die kern. Die aantal protone (Atoomgetal) definieer watter element dit is!</value>
+  </data>
+  <data name="ai_concept_radioactivity" xml:space="preserve">
+    <value>**Radioaktiwiteit** is die proses waardeur 'n onstabile atoomkern energie verloor deur straling uit te straal. Elemente soos Uraan is bekend hiervoor!</value>
+  </data>
+  <data name="ai_concept_shell" xml:space="preserve">
+    <value>Elektrone woon in **skille** (enervievlakke) rondom die kern. Die konfigurasie bepaal die element se posisie in die tabel.</value>
+  </data>
+  <data name="ai_concept_valence" xml:space="preserve">
+    <value>**Valenselektrone** is die elektrone in die buitenste skil van 'n atoom. Hulle bepaal hoe 'n element met ander reageer.</value>
+  </data>
+  <data name="ai_config_is" xml:space="preserve">
+    <value>Sy elektronkonfigurasie is %1$s.</value>
+  </data>
+  <data name="ai_connector_question_1" xml:space="preserve">
+    <value>Om jou vraag te beantwoord,</value>
+  </data>
+  <data name="ai_connector_question_2" xml:space="preserve">
+    <value>Ek sien. Hier is wat ek gevind het:</value>
+  </data>
+  <data name="ai_connector_question_3" xml:space="preserve">
+    <value>Wat dit betref,</value>
+  </data>
+  <data name="ai_connector_why_1" xml:space="preserve">
+    <value>Dit is 'n uitstekende opvolgvraag!</value>
+  </data>
+  <data name="ai_connector_why_2" xml:space="preserve">
+    <value>Goeie punt. Laat ek verder verduidelik.</value>
+  </data>
+  <data name="ai_connector_why_3" xml:space="preserve">
+    <value>Om uit te brei op wat ek pas gesê het,</value>
+  </data>
+  <data name="ai_context_lost" xml:space="preserve">
+    <value>Konteks verloor</value>
+  </data>
+  <data name="ai_context_series" xml:space="preserve">
+    <value>%1$s is %2$s, in periode %3$d.</value>
+  </data>
+  <data name="ai_converted_from" xml:space="preserve">
+    <value>Omgeskakel vanaf die aangetekende waarde %1$s.</value>
+  </data>
+  <data name="ai_copy_image" xml:space="preserve">
+    <value>Kopieer prent</value>
+  </data>
+  <data name="ai_count_result" xml:space="preserve">
+    <value>**%1$d** elemente pas.</value>
+  </data>
+  <data name="ai_coverage_note" xml:space="preserve">
+    <value>%1$s is aangeteken vir %2$d van %3$d elemente.</value>
+  </data>
+  <data name="ai_covered_all" xml:space="preserve">
+    <value>Ons het baie oor **%1$s** gedek!</value>
+  </data>
+  <data name="ai_dataset_english_note" xml:space="preserve">
+    <value>*Hierdie verwysingsinskrywing is slegs in Engels beskikbaar.*</value>
+  </data>
+  <data name="ai_decay_effectively_none" xml:space="preserve">
+    <value>Ná %2$s %3$s is daar prakties niks van %1$s oor nie.</value>
+  </data>
+  <data name="ai_decay_elapsed" xml:space="preserve">
+    <value>Om van **%1$s g** na **%2$s g** %3$s te gaan neem sowat **%4$s %5$s**.</value>
+  </data>
+  <data name="ai_decay_half_lives" xml:space="preserve">
+    <value>In daardie tyd deurloop %1$s **%2$s** halfleeftye, wat sowat **%3$s%%** van die monster laat.</value>
+  </data>
+  <data name="ai_decay_no_half_life" xml:space="preserve">
+    <value>%1$s is gelys, maar die halfleeftyd is as "%2$s" aangeteken, dus kan ek nie verval bereken nie.</value>
+  </data>
+  <data name="ai_decay_remaining" xml:space="preserve">
+    <value>Ongeveer **%1$s %2$s** van die oorspronklike %3$s g %4$s bly oor ná %5$s %6$s.</value>
+  </data>
+  <data name="ai_decay_stable" xml:space="preserve">
+    <value>%1$s is stabiel — dit verval nie, dus gaan niks met tyd verlore nie.</value>
+  </data>
+  <data name="ai_decay_unlisted" xml:space="preserve">
+    <value>Die program lys nie %1$s onder daardie element se isotope nie, so ek het geen halfleeftyd daarvoor nie.</value>
+  </data>
+  <data name="ai_decay_working_half_life" xml:space="preserve">
+    <value>Halfleeftyd van %1$s: %2$s</value>
+  </data>
+  <data name="ai_decay_working_header" xml:space="preserve">
+    <value>Berekening</value>
+  </data>
+  <data name="ai_decay_working_n" xml:space="preserve">
+    <value>n = t / t½ = %1$s → 2⁻ⁿ = %2$s%%</value>
+  </data>
+  <data name="ai_difference_group" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_mass" xml:space="preserve">
+    <value>• **%1$s**: %2$s is aansienlik swaarder.</value>
+  </data>
+  <data name="ai_difference_need_two" xml:space="preserve">
+    <value>Ek het twee elemente nodig om hul verskille te verduidelik!</value>
+  </data>
+  <data name="ai_difference_phase" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_difference_similar" xml:space="preserve">
+    <value>%1$s en %2$s is baie soortgelyk! Hulle is albei %3$s %4$s elemente in die %5$s reeks.</value>
+  </data>
+  <data name="ai_difference_type" xml:space="preserve">
+    <value>• **%1$s**: %2$s: %3$s, %4$s: %5$s</value>
+  </data>
+  <data name="ai_dilution_add_solvent" xml:space="preserve">
+    <value>Voeg **%1$s mL** oplosmiddel by.</value>
+  </data>
+  <data name="ai_dilution_result" xml:space="preserve">
+    <value>Om **%1$s mol/L** vanaf **%2$s mL** te verdun gee **%3$s mol/L** by **%4$s mL**.</value>
+  </data>
+  <data name="ai_discovered_by" xml:space="preserve">
+    <value>%1$s is ontdek deur %2$s in %3$s.</value>
+  </data>
+  <data name="ai_discovered_in" xml:space="preserve">
+    <value>%1$s is ontdek in %2$s.</value>
+  </data>
+  <data name="ai_elec_mag_header" xml:space="preserve">
+    <value>Elektriese en Magnetiese eienskappe van %1$s:</value>
+  </data>
+  <data name="ai_elec_mag_properties" xml:space="preserve">
+    <value>Elektriese en magnetiese eienskappe van **%1$s**:</value>
+  </data>
+  <data name="ai_element" xml:space="preserve">
+    <value>element</value>
+  </data>
+  <data name="ai_element_overview_appearance" xml:space="preserve">
+    <value> Dit verskyn gewoonlik as: %1$s.</value>
+  </data>
+  <data name="ai_element_overview_electrons" xml:space="preserve">
+    <value> Dit het %1$s elektrone wat om sy kern wentel.</value>
+  </data>
+  <data name="ai_element_overview_intro" xml:space="preserve">
+    <value>%1$s %2$s (%3$s) is 'n fassinerende element! Dit is atoomgetal %4$s en behoort aan die %5$s groep.</value>
+  </data>
+  <data name="ai_element_overview_isotopes" xml:space="preserve">
+    <value> 'n Atoom van %1$s bevat %2$s protone, %3$s elektrone, en gewoonlik %4$s neutrone.</value>
+  </data>
+  <data name="ai_element_overview_series" xml:space="preserve">
+    <value> Dit is deel van die %1$s-reeks.</value>
+  </data>
+  <data name="ai_emission_spectrum" xml:space="preserve">
+    <value>Hier is die emissiespektrum van %1$s: die lig wat sy atome uitstraal wanneer opgewekte elektrone terugval. Die program stoor dit as 'n prent, so ek kan die patroon wys maar nie individuele lyne benoem nie.</value>
+  </data>
+  <data name="ai_empirical_molecular" xml:space="preserve">
+    <value>Met 'n molêre massa van %1$s g/mol is die molekulêre formule **%2$s**, %3$d × %4$s.</value>
+  </data>
+  <data name="ai_empirical_reduced" xml:space="preserve">
+    <value>Die empiriese formule van %1$s is **%2$s**: sy onderskrifte deel 'n faktor van %3$d.</value>
+  </data>
+  <data name="ai_empirical_result" xml:space="preserve">
+    <value>Die empiriese formule is **%1$s**.</value>
+  </data>
+  <data name="ai_empirical_same" xml:space="preserve">
+    <value>%1$s is reeds in sy eenvoudigste heelgetalverhouding, dus is dit sy eie empiriese formule.</value>
+  </data>
+  <data name="ai_encouragement" xml:space="preserve">
+    <value>Goeie vraag! 🌟</value>
+  </data>
+  <data name="ai_eqn_no_desc" xml:space="preserve">
+    <value>Die toepassing sluit hierdie vergelyking as 'n visuele verwysing in.</value>
+  </data>
+  <data name="ai_equation_balanced" xml:space="preserve">
+    <value>**%1$s → %2$s**</value>
+  </data>
+  <data name="ai_equation_check_header" xml:space="preserve">
+    <value>Atoomkontrole</value>
+  </data>
+  <data name="ai_equation_no_solution" xml:space="preserve">
+    <value>Daardie vergelyking het geen balans met heel positiewe koëffisiënte nie.</value>
+  </data>
+  <data name="ai_equation_one_sided" xml:space="preserve">
+    <value>Daardie vergelyking kan nie gebalanseer word nie: 'n element kom net aan een kant voor, en geen koëffisiënte kan dit regstel nie.</value>
+  </data>
+  <data name="ai_equation_one_sided_named" xml:space="preserve">
+    <value>Daardie vergelyking kan nie gebalanseer word nie: %1$s kom net aan een kant voor, en geen koëffisiënte kan dit regstel nie.</value>
+  </data>
+  <data name="ai_equation_parse_failed" xml:space="preserve">
+    <value>Ek kon dit nie as 'n chemiese vergelyking lees nie. Probeer 'n vorm soos Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_equation_tally_row" xml:space="preserve">
+    <value>• **%1$s** — %2$d links, %3$d regs</value>
+  </data>
+  <data name="ai_equation_too_large" xml:space="preserve">
+    <value>Daardie vergelyking benodig koëffisiënte wat te groot is vir 'n werklike reaksie. Kyk na die formules.</value>
+  </data>
+  <data name="ai_equation_underdetermined" xml:space="preserve">
+    <value>Daardie vergelyking het meer as een onafhanklike balans — dit lees soos twee reaksies wat as een geskryf is. Skei hulle, dan balanseer ek elkeen.</value>
+  </data>
+  <data name="ai_etymology_header" xml:space="preserve">
+    <value>Die naam **%1$s** het 'n interessante oorsprong:</value>
+  </data>
+  <data name="ai_fact_data_highest" xml:space="preserve">
+    <value>**%1$s** het die hoogste %2$s van die %3$d elemente met 'n aangetekende waarde: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_lowest" xml:space="preserve">
+    <value>**%1$s** het die laagste %2$s van die %3$d elemente met 'n aangetekende waarde: %4$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_high" xml:space="preserve">
+    <value>**%1$s** is nommer %2$d uit %3$d elemente vir die hoogste %4$s: %5$s.</value>
+  </data>
+  <data name="ai_fact_data_rank_low" xml:space="preserve">
+    <value>**%1$s** is nommer %2$d uit %3$d elemente vir die laagste %4$s: %5$s.</value>
+  </data>
+  <data name="ai_facts.0" xml:space="preserve">
+    <value>Het jy geweet? Suurstof is die mees oorvloedige element in die aardkors!</value>
+  </data>
+  <data name="ai_facts.1" xml:space="preserve">
+    <value>Prettige feit: Goud roes of korrodeer nooit nie. Dit bly vir ewig blink!</value>
+  </data>
+  <data name="ai_facts.2" xml:space="preserve">
+    <value>Hier is iets koel: Waterstof is die mees oorvloedige element in die heelal! 🌌</value>
+  </data>
+  <data name="ai_facts.3" xml:space="preserve">
+    <value>Verbasend: Koolstof is die basis vir alle bekende lewe op aarde!</value>
+  </data>
+  <data name="ai_facts.4" xml:space="preserve">
+    <value>Interessant: Helium is die enigste element wat nie onder normale druk stol nie!</value>
+  </data>
+  <data name="ai_facts.5" xml:space="preserve">
+    <value>Prettige feit: Kwik is die enigste metaal wat vloeibaar is by kamertemperatuur! 💧</value>
+  </data>
+  <data name="ai_facts.6" xml:space="preserve">
+    <value>Het jy geweet? Die element frankium is so radioaktief dat dit onmiddellik sal verdamp!</value>
+  </data>
+  <data name="ai_facts.7" xml:space="preserve">
+    <value>Koel: Diamant en grafiet is albei gemaak van suiwer koolstof, maar het heeltemal verskillende eienskappe!</value>
+  </data>
+  <data name="ai_facts.8" xml:space="preserve">
+    <value>Verbasend: 'n Enkele ons goud kan in 'n plaat van 300 vierkante voet geslaan word!</value>
+  </data>
+  <data name="ai_facts.9" xml:space="preserve">
+    <value>Interessant: Neon vorm eintlik geen chemiese verbindings onder normale toestande nie!</value>
+  </data>
+  <data name="ai_feature_achievements" xml:space="preserve">
+    <value>Volg jou vordering met **prestasies** en gebruikstatistieke op die gebruikersblad.</value>
+  </data>
+  <data name="ai_feature_capabilities" xml:space="preserve">
+    <value>Ek kan elementeienskappe opsoek en vergelyk, vergelykings balanseer, molmassas en oplossingskonsentrasies bereken, eenhede omskakel en vervalberekeninge doen. Vra my oor 'n element, of skryf 'n formule of vergelyking.</value>
+  </data>
+  <data name="ai_feature_emission_spectrum" xml:space="preserve">
+    <value>Jy kan 'n element se **emissiespektrum** in sy besonderhedepaneel sien. Dit wys die unieke ligpatroon wat daardie element voortbring.</value>
+  </data>
+  <data name="ai_feature_flashcards" xml:space="preserve">
+    <value>Die program het verskeie **flitskaart-minispeletjies** vir elementsimbole, atoommassas en klassifikasies, met vlak en XP om by te hou.</value>
+  </data>
+  <data name="ai_feature_ideal_gas" xml:space="preserve">
+    <value>Gebruik die **ideale gas-sakrekenaar** om druk, volume, mol of temperatuur uit PV = nRT te vind.</value>
+  </data>
+  <data name="ai_feature_molar_mass" xml:space="preserve">
+    <value>Daar is 'n ingeboude **molmassa-sakrekenaar** vir die molekulêre gewig van komplekse verbindings. Ek kan dit ook hier doen — gee my net 'n formule.</value>
+  </data>
+  <data name="ai_feature_nuclide_table" xml:space="preserve">
+    <value>Die program bevat 'n omvattende **nukliedtabel** wat isotope vir alle elemente wys, kleurgekodeer volgens vervaltipe (alfa, beta ensovoorts).</value>
+  </data>
+  <data name="ai_feature_reaction_balancer" xml:space="preserve">
+    <value>Die **chemiese reaksiebalanseerder** help jou vergelykings balanseer en gunstelinge stoor. Jy kan my ook hier vra — skryf iets soos Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="ai_feature_unit_converter" xml:space="preserve">
+    <value>Die program bevat 'n **eenheidsomskakelaar** vir temperature en ander wetenskaplike eenhede. Jy kan my ook net vra, byvoorbeeld "skakel 500 K om na °C".</value>
+  </data>
+  <data name="ai_field_abundance_crustal_rocks" xml:space="preserve">
+    <value>voorkoms in korsgesteentes</value>
+  </data>
+  <data name="ai_field_abundance_earth_crust" xml:space="preserve">
+    <value>voorkoms in die aardkors</value>
+  </data>
+  <data name="ai_field_abundance_earth_soils" xml:space="preserve">
+    <value>voorkoms in grond</value>
+  </data>
+  <data name="ai_field_abundance_human_body" xml:space="preserve">
+    <value>voorkoms in die menslike liggaam</value>
+  </data>
+  <data name="ai_field_abundance_meteorites" xml:space="preserve">
+    <value>voorkoms in meteoriete</value>
+  </data>
+  <data name="ai_field_abundance_sea_water" xml:space="preserve">
+    <value>voorkoms in seewater</value>
+  </data>
+  <data name="ai_field_abundance_solar_system" xml:space="preserve">
+    <value>voorkoms in die sonnestelsel</value>
+  </data>
+  <data name="ai_field_abundance_sun" xml:space="preserve">
+    <value>voorkoms in die Son</value>
+  </data>
+  <data name="ai_field_abundance_urban_soils" xml:space="preserve">
+    <value>voorkoms in stedelike grond</value>
+  </data>
+  <data name="ai_field_nfpa_flammability" xml:space="preserve">
+    <value>ontvlambaarheidsgradering</value>
+  </data>
+  <data name="ai_field_nfpa_health" xml:space="preserve">
+    <value>gesondheidsgradering</value>
+  </data>
+  <data name="ai_field_nfpa_instability" xml:space="preserve">
+    <value>onstabiliteitsgradering</value>
+  </data>
+  <data name="ai_field_nfpa_special" xml:space="preserve">
+    <value>spesiale gevaar</value>
+  </data>
+  <data name="ai_filter_matched" xml:space="preserve">
+    <value>%1$d elemente pas:</value>
+  </data>
+  <data name="ai_filter_none" xml:space="preserve">
+    <value>Geen elemente pas by daardie voorwaardes nie.</value>
+  </data>
+  <data name="ai_filter_top" xml:space="preserve">
+    <value>Top %1$d van %2$d passende elemente:</value>
+  </data>
+  <data name="ai_follow_compare" xml:space="preserve">
+    <value>%1$s van %2$s en %3$s</value>
+  </data>
+  <data name="ai_follow_count" xml:space="preserve">
+    <value>Hoeveel is daar?</value>
+  </data>
+  <data name="ai_follow_highest" xml:space="preserve">
+    <value>Watter element het die hoogste %1$s?</value>
+  </data>
+  <data name="ai_follow_lowest" xml:space="preserve">
+    <value>Watter element het die laagste %1$s?</value>
+  </data>
+  <data name="ai_follow_steps" xml:space="preserve">
+    <value>Wys die stappe</value>
+  </data>
+  <data name="ai_follow_unit" xml:space="preserve">
+    <value>%1$s van %2$s in %3$s</value>
+  </data>
+  <data name="ai_formula_c6h12o6" xml:space="preserve">
+    <value>C6H12O6 is Glukose, 'n eenvoudige suiker wat energie aan lewende dinge verskaf. Dit het 6 Koolstowwe, 12 Waterstowwe, en 6 Suurstowwe.</value>
+  </data>
+  <data name="ai_formula_ch4" xml:space="preserve">
+    <value>CH4 is Metaan, die eenvoudigste alkaan en 'n kragtige kweekhuisgas. Dit is een Koolstof en vier Waterstowwe.</value>
+  </data>
+  <data name="ai_formula_co2" xml:space="preserve">
+    <value>CO2 is Koolstofdioksied. Dit is saamgestel uit een Koolstofatoom and twee Suurstofatome.</value>
+  </data>
+  <data name="ai_formula_composition_offer" xml:space="preserve">
+    <value> Sal jy wil hê ek moet sy elementêre samestelling uiteensit?</value>
+  </data>
+  <data name="ai_formula_consists_of" xml:space="preserve">
+    <value>Dit bestaan uit:</value>
+  </data>
+  <data name="ai_formula_generic" xml:space="preserve">
+    <value>Ek herken dat dit soos 'n chemiese formule lyk, maar ek leer nog oor molekules! Vra my oor die individuele elemente.</value>
+  </data>
+  <data name="ai_formula_h2o" xml:space="preserve">
+    <value>H2O is water! Dit is gemaak van twee Waterstofatome en een Suurstofatoom.</value>
+  </data>
+  <data name="ai_formula_h2so4" xml:space="preserve">
+    <value>H2SO4 is Swawelsuur, 'n baie sterk en belangrike industriële suur. Dit bevat Waterstof, Swawel en Suurstof.</value>
+  </data>
+  <data name="ai_formula_hcl" xml:space="preserve">
+    <value>HCl is Soutsuur, wat eintlik in jou maag gevind word om met vertering te help!</value>
+  </data>
+  <data name="ai_formula_item" xml:space="preserve">
+    <value>• %1$s × %2$s (%3$s)</value>
+  </data>
+  <data name="ai_formula_mass" xml:space="preserve">
+    <value>Die molêre massa van **%1$s** is **%2$s g/mol**.</value>
+  </data>
+  <data name="ai_formula_nacl" xml:space="preserve">
+    <value>NaCl is Natriumchloried, beter bekend as tafelsout! Dit kombineer Natrium en Chloor.</value>
+  </data>
+  <data name="ai_formula_nh3" xml:space="preserve">
+    <value>NH3 is Ammoniak, wat dikwels in skoonmaakmiddels gebruik word. Dit is een Stikstof en drie Waterstowwe.</value>
+  </data>
+  <data name="ai_formula_o2" xml:space="preserve">
+    <value>O2 is die suurstof wat ons inasem! Dit is twee suurstofatome wat aanmekaar gebind is.</value>
+  </data>
+  <data name="ai_formula_pro_plus" xml:space="preserve">
+    <value>Die ontleding van chemiese verbindings soos **%1$s** is 'n **PRO+** funksie. As 'n %2$s gebruiker kan ek jou net help met individuele elemente!</value>
+  </data>
+  <data name="ai_formula_recognize" xml:space="preserve">
+    <value>Ek herken **%1$s** as 'n chemiese verbinding met 'n molêre massa van **%2$s**.</value>
+  </data>
+  <data name="ai_free_user" xml:space="preserve">
+    <value>Gratis</value>
+  </data>
+  <data name="ai_gas_result" xml:space="preserve">
+    <value>Volgens die ideale gaswet, PV = nRT: **%1$s**.</value>
+  </data>
+  <data name="ai_gas_stp" xml:space="preserve">
+    <value>STD word as 1 atm en 273,15 K geneem.</value>
+  </data>
+  <data name="ai_geo_color" xml:space="preserve">
+    <value>%1$s: %2$s %3$s, %4$s %5$s.</value>
+  </data>
+  <data name="ai_geo_dens" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_hard" xml:space="preserve">
+    <value>%1$s: %2$s %3$s.</value>
+  </data>
+  <data name="ai_geo_info" xml:space="preserve">
+    <value>%1$s is 'n %2$s in die %3$s groep. Kleur: %4$s. Hardheid: %5$s. Digtheid: %6$s. Magnetisme: %7$s.</value>
+  </data>
+  <data name="ai_grams_to_moles" xml:space="preserve">
+    <value>**%1$s g** %2$s is **%3$s mol**.</value>
+  </data>
+  <data name="ai_greeting" xml:space="preserve">
+    <value>Haai daar! 👋 Ek is jou chemie-buddy. Vra my enigiets oor elemente!</value>
+  </data>
+  <data name="ai_group" xml:space="preserve">
+    <value>Groep</value>
+  </data>
+  <data name="ai_hard_header" xml:space="preserve">
+    <value>Hardheidseienskappe van %1$s:</value>
+  </data>
+  <data name="ai_help_response" xml:space="preserve">
+    <value>Ek is streng opgelei op die data wat beskikbaar is binne hierdie toepassing! Ek kan jou help met:
+
+🧪 **Gedetailleerde Elemente**: Eienskappe, voorkoms en ontdekkingsfeite direk vanaf ons JSON-databasis.
+⚖️ **Datagebruik**: Vergelyk digtheid, massa, radius en reaktiwiteit tussen elemente.
+💥 **Reaktiwiteit**: Ek gebruik die toepassing se groep- en periodedata om te verduidelik hoe elemente soos Natrium met Water reageer.
+🧬 **Biologies/Veiligheid**: Toksisiteit en biologiese rolle gevind in die elementbeskrywings.
+⚛️ **Isotope en Volopheid**: Spesifieke data uit ons toegewyde isotoop- en volopheidstabelle.
+📉 **Periodieke Tendense**: Verduidelik patrone soos Elektronegatiwiteit gebaseer op die tabel se struktuur.
+🔢 **Molêre Massa**: Akkurate berekeninge met behulp van die atoomgewigte in die toepassing.
+📝 **Definisies**: Verduidelikings vir chemieterme wat regdeur die toepassing gebruik word.
+
+Vra net en ek sal die antwoord in die toepassing se rekords vind! 🌟</value>
+  </data>
+  <data name="ai_higher_than" xml:space="preserve">
+    <value>%1$s het 'n hoër %2$s as %3$s.</value>
+  </data>
+  <data name="ai_hint" xml:space="preserve">
+    <value>Vra my enigiets...</value>
+  </data>
+  <data name="ai_history_pro_only" xml:space="preserve">
+    <value>Geselsgeskiedenis is 'n PRO-kenmerk</value>
+  </data>
+  <data name="ai_history_sign_in" xml:space="preserve">
+    <value>Meld aan om geselsgeskiedenis te sien</value>
+  </data>
+  <data name="ai_id_header" xml:space="preserve">
+    <value>Identifiseerders vir %1$s:</value>
+  </data>
+  <data name="ai_identifiers_for" xml:space="preserve">
+    <value>Identifiseerders vir **%1$s**:</value>
+  </data>
+  <data name="ai_identity_result" xml:space="preserve">
+    <value>Gebaseer op die waardes in die toepassing, is die element met 'n waarde naby aan **%1$s** vir sy eienskappe **%2$s** (werklik: %3$s).</value>
+  </data>
+  <data name="ai_ion_anion" xml:space="preserve">
+    <value>'n Anioon neem sy ekstra elektrone op die volgende plekke in die vulvolgorde op.</value>
+  </data>
+  <data name="ai_ion_cation" xml:space="preserve">
+    <value>'n Katioon verloor eers sy buitenste elektrone: die hoogste skil, en daarin die hoogste subskil.</value>
+  </data>
+  <data name="ai_ion_config" xml:space="preserve">
+    <value>Die elektronkonfigurasie van **%1$s** is **%2$s**. Neutrale %3$s is %4$s.</value>
+  </data>
+  <data name="ai_ion_count" xml:space="preserve">
+    <value>%1$s het %2$d ionisasie-energiewaarde(s) beskikbaar in die toepassing.</value>
+  </data>
+  <data name="ai_ion_isoelectronic" xml:space="preserve">
+    <value>Dit is dieselfde konfigurasie as %1$s.</value>
+  </data>
+  <data name="ai_isotope_compare_header" xml:space="preserve">
+    <value>%1$s teenoor %2$s</value>
+  </data>
+  <data name="ai_isotope_compare_row" xml:space="preserve">
+    <value>• **%1$s**: %2$s teenoor %3$s</value>
+  </data>
+  <data name="ai_isotope_decay" xml:space="preserve">
+    <value>(Verval: %1$s)</value>
+  </data>
+  <data name="ai_isotope_decays" xml:space="preserve">
+    <value>• **%1$s** — %2$s, halfleeftyd %3$s</value>
+  </data>
+  <data name="ai_isotope_half_life" xml:space="preserve">
+    <value> Dit het 'n halfleeftyd van %1$s en verval via %2$s.</value>
+  </data>
+  <data name="ai_isotope_halflife_only" xml:space="preserve">
+    <value>• **%1$s** — halfleeftyd %2$s</value>
+  </data>
+  <data name="ai_isotope_header" xml:space="preserve">
+    <value>Volgens die toepassing se isotooptabel, hier is die sleutelisotope vir **%1$s**:</value>
+  </data>
+  <data name="ai_isotope_neutron_diff" xml:space="preserve">
+    <value>%1$s het %2$d neutrone, %3$s het %4$d — 'n verskil van %5$d.</value>
+  </data>
+  <data name="ai_isotope_same_element" xml:space="preserve">
+    <value>Albei is isotope van %1$s, dus het hulle dieselfde %2$d protone en verskil net in neutrone.</value>
+  </data>
+  <data name="ai_isotope_stable" xml:space="preserve">
+    <value>• **%1$s** — stabiel</value>
+  </data>
+  <data name="ai_isotope_unlisted" xml:space="preserve">
+    <value>nie in die isotooptabel gelys nie</value>
+  </data>
+  <data name="ai_isotopes_header" xml:space="preserve">
+    <value>Isotope van %1$s</value>
+  </data>
+  <data name="ai_isotopes_summary" xml:space="preserve">
+    <value>%1$d bekende isotope, %2$d daarvan stabiel.</value>
+  </data>
+  <data name="ai_label_decay" xml:space="preserve">
+    <value>Vervalwyse</value>
+  </data>
+  <data name="ai_label_half_life" xml:space="preserve">
+    <value>Halfleeftyd</value>
+  </data>
+  <data name="ai_label_mass_number" xml:space="preserve">
+    <value>Massagetal</value>
+  </data>
+  <data name="ai_label_neutrons" xml:space="preserve">
+    <value>Neutrone</value>
+  </data>
+  <data name="ai_label_protons" xml:space="preserve">
+    <value>Protone</value>
+  </data>
+  <data name="ai_lang_switched" xml:space="preserve">
+    <value>AI-taal verander na: %1$s 🌐</value>
+  </data>
+  <data name="ai_limit_reset_badge" xml:space="preserve">
+    <value>Herstel %1$s</value>
+  </data>
+  <data name="ai_limit_unlimited" xml:space="preserve">
+    <value>Onbeperk</value>
+  </data>
+  <data name="ai_list_header" xml:space="preserve">
+    <value>Hier is die **%1$s** elemente:</value>
+  </data>
+  <data name="ai_list_more" xml:space="preserve">
+    <value>…en %1$d meer.</value>
+  </data>
+  <data name="ai_list_row" xml:space="preserve">
+    <value>• **%1$s** — %2$s</value>
+  </data>
+  <data name="ai_list_row_plain" xml:space="preserve">
+    <value>• **%1$s**</value>
+  </data>
+  <data name="ai_list_spread" xml:space="preserve">
+    <value>Waardes strek van %1$s tot %2$s.</value>
+  </data>
+  <data name="ai_locked_fields" xml:space="preserve">
+    <value>%1$s is deel van %2$s. Gradeer op om dit hier en op elke elementbladsy te sien.</value>
+  </data>
+  <data name="ai_locked_generic" xml:space="preserve">
+    <value>Daardie antwoord is deel van %1$s. Gradeer op om dit te ontsluit.</value>
+  </data>
+  <data name="ai_lower_than" xml:space="preserve">
+    <value>%1$s het 'n laer %2$s as %3$s.</value>
+  </data>
+  <data name="ai_mech_header" xml:space="preserve">
+    <value>%1$s vir %2$s:</value>
+  </data>
+  <data name="ai_molar_mass_generic" xml:space="preserve">
+    <value>Ek kan help met molêre massas! Probeer vra "Wat is die molêre massa van H2O?"</value>
+  </data>
+  <data name="ai_molar_mass_of" xml:space="preserve">
+    <value>Die molêre massa van %1$s is %2$s.</value>
+  </data>
+  <data name="ai_molar_mass_pro_plus" xml:space="preserve">
+    <value>Die berekening van molêre massa vir verbindings is 'n **PRO+** funksie. As 'n %1$s gebruiker kan jy steeds molêre massa vir individuele elemente kry!</value>
+  </data>
+  <data name="ai_moles_of" xml:space="preserve">
+    <value>**%1$s mol** van %2$s bevat **%3$s** atome.</value>
+  </data>
+  <data name="ai_moles_to_particles" xml:space="preserve">
+    <value>**%1$s mol** bevat **%2$s** partikels.</value>
+  </data>
+  <data name="ai_naturally_occurring" xml:space="preserve">
+    <value>Kom natuurlik voor</value>
+  </data>
+  <data name="ai_neighbour_after" xml:space="preserve">
+    <value>**%1$s** (atoomgetal %2$d) kom onmiddellik na %3$s.</value>
+  </data>
+  <data name="ai_neighbour_before" xml:space="preserve">
+    <value>**%1$s** (atoomgetal %2$d) kom onmiddellik voor %3$s.</value>
+  </data>
+  <data name="ai_nfpa_flammable_0" xml:space="preserve">
+    <value>Sal nie brand nie</value>
+  </data>
+  <data name="ai_nfpa_flammable_1" xml:space="preserve">
+    <value>Moet voorverhit word om te brand</value>
+  </data>
+  <data name="ai_nfpa_flammable_2" xml:space="preserve">
+    <value>Ontsteek wanneer matig verhit</value>
+  </data>
+  <data name="ai_nfpa_flammable_3" xml:space="preserve">
+    <value>Ontsteek by normale temperature</value>
+  </data>
+  <data name="ai_nfpa_flammable_4" xml:space="preserve">
+    <value>Uiters vlambaar</value>
+  </data>
+  <data name="ai_nfpa_health_0" xml:space="preserve">
+    <value>Normale materiaal</value>
+  </data>
+  <data name="ai_nfpa_health_1" xml:space="preserve">
+    <value>Effens gevaarlik</value>
+  </data>
+  <data name="ai_nfpa_health_2" xml:space="preserve">
+    <value>Gevaarlik</value>
+  </data>
+  <data name="ai_nfpa_health_3" xml:space="preserve">
+    <value>Uiterste gevaar</value>
+  </data>
+  <data name="ai_nfpa_health_4" xml:space="preserve">
+    <value>Dodelik</value>
+  </data>
+  <data name="ai_nfpa_instability_0" xml:space="preserve">
+    <value>Stabiel</value>
+  </data>
+  <data name="ai_nfpa_instability_1" xml:space="preserve">
+    <value>Onstabiel indien verhit</value>
+  </data>
+  <data name="ai_nfpa_instability_2" xml:space="preserve">
+    <value>Gewelddadige chemiese verandering moontlik</value>
+  </data>
+  <data name="ai_nfpa_instability_3" xml:space="preserve">
+    <value>Kan detoneer met 'n sterk aanstigter</value>
+  </data>
+  <data name="ai_nfpa_instability_4" xml:space="preserve">
+    <value>Kan maklik detoneer</value>
+  </data>
+  <data name="ai_nfpa_special_none" xml:space="preserve">
+    <value>Geen spesiale gevaar aangeteken nie</value>
+  </data>
+  <data name="ai_nfpa_special_ox" xml:space="preserve">
+    <value>Oksideermiddel</value>
+  </data>
+  <data name="ai_nfpa_special_sa" xml:space="preserve">
+    <value>Eenvoudige versmoringsmiddel</value>
+  </data>
+  <data name="ai_nfpa_special_w" xml:space="preserve">
+    <value>Reageer met water</value>
+  </data>
+  <data name="ai_nfpa_unrated" xml:space="preserve">
+    <value>Nie gegradeer nie</value>
+  </data>
+  <data name="ai_no_abundance_data" xml:space="preserve">
+    <value>Ek het nie spesifieke numeriese oorvloedswaardes vir %1$s nie, maar die beskrywing sê: %2$s.</value>
+  </data>
+  <data name="ai_no_bio_data" xml:space="preserve">
+    <value>Ek het nie gedetailleerde biologiese data vir %1$s nie, maar standaard veiligheid sê:</value>
+  </data>
+  <data name="ai_no_data" xml:space="preserve">
+    <value>Hmm, ek kon nie inligting daaroor vind nie. Probeer vra oor 'n element soos 'suurstof' of 'goud'!</value>
+  </data>
+  <data name="ai_no_data_alternatives" xml:space="preserve">
+    <value>Aangeteken vir %1$s: %2$s.</value>
+  </data>
+  <data name="ai_no_data_right_now" xml:space="preserve">
+    <value>Ek kan dit nie nou nagaan nie.</value>
+  </data>
+  <data name="ai_no_etymology_data" xml:space="preserve">
+    <value>Ek is nie presies seker oor die wortel van sy naam nie, maar dit is ontdek deur %2$s in %3$s.</value>
+  </data>
+  <data name="ai_no_isotope_data" xml:space="preserve">
+    <value>Ek het nie 'n gedetailleerde lys van isotope vir %1$s in my vinnige-toegang data nie, maar jy kan 'n omvattende lys in die Isotooptabel vind!</value>
+  </data>
+  <data name="ai_no_list_data" xml:space="preserve">
+    <value>Ek kon geen elemente in ons databasis vind wat aan daardie kriteria voldoen nie.</value>
+  </data>
+  <data name="ai_no_physical_data" xml:space="preserve">
+    <value>Ek het nie gedetailleerde fisiese eienskappe vir %1$s in die vinnige-toegang data nie, maar jy kan die gedetailleerde eienskappepanele nagaan!</value>
+  </data>
+  <data name="ai_no_property_data" xml:space="preserve">
+    <value>Jammer, ek het nie tans die data vir %1$s se %2$s nie.</value>
+  </data>
+  <data name="ai_no_usage_data" xml:space="preserve">
+    <value>Ek het nie 'n spesifieke lys van gebruike vir %1$s nie, maar dit is 'n fassinerende element! Jy kan meer lees in die gedetailleerde beskrywing.</value>
+  </data>
+  <data name="ai_nuclide_body" xml:space="preserve">
+    <value>• **Protone:** %1$d
+• **Neutrone:** %2$d
+• **Massagetal:** %3$d</value>
+  </data>
+  <data name="ai_nuclide_explain" xml:space="preserve">
+    <value>Neutrone = massagetal − atoomgetal = %1$d − %2$d = **%3$d**.</value>
+  </data>
+  <data name="ai_nuclide_header" xml:space="preserve">
+    <value>%1$s-%2$d</value>
+  </data>
+  <data name="ai_open_in_app" xml:space="preserve">
+    <value>Open %1$s</value>
+  </data>
+  <data name="ai_ordinal_suffix_nd" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="ai_ordinal_suffix_rd" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="ai_ordinal_suffix_st" xml:space="preserve">
+    <value>ste</value>
+  </data>
+  <data name="ai_ordinal_suffix_th" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="ai_oxidation_neg" xml:space="preserve">
+    <value>• Negatief: %1$s</value>
+  </data>
+  <data name="ai_oxidation_pos" xml:space="preserve">
+    <value>• Positief: %1$s</value>
+  </data>
+  <data name="ai_oxidation_states" xml:space="preserve">
+    <value>**%1$s** het verskeie moontlike oksidasietoestande.</value>
+  </data>
+  <data name="ai_period" xml:space="preserve">
+    <value>Periode</value>
+  </data>
+  <data name="ai_personalized_greeting_fav" xml:space="preserve">
+    <value>Haai! Ek onthou jy het onlangs na %1$s gekyk. Wil jy meer besonderhede sien?</value>
+  </data>
+  <data name="ai_personalized_greeting_interest" xml:space="preserve">
+    <value>Welkom terug! Gereed om meer oor %1$s te verken? Ons kan weer na %2$s kyk.</value>
+  </data>
+  <data name="ai_ph_acid" xml:space="preserve">
+    <value>%1$s is 'n sterk suur, so 'n %2$s M oplossing het [H⁺] = %3$s M en 'n pH van **%4$s**.</value>
+  </data>
+  <data name="ai_ph_base" xml:space="preserve">
+    <value>%1$s is 'n sterk basis, so 'n %2$s M oplossing het [OH⁻] = %3$s M, 'n pOH van %4$s en 'n pH van **%5$s**.</value>
+  </data>
+  <data name="ai_ph_info" xml:space="preserve">
+    <value>%1$s: suur onder pH %2$s is %3$s, neutrale reeks %4$s is %5$s, en bo pH %6$s is dit %7$s.</value>
+  </data>
+  <data name="ai_ph_info_short" xml:space="preserve">
+    <value>%1$s: pH-reeks %2$s is %3$s.</value>
+  </data>
+  <data name="ai_phase_gas" xml:space="preserve">
+    <value>Gas</value>
+  </data>
+  <data name="ai_phase_liquid" xml:space="preserve">
+    <value>Vloeistof</value>
+  </data>
+  <data name="ai_phase_solid" xml:space="preserve">
+    <value>Vaste stof</value>
+  </data>
+  <data name="ai_physical_header" xml:space="preserve">
+    <value>Gebaseer op die fisiese eienskappe wat in die toepassing gestoor is vir **%1$s**:</value>
+  </data>
+  <data name="ai_poi_info" xml:space="preserve">
+    <value>%1$s: Poisson se verhoudingsreeks %2$s (%3$s).</value>
+  </data>
+  <data name="ai_pro_tip_hint" xml:space="preserve">
+    <value>Pro-wenk: Jy kan my ook vra oor sy oorsprong, biologiese rol, of reaktiwiteit!</value>
+  </data>
+  <data name="ai_pro_user" xml:space="preserve">
+    <value>PRO</value>
+  </data>
+  <data name="ai_property_is" xml:space="preserve">
+    <value>%1$s se %2$s is %3$s.</value>
+  </data>
+  <data name="ai_quiz_atomic" xml:space="preserve">
+    <value>Watter element het die atoomgetal **%1$s**?</value>
+  </data>
+  <data name="ai_quiz_correct" xml:space="preserve">
+    <value>✨ **Korrek!** Wel gedaan. Die antwoord was inderdaad **%1$s**. Gereed vir nog 'n vraag?</value>
+  </data>
+  <data name="ai_quiz_history" xml:space="preserve">
+    <value>Hierdie element is ontdek deur **%1$s** in **%2$s**. Kan jy raai watter een dit is?</value>
+  </data>
+  <data name="ai_quiz_no_start" xml:space="preserve">
+    <value>Ek kan nie nou 'n vasvra begin nie.</value>
+  </data>
+  <data name="ai_quiz_not_active" xml:space="preserve">
+    <value>Ek is nie nou in vasvra-modus nie.</value>
+  </data>
+  <data name="ai_quiz_run_done" xml:space="preserve">
+    <value>Dis die vasvra: **%1$d uit %2$d** reg, **%3$d XP** verdien.</value>
+  </data>
+  <data name="ai_quiz_run_none" xml:space="preserve">
+    <value>Ek kon nie vrae daaroor maak nie. Probeer 'n groep, 'n periode, 'n familie elemente of 'n enkele element.</value>
+  </data>
+  <data name="ai_quiz_run_question" xml:space="preserve">
+    <value>**Vraag %1$d van %2$d.** %3$s</value>
+  </data>
+  <data name="ai_quiz_run_right" xml:space="preserve">
+    <value>✨ Reg! **+%1$d XP**.</value>
+  </data>
+  <data name="ai_quiz_run_scope_count" xml:space="preserve">
+    <value>%1$d elemente</value>
+  </data>
+  <data name="ai_quiz_run_start_all" xml:space="preserve">
+    <value>'n Vasvra van **%1$d vrae** uit die hele tabel. Tik op 'n antwoord, of sê stop om te eindig.</value>
+  </data>
+  <data name="ai_quiz_run_start_scoped" xml:space="preserve">
+    <value>'n Vasvra van **%1$d vrae** oor %2$s. Tik op 'n antwoord, of sê stop om te eindig.</value>
+  </data>
+  <data name="ai_quiz_run_stopped" xml:space="preserve">
+    <value>Vasvra gestop: **%1$d uit %2$d** reg, **%3$d XP** verdien.</value>
+  </data>
+  <data name="ai_quiz_run_wrong" xml:space="preserve">
+    <value>Nie heeltemal nie: die antwoord was **%1$s**.</value>
+  </data>
+  <data name="ai_quiz_start" xml:space="preserve">
+    <value>Ek dink aan 'n element. Sy simbool is **%1$s**. Wat is sy naam?</value>
+  </data>
+  <data name="ai_quiz_wrong" xml:space="preserve">
+    <value>Nie heeltemal nie! Die antwoord was **%1$s**. Wil jy nog een probeer? Sê net 'quiz'!</value>
+  </data>
+  <data name="ai_radioactive_no" xml:space="preserve">
+    <value>%1$s word algemeen as stabiel beskou en nie radioaktief nie.</value>
+  </data>
+  <data name="ai_radioactive_yes" xml:space="preserve">
+    <value>%1$s is radioaktief: %2$s</value>
+  </data>
+  <data name="ai_radius_details" xml:space="preserve">
+    <value>Hier is die radiusbesonderhede vir **%1$s**:</value>
+  </data>
+  <data name="ai_radius_header" xml:space="preserve">
+    <value>Radiusbesonderhede vir %1$s:</value>
+  </data>
+  <data name="ai_rank_highest" xml:space="preserve">
+    <value>Dit is die hoogste van die %1$d elemente met 'n aangetekende %2$s.</value>
+  </data>
+  <data name="ai_rank_lowest" xml:space="preserve">
+    <value>Dit is die laagste van die %1$d elemente met 'n aangetekende %2$s.</value>
+  </data>
+  <data name="ai_rank_nth" xml:space="preserve">
+    <value>Dit plaas dit **%1$d van %2$d** elemente volgens %3$s.</value>
+  </data>
+  <data name="ai_rate_limit_reached" xml:space="preserve">
+    <value>Jy het jou daaglikse limiet van %1$d boodskappe bereik. Gradeer op na PRO of PRO+ vir meer!</value>
+  </data>
+  <data name="ai_rate_limit_resets" xml:space="preserve">
+    <value>Jou daaglikse boodskappe kom om %1$s terug.</value>
+  </data>
+  <data name="ai_reaction_acid" xml:space="preserve">
+    <value>Baie metale reageer met sure om waterstofgas vry te stel. %1$s se reaktiwiteit hang af van sy posisie in die aktiwiteitsreeks.</value>
+  </data>
+  <data name="ai_reaction_alkali_halogen" xml:space="preserve">
+    <value>Hierdie reageer heftig om 'n **sout** ('n ioniese verbinding) te vorm. Byvoorbeeld, %1$s en %2$s kan kombineer om 'n unieke verbinding te maak!</value>
+  </data>
+  <data name="ai_reaction_alkali_water" xml:space="preserve">
+    <value>Alkalimetale soos %1$s reageer **heftig** met water, wat waterstofgas en 'n sterk basis produseer. Dit kan selfs ontplof!</value>
+  </data>
+  <data name="ai_reaction_alkaline_earth_water" xml:space="preserve">
+    <value>%1$s reageer kragtig met water om waterstofgas en sy hidroksied te vorm.</value>
+  </data>
+  <data name="ai_reaction_complex" xml:space="preserve">
+    <value>Reaksies kan kompleks wees! In die algemeen hang die gedrag van %1$s af van sy groep (%2$s) en elektronegatiwiteit.</value>
+  </data>
+  <data name="ai_reaction_generic_elements" xml:space="preserve">
+    <value>Die reaksie tussen %1$s en %2$s hang af van hul elektronkonfigurasies. Hulle kan 'n verbinding vorm as een kan skenk en die ander elektrone kan aanvaar!</value>
+  </data>
+  <data name="ai_reaction_generic_water" xml:space="preserve">
+    <value>Ek het nie spesifieke data vir %1$s se reaksie met water nie, maar baie metale vorm oksiede of hidroksiede oor tyd.</value>
+  </data>
+  <data name="ai_reaction_magnesium_water" xml:space="preserve">
+    <value>%1$s reageer stadig met koue water maar vinnig met stoom.</value>
+  </data>
+  <data name="ai_reaction_noble_gas" xml:space="preserve">
+    <value>%1$s is 'n edelgas en is uiters stabiel, en reageer selde met enigiets omdat dit 'n vol buitenste skil het.</value>
+  </data>
+  <data name="ai_reaction_oxygen" xml:space="preserve">
+    <value>Die meeste elemente reageer met suurstof om oksiede te vorm. Byvoorbeeld, metale soos %1$s vorm dikwels 'n beskermende laag of roes.</value>
+  </data>
+  <data name="ai_reactivity_more" xml:space="preserve">
+    <value>**%1$s** is oor die algemeen meer reaktief as **%2$s** gebaseer op sy posisie in die periodieke tabel.</value>
+  </data>
+  <data name="ai_reactivity_need_two" xml:space="preserve">
+    <value>Ek het ten minste twee elemente nodig om hul reaktiwiteit te vergelyk!</value>
+  </data>
+  <data name="ai_reactivity_no_result" xml:space="preserve">
+    <value>Ek kon nie die mees reaktiewe element bepaal nie.</value>
+  </data>
+  <data name="ai_reactivity_result" xml:space="preserve">
+    <value>Die mees reaktiewe %1$s is **%2$s**.</value>
+  </data>
+  <data name="ai_reactivity_similar" xml:space="preserve">
+    <value>Albei **%1$s** en **%2$s** het soortgelyke reaktiwiteitsvlakke.</value>
+  </data>
+  <data name="ai_recap_is" xml:space="preserve">
+    <value>Net om te herhaal, %1$s se %2$s is %3$s.</value>
+  </data>
+  <data name="ai_related_label" xml:space="preserve">
+    <value>Verwante inligting:</value>
+  </data>
+  <data name="ai_related_offer" xml:space="preserve">
+    <value>Ek het plaaslike verwante inligting gevind. Vra 'wys verwante' om dit te sien.</value>
+  </data>
+  <data name="ai_related_offer_lang" xml:space="preserve">
+    <value>Ek het plaaslike verwante inligting gevind maar nie in die gekose taal nie. Probeer om die taal te verander of vra in elk geval.</value>
+  </data>
+  <data name="ai_rich_overview_advanced" xml:space="preserve">
+    <value>Gevorderde Atoomdata</value>
+  </data>
+  <data name="ai_rich_overview_applications" xml:space="preserve">
+    <value>Toepassings en Gebruike</value>
+  </data>
+  <data name="ai_rich_overview_basic_facts" xml:space="preserve">
+    <value>Basiese Feite</value>
+  </data>
+  <data name="ai_rich_overview_biological" xml:space="preserve">
+    <value>Biologiese Rol</value>
+  </data>
+  <data name="ai_rich_overview_compounds" xml:space="preserve">
+    <value>Algemene Verbindings</value>
+  </data>
+  <data name="ai_rich_overview_etymology" xml:space="preserve">
+    <value>Oorsprong en Geskiedenis</value>
+  </data>
+  <data name="ai_rich_overview_isotopes" xml:space="preserve">
+    <value>Bekende Isotope</value>
+  </data>
+  <data name="ai_rich_overview_properties" xml:space="preserve">
+    <value>Eienskappe</value>
+  </data>
+  <data name="ai_rich_overview_safety" xml:space="preserve">
+    <value>Veiligheid en Gevare</value>
+  </data>
+  <data name="ai_rich_overview_where_found" xml:space="preserve">
+    <value>Waar word %1$s gevind?</value>
+  </data>
+  <data name="ai_runner_up" xml:space="preserve">
+    <value>Volgende is %1$s teen %2$s.</value>
+  </data>
+  <data name="ai_safety_caution_flammable" xml:space="preserve">
+    <value>Waarskuwing: Hierdie element is uiters vlambaar!</value>
+  </data>
+  <data name="ai_safety_caution_health" xml:space="preserve">
+    <value>Waarskuwing: Hierdie element is hoogs gevaarlik vir die gesondheid!</value>
+  </data>
+  <data name="ai_safety_flammability" xml:space="preserve">
+    <value>• **Vlambaarheid:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_header" xml:space="preserve">
+    <value>Veiligheidsprofiel vir %1$s (NFPA 704):</value>
+  </data>
+  <data name="ai_safety_health" xml:space="preserve">
+    <value>• **Gesondheid:** %1$d/4 (%2$s)</value>
+  </data>
+  <data name="ai_safety_instability" xml:space="preserve">
+    <value>• **Onstabiliteit:** %1$d/4</value>
+  </data>
+  <data name="ai_safety_no_data" xml:space="preserve">
+    <value>Ek het nie spesifieke NFPA-gevaargraderings vir %1$s nie, maar volg altyd standaard laboratoriumveiligheidsprotokolle.</value>
+  </data>
+  <data name="ai_safety_none_recorded" xml:space="preserve">
+    <value>Geen NFPA-gevaargraderings is vir %1$s aangeteken nie.</value>
+  </data>
+  <data name="ai_safety_radioactive" xml:space="preserve">
+    <value>%1$s is radioaktief (%2$s), wat sy primêre veiligheidskwessie is. Hanteer met uiterste versigtigheid!</value>
+  </data>
+  <data name="ai_safety_radioactive_note" xml:space="preserve">
+    <value>Hierdie element is radioaktief.</value>
+  </data>
+  <data name="ai_safety_special" xml:space="preserve">
+    <value>• **Spesiaal:** %1$s</value>
+  </data>
+  <data name="ai_same_value" xml:space="preserve">
+    <value>Albei het dieselfde %1$s!</value>
+  </data>
+  <data name="ai_send_question" xml:space="preserve">
+    <value>Stuur hierdie vraag</value>
+  </data>
+  <data name="ai_send_question_body" xml:space="preserve">
+    <value>Jou vraag word na die ontwikkelaar gestuur sodat dit in 'n toekomstige weergawe beantwoord kan word.
+
+Gestuur: die vraag soos jy dit getik het, die app se taal en weergawe, en waarom dit nie beantwoord kon word nie.
+Nie gestuur nie: jou naam, rekening, toestel of die res van hierdie gesprek.</value>
+  </data>
+  <data name="ai_send_question_confirm" xml:space="preserve">
+    <value>Stuur</value>
+  </data>
+  <data name="ai_send_question_failed" xml:space="preserve">
+    <value>Die vraag kon nie gestuur word nie. Gaan jou verbinding na en probeer weer.</value>
+  </data>
+  <data name="ai_send_question_sent" xml:space="preserve">
+    <value>Dankie – jou vraag is gestuur.</value>
+  </data>
+  <data name="ai_send_question_title" xml:space="preserve">
+    <value>Stuur die vraag?</value>
+  </data>
+  <data name="ai_series_actinide" xml:space="preserve">
+    <value>Aktinoiede is die 15 elemente met atoomgetalle 89 tot 103. Hulle is almal radioaktief!</value>
+  </data>
+  <data name="ai_series_actinide_label" xml:space="preserve">
+    <value>Aktinied</value>
+  </data>
+  <data name="ai_series_alkali" xml:space="preserve">
+    <value>Alkalimetale is in Groep 1. Hulle is baie reaktief en het een elektron in hul buitenste skil. Voorbeelde sluit in Litium, Natrium en Kalium.</value>
+  </data>
+  <data name="ai_series_alkali_metal_label" xml:space="preserve">
+    <value>Alkalimetaal</value>
+  </data>
+  <data name="ai_series_alkaline_earth_label" xml:space="preserve">
+    <value>Alkaliese Erdmetaal</value>
+  </data>
+  <data name="ai_series_generic" xml:space="preserve">
+    <value>Ek is bekend met daardie reeks! Hulle het unieke chemiese eienskappe. Van watter spesifieke element in daardie reeks wil jy graag weet?</value>
+  </data>
+  <data name="ai_series_halogen" xml:space="preserve">
+    <value>Halogene is in Groep 17. Hulle is hoogs reaktiewe nie-metale. Fluoor en Chloor is die bekendstes!</value>
+  </data>
+  <data name="ai_series_halogen_label" xml:space="preserve">
+    <value>Halogeen</value>
+  </data>
+  <data name="ai_series_lanthanide" xml:space="preserve">
+    <value>Lantanoiede is die 15 elemente met atoomgetalle 57 tot 71. Hulle word ook 'seldsame aardelemente' genoem.</value>
+  </data>
+  <data name="ai_series_lanthanide_label" xml:space="preserve">
+    <value>Lantanied</value>
+  </data>
+  <data name="ai_series_metalloid" xml:space="preserve">
+    <value>Metalloïede het eienskappe van beide metale en nie-metale. Hulle word langs die 'trap' van die periodieke tabel gevind.</value>
+  </data>
+  <data name="ai_series_metalloid_label" xml:space="preserve">
+    <value>Metalloïed</value>
+  </data>
+  <data name="ai_series_noble_gas" xml:space="preserve">
+    <value>Edelgasse is in Groep 18. Hulle is baie stabiel en reageer selde met ander elemente omdat hul buitenste skille vol is.</value>
+  </data>
+  <data name="ai_series_noble_gas_label" xml:space="preserve">
+    <value>Edelgas</value>
+  </data>
+  <data name="ai_series_nonmetal_label" xml:space="preserve">
+    <value>Niemetaal</value>
+  </data>
+  <data name="ai_series_transition" xml:space="preserve">
+    <value>Oorgangsmetale is die elemente in groepe 3-12. Hulle is goeie geleiers en vorm dikwels kleurvolle verbindings.</value>
+  </data>
+  <data name="ai_series_transition_metal_label" xml:space="preserve">
+    <value>Oorgangsmetaal</value>
+  </data>
+  <data name="ai_share_failed" xml:space="preserve">
+    <value>Kon nie die prent skep nie</value>
+  </data>
+  <data name="ai_share_footer" xml:space="preserve">
+    <value>Beantwoord deur Atomic, die periodieke tabel-toep</value>
+  </data>
+  <data name="ai_share_image" xml:space="preserve">
+    <value>Deel as prent</value>
+  </data>
+  <data name="ai_similarity_generic" xml:space="preserve">
+    <value>**%1$s** is deel van die %2$s reeks. Ander elemente in hierdie reeks sal verwante eienskappe hê!</value>
+  </data>
+  <data name="ai_similarity_no_element" xml:space="preserve">
+    <value>Ek is nie seker vir walthere element jy ooreenkomste wil vind nie.</value>
+  </data>
+  <data name="ai_similarity_result_footer" xml:space="preserve">
+    <value>.
+
+Hulle deel soortgelyke chemiese gedrag as gevolg van hul valenselektrone!</value>
+  </data>
+  <data name="ai_similarity_result_header" xml:space="preserve">
+    <value>Soos **%1$s**, is hierdie elemente ook **%2$ss**: 
+
+</value>
+  </data>
+  <data name="ai_solution_generic_substance" xml:space="preserve">
+    <value>die oplossing</value>
+  </data>
+  <data name="ai_solution_mass_needed" xml:space="preserve">
+    <value>Jy het **%1$s g** %2$s nodig vir %3$s mL van 'n %4$s mol/L-oplossing.</value>
+  </data>
+  <data name="ai_solution_molarity" xml:space="preserve">
+    <value>Die konsentrasie van %2$s is **%1$s mol/L**.</value>
+  </data>
+  <data name="ai_solution_moles" xml:space="preserve">
+    <value>Dit is **%1$s mol** %2$s.</value>
+  </data>
+  <data name="ai_solution_volume" xml:space="preserve">
+    <value>Jy het **%1$s mL** by **%2$s mol/L** nodig.</value>
+  </data>
+  <data name="ai_solution_working_c1v1" xml:space="preserve">
+    <value>C₁V₁ = C₂V₂ → %1$s × %2$s = %3$s × %4$s</value>
+  </data>
+  <data name="ai_solution_working_header" xml:space="preserve">
+    <value>Berekening</value>
+  </data>
+  <data name="ai_solution_working_mass" xml:space="preserve">
+    <value>m = n × M → %1$s g = %2$s mol × %3$s g/mol</value>
+  </data>
+  <data name="ai_solution_working_nvc" xml:space="preserve">
+    <value>n = c × V → %1$s mol = %2$s mol/L × %3$s L</value>
+  </data>
+  <data name="ai_source_element_data" xml:space="preserve">
+    <value>%1$s — elementdata (%2$s)</value>
+  </data>
+  <data name="ai_source_table" xml:space="preserve">
+    <value>%1$s — %2$s-tabel</value>
+  </data>
+  <data name="ai_sources_header" xml:space="preserve">
+    <value>Bronne</value>
+  </data>
+  <data name="ai_stable_label" xml:space="preserve">
+    <value>Stabiel</value>
+  </data>
+  <data name="ai_steps_balance_equations" xml:space="preserve">
+    <value>Elke element het net soveel atome links as regs nodig:</value>
+  </data>
+  <data name="ai_steps_balance_solve" xml:space="preserve">
+    <value>Die kleinste heelgetalle wat aan elke reël voldoen:</value>
+  </data>
+  <data name="ai_steps_balance_unknowns" xml:space="preserve">
+    <value>Skryf 'n onbekende koëffisiënt voor elke formule:</value>
+  </data>
+  <data name="ai_steps_decay_legend" xml:space="preserve">
+    <value>t½ is die halfleeftyd, t die tyd wat verloop het, n die aantal halfleeftye, en N₀ en N die hoeveelhede voor en ná.</value>
+  </data>
+  <data name="ai_steps_empirical" xml:space="preserve">
+    <value>Elke massa in mol, dan elkeen gedeel deur die kleinste:</value>
+  </data>
+  <data name="ai_steps_formula" xml:space="preserve">
+    <value>Die molêre massa is die som van elke element se aantal atome maal sy atoommassa:</value>
+  </data>
+  <data name="ai_steps_gas" xml:space="preserve">
+    <value>Herrangskik PV = nRT vir die onbekende, met R = 0,08206 L·atm/(mol·K):</value>
+  </data>
+  <data name="ai_steps_header" xml:space="preserve">
+    <value>Stap vir stap</value>
+  </data>
+  <data name="ai_steps_ion" xml:space="preserve">
+    <value>Begin by die neutrale atoom en verwyder of voeg elektrone by:</value>
+  </data>
+  <data name="ai_steps_moles_legend" xml:space="preserve">
+    <value>m is die massa, M die molêre massa, n die hoeveelheid in mol, N die aantal deeltjies en N_A Avogadro se konstante.</value>
+  </data>
+  <data name="ai_steps_ph" xml:space="preserve">
+    <value>'n Sterk suur of basis dissosieer heeltemal, so die konsentrasie gee die ioon direk:</value>
+  </data>
+  <data name="ai_steps_solution_legend" xml:space="preserve">
+    <value>n is die hoeveelheid in mol, c die konsentrasie, V die volume, m die massa en M die molêre massa.</value>
+  </data>
+  <data name="ai_steps_stoich" xml:space="preserve">
+    <value>Elke hoeveelheid in mol, dan deur die koëffisiënte:</value>
+  </data>
+  <data name="ai_stoich_excess" xml:space="preserve">
+    <value>%1$s g %2$s bly oor.</value>
+  </data>
+  <data name="ai_stoich_limiting" xml:space="preserve">
+    <value>In %1$s is **%2$s** die beperkende reagens: dit raak eerste op.</value>
+  </data>
+  <data name="ai_stoich_makes" xml:space="preserve">
+    <value>In %1$s lewer %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_matches" xml:space="preserve">
+    <value>In %1$s hoort %2$s by **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_needs" xml:space="preserve">
+    <value>In %1$s benodig %2$s **%3$s g %4$s** (%5$s mol).</value>
+  </data>
+  <data name="ai_stoich_product" xml:space="preserve">
+    <value>Dit lewer **%1$s g %2$s** (%3$s mol).</value>
+  </data>
+  <data name="ai_structural_no_results" xml:space="preserve">
+    <value>Ek kon niks in daardie groep of periode vind nie. Onthou: daar is 18 groepe en 7 periodes!</value>
+  </data>
+  <data name="ai_structural_result" xml:space="preserve">
+    <value>Die elemente in **%1$s %2$s** is: 
+</value>
+  </data>
+  <data name="ai_structural_specify_number" xml:space="preserve">
+    <value>Spesifiseer asseblief 'n groep- of periodenommer!</value>
+  </data>
+  <data name="ai_study_locked" xml:space="preserve">
+    <value>Die studieafrigter is deel van PRO: dit onthou die vasvravrae wat jy mis en bring elkeen terug net voordat jy dit sou vergeet.</value>
+  </data>
+  <data name="ai_study_none" xml:space="preserve">
+    <value>Daar is niks om nou te hersien nie. Vasvravrae wat jy mis, kom hierheen terug wanneer dit tyd is om hulle te oefen.</value>
+  </data>
+  <data name="ai_study_start" xml:space="preserve">
+    <value>Tyd om te hersien: **%1$d vrae** om te oefen. Tik op 'n antwoord, of sê stop om te eindig.</value>
+  </data>
+  <data name="ai_suggest_element.0" xml:space="preserve">
+    <value>Gebruike van %1$s</value>
+  </data>
+  <data name="ai_suggest_element.1" xml:space="preserve">
+    <value>Atoommassa van %1$s</value>
+  </data>
+  <data name="ai_suggest_element.2" xml:space="preserve">
+    <value>Is %1$s gevaarlik?</value>
+  </data>
+  <data name="ai_suggest_element.3" xml:space="preserve">
+    <value>Waar kom %1$s voor?</value>
+  </data>
+  <data name="ai_suggest_element.4" xml:space="preserve">
+    <value>Elektronkonfigurasie van %1$s</value>
+  </data>
+  <data name="ai_suggest_element.5" xml:space="preserve">
+    <value>Isotope van %1$s</value>
+  </data>
+  <data name="ai_suggest_general.0" xml:space="preserve">
+    <value>Vertel my 'n interessante feit</value>
+  </data>
+  <data name="ai_suggest_general.1" xml:space="preserve">
+    <value>Begin 'n vasvra</value>
+  </data>
+  <data name="ai_suggest_general.2" xml:space="preserve">
+    <value>Wat is die alkalimetale?</value>
+  </data>
+  <data name="ai_suggest_general.3" xml:space="preserve">
+    <value>Swaarste element?</value>
+  </data>
+  <data name="ai_suggest_tools.0" xml:space="preserve">
+    <value>Balanseer Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="ai_suggest_tools.1" xml:space="preserve">
+    <value>Skakel 500 K om na °C</value>
+  </data>
+  <data name="ai_suggest_tools.2" xml:space="preserve">
+    <value>Hoeveel gram NaCl vir 250 mL van 0,5 mol/L?</value>
+  </data>
+  <data name="ai_suggest_tools.3" xml:space="preserve">
+    <value>Hoeveel van 100 g koolstof-14 bly ná 11460 jaar oor?</value>
+  </data>
+  <data name="ai_suggest_trends.0" xml:space="preserve">
+    <value>Wat is periodieke tendense?</value>
+  </data>
+  <data name="ai_suggest_trends.1" xml:space="preserve">
+    <value>Tendens van elektronegatiwiteit</value>
+  </data>
+  <data name="ai_suggest_trends.2" xml:space="preserve">
+    <value>Tendens van atoomradius</value>
+  </data>
+  <data name="ai_suggest_trends.3" xml:space="preserve">
+    <value>Ionisasie-energie</value>
+  </data>
+  <data name="ai_suggestion_abundance" xml:space="preserve">
+    <value>Moet ons kyk waar dit in die heelal gevind word?</value>
+  </data>
+  <data name="ai_suggestion_bio" xml:space="preserve">
+    <value>Wil jy weet van sy biologiese rol?</value>
+  </data>
+  <data name="ai_suggestion_compare" xml:space="preserve">
+    <value>Wil jy dit met 'n ander element vergelyk?</value>
+  </data>
+  <data name="ai_suggestion_iso" xml:space="preserve">
+    <value>Ek kan jou ook vertel van sy isotope.</value>
+  </data>
+  <data name="ai_suggestion_safety" xml:space="preserve">
+    <value>Ek het ook veiligheidsdata daarvoor, as jy belangstel.</value>
+  </data>
+  <data name="ai_superlative_among" xml:space="preserve">
+    <value>Onder die %1$ss, %2$s</value>
+  </data>
+  <data name="ai_superlative_generic" xml:space="preserve">
+    <value>Dit is 'n goeie vraag! Ek kan die mees digte, swaarste of mees elektronegatiewe elemente vind. Watter een wil jy weet?</value>
+  </data>
+  <data name="ai_superlative_highest" xml:space="preserve">
+    <value>hoogste</value>
+  </data>
+  <data name="ai_superlative_lowest" xml:space="preserve">
+    <value>laagste</value>
+  </data>
+  <data name="ai_superlative_no_calculate" xml:space="preserve">
+    <value>Ek kon dit nie nou bereken nie.</value>
+  </data>
+  <data name="ai_superlative_nth" xml:space="preserve">
+    <value>Die **%1$d**%2$s %3$s %4$s is **%5$s**, teen %6$s.</value>
+  </data>
+  <data name="ai_superlative_result" xml:space="preserve">
+    <value>Die element met die %1$s %2$s is **%3$s**, met 'n waarde van %4$s.</value>
+  </data>
+  <data name="ai_synthetic_only" xml:space="preserve">
+    <value>Sinteties (kom nie natuurlik voor nie)</value>
+  </data>
+  <data name="ai_technical_config" xml:space="preserve">
+    <value> Dit het 'n elektronkonfigurasie van %1$s.</value>
+  </data>
+  <data name="ai_technical_mass" xml:space="preserve">
+    <value> Sy presiese atoommassa is %1$s.</value>
+  </data>
+  <data name="ai_thermal_header" xml:space="preserve">
+    <value>Termiese eienskappe van %1$s:</value>
+  </data>
+  <data name="ai_thermal_properties" xml:space="preserve">
+    <value>Termiese eienskappe van **%1$s**:</value>
+  </data>
+  <data name="ai_trend_electronegativity" xml:space="preserve">
+    <value>Elektronegatiwiteit neem gewoonlik toe van links na regs oor 'n periode en neem af afwaarts in 'n groep. Fluoor is die kampioen hier!</value>
+  </data>
+  <data name="ai_trend_extremes" xml:space="preserve">
+    <value>Hoogste: %1$s (%2$s). Laagste: %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_falls" xml:space="preserve">
+    <value>Dit daal oor die algemeen, van %1$s (%2$s) tot %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_general" xml:space="preserve">
+    <value>Periodieke tendense is patrone in die eienskappe van elemente! Oor watter tendens is jy nuuskierig: Atoomradius, Elektronegatiwiteit, of Ionisasie-energie?</value>
+  </data>
+  <data name="ai_trend_header" xml:space="preserve">
+    <value>**%1$s** oor %2$d elemente, volgens atoomnommer:</value>
+  </data>
+  <data name="ai_trend_ionization" xml:space="preserve">
+    <value>Ionisasie-energie neem toe oor 'n periode en neem af afwaarts in 'n groep. Dit word moeiliker om 'n elektron weg te trek namate jy na regs beweeg!</value>
+  </data>
+  <data name="ai_trend_metallic" xml:space="preserve">
+    <value>Metaalkarakter neem af oor 'n periode en neem toe afwaarts in 'n groep. Die mees metaalagtige elemente is links onder (soos Fransium).</value>
+  </data>
+  <data name="ai_trend_mixed" xml:space="preserve">
+    <value>Dit het geen vaste rigting nie: %1$s (%2$s) aan die een kant, %3$s (%4$s) aan die ander.</value>
+  </data>
+  <data name="ai_trend_radius" xml:space="preserve">
+    <value>Atoomradius neem af oor 'n periode (links na regs) omdat die kern elektrone stywer trek, en neem toe afwaarts in 'n groep namate meer skille bygevoeg word.</value>
+  </data>
+  <data name="ai_trend_rises" xml:space="preserve">
+    <value>Dit styg oor die algemeen, van %1$s (%2$s) tot %3$s (%4$s).</value>
+  </data>
+  <data name="ai_trend_table_header" xml:space="preserve">
+    <value>**%1$s** oor die hele periodieke tabel: %2$d elemente het ’n waarde.</value>
+  </data>
+  <data name="ai_unit_atoms_per_si" xml:space="preserve">
+    <value>atome per 10⁶ silikonatome</value>
+  </data>
+  <data name="ai_unit_bridge_note" xml:space="preserve">
+    <value>Omgeskakel met 1 eV = 96,485 kJ/mol — dieselfde energie, per deeltjie eerder as per mol getel.</value>
+  </data>
+  <data name="ai_unit_converted" xml:space="preserve">
+    <value>**%1$s %2$s** is **%3$s %4$s**.</value>
+  </data>
+  <data name="ai_unit_mg_per_kg" xml:space="preserve">
+    <value>mg/kg (ppm)</value>
+  </data>
+  <data name="ai_unit_ug_per_l" xml:space="preserve">
+    <value>µg/l</value>
+  </data>
+  <data name="ai_usage_header" xml:space="preserve">
+    <value>Hier is 'n paar algemene toepassings en feite oor **%1$s**:</value>
+  </data>
+  <data name="ai_valence_alkali" xml:space="preserve">
+    <value>As 'n alkalimetaal het dit **1 valenselektron** in sy buitenste skil.</value>
+  </data>
+  <data name="ai_valence_alkaline" xml:space="preserve">
+    <value>As 'n aardalkalimetaal het dit **2 valenselektrone**.</value>
+  </data>
+  <data name="ai_valence_halogen" xml:space="preserve">
+    <value>As 'n halogeen het dit **7 valenselektrone** en is baie gretig om nog een by te kry!</value>
+  </data>
+  <data name="ai_valence_noble_helium" xml:space="preserve">
+    <value>Helium het **2 valenselektrone**, wat sy enigste skil voltooi.</value>
+  </data>
+  <data name="ai_valence_noble_other" xml:space="preserve">
+    <value>Dit het 'n vol buitenste skil met **8 valenselektrone**, wat dit baie stabiel maak.</value>
+  </data>
+  <data name="ai_value_is_range" xml:space="preserve">
+    <value>Dit is 'n reeks; die rangorde gebruik die middelpunt.</value>
+  </data>
+  <data name="ai_value_trace" xml:space="preserve">
+    <value>spoorhoeveelheid</value>
+  </data>
+  <data name="ai_versus" xml:space="preserve">
+    <value>teenoor</value>
+  </data>
+  <data name="all_ai_features" xml:space="preserve">
+    <value>Alle KI-funksies:</value>
+  </data>
+  <data name="all_core_features" xml:space="preserve">
+    <value>Alle Kernfunksies</value>
+  </data>
+  <data name="alloy_base_aluminium" xml:space="preserve">
+    <value>Aluminium</value>
+  </data>
+  <data name="alloy_base_copper" xml:space="preserve">
+    <value>Koper</value>
+  </data>
+  <data name="alloy_base_gold" xml:space="preserve">
+    <value>Goud</value>
+  </data>
+  <data name="alloy_base_iron" xml:space="preserve">
+    <value>Yster</value>
+  </data>
+  <data name="alloy_base_mercury" xml:space="preserve">
+    <value>Kwik</value>
+  </data>
+  <data name="alloy_base_nickel" xml:space="preserve">
+    <value>Nikkel</value>
+  </data>
+  <data name="alloy_base_silver" xml:space="preserve">
+    <value>Silwer</value>
+  </data>
+  <data name="alloy_base_tin" xml:space="preserve">
+    <value>Tin</value>
+  </data>
+  <data name="alloy_base_titanium" xml:space="preserve">
+    <value>Titanium</value>
+  </data>
+  <data name="alloy_clear_filter" xml:space="preserve">
+    <value>Wis filter</value>
+  </data>
+  <data name="alo" xml:space="preserve">
+    <value>Legeringtabel</value>
+  </data>
+  <data name="alphabetical" xml:space="preserve">
+    <value>Alfabeties</value>
+  </data>
+  <data name="analytics_desc" xml:space="preserve">
+    <value>Help om die toepassing te verbeter deur anonieme gebruiksdata te deel</value>
+  </data>
+  <data name="analytics_title" xml:space="preserve">
+    <value>Gebruiksanalise</value>
+  </data>
+  <data name="and_more_item" xml:space="preserve">
+    <value>- en meer</value>
+  </data>
+  <data name="answer_no" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="answer_timeout" xml:space="preserve">
+    <value>Tyd is op</value>
+  </data>
+  <data name="answer_yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>Atomic</value>
+  </data>
+  <data name="appearance" xml:space="preserve">
+    <value>Voorkoms</value>
+  </data>
+  <data name="appearance_colon" xml:space="preserve">
+    <value>Voorkoms:</value>
+  </data>
+  <data name="appwidget_text" xml:space="preserve">
+    <value>VOORBEELD</value>
+  </data>
+  <data name="ask_atomic" xml:space="preserve">
+    <value>Vra Atomic</value>
+  </data>
+  <data name="atomic_mass" xml:space="preserve">
+    <value>Atoommassa</value>
+  </data>
+  <data name="atomic_mass_colon" xml:space="preserve">
+    <value>Atoommassa:</value>
+  </data>
+  <data name="atomic_number" xml:space="preserve">
+    <value>Atoomnommer</value>
+  </data>
+  <data name="atomic_number_label" xml:space="preserve">
+    <value>Atoomgetal:</value>
+  </data>
+  <data name="atomic_properties" xml:space="preserve">
+    <value>Atomiese Eienskappe</value>
+  </data>
+  <data name="atomic_radius_calculated_colon" xml:space="preserve">
+    <value>Atoomradius (Bereken):</value>
+  </data>
+  <data name="atomic_radius_empirical_colon" xml:space="preserve">
+    <value>Atoomradius (Empiries):</value>
+  </data>
+  <data name="atomic_weight" xml:space="preserve">
+    <value>Atoommassa</value>
+  </data>
+  <data name="atomic_weight_relative_atomic_mass" xml:space="preserve">
+    <value>Atoomgewig (Relatiewe Atoommassa):</value>
+  </data>
+  <data name="auto_hide_bottombar" xml:space="preserve">
+    <value>Outo-versteek onderste balk</value>
+  </data>
+  <data name="auto_hide_bottombar_desc" xml:space="preserve">
+    <value>Deaktiveer die standaard gedrag</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="bal" xml:space="preserve">
+    <value>Balanseerder</value>
+  </data>
+  <data name="balance_equation" xml:space="preserve">
+    <value>Balanseer Vergelyking:</value>
+  </data>
+  <data name="balance_equation_colon" xml:space="preserve">
+    <value>Balanseer Vergelyking:</value>
+  </data>
+  <data name="balancer_text" xml:space="preserve">
+    <value>Balans verskillende chemiese reaksies en stoor gunstelinge vir later gebruik</value>
+  </data>
+  <data name="balancer_title" xml:space="preserve">
+    <value>Chemiese Reaksies</value>
+  </data>
+  <data name="balancer_tool_card_title" xml:space="preserve">
+    <value>Balanseer 'n vergelyking</value>
+  </data>
+  <data name="balancer_tool_copied" xml:space="preserve">
+    <value>Vergelyking gekopieer</value>
+  </data>
+  <data name="balancer_tool_examples" xml:space="preserve">
+    <value>Voorbeelde</value>
+  </data>
+  <data name="balancer_tool_hint" xml:space="preserve">
+    <value>Fe + O2 -&gt; Fe2O3</value>
+  </data>
+  <data name="balancer_tool_note" xml:space="preserve">
+    <value>Pyle kan as -&gt;, =&gt;, = of → geskryf word. Toestandsimbole soos (s), (l), (g) en (aq) word geïgnoreer.</value>
+  </data>
+  <data name="balancer_tool_prompt" xml:space="preserve">
+    <value>Tik 'n vergelyking met 'n pyl, byvoorbeeld Fe + O2 -&gt; Fe2O3.</value>
+  </data>
+  <data name="balancer_tool_result" xml:space="preserve">
+    <value>Gebalanseerde vergelyking</value>
+  </data>
+  <data name="balancer_tool_text" xml:space="preserve">
+    <value>Balanseer chemiese vergelykings met presiese heelgetalkoëffisiënte</value>
+  </data>
+  <data name="balancer_tool_title" xml:space="preserve">
+    <value>Vergelykingbalanseerder</value>
+  </data>
+  <data name="base_label" xml:space="preserve">
+    <value>"Basismetaal: "</value>
+  </data>
+  <data name="block" xml:space="preserve">
+    <value>Blok</value>
+  </data>
+  <data name="block_colon" xml:space="preserve">
+    <value>Blok:</value>
+  </data>
+  <data name="blog" xml:space="preserve">
+    <value>Blogger</value>
+  </data>
+  <data name="boiling_point" xml:space="preserve">
+    <value>Kookpunt</value>
+  </data>
+  <data name="boiling_point_celsius" xml:space="preserve">
+    <value>Kookpunt (°C):</value>
+  </data>
+  <data name="boiling_point_colon" xml:space="preserve">
+    <value>Kookpunt:</value>
+  </data>
+  <data name="boiling_point_fahrenheit" xml:space="preserve">
+    <value>Kookpunt (°F):</value>
+  </data>
+  <data name="boiling_point_kelvin" xml:space="preserve">
+    <value>Kookpunt (Kelvin):</value>
+  </data>
+  <data name="bonus_xp" xml:space="preserve">
+    <value>+0% bonus aktief</value>
+  </data>
+  <data name="brinell_hardness" xml:space="preserve">
+    <value>Brinell-hardheid</value>
+  </data>
+  <data name="brinell_hardness_colon" xml:space="preserve">
+    <value>Brinell-hardheid:</value>
+  </data>
+  <data name="bug" xml:space="preserve">
+    <value>Fout</value>
+  </data>
+  <data name="bulk_modulus" xml:space="preserve">
+    <value>Volume Modulus</value>
+  </data>
+  <data name="cal" xml:space="preserve">
+    <value>Sakrekenaar</value>
+  </data>
+  <data name="calc_elements_shown" xml:space="preserve">
+    <value>Elemente ingesluit sal hier vertoon word</value>
+  </data>
+  <data name="calc_favorites" xml:space="preserve">
+    <value>Gunstelinge:</value>
+  </data>
+  <data name="calc_molar_mass" xml:space="preserve">
+    <value>Molêre Massa:</value>
+  </data>
+  <data name="calc_no_favorites" xml:space="preserve">
+    <value>Tans geen gunstelinge nie</value>
+  </data>
+  <data name="calc_no_pro_text" xml:space="preserve">
+    <value>Om toegang te kry en gunstelinge te stoor, benodig jy die PRO-weergawe</value>
+  </data>
+  <data name="calculations" xml:space="preserve">
+    <value>Berekeninge</value>
+  </data>
+  <data name="calculations_stat" xml:space="preserve">
+    <value>Berekeninge</value>
+  </data>
+  <data name="calculator_card_title" xml:space="preserve">
+    <value>Sakrekenaar:</value>
+  </data>
+  <data name="calculator_default_value" xml:space="preserve">
+    <value>0,0 (g/mol)</value>
+  </data>
+  <data name="calculator_formula" xml:space="preserve">
+    <value>Formule:</value>
+  </data>
+  <data name="calculator_text" xml:space="preserve">
+    <value>Bevat 'n sakrekenaar om molêre massa vir verskillende verbindings te bereken en gunstelinge te stoor</value>
+  </data>
+  <data name="calculator_title" xml:space="preserve">
+    <value>Sakrekenaar</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Kanselleer</value>
+  </data>
+  <data name="card_order" xml:space="preserve">
+    <value>Kaart Volgorde</value>
+  </data>
+  <data name="cas_number" xml:space="preserve">
+    <value>CAS-nommer:</value>
+  </data>
+  <data name="cas_number_colon" xml:space="preserve">
+    <value>CAS-nommer:</value>
+  </data>
+  <data name="chip_chemistry" xml:space="preserve">
+    <value>Chemie</value>
+  </data>
+  <data name="chip_math" xml:space="preserve">
+    <value>Wiskunde</value>
+  </data>
+  <data name="chip_minerals" xml:space="preserve">
+    <value>Minerale</value>
+  </data>
+  <data name="chip_physics" xml:space="preserve">
+    <value>Fisika</value>
+  </data>
+  <data name="chip_reactions" xml:space="preserve">
+    <value>Reaksies</value>
+  </data>
+  <data name="chip_rocks" xml:space="preserve">
+    <value>Gesteentes</value>
+  </data>
+  <data name="chip_soils" xml:space="preserve">
+    <value>Gronde</value>
+  </data>
+  <data name="chip_water" xml:space="preserve">
+    <value>Water</value>
+  </data>
+  <data name="clear_cache_title" xml:space="preserve">
+    <value>Vee kas uit</value>
+  </data>
+  <data name="clear_filter" xml:space="preserve">
+    <value>Verwyder Filter</value>
+  </data>
+  <data name="color_label" xml:space="preserve">
+    <value>Kleur: </value>
+  </data>
+  <data name="compare_elements" xml:space="preserve">
+    <value>Vergelyk Elemente</value>
+  </data>
+  <data name="comparison_title_format" xml:space="preserve">
+    <value>%1$s | %2$s</value>
+  </data>
+  <data name="composition_label" xml:space="preserve">
+    <value>"Samestelling: "</value>
+  </data>
+  <data name="con" xml:space="preserve">
+    <value>Konstantes Tabel</value>
+  </data>
+  <data name="confirm_sign_out" xml:space="preserve">
+    <value>Is jy seker jy wil uitteken?</value>
+  </data>
+  <data name="constants_search" xml:space="preserve">
+    <value>Soek na konstante</value>
+  </data>
+  <data name="constants_table_label" xml:space="preserve">
+    <value>Konstantes Tabel:</value>
+  </data>
+  <data name="constants_tite" xml:space="preserve">
+    <value>Konstantes Tabel</value>
+  </data>
+  <data name="correct" xml:space="preserve">
+    <value>Korrek</value>
+  </data>
+  <data name="correct_answer" xml:space="preserve">
+    <value>Korrekte antwoord: %s</value>
+  </data>
+  <data name="covalent_radius_colon" xml:space="preserve">
+    <value>Kovalente Radius:</value>
+  </data>
+  <data name="credits_electro_boy_info" xml:space="preserve">
+    <value>Vertalings vir Afrikaans</value>
+  </data>
+  <data name="credits_giancarlo_info" xml:space="preserve">
+    <value>Vertalings vir Spaans en Italiaans</value>
+  </data>
+  <data name="credits_text" xml:space="preserve">
+    <value>Toeskrywings aan bydraers</value>
+  </data>
+  <data name="credits_title" xml:space="preserve">
+    <value>Toeskrywings</value>
+  </data>
+  <data name="cristal_structure_label" xml:space="preserve">
+    <value>Kristalstruktuur: </value>
+  </data>
+  <data name="crystal_structure" xml:space="preserve">
+    <value>Kristalstruktuur:</value>
+  </data>
+  <data name="curie_point_colon" xml:space="preserve">
+    <value>Curiepunt:</value>
+  </data>
+  <data name="current_version" xml:space="preserve">
+    <value>Huidige Weergawe</value>
+  </data>
+  <data name="currently_no_favorites" xml:space="preserve">
+    <value>Tans geen gunstelinge</value>
+  </data>
+  <data name="customize_detail_card_order" xml:space="preserve">
+    <value>Pas die volgorde van detailkaarte aan</value>
+  </data>
+  <data name="customize_units_table" xml:space="preserve">
+    <value>Pas die eenhede in die hoof tabel aan</value>
+  </data>
+  <data name="dark" xml:space="preserve">
+    <value>Donker</value>
+  </data>
+  <data name="data_issue" xml:space="preserve">
+    <value>Data-probleem</value>
+  </data>
+  <data name="data_visualisations" xml:space="preserve">
+    <value>Datavisualiserings:</value>
+  </data>
+  <data name="debye_temperature_low_temperature_limit" xml:space="preserve">
+    <value>Debye-temperatuur: (lae temperatuur limiet)</value>
+  </data>
+  <data name="debye_temperature_room_temperature" xml:space="preserve">
+    <value>Debye-temperatuur: (kamertemperatuur)</value>
+  </data>
+  <data name="decay_alpha" xml:space="preserve">
+    <value>Alfaverval (α)</value>
+  </data>
+  <data name="decay_beta_minus" xml:space="preserve">
+    <value>Beta-minus-verval (β−)</value>
+  </data>
+  <data name="decay_beta_plus" xml:space="preserve">
+    <value>Beta-plus-verval (β+)</value>
+  </data>
+  <data name="decay_electron_capture" xml:space="preserve">
+    <value>Elektronvangs</value>
+  </data>
+  <data name="decay_info_fab" xml:space="preserve">
+    <value>Inligting oor verskillende verval-tipes</value>
+  </data>
+  <data name="decay_neutron_emission" xml:space="preserve">
+    <value>Neutronvrystelling</value>
+  </data>
+  <data name="decay_proton_emission" xml:space="preserve">
+    <value>Protonvrystelling</value>
+  </data>
+  <data name="decay_spontaneous_fission" xml:space="preserve">
+    <value>Spontane splyting</value>
+  </data>
+  <data name="density" xml:space="preserve">
+    <value>Digtheid</value>
+  </data>
+  <data name="density_colon" xml:space="preserve">
+    <value>Digtheid:</value>
+  </data>
+  <data name="density_label" xml:space="preserve">
+    <value>Digtheid: </value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Beskrywing</value>
+  </data>
+  <data name="description_colon" xml:space="preserve">
+    <value>Beskrywing:</value>
+  </data>
+  <data name="detail_card_order" xml:space="preserve">
+    <value>Detailkaart-volgorde</value>
+  </data>
+  <data name="dic" xml:space="preserve">
+    <value>Woordeboek</value>
+  </data>
+  <data name="dictionary" xml:space="preserve">
+    <value>Woordeboek</value>
+  </data>
+  <data name="dictionary_search" xml:space="preserve">
+    <value>Soek na Woordeboekitem</value>
+  </data>
+  <data name="dictionary_text" xml:space="preserve">
+    <value>'n Omvattende woordeboek van chemiese en fisiese terme</value>
+  </data>
+  <data name="discovered_by" xml:space="preserve">
+    <value>Ontdek deur</value>
+  </data>
+  <data name="discovered_by_colon" xml:space="preserve">
+    <value>Ontdek Deur:</value>
+  </data>
+  <data name="discovery_year" xml:space="preserve">
+    <value>Ontdekkingsjaar</value>
+  </data>
+  <data name="display_mode" xml:space="preserve">
+    <value>Wysigingsmodus</value>
+  </data>
+  <data name="early_access_features" xml:space="preserve">
+    <value>Vroeë toegang tot nuwe funksies:</value>
+  </data>
+  <data name="easy" xml:space="preserve">
+    <value>Maklik</value>
+  </data>
+  <data name="eg_number" xml:space="preserve">
+    <value>EG-nommer:</value>
+  </data>
+  <data name="eg_number_colon" xml:space="preserve">
+    <value>EG-nommer:</value>
+  </data>
+  <data name="ele" xml:space="preserve">
+    <value>Elektrochemiese Reeks</value>
+  </data>
+  <data name="electrical_resistivity" xml:space="preserve">
+    <value>Elektriese Weerstand</value>
+  </data>
+  <data name="electrical_resistivity_colon" xml:space="preserve">
+    <value>Elektriese Weerstand:</value>
+  </data>
+  <data name="electrical_type" xml:space="preserve">
+    <value>Elektriese Tipe</value>
+  </data>
+  <data name="electrical_type_colon" xml:space="preserve">
+    <value>Elektriese Tipe:</value>
+  </data>
+  <data name="electrochemical_series" xml:space="preserve">
+    <value>Elektrochemiese Reeks</value>
+  </data>
+  <data name="electrochemical_series_search" xml:space="preserve">
+    <value>Soek na Element</value>
+  </data>
+  <data name="electromagnetic_properties" xml:space="preserve">
+    <value>Elektromagnetiese Eienskappe</value>
+  </data>
+  <data name="electron_affinity_colon" xml:space="preserve">
+    <value>Elektronaffiniteit:</value>
+  </data>
+  <data name="electron_configuration_colon" xml:space="preserve">
+    <value>Elektronkonfigurasie:</value>
+  </data>
+  <data name="electron_shell_colon" xml:space="preserve">
+    <value>Elektronskil:</value>
+  </data>
+  <data name="electronegativity" xml:space="preserve">
+    <value>Elektronegatiwiteit</value>
+  </data>
+  <data name="electronegativity_allen_colon" xml:space="preserve">
+    <value>Elektronegatiwiteit (Allen):</value>
+  </data>
+  <data name="electronegativity_colon" xml:space="preserve">
+    <value>Elektronegatiwiteit:</value>
+  </data>
+  <data name="element_bulk_modulus" xml:space="preserve">
+    <value>Volume modulus:</value>
+  </data>
+  <data name="element_description_title" xml:space="preserve">
+    <value>Beskrywing</value>
+  </data>
+  <data name="element_elastic_modulus" xml:space="preserve">
+    <value>Elastisiteitsmodulus:</value>
+  </data>
+  <data name="element_electrons" xml:space="preserve">
+    <value>Elektrone:</value>
+  </data>
+  <data name="element_groups" xml:space="preserve">
+    <value>Element Groepe</value>
+  </data>
+  <data name="element_info_title" xml:space="preserve">
+    <value>Element Inligting</value>
+  </data>
+  <data name="element_more_title" xml:space="preserve">
+    <value>Bykomende Eienskappe</value>
+  </data>
+  <data name="element_name_default" xml:space="preserve">
+    <value>Elementnaam (Standaard)</value>
+  </data>
+  <data name="element_names" xml:space="preserve">
+    <value>Element Name</value>
+  </data>
+  <data name="element_number" xml:space="preserve">
+    <value>Elementnommer</value>
+  </data>
+  <data name="element_of_the_day" xml:space="preserve">
+    <value>Element van die Dag</value>
+  </data>
+  <data name="element_of_the_day_description" xml:space="preserve">
+    <value>Vertoon elke dag 'n ander element met sy simbool, naam en beskrywing</value>
+  </data>
+  <data name="element_overview" xml:space="preserve">
+    <value>Element oorsig:</value>
+  </data>
+  <data name="element_poisson_ratio" xml:space="preserve">
+    <value>Poisson-verhouding:</value>
+  </data>
+  <data name="element_shear_modulus" xml:space="preserve">
+    <value>Skuifmodulus:</value>
+  </data>
+  <data name="element_speed_sound" xml:space="preserve">
+    <value>Spoed van klank:</value>
+  </data>
+  <data name="element_symbols" xml:space="preserve">
+    <value>Element Simbole</value>
+  </data>
+  <data name="element_young_modulus" xml:space="preserve">
+    <value>Young se modulus:</value>
+  </data>
+  <data name="elements_included_will_be_shown_here" xml:space="preserve">
+    <value>Ingeslote elemente sal hier gewys word</value>
+  </data>
+  <data name="elements_opened" xml:space="preserve">
+    <value>Elemente Geopen</value>
+  </data>
+  <data name="emi" xml:space="preserve">
+    <value>Emissiespektrum Tabel</value>
+  </data>
+  <data name="emission_spectrum_colon" xml:space="preserve">
+    <value>Emissie-spektrum:</value>
+  </data>
+  <data name="emission_spectrum_table" xml:space="preserve">
+    <value>Emissiespektrum tabel:</value>
+  </data>
+  <data name="emission_text" xml:space="preserve">
+    <value>Emissiespektrum vir elemente, wat die frekwensies is van elektromagnetiese straling uitgestraal as gevolg van elektrone wat van 'n hoër na 'n laer energievlak oorgaan.</value>
+  </data>
+  <data name="emission_title" xml:space="preserve">
+    <value>Emissiespektrum Tabel</value>
+  </data>
+  <data name="enable_sync" xml:space="preserve">
+    <value>Aktiveer Sinkronisasie</value>
+  </data>
+  <data name="enable_sync_desc" xml:space="preserve">
+    <value>Sinkronisasie van vordering vir vlak, xp, prestasies, ens. is beskikbaar vir PRO en PRO+ gebruikers</value>
+  </data>
+  <data name="enable_sync_pro_button" xml:space="preserve">
+    <value>Opgradeer</value>
+  </data>
+  <data name="enable_zoom_in_tables" xml:space="preserve">
+    <value>Aktiveer zoom in tabelle</value>
+  </data>
+  <data name="english_name_colon" xml:space="preserve">
+    <value>Engelse Naam:</value>
+  </data>
+  <data name="enter_new_text" xml:space="preserve">
+    <value>Voer nuwe teks in</value>
+  </data>
+  <data name="eqe" xml:space="preserve">
+    <value>Formules</value>
+  </data>
+  <data name="equations_search_other" xml:space="preserve">
+    <value>Probeer 'n ander soekterm of kyk jou spelling</value>
+  </data>
+  <data name="exam_best_score" xml:space="preserve">
+    <value>Beste telling: %1$d%%</value>
+  </data>
+  <data name="exam_finished_xp" xml:space="preserve">
+    <value>Eksamen voltooi: +%1$d XP</value>
+  </data>
+  <data name="exam_locked" xml:space="preserve">
+    <value>Bereik vlak %1$d om te ontsluit</value>
+  </data>
+  <data name="exam_not_taken" xml:space="preserve">
+    <value>Nog nie probeer nie</value>
+  </data>
+  <data name="exam_passed" xml:space="preserve">
+    <value>Geslaag · beste telling %1$d%%</value>
+  </data>
+  <data name="exam_pro_locked" xml:space="preserve">
+    <value>Hierdie eksamen vereis PRO+</value>
+  </data>
+  <data name="exam_results" xml:space="preserve">
+    <value>Eksamenuitslae</value>
+  </data>
+  <data name="exam_start" xml:space="preserve">
+    <value>Begin eksamen</value>
+  </data>
+  <data name="exam_test_subtitle" xml:space="preserve">
+    <value>Alles van vlak %1$d tot %2$d, gemeng</value>
+  </data>
+  <data name="exam_test_title" xml:space="preserve">
+    <value>Eksamen</value>
+  </data>
+  <data name="exit_compare_mode" xml:space="preserve">
+    <value>Verlaat Vergelyking</value>
+  </data>
+  <data name="experimental" xml:space="preserve">
+    <value>Eksperimenteel</value>
+  </data>
+  <data name="experimental_text" xml:space="preserve">
+    <value>Bykomende eksperimentele instellings</value>
+  </data>
+  <data name="experimental_title" xml:space="preserve">
+    <value>Eksperimentele Instellings</value>
+  </data>
+  <data name="favorite_bar" xml:space="preserve">
+    <value>Gunstelingbalk</value>
+  </data>
+  <data name="favorite_settings_atomic_properties" xml:space="preserve">
+    <value>Atoomeienskappe</value>
+  </data>
+  <data name="favorite_settings_electromagnetic" xml:space="preserve">
+    <value>Elektromagnetiese Eienskappe</value>
+  </data>
+  <data name="favorite_settings_general" xml:space="preserve">
+    <value>Algemeen</value>
+  </data>
+  <data name="favorite_settings_nuclear" xml:space="preserve">
+    <value>Kern</value>
+  </data>
+  <data name="favorite_settings_temperatures" xml:space="preserve">
+    <value>Temperatuur</value>
+  </data>
+  <data name="favorite_settings_thermodynamics" xml:space="preserve">
+    <value>Termodinamies</value>
+  </data>
+  <data name="favorite_settings_title" xml:space="preserve">
+    <value>Gunstelingbalk</value>
+  </data>
+  <data name="favorites_colon" xml:space="preserve">
+    <value>Gunstelinge:</value>
+  </data>
+  <data name="feature_check" xml:space="preserve">
+    <value>Funksie ingesluit</value>
+  </data>
+  <data name="features" xml:space="preserve">
+    <value>Kenmerke:</value>
+  </data>
+  <data name="fifty_lives_in_flashcards" xml:space="preserve">
+    <value>50 lewens in flitskaarte:</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="finished_game_xp" xml:space="preserve">
+    <value>Voltooide Speletjie: +%dxp</value>
+  </data>
+  <data name="fire_hazard" xml:space="preserve">
+    <value>Brandgevaar:</value>
+  </data>
+  <data name="fla" xml:space="preserve">
+    <value>Flitskaarte</value>
+  </data>
+  <data name="flashcards_atomic_mass" xml:space="preserve">
+    <value>Atoommassa</value>
+  </data>
+  <data name="flashcards_chemical_reactions" xml:space="preserve">
+    <value>Chemiese Reaksies</value>
+  </data>
+  <data name="flashcards_difficulty" xml:space="preserve">
+    <value>Kies Moeilikheidsgraad:</value>
+  </data>
+  <data name="flashcards_difficulty_title" xml:space="preserve">
+    <value>Moeilikheidsgraad</value>
+  </data>
+  <data name="flashcards_element_classifications" xml:space="preserve">
+    <value>Element Klassifikasies</value>
+  </data>
+  <data name="flashcards_element_symbols" xml:space="preserve">
+    <value>Element Simbole</value>
+  </data>
+  <data name="flashcards_free_games" xml:space="preserve">
+    <value>Gratis Speletjies:</value>
+  </data>
+  <data name="flashcards_game_element_appearance" xml:space="preserve">
+    <value>Voorkoms</value>
+  </data>
+  <data name="flashcards_game_element_atomic_mass" xml:space="preserve">
+    <value>Atoommassa</value>
+  </data>
+  <data name="flashcards_game_element_density" xml:space="preserve">
+    <value>Digtheid</value>
+  </data>
+  <data name="flashcards_game_element_groups" xml:space="preserve">
+    <value>Element Groepe</value>
+  </data>
+  <data name="flashcards_game_element_names" xml:space="preserve">
+    <value>Element Name</value>
+  </data>
+  <data name="flashcards_game_element_symbols" xml:space="preserve">
+    <value>Element Simbole</value>
+  </data>
+  <data name="flashcards_info" xml:space="preserve">
+    <value>Leer die Periodieke Tabel met ingeboude "leer-speletjies"</value>
+  </data>
+  <data name="flashcards_level" xml:space="preserve">
+    <value>Vlak</value>
+  </data>
+  <data name="flashcards_lives_info" xml:space="preserve">
+    <value>Elke verkeerde antwoord lei tot die verlies van 'n lewe</value>
+  </data>
+  <data name="flashcards_mixed_questions" xml:space="preserve">
+    <value>Gemengde Vrae</value>
+  </data>
+  <data name="flashcards_pro_level_0_5" xml:space="preserve">
+    <value>Vlak 0-4:</value>
+  </data>
+  <data name="flashcards_pro_level_10_15" xml:space="preserve">
+    <value>Vlak 10-14:</value>
+  </data>
+  <data name="flashcards_pro_level_5_10" xml:space="preserve">
+    <value>Vlak 5-9:</value>
+  </data>
+  <data name="flashcards_pro_plus_games" xml:space="preserve">
+    <value>PRO+ Speletjies:</value>
+  </data>
+  <data name="flashcards_statistics" xml:space="preserve">
+    <value>Statistiek</value>
+  </data>
+  <data name="flashcards_title" xml:space="preserve">
+    <value>Flitskaarte</value>
+  </data>
+  <data name="flashcards_total_games" xml:space="preserve">
+    <value>Speletjies</value>
+  </data>
+  <data name="flashcards_total_xp" xml:space="preserve">
+    <value>Totale XP</value>
+  </data>
+  <data name="flashcards_unlimited_lives" xml:space="preserve">
+    <value>Onbeperkte lewens in flitskaarte:</value>
+  </data>
+  <data name="formula_will_be_displayed_here" xml:space="preserve">
+    <value>Formule sal hier vertoon word</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>GRATIS</value>
+  </data>
+  <data name="fusion_heat" xml:space="preserve">
+    <value>Fusiemassa</value>
+  </data>
+  <data name="fusion_heat_colon" xml:space="preserve">
+    <value>Fusiehitte:</value>
+  </data>
+  <data name="game_compare_pair" xml:space="preserve">
+    <value>Kop teen kop</value>
+  </data>
+  <data name="game_extremes_advanced" xml:space="preserve">
+    <value>Gevorderde uiterstes</value>
+  </data>
+  <data name="game_group" xml:space="preserve">
+    <value>Groepe</value>
+  </data>
+  <data name="game_highest" xml:space="preserve">
+    <value>Watter een is hoogste?</value>
+  </data>
+  <data name="game_isotope_decay" xml:space="preserve">
+    <value>Vervalwyses</value>
+  </data>
+  <data name="game_isotope_half_life" xml:space="preserve">
+    <value>Halfleeftyd</value>
+  </data>
+  <data name="game_isotope_neutrons" xml:space="preserve">
+    <value>Neutrongetal</value>
+  </data>
+  <data name="game_isotope_stability" xml:space="preserve">
+    <value>Stabiele isotope</value>
+  </data>
+  <data name="game_lowest" xml:space="preserve">
+    <value>Watter een is laagste?</value>
+  </data>
+  <data name="game_molar_mass" xml:space="preserve">
+    <value>Molêre massa</value>
+  </data>
+  <data name="game_odd_one_out" xml:space="preserve">
+    <value>Wie hoort nie tuis nie?</value>
+  </data>
+  <data name="game_period" xml:space="preserve">
+    <value>Periodes</value>
+  </data>
+  <data name="game_results" xml:space="preserve">
+    <value>Speletjie Resultate</value>
+  </data>
+  <data name="game_valence_electrons" xml:space="preserve">
+    <value>Valenselektrone</value>
+  </data>
+  <data name="gas" xml:space="preserve">
+    <value>Ideale Gaskalkulator</value>
+  </data>
+  <data name="geo" xml:space="preserve">
+    <value>Geologie Tabel</value>
+  </data>
+  <data name="geo_clear_filter" xml:space="preserve">
+    <value>Verwyder Filter</value>
+  </data>
+  <data name="geo_no_results" xml:space="preserve">
+    <value>Geen resultate</value>
+  </data>
+  <data name="geo_search_hint" xml:space="preserve">
+    <value>Soek na Geologie-item</value>
+  </data>
+  <data name="geo_try_another_search" xml:space="preserve">
+    <value>Probeer 'n ander soekterm of kyk jou spelling</value>
+  </data>
+  <data name="geology_table" xml:space="preserve">
+    <value>Geologie tabel:</value>
+  </data>
+  <data name="get_pro" xml:space="preserve">
+    <value>Kry PRO</value>
+  </data>
+  <data name="get_pro_button" xml:space="preserve">
+    <value>Kry PRO</value>
+  </data>
+  <data name="get_pro_element_text" xml:space="preserve">
+    <value>Kry die PRO-weergawe om bykomende inligting oor elemente te ontsluit</value>
+  </data>
+  <data name="get_pro_plus" xml:space="preserve">
+    <value>Kry PRO+</value>
+  </data>
+  <data name="get_pro_plus_button" xml:space="preserve">
+    <value>Kry PRO+</value>
+  </data>
+  <data name="get_pro_title" xml:space="preserve">
+    <value>Kry PRO Weergawe</value>
+  </data>
+  <data name="git_text" xml:space="preserve">
+    <value>Atomic's oopbron Github-bewaarplek</value>
+  </data>
+  <data name="go_online_for_emission" xml:space="preserve">
+    <value>Gaan aanlyn vir emissielyn</value>
+  </data>
+  <data name="go_online_for_emission_lines" xml:space="preserve">
+    <value>Gaan aanlyn vir emissielyn</value>
+  </data>
+  <data name="go_pro_more_features" xml:space="preserve">
+    <value>Go Pro - meer funksies</value>
+  </data>
+  <data name="go_pro_school_start_sale" xml:space="preserve">
+    <value>GO PRO - SKOOLBEGIN UITVERKOPING</value>
+  </data>
+  <data name="grid_parameters" xml:space="preserve">
+    <value>Roosterparameters: (rooster-konstantes)</value>
+  </data>
+  <data name="grid_title" xml:space="preserve">
+    <value>Roostereienskappe</value>
+  </data>
+  <data name="group_label" xml:space="preserve">
+    <value>Groep: </value>
+  </data>
+  <data name="hard" xml:space="preserve">
+    <value>Moeilik</value>
+  </data>
+  <data name="hardness_label" xml:space="preserve">
+    <value>Hardheid: </value>
+  </data>
+  <data name="hardness_properties" xml:space="preserve">
+    <value>Hardheid Eienskappe</value>
+  </data>
+  <data name="hardness_properties_requires_pro" xml:space="preserve">
+    <value>Hardheideienskappe vereis PRO-weergawe. Kry PRO om meer data en tabelle te ontsluit:</value>
+  </data>
+  <data name="hazard_diamond" xml:space="preserve">
+    <value>Gevaarruit</value>
+  </data>
+  <data name="hazard_flammability" xml:space="preserve">
+    <value>Ontvlambaarheid</value>
+  </data>
+  <data name="hazard_health" xml:space="preserve">
+    <value>Gesondheidsgevaar</value>
+  </data>
+  <data name="hazard_instability" xml:space="preserve">
+    <value>Onstabiliteit</value>
+  </data>
+  <data name="hazard_materials" xml:space="preserve">
+    <value>Gevaarlike materiale:</value>
+  </data>
+  <data name="hazard_title" xml:space="preserve">
+    <value>Gevaar van Materiale</value>
+  </data>
+  <data name="hazard_title_requires_pro" xml:space="preserve">
+    <value>Gevaar van Materiale vereis PRO-weergawe. Kry PRO om meer data en tabelle te ontsluit:</value>
+  </data>
+  <data name="health_hazard" xml:space="preserve">
+    <value>Gesondheidsgevaar:</value>
+  </data>
+  <data name="highest" xml:space="preserve">
+    <value>hoogste</value>
+  </data>
+  <data name="ideal_calculated" xml:space="preserve">
+    <value>Gedeaktiveer</value>
+  </data>
+  <data name="ideal_gas_calculate_field" xml:space="preserve">
+    <value>Bereken:</value>
+  </data>
+  <data name="ideal_gas_calculator_title" xml:space="preserve">
+    <value>Ideale Gaskalkulator</value>
+  </data>
+  <data name="ideal_gas_card_title" xml:space="preserve">
+    <value>Ideale Gaswet Kalkulator (PV=nRT):</value>
+  </data>
+  <data name="ideal_gas_moles" xml:space="preserve">
+    <value>Mol (n):</value>
+  </data>
+  <data name="ideal_gas_moles_hint" xml:space="preserve">
+    <value>Voer mol in</value>
+  </data>
+  <data name="ideal_gas_pressure" xml:space="preserve">
+    <value>Druk (P):</value>
+  </data>
+  <data name="ideal_gas_pressure_hint" xml:space="preserve">
+    <value>Voer druk in</value>
+  </data>
+  <data name="ideal_gas_result" xml:space="preserve">
+    <value>Resultaat:</value>
+  </data>
+  <data name="ideal_gas_temperature" xml:space="preserve">
+    <value>Temperatuur (T):</value>
+  </data>
+  <data name="ideal_gas_temperature_hint" xml:space="preserve">
+    <value>Voer temperatuur in</value>
+  </data>
+  <data name="ideal_gas_text" xml:space="preserve">
+    <value>Bereken ideale gaseienskappe deur die ideale gaswetvergelyking PV=nRT te gebruik. Kies watter veranderlike om te bereken en voer die ander drie waardes in.</value>
+  </data>
+  <data name="ideal_gas_volume" xml:space="preserve">
+    <value>Volume (V):</value>
+  </data>
+  <data name="ideal_gas_volume_hint" xml:space="preserve">
+    <value>Voer volume in</value>
+  </data>
+  <data name="info_text" xml:space="preserve">
+    <value>Appweergawe en besonderhede</value>
+  </data>
+  <data name="info_title" xml:space="preserve">
+    <value>Inligting</value>
+  </data>
+  <data name="intro_calculator_description" xml:space="preserve">
+    <value>Bereken molêre massas van chemiese verbindings vinnig en akkuraat. Perfek vir chemiese studente en professionele persone.</value>
+  </data>
+  <data name="intro_calculator_title" xml:space="preserve">
+    <value>Molêre Massa-sakrekenaar</value>
+  </data>
+  <data name="intro_finish" xml:space="preserve">
+    <value>Begin</value>
+  </data>
+  <data name="intro_flashcards_description" xml:space="preserve">
+    <value>Bemeester die periodieke tabel met interaktiewe flitskaarte. Toets jou kennis van elementsimbole, atoommassas en chemiese eienskappe.</value>
+  </data>
+  <data name="intro_flashcards_title" xml:space="preserve">
+    <value>Leer met Flitskaarte</value>
+  </data>
+  <data name="intro_image_description" xml:space="preserve">
+    <value>Inleidingsbeeld</value>
+  </data>
+  <data name="intro_next" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="intro_pro_description" xml:space="preserve">
+    <value>Kry toegang tot bykomende data, gevorderde tabelle, verbeterde sakrekenaars en eksklusiewe funksies met die PRO-weergawe.</value>
+  </data>
+  <data name="intro_pro_title" xml:space="preserve">
+    <value>Ontsluit PRO-funksies</value>
+  </data>
+  <data name="intro_skip" xml:space="preserve">
+    <value>Slaan oor</value>
+  </data>
+  <data name="intro_welcome_description" xml:space="preserve">
+    <value>Jou omvattende periodieke tabel-verwysing met gedetailleerde elementinligting, interaktiewe gereedskap en leerfunksies.</value>
+  </data>
+  <data name="intro_welcome_title" xml:space="preserve">
+    <value>Welkom by Atomic</value>
+  </data>
+  <data name="ion" xml:space="preserve">
+    <value>Ionisasie-energieë</value>
+  </data>
+  <data name="ion_charge_colon" xml:space="preserve">
+    <value>Ioonlading:</value>
+  </data>
+  <data name="ion_no_results" xml:space="preserve">
+    <value>Geen resultate</value>
+  </data>
+  <data name="ion_try_another_search" xml:space="preserve">
+    <value>Probeer 'n ander soekterm of kyk jou spelling</value>
+  </data>
+  <data name="ionization_energies_colon" xml:space="preserve">
+    <value>Ionisasie-energieë:</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>Isotope</value>
+  </data>
+  <data name="iso_half_life_colon" xml:space="preserve">
+    <value>Halfleeftyd:</value>
+  </data>
+  <data name="iso_no_results" xml:space="preserve">
+    <value>Geen resultate</value>
+  </data>
+  <data name="iso_search_hint" xml:space="preserve">
+    <value>Soek na Isotope</value>
+  </data>
+  <data name="iso_try_another_search" xml:space="preserve">
+    <value>Probeer 'n ander soekterm of kyk jou spelling</value>
+  </data>
+  <data name="isotope" xml:space="preserve">
+    <value>Isotoop</value>
+  </data>
+  <data name="isotopes_colon" xml:space="preserve">
+    <value>Isotope:</value>
+  </data>
+  <data name="isotopes_table_description" xml:space="preserve">
+    <value>Tabel met isotope van verskillende elemente sowel as halfleeftyd, massa, protone, neutrone en nukleon data.</value>
+  </data>
+  <data name="isotopes_title" xml:space="preserve">
+    <value>Isotope</value>
+  </data>
+  <data name="language_content" xml:space="preserve">
+    <value>Kies Taal</value>
+  </data>
+  <data name="language_title" xml:space="preserve">
+    <value>Tale</value>
+  </data>
+  <data name="last_synced" xml:space="preserve">
+    <value>Laaste gesinkroniseer</value>
+  </data>
+  <data name="last_synced_never" xml:space="preserve">
+    <value>Nooit</value>
+  </data>
+  <data name="learning_games" xml:space="preserve">
+    <value>Leer-speletjies:</value>
+  </data>
+  <data name="learning_games_nav" xml:space="preserve">
+    <value>Flashcards</value>
+  </data>
+  <data name="leave_game_confirm" xml:space="preserve">
+    <value>Verlaat</value>
+  </data>
+  <data name="leave_game_message" xml:space="preserve">
+    <value>Is jy seker jy wil die speletjie verlaat? Jy sal %1$d lewens verloor.</value>
+  </data>
+  <data name="leave_game_stay" xml:space="preserve">
+    <value>Bly</value>
+  </data>
+  <data name="leave_game_title" xml:space="preserve">
+    <value>Verlaat speletjie?</value>
+  </data>
+  <data name="level_0_4" xml:space="preserve">
+    <value>Vlak 0–4</value>
+  </data>
+  <data name="level_10_14" xml:space="preserve">
+    <value>Vlak 10–14</value>
+  </data>
+  <data name="level_15_19" xml:space="preserve">
+    <value>Vlak 15–19</value>
+  </data>
+  <data name="level_20_24" xml:space="preserve">
+    <value>Vlak 20–24</value>
+  </data>
+  <data name="level_25_29" xml:space="preserve">
+    <value>Vlak 25</value>
+  </data>
+  <data name="level_30_34" xml:space="preserve">
+    <value>Vlak 30</value>
+  </data>
+  <data name="level_5_9" xml:space="preserve">
+    <value>Vlak 5–9</value>
+  </data>
+  <data name="level_range_format" xml:space="preserve">
+    <value>Vlak %1$d</value>
+  </data>
+  <data name="level_up_message" xml:space="preserve">
+    <value>Geluk, jy het vlak %1$d bereik!</value>
+  </data>
+  <data name="level_up_title" xml:space="preserve">
+    <value>Vlak op!</value>
+  </data>
+  <data name="level_x_y" xml:space="preserve">
+    <value>Vlak X-Y</value>
+  </data>
+  <data name="license_title" xml:space="preserve">
+    <value>Lisensies</value>
+  </data>
+  <data name="licenses_text" xml:space="preserve">
+    <value>Lisensies van werke wat deur Atomic gebruik word</value>
+  </data>
+  <data name="licenses_title" xml:space="preserve">
+    <value>Lisensies</value>
+  </data>
+  <data name="light" xml:space="preserve">
+    <value>Lig</value>
+  </data>
+  <data name="lives_label" xml:space="preserve">
+    <value>Lewens: %s</value>
+  </data>
+  <data name="lives_lost_detail" xml:space="preserve">
+    <value>Lewens verloor: %1$d (%2$d per verkeerde/tyduit antwoord)</value>
+  </data>
+  <data name="lives_lost_result.One" xml:space="preserve">
+    <value>%d lewe verloor</value>
+  </data>
+  <data name="lives_lost_result.Other" xml:space="preserve">
+    <value>%d lewens verloor</value>
+  </data>
+  <data name="lives_unlimited" xml:space="preserve">
+    <value>Lewens: ∞</value>
+  </data>
+  <data name="login_for_sync" xml:space="preserve">
+    <value>Meld aan om sinkronisasie te aktiveer</value>
+  </data>
+  <data name="login_for_sync_and_more" xml:space="preserve">
+    <value>Meld aan om data te sinkroniseer</value>
+  </data>
+  <data name="lowest" xml:space="preserve">
+    <value>laagste</value>
+  </data>
+  <data name="magnetic_type" xml:space="preserve">
+    <value>Magnetiese Tipe</value>
+  </data>
+  <data name="magnetic_type_colon" xml:space="preserve">
+    <value>Magnetiese Tipe:</value>
+  </data>
+  <data name="magnetism_label" xml:space="preserve">
+    <value>Magnetisme: </value>
+  </data>
+  <data name="medium" xml:space="preserve">
+    <value>Gemiddeld</value>
+  </data>
+  <data name="melting_point" xml:space="preserve">
+    <value>Smeltpunt</value>
+  </data>
+  <data name="melting_point_celsius" xml:space="preserve">
+    <value>Smeltpunt (°C):</value>
+  </data>
+  <data name="melting_point_colon" xml:space="preserve">
+    <value>Smeltpunt:</value>
+  </data>
+  <data name="melting_point_fahrenheit" xml:space="preserve">
+    <value>Smeltpunt (°F):</value>
+  </data>
+  <data name="melting_point_kelvin" xml:space="preserve">
+    <value>Smeltpunt (Kelvin):</value>
+  </data>
+  <data name="member_already" xml:space="preserve">
+    <value>Jy is 'n PRO-lid!</value>
+  </data>
+  <data name="member_btn" xml:space="preserve">
+    <value>Jou PRO-voordele</value>
+  </data>
+  <data name="member_desch" xml:space="preserve">
+    <value>Dankie dat jy die ontwikkeling van 'Atomic - Periodieke Tabel' ondersteun. Op hierdie bladsy sal inligting oor jou PRO-voordele beskikbaar wees soos meer PRO-funksies bygevoeg word.</value>
+  </data>
+  <data name="member_title" xml:space="preserve">
+    <value>PRO Lidbladsy</value>
+  </data>
+  <data name="mohs_hardness" xml:space="preserve">
+    <value>Mohs-hardheid</value>
+  </data>
+  <data name="mohs_hardness_colon" xml:space="preserve">
+    <value>Mohs-hardheid:</value>
+  </data>
+  <data name="molar_heat_capacity_colon" xml:space="preserve">
+    <value>Molêre Hittekapasiteit:</value>
+  </data>
+  <data name="molar_mass_value" xml:space="preserve">
+    <value>%1$s g/mol</value>
+  </data>
+  <data name="molar_volume_colon" xml:space="preserve">
+    <value>Molêre Volume:</value>
+  </data>
+  <data name="more_information" xml:space="preserve">
+    <value>Meer inligting:</value>
+  </data>
+  <data name="most_advanced" xml:space="preserve">
+    <value>Mees Gevorderd</value>
+  </data>
+  <data name="most_used" xml:space="preserve">
+    <value>Mees Gebruik:</value>
+  </data>
+  <data name="neel_point_colon" xml:space="preserve">
+    <value>Néelpunt:</value>
+  </data>
+  <data name="neutron_cross_sectional" xml:space="preserve">
+    <value>Neutron-deursnee</value>
+  </data>
+  <data name="neutron_cross_sectional_colon" xml:space="preserve">
+    <value>Neutron Deursnee:</value>
+  </data>
+  <data name="neutrons" xml:space="preserve">
+    <value>Neutrone:</value>
+  </data>
+  <data name="new_label" xml:space="preserve">
+    <value>Nuut</value>
+  </data>
+  <data name="next_life_gain.One" xml:space="preserve">
+    <value>Jy sal %d lewe kry.</value>
+  </data>
+  <data name="next_life_gain.Other" xml:space="preserve">
+    <value>Jy sal %d lewens kry.</value>
+  </data>
+  <data name="next_life_in_detail" xml:space="preserve">
+    <value>Volgende lewe oor %1$d minute en %2$d sekondes.
+%3$s</value>
+  </data>
+  <data name="no_image" xml:space="preserve">
+    <value>Geen beeld</value>
+  </data>
+  <data name="no_questions_title" xml:space="preserve">
+    <value>Nie genoeg data nie</value>
+  </data>
+  <data name="no_results" xml:space="preserve">
+    <value>Geen resultate</value>
+  </data>
+  <data name="no_unlocked_games" xml:space="preserve">
+    <value>Geen ontsluite speletjies beskikbaar nie!</value>
+  </data>
+  <data name="non_pro" xml:space="preserve">
+    <value>NIE-PRO</value>
+  </data>
+  <data name="notes_placeholder" xml:space="preserve">
+    <value>Maak notas vir die element:</value>
+  </data>
+  <data name="nuc" xml:space="preserve">
+    <value>Nukliedtabel</value>
+  </data>
+  <data name="nuclear_properties" xml:space="preserve">
+    <value>Kern Eienskappe</value>
+  </data>
+  <data name="nucleons" xml:space="preserve">
+    <value>Nukleone:</value>
+  </data>
+  <data name="nuclide_table" xml:space="preserve">
+    <value>Nuklied tabel:</value>
+  </data>
+  <data name="nuclide_table_title" xml:space="preserve">
+    <value>Nukliedtabel</value>
+  </data>
+  <data name="offline_mode" xml:space="preserve">
+    <value>Vanlynmodus</value>
+  </data>
+  <data name="offline_mode_desc" xml:space="preserve">
+    <value>Deaktiveer laai van beelde</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="open_base_element" xml:space="preserve">
+    <value>Open basiselement</value>
+  </data>
+  <data name="open_table_button" xml:space="preserve">
+    <value>Maak tabel oop</value>
+  </data>
+  <data name="other_settings" xml:space="preserve">
+    <value>Gevorderd</value>
+  </data>
+  <data name="other_title" xml:space="preserve">
+    <value>Ander</value>
+  </data>
+  <data name="out_of_lives_hours" xml:space="preserve">
+    <value>Uit lewens! Meer lewens in %1$d ure, %2$d minute en %3$d sekondes.</value>
+  </data>
+  <data name="out_of_lives_minutes" xml:space="preserve">
+    <value>Uit lewens! Meer lewens in %1$d minute en %2$d sekondes.</value>
+  </data>
+  <data name="overview" xml:space="preserve">
+    <value>Oorsig</value>
+  </data>
+  <data name="owns_pro_plus" xml:space="preserve">
+    <value>Het PRO+</value>
+  </data>
+  <data name="oxidation_states_colon" xml:space="preserve">
+    <value>Oksidasietoestande:</value>
+  </data>
+  <data name="perfect_all_correct_xp" xml:space="preserve">
+    <value>Perfek (Alles Korrek): +%dxp</value>
+  </data>
+  <data name="personalise_favorite_bar" xml:space="preserve">
+    <value>Personaliseer die gunstelingbalk</value>
+  </data>
+  <data name="personalization_settings" xml:space="preserve">
+    <value>Personalisering</value>
+  </data>
+  <data name="ph_title" xml:space="preserve">
+    <value>pH-aanwysers</value>
+  </data>
+  <data name="phase_stp" xml:space="preserve">
+    <value>Fase (STP)</value>
+  </data>
+  <data name="phase_stp_colon" xml:space="preserve">
+    <value>Fase (STP):</value>
+  </data>
+  <data name="phi" xml:space="preserve">
+    <value>pH-aanwysers</value>
+  </data>
+  <data name="poi" xml:space="preserve">
+    <value>Poisson-verhoudingstabel</value>
+  </data>
+  <data name="poi_clear_filter" xml:space="preserve">
+    <value>Verwyder Filter</value>
+  </data>
+  <data name="poi_no_results" xml:space="preserve">
+    <value>Geen resultate</value>
+  </data>
+  <data name="poi_search_hint" xml:space="preserve">
+    <value>Soek na Woordeboekitem</value>
+  </data>
+  <data name="poi_try_another_search" xml:space="preserve">
+    <value>Probeer 'n ander soekterm of kyk jou spelling</value>
+  </data>
+  <data name="poisson_constants_sound_speed" xml:space="preserve">
+    <value>Poisson se konstantes, klankspoed:</value>
+  </data>
+  <data name="poisson_ratio_table" xml:space="preserve">
+    <value>Poisson verhouding tabel:</value>
+  </data>
+  <data name="poissons_ratio" xml:space="preserve">
+    <value>Poisson-verhouding</value>
+  </data>
+  <data name="poissons_ratio_title" xml:space="preserve">
+    <value>Poisson-verhouding</value>
+  </data>
+  <data name="popup_action_button" xml:space="preserve">
+    <value>Gradeer op na PRO+</value>
+  </data>
+  <data name="popup_content_text" xml:space="preserve">
+    <value>Gradeer 'Atomic - Periodieke Tabel' op om bykomende data, tabelle en flitskaarte te ontsluit om meer oor die periodieke tabel te leer.</value>
+  </data>
+  <data name="popup_secondary_button" xml:space="preserve">
+    <value>Nie vandag nie</value>
+  </data>
+  <data name="popup_title" xml:space="preserve">
+    <value>Gradeer op na PRO+</value>
+  </data>
+  <data name="price_not_available" xml:space="preserve">
+    <value>Prys nie beskikbaar nie</value>
+  </data>
+  <data name="price_placeholder" xml:space="preserve">
+    <value>---</value>
+  </data>
+  <data name="pro_additional_data" xml:space="preserve">
+    <value>Bykomende Data</value>
+  </data>
+  <data name="pro_additional_data_descr" xml:space="preserve">
+    <value>Bykomende data soos hardheidseienskappe (mohs-, vickers-, en brinell-hardheid) sowel as klankspoed, Poisson-konstante, Young se Modulus, Volume- en Skuifmodulus ens. Ook inligting oor die identifikasie van minerale.</value>
+  </data>
+  <data name="pro_additional_flashcards" xml:space="preserve">
+    <value>Bykomende flitskaarte en sinchronisasie</value>
+  </data>
+  <data name="pro_additional_flashcards_descr" xml:space="preserve">
+    <value>Toegang tot bykomende flitskaarte, meer lewens en sinchronisasie van jou vordering</value>
+  </data>
+  <data name="pro_additional_sync" xml:space="preserve">
+    <value>Sinchroniseer vir notas en vordering</value>
+  </data>
+  <data name="pro_additional_sync_descr" xml:space="preserve">
+    <value>Aktiveer sinchronisering vir notas en vordering om jou studie op al jou toestelle makliker te maak</value>
+  </data>
+  <data name="pro_additional_tables" xml:space="preserve">
+    <value>Bykomende Tabelle</value>
+  </data>
+  <data name="pro_additional_tables_descr" xml:space="preserve">
+    <value>Bykomende tabelle insluitend 'n nukliedtabel, poisson-verhoudingstabel, konstantes-tabel, geologietabel ens., met meer wat in die toekoms kom</value>
+  </data>
+  <data name="pro_additional_visualisations" xml:space="preserve">
+    <value>Bykomende Visualisasies</value>
+  </data>
+  <data name="pro_additional_visualisations_descr" xml:space="preserve">
+    <value>Toegang tot meer visualisasies in die hoof tabel soos Poisson-verhouding, volume-modulus ens.</value>
+  </data>
+  <data name="pro_already_purchased_check" xml:space="preserve">
+    <value>Kyk produk op rekening</value>
+  </data>
+  <data name="pro_already_purchased_title" xml:space="preserve">
+    <value>Reeds PRO gekoop?</value>
+  </data>
+  <data name="pro_better_ai" xml:space="preserve">
+    <value>Addisionele KI-funksies</value>
+  </data>
+  <data name="pro_better_ai_descr" xml:space="preserve">
+    <value>Ontsluit alle funksies van die KI-agent, met vasvra, toegang tot pro-data en nog baie meer</value>
+  </data>
+  <data name="pro_better_calculator" xml:space="preserve">
+    <value>Beter Sakrekenaar</value>
+  </data>
+  <data name="pro_better_calculator_descr" xml:space="preserve">
+    <value>'n Verbeterde sakrekenaar met die moontlikheid om molêre massas van verskillende verbindings op die gunstelingblad te stoor.</value>
+  </data>
+  <data name="pro_descr" xml:space="preserve">
+    <value>Atomic - Periodieke Tabel' is 'n gratis en oopbron toepassing deur my in Swede gemaak in my vrye tyd. Deur die PRO-weergawe te koop ondersteun jy die ontwikkeling en ontvang jy ekstra data en funksies!</value>
+  </data>
+  <data name="pro_features_descr" xml:space="preserve">
+    <value>Verken sommige van die vele funksies van die PRO-weergawe en wat hulle insluit.</value>
+  </data>
+  <data name="pro_features_table_description" xml:space="preserve">
+    <value>In die volgende tabel word die kenmerke wat in die GRATIS, PRO en PRO+ weergawes ingesluit is, beskryf:</value>
+  </data>
+  <data name="pro_features_title" xml:space="preserve">
+    <value>Funksies van PRO-weergawe:</value>
+  </data>
+  <data name="pro_get_more_out" xml:space="preserve">
+    <value>Haal meer uit Atomic</value>
+  </data>
+  <data name="pro_plus_badge_text" xml:space="preserve">
+    <value>Mees gevorderd</value>
+  </data>
+  <data name="pro_plus_rewards" xml:space="preserve">
+    <value>PRO+ Belonings: %s</value>
+  </data>
+  <data name="pro_plus_subtitle" xml:space="preserve">
+    <value>Ontsluit gevorderde data en bykomende flitskaarte.</value>
+  </data>
+  <data name="pro_plus_user" xml:space="preserve">
+    <value>PRO+ GEBRUIKER</value>
+  </data>
+  <data name="pro_plus_version" xml:space="preserve">
+    <value>PRO+ Weergawe</value>
+  </data>
+  <data name="pro_price_loading" xml:space="preserve">
+    <value>laai prys...</value>
+  </data>
+  <data name="pro_title" xml:space="preserve">
+    <value>PRO Weergawe</value>
+  </data>
+  <data name="pro_upgrade_to_pro" xml:space="preserve">
+    <value>Gradeer op na PRO</value>
+  </data>
+  <data name="pro_user" xml:space="preserve">
+    <value>PRO GEBRUIKER</value>
+  </data>
+  <data name="pro_user_badge" xml:space="preserve">
+    <value>PRO-gebruiker</value>
+  </data>
+  <data name="pro_version" xml:space="preserve">
+    <value>PRO Weergawe</value>
+  </data>
+  <data name="properties" xml:space="preserve">
+    <value>Eienskappe</value>
+  </data>
+  <data name="protons" xml:space="preserve">
+    <value>Protone:</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Vraag</value>
+  </data>
+  <data name="question_appearance" xml:space="preserve">
+    <value>Wat is die voorkoms van %s?</value>
+  </data>
+  <data name="question_atomic_mass" xml:space="preserve">
+    <value>Wat is die atoommassa van %s?</value>
+  </data>
+  <data name="question_atomic_number" xml:space="preserve">
+    <value>Wat is die atoomgetal van %s?</value>
+  </data>
+  <data name="question_block" xml:space="preserve">
+    <value>Tot watter blok behoort %s?</value>
+  </data>
+  <data name="question_boiling_point_celsius" xml:space="preserve">
+    <value>Wat is die kookpunt (°C) van %s?</value>
+  </data>
+  <data name="question_boiling_point_fahrenheit" xml:space="preserve">
+    <value>Wat is die kookpunt (°F) van %s?</value>
+  </data>
+  <data name="question_boiling_point_kelvin" xml:space="preserve">
+    <value>Wat is die kookpunt (Kelvin) van %s?</value>
+  </data>
+  <data name="question_brinell_hardness" xml:space="preserve">
+    <value>Wat is die Brinell-hardheid van %s?</value>
+  </data>
+  <data name="question_crystal_structure" xml:space="preserve">
+    <value>Wat is die kristalstruktuur van %s?</value>
+  </data>
+  <data name="question_density" xml:space="preserve">
+    <value>Wat is die digtheid van %s?</value>
+  </data>
+  <data name="question_discovered_by" xml:space="preserve">
+    <value>Wie het %s ontdek?</value>
+  </data>
+  <data name="question_discovery_year" xml:space="preserve">
+    <value>In watter jaar is %s ontdek?</value>
+  </data>
+  <data name="question_earth_crust_abundance" xml:space="preserve">
+    <value>Wat is die voorkoms van %s in die aardkors? mg/kg (ppm)</value>
+  </data>
+  <data name="question_earth_soils_abundance" xml:space="preserve">
+    <value>Wat is die voorkoms van %s in aardgrond? mg/kg (ppm)</value>
+  </data>
+  <data name="question_electrical_type" xml:space="preserve">
+    <value>Wat is die elektriese tipe van %s?</value>
+  </data>
+  <data name="question_electronegativity" xml:space="preserve">
+    <value>Wat is die elektronegatiwiteit van %s?</value>
+  </data>
+  <data name="question_element_group" xml:space="preserve">
+    <value>Wat is die elementgroep van %s?</value>
+  </data>
+  <data name="question_element_name" xml:space="preserve">
+    <value>Wat is die naam van %s?</value>
+  </data>
+  <data name="question_element_symbol" xml:space="preserve">
+    <value>Wat is die simbool vir %s?</value>
+  </data>
+  <data name="question_group_of" xml:space="preserve">
+    <value>In watter groep is %1$s?</value>
+  </data>
+  <data name="question_highest_atomic_mass" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste atoommassa?</value>
+  </data>
+  <data name="question_highest_boiling_point" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste kookpunt?</value>
+  </data>
+  <data name="question_highest_brinell_hardness" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste Brinell-hardheid?</value>
+  </data>
+  <data name="question_highest_bulk_modulus" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste bulkmodulus?</value>
+  </data>
+  <data name="question_highest_density" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste digtheid?</value>
+  </data>
+  <data name="question_highest_electronegativity" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste elektronegatiwiteit?</value>
+  </data>
+  <data name="question_highest_fusion_heat" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste smeltingswarmte?</value>
+  </data>
+  <data name="question_highest_melting_point" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste smeltpunt?</value>
+  </data>
+  <data name="question_highest_mohs_hardness" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste Mohs-hardheid?</value>
+  </data>
+  <data name="question_highest_shear_modulus" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste skuifmodulus?</value>
+  </data>
+  <data name="question_highest_speed_of_sound" xml:space="preserve">
+    <value>In watter een van hierdie beweeg klank die vinnigste?</value>
+  </data>
+  <data name="question_highest_thermal_conductivity" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste termiese geleidingsvermoë?</value>
+  </data>
+  <data name="question_highest_vaporization_heat" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste verdampingswarmte?</value>
+  </data>
+  <data name="question_highest_vickers_hardness" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste Vickers-hardheid?</value>
+  </data>
+  <data name="question_highest_young_modulus" xml:space="preserve">
+    <value>Watter een van hierdie het die hoogste Young-modulus?</value>
+  </data>
+  <data name="question_isotope_decay" xml:space="preserve">
+    <value>Hoe verval %1$s?</value>
+  </data>
+  <data name="question_isotope_longest_half_life" xml:space="preserve">
+    <value>Watter een van hierdie isotope het die langste halfleeftyd?</value>
+  </data>
+  <data name="question_isotope_neutrons" xml:space="preserve">
+    <value>Hoeveel neutrone het %1$s?</value>
+  </data>
+  <data name="question_isotope_shortest_half_life" xml:space="preserve">
+    <value>Watter een van hierdie isotope het die kortste halfleeftyd?</value>
+  </data>
+  <data name="question_isotope_stable" xml:space="preserve">
+    <value>Watter een van hierdie isotope is stabiel?</value>
+  </data>
+  <data name="question_largest_atomic_radius" xml:space="preserve">
+    <value>Watter een van hierdie het die grootste atoomradius?</value>
+  </data>
+  <data name="question_largest_molar_volume" xml:space="preserve">
+    <value>Watter een van hierdie het die grootste molêre volume?</value>
+  </data>
+  <data name="question_lowest_atomic_mass" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste atoommassa?</value>
+  </data>
+  <data name="question_lowest_boiling_point" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste kookpunt?</value>
+  </data>
+  <data name="question_lowest_brinell_hardness" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste Brinell-hardheid?</value>
+  </data>
+  <data name="question_lowest_bulk_modulus" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste bulkmodulus?</value>
+  </data>
+  <data name="question_lowest_density" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste digtheid?</value>
+  </data>
+  <data name="question_lowest_electronegativity" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste elektronegatiwiteit?</value>
+  </data>
+  <data name="question_lowest_fusion_heat" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste smeltingswarmte?</value>
+  </data>
+  <data name="question_lowest_melting_point" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste smeltpunt?</value>
+  </data>
+  <data name="question_lowest_mohs_hardness" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste Mohs-hardheid?</value>
+  </data>
+  <data name="question_lowest_shear_modulus" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste skuifmodulus?</value>
+  </data>
+  <data name="question_lowest_speed_of_sound" xml:space="preserve">
+    <value>In watter een van hierdie beweeg klank die stadigste?</value>
+  </data>
+  <data name="question_lowest_thermal_conductivity" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste termiese geleidingsvermoë?</value>
+  </data>
+  <data name="question_lowest_vaporization_heat" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste verdampingswarmte?</value>
+  </data>
+  <data name="question_lowest_vickers_hardness" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste Vickers-hardheid?</value>
+  </data>
+  <data name="question_lowest_young_modulus" xml:space="preserve">
+    <value>Watter een van hierdie het die laagste Young-modulus?</value>
+  </data>
+  <data name="question_magnetic_type" xml:space="preserve">
+    <value>Wat is die magnetiese tipe van %s?</value>
+  </data>
+  <data name="question_melting_point_celsius" xml:space="preserve">
+    <value>Wat is die smeltpunt (°C) van %s?</value>
+  </data>
+  <data name="question_melting_point_fahrenheit" xml:space="preserve">
+    <value>Wat is die smeltpunt (°F) van %s?</value>
+  </data>
+  <data name="question_melting_point_kelvin" xml:space="preserve">
+    <value>Wat is die smeltpunt (Kelvin) van %s?</value>
+  </data>
+  <data name="question_mohs_hardness" xml:space="preserve">
+    <value>Wat is die Mohs-hardheid van %s?</value>
+  </data>
+  <data name="question_molar_mass" xml:space="preserve">
+    <value>Wat is die molêre massa van %1$s?</value>
+  </data>
+  <data name="question_neutron_cross_sectional" xml:space="preserve">
+    <value>Wat is die neutron-dwarsdeursnee van %s?</value>
+  </data>
+  <data name="question_nfpa_diamond" xml:space="preserve">
+    <value>Wat is die NFPA 704-gevaarruit van %s? (gesondheid / ontvlambaarheid / onstabiliteit)</value>
+  </data>
+  <data name="question_nfpa_flammability" xml:space="preserve">
+    <value>Wat is die NFPA 704-ontvlambaarheid van %s?</value>
+  </data>
+  <data name="question_nfpa_health" xml:space="preserve">
+    <value>Wat is die NFPA 704-gesondheidsgevaar van %s?</value>
+  </data>
+  <data name="question_nfpa_instability" xml:space="preserve">
+    <value>Wat is die NFPA 704-onstabiliteit van %s?</value>
+  </data>
+  <data name="question_not_a_series" xml:space="preserve">
+    <value>Watter een van hierdie is NIE ’n %1$s nie?</value>
+  </data>
+  <data name="question_period_of" xml:space="preserve">
+    <value>In watter periode is %1$s?</value>
+  </data>
+  <data name="question_phase_stp" xml:space="preserve">
+    <value>Wat is die fase van %s by STP?</value>
+  </data>
+  <data name="question_radioactive" xml:space="preserve">
+    <value>Is %s radioaktief?</value>
+  </data>
+  <data name="question_smallest_atomic_radius" xml:space="preserve">
+    <value>Watter een van hierdie het die kleinste atoomradius?</value>
+  </data>
+  <data name="question_smallest_molar_volume" xml:space="preserve">
+    <value>Watter een van hierdie het die kleinste molêre volume?</value>
+  </data>
+  <data name="question_specific_heat_capacity" xml:space="preserve">
+    <value>Wat is die spesifieke warmtekapasiteit van %s?</value>
+  </data>
+  <data name="question_superconducting_point" xml:space="preserve">
+    <value>Wat is die supergeleidingspunt van %s?</value>
+  </data>
+  <data name="question_text" xml:space="preserve">
+    <value>Vraag Teks</value>
+  </data>
+  <data name="question_valence_electrons" xml:space="preserve">
+    <value>Hoeveel valenselektrone het %1$s?</value>
+  </data>
+  <data name="question_vickers_hardness" xml:space="preserve">
+    <value>Wat is die Vickers-hardheid van %s?</value>
+  </data>
+  <data name="question_xp_detail" xml:space="preserve">
+    <value>XP vir hierdie vraag: +%1$d</value>
+  </data>
+  <data name="questions_correct_xp" xml:space="preserve">
+    <value>Vrae Korrek: +%dxp</value>
+  </data>
+  <data name="quiz_loading" xml:space="preserve">
+    <value>Vrae word voorberei…</value>
+  </data>
+  <data name="quiz_no_questions" xml:space="preserve">
+    <value>Kon nie vrae vir hierdie speletjie skep nie. Probeer ’n ander een.</value>
+  </data>
+  <data name="radioactive" xml:space="preserve">
+    <value>Radioaktief</value>
+  </data>
+  <data name="radioactive_colon" xml:space="preserve">
+    <value>Radioaktief:</value>
+  </data>
+  <data name="random_element" xml:space="preserve">
+    <value>Lukrake Element</value>
+  </data>
+  <data name="rate" xml:space="preserve">
+    <value>Beoordeel</value>
+  </data>
+  <data name="rate_app" xml:space="preserve">
+    <value>Beoordeel App</value>
+  </data>
+  <data name="rate_app_description" xml:space="preserve">
+    <value>Laat weet ons wat jy van die app dink deur dit op Play Store te beoordeel!</value>
+  </data>
+  <data name="reaction_balancer" xml:space="preserve">
+    <value>Reaksie Balanseerder:</value>
+  </data>
+  <data name="reactivity_hazard" xml:space="preserve">
+    <value>Reaktiwiteit:</value>
+  </data>
+  <data name="read_more" xml:space="preserve">
+    <value>..meer</value>
+  </data>
+  <data name="read_more_widget" xml:space="preserve">
+    <value>Lees meer</value>
+  </data>
+  <data name="rec" xml:space="preserve">
+    <value>Chemiese Reaksies</value>
+  </data>
+  <data name="refractive_index_colon" xml:space="preserve">
+    <value>Brekingsindeks:</value>
+  </data>
+  <data name="requires_pro" xml:space="preserve">
+    <value>Vereis PRO-weergawe</value>
+  </data>
+  <data name="requires_pro_plus_until_2026" xml:space="preserve">
+    <value>Vereis PRO+ tot 1 Jan 2026</value>
+  </data>
+  <data name="reward_5pct_title" xml:space="preserve">
+    <value>+5% XP-bonus</value>
+  </data>
+  <data name="rewards_available" xml:space="preserve">
+    <value>Belonings:</value>
+  </data>
+  <data name="save_calculations" xml:space="preserve">
+    <value>Stoor berekeninge:</value>
+  </data>
+  <data name="save_equations" xml:space="preserve">
+    <value>Stoor vergelykings:</value>
+  </data>
+  <data name="save_units" xml:space="preserve">
+    <value>Stoor eenhede:</value>
+  </data>
+  <data name="score_summary" xml:space="preserve">
+    <value>Telling: %1$d/%2$d</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Soek Elemente</value>
+  </data>
+  <data name="search_elements" xml:space="preserve">
+    <value>Soek na Element</value>
+  </data>
+  <data name="search_for_element" xml:space="preserve">
+    <value>Soek vir element</value>
+  </data>
+  <data name="searches" xml:space="preserve">
+    <value>Soektogte</value>
+  </data>
+  <data name="select_element_to_compare" xml:space="preserve">
+    <value>Kies Element om te Vergelyk</value>
+  </data>
+  <data name="select_theme" xml:space="preserve">
+    <value>Kies Tema</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Instellings</value>
+  </data>
+  <data name="settings_favorite_content" xml:space="preserve">
+    <value>Personaliseer die gunstelingbalk</value>
+  </data>
+  <data name="settings_favorite_title" xml:space="preserve">
+    <value>Gunstelingbalk</value>
+  </data>
+  <data name="settings_nav_bar_content" xml:space="preserve">
+    <value>Deaktiveer die standaard gedrag</value>
+  </data>
+  <data name="settings_nav_bar_title" xml:space="preserve">
+    <value>Outo-versteek onderste balk</value>
+  </data>
+  <data name="settings_offline_content" xml:space="preserve">
+    <value>Deaktiveer laai van beelde</value>
+  </data>
+  <data name="settings_offline_title" xml:space="preserve">
+    <value>Vanlynmodus</value>
+  </data>
+  <data name="settings_order_content" xml:space="preserve">
+    <value>Pas die volgorde van detailkaarte aan</value>
+  </data>
+  <data name="settings_order_title" xml:space="preserve">
+    <value>Detailkaart-volgorde</value>
+  </data>
+  <data name="settings_themes_content" xml:space="preserve">
+    <value>Kies Tema</value>
+  </data>
+  <data name="settings_themes_title" xml:space="preserve">
+    <value>Temas</value>
+  </data>
+  <data name="settings_title" xml:space="preserve">
+    <value>Instellings</value>
+  </data>
+  <data name="settings_unit_content" xml:space="preserve">
+    <value>Pas die eenhede in die hoof tabel aan</value>
+  </data>
+  <data name="settings_unit_title" xml:space="preserve">
+    <value>Tabeleenhede</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>Deel</value>
+  </data>
+  <data name="share_app" xml:space="preserve">
+    <value>Deel toep</value>
+  </data>
+  <data name="share_app_description" xml:space="preserve">
+    <value>As jy die toep nuttig vind, deel dit asseblief met jou vriende en ander!</value>
+  </data>
+  <data name="shear_modulus" xml:space="preserve">
+    <value>Skuifmodulus</value>
+  </data>
+  <data name="short_voltage" xml:space="preserve">
+    <value>(Volt)</value>
+  </data>
+  <data name="show_atomic_radius_calculated" xml:space="preserve">
+    <value>Wys Atoomradius (Berekend)</value>
+  </data>
+  <data name="show_atomic_radius_empirical" xml:space="preserve">
+    <value>Wys Atoomradius (Empiries)</value>
+  </data>
+  <data name="show_boiling_point" xml:space="preserve">
+    <value>Wys Kookpunt</value>
+  </data>
+  <data name="show_covalent_radius" xml:space="preserve">
+    <value>Wys Kovalente radius</value>
+  </data>
+  <data name="show_density" xml:space="preserve">
+    <value>Wys Digtheid</value>
+  </data>
+  <data name="show_electronegativity" xml:space="preserve">
+    <value>Wys Elektronegatiwiteit</value>
+  </data>
+  <data name="show_fusion_heat" xml:space="preserve">
+    <value>Wys Fusiemassa</value>
+  </data>
+  <data name="show_if_radioactive" xml:space="preserve">
+    <value>Wys As Radioaktief</value>
+  </data>
+  <data name="show_melting_point" xml:space="preserve">
+    <value>Wys Smeltpunt</value>
+  </data>
+  <data name="show_molar_mass" xml:space="preserve">
+    <value>Wys Molêre Massa</value>
+  </data>
+  <data name="show_resistivity" xml:space="preserve">
+    <value>Wys Weerstand</value>
+  </data>
+  <data name="show_specific_heat_capacity" xml:space="preserve">
+    <value>Wys Spesifieke Hittekapasiteit</value>
+  </data>
+  <data name="show_stp_phase" xml:space="preserve">
+    <value>Wys STP-fase</value>
+  </data>
+  <data name="show_van_der_waals_radius" xml:space="preserve">
+    <value>Wys Van der Waals-radius</value>
+  </data>
+  <data name="show_vaporization_heat" xml:space="preserve">
+    <value>Wys Verdampingshitte</value>
+  </data>
+  <data name="sign_in_failed" xml:space="preserve">
+    <value>Aanmelding het misluk</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>Teken uit</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>Teken in…</value>
+  </data>
+  <data name="sol" xml:space="preserve">
+    <value>Oplosbaarheidstabel</value>
+  </data>
+  <data name="solubility_info_c" xml:space="preserve">
+    <value>"S: Oplosbaar
+Ss: Effens Oplosbaar
+I: Onoplosbaar"</value>
+  </data>
+  <data name="solubility_info_t" xml:space="preserve">
+    <value>Oplosbaarheid Hulp</value>
+  </data>
+  <data name="solubility_table" xml:space="preserve">
+    <value>Oplosbaarheid Tabel</value>
+  </data>
+  <data name="sources_settings_title" xml:space="preserve">
+    <value>Bronne</value>
+  </data>
+  <data name="sources_wwe_title" xml:space="preserve">
+    <value>Water en Afvalwater Ingenieurswese</value>
+  </data>
+  <data name="space_group_name_colon" xml:space="preserve">
+    <value>Ruimtegroep Naam:</value>
+  </data>
+  <data name="space_group_number_colon" xml:space="preserve">
+    <value>Ruimtegroep Nommer:</value>
+  </data>
+  <data name="specific_hazard" xml:space="preserve">
+    <value>Spesifieke gevaar:</value>
+  </data>
+  <data name="specific_heat_capacity" xml:space="preserve">
+    <value>Spesifieke Hittekapasiteit</value>
+  </data>
+  <data name="specific_heat_capacity_colon" xml:space="preserve">
+    <value>Spesifieke Hittekapasiteit:</value>
+  </data>
+  <data name="spelling" xml:space="preserve">
+    <value>Probeer 'n ander soekterm of kyk jou spelling</value>
+  </data>
+  <data name="split_view" xml:space="preserve">
+    <value>Elementverdeelde aansig</value>
+  </data>
+  <data name="streak_label" xml:space="preserve">
+    <value>Reeks: </value>
+  </data>
+  <data name="streak_notification_body" xml:space="preserve">
+    <value>Speel vandag om jou %1$d-dag reeks te behou.</value>
+  </data>
+  <data name="streak_notification_title" xml:space="preserve">
+    <value>Hou jou %1$d-dag reeks!</value>
+  </data>
+  <data name="submit_activity_title" xml:space="preserve">
+    <value>Dien probleem in</value>
+  </data>
+  <data name="submit_bug" xml:space="preserve">
+    <value>Fout</value>
+  </data>
+  <data name="submit_data_i" xml:space="preserve">
+    <value>Data-probleem</value>
+  </data>
+  <data name="submit_data_issue" xml:space="preserve">
+    <value>Dien Data-probleem in</value>
+  </data>
+  <data name="submit_issue" xml:space="preserve">
+    <value>Probleem</value>
+  </data>
+  <data name="submit_question" xml:space="preserve">
+    <value>Vraag</value>
+  </data>
+  <data name="submit_send" xml:space="preserve">
+    <value>Stuur in</value>
+  </data>
+  <data name="submit_text" xml:space="preserve">
+    <value>Rappoteer foute en datafoute</value>
+  </data>
+  <data name="submit_title" xml:space="preserve">
+    <value>Rappoteer Probleem</value>
+  </data>
+  <data name="superconducting_point" xml:space="preserve">
+    <value>Supergeleier-punt</value>
+  </data>
+  <data name="superconducting_point_colon" xml:space="preserve">
+    <value>Supergeleidende Punt:</value>
+  </data>
+  <data name="sync_available_pro_only" xml:space="preserve">
+    <value>Kry PRO of PRO+ om wolksinkronisasie te aktiveer</value>
+  </data>
+  <data name="sync_complete" xml:space="preserve">
+    <value>Vordering gesinkroniseer</value>
+  </data>
+  <data name="sync_data" xml:space="preserve">
+    <value>Sinchroniseer data:</value>
+  </data>
+  <data name="sync_failed" xml:space="preserve">
+    <value>Sinkronisasie het misluk</value>
+  </data>
+  <data name="sync_status" xml:space="preserve">
+    <value>Nie gesinkroniseer nie</value>
+  </data>
+  <data name="syncing_progress" xml:space="preserve">
+    <value>Sinkroniseer vordering…</value>
+  </data>
+  <data name="system_default" xml:space="preserve">
+    <value>Stelsel Verstek</value>
+  </data>
+  <data name="table_alloy" xml:space="preserve">
+    <value>Legeringtabel</value>
+  </data>
+  <data name="table_alloy_text" xml:space="preserve">
+    <value>’n Tabel van algemene legerings, waarvan hulle gemaak is en waarom hulle in plaas van die suiwer metaal gebruik word</value>
+  </data>
+  <data name="table_constants_text" xml:space="preserve">
+    <value>'n Tabel wat algemene konstantes bevat vir berekeninge, insluitend wiskunde, fisika, standaard water-vloei ens.</value>
+  </data>
+  <data name="table_electrochemical" xml:space="preserve">
+    <value>Elektrochemiese Reeks</value>
+  </data>
+  <data name="table_electrochemical_text" xml:space="preserve">
+    <value>'n Tabel met 'n elektrochemiese reeks, gesorteer van (-) na (+) spanning</value>
+  </data>
+  <data name="table_equations" xml:space="preserve">
+    <value>Formules</value>
+  </data>
+  <data name="table_equations_text" xml:space="preserve">
+    <value>'n Tabel met formules vir wiskunde, fisika en chemie</value>
+  </data>
+  <data name="table_geology" xml:space="preserve">
+    <value>Geologietabel</value>
+  </data>
+  <data name="table_geology_text" xml:space="preserve">
+    <value>'n Tabel met inligting oor minerale, gesteentes en gronde</value>
+  </data>
+  <data name="table_ionization" xml:space="preserve">
+    <value>Ionisasie-energieë</value>
+  </data>
+  <data name="table_ionization_text" xml:space="preserve">
+    <value>'n Tabel met verskillende elemente se ionisasie-energieë</value>
+  </data>
+  <data name="table_nuclide" xml:space="preserve">
+    <value>Nukliedtabel</value>
+  </data>
+  <data name="table_nuclide_text" xml:space="preserve">
+    <value>'n Twee-dimensionele tabel van nukliede, met kleur wat vervaltipe onderskei</value>
+  </data>
+  <data name="table_order_text" xml:space="preserve">
+    <value>Bepaal volgorde van tabelle</value>
+  </data>
+  <data name="table_order_title" xml:space="preserve">
+    <value>Sorteer tabellys</value>
+  </data>
+  <data name="table_ph" xml:space="preserve">
+    <value>pH-aanwysers</value>
+  </data>
+  <data name="table_ph_text" xml:space="preserve">
+    <value>'n pH-aanwyser-tabel vir kleure op verskillende suur/basis-vlakke</value>
+  </data>
+  <data name="table_poisson" xml:space="preserve">
+    <value>Poisson-verhoudingstabel</value>
+  </data>
+  <data name="table_poisson_text" xml:space="preserve">
+    <value>'n Tabel met Poisson-verhoudings vir verskillende gesteentes, gronde, minerale en ander materiale</value>
+  </data>
+  <data name="table_solubility" xml:space="preserve">
+    <value>Oplosbaarheidstabel</value>
+  </data>
+  <data name="table_solubility_text" xml:space="preserve">
+    <value>'n Tabel met inligting oor verskillende stowwe se oplosbaarheid</value>
+  </data>
+  <data name="table_units" xml:space="preserve">
+    <value>Tabeleenhede</value>
+  </data>
+  <data name="take_notes_for_element" xml:space="preserve">
+    <value>Maak notas vir element</value>
+  </data>
+  <data name="temperatures" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>Temas</value>
+  </data>
+  <data name="thermal_conductivity_colon" xml:space="preserve">
+    <value>Termiese Geleidingsvermoë:</value>
+  </data>
+  <data name="thermal_expansion_colon" xml:space="preserve">
+    <value>Termiese Uitsetting:</value>
+  </data>
+  <data name="thermodynamic_properties" xml:space="preserve">
+    <value>Termodinamiese Eienskappe</value>
+  </data>
+  <data name="time_up" xml:space="preserve">
+    <value>Tyd is Op</value>
+  </data>
+  <data name="tool_btn_open" xml:space="preserve">
+    <value>Maak Gereedskap Oop</value>
+  </data>
+  <data name="tools" xml:space="preserve">
+    <value>Nutsgoed</value>
+  </data>
+  <data name="tools_title" xml:space="preserve">
+    <value>Gereedskap (bv. sakrekenaar)</value>
+  </data>
+  <data name="total_xp_stat" xml:space="preserve">
+    <value>Totale XP: %d</value>
+  </data>
+  <data name="total_xp_with_multiplier" xml:space="preserve">
+    <value>Totale XP: %1$d (%2$s ×%3$s)</value>
+  </data>
+  <data name="try_another_search" xml:space="preserve">
+    <value>Probeer 'n ander soekterm of kyk jou spelling.</value>
+  </data>
+  <data name="type_label" xml:space="preserve">
+    <value>Tipe: </value>
+  </data>
+  <data name="ultimate_already_owned_account" xml:space="preserve">
+    <value>Jy besit reeds PRO+ Ultimate op hierdie rekening.</value>
+  </data>
+  <data name="ultimate_buy" xml:space="preserve">
+    <value>Kry PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_coming_soon" xml:space="preserve">
+    <value>Kom binnekort</value>
+  </data>
+  <data name="ultimate_description" xml:space="preserve">
+    <value>Ontsluit PRO+ op Android en Windows met 'n enkele aankoop. Maak seker jou aantekeninge, prestasies en vordering is op alle toestelle by jou!</value>
+  </data>
+  <data name="ultimate_owned" xml:space="preserve">
+    <value>Besit PRO+ Ultimate</value>
+  </data>
+  <data name="ultimate_upgrade_title" xml:space="preserve">
+    <value>Gradeer op na Ultimate</value>
+  </data>
+  <data name="uni" xml:space="preserve">
+    <value>Eenheidsomskakelaar</value>
+  </data>
+  <data name="unit_add_favorite" xml:space="preserve">
+    <value>Voeg by Gunstelinge:</value>
+  </data>
+  <data name="unit_category" xml:space="preserve">
+    <value>Kategorie:</value>
+  </data>
+  <data name="unit_converter_title" xml:space="preserve">
+    <value>Eenheidsomskakelaar</value>
+  </data>
+  <data name="unit_description" xml:space="preserve">
+    <value>'n Eenvoudige eenheidsomskakelaar vir verskeie doeleindes</value>
+  </data>
+  <data name="unit_display_formula" xml:space="preserve">
+    <value>Formule sal hier vertoon word</value>
+  </data>
+  <data name="unit_enter_value" xml:space="preserve">
+    <value>Waarde</value>
+  </data>
+  <data name="unit_favorites" xml:space="preserve">
+    <value>Gunstelinge:</value>
+  </data>
+  <data name="unit_formula" xml:space="preserve">
+    <value>Formule:</value>
+  </data>
+  <data name="unit_output_value" xml:space="preserve">
+    <value>Uitset</value>
+  </data>
+  <data name="unit_settings_title" xml:space="preserve">
+    <value>Tabel-eenhede</value>
+  </data>
+  <data name="unit_temperature" xml:space="preserve">
+    <value>Temperatuur</value>
+  </data>
+  <data name="unit_title" xml:space="preserve">
+    <value>Eenheidsomskakelaar</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>Onbekend</value>
+  </data>
+  <data name="unlimited_ai_messages" xml:space="preserve">
+    <value>Onbeperkte KI-boodskappe:</value>
+  </data>
+  <data name="unlock_advanced_data_and_additional_flashcards" xml:space="preserve">
+    <value>Ontsluit gevorderde data en addisionele flitskaarte.</value>
+  </data>
+  <data name="unlock_advanced_data_and_extra_atomic_content" xml:space="preserve">
+    <value>Ontsluit gevorderde data en ekstra Atomic-inhoud.</value>
+  </data>
+  <data name="unlock_all_flashcards" xml:space="preserve">
+    <value>Ontsluit alle Flitskaarte en Funksies</value>
+  </data>
+  <data name="upgrade_pro_plus_description" xml:space="preserve">
+    <value>Kry onbeperkte lewens en bykomende flitskaart-speletjies soos elektronegatiwiteit, radioaktiwiteit, kristalstruktuur en meer!</value>
+  </data>
+  <data name="upgrade_to_pro_plus" xml:space="preserve">
+    <value>Gradeer op na PRO+</value>
+  </data>
+  <data name="usage_statistics" xml:space="preserve">
+    <value>Gebruiksstatistieke</value>
+  </data>
+  <data name="user_achievements" xml:space="preserve">
+    <value>Prestasies</value>
+  </data>
+  <data name="user_achievements_Text" xml:space="preserve">
+    <value>Hou jou vordering van die leer van elemente van die wêreld dop met prestasies</value>
+  </data>
+  <data name="user_img" xml:space="preserve">
+    <value>Verander profielprent</value>
+  </data>
+  <data name="user_signed_in_fmt" xml:space="preserve">
+    <value>Aangemeld as %1$s</value>
+  </data>
+  <data name="user_signed_out" xml:space="preserve">
+    <value>Nie aangemeld nie</value>
+  </data>
+  <data name="user_title" xml:space="preserve">
+    <value>Gebruikerblad</value>
+  </data>
+  <data name="van_der_waals_radius_colon" xml:space="preserve">
+    <value>Van der Waals Radius:</value>
+  </data>
+  <data name="vaporization_heat" xml:space="preserve">
+    <value>Verdampingshitte</value>
+  </data>
+  <data name="vaporization_heat_colon" xml:space="preserve">
+    <value>Verdampingshitte:</value>
+  </data>
+  <data name="vickers_hardness" xml:space="preserve">
+    <value>Vickers-hardheid</value>
+  </data>
+  <data name="vickers_hardness_colon" xml:space="preserve">
+    <value>Vickers-hardheid:</value>
+  </data>
+  <data name="view_all" xml:space="preserve">
+    <value>Sien alles</value>
+  </data>
+  <data name="view_all_isotopes" xml:space="preserve">
+    <value>Bekyk alle isotope</value>
+  </data>
+  <data name="weight_calculator_title" xml:space="preserve">
+    <value>Gewig sakrekenaar</value>
+  </data>
+  <data name="widget_description_placeholder" xml:space="preserve">
+    <value>Laai element-inligting...</value>
+  </data>
+  <data name="win_text" xml:space="preserve">
+    <value>Laai die app vir Windows af</value>
+  </data>
+  <data name="win_title" xml:space="preserve">
+    <value>Kry Desktop App</value>
+  </data>
+  <data name="work_function_colon" xml:space="preserve">
+    <value>Werkfunksie:</value>
+  </data>
+  <data name="wrong" xml:space="preserve">
+    <value>Verkeerd</value>
+  </data>
+  <data name="xp_bonus" xml:space="preserve">
+    <value>+%d%% bonus xp</value>
+  </data>
+  <data name="xp_bonus_unlocked" xml:space="preserve">
+    <value>5%% XP-bonus ontsluit op vlak %1$d!</value>
+  </data>
+  <data name="year_discovered" xml:space="preserve">
+    <value>Jaar Ontdek</value>
+  </data>
+  <data name="year_discovered_colon" xml:space="preserve">
+    <value>Jaar Ontdek:</value>
+  </data>
+  <data name="you_have_full_lives" xml:space="preserve">
+    <value>Jy het volle lewens!</value>
+  </data>
+  <data name="young_bulk_shear_modulus" xml:space="preserve">
+    <value>Young-, bulk-, skuifmodulus:</value>
+  </data>
+  <data name="youngs_modulus" xml:space="preserve">
+    <value>Young se Modulus</value>
+  </data>
+  <data name="your_answer" xml:space="preserve">
+    <value>Jou antwoord: %s</value>
+  </data>
+</root>

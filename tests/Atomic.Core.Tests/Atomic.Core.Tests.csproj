@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Atomic.Core.Tests</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <Configurations>Debug;Release;Any</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Atomic.Core\Atomic.Core.csproj" />
+  </ItemGroup>
+
+  <!--
+    Element tables, the corpus and the golden files come from the shared-data submodule
+    (shared/, roadmap 0.3), which the Android app reads too, so both platforms are tested
+    against one copy. String resources are linked from the app project, so the tests run
+    against exactly what ships.
+  -->
+  <ItemGroup>
+    <Content Include="..\..\shared\elements\elements_*.json" Link="assets\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The reference tables' titles in each language (roadmap 1.3). -->
+    <Content Include="..\..\shared\datasets\titles_*.tsv" Link="assets\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The written explanations for why-questions, and their words in each language (roadmap 2.4). -->
+    <Content Include="..\..\shared\datasets\explanations*.tsv" Link="assets\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The questions a chat opened from each screen offers first (roadmap 2.9). -->
+    <Content Include="..\..\shared\datasets\screen_chips.tsv" Link="assets\screen_chips.tsv" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The language detector's trigram model (roadmap 1.4). -->
+    <Content Include="..\..\shared\language\trigrams.tsv" Link="assets\trigrams.tsv" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\src\Atomic.App\Strings\**\*.resw" Link="strings\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\shared\corpus\**\*.tsv" Link="corpus\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The held-out fifth (roadmap 0.5), run when CORPUS_SPLIT is heldout or all. -->
+    <Content Include="..\..\shared\heldout\**\*.tsv" Link="heldout\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <!--
+      The page markup, so a test can check that every {loc:Str Key=...} names a real resource.
+      Linked rather than copied for the same reason the .resw files are: the test must see
+      exactly what ships.
+    -->
+    <Content Include="..\..\src\Atomic.App\**\*.xaml" Exclude="..\..\src\Atomic.App\bin\**\*.xaml;..\..\src\Atomic.App\obj\**\*.xaml" Link="pagexaml\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\shared\golden\**\*.tsv" Link="golden\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

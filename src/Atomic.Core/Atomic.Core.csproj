@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The Ask Atomic engine, quiz generators, progression rules and sync merge logic.
+
+    TargetFramework is plain net8.0 on purpose. It is the enforcement mechanism for the
+    "no UI, no platform" rule: reaching for Windows.Storage or Microsoft.UI in here will
+    not compile. Do not add a -windows suffix, and do not add PackageReferences without
+    a very good reason - System.Text.Json is in-box.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Atomic.Core</RootNamespace>
+    <AssemblyName>Atomic.Core</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+
+    <!--
+      Mirrors Atomic.App's configurations and platforms. The code is architecture-neutral,
+      but a ProjectReference propagates Configuration and Platform to the referenced project,
+      so Atomic.App building as deb|ARM64 would otherwise fail to resolve this one.
+    -->
+    <Configurations>Debug;Release;deb;Any</Configurations>
+    <Platforms>AnyCPU;x86;x64;ARM64</Platforms>
+
+    <!--
+      The engine must never read CultureInfo.CurrentCulture. Chat language is detected
+      per message and passed explicitly; letting the ambient culture leak in makes the
+      answer depend on the user's regional settings. These analyzers are the "specify
+      IFormatProvider / StringComparison" family - promoting them to errors makes the
+      compiler enforce it instead of code review.
+    -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <WarningsAsErrors>CA1304;CA1305;CA1307;CA1310;CA1311</WarningsAsErrors>
+
+    <!-- Needed for String.Normalize and the Unicode script tables. -->
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      QueryPlanner's sub-planners are internal rather than private so they can be tested one at a
+      time. On Android they are private and reachable only through an 876-line cascade, so the only
+      thing that covers them is the 3,162-row corpus - which tells you a query came out wrong, not
+      which of eight ordered branches claimed it. Testing them directly is the one place this port
+      deliberately improves on the original's testability.
+    -->
+    <InternalsVisibleTo Include="Atomic.Core.Tests" />
+  </ItemGroup>
+
+</Project>

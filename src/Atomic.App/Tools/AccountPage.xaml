@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Atomic.App.Tools.AccountPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atomic.App.Tools"
+    xmlns:controls="using:Atomic.App.Controls"
+    xmlns:loc="using:Atomic.App.Localization"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel Padding="56,40,36,36" HorizontalAlignment="Center" MaxWidth="900" Spacing="16">
+
+            <!-- Header: avatar and PRO badge - the top of the Android user activity. -->
+            <StackPanel Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
+                <Grid Width="88" Height="88">
+                    <!-- The person glyph is the fallback, behind the photo rather than instead of
+                         it, so a slow or failed download leaves the header looking finished. -->
+                    <Border CornerRadius="44"
+                            Background="{ThemeResource AccentFillColorDefaultBrush}">
+                        <FontIcon Glyph="&#xE77B;" FontSize="44"
+                                  Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+                    </Border>
+                    <Image x:Name="AvatarImage" Visibility="Collapsed" Stretch="UniformToFill" />
+                </Grid>
+                <!--
+                    No page title here: the navigation header already renders it a few pixels
+                    above, and Android only carries one because it has no breadcrumb.
+                -->
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <Border x:Name="ProBadge" Visibility="Collapsed"
+                            HorizontalAlignment="Left" CornerRadius="12" Padding="10,3"
+                            Background="{ThemeResource AccentFillColorDefaultBrush}">
+                        <TextBlock x:Name="ProBadgeText" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+                    </Border>
+
+                    <!--
+                        What the phone reports. Read from the account document and never written
+                        back - Windows has no business claiming a tier for a device it cannot see.
+                    -->
+                    <Border x:Name="AndroidBadge" Visibility="Collapsed"
+                            HorizontalAlignment="Left" CornerRadius="12" Padding="10,3"
+                            BorderThickness="1"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
+                        <TextBlock x:Name="AndroidBadgeText" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <!--
+                Licences: what this account owns, on each platform. Windows and the phone are
+                separate stores and separate purchases, so each is named - and Ultimate, the one
+                purchase that covers both, is named as itself rather than hidden behind the PRO+ it
+                grants. The phone's tier comes from the account document; the offer opens the PRO page.
+            -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="20" Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xE8D7;" FontSize="18"
+                                  Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                        <TextBlock Text="{loc:Str Key=licenses_title}" FontWeight="SemiBold"
+                                   FontSize="18"
+                                   Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                    </StackPanel>
+
+                    <!-- Platform names are product names, the same in every language. -->
+                    <Grid ColumnSpacing="24" RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Windows"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="WindowsTierText" Grid.Column="1" FontWeight="SemiBold" />
+
+                        <TextBlock Grid.Row="1" Text="Android"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="AndroidTierText" Grid.Row="1" Grid.Column="1" FontWeight="SemiBold" />
+
+                        <TextBlock x:Name="UltimateLabel" Grid.Row="2" Text="PRO+ Ultimate"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="UltimateStatusText" Grid.Row="2" Grid.Column="1" FontWeight="SemiBold" />
+                    </Grid>
+
+                    <!-- Only when Ultimate is not owned. -->
+                    <StackPanel x:Name="UltimateOffer" Spacing="10" Visibility="Collapsed">
+                        <TextBlock x:Name="UltimateOfferText" TextWrapping="Wrap"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <Button x:Name="UltimateOfferButton" Click="UltimateOffer_Click"
+                                Style="{StaticResource AccentButtonStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Sign in / sync / sign out. -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="20" Padding="20">
+                <StackPanel Spacing="12">
+
+                    <TextBlock x:Name="StatusText" TextWrapping="Wrap" FontSize="15" />
+
+                    <!--
+                        The uid is shown deliberately. It is the one value that proves a Windows
+                        sign-in landed in the same Firebase project as the phone - the P0
+                        precondition - and it cannot be checked any other way from inside the app.
+                    -->
+                    <StackPanel x:Name="UidPanel" Spacing="2" Visibility="Collapsed">
+                        <TextBlock x:Name="UidLabel" FontSize="12"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="UidText" FontSize="13" IsTextSelectionEnabled="True"
+                                   FontFamily="Consolas" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- Sync is automatic, so this is the only thing that reports it happening. -->
+                    <TextBlock x:Name="LastSyncText" FontSize="12" TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Name="SignInButton" Click="SignIn_Click"
+                                Style="{StaticResource AccentButtonStyle}" />
+                        <Button x:Name="SignOutButton" Click="SignOut_Click" />
+                        <ProgressRing x:Name="Busy" IsActive="False" Width="20" Height="20"
+                                      VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <InfoBar x:Name="Problem" IsOpen="False" Severity="Error" IsClosable="True" />
+                </StackPanel>
+            </Border>
+
+            <!-- Usage statistics - the stats box, over the counters this app actually keeps. -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="20" Padding="20">
+                <StackPanel Spacing="14">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xE9D9;" FontSize="18"
+                                  Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                        <TextBlock Text="{loc:Str Key=usage_statistics}" FontWeight="SemiBold"
+                                   FontSize="18"
+                                   Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                    </StackPanel>
+                    <controls:WrapPanel x:Name="StatsPanel"
+                                        HorizontalSpacing="12" VerticalSpacing="12" />
+                </StackPanel>
+            </Border>
+
+            <!-- Achievements. The same list the flashcards page shows, from one catalog. -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="20" Padding="20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xF272;" FontSize="18"
+                                  Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                        <TextBlock Text="{loc:Str Key=user_achievements}" FontWeight="SemiBold"
+                                   FontSize="18"
+                                   Foreground="{ThemeResource AccentAAFillColorDefaultBrush}" />
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{x:Bind Achievements, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:Achievement">
+                                <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                        CornerRadius="12"
+                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                        BorderThickness="1" Padding="12"
+                                        Opacity="{x:Bind DisplayOpacity}"
+                                        Margin="0,12,0,0">
+                                    <StackPanel Orientation="Horizontal" Spacing="16"
+                                                VerticalAlignment="Center">
+                                        <FontIcon Glyph="{x:Bind DisplayIcon}" FontSize="28"
+                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}"
+                                                  VerticalAlignment="Center" />
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Bind Header}" FontWeight="Bold" FontSize="16" />
+                                            <TextBlock Text="{x:Bind Description}" FontSize="13"
+                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                            <ProgressBar Minimum="0" Maximum="{x:Bind Goal}"
+                                                         Value="{x:Bind ClampedProgress}"
+                                                         Height="6" Margin="0,6,0,0" Width="600"
+                                                         HorizontalAlignment="Left" />
+                                            <TextBlock Text="{x:Bind ProgressText}" FontSize="12"
+                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                       Margin="0,2,0,0" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Name="Explanation" TextWrapping="Wrap" FontSize="13"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>
