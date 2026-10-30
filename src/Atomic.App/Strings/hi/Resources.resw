@@ -408,6 +408,9 @@
   <data name="ai_converted_from" xml:space="preserve">
     <value>दर्ज मान %1$s से परिवर्तित।</value>
   </data>
+  <data name="ai_copy_image" xml:space="preserve">
+    <value>छवि कॉपी करें</value>
+  </data>
   <data name="ai_count_result" xml:space="preserve">
     <value>**%1$d** तत्व मेल खाते हैं।</value>
   </data>
@@ -1380,6 +1383,15 @@
   </data>
   <data name="ai_series_transition_metal_label" xml:space="preserve">
     <value>संक्रमण धातु</value>
+  </data>
+  <data name="ai_share_failed" xml:space="preserve">
+    <value>छवि नहीं बन सकी</value>
+  </data>
+  <data name="ai_share_footer" xml:space="preserve">
+    <value>Atomic द्वारा उत्तर, आवर्त सारणी ऐप</value>
+  </data>
+  <data name="ai_share_image" xml:space="preserve">
+    <value>छवि के रूप में साझा करें</value>
   </data>
   <data name="ai_similarity_generic" xml:space="preserve">
     <value>**%1$s** %2$s श्रृंखला का हिस्सा है। इस श्रृंखला के अन्य तत्वों में संबंधित गुण होंगे!</value>

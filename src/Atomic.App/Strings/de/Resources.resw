@@ -396,6 +396,9 @@
   <data name="ai_converted_from" xml:space="preserve">
     <value>Umgerechnet aus dem erfassten Wert %1$s.</value>
   </data>
+  <data name="ai_copy_image" xml:space="preserve">
+    <value>Bild kopieren</value>
+  </data>
   <data name="ai_count_result" xml:space="preserve">
     <value>**%1$d** Elemente stimmen überein.</value>
   </data>
@@ -1368,6 +1371,15 @@ Nicht gesendet: dein Name, Konto, Gerät oder der Rest dieses Chats.</value>
   </data>
   <data name="ai_series_transition_metal_label" xml:space="preserve">
     <value>Übergangsmetall</value>
+  </data>
+  <data name="ai_share_failed" xml:space="preserve">
+    <value>Das Bild konnte nicht erstellt werden</value>
+  </data>
+  <data name="ai_share_footer" xml:space="preserve">
+    <value>Beantwortet von Atomic, der Periodensystem-App</value>
+  </data>
+  <data name="ai_share_image" xml:space="preserve">
+    <value>Als Bild teilen</value>
   </data>
   <data name="ai_similarity_generic" xml:space="preserve">
     <value>**%1$s** ist Teil der %2$s Serie. Andere Elemente in dieser Serie haben verwandte Eigenschaften!</value>

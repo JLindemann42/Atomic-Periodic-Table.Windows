@@ -541,6 +541,49 @@ namespace Atomic.App.Controls
             Input.Focus(FocusState.Programmatic);
         }
 
+        /// <summary>Offer to share the answer as an image, or copy it (roadmap 2.10).</summary>
+        private void ShareAnswer_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button { Tag: ChatMessage message } button) return;
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+            var menu = new MenuFlyout();
+            var share = new MenuFlyoutItem { Text = strings.Get(S.share), Icon = new FontIcon { Glyph = "\uE72D" } };
+            share.Click += (_, _) => _ = ShareAnswerAsync(button, message, copy: false);
+            var copy = new MenuFlyoutItem { Text = strings.Get(S.ai_copy_image), Icon = new FontIcon { Glyph = "\uE8C8" } };
+            copy.Click += (_, _) => _ = ShareAnswerAsync(button, message, copy: true);
+            menu.Items.Add(share);
+            menu.Items.Add(copy);
+            menu.ShowAt(button);
+        }
+
+        private async System.Threading.Tasks.Task ShareAnswerAsync(Button button, ChatMessage message, bool copy)
+        {
+            var strings = ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current));
+            // The question is the user's message just before this answer.
+            var index = Session.Messages.IndexOf(message);
+            var question = index > 0 && Session.Messages[index - 1].IsUser ? Session.Messages[index - 1].Text : null;
+            // The card beside the button, unless it is locked: a share never shows what the paywall hides.
+            FrameworkElement? card = null;
+            if (message.HasCard == Visibility.Visible && !message.IsCardLocked && button.Parent is Panel bubble)
+                card = bubble.Children.OfType<ProGate>().FirstOrDefault()?.Content as FrameworkElement;
+            try
+            {
+                var file = await AnswerShareImage.RenderAsync(ShareHost, question, message.Text, card, strings);
+                if (copy) AnswerShareImage.Copy(file);
+                else AnswerShareImage.Share(file, strings.Get(S.ask_atomic));
+            }
+            catch (Exception)
+            {
+                // Rendering or the share UI failed; say so rather than doing nothing.
+                await new ContentDialog
+                {
+                    XamlRoot = XamlRoot,
+                    Content = strings.Get(S.ai_share_failed),
+                    CloseButtonText = "OK",
+                }.ShowAsync();
+            }
+        }
+
         private void Action_Click(object sender, RoutedEventArgs e)
         {
             if (sender is not Button { Tag: ChatAction action }) return;

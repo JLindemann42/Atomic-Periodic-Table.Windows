@@ -408,6 +408,9 @@
   <data name="ai_converted_from" xml:space="preserve">
     <value>Converti depuis la valeur enregistrée %1$s.</value>
   </data>
+  <data name="ai_copy_image" xml:space="preserve">
+    <value>Copier l'image</value>
+  </data>
   <data name="ai_count_result" xml:space="preserve">
     <value>**%1$d** éléments correspondent.</value>
   </data>
@@ -1380,6 +1383,15 @@ Non envoyé : votre nom, votre compte, votre appareil ni le reste de cette conve
   </data>
   <data name="ai_series_transition_metal_label" xml:space="preserve">
     <value>Métal de Transition</value>
+  </data>
+  <data name="ai_share_failed" xml:space="preserve">
+    <value>Impossible de créer l'image</value>
+  </data>
+  <data name="ai_share_footer" xml:space="preserve">
+    <value>Répondu par Atomic, l'application du tableau périodique</value>
+  </data>
+  <data name="ai_share_image" xml:space="preserve">
+    <value>Partager en image</value>
   </data>
   <data name="ai_similarity_generic" xml:space="preserve">
     <value>**%1$s** fait partie de la série %2$s. D'autres éléments de cette série auront des propriétés liées !</value>

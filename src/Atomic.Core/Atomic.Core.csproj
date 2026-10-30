@@ -21,7 +21,7 @@
       but a ProjectReference propagates Configuration and Platform to the referenced project,
       so Atomic.App building as deb|ARM64 would otherwise fail to resolve this one.
     -->
-    <Configurations>Debug;Release;deb</Configurations>
+    <Configurations>Debug;Release;deb;Any</Configurations>
     <Platforms>AnyCPU;x86;x64;ARM64</Platforms>
 
     <!--

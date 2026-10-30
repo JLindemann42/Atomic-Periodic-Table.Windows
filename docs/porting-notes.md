@@ -1862,3 +1862,20 @@ The hosting differs. On Android each screen hosts its own panel and names itself
 `screen_chips.tsv` is a `Content` item in both `Atomic.App.csproj` and the test project, like the
 explanation files. 3,859 core tests pass; held-out (452) passes; the app builds. The panel was
 not run on screen here; Android's was, on the emulator.
+
+### D82 — shareable answer cards (roadmap 2.10)
+
+Ported from Android in the same change. Every answer in `AiChatPanel` has a share button that
+opens a small menu: **Share**, through the Windows share UI (`DataTransferManagerInterop` on the
+main window's handle), and **Copy image**, to the clipboard as a bitmap and a file. Windows has
+both because on a desktop pasting into another app is as common as sharing. `ai_copy_image` is
+therefore in Android's `strings.xml`, where Android does not use it.
+
+`Services/AnswerShareImage.cs` builds the image in code: the Ask Atomic glyph and name, the
+question, the answer through `MarkdownText`, the card snapshot, and the footer.
+`RenderTargetBitmap` only captures elements in the visual tree, so the image is laid out on the
+panel's `ShareHost` canvas, 20,000 px to the left of the window, while it renders. As on Android,
+a locked card is left out.
+
+3,859 core tests pass and the app builds. The button, the share UI and the clipboard were not tried
+on screen here. Android's were, on the emulator.

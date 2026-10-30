@@ -408,6 +408,9 @@
   <data name="ai_converted_from" xml:space="preserve">
     <value>Convertito dal valore registrato %1$s.</value>
   </data>
+  <data name="ai_copy_image" xml:space="preserve">
+    <value>Copia immagine</value>
+  </data>
   <data name="ai_count_result" xml:space="preserve">
     <value>**%1$d** elementi corrispondono.</value>
   </data>
@@ -1380,6 +1383,15 @@ Non viene inviato: il tuo nome, l'account, il dispositivo o il resto della chat.
   </data>
   <data name="ai_series_transition_metal_label" xml:space="preserve">
     <value>Metallo di Transizione</value>
+  </data>
+  <data name="ai_share_failed" xml:space="preserve">
+    <value>Impossibile creare l'immagine</value>
+  </data>
+  <data name="ai_share_footer" xml:space="preserve">
+    <value>Risposta di Atomic, l'app della tavola periodica</value>
+  </data>
+  <data name="ai_share_image" xml:space="preserve">
+    <value>Condividi come immagine</value>
   </data>
   <data name="ai_similarity_generic" xml:space="preserve">
     <value>**%1$s** fa parte della serie %2$s. Altri elementi in questa serie avranno proprietà correlate!</value>

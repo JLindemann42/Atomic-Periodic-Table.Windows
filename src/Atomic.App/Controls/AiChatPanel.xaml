@@ -88,6 +88,17 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+
+                        <!-- Shares the answer as a branded image, or copies it (roadmap 2.10). -->
+                        <Button Click="ShareAnswer_Click"
+                                Tag="{x:Bind}"
+                                Padding="6"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                ToolTipService.ToolTip="{x:Bind ShareLabel}"
+                                AutomationProperties.Name="{x:Bind ShareLabel}">
+                            <FontIcon Glyph="&#xE72D;" FontSize="14" />
+                        </Button>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -123,6 +134,9 @@
     </UserControl.Resources>
 
     <Grid>
+        <!-- Where a shared answer is laid out, off screen, while it is rendered to an image (roadmap 2.10). -->
+        <Canvas x:Name="ShareHost" IsHitTestVisible="False" />
+
         <!--
             The drawer. A Border on the right edge, full height below the title bar, slid in by a
             composition translation - see the code-behind for why not a Storyboard.

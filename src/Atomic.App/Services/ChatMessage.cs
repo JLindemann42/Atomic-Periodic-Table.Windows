@@ -100,6 +100,10 @@ namespace Atomic.App.Services
         [JsonIgnore]
         public bool IsUser => Role == ChatRole.User;
 
+        /// <summary>The share button's name and tooltip (roadmap 2.10).</summary>
+        public string ShareLabel =>
+            ResourceStringProvider.For(AppLanguage.BaseCode(AppLanguage.Current)).Get(Atomic.Core.Localization.S.ai_share_image);
+
         // ---- Card slot ---------------------------------------------------------------------------
         //
         // The engine emits cards regardless of entitlement - ChatCardPolicy only governs network

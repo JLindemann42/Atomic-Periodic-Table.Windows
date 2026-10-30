@@ -5,13 +5,13 @@
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>Atomic.App</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Platforms>x86;x64;ARM64</Platforms>
+    <Platforms>x86;x64;ARM64;AnyCPU</Platforms>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;deb</Configurations>
+    <Configurations>Debug;Release;deb;Any</Configurations>
 
     <!--
       Localization. DefaultLanguage is the fallback MRT uses when the user's language has no
@@ -39,6 +39,7 @@
     <Content Remove="Assets\no_image_light.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\256x.png" />
     <None Remove="Assets\256x.targetsize-16.png" />
     <None Remove="Assets\256x.targetsize-16_altform-unplated.png" />
     <None Remove="Assets\256x.targetsize-24_altform-unplated.png" />
@@ -63,6 +64,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Used by AnswerShareImage; it must be packaged as WinUI content for ms-appx loading. -->
+    <Content Include="Assets\64x.png">
+      <TargetPath>Assets\256x.png</TargetPath>
+    </Content>
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -363,10 +368,9 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundle>Never</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <AppInstallerUri>C:\Program Files\Atomic</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateThumbprint>C50A1A3EE1E6474A1F1B9F94E8B52115D41A9085</PackageCertificateThumbprint>
     <PackageCertificateKeyFile>Atomic_PeriodicTable_TemporaryKey.pfx</PackageCertificateKeyFile>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <AssemblyName>Atomic - Periodic Table</AssemblyName>

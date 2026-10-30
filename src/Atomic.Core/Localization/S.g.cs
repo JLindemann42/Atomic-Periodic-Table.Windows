@@ -132,6 +132,7 @@ public static partial class S
     public const string ai_context_lost = "ai_context_lost";
     public const string ai_context_series = "ai_context_series";
     public const string ai_converted_from = "ai_converted_from";
+    public const string ai_copy_image = "ai_copy_image";
     public const string ai_count_result = "ai_count_result";
     public const string ai_coverage_note = "ai_coverage_note";
     public const string ai_covered_all = "ai_covered_all";
@@ -451,6 +452,9 @@ public static partial class S
     public const string ai_series_nonmetal_label = "ai_series_nonmetal_label";
     public const string ai_series_transition = "ai_series_transition";
     public const string ai_series_transition_metal_label = "ai_series_transition_metal_label";
+    public const string ai_share_failed = "ai_share_failed";
+    public const string ai_share_footer = "ai_share_footer";
+    public const string ai_share_image = "ai_share_image";
     public const string ai_similarity_generic = "ai_similarity_generic";
     public const string ai_similarity_no_element = "ai_similarity_no_element";
     public const string ai_similarity_result_footer = "ai_similarity_result_footer";
