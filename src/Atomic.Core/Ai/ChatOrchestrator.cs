@@ -851,6 +851,42 @@ namespace Atomic.Core.Ai
             return engine;
         }
 
+        /// <summary>
+        /// The screen the chat was opened from (roadmap 2.9), one of <see cref="Screens"/>; null for
+        /// the periodic table and the element pages. Not dialogue state: a new thread is still opened
+        /// from there.
+        /// </summary>
+        public string? Screen { get; private set; }
+
+        /// <summary>
+        /// Put an element in focus without a turn: the chat opened from that element's page, so
+        /// "what is its density" is about it. Mirrors Android's <c>focusOn</c>.
+        /// </summary>
+        public void FocusOn(string? elementKey)
+        {
+            if (string.IsNullOrWhiteSpace(elementKey)) return;
+            State.FocusElement = elementKey.ToLowerInvariant();
+        }
+
+        /// <summary>Where the chat was opened: the screen, and the element it is about when it has one (roadmap 2.9).</summary>
+        public void OpenedFrom(string? screen, string? elementKey = null)
+        {
+            Screen = screen;
+            FocusOn(elementKey);
+        }
+
+        /// <summary>
+        /// The chips to show before anything has been asked. Opened from a screen, its own questions
+        /// come first (roadmap 2.9). Mirrors Android's public <c>suggestions()</c>.
+        /// </summary>
+        public IReadOnlyList<string> OpeningSuggestions()
+        {
+            var strings = _stringsFor(State.ActiveLanguage);
+            var general = Suggestions(strings, null);
+            var fromScreen = Screen is { } screen ? _retrieval.ScreenChips.ForScreen(screen, strings.Language) : [];
+            return fromScreen.Concat(general).Distinct().Take(MaxSuggestions).ToList();
+        }
+
         /// <summary>Start a new thread, keeping the language the user is writing in.</summary>
         public void Reset()
         {

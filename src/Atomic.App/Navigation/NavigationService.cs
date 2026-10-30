@@ -57,6 +57,12 @@ namespace Atomic.App.Navigation
         /// <summary>The route currently displayed, if the page is registered.</summary>
         public RouteDescriptor? CurrentRoute => AppRoutes.ByType(_frame.CurrentSourcePageType);
 
+        /// <summary>The page currently displayed, so the chat can read its element (roadmap 2.9).</summary>
+        public object? CurrentContent => _frame.Content;
+
+        /// <summary>Raised after every navigation, so a docked chat can follow the page (roadmap 2.9).</summary>
+        public event EventHandler? PageChanged;
+
         public bool Navigate(string tag, object? parameter = null)
         {
             var route = AppRoutes.ByTag(tag);
@@ -258,6 +264,7 @@ namespace Atomic.App.Navigation
             _nav.IsBackEnabled = _frame.CanGoBack;
             SyncSelection(e.SourcePageType);
             RecordVisit(route);
+            PageChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

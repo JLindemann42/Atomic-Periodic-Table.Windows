@@ -38,6 +38,10 @@
     <Content Include="..\..\shared\datasets\explanations*.tsv"
              Link="assets\%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
+    <!-- The questions a chat opened from each screen offers first (roadmap 2.9). -->
+    <Content Include="..\..\shared\datasets\screen_chips.tsv"
+             Link="assets\screen_chips.tsv"
+             CopyToOutputDirectory="PreserveNewest" />
     <!-- The language detector's trigram model (roadmap 1.4). -->
     <Content Include="..\..\shared\language\trigrams.tsv"
              Link="assets\trigrams.tsv"

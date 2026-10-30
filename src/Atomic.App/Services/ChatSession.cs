@@ -85,8 +85,23 @@ namespace Atomic.App.Services
             get
             {
                 var strings = Strings();
-                return [.. strings.Array("ai_suggest_general"), .. strings.Array("ai_suggest_tools")];
+                IReadOnlyList<string> general = [.. strings.Array("ai_suggest_general"), .. strings.Array("ai_suggest_tools")];
+                // Opened from a screen or an element, the orchestrator's own chips lead (roadmap 2.9).
+                if (_orchestrator is not { } chat || (chat.Screen is null && chat.State.FocusElement is null)) return general;
+                return [.. chat.OpeningSuggestions().Concat(general).Distinct()];
             }
+        }
+
+        /// <summary>
+        /// Where the chat is opened: a screen from <see cref="Atomic.Core.Ai.Screens"/>, and the
+        /// element on it by symbol (roadmap 2.9). Leaves an element already in focus alone when the
+        /// page has none, so a conversation about gold survives a visit to a table.
+        /// </summary>
+        public void OpenedFrom(string? screen, string? symbol)
+        {
+            if (Orchestrator() is not { } chat) return;
+            var key = symbol is null ? null : RetrievalService.Get(ElementRepository.Source)?.Store.BySymbol(symbol)?.Key;
+            chat.OpenedFrom(screen, key);
         }
 
         /// <summary>True when the engine could not be built at all - no element data.</summary>

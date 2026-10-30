@@ -59,6 +59,11 @@ namespace Atomic.Core.Ai.Retrieval
                 _source.Text("explanations.tsv"), _source.Text($"explanations_{lang}.tsv"),
                 _source.Text("explanations_en.tsv"), lang));
 
+        private ScreenChips? _screenChips;
+
+        /// <summary>The questions a chat opened from each screen offers first (roadmap 2.9).</summary>
+        public ScreenChips ScreenChips => _screenChips ??= ScreenChips.Parse(_source.Text("screen_chips.tsv"));
+
         /// <summary>The entity resolver for a language, built on first use.</summary>
         public EntityResolver Resolver(string language) =>
             _resolvers.GetOrAdd(language, lang => new EntityResolver(SharedAliases(), lang));

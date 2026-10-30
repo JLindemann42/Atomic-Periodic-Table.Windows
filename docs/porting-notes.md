@@ -1839,3 +1839,26 @@ counts 3,836 here. `QueryExecutorTest.EveryIntentIsHandled` names the two new in
 
 `corpus/calculators.tsv` grows to 40 rows. `CalculatorMathTest` gains Android's five new cases. 3,854
 core tests pass; held-out (452) passes; the app builds.
+
+### D81 — context from any screen (roadmap 2.9)
+
+Ported from Android in the same change. The core matches Android: `Ai/ScreenChips.cs` holds
+`Screens` and the chip table read from `datasets/screen_chips.tsv`. `ChatOrchestrator` gains
+`Screen`, `FocusOn` (which Android had and this port lacked), `OpenedFrom` and
+`OpeningSuggestions`, the last being Android's public `suggestions()`. `ScreenChipsTest` mirrors
+Android's and asks all 374 chips.
+
+The hosting differs. On Android each screen hosts its own panel and names itself through
+`BaseActivity.chatScreen`. Here one panel serves every page, so it reads the page it is opened over:
+- **`ChatContext`.** `Navigation/ChatContext.cs` maps route tags to screen ids, including the detail
+  pages of the tables, and takes the element from `ElementDetailsPage`.
+- **When it applies.** `AiChatPanel` applies the context when it opens, and on
+  `NavigationService.PageChanged` while it stays open, so a docked chat follows the page.
+- **Starters.** `ChatSession.Starters` puts the orchestrator's opening chips ahead of the general
+  starters once a screen or an element is in play.
+- **Before this.** The Windows chat had no context at all, not even on an element page. The
+  roadmap's "element pages only, on both" was true only of Android.
+
+`screen_chips.tsv` is a `Content` item in both `Atomic.App.csproj` and the test project, like the
+explanation files. 3,859 core tests pass; held-out (452) passes; the app builds. The panel was
+not run on screen here; Android's was, on the emulator.

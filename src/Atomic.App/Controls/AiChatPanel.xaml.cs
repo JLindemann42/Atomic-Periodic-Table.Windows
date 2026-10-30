@@ -138,7 +138,21 @@ namespace Atomic.App.Controls
         public event EventHandler<bool>? OpenChanged;
 
         /// <summary>Where a citation chip navigates to. Supplied by the host.</summary>
-        public NavigationService? Navigation { get; set; }
+        public NavigationService? Navigation
+        {
+            get => _navigation;
+            set
+            {
+                if (_navigation is not null) _navigation.PageChanged -= Navigation_PageChanged;
+                _navigation = value;
+                if (_navigation is not null) _navigation.PageChanged += Navigation_PageChanged;
+            }
+        }
+
+        private void Navigation_PageChanged(object? sender, EventArgs e)
+        {
+            if (_isOpen) ApplyContext();
+        }
 
         /// <summary>Re-read every string. Called when the app language changes at runtime.</summary>
         public void ApplyStrings()
@@ -194,6 +208,7 @@ namespace Atomic.App.Controls
             _isOpen = true;
 
             Visibility = Visibility.Visible;
+            ApplyContext();
             SizeSheet();
             ApplyMode();
             Animate(open: true);
@@ -207,6 +222,19 @@ namespace Atomic.App.Controls
 
             _ = RestoreAsync();
         }
+
+        /// <summary>
+        /// Tell the session which page the chat is over (roadmap 2.9), on opening and on every
+        /// navigation while it stays open.
+        /// </summary>
+        private void ApplyContext()
+        {
+            var (screen, symbol) = Atomic.App.Navigation.ChatContext.Of(Navigation);
+            Session.OpenedFrom(screen, symbol);
+            UpdateSuggestions();
+        }
+
+        private NavigationService? _navigation;
 
         /// <summary>
         /// Load the saved thread, and never take the window down doing it.
